@@ -8,6 +8,6 @@ package model;
  *
  * @author Admin BVCN88 02
  */
-public class Event {
+public class DoiTra {
     
 }
