@@ -9,5 +9,51 @@ package model;
  * @author Admin BVCN88 02
  */
 public class LoaiSanPham {
+    private String maLoaiSanPham;
+    private String tenLoaiSanPham;
+    private boolean trangThai;
+    private String moTa;
+
+    public LoaiSanPham() {
+    }
+
+    public LoaiSanPham(String maLoaiSanPham, String tenLoaiSanPham, boolean trangThai, String moTa) {
+        this.maLoaiSanPham = maLoaiSanPham;
+        this.tenLoaiSanPham = tenLoaiSanPham;
+        this.trangThai = trangThai;
+        this.moTa = moTa;
+    }
+
+    public String getMaLoaiSanPham() {
+        return maLoaiSanPham;
+    }
+
+    public void setMaLoaiSanPham(String maLoaiSanPham) {
+        this.maLoaiSanPham = maLoaiSanPham;
+    }
+
+    public String getTenLoaiSanPham() {
+        return tenLoaiSanPham;
+    }
+
+    public void setTenLoaiSanPham(String tenLoaiSanPham) {
+        this.tenLoaiSanPham = tenLoaiSanPham;
+    }
+
+    public boolean isTrangThai() {
+        return trangThai;
+    }
+
+    public void setTrangThai(boolean trangThai) {
+        this.trangThai = trangThai;
+    }
+
+    public String getMoTa() {
+        return moTa;
+    }
+
+    public void setMoTa(String moTa) {
+        this.moTa = moTa;
+    }
     
 }
