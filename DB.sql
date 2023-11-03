@@ -45,7 +45,7 @@ CREATE TABLE [HinhThucThanhToan] (
 );
 CREATE TABLE [Eventa] (
   [MaEV] varchar(10),
-  [TenEV] varchar(10),
+  [TenEV] varchar(50),
   [HinhThuc] nvarchar(100),
   [MucGiamGia] varchar(100),
   [ThoiGianBatDau] date,
