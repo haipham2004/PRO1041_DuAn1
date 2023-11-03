@@ -9,5 +9,61 @@ package model;
  * @author Admin BVCN88 02
  */
 public class TaiKhoan {
+    private String maTaiKhoan;
+    private String UserName;
+    private String PassWord;
+    private String role;
+    private int trangThai;
+
+    public TaiKhoan() {
+    }
+
+    public TaiKhoan(String maTaiKhoan, String UserName, String PassWord, String role, int trangThai) {
+        this.maTaiKhoan = maTaiKhoan;
+        this.UserName = UserName;
+        this.PassWord = PassWord;
+        this.role = role;
+        this.trangThai = trangThai;
+    }
+
+    public String getMaTaiKhoan() {
+        return maTaiKhoan;
+    }
+
+    public void setMaTaiKhoan(String maTaiKhoan) {
+        this.maTaiKhoan = maTaiKhoan;
+    }
+
+    public String getUserName() {
+        return UserName;
+    }
+
+    public void setUserName(String UserName) {
+        this.UserName = UserName;
+    }
+
+    public String getPassWord() {
+        return PassWord;
+    }
+
+    public void setPassWord(String PassWord) {
+        this.PassWord = PassWord;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public int getTrangThai() {
+        return trangThai;
+    }
+
+    public void setTrangThai(int trangThai) {
+        this.trangThai = trangThai;
+    }
     
 }

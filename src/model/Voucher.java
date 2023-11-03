@@ -9,5 +9,8 @@ package model;
  * @author Admin BVCN88 02
  */
 public class Voucher {
-    
+    private String maVoucher;
+    private Ev ;
+    private int soLuong;
+    private boolean trangThai;
 }
