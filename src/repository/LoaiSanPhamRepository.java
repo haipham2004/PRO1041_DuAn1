@@ -8,8 +8,6 @@ package repository;
  *
  * @author Admin BVCN88 02
  */
-public class TestRepo {
-    public static void main(String[] args) {
-        System.out.println("HảiCheckCheckk");
-    }
+public class LoaiSanPhamRepository {
+    
 }
