@@ -15,6 +15,42 @@ INSERT INTO KhachHang Values
 INSERT INTO HinhThucThanhToan Values
 ('HTTT01',N'Tiền mặt',1),
 ('HTTT02',N'Chuyển khoản',1)
+INSERT INTO LoaiSanPham VALUES
+('LSP01',N'Áo thun nam',1,N'Hàng đẹp'),
+('LSP02',N'Áo sơ mi nam',1,N'Hàng đẹp'),
+('LSP03',N'Áo khoác nam',1,N'Hàng đẹp'),
+('LSP04',N'Áo polo Nam',0,N'Hàng đẹp'),
+('LSP05',N'Áo jeans Nam',1,N'Hàng đẹp')
+INSERT INTO SanPham VALUES
+('SP01',N'OLD NAVY',1,'LSP05'),
+('SP02',N'GAP',1,'LSP05'),
+('SP03',N'LEVI',1,'LSP05'),
+('SP04',N'Basic Tee',1,'LSP01'),
+('SP05',N'Graphic Tee',1,'LSP01'),
+('SP06',N'Longline Tee',1,'LSP01'),
+('SP07',N'Flannel Shirt',1,'LSP03'),
+('SP08',N'inen Shirt',1,'LSP03'),
+('SP09',N'Western Shirt',1,'LSP03'),
+('SP10',N'Denim Jacket',1,'LSP02'),
+('SP11',N'Down Jacket',1,'LSP02'),
+('SP12',N'Pea Coat ',1,'LSP02')
+INSERT INTO MauSac VALUES
+('MS01',N'Đỏ',1),
+('MS02',N'Đen',1),
+('MS03',N'Trắng',1),
+('MS04',N'Xanh',1),
+('MS05',N'Vàng',1)
+INSERT INTO ChatLieu VALUES
+('CL01',N'Vải cotton',1),
+('CL02',N'Vải kaki',1),
+('CL03',N'Vải Kate',1),
+('CL04',N'Vải nỉ',1),
+('CL05',N'Vải Jean',1)
+INSERT INTO KichThuoc VALUES
+('KT01','S',1),
+('KT02','M',1),
+('KT03','L',1),
+('KT04','XL',1)
 
 alter tABLE KhachHang
 ALTER COLUMN GioiTinh bit
