@@ -10,7 +10,7 @@ package model;
  */
 public class Voucher {
     private String maVoucher;
-    private Ev ;
+    private Eventa eventa ;
     private int soLuong;
     private boolean trangThai;
 }
