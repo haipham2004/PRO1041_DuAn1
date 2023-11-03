@@ -51,8 +51,7 @@ INSERT INTO KichThuoc VALUES
 ('KT02','M',1),
 ('KT03','L',1),
 ('KT04','XL',1)
-INSERT INTO HoaDon VALUES
---làm tiếp...
+
 alter tABLE KhachHang
 ALTER COLUMN GioiTinh bit
 SELECT*FROM KhachHang
