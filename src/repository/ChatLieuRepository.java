@@ -7,37 +7,38 @@ package repository;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import model.LoaiSanPham;
-import model.SanPham;
+import model.ChatLieu;
+import model.MauSac;
 import util.DBConnect1111111;
 
 /**
  *
  * @author Admin BVCN88 02
  */
-public class LoaiSanPhamRepository {
+public class ChatLieuRepository {
 
     PreparedStatement pst = null;
     Connection conn = null;
     ResultSet rs = null;
     String sql = null;
-    List<LoaiSanPham> listLoaiSanPham = new ArrayList<>();
+    List<ChatLieu> listChatLieu = new ArrayList<>();
 
-    public List<LoaiSanPham> getAll() {
+    public List<ChatLieu> getAll() {
         try {
             conn = DBConnect1111111.getConnection();
             sql = "";
             pst = conn.prepareStatement(sql);
             rs = pst.executeQuery();
             while (rs.next()) {
-                LoaiSanPham lsp = new LoaiSanPham(rs.getString(1),
-                        rs.getString(2), rs.getBoolean(3), rs.getString(4));
-                listLoaiSanPham.add(lsp);
+                ChatLieu cl = new ChatLieu(rs.getString(1),
+                        rs.getString(2), rs.getBoolean(3));
+                listChatLieu.add(cl);
             }
         } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
-        return listLoaiSanPham;
+        return listChatLieu;
     }
+
 }

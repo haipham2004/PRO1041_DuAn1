@@ -9,14 +9,15 @@ package model;
  * @author Admin BVCN88 02
  */
 public class ChatLieu {
+
     private String maChatLieu;
     private String tenChatLieu;
-    private int trangThai;
+    private boolean trangThai;
 
     public ChatLieu() {
     }
 
-    public ChatLieu(String maChatLieu, String tenChatLieu, int trangThai) {
+    public ChatLieu(String maChatLieu, String tenChatLieu, boolean trangThai) {
         this.maChatLieu = maChatLieu;
         this.tenChatLieu = tenChatLieu;
         this.trangThai = trangThai;
@@ -38,12 +39,12 @@ public class ChatLieu {
         this.tenChatLieu = tenChatLieu;
     }
 
-    public int getTrangThai() {
+    public boolean isTrangThai() {
         return trangThai;
     }
 
-    public void setTrangThai(int trangThai) {
+    public void setTrangThai(boolean trangThai) {
         this.trangThai = trangThai;
     }
-    
+
 }

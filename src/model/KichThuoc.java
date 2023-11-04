@@ -11,12 +11,12 @@ package model;
 public class KichThuoc {
     private String maKichThuoc;
     private String tenKichThuoc;
-    private int trangThai;
+    private boolean trangThai;
 
     public KichThuoc() {
     }
 
-    public KichThuoc(String maKichThuoc, String tenKichThuoc, int trangThai) {
+    public KichThuoc(String maKichThuoc, String tenKichThuoc, boolean trangThai) {
         this.maKichThuoc = maKichThuoc;
         this.tenKichThuoc = tenKichThuoc;
         this.trangThai = trangThai;
@@ -38,12 +38,13 @@ public class KichThuoc {
         this.tenKichThuoc = tenKichThuoc;
     }
 
-    public int getTrangThai() {
+    public boolean isTrangThai() {
         return trangThai;
     }
 
-    public void setTrangThai(int trangThai) {
+    public void setTrangThai(boolean trangThai) {
         this.trangThai = trangThai;
     }
-    
+
+  
 }
