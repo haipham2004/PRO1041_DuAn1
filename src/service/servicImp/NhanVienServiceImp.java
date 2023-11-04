@@ -15,6 +15,7 @@ import service.AdamStore;
  */
 public class NhanVienServiceImp implements AdamStore<NhanVien, String>{
     NhanVienRepository repo = new NhanVienRepository();
+
     @Override
     public List<NhanVien> getAll() {
         return repo.getAll();
@@ -44,5 +45,5 @@ public class NhanVienServiceImp implements AdamStore<NhanVien, String>{
     public List<NhanVien> getList(String e) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
+
 }
