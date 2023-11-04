@@ -80,6 +80,38 @@ public class AdamStoreView extends javax.swing.JFrame {
         LoaiSanPham lsp = (LoaiSanPham) tblSanPham.getValueAt(index, 4);
         cbxLoaiSanPham.setSelectedItem(lsp);
     }
+    public void detailNV(int index){
+        txtMaNV.setText(tblNV0.getValueAt(index, 0).toString());
+        txtMaTK.setText(tblNV0.getValueAt(index, 1).toString());
+        txtHoTen.setText(tblNV0.getValueAt(index, 2).toString());
+        if (tblNV0.getValueAt(index, 3).toString().equals("Nam")) {
+            rdoNam.setSelected(true);
+        } else {
+            rdoNu.setSelected(true);
+        }
+        txtDiaChi.setText(tblNV0.getValueAt(index, 4).toString());
+        txtSDT.setText(tblNV0.getValueAt(index, 5).toString());
+        txtCCCD.setText(tblNV0.getValueAt(index, 6).toString());
+        txtNgayVaoLam.setText(tblNV0.getValueAt(index, 7).toString());
+        rdoNghiViec.setSelected(true);
+        txtAnh.setText(tblNV0.getValueAt(index, 8).toString());
+    }
+    public void detailNV1(int index){
+        txtMaNV.setText(tblNV1.getValueAt(index, 0).toString());
+        txtMaTK.setText(tblNV1.getValueAt(index, 1).toString());
+        txtHoTen.setText(tblNV1.getValueAt(index, 2).toString());
+        if (tblNV1.getValueAt(index, 3).toString().equals("Nam")) {
+            rdoNam.setSelected(true);
+        } else {
+            rdoNu.setSelected(true);
+        }
+        txtDiaChi.setText(tblNV1.getValueAt(index, 4).toString());
+        txtSDT.setText(tblNV1.getValueAt(index, 5).toString());
+        txtCCCD.setText(tblNV1.getValueAt(index, 6).toString());
+        txtNgayVaoLam.setText(tblNV1.getValueAt(index, 7).toString());
+        rdoDangLamViec.setSelected(true);
+        txtAnh.setText(tblNV1.getValueAt(index, 8).toString());
+    }
 
     public void fillTableSamPham(List<SanPham> list) {
         mol = (DefaultTableModel) tblSanPham.getModel();
@@ -250,12 +282,14 @@ public class AdamStoreView extends javax.swing.JFrame {
         btnThemNV = new javax.swing.JButton();
         btnSuaNV = new javax.swing.JButton();
         btnMoiNV = new javax.swing.JButton();
+        txtAnh = new javax.swing.JTextField();
         jPanel8 = new javax.swing.JPanel();
         cboGioiTinh = new javax.swing.JComboBox<>();
         cboDiaChi = new javax.swing.JComboBox<>();
         jPanel10 = new javax.swing.JPanel();
         txtTimNV = new javax.swing.JTextField();
         btnTimNV = new javax.swing.JButton();
+        cboTimKiemNV = new javax.swing.JComboBox<>();
         jTabbedPane3 = new javax.swing.JTabbedPane();
         jPanel11 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
@@ -1250,7 +1284,7 @@ public class AdamStoreView extends javax.swing.JFrame {
 
         jLabel35.setText("Trạng thái");
 
-        jLabel36.setText("jLabel36");
+        jLabel36.setText("Ảnh");
 
         buttonGroup3.add(rdoDangLamViec);
         rdoDangLamViec.setText("Đang làm việc");
@@ -1293,7 +1327,6 @@ public class AdamStoreView extends javax.swing.JFrame {
                     .addComponent(txtDiaChi))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel61Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel36, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel61Layout.createSequentialGroup()
                         .addGroup(jPanel61Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel33, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1305,14 +1338,16 @@ public class AdamStoreView extends javax.swing.JFrame {
                     .addGroup(jPanel61Layout.createSequentialGroup()
                         .addGroup(jPanel61Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel34)
-                            .addComponent(jLabel35))
+                            .addComponent(jLabel35)
+                            .addComponent(jLabel36, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel61Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel61Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel61Layout.createSequentialGroup()
                                 .addComponent(rdoDangLamViec)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(rdoNghiViec))
-                            .addComponent(txtNgayVaoLam, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(txtNgayVaoLam, javax.swing.GroupLayout.DEFAULT_SIZE, 238, Short.MAX_VALUE)
+                            .addComponent(txtAnh))))
                 .addGap(79, 79, 79))
             .addGroup(jPanel61Layout.createSequentialGroup()
                 .addGap(39, 39, 39)
@@ -1356,7 +1391,8 @@ public class AdamStoreView extends javax.swing.JFrame {
                 .addGroup(jPanel61Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel31)
                     .addComponent(txtDiaChi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel36))
+                    .addComponent(jLabel36)
+                    .addComponent(txtAnh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                 .addGroup(jPanel61Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnThemNV)
@@ -1396,12 +1432,16 @@ public class AdamStoreView extends javax.swing.JFrame {
 
         btnTimNV.setText("Tìm");
 
+        cboTimKiemNV.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mã NV", "Mã TK", "SĐT", "CCCD" }));
+
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
         jPanel10Layout.setHorizontalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel10Layout.createSequentialGroup()
-                .addGap(94, 94, 94)
+                .addContainerGap()
+                .addComponent(cboTimKiemNV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
                 .addComponent(txtTimNV)
                 .addGap(18, 18, 18)
                 .addComponent(btnTimNV)
@@ -1413,7 +1453,8 @@ public class AdamStoreView extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtTimNV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnTimNV))
+                    .addComponent(btnTimNV)
+                    .addComponent(cboTimKiemNV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(10, Short.MAX_VALUE))
         );
 
@@ -1425,9 +1466,14 @@ public class AdamStoreView extends javax.swing.JFrame {
                 {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6", "Title 7", "Title 8", "Title 9"
+                "Mã NV", "Mã TK", "Họ tên", "Giới tính", "Địa chỉ", "SĐT", "CCCD", "Ngày vào làm", "Ảnh"
             }
         ));
+        tblNV1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblNV1MouseClicked(evt);
+            }
+        });
         jScrollPane4.setViewportView(tblNV1);
 
         javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
@@ -1461,9 +1507,14 @@ public class AdamStoreView extends javax.swing.JFrame {
                 {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6", "Title 7", "Title 8", "Title 9"
+                "Mã NV", "Mã TK", "Họ tên", "Giới tính", "Địa chỉ", "SĐT", "CCCD", "Ngày vào làm", "Ảnh"
             }
         ));
+        tblNV0.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblNV0MouseClicked(evt);
+            }
+        });
         jScrollPane5.setViewportView(tblNV0);
 
         javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
@@ -1722,6 +1773,16 @@ public class AdamStoreView extends javax.swing.JFrame {
         fillTableSamPham(serviceSP.getAll());
     }//GEN-LAST:event_btnQuayLaiActionPerformed
 
+    private void tblNV1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblNV1MouseClicked
+        index = tblNV1.getSelectedRow();
+        detailNV1(index);
+    }//GEN-LAST:event_tblNV1MouseClicked
+
+    private void tblNV0MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblNV0MouseClicked
+        index = tblNV0.getSelectedRow();
+        detailNV(index);
+    }//GEN-LAST:event_tblNV0MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -1783,6 +1844,7 @@ public class AdamStoreView extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cboDiaChi;
     private javax.swing.JComboBox<String> cboGioiTinh;
     private javax.swing.JComboBox<String> cboLoaiSanPham;
+    private javax.swing.JComboBox<String> cboTimKiemNV;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -1889,6 +1951,7 @@ public class AdamStoreView extends javax.swing.JFrame {
     private javax.swing.JTable tblNV0;
     private javax.swing.JTable tblNV1;
     private javax.swing.JTable tblSanPham;
+    private javax.swing.JTextField txtAnh;
     private javax.swing.JTextField txtCCCD;
     private javax.swing.JTextField txtDiaChi;
     private javax.swing.JTextField txtHoTen;
