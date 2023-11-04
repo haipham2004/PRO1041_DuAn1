@@ -48,7 +48,7 @@ public class AdamStoreView extends javax.swing.JFrame {
         initComponents();
         this.dispose();
         setUndecorated(true);
-        setSize(1140, 710);
+        setSize(1145, 710);
         this.setLocationRelativeTo(null);
         fillTableSamPham(serviceSP.getAll());
         loadCbxLoaiSanPham(serviceLSP.getAll());
@@ -1832,7 +1832,6 @@ public class AdamStoreView extends javax.swing.JFrame {
         fillTableSamPham(serviceSP.getAll());
     }//GEN-LAST:event_btnQuayLaiActionPerformed
 
-<<<<<<< HEAD
     private void txtTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTimKiemActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTimKiemActionPerformed
@@ -1840,7 +1839,7 @@ public class AdamStoreView extends javax.swing.JFrame {
     private void cbo1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbo1MouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_cbo1MouseClicked
-=======
+
     private void tblNV1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblNV1MouseClicked
         index = tblNV1.getSelectedRow();
         detailNV1(index);
@@ -1886,7 +1885,7 @@ public class AdamStoreView extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_lblAnhNVMouseClicked
->>>>>>> 3f45480fe05fe879f7fcb3cae07c4f9e8e75524b
+
 
     /**
      * @param args the command line arguments
