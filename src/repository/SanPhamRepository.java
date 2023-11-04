@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package repository;
+
 import java.sql.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -18,28 +19,125 @@ import util.DBConnect1111111;
  * @author Admin BVCN88 02
  */
 public class SanPhamRepository {
-     PreparedStatement pst = null;
+
+    PreparedStatement pst = null;
     Connection conn = null;
     ResultSet rs = null;
     String sql = null;
     List<SanPham> listSanPham = new ArrayList<>();
-     public List<SanPham> getAll() {
+
+    public List<SanPham> getAll() {
+        listSanPham.clear();
         try {
             conn = DBConnect1111111.getConnection();
-            sql = "";
+            sql = "SELECT SP.MaSanPham,SP.TenSanPham,SP.TrangThai,LSP.MaLSP,LSP.TenLSP,SP.XuatXU \n"
+                    + "FROm SanPham SP INNER JOIN LoaiSanPham LSP ON SP.MaLSP=LSP.MaLSP";
             pst = conn.prepareStatement(sql);
             rs = pst.executeQuery();
             while (rs.next()) {
                 LoaiSanPham lsp = new LoaiSanPham(rs.getString(4),
-                        rs.getString(5), rs.getBoolean(6), rs.getString(7));
-                SanPham sp=new SanPham(rs.getString(1), rs.getString(2),
-                        rs.getBoolean(3), lsp,rs.getString(8));
+                        rs.getString(5));
+                SanPham sp = new SanPham(rs.getString(1), rs.getString(2),
+                        rs.getBoolean(3), lsp, rs.getString(6));
                 listSanPham.add(sp);
             }
         } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
-        return  listSanPham;
+        return listSanPham;
+    }
+
+    public int them(SanPham sp) {
+        try {
+            conn = DBConnect1111111.getConnection();
+            sql = "";
+            pst = conn.prepareStatement(sql);
+            pst.setObject(1, sp.getMaSanPham());
+            pst.setObject(2, sp.getTenSanPham());
+            pst.setObject(3, sp.isTrangThai());
+            pst.setObject(4, sp.getLoaiSanPham().getMaLoaiSanPham());
+            pst.setObject(5, sp.getXuatXu());
+            return pst.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+
+    public int sua(SanPham sp, String ma) {
+        try {
+            conn = DBConnect1111111.getConnection();
+            sql = "";
+            pst = conn.prepareStatement(sql);
+            pst.setObject(1, sp.getTenSanPham());
+            pst.setObject(2, sp.isTrangThai());
+            pst.setObject(3, sp.getLoaiSanPham().getMaLoaiSanPham());
+            pst.setObject(4, sp.getXuatXu());
+            pst.setObject(5, ma);
+            return pst.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+
+    public int xoa(String ma) {
+        try {
+            conn = DBConnect1111111.getConnection();
+            sql = "";
+            pst = conn.prepareStatement(sql);
+            pst.setObject(1, ma);
+            return pst.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+
+    public SanPham getOne(String ma) {
+        SanPham sp = null;
+        try {
+            conn = DBConnect1111111.getConnection();
+            sql = "SELECT SP.MaSanPham,SP.TenSanPham,SP.TrangThai,LSP.MaLSP,LSP.TenLSP,SP.XuatXU \n"
+                    + "FROm SanPham SP INNER JOIN LoaiSanPham LSP ON SP.MaLSP=LSP.MaLSP where SP.MaSanPham=?";
+            pst = conn.prepareStatement(sql);
+            pst.setObject(1, ma);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                LoaiSanPham lsp = new LoaiSanPham(rs.getString(4),
+                        rs.getString(5));
+                sp = new SanPham(rs.getString(1), rs.getString(2),
+                        rs.getBoolean(3), lsp, rs.getString(6));
+                listSanPham.add(sp);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+        return sp;
+    }
+
+    public List<SanPham> getList(String name) {
+        List<SanPham> listSanPham2 = new ArrayList<>();
+        try {
+            conn = DBConnect1111111.getConnection();
+            sql = "SELECT SP.MaSanPham,SP.TenSanPham,SP.TrangThai,LSP.MaLSP,LSP.TenLSP,SP.XuatXU \n"
+                    + "FROm SanPham SP INNER JOIN LoaiSanPham LSP ON SP.MaLSP=LSP.MaLSP where SP.TenSanPham like ?";
+            pst = conn.prepareStatement(sql);
+            pst.setObject(1, name);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                LoaiSanPham lsp = new LoaiSanPham(rs.getString(4),
+                        rs.getString(5));
+                SanPham sp = new SanPham(rs.getString(1), rs.getString(2),
+                        rs.getBoolean(3), lsp, rs.getString(6));
+                listSanPham2.add(sp);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+        return listSanPham2;
     }
 }

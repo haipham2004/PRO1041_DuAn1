@@ -6,17 +6,30 @@ package view;
 
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.util.List;
+import javax.swing.ComboBoxModel;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import model.LoaiSanPham;
+import model.SanPham;
+import service.AdamStore;
+import service.servicImp.LoaiSanPhamServiceImp;
+import service.servicImp.SanPhamServiceImp;
 
 /**
  *
  * @author Admin
  */
 public class AdamStoreView extends javax.swing.JFrame {
-    
+
     CardLayout cardLayout = new CardLayout();
-    
-    
+    DefaultTableModel mol = new DefaultTableModel();
+    DefaultComboBoxModel<LoaiSanPham> cbxLoaiSanPham = new DefaultComboBoxModel<>();
+    LoaiSanPhamServiceImp serviceLSP = new LoaiSanPhamServiceImp();
+    SanPhamServiceImp serviceSP = new SanPhamServiceImp();
+    int index = -1;
+
     /**
      * Creates new form AdamStoreView
      */
@@ -26,6 +39,51 @@ public class AdamStoreView extends javax.swing.JFrame {
         setUndecorated(true);
         setSize(1140, 710);
         this.setLocationRelativeTo(null);
+        fillTableSamPham(serviceSP.getAll());
+        loadCbxLoaiSanPham(serviceLSP.getAll());
+        loadCbo1(serviceLSP.getAll());
+
+    }
+
+    public void loadCbxLoaiSanPham(List<LoaiSanPham> list) {
+        cbxLoaiSanPham.removeAllElements();
+        for (LoaiSanPham loaiSanPham : list) {
+            cbxLoaiSanPham.addElement(loaiSanPham);
+        }
+        cboLoaiSanPham.setModel((ComboBoxModel) cbxLoaiSanPham);
+    }
+
+    public void loadCbo1(List<LoaiSanPham> list) {
+        cbxLoaiSanPham.removeAllElements();
+        for (LoaiSanPham loaiSanPham : list) {
+            cbxLoaiSanPham.addElement(loaiSanPham);
+        }
+        cbo1.setModel((ComboBoxModel) cbxLoaiSanPham);
+    }
+
+    public void detailSP(int index) {
+        txtMaSanPham.setText(tblSanPham.getValueAt(index, 0).toString());
+        txtTenSanPham.setText(tblSanPham.getValueAt(index, 1).toString());
+        if (tblSanPham.getValueAt(index, 2).toString().equals("Còn hàng")) {
+            rdConHang.setSelected(true);
+        } else {
+            rdHetHang.setSelected(true);
+        }
+        txtXuatXu.setText(tblSanPham.getValueAt(index, 3).toString());
+        LoaiSanPham lsp = (LoaiSanPham) tblSanPham.getValueAt(index, 4);
+        cbxLoaiSanPham.setSelectedItem(lsp);
+    }
+
+    public void fillTableSamPham(List<SanPham> list) {
+        mol = (DefaultTableModel) tblSanPham.getModel();
+        mol.setRowCount(0);
+        for (SanPham sanPham : list) {
+            mol.addRow(new Object[]{
+                sanPham.getMaSanPham(), sanPham.getTenSanPham(),
+                sanPham.isTrangThai() ? "Còn hàng" : "Hết hàng", sanPham.getXuatXu(),
+                sanPham.getLoaiSanPham()
+            });
+        }
     }
 
     /**
@@ -109,10 +167,9 @@ public class AdamStoreView extends javax.swing.JFrame {
         rdConHang = new javax.swing.JRadioButton();
         rdHetHang = new javax.swing.JRadioButton();
         jPanel4 = new javax.swing.JPanel();
-        jPanel5 = new javax.swing.JPanel();
-        cbo2 = new javax.swing.JComboBox<>();
         jPanel7 = new javax.swing.JPanel();
         txtTimKiem = new javax.swing.JTextField();
+        btnSearch = new javax.swing.JButton();
         jPanel9 = new javax.swing.JPanel();
         cbo1 = new javax.swing.JComboBox<>();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -121,6 +178,7 @@ public class AdamStoreView extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
+        btnQuayLai = new javax.swing.JButton();
         jPanel28 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         pnlChiTietNhanVien = new javax.swing.JPanel();
@@ -624,6 +682,11 @@ public class AdamStoreView extends javax.swing.JFrame {
                 "Tháng", "Sản phẩm bán", "Tổng giá bán", "Tổng giá giảm", "Doanh thu"
             }
         ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         jLabel20.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -869,28 +932,14 @@ public class AdamStoreView extends javax.swing.JFrame {
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Lọc sản phẩm"));
 
-        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Xuất xứ"));
-
-        cbo2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addComponent(cbo2, 0, 190, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addComponent(cbo2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(33, Short.MAX_VALUE))
-        );
-
         jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder("Tìm kiếm"));
+
+        btnSearch.setText("Search");
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -898,15 +947,19 @@ public class AdamStoreView extends javax.swing.JFrame {
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(txtTimKiem, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
+                .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                .addComponent(btnSearch)
                 .addContainerGap())
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addGap(24, 24, 24)
-                .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSearch))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         jPanel9.setBorder(javax.swing.BorderFactory.createTitledBorder("Loại sản phẩm"));
@@ -937,11 +990,9 @@ public class AdamStoreView extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(36, 36, 36)
                 .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
-                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(79, 79, 79)
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -949,8 +1000,7 @@ public class AdamStoreView extends javax.swing.JFrame {
                 .addGap(15, 15, 15)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -965,6 +1015,11 @@ public class AdamStoreView extends javax.swing.JFrame {
                 "Mã SP", "Tên SP", "Trạng thái", "Xuất xứ", "Tên loại SP"
             }
         ));
+        tblSanPham.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblSanPhamMouseClicked(evt);
+            }
+        });
         jScrollPane3.setViewportView(tblSanPham);
 
         jButton1.setText("Thêm");
@@ -974,6 +1029,13 @@ public class AdamStoreView extends javax.swing.JFrame {
         jButton4.setText("Xoá");
 
         jButton5.setText("Clear");
+
+        btnQuayLai.setText("Quay lại");
+        btnQuayLai.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnQuayLaiActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel29Layout = new javax.swing.GroupLayout(jPanel29);
         jPanel29.setLayout(jPanel29Layout);
@@ -996,6 +1058,8 @@ public class AdamStoreView extends javax.swing.JFrame {
                 .addComponent(jButton4)
                 .addGap(37, 37, 37)
                 .addComponent(jButton5)
+                .addGap(34, 34, 34)
+                .addComponent(btnQuayLai)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel29Layout.setVerticalGroup(
@@ -1010,7 +1074,8 @@ public class AdamStoreView extends javax.swing.JFrame {
                     .addComponent(jButton1)
                     .addComponent(jButton3)
                     .addComponent(jButton4)
-                    .addComponent(jButton5))
+                    .addComponent(jButton5)
+                    .addComponent(btnQuayLai))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -1196,7 +1261,7 @@ public class AdamStoreView extends javax.swing.JFrame {
         // TODO add your handling code here:
         DangNhapView dangNhapView = new DangNhapView();
         int check = JOptionPane.showConfirmDialog(this, "Xác nhận đăng xuất?");
-        if (check==0) {
+        if (check == 0) {
             this.dispose();
             dangNhapView.setVisible(true);
         }
@@ -1207,7 +1272,7 @@ public class AdamStoreView extends javax.swing.JFrame {
         cardLayout = (CardLayout) pnlMain.getLayout();
         cardLayout.show(pnlMain, "pnlChiTietDoiMatKhau");
         resetBackGroundColor();
-        pnlDoiMatKhau.setBackground(new Color(204,204,204));
+        pnlDoiMatKhau.setBackground(new Color(204, 204, 204));
     }//GEN-LAST:event_pnlDoiMatKhauMouseClicked
 
     private void pnlKhachHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlKhachHangMouseClicked
@@ -1215,7 +1280,7 @@ public class AdamStoreView extends javax.swing.JFrame {
         cardLayout = (CardLayout) pnlMain.getLayout();
         cardLayout.show(pnlMain, "pnlChiTietKhachHang");
         resetBackGroundColor();
-        pnlKhachHang.setBackground(new Color(204,204,204));
+        pnlKhachHang.setBackground(new Color(204, 204, 204));
     }//GEN-LAST:event_pnlKhachHangMouseClicked
 
     private void pnlKhuyenMaiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlKhuyenMaiMouseClicked
@@ -1223,7 +1288,7 @@ public class AdamStoreView extends javax.swing.JFrame {
         cardLayout = (CardLayout) pnlMain.getLayout();
         cardLayout.show(pnlMain, "pnlChiTietKhuyenMai");
         resetBackGroundColor();
-        pnlKhuyenMai.setBackground(new Color(204,204,204));
+        pnlKhuyenMai.setBackground(new Color(204, 204, 204));
     }//GEN-LAST:event_pnlKhuyenMaiMouseClicked
 
     private void pnlLichSuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlLichSuMouseClicked
@@ -1231,7 +1296,7 @@ public class AdamStoreView extends javax.swing.JFrame {
         cardLayout = (CardLayout) pnlMain.getLayout();
         cardLayout.show(pnlMain, "pnlChiTietLichSu");
         resetBackGroundColor();
-        pnlLichSu.setBackground(new Color(204,204,204));
+        pnlLichSu.setBackground(new Color(204, 204, 204));
     }//GEN-LAST:event_pnlLichSuMouseClicked
 
     private void pnlHoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlHoaDonMouseClicked
@@ -1239,7 +1304,7 @@ public class AdamStoreView extends javax.swing.JFrame {
         cardLayout = (CardLayout) pnlMain.getLayout();
         cardLayout.show(pnlMain, "pnlChiTietHoaDon");
         resetBackGroundColor();
-        pnlHoaDon.setBackground(new Color(204,204,204));
+        pnlHoaDon.setBackground(new Color(204, 204, 204));
     }//GEN-LAST:event_pnlHoaDonMouseClicked
 
     private void pnlThongKeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlThongKeMouseEntered
@@ -1251,7 +1316,7 @@ public class AdamStoreView extends javax.swing.JFrame {
         cardLayout = (CardLayout) pnlMain.getLayout();
         cardLayout.show(pnlMain, "pnlChiTietThongKe");
         resetBackGroundColor();
-        pnlThongKe.setBackground(new Color(204,204,204));
+        pnlThongKe.setBackground(new Color(204, 204, 204));
     }//GEN-LAST:event_pnlThongKeMouseClicked
 
     private void pnlNhanVienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlNhanVienMouseClicked
@@ -1259,7 +1324,7 @@ public class AdamStoreView extends javax.swing.JFrame {
         cardLayout = (CardLayout) pnlMain.getLayout();
         cardLayout.show(pnlMain, "pnlChiTietNhanVien");
         resetBackGroundColor();
-        pnlNhanVien.setBackground(new Color(204,204,204));
+        pnlNhanVien.setBackground(new Color(204, 204, 204));
     }//GEN-LAST:event_pnlNhanVienMouseClicked
 
     private void pnlSanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlSanPhamMouseClicked
@@ -1267,13 +1332,35 @@ public class AdamStoreView extends javax.swing.JFrame {
         cardLayout = (CardLayout) pnlMain.getLayout();
         cardLayout.show(pnlMain, "pnlChiTietSanPham");
         resetBackGroundColor();
-        pnlSanPham.setBackground(new Color(204,204,204));
+        pnlSanPham.setBackground(new Color(204, 204, 204));
     }//GEN-LAST:event_pnlSanPhamMouseClicked
 
     private void btnExitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExitMouseClicked
         // TODO add your handling code here:
         System.exit(0);
     }//GEN-LAST:event_btnExitMouseClicked
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    private void tblSanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSanPhamMouseClicked
+        // TODO add your handling code here:
+        index = tblSanPham.getSelectedRow();
+        detailSP(index);
+    }//GEN-LAST:event_tblSanPhamMouseClicked
+
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
+        // TODO add your handling code here:
+        String timKiem=txtTimKiem.getText();
+        timKiem='%'+timKiem+'%';
+        fillTableSamPham(serviceSP.getList(timKiem));
+    }//GEN-LAST:event_btnSearchActionPerformed
+
+    private void btnQuayLaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuayLaiActionPerformed
+        // TODO add your handling code here:
+        fillTableSamPham(serviceSP.getAll());
+    }//GEN-LAST:event_btnQuayLaiActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1309,23 +1396,24 @@ public class AdamStoreView extends javax.swing.JFrame {
             }
         });
     }
-    
-    public void resetBackGroundColor(){
-        pnlThongKe.setBackground(new Color(51,204,255));
-        pnlHoaDon.setBackground(new Color(51,204,255));
-        pnlSanPham.setBackground(new Color(51,204,255));
-        pnlDoiMatKhau.setBackground(new Color(51,204,255));
-        pnlKhachHang.setBackground(new Color(51,204,255));
-        pnlKhuyenMai.setBackground(new Color(51,204,255));
-        pnlLichSu.setBackground(new Color(51,204,255));
-        pnlNhanVien.setBackground(new Color(51,204,255));
+
+    public void resetBackGroundColor() {
+        pnlThongKe.setBackground(new Color(51, 204, 255));
+        pnlHoaDon.setBackground(new Color(51, 204, 255));
+        pnlSanPham.setBackground(new Color(51, 204, 255));
+        pnlDoiMatKhau.setBackground(new Color(51, 204, 255));
+        pnlKhachHang.setBackground(new Color(51, 204, 255));
+        pnlKhuyenMai.setBackground(new Color(51, 204, 255));
+        pnlLichSu.setBackground(new Color(51, 204, 255));
+        pnlNhanVien.setBackground(new Color(51, 204, 255));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnExit;
+    private javax.swing.JButton btnQuayLai;
+    private javax.swing.JButton btnSearch;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> cbo1;
-    private javax.swing.JComboBox<String> cbo2;
     private javax.swing.JComboBox<String> cboLoaiSanPham;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -1373,7 +1461,6 @@ public class AdamStoreView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel29;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JRadioButton jRadioButton1;
