@@ -11,23 +11,25 @@ import java.util.Date;
  * @author Admin BVCN88 02
  */
 public class NhanVien {
- private String maNhanVien;
- private TaiKhoan taiKhoan;
- private String hoTen;
- private boolean gioiTinh;
- private String diaChi;
- private String soDienThoai;
- private String CCCD;
- private Date ngayVaoLam;
- private boolean trangThai;
- private String anh;
+
+    private String maNhanVien;
+    private TaiKhoan taiKhoan;
+    private String hoTen;
+    private boolean gioiTinh;
+    private String diaChi;
+    private String soDienThoai;
+    private String CCCD;
+    private Date ngayVaoLam;
+    private boolean trangThai;
+    private String anh;
+    private String maTaiKhoan;
 
     public NhanVien() {
     }
 
-    public NhanVien(String maNhanVien, TaiKhoan taiKhoan, String hoTen, boolean gioiTinh, String diaChi, String soDienThoai, String CCCD, Date ngayVaoLam, boolean trangThai, String anh) {
+    public NhanVien(String maNhanVien, String maTaiKhoan, String hoTen, boolean gioiTinh, String diaChi, String soDienThoai, String CCCD, Date ngayVaoLam, boolean trangThai, String anh) {
         this.maNhanVien = maNhanVien;
-        this.taiKhoan = taiKhoan;
+        this.maTaiKhoan = taiKhoan.getMaTaiKhoan();
         this.hoTen = hoTen;
         this.gioiTinh = gioiTinh;
         this.diaChi = diaChi;
@@ -117,6 +119,4 @@ public class NhanVien {
     public void setAnh(String anh) {
         this.anh = anh;
     }
- 
- 
 }
