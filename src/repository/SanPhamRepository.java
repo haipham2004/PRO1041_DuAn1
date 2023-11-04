@@ -31,9 +31,9 @@ public class SanPhamRepository {
             rs = pst.executeQuery();
             while (rs.next()) {
                 LoaiSanPham lsp = new LoaiSanPham(rs.getString(4),
-                        rs.getString(25), rs.getBoolean(6), rs.getString(4));
+                        rs.getString(5), rs.getBoolean(6), rs.getString(7));
                 SanPham sp=new SanPham(rs.getString(1), rs.getString(2),
-                        rs.getBoolean(3), lsp);
+                        rs.getBoolean(3), lsp,rs.getString(8));
                 listSanPham.add(sp);
             }
         } catch (Exception e) {

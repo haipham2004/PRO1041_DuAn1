@@ -14,15 +14,17 @@ public class SanPham {
     private String tenSanPham;
     private boolean trangThai;
     private LoaiSanPham loaiSanPham;
+    private String xuatXu;
 
     public SanPham() {
     }
 
-    public SanPham(String maSanPham, String tenSanPham, boolean trangThai, LoaiSanPham loaiSanPham) {
+    public SanPham(String maSanPham, String tenSanPham, boolean trangThai, LoaiSanPham loaiSanPham, String xuatXu) {
         this.maSanPham = maSanPham;
         this.tenSanPham = tenSanPham;
         this.trangThai = trangThai;
         this.loaiSanPham = loaiSanPham;
+        this.xuatXu = xuatXu;
     }
 
     public String getMaSanPham() {
@@ -56,5 +58,15 @@ public class SanPham {
     public void setLoaiSanPham(LoaiSanPham loaiSanPham) {
         this.loaiSanPham = loaiSanPham;
     }
+
+    public String getXuatXu() {
+        return xuatXu;
+    }
+
+    public void setXuatXu(String xuatXu) {
+        this.xuatXu = xuatXu;
+    }
+
+    
 
 }
