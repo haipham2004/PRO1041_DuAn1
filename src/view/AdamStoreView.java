@@ -96,6 +96,7 @@ public class AdamStoreView extends javax.swing.JFrame {
         jPanel27 = new javax.swing.JPanel();
         jPanel29 = new javax.swing.JPanel();
         jPanel28 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
         pnlChiTietNhanVien = new javax.swing.JPanel();
         pnlChiTietHoaDon = new javax.swing.JPanel();
         pnlChiTietKhachHang = new javax.swing.JPanel();
@@ -807,6 +808,19 @@ public class AdamStoreView extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Thuộc tính sản phẩm", jPanel28);
 
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 801, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 541, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("Sản Phảm", jPanel2);
+
         javax.swing.GroupLayout pnlChiTietSanPhamLayout = new javax.swing.GroupLayout(pnlChiTietSanPham);
         pnlChiTietSanPham.setLayout(pnlChiTietSanPhamLayout);
         pnlChiTietSanPhamLayout.setHorizontalGroup(
@@ -1097,6 +1111,7 @@ public class AdamStoreView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel23;
     private javax.swing.JPanel jPanel24;
     private javax.swing.JPanel jPanel25;
