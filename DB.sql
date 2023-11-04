@@ -15,10 +15,10 @@ CREATE TABLE [NhanVien] (
   [MaTK] varchar(10) not null,
   CONSTRAINT FK_NV_TK foreign key(MaTK) references TaiKhoan(MaTK),
   [HoTen] nvarchar(50),
-  [GioiTinh] int,
+  [GioiTinh] bit,
   [DiaChi] nvarchar(100),
   [SoDienThoai] varchar(10),
-  [CCCD] int,
+  [CCCD] nvarchar(50),
   [NgayVaoLam] date,
   [TrangThai] bit,
   [Anh] varchar(MAX),
@@ -31,7 +31,7 @@ CREATE TABLE [KhachHang] (
   [NgaySinh] date,
   [SoDienThoai] varchar(10),
   [Email] varchar(100),
-  [GioiTInh] int,
+  [GioiTInh] bit,
   [DiaChi] nvarchar(100),
   [TrangThai] bit,
   PRIMARY KEY ([MaKH])
@@ -45,7 +45,7 @@ CREATE TABLE [HinhThucThanhToan] (
 );
 CREATE TABLE [Eventa] (
   [MaEV] varchar(10),
-  [TenEV] varchar(10),
+  [TenEV] varchar(50),
   [HinhThuc] nvarchar(100),
   [MucGiamGia] varchar(100),
   [ThoiGianBatDau] date,

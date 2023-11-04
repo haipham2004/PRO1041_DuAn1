@@ -6,8 +6,8 @@ package model;
 
 /**
  *
- * @author Admin BVCN88 02
+ * @author Admin
  */
-public class Test {
+public class CheckClass {
     
 }
