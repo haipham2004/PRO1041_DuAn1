@@ -11,16 +11,17 @@ import java.util.Date;
  * @author Admin BVCN88 02
  */
 public class NhanVien {
- private String maNhanVien;
- private TaiKhoan taiKhoan;
- private String hoTen;
- private boolean gioiTinh;
- private String diaChi;
- private String soDienThoai;
- private String CCCD;
- private Date ngayVaoLam;
- private boolean trangThai;
- private String anh;
+
+    private String maNhanVien;
+    private TaiKhoan taiKhoan;
+    private String hoTen;
+    private boolean gioiTinh;
+    private String diaChi;
+    private String soDienThoai;
+    private String CCCD;
+    private Date ngayVaoLam;
+    private boolean trangThai;
+    private String anh;
 
     public NhanVien() {
     }
@@ -117,6 +118,10 @@ public class NhanVien {
     public void setAnh(String anh) {
         this.anh = anh;
     }
- 
- 
+
+    @Override
+    public String toString() {
+        return diaChi;
+    }
+    
 }
