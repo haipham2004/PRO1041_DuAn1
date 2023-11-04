@@ -156,6 +156,7 @@ public class AdamStoreView extends javax.swing.JFrame {
                 addedValues.add(nv.getDiaChi());
             }
         }
+        cboDiaChi.addItem("");
         cboDiaChi.setModel((ComboBoxModel) cbxNhanVien);
     }
 
@@ -1266,6 +1267,8 @@ public class AdamStoreView extends javax.swing.JFrame {
 
         jLabel29.setText("Họ tên");
 
+        txtMaNV.setEditable(false);
+
         jLabel30.setText("Giới tính");
 
         jLabel31.setText("Địa chỉ");
@@ -1285,6 +1288,8 @@ public class AdamStoreView extends javax.swing.JFrame {
         jLabel35.setText("Trạng thái");
 
         jLabel36.setText("Ảnh");
+
+        txtNgayVaoLam.setEditable(false);
 
         buttonGroup3.add(rdoDangLamViec);
         rdoDangLamViec.setText("Đang làm việc");
@@ -1393,12 +1398,12 @@ public class AdamStoreView extends javax.swing.JFrame {
                     .addComponent(txtDiaChi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel36)
                     .addComponent(txtAnh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
                 .addGroup(jPanel61Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnThemNV)
                     .addComponent(btnSuaNV)
                     .addComponent(btnMoiNV))
-                .addGap(31, 31, 31))
+                .addGap(18, 18, 18))
         );
 
         jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder("Bộ lọc"));
@@ -1432,7 +1437,7 @@ public class AdamStoreView extends javax.swing.JFrame {
 
         btnTimNV.setText("Tìm");
 
-        cboTimKiemNV.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mã NV", "Mã TK", "SĐT", "CCCD" }));
+        cboTimKiemNV.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mã NV", "Họ tên", "SĐT", "CCCD" }));
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
@@ -1489,7 +1494,7 @@ public class AdamStoreView extends javax.swing.JFrame {
         );
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 180, Short.MAX_VALUE)
+            .addGap(0, 199, Short.MAX_VALUE)
             .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel11Layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -1530,7 +1535,7 @@ public class AdamStoreView extends javax.swing.JFrame {
         );
         jPanel14Layout.setVerticalGroup(
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 180, Short.MAX_VALUE)
+            .addGap(0, 199, Short.MAX_VALUE)
             .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel14Layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -1560,9 +1565,8 @@ public class AdamStoreView extends javax.swing.JFrame {
                 .addGroup(pnlChiTietNhanVienLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTabbedPane3)
-                .addContainerGap())
+                .addGap(18, 18, 18)
+                .addComponent(jTabbedPane3))
         );
 
         pnlMain.add(pnlChiTietNhanVien, "pnlChiTietNhanVien");
