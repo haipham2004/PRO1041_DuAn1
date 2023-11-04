@@ -51,18 +51,14 @@ INSERT INTO KichThuoc VALUES
 ('KT02','M',1),
 ('KT03','L',1),
 ('KT04','XL',1)
-<<<<<<< HEAD
+
 INSERT INTO Eventa VALUES
 ('EV01',N'Sinh nhật cửa hàng',N'Giảm giá','20%','2023-03-11','2023-03-15',N'Siêu giảm giá',1),
 ('EV02',N'Quốc tế Nam giới',N'Giảm giá','50%','2023-10-19','2023-10-21',N'Siêu giảm giá',1),
 ('EV03',N'Giáng sinh',N'Giảm giá','40%','2023-11-03','2023-11-05',N'Siêu giảm giá',1)
-
-alter tABLE Eventa
-ALTER COLUMN [TenEV] varchar(50)
-=======
-
-alter tABLE KhachHang
-ALTER COLUMN GioiTinh bit
->>>>>>> ff9a16d30fc0a910f4cb09a57776a87b6d734603
+INSERT INTO ChiTietSanPham VALUES
+('CTSP01','SP02','MS05','CL03','KT04',2,500000,1),
+('CTSP02','SP05','MS02','CL01','KT01',1,356000,1),
+('CTSP03','SP06','MS02','CL03','KT02',4,297000,1)
 SELECT*FROM KhachHang
 DELETE FROM KhachHang
