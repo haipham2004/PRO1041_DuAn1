@@ -1840,7 +1840,7 @@
                               <Component id="jPanel10" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="jTabbedPane3" pref="225" max="32767" attributes="0"/>
+                          <Component id="jTabbedPane3" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -1951,9 +1951,9 @@
                                   <Component id="txtSDT" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel36" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
+                              <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
                                           <Component id="jLabel28" alignment="3" min="-2" max="-2" attributes="0"/>
                                           <Component id="txtMaTK" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -1989,7 +1989,7 @@
                                       </Group>
                                   </Group>
                                   <Group type="102" alignment="1" attributes="0">
-                                      <EmptySpace max="32767" attributes="0"/>
+                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                       <Component id="lblAnhNV" min="-2" pref="206" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
@@ -2015,9 +2015,6 @@
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="txtMaNV">
-                      <Properties>
-                        <Property name="editable" type="boolean" value="false"/>
-                      </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="txtMaTK">
                     </Component>
@@ -2105,6 +2102,9 @@
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Th&#xea;m"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnThemNVActionPerformed"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.JButton" name="btnSuaNV">
                       <Properties>

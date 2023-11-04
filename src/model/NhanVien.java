@@ -22,6 +22,7 @@ public class NhanVien {
     private Date ngayVaoLam;
     private boolean trangThai;
     private String anh;
+    private String maTaiKhoan;
 
     public NhanVien() {
     }
@@ -37,6 +38,27 @@ public class NhanVien {
         this.ngayVaoLam = ngayVaoLam;
         this.trangThai = trangThai;
         this.anh = anh;
+    }
+
+    public NhanVien(String maNhanVien, String maTaiKhoan, String hoTen, boolean gioiTinh, String diaChi, String soDienThoai, String CCCD, Date ngayVaoLam, boolean trangThai, String anh) {
+        this.maNhanVien = maNhanVien;
+        this.hoTen = hoTen;
+        this.gioiTinh = gioiTinh;
+        this.diaChi = diaChi;
+        this.soDienThoai = soDienThoai;
+        this.CCCD = CCCD;
+        this.ngayVaoLam = ngayVaoLam;
+        this.trangThai = trangThai;
+        this.anh = anh;
+        this.maTaiKhoan = maTaiKhoan;
+    }
+
+    public String getMaTaiKhoan() {
+        return maTaiKhoan;
+    }
+
+    public void setMaTaiKhoan(String maTaiKhoan) {
+        this.maTaiKhoan = maTaiKhoan;
     }
 
     public String getMaNhanVien() {
@@ -123,5 +145,5 @@ public class NhanVien {
     public String toString() {
         return diaChi;
     }
-    
+
 }
