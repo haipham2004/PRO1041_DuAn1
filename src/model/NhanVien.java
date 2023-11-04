@@ -22,14 +22,13 @@ public class NhanVien {
     private Date ngayVaoLam;
     private boolean trangThai;
     private String anh;
-    private String maTaiKhoan;
 
     public NhanVien() {
     }
 
-    public NhanVien(String maNhanVien, String maTaiKhoan, String hoTen, boolean gioiTinh, String diaChi, String soDienThoai, String CCCD, Date ngayVaoLam, boolean trangThai, String anh) {
+    public NhanVien(String maNhanVien, TaiKhoan taiKhoan, String hoTen, boolean gioiTinh, String diaChi, String soDienThoai, String CCCD, Date ngayVaoLam, boolean trangThai, String anh) {
         this.maNhanVien = maNhanVien;
-        this.maTaiKhoan = taiKhoan.getMaTaiKhoan();
+        this.taiKhoan = taiKhoan;
         this.hoTen = hoTen;
         this.gioiTinh = gioiTinh;
         this.diaChi = diaChi;
@@ -119,4 +118,10 @@ public class NhanVien {
     public void setAnh(String anh) {
         this.anh = anh;
     }
+
+    @Override
+    public String toString() {
+        return diaChi;
+    }
+    
 }
