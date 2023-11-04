@@ -21,7 +21,7 @@ public class DBConnect1111111 {
     private static final String PASSWORD = "Haitam77";
     private static final String SERVER = "localhost";
     private static final String PORT = "1433";
-    private static final String DATABASE_NAME = "PTPM_FINALLY_JAVA_SOF2041";
+    private static final String DATABASE_NAME = "AdamStores";
     private static final boolean USING_SSL = false;
    
     private static String CONNECT_STRING;
