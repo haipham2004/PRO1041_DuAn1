@@ -3,28 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/PRO1041_DuAn1/DuAn1/src/model/LoaiSanPham.java</file>
-            <file>file:/D:/PRO1041_DuAn1/DuAn1/src/model/ChatLieu.java</file>
-            <file>file:/D:/PRO1041_DuAn1/DuAn1/src/model/SanPham.java</file>
-            <file>file:/D:/PRO1041_DuAn1/DuAn1/src/model/KichThuoc.java</file>
-            <file>file:/D:/PRO1041_DuAn1/DuAn1/src/model/KhachHang.java</file>
-            <file>file:/D:/PRO1041_DuAn1/DuAn1/src/model/NhanVien.java</file>
-            <file>file:/D:/PRO1041_DuAn1/DuAn1/src/view/TestView.java</file>
-            <file>file:/D:/PRO1041_DuAn1/DuAn1/src/service/AdamStore.java</file>
-            <file>file:/D:/PRO1041_DuAn1/DuAn1/src/model/HoaDon.java</file>
-            <file>file:/D:/PRO1041_DuAn1/DuAn1/src/repository/SanPhamRepository.java</file>
-            <file>file:/D:/PRO1041_DuAn1/DuAn1/src/model/HinhThucThanhToan.java</file>
-            <file>file:/D:/PRO1041_DuAn1/DuAn1/src/model/DoiTra.java</file>
-            <file>file:/D:/PRO1041_DuAn1/DuAn1/src/service/servicImp/SanPhamServiceImp.java</file>
-            <file>file:/D:/PRO1041_DuAn1/DuAn1/src/service/servicImp/LoaiSanPhamServiceImp.java</file>
-            <file>file:/D:/PRO1041_DuAn1/DuAn1/src/util/DBConnect1111111.java</file>
-            <file>file:/D:/PRO1041_DuAn1/DuAn1/src/model/ChiTietSanPham.java</file>
-            <file>file:/D:/PRO1041_DuAn1/DuAn1/src/model/Voucher.java</file>
-            <file>file:/D:/PRO1041_DuAn1/DuAn1/src/service/servicImp/TestImp.java</file>
-            <file>file:/D:/PRO1041_DuAn1/DuAn1/src/model/Eventa.java</file>
-            <file>file:/D:/PRO1041_DuAn1/DuAn1/src/model/MauSac.java</file>
-            <file>file:/D:/PRO1041_DuAn1/DuAn1/src/repository/LoaiSanPhamRepository.java</file>
-            <file>file:/D:/PRO1041_DuAn1/DuAn1/src/model/TaiKhoan.java</file>
+
         </group>
     </open-files>
 </project-private>
