@@ -8,8 +8,10 @@ import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Image;
 import java.io.File;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
@@ -20,6 +22,7 @@ import javax.swing.table.DefaultTableModel;
 import model.LoaiSanPham;
 import model.NhanVien;
 import model.SanPham;
+import model.TaiKhoan;
 import service.AdamStore;
 import service.servicImp.LoaiSanPhamServiceImp;
 import service.servicImp.NhanVienServiceImp;
@@ -39,6 +42,7 @@ public class AdamStoreView extends javax.swing.JFrame {
     LoaiSanPhamServiceImp serviceLSP = new LoaiSanPhamServiceImp();
     SanPhamServiceImp serviceSP = new SanPhamServiceImp();
     NhanVienServiceImp serviceNV = new NhanVienServiceImp();
+    String anhNV;
     int index = -1;
 
     /**
@@ -55,6 +59,8 @@ public class AdamStoreView extends javax.swing.JFrame {
         loadCbo1(serviceLSP.getAll());
         fillTableNV(serviceNV.getAll());
         loadCboDiaChi(serviceNV.getAll());
+        String today = toString().valueOf(LocalDate.now());
+        txtNgayVaoLam.setText(today);
     }
 
     public void loadCbxLoaiSanPham(List<LoaiSanPham> list) {
@@ -101,7 +107,8 @@ public class AdamStoreView extends javax.swing.JFrame {
         txtNgayVaoLam.setText(tblNV0.getValueAt(index, 7).toString());
         rdoNghiViec.setSelected(true);
         ImageIcon icon = new ImageIcon(tblNV0.getValueAt(index, 8).toString());
-        lblAnhNV.setIcon(icon);
+        Image image = icon.getImage().getScaledInstance(146, 206, Image.SCALE_SMOOTH);
+        lblAnhNV.setIcon(new ImageIcon(image));
     }
 
     public void detailNV1(int index) {
@@ -119,7 +126,8 @@ public class AdamStoreView extends javax.swing.JFrame {
         txtNgayVaoLam.setText(tblNV1.getValueAt(index, 7).toString());
         rdoDangLamViec.setSelected(true);
         ImageIcon icon = new ImageIcon(tblNV1.getValueAt(index, 8).toString());
-        lblAnhNV.setIcon(icon);
+        Image image = icon.getImage().getScaledInstance(146, 206, Image.SCALE_SMOOTH);
+        lblAnhNV.setIcon(new ImageIcon(image));
     }
 
     public void fillTableSamPham(List<SanPham> list) {
@@ -166,6 +174,38 @@ public class AdamStoreView extends javax.swing.JFrame {
             }
         }
         cboDiaChi.setModel((ComboBoxModel) cbxNhanVien);
+    }
+
+    public NhanVien getFormNV() {
+        String maNV = txtMaNV.getText();
+        String maTK = txtMaTK.getText();
+        String hoTen = txtHoTen.getText();
+        Boolean gt = rdoNam.isSelected() ? true : false;
+        String diaChi = txtDiaChi.getText();
+        String sdt = txtSDT.getText();
+        String cccd = txtCCCD.getText();
+        String ngay = txtNgayVaoLam.getText();
+        Date ngayVaoLam = null;
+        try {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            ngayVaoLam = dateFormat.parse(ngay);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        Boolean trangThai = rdoDangLamViec.isSelected() ? true : false;
+        String anh = anhNV;
+        return new NhanVien(maNV, maTK, hoTen, gt, diaChi, sdt, cccd, ngayVaoLam, trangThai, anh);
+    }
+
+    public void themNV() {
+        NhanVien nv = this.getFormNV();
+        try {
+            serviceNV.them(nv);
+            fillTableNV(serviceNV.getAll());
+            loadCboDiaChi(serviceNV.getAll());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -1286,8 +1326,6 @@ public class AdamStoreView extends javax.swing.JFrame {
 
         jLabel29.setText("Họ tên");
 
-        txtMaNV.setEditable(false);
-
         jLabel30.setText("Giới tính");
 
         jLabel31.setText("Địa chỉ");
@@ -1317,6 +1355,11 @@ public class AdamStoreView extends javax.swing.JFrame {
         rdoNghiViec.setText("Nghỉ việc");
 
         btnThemNV.setText("Thêm");
+        btnThemNV.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThemNVActionPerformed(evt);
+            }
+        });
 
         btnSuaNV.setText("Sửa");
 
@@ -1408,9 +1451,9 @@ public class AdamStoreView extends javax.swing.JFrame {
                     .addComponent(jLabel32)
                     .addComponent(txtSDT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel36))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel61Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel61Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
                         .addGroup(jPanel61Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel28)
                             .addComponent(txtMaTK, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1440,7 +1483,7 @@ public class AdamStoreView extends javax.swing.JFrame {
                             .addComponent(btnSuaNV)
                             .addComponent(btnMoiNV)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel61Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(lblAnhNV, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18))
         );
@@ -1621,7 +1664,7 @@ public class AdamStoreView extends javax.swing.JFrame {
                     .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jTabbedPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE))
+                .addComponent(jTabbedPane3))
         );
 
         pnlMain.add(pnlChiTietNhanVien, "pnlChiTietNhanVien");
@@ -1844,12 +1887,14 @@ public class AdamStoreView extends javax.swing.JFrame {
         index = tblNV1.getSelectedRow();
         detailNV1(index);
         btnThemNV.setEnabled(false);
+        txtMaNV.setEnabled(false);
     }//GEN-LAST:event_tblNV1MouseClicked
 
     private void tblNV0MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblNV0MouseClicked
         index = tblNV0.getSelectedRow();
         detailNV(index);
         btnThemNV.setEnabled(false);
+        txtMaNV.setEnabled(false);
     }//GEN-LAST:event_tblNV0MouseClicked
 
     private void btnMoiNVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoiNVActionPerformed
@@ -1863,7 +1908,9 @@ public class AdamStoreView extends javax.swing.JFrame {
         txtSDT.setText("");
         txtCCCD.setText("");
         rdoDangLamViec.setSelected(true);
+        lblAnhNV.setIcon(null);
         btnThemNV.setEnabled(true);
+        txtMaNV.setEnabled(true);
         tblNV1.clearSelection();
         tblNV0.clearSelection();
     }//GEN-LAST:event_btnMoiNVActionPerformed
@@ -1871,7 +1918,6 @@ public class AdamStoreView extends javax.swing.JFrame {
     private void lblAnhNVMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAnhNVMouseClicked
         JFileChooser fileChooser = new JFileChooser();
         int returnValue = fileChooser.showOpenDialog(null);
-
         if (returnValue == JFileChooser.APPROVE_OPTION) {
             File selectedFile = fileChooser.getSelectedFile();
             try {
@@ -1880,12 +1926,16 @@ public class AdamStoreView extends javax.swing.JFrame {
                 Image resizedImage = originalImage.getScaledInstance(146, 206, Image.SCALE_SMOOTH);
                 ImageIcon resizedIcon = new ImageIcon(resizedImage);
                 lblAnhNV.setIcon(resizedIcon);
+                anhNV = selectedFile.getAbsolutePath();
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
         }
     }//GEN-LAST:event_lblAnhNVMouseClicked
 
+    private void btnThemNVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemNVActionPerformed
+        this.themNV();
+    }//GEN-LAST:event_btnThemNVActionPerformed
 
     /**
      * @param args the command line arguments
