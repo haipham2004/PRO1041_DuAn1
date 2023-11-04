@@ -18,32 +18,32 @@ public class SanPhamServiceImp implements AdamStore<SanPham, String>{
 
     @Override
     public List<SanPham> getAll() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return repo.getAll();
     }
 
     @Override
     public int them(SanPham k) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return repo.them(k);
     }
 
     @Override
     public int sua(SanPham k, String e) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return repo.sua(k, e);
     }
 
     @Override
     public int xoa(String e) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return repo.xoa(e);
     }
 
     @Override
     public SanPham getOne(String e) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return repo.getOne(e);
     }
 
     @Override
     public List<SanPham> getList(String e) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return repo.getList(e);
     }
     
 }

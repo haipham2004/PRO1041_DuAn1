@@ -18,7 +18,7 @@ public class LoaiSanPhamServiceImp implements AdamStore<LoaiSanPham, String>{
 
     @Override
     public List<LoaiSanPham> getAll() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+     return repo.getAll();
     }
 
     @Override

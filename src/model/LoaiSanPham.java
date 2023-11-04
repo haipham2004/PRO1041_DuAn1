@@ -17,6 +17,11 @@ public class LoaiSanPham {
     public LoaiSanPham() {
     }
 
+    public LoaiSanPham(String maLoaiSanPham, String tenLoaiSanPham) {
+        this.maLoaiSanPham = maLoaiSanPham;
+        this.tenLoaiSanPham = tenLoaiSanPham;
+    }
+
     public LoaiSanPham(String maLoaiSanPham, String tenLoaiSanPham, boolean trangThai, String moTa) {
         this.maLoaiSanPham = maLoaiSanPham;
         this.tenLoaiSanPham = tenLoaiSanPham;
@@ -54,6 +59,11 @@ public class LoaiSanPham {
 
     public void setMoTa(String moTa) {
         this.moTa = moTa;
+    }
+
+    @Override
+    public String toString() {
+        return tenLoaiSanPham;
     }
     
 }

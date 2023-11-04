@@ -24,9 +24,10 @@ public class LoaiSanPhamRepository {
     List<LoaiSanPham> listLoaiSanPham = new ArrayList<>();
 
     public List<LoaiSanPham> getAll() {
+        listLoaiSanPham.clear();
         try {
             conn = DBConnect1111111.getConnection();
-            sql = "";
+            sql = "SELECT * FROM LoaiSanPham";
             pst = conn.prepareStatement(sql);
             rs = pst.executeQuery();
             while (rs.next()) {
