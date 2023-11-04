@@ -4,10 +4,46 @@
  */
 package service.servicImp;
 
+import java.util.List;
+import model.LoaiSanPham;
+import repository.LoaiSanPhamRepository;
+import service.AdamStore;
+
 /**
  *
  * @author Admin BVCN88 02
  */
-public class LoaiSanPhamServiceImp {
+public class LoaiSanPhamServiceImp implements AdamStore<LoaiSanPham, String>{
+    LoaiSanPhamRepository repo=new LoaiSanPhamRepository();
+
+    @Override
+    public List<LoaiSanPham> getAll() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public int them(LoaiSanPham k) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public int sua(LoaiSanPham k, String e) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public int xoa(String e) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public LoaiSanPham getOne(String e) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public List<LoaiSanPham> getList(String e) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
     
 }
