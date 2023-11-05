@@ -17,6 +17,11 @@ public class ChatLieu {
     public ChatLieu() {
     }
 
+    public ChatLieu(String maChatLieu, String tenChatLieu) {
+        this.maChatLieu = maChatLieu;
+        this.tenChatLieu = tenChatLieu;
+    }
+
     public ChatLieu(String maChatLieu, String tenChatLieu, boolean trangThai) {
         this.maChatLieu = maChatLieu;
         this.tenChatLieu = tenChatLieu;
@@ -45,6 +50,11 @@ public class ChatLieu {
 
     public void setTrangThai(boolean trangThai) {
         this.trangThai = trangThai;
+    }
+
+    @Override
+    public String toString() {
+        return tenChatLieu;
     }
 
 }

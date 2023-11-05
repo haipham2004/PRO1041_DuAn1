@@ -17,10 +17,6 @@ public class LoaiSanPham {
     public LoaiSanPham() {
     }
 
-    public LoaiSanPham(String tenLoaiSanPham) {
-        this.tenLoaiSanPham = tenLoaiSanPham;
-    }
-
     public LoaiSanPham(String maLoaiSanPham, String tenLoaiSanPham) {
         this.maLoaiSanPham = maLoaiSanPham;
         this.tenLoaiSanPham = tenLoaiSanPham;

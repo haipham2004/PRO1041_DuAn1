@@ -16,6 +16,12 @@ public class KichThuoc {
     public KichThuoc() {
     }
 
+    public KichThuoc(String maKichThuoc, String tenKichThuoc) {
+        this.maKichThuoc = maKichThuoc;
+        this.tenKichThuoc = tenKichThuoc;
+    }
+    
+
     public KichThuoc(String maKichThuoc, String tenKichThuoc, boolean trangThai) {
         this.maKichThuoc = maKichThuoc;
         this.tenKichThuoc = tenKichThuoc;
@@ -44,6 +50,11 @@ public class KichThuoc {
 
     public void setTrangThai(boolean trangThai) {
         this.trangThai = trangThai;
+    }
+
+    @Override
+    public String toString() {
+        return  tenKichThuoc;
     }
 
   

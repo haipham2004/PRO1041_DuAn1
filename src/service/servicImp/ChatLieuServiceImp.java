@@ -4,10 +4,46 @@
  */
 package service.servicImp;
 
+import java.util.List;
+import model.ChatLieu;
+import repository.ChatLieuRepository;
+import service.AdamStore;
+
 /**
  *
  * @author Admin BVCN88 02
  */
-public class ChatLieuServiceImp {
+public class ChatLieuServiceImp implements AdamStore<ChatLieu, String>{
+    ChatLieuRepository repo=new ChatLieuRepository();
+
+    @Override
+    public List<ChatLieu> getAll() {
+        return repo.getAll();
+    }
+
+    @Override
+    public int them(ChatLieu k) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public int sua(ChatLieu k, String e) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public int xoa(String e) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public ChatLieu getOne(String e) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public List<ChatLieu> getList(String e) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
     
 }

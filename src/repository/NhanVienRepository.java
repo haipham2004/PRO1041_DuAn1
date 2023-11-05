@@ -29,7 +29,8 @@ public class NhanVienRepository {
         listNhanVien.clear();
         try {
             conn = DBConnect1111111.getConnection();
-            sql = "select nv.MaNV,nv.MaTK,nv.HoTen,nv.GioiTinh,nv.DiaChi,nv.SoDienThoai,nv.CCCD,nv.NgayVaoLam,nv.TrangThai,nv.Anh,tk.UserName,tk.PassWord,tk.Role,tk.TrangThai \n"
+            sql = "select nv.MaNV,nv.MaTK,nv.HoTen,nv.GioiTinh,nv.DiaChi,nv.SoDienThoai"
+                    + ",nv.CCCD,nv.NgayVaoLam,nv.TrangThai,nv.Anh,tk.UserName,tk.PassWord,tk.Role,tk.TrangThai \n"
                     + "from NhanVien nv join TaiKhoan tk on tk.MaTK = nv.MaTK";
             pst = conn.prepareStatement(sql);
             rs = pst.executeQuery();

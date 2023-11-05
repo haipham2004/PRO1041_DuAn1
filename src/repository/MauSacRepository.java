@@ -22,7 +22,7 @@ public class MauSacRepository {
      public List<MauSac> getAll() {
         try {
             conn = DBConnect1111111.getConnection();
-            sql = "";
+            sql = "SELECT*FROM MauSac";
             pst = conn.prepareStatement(sql);
             rs = pst.executeQuery();
             while (rs.next()) {

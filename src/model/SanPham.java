@@ -19,6 +19,10 @@ public class SanPham {
     public SanPham() {
     }
 
+    public SanPham(String maSanPham) {
+        this.maSanPham = maSanPham;
+    }
+
     public SanPham(String maSanPham, String tenSanPham, boolean trangThai, LoaiSanPham loaiSanPham, String xuatXu) {
         this.maSanPham = maSanPham;
         this.tenSanPham = tenSanPham;

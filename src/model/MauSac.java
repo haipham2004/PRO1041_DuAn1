@@ -16,6 +16,11 @@ public class MauSac {
     public MauSac() {
     }
 
+    public MauSac(String maMauSac, String tenMauSac) {
+        this.maMauSac = maMauSac;
+        this.tenMauSac = tenMauSac;
+    }
+
     public MauSac(String maMauSac, String tenMauSac, boolean trangThai) {
         this.maMauSac = maMauSac;
         this.tenMauSac = tenMauSac;
@@ -44,6 +49,11 @@ public class MauSac {
 
     public void setTrangThai(boolean trangThai) {
         this.trangThai = trangThai;
+    }
+
+    @Override
+    public String toString() {
+        return  tenMauSac ;
     }
 
     

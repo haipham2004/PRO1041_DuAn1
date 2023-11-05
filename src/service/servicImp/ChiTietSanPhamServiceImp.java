@@ -3,32 +3,31 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package service.servicImp;
-
 import java.util.List;
-import model.NhanVien;
-
-import repository.NhanVienRepository;
+import model.ChiTietSanPham;
+import repository.ChiTietSanPhamRepository;
 import service.AdamStore;
+import view.AdamStoreView;
 
 /**
  *
- * @author Admin
+ * @author Admin BVCN88 02
  */
-public class NhanVienServiceImp implements AdamStore<NhanVien, String>{
-    NhanVienRepository repo = new NhanVienRepository();
+public class ChiTietSanPhamServiceImp implements AdamStore<ChiTietSanPham, String>{
+    ChiTietSanPhamRepository repo=new ChiTietSanPhamRepository();
 
     @Override
-    public List<NhanVien> getAll() {
+    public List<ChiTietSanPham> getAll() {
         return repo.getAll();
     }
 
     @Override
-    public int them(NhanVien k) {
-        return repo.insert(k);
+    public int them(ChiTietSanPham k) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public int sua(NhanVien k, String e) {
+    public int sua(ChiTietSanPham k, String e) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
@@ -38,13 +37,14 @@ public class NhanVienServiceImp implements AdamStore<NhanVien, String>{
     }
 
     @Override
-    public NhanVien getOne(String e) {
+    public ChiTietSanPham getOne(String e) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public List<NhanVien> getList(String e) {
+    public List<ChiTietSanPham> getList(String e) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
+    
 }
