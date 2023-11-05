@@ -68,7 +68,7 @@ public class SanPhamRepository {
     public int sua(SanPham sp, String ma) {
         try {
             conn = DBConnect.getConnection();
-            sql = "";
+            sql = "UPDATE SanPham set TenSanPham=?,TrangThai=?,MaLSP=?,XuatXU=? where MaSanPham=?";
             pst = conn.prepareStatement(sql);
             pst.setObject(1, sp.getTenSanPham());
             pst.setObject(2, sp.isTrangThai());

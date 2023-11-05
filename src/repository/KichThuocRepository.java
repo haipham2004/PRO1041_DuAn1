@@ -20,6 +20,7 @@ public class KichThuocRepository {
     String sql = null;
     List<KichThuoc> listKichThuoc = new ArrayList<>();
        public List<KichThuoc> getAll() {
+           listKichThuoc.clear();
         try {
             conn = DBConnect.getConnection();
             sql = "SELECT*FROM KichThuoc";
