@@ -66,160 +66,9 @@ public class AdamStoreView extends javax.swing.JFrame {
         setUndecorated(true);
         setSize(1145, 710);
         this.setLocationRelativeTo(null);
-        fillTableSamPham(serviceSP.getAll());
-        loadCbxLoaiSanPham(serviceLSP.getAll());
-        loadCbo1(serviceLSP.getAll());
-        loadCbxChatLieu(serviceCl.getAll());
-        loadCbxKichThuoc(serviceKT.getAll());
-        loadCbxMauSac(serviceMS.getAll());
-        fillTableNV(serviceNV.getAll());
-        loadCboDiaChi(serviceNV.getAll());
-        fillTableChiTietSanPham(serviceCTSP.getAll());
+
     }
 
-    public void loadCbxLoaiSanPham(List<LoaiSanPham> list) {
-        cbxLoaiSanPham.removeAllElements();
-        for (LoaiSanPham loaiSanPham : list) {
-            cbxLoaiSanPham.addElement(loaiSanPham);
-        }
-        cboLoaiSanPham.setModel((ComboBoxModel) cbxLoaiSanPham);
-    }
-    public void loadCbxMauSac(List<MauSac> list) {
-        cbxMauSac.removeAllElements();
-        for (MauSac mauSac : list) {
-            cbxMauSac.addElement(mauSac);
-        }
-        cboMauSac.setModel((ComboBoxModel) cbxMauSac);
-    }
-    public void loadCbxKichThuoc(List<KichThuoc> list) {
-        cbxKichThuoc.removeAllElements();
-        for (KichThuoc kichThuoc : list) {
-            cbxKichThuoc.addElement(kichThuoc);
-        }
-        cboKichThuoc.setModel((ComboBoxModel) cbxKichThuoc);
-    }
-    public void loadCbxChatLieu(List<ChatLieu> list) {
-        cbxChatLieu.removeAllElements();
-        for (ChatLieu chatLieu : list) {
-            cbxChatLieu.addElement(chatLieu);
-        }
-        cboChatLieu.setModel((ComboBoxModel) cbxLoaiSanPham);
-    }
-
-    public void loadCbo1(List<LoaiSanPham> list) {
-        cbxLoaiSanPham.removeAllElements();
-        for (LoaiSanPham loaiSanPham : list) {
-            cbxLoaiSanPham.addElement(loaiSanPham);
-        }
-        cbo1.setModel((ComboBoxModel) cbxLoaiSanPham);
-    }
-
-    public void detailSP(int index) {
-        txtMaSanPham.setText(tblSanPham.getValueAt(index, 0).toString());
-        txtTenSanPham.setText(tblSanPham.getValueAt(index, 1).toString());
-        if (tblSanPham.getValueAt(index, 2).toString().equals("Còn hàng")) {
-            rdConHang.setSelected(true);
-        } else {
-            rdHetHang.setSelected(true);
-        }
-        txtXuatXu.setText(tblSanPham.getValueAt(index, 3).toString());
-        LoaiSanPham lsp = (LoaiSanPham) tblSanPham.getValueAt(index, 4);
-        cbxLoaiSanPham.setSelectedItem(lsp);
-    }
-
-    public void detailNV(int index) {
-        txtMaNV.setText(tblNV0.getValueAt(index, 0).toString());
-        txtMaTK.setText(tblNV0.getValueAt(index, 1).toString());
-        txtHoTen.setText(tblNV0.getValueAt(index, 2).toString());
-        if (tblNV0.getValueAt(index, 3).toString().equals("Nam")) {
-            rdoNam.setSelected(true);
-        } else {
-            rdoNu.setSelected(true);
-        }
-        txtDiaChi.setText(tblNV0.getValueAt(index, 4).toString());
-        txtSDT.setText(tblNV0.getValueAt(index, 5).toString());
-        txtCCCD.setText(tblNV0.getValueAt(index, 6).toString());
-        txtNgayVaoLam.setText(tblNV0.getValueAt(index, 7).toString());
-        rdoNghiViec.setSelected(true);
-        ImageIcon icon = new ImageIcon(tblNV0.getValueAt(index, 8).toString());
-        lblAnhNV.setIcon(icon);
-    }
-
-    public void detailNV1(int index) {
-        txtMaNV.setText(tblNV1.getValueAt(index, 0).toString());
-        txtMaTK.setText(tblNV1.getValueAt(index, 1).toString());
-        txtHoTen.setText(tblNV1.getValueAt(index, 2).toString());
-        if (tblNV1.getValueAt(index, 3).toString().equals("Nam")) {
-            rdoNam.setSelected(true);
-        } else {
-            rdoNu.setSelected(true);
-        }
-        txtDiaChi.setText(tblNV1.getValueAt(index, 4).toString());
-        txtSDT.setText(tblNV1.getValueAt(index, 5).toString());
-        txtCCCD.setText(tblNV1.getValueAt(index, 6).toString());
-        txtNgayVaoLam.setText(tblNV1.getValueAt(index, 7).toString());
-        rdoDangLamViec.setSelected(true);
-        ImageIcon icon = new ImageIcon(tblNV1.getValueAt(index, 8).toString());
-        lblAnhNV.setIcon(icon);
-    }
-
-    public void fillTableSamPham(List<SanPham> list) {
-        mol = (DefaultTableModel) tblSanPham.getModel();
-        mol.setRowCount(0);
-        for (SanPham sanPham : list) {
-            mol.addRow(new Object[]{
-                sanPham.getMaSanPham(), sanPham.getTenSanPham(),
-                sanPham.isTrangThai() ? "Còn hàng" : "Hết hàng", sanPham.getXuatXu(),
-                sanPham.getLoaiSanPham()
-            });
-        }
-    }
-    public void fillTableChiTietSanPham(List<ChiTietSanPham> list){
-        mol=(DefaultTableModel) tblChiTietSanPham1.getModel();
-        mol.setRowCount(0);
-        for (ChiTietSanPham chiTietSanPham : list) {
-            mol.addRow(new Object[]{
-                chiTietSanPham.getMaChiTietSanPham(),chiTietSanPham.getSanPham().getMaSanPham(),
-                chiTietSanPham.getSoLuong(),chiTietSanPham.getGia(),
-                chiTietSanPham.getChatLieu(),chiTietSanPham.getMauSac(),
-                chiTietSanPham.getKichThuoc(),chiTietSanPham.isTrangThai()?"Còn hàng":"Hết hàng"
-            });
-        }
-    }
-
-    public void fillTableNV(List<NhanVien> list) {
-        mol = (DefaultTableModel) tblNV0.getModel();
-        mol1 = (DefaultTableModel) tblNV1.getModel();
-        mol.setRowCount(0);
-        mol1.setRowCount(0);
-        for (NhanVien nv : list) {
-            if (!nv.isTrangThai()) {
-                mol.addRow(new Object[]{
-                    nv.getMaNhanVien(), nv.getTaiKhoan().getMaTaiKhoan(), nv.getHoTen(),
-                    nv.isGioiTinh() ? "Nam" : "Nữ", nv.getDiaChi(), nv.getSoDienThoai(),
-                    nv.getCCCD(), nv.getNgayVaoLam(), nv.getAnh()
-                });
-            } else {
-                mol1.addRow(new Object[]{
-                    nv.getMaNhanVien(), nv.getTaiKhoan().getMaTaiKhoan(), nv.getHoTen(),
-                    nv.isGioiTinh() ? "Nam" : "Nữ", nv.getDiaChi(), nv.getSoDienThoai(),
-                    nv.getCCCD(), nv.getNgayVaoLam(), nv.getAnh()
-                });
-            }
-        }
-    }
-
-    public void loadCboDiaChi(List<NhanVien> list) {
-        cbxNhanVien.removeAllElements();
-        List<String> addedValues = new ArrayList<>();
-        for (NhanVien nv : list) {
-            if (!addedValues.contains(nv.getDiaChi())) {
-                cbxNhanVien.addElement(nv);
-                addedValues.add(nv.getDiaChi());
-            }
-        }
-        cboDiaChi.setModel((ComboBoxModel) cbxNhanVien);
-    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -2087,15 +1936,11 @@ public class AdamStoreView extends javax.swing.JFrame {
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void tblNV1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblNV1MouseClicked
-        index = tblNV1.getSelectedRow();
-        detailNV1(index);
-        btnThemNV.setEnabled(false);
+    
     }//GEN-LAST:event_tblNV1MouseClicked
 
     private void tblNV0MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblNV0MouseClicked
-        index = tblNV0.getSelectedRow();
-        detailNV(index);
-        btnThemNV.setEnabled(false);
+      
     }//GEN-LAST:event_tblNV0MouseClicked
 
     private void btnMoiNVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoiNVActionPerformed
@@ -2115,39 +1960,22 @@ public class AdamStoreView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnMoiNVActionPerformed
 
     private void lblAnhNVMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAnhNVMouseClicked
-        JFileChooser fileChooser = new JFileChooser();
-        int returnValue = fileChooser.showOpenDialog(null);
-
-        if (returnValue == JFileChooser.APPROVE_OPTION) {
-            File selectedFile = fileChooser.getSelectedFile();
-            try {
-                ImageIcon originalIcon = new ImageIcon(selectedFile.getAbsolutePath());
-                Image originalImage = originalIcon.getImage();
-                Image resizedImage = originalImage.getScaledInstance(146, 206, Image.SCALE_SMOOTH);
-                ImageIcon resizedIcon = new ImageIcon(resizedImage);
-                lblAnhNV.setIcon(resizedIcon);
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
-        }
+   
     }//GEN-LAST:event_lblAnhNVMouseClicked
 
     private void btnQuayLaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuayLaiActionPerformed
         // TODO add your handling code here:
-        fillTableSamPham(serviceSP.getAll());
+       
     }//GEN-LAST:event_btnQuayLaiActionPerformed
 
     private void tblSanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSanPhamMouseClicked
         // TODO add your handling code here:
-        index = tblSanPham.getSelectedRow();
-        detailSP(index);
+     
     }//GEN-LAST:event_tblSanPhamMouseClicked
 
     private void cbo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbo1ActionPerformed
         // TODO add your handling code here:
-        LoaiSanPham lsp=(LoaiSanPham) cbxLoaiSanPham.getSelectedItem();
-        String name=lsp.toString();
-        fillTableSamPham(serviceSP.getList(name));
+       
     }//GEN-LAST:event_cbo1ActionPerformed
 
     private void cbo1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbo1MouseClicked
@@ -2156,9 +1984,7 @@ public class AdamStoreView extends javax.swing.JFrame {
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         // TODO add your handling code here:
-        String timKiem = txtTimKiem.getText();
-        timKiem = '%' + timKiem + '%';
-        fillTableSamPham(serviceSP.getList(timKiem));
+       
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void txtTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTimKiemActionPerformed
@@ -2372,4 +2198,6 @@ public class AdamStoreView extends javax.swing.JFrame {
     private javax.swing.JTextField txtTimNV;
     private javax.swing.JTextField txtXuatXu;
     // End of variables declaration//GEN-END:variables
+
+  
 }
