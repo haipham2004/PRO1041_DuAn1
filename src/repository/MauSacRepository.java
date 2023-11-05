@@ -20,6 +20,7 @@ public class MauSacRepository {
     String sql = null;
     List<MauSac> listMauSac = new ArrayList<>();
      public List<MauSac> getAll() {
+         listMauSac.clear();
         try {
             conn = DBConnect.getConnection();
             sql = "SELECT*FROM MauSac";
