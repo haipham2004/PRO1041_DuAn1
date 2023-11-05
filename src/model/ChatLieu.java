@@ -17,6 +17,10 @@ public class ChatLieu {
     public ChatLieu() {
     }
 
+    public ChatLieu(String maChatLieu) {
+        this.maChatLieu = maChatLieu;
+    }
+
     public ChatLieu(String maChatLieu, String tenChatLieu) {
         this.maChatLieu = maChatLieu;
         this.tenChatLieu = tenChatLieu;
