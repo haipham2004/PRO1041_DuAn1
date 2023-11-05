@@ -16,6 +16,10 @@ public class MauSac {
     public MauSac() {
     }
 
+    public MauSac(String maMauSac) {
+        this.maMauSac = maMauSac;
+    }
+
     public MauSac(String maMauSac, String tenMauSac) {
         this.maMauSac = maMauSac;
         this.tenMauSac = tenMauSac;
