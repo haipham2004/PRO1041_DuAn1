@@ -24,6 +24,7 @@ public class ChatLieuRepository {
     List<ChatLieu> listChatLieu = new ArrayList<>();
 
     public List<ChatLieu> getAll() {
+        listChatLieu.clear();
         try {
             conn = DBConnect.getConnection();
             sql = "SELECT*FROM ChatLieu";

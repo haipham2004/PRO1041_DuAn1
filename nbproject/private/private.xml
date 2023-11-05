@@ -3,18 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/view/itf_ThongKe.java</file>
-            <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/view/itf_HoaDon.java</file>
-            <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/view/itf_DoiMatKhau.java</file>
-            <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/view/AdamStoreView.java</file>
-            <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/view/itf_NhanVien.java</file>
-            <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/view/itf_KhachHang.java</file>
-            <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/util/DBConnect.java</file>
-            <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/view/itf_SanPham.java</file>
-            <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/view/itf_KhuyenMai.java</file>
-            <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/service/AdamStore.java</file>
-            <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/view/itf_LichSu.java</file>
-            <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/model/KhachHang.java</file>
+            <file>file:/D:/PRO1041_DuAn1/PRO1041_DuAn1/src/view/itf_SanPham.java</file>
+            <file>file:/D:/PRO1041_DuAn1/PRO1041_DuAn1/src/view/AdamStoreView.java</file>
         </group>
     </open-files>
 </project-private>
