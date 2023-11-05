@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import model.NhanVien;
 import model.TaiKhoan;
-import util.DBConnect1111111;
+import util.DBConnect;
 
 /**
  *
@@ -28,7 +28,7 @@ public class NhanVienRepository {
     public List<NhanVien> getAll() {
         listNhanVien.clear();
         try {
-            conn = DBConnect1111111.getConnection();
+            conn = DBConnect.getConnection();
             sql = "select nv.MaNV,nv.MaTK,nv.HoTen,nv.GioiTinh,nv.DiaChi,nv.SoDienThoai"
                     + ",nv.CCCD,nv.NgayVaoLam,nv.TrangThai,nv.Anh,tk.UserName,tk.PassWord,tk.Role,tk.TrangThai \n"
                     + "from NhanVien nv join TaiKhoan tk on tk.MaTK = nv.MaTK";
@@ -51,7 +51,7 @@ public class NhanVienRepository {
     }
     public int insert(NhanVien nv) {
         try {
-            conn = DBConnect1111111.getConnection();
+            conn = DBConnect.getConnection();
             sql = "INSERT INTO NhanVien (MaNV,MaTK,HoTen,GioiTinh,DiaChi,SoDienThoai,CCCD,NgayVaoLam,TrangThai,Anh) VALUES (?,?,?,?,?,?,?,?,?,?)";
             pst = conn.prepareStatement(sql);
             pst.setObject(1, nv.getMaNhanVien());

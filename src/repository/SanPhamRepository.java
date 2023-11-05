@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import model.LoaiSanPham;
 import model.SanPham;
-import util.DBConnect1111111;
+import util.DBConnect;
 
 /**
  *
@@ -29,7 +29,7 @@ public class SanPhamRepository {
     public List<SanPham> getAll() {
         listSanPham.clear();
         try {
-            conn = DBConnect1111111.getConnection();
+            conn = DBConnect.getConnection();
             sql = "SELECT SP.MaSanPham,SP.TenSanPham,SP.TrangThai,LSP.MaLSP,LSP.TenLSP,SP.XuatXU \n"
                     + "FROm SanPham SP INNER JOIN LoaiSanPham LSP ON SP.MaLSP=LSP.MaLSP";
             pst = conn.prepareStatement(sql);
@@ -50,8 +50,8 @@ public class SanPhamRepository {
 
     public int them(SanPham sp) {
         try {
-            conn = DBConnect1111111.getConnection();
-            sql = "";
+            conn = DBConnect.getConnection();
+            sql = "INSERT INTO SanPham(MaSanPham,TenSanPham,TrangThai,MaLSP,XuatXU) VALUES(?,?,?,?,?)";
             pst = conn.prepareStatement(sql);
             pst.setObject(1, sp.getMaSanPham());
             pst.setObject(2, sp.getTenSanPham());
@@ -67,7 +67,7 @@ public class SanPhamRepository {
 
     public int sua(SanPham sp, String ma) {
         try {
-            conn = DBConnect1111111.getConnection();
+            conn = DBConnect.getConnection();
             sql = "";
             pst = conn.prepareStatement(sql);
             pst.setObject(1, sp.getTenSanPham());
@@ -84,7 +84,7 @@ public class SanPhamRepository {
 
     public int xoa(String ma) {
         try {
-            conn = DBConnect1111111.getConnection();
+            conn = DBConnect.getConnection();
             sql = "";
             pst = conn.prepareStatement(sql);
             pst.setObject(1, ma);
@@ -98,7 +98,7 @@ public class SanPhamRepository {
     public SanPham getOne(String ma) {
         SanPham sp = null;
         try {
-            conn = DBConnect1111111.getConnection();
+            conn = DBConnect.getConnection();
             sql = "SELECT SP.MaSanPham,SP.TenSanPham,SP.TrangThai,LSP.MaLSP,LSP.TenLSP,SP.XuatXU \n"
                     + "FROm SanPham SP INNER JOIN LoaiSanPham LSP ON SP.MaLSP=LSP.MaLSP where SP.MaSanPham=?";
             pst = conn.prepareStatement(sql);
@@ -121,7 +121,7 @@ public class SanPhamRepository {
     public List<SanPham> getList(String name) {
         List<SanPham> listSanPham2 = new ArrayList<>();
         try {
-            conn = DBConnect1111111.getConnection();
+            conn = DBConnect.getConnection();
             sql = "SELECT SP.MaSanPham,SP.TenSanPham,SP.TrangThai,LSP.MaLSP,LSP.TenLSP,SP.XuatXU \n"
                     + "FROm SanPham SP INNER JOIN LoaiSanPham LSP ON SP.MaLSP=LSP.MaLSP where SP.TenSanPham like ? or LSP.TenLSP like ?";
             pst = conn.prepareStatement(sql);
