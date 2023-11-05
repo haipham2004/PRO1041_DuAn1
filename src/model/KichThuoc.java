@@ -16,6 +16,10 @@ public class KichThuoc {
     public KichThuoc() {
     }
 
+    public KichThuoc(String maKichThuoc) {
+        this.maKichThuoc = maKichThuoc;
+    }
+
     public KichThuoc(String maKichThuoc, String tenKichThuoc) {
         this.maKichThuoc = maKichThuoc;
         this.tenKichThuoc = tenKichThuoc;
