@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import model.LoaiSanPham;
 import model.MauSac;
-import util.DBConnect1111111;
+import util.DBConnect;
 /**
  *
  * @author Admin BVCN88 02
@@ -21,7 +21,7 @@ public class MauSacRepository {
     List<MauSac> listMauSac = new ArrayList<>();
      public List<MauSac> getAll() {
         try {
-            conn = DBConnect1111111.getConnection();
+            conn = DBConnect.getConnection();
             sql = "SELECT*FROM MauSac";
             pst = conn.prepareStatement(sql);
             rs = pst.executeQuery();
@@ -35,5 +35,37 @@ public class MauSacRepository {
             return null;
         }
         return listMauSac;
+    }
+     public MauSac getOne(String ma){
+           MauSac ms=null;
+            try {
+            conn = DBConnect.getConnection();
+            sql = "SELECT*FROM MauSac where MaMauSac=?";
+            pst = conn.prepareStatement(sql);
+            pst.setObject(1, ma);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+            ms=new MauSac(rs.getString(1), 
+                        rs.getString(2), rs.getBoolean(3));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+           return ms;
+       }
+      public int them(MauSac ms){
+        try {
+            conn=DBConnect.getConnection();
+            sql="INSERT INTO MauSac VALUES(?,?,?)";
+            pst=conn.prepareStatement(sql);
+            pst.setObject(1, ms.getMaMauSac());
+            pst.setObject(2, ms.getTenMauSac());
+            pst.setObject(3, ms.isTrangThai());
+            return pst.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
     }
 }
