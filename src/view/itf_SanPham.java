@@ -7,6 +7,7 @@ package view;
 import java.util.List;
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.plaf.basic.BasicInternalFrameUI;
 import javax.swing.table.DefaultTableModel;
 import model.ChatLieu;
 import model.ChiTietSanPham;
@@ -26,29 +27,36 @@ import service.servicImp.SanPhamServiceImp;
  * @author Admin BVCN88 02
  */
 public class itf_SanPham extends javax.swing.JInternalFrame {
-DefaultTableModel mol = new DefaultTableModel();
-DefaultComboBoxModel<LoaiSanPham> cbxLoaiSanPham = new DefaultComboBoxModel<>();
-    DefaultComboBoxModel<MauSac> cbxMauSac=new DefaultComboBoxModel<>();
-    DefaultComboBoxModel<ChatLieu> cbxChatLieu=new DefaultComboBoxModel<>();
-    DefaultComboBoxModel<KichThuoc> cbxKichThuoc=new DefaultComboBoxModel<>();
-     LoaiSanPhamServiceImp serviceLSP = new LoaiSanPhamServiceImp();
-    MauSacServiceImp serviceMS=new MauSacServiceImp();
-    ChatLieuServiceImp serviceCl=new ChatLieuServiceImp();
-    KichThuocServiceImp serviceKT=new KichThuocServiceImp();
-    ChiTietSanPhamServiceImp serviceCTSP=new ChiTietSanPhamServiceImp();
+
+    DefaultTableModel mol = new DefaultTableModel();
+    DefaultComboBoxModel<LoaiSanPham> cbxLoaiSanPham = new DefaultComboBoxModel<>();
+    DefaultComboBoxModel<MauSac> cbxMauSac = new DefaultComboBoxModel<>();
+    DefaultComboBoxModel<ChatLieu> cbxChatLieu = new DefaultComboBoxModel<>();
+    DefaultComboBoxModel<KichThuoc> cbxKichThuoc = new DefaultComboBoxModel<>();
+    LoaiSanPhamServiceImp serviceLSP = new LoaiSanPhamServiceImp();
+    MauSacServiceImp serviceMS = new MauSacServiceImp();
+    ChatLieuServiceImp serviceCl = new ChatLieuServiceImp();
+    KichThuocServiceImp serviceKT = new KichThuocServiceImp();
+    ChiTietSanPhamServiceImp serviceCTSP = new ChiTietSanPhamServiceImp();
     SanPhamServiceImp serviceSP = new SanPhamServiceImp();
-    int index=-1;
+    int index = -1;
+
     public itf_SanPham() {
         initComponents();
-          fillTableSamPham(serviceSP.getAll());
+        this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
+        BasicInternalFrameUI uI = (BasicInternalFrameUI) this.getUI();
+        uI.setNorthPane(null);
+        this.setSize(930,655);
+        fillTableSamPham(serviceSP.getAll());
         loadCbxLoaiSanPham(serviceLSP.getAll());
         loadCbo1(serviceLSP.getAll());
         loadCbxChatLieu(serviceCl.getAll());
         loadCbxKichThuoc(serviceKT.getAll());
         loadCbxMauSac(serviceMS.getAll());
-         fillTableChiTietSanPham(serviceCTSP.getAll());
+        fillTableChiTietSanPham(serviceCTSP.getAll());
     }
-     public void fillTableSamPham(List<SanPham> list) {
+
+    public void fillTableSamPham(List<SanPham> list) {
         mol = (DefaultTableModel) tblSanPham.getModel();
         mol.setRowCount(0);
         for (SanPham sanPham : list) {
@@ -59,36 +67,38 @@ DefaultComboBoxModel<LoaiSanPham> cbxLoaiSanPham = new DefaultComboBoxModel<>();
             });
         }
     }
-    public void fillTableChiTietSanPham(List<ChiTietSanPham> list){
-        mol=(DefaultTableModel) tblChiTietSanPham.getModel();
+
+    public void fillTableChiTietSanPham(List<ChiTietSanPham> list) {
+        mol = (DefaultTableModel) tblChiTietSanPham.getModel();
         mol.setRowCount(0);
         for (ChiTietSanPham chiTietSanPham : list) {
             mol.addRow(new Object[]{
-                chiTietSanPham.getMaChiTietSanPham(),chiTietSanPham.getSanPham().getMaSanPham(),
-                chiTietSanPham.getSoLuong(),chiTietSanPham.getGia(),
-                chiTietSanPham.getChatLieu(),chiTietSanPham.getMauSac(),
-                chiTietSanPham.getKichThuoc(),chiTietSanPham.isTrangThai()?"Còn hàng":"Hết hàng"
+                chiTietSanPham.getMaChiTietSanPham(), chiTietSanPham.getSanPham().getMaSanPham(),
+                chiTietSanPham.getSoLuong(), chiTietSanPham.getGia(),
+                chiTietSanPham.getChatLieu(), chiTietSanPham.getMauSac(),
+                chiTietSanPham.getKichThuoc(), chiTietSanPham.isTrangThai() ? "Còn hàng" : "Hết hàng"
             });
         }
     }
-    public void deltailChiTietSanPham(int index){
+
+    public void deltailChiTietSanPham(int index) {
         txtMaCTSP.setText(tblChiTietSanPham.getValueAt(index, 0).toString());
         txtmaSP1.setText(tblChiTietSanPham.getValueAt(index, 1).toString());
         txtSoLuong1.setText(tblChiTietSanPham.getValueAt(index, 0).toString());
         txtGia.setText(tblChiTietSanPham.getValueAt(index, 3).toString());
-        ChatLieu cl=(ChatLieu) tblChiTietSanPham.getValueAt(index, 4);
+        ChatLieu cl = (ChatLieu) tblChiTietSanPham.getValueAt(index, 4);
         cbxChatLieu.setSelectedItem(cl);
-        MauSac ms=(MauSac) tblChiTietSanPham.getValueAt(index, 5);
+        MauSac ms = (MauSac) tblChiTietSanPham.getValueAt(index, 5);
         cbxChatLieu.setSelectedItem(ms);
-        KichThuoc kt=(KichThuoc) tblChiTietSanPham.getValueAt(index, 6);
+        KichThuoc kt = (KichThuoc) tblChiTietSanPham.getValueAt(index, 6);
         cbxChatLieu.setSelectedItem(kt);
-        if(tblChiTietSanPham.getValueAt(index, 0).equals("Còn hàng")){
+        if (tblChiTietSanPham.getValueAt(index, 0).equals("Còn hàng")) {
             rdConhang1.setSelected(true);
-        }else{
+        } else {
             rdHethang1.setSelected(true);
         }
     }
-    
+
     public void detailSP(int index) {
         txtMaSanPham.setText(tblSanPham.getValueAt(index, 0).toString());
         txtTenSanPham.setText(tblSanPham.getValueAt(index, 1).toString());
@@ -101,13 +111,15 @@ DefaultComboBoxModel<LoaiSanPham> cbxLoaiSanPham = new DefaultComboBoxModel<>();
         LoaiSanPham lsp = (LoaiSanPham) tblSanPham.getValueAt(index, 4);
         cbxLoaiSanPham.setSelectedItem(lsp);
     }
-     public void loadCbxLoaiSanPham(List<LoaiSanPham> list) {
+
+    public void loadCbxLoaiSanPham(List<LoaiSanPham> list) {
         cbxLoaiSanPham.removeAllElements();
         for (LoaiSanPham loaiSanPham : list) {
             cbxLoaiSanPham.addElement(loaiSanPham);
         }
         cboLoaiSanPham.setModel((ComboBoxModel) cbxLoaiSanPham);
     }
+
     public void loadCbxMauSac(List<MauSac> list) {
         cbxMauSac.removeAllElements();
         for (MauSac mauSac : list) {
@@ -115,6 +127,7 @@ DefaultComboBoxModel<LoaiSanPham> cbxLoaiSanPham = new DefaultComboBoxModel<>();
         }
         cboMauSac.setModel((ComboBoxModel) cbxMauSac);
     }
+
     public void loadCbxKichThuoc(List<KichThuoc> list) {
         cbxKichThuoc.removeAllElements();
         for (KichThuoc kichThuoc : list) {
@@ -122,6 +135,7 @@ DefaultComboBoxModel<LoaiSanPham> cbxLoaiSanPham = new DefaultComboBoxModel<>();
         }
         cboKichThuoc.setModel((ComboBoxModel) cbxKichThuoc);
     }
+
     public void loadCbxChatLieu(List<ChatLieu> list) {
         cbxChatLieu.removeAllElements();
         for (ChatLieu chatLieu : list) {
@@ -137,8 +151,6 @@ DefaultComboBoxModel<LoaiSanPham> cbxLoaiSanPham = new DefaultComboBoxModel<>();
         }
         cbo1.setModel((ComboBoxModel) cbxLoaiSanPham);
     }
-
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -362,7 +374,7 @@ DefaultComboBoxModel<LoaiSanPham> cbxLoaiSanPham = new DefaultComboBoxModel<>();
                 .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(79, 79, 79)
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(470, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -411,11 +423,8 @@ DefaultComboBoxModel<LoaiSanPham> cbxLoaiSanPham = new DefaultComboBoxModel<>();
             jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel29Layout.createSequentialGroup()
-                .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel29Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jScrollPane3))
+                .addContainerGap()
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(jPanel29Layout.createSequentialGroup()
                 .addGap(34, 34, 34)
@@ -427,6 +436,9 @@ DefaultComboBoxModel<LoaiSanPham> cbxLoaiSanPham = new DefaultComboBoxModel<>();
                 .addGap(27, 27, 27)
                 .addComponent(btnQuayLai)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel29Layout.createSequentialGroup()
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 815, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel29Layout.setVerticalGroup(
             jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -443,7 +455,7 @@ DefaultComboBoxModel<LoaiSanPham> cbxLoaiSanPham = new DefaultComboBoxModel<>();
                     .addComponent(btnQuayLai))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(793, Short.MAX_VALUE))
+                .addContainerGap(11, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel27Layout = new javax.swing.GroupLayout(jPanel27);
@@ -659,7 +671,7 @@ DefaultComboBoxModel<LoaiSanPham> cbxLoaiSanPham = new DefaultComboBoxModel<>();
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1122, Short.MAX_VALUE)
+            .addGap(0, 849, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel2Layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -682,11 +694,11 @@ DefaultComboBoxModel<LoaiSanPham> cbxLoaiSanPham = new DefaultComboBoxModel<>();
         jPanel28.setLayout(jPanel28Layout);
         jPanel28Layout.setHorizontalGroup(
             jPanel28Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1122, Short.MAX_VALUE)
+            .addGap(0, 849, Short.MAX_VALUE)
         );
         jPanel28Layout.setVerticalGroup(
             jPanel28Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1327, Short.MAX_VALUE)
+            .addGap(0, 545, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Thuộc tính", jPanel28);
@@ -704,7 +716,8 @@ DefaultComboBoxModel<LoaiSanPham> cbxLoaiSanPham = new DefaultComboBoxModel<>();
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1))
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 576, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         pack();
@@ -727,8 +740,8 @@ DefaultComboBoxModel<LoaiSanPham> cbxLoaiSanPham = new DefaultComboBoxModel<>();
 
     private void cbo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbo1ActionPerformed
         // TODO add your handling code here:
-        LoaiSanPham lsp=(LoaiSanPham) cbxLoaiSanPham.getSelectedItem();
-        String name=lsp.toString();
+        LoaiSanPham lsp = (LoaiSanPham) cbxLoaiSanPham.getSelectedItem();
+        String name = lsp.toString();
         fillTableSamPham(serviceSP.getList(name));
     }//GEN-LAST:event_cbo1ActionPerformed
 
@@ -745,7 +758,7 @@ DefaultComboBoxModel<LoaiSanPham> cbxLoaiSanPham = new DefaultComboBoxModel<>();
 
     private void tblChiTietSanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblChiTietSanPhamMouseClicked
         // TODO add your handling code here:
-         index = tblSanPham.getSelectedRow();
+        index = tblSanPham.getSelectedRow();
         deltailChiTietSanPham(index);
     }//GEN-LAST:event_tblChiTietSanPhamMouseClicked
 
