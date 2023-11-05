@@ -26,6 +26,7 @@ public class NhanVienRepository {
     List<NhanVien> listNhanVien = new ArrayList<>();
 
     public List<NhanVien> getAll() {
+        listNhanVien.clear();
         try {
             conn = DBConnect1111111.getConnection();
             sql = "select nv.MaNV,nv.MaTK,nv.HoTen,nv.GioiTinh,nv.DiaChi,nv.SoDienThoai"
@@ -47,5 +48,26 @@ public class NhanVienRepository {
             return null;
         }
         return listNhanVien;
+    }
+    public int insert(NhanVien nv) {
+        try {
+            conn = DBConnect1111111.getConnection();
+            sql = "INSERT INTO NhanVien (MaNV,MaTK,HoTen,GioiTinh,DiaChi,SoDienThoai,CCCD,NgayVaoLam,TrangThai,Anh) VALUES (?,?,?,?,?,?,?,?,?,?)";
+            pst = conn.prepareStatement(sql);
+            pst.setObject(1, nv.getMaNhanVien());
+            pst.setObject(2, nv.getMaTaiKhoan());
+            pst.setObject(3, nv.getHoTen());
+            pst.setObject(4, nv.isGioiTinh());
+            pst.setObject(5, nv.getDiaChi());
+            pst.setObject(6, nv.getSoDienThoai());
+            pst.setObject(7, nv.getCCCD());
+            pst.setObject(8, nv.getNgayVaoLam());
+            pst.setObject(9, nv.isTrangThai());
+            pst.setObject(10, nv.getAnh());
+            return pst.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
     }
 }

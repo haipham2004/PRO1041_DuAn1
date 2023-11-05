@@ -24,7 +24,7 @@ public class NhanVienServiceImp implements AdamStore<NhanVien, String>{
 
     @Override
     public int them(NhanVien k) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return repo.insert(k);
     }
 
     @Override

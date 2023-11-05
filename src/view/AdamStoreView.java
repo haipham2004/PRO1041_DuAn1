@@ -8,8 +8,10 @@ import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Image;
 import java.io.File;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
@@ -25,7 +27,6 @@ import javax.swing.table.DefaultTableModel;
  */
 public class AdamStoreView extends javax.swing.JFrame {
 
-  
 
     /**
      * Creates new form AdamStoreView
@@ -39,6 +40,38 @@ public class AdamStoreView extends javax.swing.JFrame {
 
     }
 
+
+    public NhanVien getFormNV() {
+        String maNV = txtMaNV.getText();
+        String maTK = txtMaTK.getText();
+        String hoTen = txtHoTen.getText();
+        Boolean gt = rdoNam.isSelected() ? true : false;
+        String diaChi = txtDiaChi.getText();
+        String sdt = txtSDT.getText();
+        String cccd = txtCCCD.getText();
+        String ngay = txtNgayVaoLam.getText();
+        Date ngayVaoLam = null;
+        try {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            ngayVaoLam = dateFormat.parse(ngay);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        Boolean trangThai = rdoDangLamViec.isSelected() ? true : false;
+        String anh = anhNV;
+        return new NhanVien(maNV, maTK, hoTen, gt, diaChi, sdt, cccd, ngayVaoLam, trangThai, anh);
+    }
+
+    public void themNV() {
+        NhanVien nv = this.getFormNV();
+        try {
+            serviceNV.them(nv);
+            fillTableNV(serviceNV.getAll());
+            loadCboDiaChi(serviceNV.getAll());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -1181,8 +1214,6 @@ public class AdamStoreView extends javax.swing.JFrame {
 
         jLabel29.setText("Họ tên");
 
-        txtMaNV.setEditable(false);
-
         jLabel30.setText("Giới tính");
 
         jLabel31.setText("Địa chỉ");
@@ -1212,6 +1243,11 @@ public class AdamStoreView extends javax.swing.JFrame {
         rdoNghiViec.setText("Nghỉ việc");
 
         btnThemNV.setText("Thêm");
+        btnThemNV.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThemNVActionPerformed(evt);
+            }
+        });
 
         btnSuaNV.setText("Sửa");
 
@@ -1303,6 +1339,7 @@ public class AdamStoreView extends javax.swing.JFrame {
                     .addComponent(jLabel32)
                     .addComponent(txtSDT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel36))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel61Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel61Layout.createSequentialGroup()
                         .addGroup(jPanel61Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -1743,15 +1780,11 @@ public class AdamStoreView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cbo1MouseClicked
 
-    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
-        // TODO add your handling code here:
-       
-    }//GEN-LAST:event_btnSearchActionPerformed
 
-    private void txtTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTimKiemActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtTimKiemActionPerformed
 
+    private void btnThemNVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemNVActionPerformed
+        this.themNV();
+    }//GEN-LAST:event_btnThemNVActionPerformed
 
     /**
      * @param args the command line arguments
