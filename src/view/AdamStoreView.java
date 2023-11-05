@@ -17,21 +17,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import model.LoaiSanPham;
-import model.NhanVien;
-import model.SanPham;
-import model.MauSac;
-import model.ChatLieu;
-import model.KichThuoc;
-import model.ChiTietSanPham;
-import service.AdamStore;
-import service.servicImp.LoaiSanPhamServiceImp;
-import service.servicImp.ChatLieuServiceImp;
-import service.servicImp.MauSacServiceImp;
-import service.servicImp.KichThuocServiceImp;
-import service.servicImp.NhanVienServiceImp;
-import service.servicImp.ChiTietSanPhamServiceImp; 
-import service.servicImp.SanPhamServiceImp;
+
 
 /**
  *
@@ -39,23 +25,7 @@ import service.servicImp.SanPhamServiceImp;
  */
 public class AdamStoreView extends javax.swing.JFrame {
 
-    CardLayout cardLayout = new CardLayout();
-    DefaultTableModel mol = new DefaultTableModel();
-    DefaultTableModel mol1 = new DefaultTableModel();
-    DefaultComboBoxModel<LoaiSanPham> cbxLoaiSanPham = new DefaultComboBoxModel<>();
-    DefaultComboBoxModel<MauSac> cbxMauSac=new DefaultComboBoxModel<>();
-    DefaultComboBoxModel<ChatLieu> cbxChatLieu=new DefaultComboBoxModel<>();
-    DefaultComboBoxModel<KichThuoc> cbxKichThuoc=new DefaultComboBoxModel<>();
-    DefaultComboBoxModel<NhanVien> cbxNhanVien = new DefaultComboBoxModel<>();
-    LoaiSanPhamServiceImp serviceLSP = new LoaiSanPhamServiceImp();
-    MauSacServiceImp serviceMS=new MauSacServiceImp();
-    ChatLieuServiceImp serviceCl=new ChatLieuServiceImp();
-    KichThuocServiceImp serviceKT=new KichThuocServiceImp();
-    ChiTietSanPhamServiceImp serviceCTSP=new ChiTietSanPhamServiceImp();
-    SanPhamServiceImp serviceSP = new SanPhamServiceImp();
-    
-    NhanVienServiceImp serviceNV = new NhanVienServiceImp();
-    int index = -1;
+  
 
     /**
      * Creates new form AdamStoreView
@@ -167,29 +137,6 @@ public class AdamStoreView extends javax.swing.JFrame {
         btnQuayLai = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jPanel30 = new javax.swing.JPanel();
-        jPanel16 = new javax.swing.JPanel();
-        jLabel45 = new javax.swing.JLabel();
-        jLabel46 = new javax.swing.JLabel();
-        maCTSP1 = new javax.swing.JTextField();
-        maSP1 = new javax.swing.JTextField();
-        jLabel47 = new javax.swing.JLabel();
-        jLabel48 = new javax.swing.JLabel();
-        jLabel49 = new javax.swing.JLabel();
-        cboChatLieu = new javax.swing.JComboBox<>();
-        cboKichThuoc = new javax.swing.JComboBox<>();
-        cboMauSac = new javax.swing.JComboBox<>();
-        txtSoLuong1 = new javax.swing.JTextField();
-        jLabel50 = new javax.swing.JLabel();
-        jLabel51 = new javax.swing.JLabel();
-        txtGia1 = new javax.swing.JTextField();
-        jLabel52 = new javax.swing.JLabel();
-        rdConhang1 = new javax.swing.JRadioButton();
-        rdHethang1 = new javax.swing.JRadioButton();
-        jPanel17 = new javax.swing.JPanel();
-        jButton6 = new javax.swing.JButton();
-        jPanel18 = new javax.swing.JPanel();
-        jScrollPane7 = new javax.swing.JScrollPane();
-        tblChiTietSanPham1 = new javax.swing.JTable();
         jPanel28 = new javax.swing.JPanel();
         pnlChiTietNhanVien = new javax.swing.JPanel();
         jPanel61 = new javax.swing.JPanel();
@@ -1161,189 +1108,15 @@ public class AdamStoreView extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Sản Phẩm", jPanel27);
 
-        jPanel16.setBorder(javax.swing.BorderFactory.createTitledBorder("Thông tin sản phẩm"));
-
-        jLabel45.setText("Mã CTSP");
-
-        jLabel46.setText("Mã SP");
-
-        jLabel47.setText("Màu sắc");
-
-        jLabel48.setText("Chất liệu");
-
-        jLabel49.setText("Kích thước");
-
-        cboChatLieu.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        cboKichThuoc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        cboMauSac.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jLabel50.setText("Số lượng");
-
-        jLabel51.setText("Giá");
-
-        jLabel52.setText("Trạng thái");
-
-        buttonGroup4.add(rdConhang1);
-        rdConhang1.setText("Còn hàng");
-
-        buttonGroup4.add(rdHethang1);
-        rdHethang1.setText("Hết hàng");
-
-        jButton6.setText("Thêm");
-
-        javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
-        jPanel17.setLayout(jPanel17Layout);
-        jPanel17Layout.setHorizontalGroup(
-            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel17Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jButton6)
-                .addContainerGap(50, Short.MAX_VALUE))
-        );
-        jPanel17Layout.setVerticalGroup(
-            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel17Layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(jButton6)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        jPanel18.setBorder(javax.swing.BorderFactory.createTitledBorder("Lọc sản phẩm"));
-
-        javax.swing.GroupLayout jPanel18Layout = new javax.swing.GroupLayout(jPanel18);
-        jPanel18.setLayout(jPanel18Layout);
-        jPanel18Layout.setHorizontalGroup(
-            jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        jPanel18Layout.setVerticalGroup(
-            jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-
-        tblChiTietSanPham1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
-            },
-            new String [] {
-                "Mã SPCT", "Mã SP", "Số lượng", "Giá", "Chất liệu", "Màu sắc ", "Kích thước", "Trạng thái"
-            }
-        ));
-        jScrollPane7.setViewportView(tblChiTietSanPham1);
-
-        javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
-        jPanel16.setLayout(jPanel16Layout);
-        jPanel16Layout.setHorizontalGroup(
-            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel16Layout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(jPanel16Layout.createSequentialGroup()
-                            .addComponent(jLabel45, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(maCTSP1, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPanel16Layout.createSequentialGroup()
-                            .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel46, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel50, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(txtSoLuong1)
-                                .addComponent(maSP1, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)
-                                .addComponent(txtGia1))))
-                    .addComponent(jLabel51, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
-                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel16Layout.createSequentialGroup()
-                        .addComponent(jLabel52, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(rdConhang1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(rdHethang1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel16Layout.createSequentialGroup()
-                        .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel48, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel47)
-                            .addComponent(jLabel49))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cboMauSac, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cboKichThuoc, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cboChatLieu, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel16Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 801, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-            .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel16Layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(jPanel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addContainerGap()))
-        );
-        jPanel16Layout.setVerticalGroup(
-            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel16Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jPanel17, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel16Layout.createSequentialGroup()
-                        .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel45)
-                            .addComponent(maCTSP1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel47)
-                            .addComponent(cboMauSac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel46)
-                            .addComponent(maSP1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel48)
-                            .addComponent(cboChatLieu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel49)
-                            .addComponent(cboKichThuoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtSoLuong1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel50))
-                        .addGap(22, 22, 22)
-                        .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel51)
-                            .addComponent(txtGia1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel52)
-                            .addComponent(rdConhang1)
-                            .addComponent(rdHethang1))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 173, Short.MAX_VALUE)
-                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18))
-            .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel16Layout.createSequentialGroup()
-                    .addGap(179, 179, 179)
-                    .addComponent(jPanel18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(266, Short.MAX_VALUE)))
-        );
-
         javax.swing.GroupLayout jPanel30Layout = new javax.swing.GroupLayout(jPanel30);
         jPanel30.setLayout(jPanel30Layout);
         jPanel30Layout.setHorizontalGroup(
             jPanel30Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel30Layout.createSequentialGroup()
-                .addComponent(jPanel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addGap(0, 829, Short.MAX_VALUE)
         );
         jPanel30Layout.setVerticalGroup(
             jPanel30Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel30Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addComponent(jPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(722, Short.MAX_VALUE))
+            .addGap(0, 1327, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -1860,7 +1633,7 @@ public class AdamStoreView extends javax.swing.JFrame {
 
     private void pnlDoiMatKhauMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlDoiMatKhauMouseClicked
         // TODO add your handling code here:
-        cardLayout = (CardLayout) pnlMain.getLayout();
+        CardLayout cardLayout = (CardLayout) pnlMain.getLayout();
         cardLayout.show(pnlMain, "pnlChiTietDoiMatKhau");
         resetBackGroundColor();
         pnlDoiMatKhau.setBackground(new Color(204, 204, 204));
@@ -1868,7 +1641,7 @@ public class AdamStoreView extends javax.swing.JFrame {
 
     private void pnlKhachHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlKhachHangMouseClicked
         // TODO add your handling code here:
-        cardLayout = (CardLayout) pnlMain.getLayout();
+        CardLayout cardLayout = (CardLayout) pnlMain.getLayout();
         cardLayout.show(pnlMain, "pnlChiTietKhachHang");
         resetBackGroundColor();
         pnlKhachHang.setBackground(new Color(204, 204, 204));
@@ -1876,7 +1649,7 @@ public class AdamStoreView extends javax.swing.JFrame {
 
     private void pnlKhuyenMaiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlKhuyenMaiMouseClicked
         // TODO add your handling code here:
-        cardLayout = (CardLayout) pnlMain.getLayout();
+        CardLayout cardLayout = (CardLayout) pnlMain.getLayout();
         cardLayout.show(pnlMain, "pnlChiTietKhuyenMai");
         resetBackGroundColor();
         pnlKhuyenMai.setBackground(new Color(204, 204, 204));
@@ -1884,7 +1657,7 @@ public class AdamStoreView extends javax.swing.JFrame {
 
     private void pnlLichSuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlLichSuMouseClicked
         // TODO add your handling code here:
-        cardLayout = (CardLayout) pnlMain.getLayout();
+        CardLayout cardLayout = (CardLayout) pnlMain.getLayout();
         cardLayout.show(pnlMain, "pnlChiTietLichSu");
         resetBackGroundColor();
         pnlLichSu.setBackground(new Color(204, 204, 204));
@@ -1892,7 +1665,7 @@ public class AdamStoreView extends javax.swing.JFrame {
 
     private void pnlHoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlHoaDonMouseClicked
         // TODO add your handling code here:
-        cardLayout = (CardLayout) pnlMain.getLayout();
+        CardLayout cardLayout = (CardLayout) pnlMain.getLayout();
         cardLayout.show(pnlMain, "pnlChiTietHoaDon");
         resetBackGroundColor();
         pnlHoaDon.setBackground(new Color(204, 204, 204));
@@ -1904,7 +1677,7 @@ public class AdamStoreView extends javax.swing.JFrame {
 
     private void pnlThongKeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlThongKeMouseClicked
         // TODO add your handling code here:
-        cardLayout = (CardLayout) pnlMain.getLayout();
+        CardLayout cardLayout = (CardLayout) pnlMain.getLayout();
         cardLayout.show(pnlMain, "pnlChiTietThongKe");
         resetBackGroundColor();
         pnlThongKe.setBackground(new Color(204, 204, 204));
@@ -1912,7 +1685,7 @@ public class AdamStoreView extends javax.swing.JFrame {
 
     private void pnlNhanVienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlNhanVienMouseClicked
         // TODO add your handling code here:
-        cardLayout = (CardLayout) pnlMain.getLayout();
+        CardLayout cardLayout = (CardLayout) pnlMain.getLayout();
         cardLayout.show(pnlMain, "pnlChiTietNhanVien");
         resetBackGroundColor();
         pnlNhanVien.setBackground(new Color(204, 204, 204));
@@ -1920,7 +1693,7 @@ public class AdamStoreView extends javax.swing.JFrame {
 
     private void pnlSanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlSanPhamMouseClicked
         // TODO add your handling code here:
-        cardLayout = (CardLayout) pnlMain.getLayout();
+        CardLayout cardLayout = (CardLayout) pnlMain.getLayout();
         cardLayout.show(pnlMain, "pnlChiTietSanPham");
         resetBackGroundColor();
         pnlSanPham.setBackground(new Color(204, 204, 204));
@@ -1944,19 +1717,7 @@ public class AdamStoreView extends javax.swing.JFrame {
     }//GEN-LAST:event_tblNV0MouseClicked
 
     private void btnMoiNVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoiNVActionPerformed
-        String today = toString().valueOf(LocalDate.now());
-        txtNgayVaoLam.setText(today);
-        txtMaNV.setText("");
-        txtMaTK.setText("");
-        txtHoTen.setText("");
-        buttonGroup2.clearSelection();
-        txtDiaChi.setText("");
-        txtSDT.setText("");
-        txtCCCD.setText("");
-        rdoDangLamViec.setSelected(true);
-        btnThemNV.setEnabled(true);
-        tblNV1.clearSelection();
-        tblNV0.clearSelection();
+      
     }//GEN-LAST:event_btnMoiNVActionPerformed
 
     private void lblAnhNVMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAnhNVMouseClicked
@@ -2051,18 +1812,14 @@ public class AdamStoreView extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup3;
     private javax.swing.ButtonGroup buttonGroup4;
     private javax.swing.JComboBox<String> cbo1;
-    private javax.swing.JComboBox<String> cboChatLieu;
     private javax.swing.JComboBox<String> cboDiaChi;
     private javax.swing.JComboBox<String> cboGioiTinh;
-    private javax.swing.JComboBox<String> cboKichThuoc;
     private javax.swing.JComboBox<String> cboLoaiSanPham;
-    private javax.swing.JComboBox<String> cboMauSac;
     private javax.swing.JComboBox<String> cboTimKiemNV;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
@@ -2096,15 +1853,7 @@ public class AdamStoreView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel45;
-    private javax.swing.JLabel jLabel46;
-    private javax.swing.JLabel jLabel47;
-    private javax.swing.JLabel jLabel48;
-    private javax.swing.JLabel jLabel49;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel50;
-    private javax.swing.JLabel jLabel51;
-    private javax.swing.JLabel jLabel52;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -2115,9 +1864,6 @@ public class AdamStoreView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
-    private javax.swing.JPanel jPanel16;
-    private javax.swing.JPanel jPanel17;
-    private javax.swing.JPanel jPanel18;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel23;
     private javax.swing.JPanel jPanel24;
@@ -2140,7 +1886,6 @@ public class AdamStoreView extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTabbedPane jTabbedPane3;
@@ -2149,8 +1894,6 @@ public class AdamStoreView extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JLabel lblAnhNV;
-    private javax.swing.JTextField maCTSP1;
-    private javax.swing.JTextField maSP1;
     private javax.swing.JPanel pnlChiTietDoiMatKhau;
     private javax.swing.JPanel pnlChiTietHoaDon;
     private javax.swing.JPanel pnlChiTietKhachHang;
@@ -2172,27 +1915,22 @@ public class AdamStoreView extends javax.swing.JFrame {
     private javax.swing.JPanel pnlThongKe;
     private javax.swing.JPanel pnlTitle;
     private javax.swing.JRadioButton rdConHang;
-    private javax.swing.JRadioButton rdConhang1;
     private javax.swing.JRadioButton rdHetHang;
-    private javax.swing.JRadioButton rdHethang1;
     private javax.swing.JRadioButton rdoDangLamViec;
     private javax.swing.JRadioButton rdoNam;
     private javax.swing.JRadioButton rdoNghiViec;
     private javax.swing.JRadioButton rdoNu;
-    private javax.swing.JTable tblChiTietSanPham1;
     private javax.swing.JTable tblNV0;
     private javax.swing.JTable tblNV1;
     private javax.swing.JTable tblSanPham;
     private javax.swing.JTextField txtCCCD;
     private javax.swing.JTextField txtDiaChi;
-    private javax.swing.JTextField txtGia1;
     private javax.swing.JTextField txtHoTen;
     private javax.swing.JTextField txtMaNV;
     private javax.swing.JTextField txtMaSanPham;
     private javax.swing.JTextField txtMaTK;
     private javax.swing.JTextField txtNgayVaoLam;
     private javax.swing.JTextField txtSDT;
-    private javax.swing.JTextField txtSoLuong1;
     private javax.swing.JTextField txtTenSanPham;
     private javax.swing.JTextField txtTimKiem;
     private javax.swing.JTextField txtTimNV;
