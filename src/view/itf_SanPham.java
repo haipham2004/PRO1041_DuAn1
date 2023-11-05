@@ -160,15 +160,15 @@ public class itf_SanPham extends javax.swing.JInternalFrame {
     public void deltailChiTietSanPham(int index) {
         txtMaCTSP.setText(tblChiTietSanPham.getValueAt(index, 0).toString());
         txtmaSPs.setText(tblChiTietSanPham.getValueAt(index, 1).toString());
-        txtSoLuong.setText(tblChiTietSanPham.getValueAt(index, 0).toString());
+        txtSoLuong.setText(tblChiTietSanPham.getValueAt(index, 2).toString());
         txtGia.setText(tblChiTietSanPham.getValueAt(index, 3).toString());
         ChatLieu cl = (ChatLieu) tblChiTietSanPham.getValueAt(index, 4);
         cbxChatLieu.setSelectedItem(cl);
         MauSac ms = (MauSac) tblChiTietSanPham.getValueAt(index, 5);
-        cbxChatLieu.setSelectedItem(ms);
+        cbxMauSac.setSelectedItem(ms);
         KichThuoc kt = (KichThuoc) tblChiTietSanPham.getValueAt(index, 6);
-        cbxChatLieu.setSelectedItem(kt);
-        if (tblChiTietSanPham.getValueAt(index, 0).equals("Còn hàng")) {
+        cbxKichThuoc.setSelectedItem(kt);
+        if (tblChiTietSanPham.getValueAt(index, 7).toString().equals("Còn hàng")) {
             rdConhang1.setSelected(true);
         } else {
             rdHethang1.setSelected(true);
@@ -217,7 +217,7 @@ public class itf_SanPham extends javax.swing.JInternalFrame {
         for (ChatLieu chatLieu : list) {
             cbxChatLieu.addElement(chatLieu);
         }
-        cboChatLieu.setModel((ComboBoxModel) cbxLoaiSanPham);
+        cboChatLieu.setModel((ComboBoxModel) cbxChatLieu);
     }
 
     public void loadCbo1(List<LoaiSanPham> list) {
@@ -1170,7 +1170,7 @@ public class itf_SanPham extends javax.swing.JInternalFrame {
 
     private void tblChiTietSanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblChiTietSanPhamMouseClicked
         // TODO add your handling code here:
-        index = tblSanPham.getSelectedRow();
+        index = tblChiTietSanPham.getSelectedRow();
         deltailChiTietSanPham(index);
     }//GEN-LAST:event_tblChiTietSanPhamMouseClicked
 
