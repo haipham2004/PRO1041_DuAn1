@@ -70,4 +70,25 @@ public class NhanVienRepository {
             return 0;
         }
     }
+    public int update(NhanVien nv, String maNV){
+        try {
+            conn = DBConnect.getConnection();
+            sql = "UPDATE NhanVien SET MaTK=?, HoTen=?, GioiTinh=?, DiaChi=?, SoDienThoai=?, CCCD=?, NgayVaoLam=?, TrangThai=?, Anh=? WHERE MaNV=?";
+            pst = conn.prepareStatement(sql);
+            pst.setObject(10, maNV);
+            pst.setObject(1, nv.getMaTaiKhoan());
+            pst.setObject(2, nv.getHoTen());
+            pst.setObject(3, nv.isGioiTinh());
+            pst.setObject(4, nv.getDiaChi());
+            pst.setObject(5, nv.getSoDienThoai());
+            pst.setObject(6, nv.getCCCD());
+            pst.setObject(7, nv.getNgayVaoLam());
+            pst.setObject(8, nv.isTrangThai());
+            pst.setObject(9, nv.getAnh());
+            return pst.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
 }
