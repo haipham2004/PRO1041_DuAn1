@@ -23,7 +23,7 @@ public class KichThuocRepository {
        public List<KichThuoc> getAll() {
         try {
             conn = DBConnect1111111.getConnection();
-            sql = "";
+            sql = "SELECT*FROM KichThuoc";
             pst = conn.prepareStatement(sql);
             rs = pst.executeQuery();
             while (rs.next()) {

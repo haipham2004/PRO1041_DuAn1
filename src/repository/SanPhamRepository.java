@@ -123,9 +123,10 @@ public class SanPhamRepository {
         try {
             conn = DBConnect1111111.getConnection();
             sql = "SELECT SP.MaSanPham,SP.TenSanPham,SP.TrangThai,LSP.MaLSP,LSP.TenLSP,SP.XuatXU \n"
-                    + "FROm SanPham SP INNER JOIN LoaiSanPham LSP ON SP.MaLSP=LSP.MaLSP where SP.TenSanPham like ?";
+                    + "FROm SanPham SP INNER JOIN LoaiSanPham LSP ON SP.MaLSP=LSP.MaLSP where SP.TenSanPham like ? or LSP.TenLSP like ?";
             pst = conn.prepareStatement(sql);
             pst.setObject(1, name);
+            pst.setObject(2, name);
             rs = pst.executeQuery();
             while (rs.next()) {
                 LoaiSanPham lsp = new LoaiSanPham(rs.getString(4),
