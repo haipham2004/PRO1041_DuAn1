@@ -4,6 +4,8 @@
  */
 package view;
 
+import javax.swing.plaf.basic.BasicInternalFrameUI;
+
 /**
  *
  * @author Admin
@@ -15,6 +17,10 @@ public class itf_NhanVien extends javax.swing.JInternalFrame {
      */
     public itf_NhanVien() {
         initComponents();
+        this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
+        BasicInternalFrameUI uI = (BasicInternalFrameUI) this.getUI();
+        uI.setNorthPane(null);
+        this.setSize(950,655);
     }
 
     /**
