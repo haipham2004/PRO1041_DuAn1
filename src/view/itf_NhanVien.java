@@ -60,8 +60,8 @@ public class itf_NhanVien extends javax.swing.JInternalFrame {
 
     public void sort() {
         tblNV0.getTableHeader().addMouseListener(new MouseAdapter() {
-            int sortType = 0; // Biến để theo dõi kiểu sắp xếp: 0 là tăng dần, 1 là giảm dần
-
+            int sortType = 0; //Biến để theo dõi kiểu sắp xếp: 0 là tăng dần, 1 là giảm dần
+            
             @Override
             public void mouseClicked(MouseEvent e) {
                 int col = tblNV0.columnAtPoint(e.getPoint());
