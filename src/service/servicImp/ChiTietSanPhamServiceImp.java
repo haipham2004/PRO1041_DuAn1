@@ -43,7 +43,7 @@ public class ChiTietSanPhamServiceImp implements AdamStore<ChiTietSanPham, Strin
 
     @Override
     public List<ChiTietSanPham> getList(String e) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return repo.getList(e);
     }
 
     
