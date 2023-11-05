@@ -39,10 +39,10 @@ public class itf_NhanVien extends javax.swing.JInternalFrame {
         initComponents();
         fillTableNV(serviceNV.getAll());
         loadCboDiaChi(serviceNV.getAll());
-        String today = toString().valueOf(LocalDate.now());
-        txtNgayVaoLam.setText(today);
+        String homNay = toString().valueOf(LocalDate.now());
+        txtNgayVaoLam.setText(homNay);
     }
-
+    
     public void detailNV(int index) {
         txtMaNV.setText(tblNV0.getValueAt(index, 0).toString());
         txtMaTK.setText(tblNV0.getValueAt(index, 1).toString());
