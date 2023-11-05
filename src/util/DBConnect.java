@@ -15,7 +15,7 @@ import java.util.logging.Logger;
  *
  * @author Windows 10 Pro
  */
-public class DBConnect1111111 {
+public class DBConnect {
     
   private static final String USERNAME = "sa";
     private static final String PASSWORD = "Haitam77";
@@ -43,7 +43,7 @@ public class DBConnect1111111 {
             CONNECT_STRING = connectStringBuilder.toString();
             System.out.println("Connect String có dạng: " + CONNECT_STRING);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(DBConnect1111111.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DBConnect.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
    
@@ -52,7 +52,7 @@ public class DBConnect1111111 {
              return DriverManager.getConnection(CONNECT_STRING);
          } catch (SQLException ex) {
              ex.printStackTrace();
-             Logger.getLogger(DBConnect1111111.class.getName()).log(Level.SEVERE, null, ex);
+             Logger.getLogger(DBConnect.class.getName()).log(Level.SEVERE, null, ex);
              return null;
          }
     }

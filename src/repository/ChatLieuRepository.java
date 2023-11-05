@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import model.ChatLieu;
 import model.MauSac;
-import util.DBConnect1111111;
+import util.DBConnect;
 
 /**
  *
@@ -25,7 +25,7 @@ public class ChatLieuRepository {
 
     public List<ChatLieu> getAll() {
         try {
-            conn = DBConnect1111111.getConnection();
+            conn = DBConnect.getConnection();
             sql = "SELECT*FROM ChatLieu";
             pst = conn.prepareStatement(sql);
             rs = pst.executeQuery();
@@ -39,6 +39,38 @@ public class ChatLieuRepository {
             return null;
         }
         return listChatLieu;
+    }
+      public ChatLieu getOne(String ma){
+           ChatLieu cl=null;
+            try {
+            conn = DBConnect.getConnection();
+            sql = "SELECT*FROM ChatLieu where MaChatLieu=?";
+            pst = conn.prepareStatement(sql);
+            pst.setObject(1, ma);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+            cl=new ChatLieu(rs.getString(1), 
+                        rs.getString(2), rs.getBoolean(3));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+           return cl;
+       }
+    public int them(ChatLieu cl){
+        try {
+            conn=DBConnect.getConnection();
+            sql="INSERT INTO ChatLieu VALUES(?,?,?)";
+            pst=conn.prepareStatement(sql);
+            pst.setObject(1, cl.getMaChatLieu());
+            pst.setObject(2, cl.getTenChatLieu());
+            pst.setObject(3, cl.isTrangThai());
+            return pst.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
     }
 
 }

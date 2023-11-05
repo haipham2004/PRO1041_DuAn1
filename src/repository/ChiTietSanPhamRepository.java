@@ -12,7 +12,7 @@ import model.ChiTietSanPham;
 import model.KichThuoc;
 import model.MauSac;
 import model.SanPham;
-import util.DBConnect1111111;
+import util.DBConnect;
 
 /**
  *
@@ -28,7 +28,7 @@ public class ChiTietSanPhamRepository {
 
     public List<ChiTietSanPham> getAll() {
         try {
-            conn = DBConnect1111111.getConnection();
+            conn = DBConnect.getConnection();
             sql = "SELECT CTSP.MaCTSP,CTSP.MaSanPham,MS.MaMauSac,MS.TenMauSac,CL.MaChatLieu,CL.TenChatLieu,\n" +
 "					KT.MaKichThuoc,KT.TenKichThuoc,CTSP.SoLuong,CTSP.Gia,CTSP.TrangThai\n" +
 "					FROM ChiTietSanPham CTSP INNER JOIN ChatLieu CL On CL.MaChatLieu=CTSP.MaChatLieu\n" +

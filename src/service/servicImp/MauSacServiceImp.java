@@ -23,7 +23,7 @@ public class MauSacServiceImp implements AdamStore<MauSac, String>{
 
     @Override
     public int them(MauSac k) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return repo.them(k);
     }
 
     @Override
@@ -38,7 +38,7 @@ public class MauSacServiceImp implements AdamStore<MauSac, String>{
 
     @Override
     public MauSac getOne(String e) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return repo.getOne(e);
     }
 
     @Override
