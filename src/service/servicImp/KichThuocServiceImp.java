@@ -23,7 +23,7 @@ public class KichThuocServiceImp implements AdamStore<KichThuoc, String>{
 
     @Override
     public int them(KichThuoc k) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return repo.them(k);
     }
 
     @Override
@@ -38,7 +38,7 @@ public class KichThuocServiceImp implements AdamStore<KichThuoc, String>{
 
     @Override
     public KichThuoc getOne(String e) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return repo.getOne(e);
     }
 
     @Override

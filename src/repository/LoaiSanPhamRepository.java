@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import model.LoaiSanPham;
 import model.SanPham;
-import util.DBConnect1111111;
+import util.DBConnect;
 
 /**
  *
@@ -26,7 +26,7 @@ public class LoaiSanPhamRepository {
     public List<LoaiSanPham> getAll() {
         listLoaiSanPham.clear();
         try {
-            conn = DBConnect1111111.getConnection();
+            conn = DBConnect.getConnection();
             sql = "SELECT * FROM LoaiSanPham";
             pst = conn.prepareStatement(sql);
             rs = pst.executeQuery();
