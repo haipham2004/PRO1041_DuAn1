@@ -46,5 +46,7 @@ public class NhanVienServiceImp implements AdamStore<NhanVien, String>{
     public List<NhanVien> getList(String e) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-
+    public List<NhanVien> getList2(String e, String f){
+        return repo.getList(e, f);
+    }
 }
