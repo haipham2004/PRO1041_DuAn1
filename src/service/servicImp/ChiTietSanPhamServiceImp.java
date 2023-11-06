@@ -28,7 +28,7 @@ public class ChiTietSanPhamServiceImp implements AdamStore<ChiTietSanPham, Strin
 
     @Override
     public int sua(ChiTietSanPham k, String e) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return repo.suas(k, e);
     }
 
     @Override
