@@ -28,7 +28,7 @@ public class ChatLieuServiceImp implements AdamStore<ChatLieu, String>{
 
     @Override
     public int sua(ChatLieu k, String e) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return repo.sua(k, e);
     }
 
     @Override

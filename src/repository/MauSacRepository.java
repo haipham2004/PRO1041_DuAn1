@@ -69,4 +69,19 @@ public class MauSacRepository {
             return 0;
         }
     }
+      
+      public int sua(MauSac ms,String ma){
+        try {
+            conn=DBConnect.getConnection();
+            sql="UPDATE MauSac set TenMauSac=?,TrangThai=? where MaMauSac=?";
+            pst=conn.prepareStatement(sql);
+            pst.setObject(1, ms.getTenMauSac());
+            pst.setObject(2, ms.isTrangThai());
+            pst.setObject(3, ma);
+            return pst.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
 }

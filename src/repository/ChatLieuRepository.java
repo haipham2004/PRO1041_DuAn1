@@ -73,5 +73,20 @@ public class ChatLieuRepository {
             return 0;
         }
     }
+    
+    public int sua(ChatLieu cl, String ma) {
+        try {
+            conn = DBConnect.getConnection();
+            sql = "UPDATE ChatLieu set TenChatLieu=?,TrangThai=?,where MaChatLieu=?";
+            pst = conn.prepareStatement(sql);
+            pst.setObject(1, cl.getTenChatLieu());
+            pst.setObject(2, cl.isTrangThai());
+            pst.setObject(3, ma);
+            return pst.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
 
 }

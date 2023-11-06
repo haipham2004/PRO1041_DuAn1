@@ -28,7 +28,7 @@ public class KichThuocServiceImp implements AdamStore<KichThuoc, String>{
 
     @Override
     public int sua(KichThuoc k, String e) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return repo.sua(k, e);
     }
 
     @Override
