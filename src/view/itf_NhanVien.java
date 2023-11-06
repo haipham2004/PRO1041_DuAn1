@@ -61,7 +61,7 @@ public class itf_NhanVien extends javax.swing.JInternalFrame {
     public void sort() {
         tblNV0.getTableHeader().addMouseListener(new MouseAdapter() {
             int sortType = 0; //Biến để theo dõi kiểu sắp xếp: 0 là tăng dần, 1 là giảm dần
-            
+
             @Override
             public void mouseClicked(MouseEvent e) {
                 int col = tblNV0.columnAtPoint(e.getPoint());
@@ -161,8 +161,6 @@ public class itf_NhanVien extends javax.swing.JInternalFrame {
 
     public void loadCboDiaChi(List<NhanVien> list) {
         cbxNhanVien.removeAllElements();
-        NhanVien emptyNhanVien = new NhanVien();
-        cbxNhanVien.addElement(emptyNhanVien);
         List<String> addedValues = new ArrayList<>();
         for (NhanVien nv : list) {
             if (!addedValues.contains(nv.getDiaChi())) {
@@ -171,6 +169,7 @@ public class itf_NhanVien extends javax.swing.JInternalFrame {
             }
         }
         cboDiaChi.setModel((ComboBoxModel) cbxNhanVien);
+        cboDiaChi.setSelectedIndex(-1);
     }
 
     public void loadCboGioiTinh() {
@@ -460,9 +459,19 @@ public class itf_NhanVien extends javax.swing.JInternalFrame {
 
         cboGioiTinh.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "None", "Nam", "Nữ" }));
         cboGioiTinh.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Giới tính"));
+        cboGioiTinh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboGioiTinhActionPerformed(evt);
+            }
+        });
 
         cboDiaChi.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "None" }));
         cboDiaChi.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Địa chỉ"));
+        cboDiaChi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboDiaChiActionPerformed(evt);
+            }
+        });
 
         btnResetNV.setText("Reset");
         btnResetNV.addActionListener(new java.awt.event.ActionListener() {
@@ -730,9 +739,43 @@ public class itf_NhanVien extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnSuaNVActionPerformed
 
     private void btnResetNVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetNVActionPerformed
-        loadCboDiaChi(serviceNV.getAll());
-        loadCboGioiTinh();
+        fillTableNV(serviceNV.getAll());
+        cboDiaChi.setSelectedIndex(-1);
+        cboGioiTinh.setSelectedIndex(-1);
     }//GEN-LAST:event_btnResetNVActionPerformed
+
+    private void cboGioiTinhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboGioiTinhActionPerformed
+        String mot;
+        String hai = null;
+        if (cboGioiTinh.getSelectedIndex() == -1) {
+            fillTableNV(serviceNV.getAll());
+            return;
+        } else if (cboGioiTinh.getSelectedIndex() == 0) {
+            mot = "1";
+        } else {
+            mot = "0";
+        }
+        if (cboDiaChi.getSelectedIndex() == -1) {
+            fillTableNV(serviceNV.getList(mot));
+        } else {
+            hai = cboDiaChi.getSelectedItem().toString();
+            fillTableNV(serviceNV.getList2(mot, hai));
+        }
+    }//GEN-LAST:event_cboGioiTinhActionPerformed
+
+    private void cboDiaChiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboDiaChiActionPerformed
+        String mot;
+        String hai;
+        if (cboDiaChi.getSelectedIndex() != -1) {
+            mot = cboDiaChi.getSelectedItem().toString();
+            if (cboGioiTinh.getSelectedIndex() == -1) {
+                fillTableNV(serviceNV.getList1(mot));
+            } else {
+                hai = cboGioiTinh.getSelectedIndex() == 1?"0":"1";
+                fillTableNV(serviceNV.getList2(hai, mot));
+            }
+        }
+    }//GEN-LAST:event_cboDiaChiActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
