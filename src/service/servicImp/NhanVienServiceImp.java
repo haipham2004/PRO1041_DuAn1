@@ -44,9 +44,12 @@ public class NhanVienServiceImp implements AdamStore<NhanVien, String>{
 
     @Override
     public List<NhanVien> getList(String e) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return repo.getList(e);
+    }
+    public List<NhanVien> getList1(String e) {
+        return repo.getList1(e);
     }
     public List<NhanVien> getList2(String e, String f){
-        return repo.getList(e, f);
+        return repo.getList2(e, f);
     }
 }
