@@ -378,23 +378,56 @@ public class itf_SanPham extends javax.swing.JInternalFrame {
     }
 
     public boolean validateCTSP() {
+        if (txtMaCTSP.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Mã trống");
+            return false;
+        }
+        if (txtSoLuong.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Số lượng trống");
+            return false;
+        } else {
+            try {
+                int sl = Integer.parseInt(txtSoLuong.getText());
+                if (sl < 0) {
+                    JOptionPane.showMessageDialog(this, "Số lượng phải lơn hơn 0");
+                    return false;
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Số lượng phải là số nguyên");
+                return false;
+            }
+        }
+
+        if (txtGia.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Giá trống");
+            return false;
+        } else {
+            try {
+                double gia = Double.parseDouble(txtGia.getText());
+                if (gia < 0) {
+                    JOptionPane.showMessageDialog(this, "Giáphải lơn hơn 0");
+                    return false;
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Giá phải là số");
+                return false;
+            }
+        }
         return true;
     }
 
     public boolean validateTT() {
-        if(txtTenMa.getText().isEmpty()){
-             JOptionPane.showMessageDialog(this, "Mã trống");
+        if (txtTenMa.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Mã trống");
             return false;
         }
-        
-        if(txtTenThuocTinh.getText().isEmpty()){
-             JOptionPane.showMessageDialog(this, "Tên trống");
+
+        if (txtTenThuocTinh.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Tên trống");
             return false;
         }
         return true;
     }
-
-   
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -1440,7 +1473,7 @@ public class itf_SanPham extends javax.swing.JInternalFrame {
     private void btnThemCTSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemCTSPActionPerformed
         // TODO add your handling code here:
         ChiTietSanPham ctsp = savesCTSP();
-        if (validateSP()) {
+//        if (validateCTSP()) {
             if (serviceCTSP.getOne(ctsp.getMaChiTietSanPham()) != null) {
                 JOptionPane.showMessageDialog(this, "Mã chi tiết sản phẩm trùng");
                 return;
@@ -1452,7 +1485,7 @@ public class itf_SanPham extends javax.swing.JInternalFrame {
                     JOptionPane.showMessageDialog(this, "Thêm sản phẩm thất bại");
                 }
             }
-        }
+//        }
     }//GEN-LAST:event_btnThemCTSPActionPerformed
 
     private void btnThemThuocTinhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemThuocTinhActionPerformed
@@ -1522,6 +1555,9 @@ public class itf_SanPham extends javax.swing.JInternalFrame {
     private void btnClearCTSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearCTSPActionPerformed
         // TODO add your handling code here:
         txtMaCTSP.setText("");
+        txtSoLuong.setText("");
+        txtGia.setText("");
+        lBTenSP.setText("");
         cboMaSP.setSelectedIndex(0);
         cboChatLieu.setSelectedIndex(0);
         cboMauSac.setSelectedIndex(0);
