@@ -175,9 +175,9 @@ public class itf_SanPham extends javax.swing.JInternalFrame {
     }
 
     public void deltailChiTietSanPham(int index) {
-        String ten = txtSanPhamCT.getText();
-
-        ChiTietSanPham ctsp = serviceCTSP.getAll().get(index);
+//        String ten = txtSanPhamCT.getText();
+//
+//        ChiTietSanPham ctsp = serviceCTSP.getAll().get(index);
 
         txtMaCTSP.setText(tblChiTietSanPham.getValueAt(index, 0).toString());
         txtSoLuong.setText(tblChiTietSanPham.getValueAt(index, 1).toString());
@@ -362,6 +362,18 @@ public class itf_SanPham extends javax.swing.JInternalFrame {
     }
 
     public boolean validateSP() {
+        if (txtMaSanPham.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Mã trống");
+            return false;
+        }
+        if (txtTenSanPham.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Tên trống");
+            return false;
+        }
+        if (txtXuatXu.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Xuất xứ trống");
+            return false;
+        }
         return true;
     }
 
@@ -369,17 +381,20 @@ public class itf_SanPham extends javax.swing.JInternalFrame {
         return true;
     }
 
-    public boolean validateCL() {
+    public boolean validateTT() {
+        if(txtTenMa.getText().isEmpty()){
+             JOptionPane.showMessageDialog(this, "Mã trống");
+            return false;
+        }
+        
+        if(txtTenThuocTinh.getText().isEmpty()){
+             JOptionPane.showMessageDialog(this, "Tên trống");
+            return false;
+        }
         return true;
     }
 
-    public boolean validateKT() {
-        return true;
-    }
-
-    public boolean validateMS() {
-        return true;
-    }
+   
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -1444,7 +1459,7 @@ public class itf_SanPham extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         if (rdChatLieu.isSelected()) {
             ChatLieu cl = savesCL();
-            if (validateCL()) {
+            if (validateTT()) {
                 if (serviceCl.getOne(cl.getMaChatLieu()) != null) {
                     JOptionPane.showMessageDialog(this, "Mã chất liệu trùng");
                     return;
@@ -1459,7 +1474,7 @@ public class itf_SanPham extends javax.swing.JInternalFrame {
             }
         } else if (rdMauSac.isSelected()) {
             MauSac ms = savesMS();
-            if (validateCL()) {
+            if (validateTT()) {
                 if (serviceMS.getOne(ms.getMaMauSac()) != null) {
                     JOptionPane.showMessageDialog(this, "Mã màu sắc trùng");
                     return;
@@ -1474,7 +1489,7 @@ public class itf_SanPham extends javax.swing.JInternalFrame {
             }
         } else {
             KichThuoc kt = savesKT();
-            if (validateKT()) {
+            if (validateTT()) {
                 if (serviceKT.getOne(kt.getMaKichThuoc()) != null) {
                     JOptionPane.showMessageDialog(this, "Mã kích thước trùng");
                     return;
