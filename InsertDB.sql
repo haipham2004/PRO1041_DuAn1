@@ -1,4 +1,6 @@
-﻿INSERT INTO TaiKhoan VALUES
+﻿----Update:2023-11-07--lúc 15g50p--
+
+INSERT INTO TaiKhoan VALUES
 ('TK01','hoilamgi1','khongnoidau1','Admin',1),
 ('TK02','hoilamgi2','khongnoidau2','Staff',1)
 INSERT INTO NhanVien VALUES
@@ -55,12 +57,21 @@ INSERT INTO Eventa VALUES
 ('EV01',N'Sinh nhật cửa hàng',N'Giảm giá','20%','2023-03-11','2023-03-15',N'Siêu giảm giá',1),
 ('EV02',N'Quốc tế Nam giới',N'Giảm giá','50%','2023-10-19','2023-10-21',N'Siêu giảm giá',1),
 ('EV03',N'Giáng sinh',N'Giảm giá','40%','2023-11-03','2023-11-05',N'Siêu giảm giá',1)
+INSERT INTO MaVoucher VALUES
+('VC01','EV01',10,1),
+('VC02','EV03',15,1),
+('VC03','EV02',2,0)
 INSERT INTO ChiTietSanPham VALUES
-('CTSP01','SP02','MS05','CL03','KT04',2,400000,800880,1),
-('CTSP02','SP05','MS02','CL01','KT01',1,356000,356000,0),
-('CTSP03','SP06','MS02','CL03','KT02',4,200000,800000,1)
-SELECT*FROM ChiTietSanPham
-SELECT*FROM KhachHang
-DELETE FROM KhachHang
+('CTSP01','SP02','MS05','CL03','KT04',2,400000,1),
+('CTSP02','SP05','MS02','CL01','KT01',1,356000,0),
+('CTSP03','SP06','MS02','CL03','KT02',4,200000,1)
 
-SELECT*FROM NhanVien
+INSERT INTO HoaDon VALUES
+('HD01','NV05','KH03','HTTT01',getDate(),450000,50000,400000,1,N'Thành công','VC03'),
+('HD02','NV03','KH02','HTTT02',getDate(),130000,50000,90000,0,N'Thất bại','VC02'),
+('HD03','NV02','KH01','HTTT01',getDate(),750000,50000,700000,1,N'Thành công','VC01')
+
+INSERT INTO HoaDonChiTiet VALUES
+('HDCT01','CTSP02','HD03',3,170000,510000,N'Ok',1),
+('HDCT02','CTSP03','HD02',4,170000,680000,N'Ok',1),
+('HDCT03','CTSP01','HD01',3,210000,630000,N'Not Ok',0)
