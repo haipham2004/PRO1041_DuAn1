@@ -20,13 +20,11 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-
 /**
  *
  * @author Admin
  */
 public class AdamStoreView extends javax.swing.JFrame {
-
 
     /**
      * Creates new form AdamStoreView
@@ -41,9 +39,6 @@ public class AdamStoreView extends javax.swing.JFrame {
         jdpMain.removeAll();
         jdpMain.add(thongKe).setVisible(true);
     }
-
-
- 
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -587,8 +582,6 @@ public class AdamStoreView extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_btnExitMouseClicked
 
-
-
     /**
      * @param args the command line arguments
      */
@@ -666,5 +659,4 @@ public class AdamStoreView extends javax.swing.JFrame {
     private javax.swing.JPanel pnlTitle;
     // End of variables declaration//GEN-END:variables
 
-  
 }
