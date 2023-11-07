@@ -18,7 +18,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import model.KhachHang;
-import service.servicImp.KhachHangService;
+import service.servicImp.KhachHangServiceImp;
 
 /**
  *
@@ -26,7 +26,7 @@ import service.servicImp.KhachHangService;
  */
 public class itf_KhachHang extends javax.swing.JInternalFrame {
 
-    KhachHangService serviceKH = new KhachHangService();
+    KhachHangServiceImp serviceKH = new KhachHangServiceImp();
     DefaultTableModel tblmol = new DefaultTableModel();
     int index = -1;
 
@@ -367,6 +367,11 @@ public class itf_KhachHang extends javax.swing.JInternalFrame {
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Tìm kiếm"));
 
         btnTimKiem.setText("Tìm kiếm");
+        btnTimKiem.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnTimKiemMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -488,18 +493,17 @@ public class itf_KhachHang extends javax.swing.JInternalFrame {
     private void btnThemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnThemMouseClicked
         // TODO add your handling code here:
         KhachHang kh = this.getFormKH();
-        if (validateKH()) {
-            if (serviceKH.getOne(kh.getMaKhachHang()) != null) {
-                JOptionPane.showMessageDialog(this, "Mã khách hàng trùng");
+        if (serviceKH.getOne(kh.getMaKhachHang()) != null) {
+            JOptionPane.showMessageDialog(this, "Mã khách hàng trùng");
+        } else {
+            if (serviceKH.them(kh) > 0) {
+                fillTableKH(serviceKH.getAll());
+                JOptionPane.showMessageDialog(this, "Thêm khách hàng thành công");
             } else {
-                if (serviceKH.them(kh) > 0) {
-                    fillTableKH(serviceKH.getAll());
-                    JOptionPane.showMessageDialog(this, "Thêm khách hàng thành công");
-                } else {
-                    JOptionPane.showMessageDialog(this, "Thêm khách hàng thất bại");
-                }
+                JOptionPane.showMessageDialog(this, "Thêm khách hàng thất bại");
             }
         }
+
     }//GEN-LAST:event_btnThemMouseClicked
 
     private void btnCapNhatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCapNhatMouseClicked
@@ -531,6 +535,13 @@ public class itf_KhachHang extends javax.swing.JInternalFrame {
         btngGioiTinh.clearSelection();
         btngTrangThai.clearSelection();
     }//GEN-LAST:event_btnLamMoiMouseClicked
+
+    private void btnTimKiemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTimKiemMouseClicked
+        // TODO add your handling code here:
+        String timKiem = txtTimKiem.getText();
+        timKiem = '%' + timKiem + '%';
+        fillTableKH(serviceKH.getList(timKiem));
+    }//GEN-LAST:event_btnTimKiemMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

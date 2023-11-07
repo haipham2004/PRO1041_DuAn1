@@ -71,7 +71,7 @@ public class KhachHangRepository {
     public int CapNhat(KhachHang kh, String maKH) {
         try {
             con = DBConnect.getConnection();
-            sql = "Update KhachHang set HoTen = ?, NgaySinh = ?,SoDienThoai,Email = ?,\n"
+            sql = "Update KhachHang set HoTen = ?, NgaySinh = ?,SoDienThoai = ?,Email = ?,\n"
                     + "GioiTInh = ?,DiaChi = ? ,TrangThai = ? where MaKH = ?";
             ps = con.prepareStatement(sql);
             ps.setObject(8, maKH);
@@ -93,7 +93,7 @@ public class KhachHangRepository {
         KhachHang kh = null;
         try {
             con = DBConnect.getConnection();
-            sql = "Select MaKH,HoTen,NgaySinh,SoDienThoai,Email,GioiTInh,DiaChi,TrangThai From KhachHang where ";
+            sql = "Select MaKH,HoTen,NgaySinh,SoDienThoai,Email,GioiTInh,DiaChi,TrangThai From KhachHang where MaKH = ?";
             ps = con.prepareStatement(sql);
             ps.setObject(1, maKH);
             rs = ps.executeQuery();
@@ -112,5 +112,31 @@ public class KhachHangRepository {
             e.printStackTrace();
             return null;
         }
+    }
+    
+    public List<KhachHang> getList(String ten) {
+        listKhachHang.clear();
+        try {
+            con = DBConnect.getConnection();
+            sql = "Select MaKH,HoTen,NgaySinh,SoDienThoai,Email,GioiTInh,DiaChi,TrangThai From KhachHang where HoTen like ?";
+            ps = con.prepareStatement(sql);
+            ps.setObject(1, ten);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                KhachHang kh = new KhachHang(rs.getString(1),
+                        rs.getString(2),
+                        rs.getDate(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getBoolean(6),
+                        rs.getString(7),
+                        rs.getBoolean(8));
+                listKhachHang.add(kh);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+        return listKhachHang;
     }
 }
