@@ -98,5 +98,19 @@ public class KhachHang {
         this.trangThai = trangThai;
     }
     
+    public String chiTietGioiTinh(){
+        if (gioiTinh) {
+            return "Nam";
+        } else {
+            return "Nữ";
+        }
+    }
     
+    public String chiTietTrangThai(){
+        if (gioiTinh) {
+            return "VIP";
+        } else {
+            return "Thường";
+        }
+    }
 }
