@@ -169,7 +169,7 @@ public class itf_SanPham extends javax.swing.JInternalFrame {
                 chiTietSanPham.getSanPham(),
                 chiTietSanPham.getChatLieu(), chiTietSanPham.getMauSac(),
                 chiTietSanPham.getKichThuoc(), chiTietSanPham.isTrangThai() ? "Còn hàng" : "Hết hàng",
-                 chiTietSanPham.getSanPham().getTenSanPham(), chiTietSanPham.getSoLuong()*chiTietSanPham.getGia()
+                chiTietSanPham.getSanPham().getTenSanPham()
             });
         }
     }
@@ -177,11 +177,8 @@ public class itf_SanPham extends javax.swing.JInternalFrame {
     public void deltailChiTietSanPham(int index) {
         String ten = txtSanPhamCT.getText();
 
-        if (ten.trim().isEmpty()) {
-            ChiTietSanPham ctsp = serviceCTSP.getAll().get(index);
-        } else {
-            ChiTietSanPham ctsp = serviceCTSP.getList(ten).get(index);
-        }
+        ChiTietSanPham ctsp = serviceCTSP.getAll().get(index);
+
         txtMaCTSP.setText(tblChiTietSanPham.getValueAt(index, 0).toString());
         txtSoLuong.setText(tblChiTietSanPham.getValueAt(index, 1).toString());
         txtGia.setText(tblChiTietSanPham.getValueAt(index, 2).toString());
@@ -925,13 +922,13 @@ public class itf_SanPham extends javax.swing.JInternalFrame {
 
         tblChiTietSanPham.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Mã SPCT", "Số lượng", "Giá", "Mã SP", "Chất liệu", "Màu sắc ", "Kích thước", "Trạng thái", "TÊN SP", "Tổng tiền"
+                "Mã SPCT", "Số lượng", "Giá", "Mã SP", "Chất liệu", "Màu sắc ", "Kích thước", "Trạng thái", "TÊN SP"
             }
         ));
         tblChiTietSanPham.addMouseListener(new java.awt.event.MouseAdapter() {
