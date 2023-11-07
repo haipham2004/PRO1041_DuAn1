@@ -18,6 +18,7 @@ import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
+import javax.swing.JTable;
 import javax.swing.RowSorter;
 import javax.swing.SortOrder;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
@@ -55,19 +56,20 @@ public class itf_NhanVien extends javax.swing.JInternalFrame {
         String today = toString().valueOf(LocalDate.now());
         txtNgayVaoLam.setText(today);
         loadCboGioiTinh();
-        sort();
+        sort(tblNV0);
+        sort(tblNV1);
     }
 
-    public void sort() {
-        tblNV0.getTableHeader().addMouseListener(new MouseAdapter() {
+    public void sort(JTable table) {
+        table.getTableHeader().addMouseListener(new MouseAdapter() {
             int sortType = 0; //Biến để theo dõi kiểu sắp xếp: 0 là tăng dần, 1 là giảm dần
 
             @Override
             public void mouseClicked(MouseEvent e) {
-                int col = tblNV0.columnAtPoint(e.getPoint());
-                tblNV0.setAutoCreateRowSorter(true);
-                TableRowSorter<TableModel> sorter = new TableRowSorter<>(tblNV0.getModel());
-                tblNV0.setRowSorter(sorter);
+                int col = table.columnAtPoint(e.getPoint());
+                table.setAutoCreateRowSorter(true);
+                TableRowSorter<TableModel> sorter = new TableRowSorter<>(table.getModel());
+                table.setRowSorter(sorter);
                 // Kiểm tra kiểu sắp xếp hiện tại và cập nhật ngược lại
                 if (sortType == 0) {
                     sorter.setSortKeys(Arrays.asList(new RowSorter.SortKey(col, SortOrder.DESCENDING)));
@@ -78,61 +80,29 @@ public class itf_NhanVien extends javax.swing.JInternalFrame {
                 }
             }
         });
-        tblNV1.getTableHeader().addMouseListener(new MouseAdapter() {
-            int sortType = 0;
-
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                int col = tblNV1.columnAtPoint(e.getPoint());
-                tblNV1.setAutoCreateRowSorter(true);
-                TableRowSorter<TableModel> sorter = new TableRowSorter<>(tblNV1.getModel());
-                tblNV1.setRowSorter(sorter);
-
-                if (sortType == 0) {
-                    sorter.setSortKeys(Arrays.asList(new RowSorter.SortKey(col, SortOrder.DESCENDING)));
-                    sortType = 1;
-                } else {
-                    sorter.setSortKeys(Arrays.asList(new RowSorter.SortKey(col, SortOrder.ASCENDING)));
-                    sortType = 0;
-                }
-            }
-        });
     }
 
-    public void detailNV(int index) {
-        txtMaNV.setText(tblNV0.getValueAt(index, 0).toString());
-        txtMaTK.setText(tblNV0.getValueAt(index, 1).toString());
-        txtHoTen.setText(tblNV0.getValueAt(index, 2).toString());
-        if (tblNV0.getValueAt(index, 3).toString().equals("Nam")) {
+    public void detailNhanVien(JTable table, int index, boolean dangLamViec) {
+        txtMaNV.setText(table.getValueAt(index, 0).toString());
+        txtMaTK.setText(table.getValueAt(index, 1).toString());
+        txtHoTen.setText(table.getValueAt(index, 2).toString());
+        if (table.getValueAt(index, 3).toString().equals("Nam")) {
             rdoNam.setSelected(true);
         } else {
             rdoNu.setSelected(true);
         }
-        txtDiaChi.setText(tblNV0.getValueAt(index, 4).toString());
-        txtSDT.setText(tblNV0.getValueAt(index, 5).toString());
-        txtCCCD.setText(tblNV0.getValueAt(index, 6).toString());
-        txtNgayVaoLam.setText(tblNV0.getValueAt(index, 7).toString());
-        rdoNghiViec.setSelected(true);
-        ImageIcon icon = new ImageIcon(tblNV0.getValueAt(index, 8).toString());
-        Image image = icon.getImage().getScaledInstance(146, 206, Image.SCALE_SMOOTH);
-        lblAnhNV.setIcon(new ImageIcon(image));
-    }
+        txtDiaChi.setText(table.getValueAt(index, 4).toString());
+        txtSDT.setText(table.getValueAt(index, 5).toString());
+        txtCCCD.setText(table.getValueAt(index, 6).toString());
+        txtNgayVaoLam.setText(table.getValueAt(index, 7).toString());
 
-    public void detailNV1(int index) {
-        txtMaNV.setText(tblNV1.getValueAt(index, 0).toString());
-        txtMaTK.setText(tblNV1.getValueAt(index, 1).toString());
-        txtHoTen.setText(tblNV1.getValueAt(index, 2).toString());
-        if (tblNV1.getValueAt(index, 3).toString().equals("Nam")) {
-            rdoNam.setSelected(true);
+        if (dangLamViec) {
+            rdoDangLamViec.setSelected(true);
         } else {
-            rdoNu.setSelected(true);
+            rdoNghiViec.setSelected(true);
         }
-        txtDiaChi.setText(tblNV1.getValueAt(index, 4).toString());
-        txtSDT.setText(tblNV1.getValueAt(index, 5).toString());
-        txtCCCD.setText(tblNV1.getValueAt(index, 6).toString());
-        txtNgayVaoLam.setText(tblNV1.getValueAt(index, 7).toString());
-        rdoDangLamViec.setSelected(true);
-        ImageIcon icon = new ImageIcon(tblNV1.getValueAt(index, 8).toString());
+
+        ImageIcon icon = new ImageIcon(table.getValueAt(index, 8).toString());
         Image image = icon.getImage().getScaledInstance(146, 206, Image.SCALE_SMOOTH);
         lblAnhNV.setIcon(new ImageIcon(image));
     }
@@ -709,7 +679,7 @@ public class itf_NhanVien extends javax.swing.JInternalFrame {
 
     private void tblNV1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblNV1MouseClicked
         index = tblNV1.getSelectedRow();
-        detailNV1(index);
+        detailNhanVien(tblNV1, index, true);
         btnThemNV.setEnabled(false);
         txtMaNV.setEnabled(false);
         tblNV0.clearSelection();
@@ -717,7 +687,7 @@ public class itf_NhanVien extends javax.swing.JInternalFrame {
 
     private void tblNV0MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblNV0MouseClicked
         index = tblNV0.getSelectedRow();
-        detailNV(index);
+        detailNhanVien(tblNV0, index, false);
         btnThemNV.setEnabled(false);
         txtMaNV.setEnabled(false);
         tblNV1.clearSelection();
@@ -772,7 +742,7 @@ public class itf_NhanVien extends javax.swing.JInternalFrame {
             if (cboGioiTinh.getSelectedIndex() == -1) {
                 fillTableNV(serviceNV.getList1(mot));
             } else {
-                hai = cboGioiTinh.getSelectedIndex() == 1?"0":"1";
+                hai = cboGioiTinh.getSelectedIndex() == 1 ? "0" : "1";
                 fillTableNV(serviceNV.getList2(hai, mot));
             }
         }
