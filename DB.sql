@@ -1,4 +1,6 @@
-﻿CREATE DATABASE AdamStores
+﻿
+----Update:2023-11-07--lúc 15g50p--
+CREATE DATABASE AdamStores
 GO
 USE AdamStores
 GO 
@@ -45,7 +47,7 @@ CREATE TABLE [HinhThucThanhToan] (
 );
 CREATE TABLE [Eventa] (
   [MaEV] varchar(10),
-  [TenEV] varchar(50),
+  [TenEV] nvarchar(50),
   [HinhThuc] nvarchar(100),
   [MucGiamGia] varchar(100),
   [ThoiGianBatDau] date,
@@ -74,6 +76,8 @@ CREATE TABLE [HoaDon] (
   CONSTRAINT FK_HD_TT foreign key(MaHTTT) references HinhThucThanhToan(MaHTTT),
   [NgayTao] datetime,
   [TongTien] Money,
+  [TongTienKM] Money,
+  [TongTienSauKM] Money,
   [TrangThai] bit,
   [GhiChu] nvarchar(100),
   [MaVoucher] varchar(10) not null,
@@ -103,6 +107,7 @@ CREATE TABLE [SanPham] (
   [TrangThai] bit,
   [MaLSP] varchar(10) not null,
   CONSTRAINT FK_SP_LSP foreign key(MaLSP) references LoaiSanPham(MaLSP),
+  [XuatXu] nvarchar(50),
   PRIMARY KEY ([MaSanPham])
 );
 
@@ -124,7 +129,7 @@ CREATE TABLE [KichThuoc] (
   [MaKichThuoc] varchar(10),
   [TenKichThuoc] nvarchar(50),
   [TrangThai] bit,
-  PRIMARY KEY ([MaKichThuoc])
+PRIMARY KEY ([MaKichThuoc])
 );
 
 CREATE TABLE [ChiTietSanPham] (
@@ -151,18 +156,10 @@ CREATE TABLE [HoaDonChiTiet] (
    [MaHoaDon] varchar(10) not null,
    CONSTRAINT FK_HDCT_HD foreign key(MaHoaDon) references HoaDon(MaHoaDon),
   [SoLuong] int,
-  [Gia] money,
-  [GiamGia] money,
+  [DonGia] money,
   [ThanhTien] money,
   [GhiChu] nvarchar(100),
   [TrangThai] bit,
   PRIMARY KEY ([MaHoaDonChiTiet])
 );
-
---ALTER TABLE SanPham--
---ADD  XuatXU NVARCHAR(50)--
---UPDATE SanPham set XuatXU=N'Quảng Châu' where MaSanPham='SP06'--
-
-
-
-
+--Update:2023-11-07--

@@ -1,7 +1,8 @@
-﻿INSERT INTO TaiKhoan VALUES
+﻿----Update:2023-11-07--lúc 15g50p--
+
+INSERT INTO TaiKhoan VALUES
 ('TK01','hoilamgi1','khongnoidau1','Admin',1),
-('TK02','hoilamgi2','khongnoidau2','Staff',1),
-('TK03','hoilamgi3','khongnoidau3','Staff',1)
+('TK02','hoilamgi2','khongnoidau2','Staff',1)
 INSERT INTO NhanVien VALUES
 ('NV01','TK02',N'Phạm Ngọc Hải',1,N'Ninh Bình','0334294889','037643953721','2023-09-15',1,'anh1.png'),
 ('NV02','TK02',N'Trần Anh Quân',1,N'Hà Nội','0958655432','037637459321','2023-09-15',1,'anh2.png'),
@@ -22,18 +23,18 @@ INSERT INTO LoaiSanPham VALUES
 ('LSP04',N'Áo polo Nam',0,N'Hàng đẹp'),
 ('LSP05',N'Áo jeans Nam',1,N'Hàng đẹp')
 INSERT INTO SanPham VALUES
-('SP01',N'OLD NAVY',1,'LSP05'),
-('SP02',N'GAP',1,'LSP05'),
-('SP03',N'LEVI',1,'LSP05'),
-('SP04',N'Basic Tee',1,'LSP01'),
-('SP05',N'Graphic Tee',1,'LSP01'),
-('SP06',N'Longline Tee',1,'LSP01'),
-('SP07',N'Flannel Shirt',1,'LSP03'),
-('SP08',N'inen Shirt',1,'LSP03'),
-('SP09',N'Western Shirt',1,'LSP03'),
-('SP10',N'Denim Jacket',1,'LSP02'),
-('SP11',N'Down Jacket',1,'LSP02'),
-('SP12',N'Pea Coat ',1,'LSP02')
+('SP01',N'OLD NAVY',1,'LSP05',N'Việt Nam'),
+('SP02',N'GAP',1,'LSP05',N'Lào'),
+('SP03',N'LEVI',1,'LSP05',N'Thái Lan'),
+('SP04',N'Basic Tee',0,'LSP01',N'Hàn Quốc'),
+('SP05',N'Graphic Tee',0,'LSP01',N'Việt Nam'),
+('SP06',N'Longline Tee',1,'LSP01',N'Campuchia'),
+('SP07',N'Flannel Shirt',1,'LSP03',N'Việt Nam'),
+('SP08',N'inen Shirt',1,'LSP03',N'Việt Nam'),
+('SP09',N'Western Shirt',1,'LSP03',N'Nhật Bản'),
+('SP10',N'Denim Jacket',1,'LSP02',N'Việt Nam'),
+('SP11',N'Down Jacket',1,'LSP02',N'Việt Nam'),
+('SP12',N'Pea Coat ',0,'LSP02',N'Đài Loan')
 INSERT INTO MauSac VALUES
 ('MS01',N'Đỏ',1),
 ('MS02',N'Đen',1),
@@ -56,9 +57,21 @@ INSERT INTO Eventa VALUES
 ('EV01',N'Sinh nhật cửa hàng',N'Giảm giá','20%','2023-03-11','2023-03-15',N'Siêu giảm giá',1),
 ('EV02',N'Quốc tế Nam giới',N'Giảm giá','50%','2023-10-19','2023-10-21',N'Siêu giảm giá',1),
 ('EV03',N'Giáng sinh',N'Giảm giá','40%','2023-11-03','2023-11-05',N'Siêu giảm giá',1)
+INSERT INTO MaVoucher VALUES
+('VC01','EV01',10,1),
+('VC02','EV03',15,1),
+('VC03','EV02',2,0)
 INSERT INTO ChiTietSanPham VALUES
-('CTSP01','SP02','MS05','CL03','KT04',2,500000,1),
-('CTSP02','SP05','MS02','CL01','KT01',1,356000,1),
-('CTSP03','SP06','MS02','CL03','KT02',4,297000,1)
-SELECT*FROM KhachHang
-DELETE FROM KhachHang
+('CTSP01','SP02','MS05','CL03','KT04',2,400000,1),
+('CTSP02','SP05','MS02','CL01','KT01',1,356000,0),
+('CTSP03','SP06','MS02','CL03','KT02',4,200000,1)
+
+INSERT INTO HoaDon VALUES
+('HD01','NV05','KH03','HTTT01',getDate(),450000,50000,400000,1,N'Thành công','VC03'),
+('HD02','NV03','KH02','HTTT02',getDate(),130000,50000,90000,0,N'Thất bại','VC02'),
+('HD03','NV02','KH01','HTTT01',getDate(),750000,50000,700000,1,N'Thành công','VC01')
+
+INSERT INTO HoaDonChiTiet VALUES
+('HDCT01','CTSP02','HD03',3,170000,510000,N'Ok',1),
+('HDCT02','CTSP03','HD02',4,170000,680000,N'Ok',1),
+('HDCT03','CTSP01','HD01',3,210000,630000,N'Not Ok',0)
