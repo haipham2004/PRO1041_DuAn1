@@ -13,7 +13,7 @@ import service.AdamStore;
  *
  * @author Admin
  */
-public class KhachHangService implements AdamStore<KhachHang, String>{
+public class KhachHangServiceImp implements AdamStore<KhachHang, String>{
     
     KhachHangRepository repo = new KhachHangRepository();
     
@@ -44,7 +44,7 @@ public class KhachHangService implements AdamStore<KhachHang, String>{
 
     @Override
     public List<KhachHang> getList(String e) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return repo.getList(e);
     }
     
 }
