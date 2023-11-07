@@ -4,14 +4,22 @@
  */
 package view;
 
+import com.sun.jdi.connect.spi.Connection;
 import javax.swing.JPanel;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import util.DBConnect;
+import java.sql.*;
+import repository.LoginRepository;
 
 /**
  *
  * @author Admin
  */
 public class DangNhapView extends javax.swing.JFrame {
+
+//    private LoginRepository mLoginRepository;
+    private LoginRepository service = new LoginRepository();
 
     /**
      * Creates new form DangNhapView
@@ -22,6 +30,21 @@ public class DangNhapView extends javax.swing.JFrame {
         setUndecorated(true);
         setSize(541, 284);
         this.setLocationRelativeTo(null);
+//        mLoginRepository = new LoginRepository();
+    }
+
+    public boolean checkEmpty() {
+        if (txtTaiKhoan.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Username khong duoc de trong !");
+            txtTaiKhoan.requestFocus();
+            return false;
+        }
+        if (txtMatKhau.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Password khong duoc de trong !");
+            txtMatKhau.requestFocus();
+            return false;
+        }
+        return true;
     }
 
     /**
@@ -33,15 +56,19 @@ public class DangNhapView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTree1 = new javax.swing.JTree();
         PanelMain = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         txtTaiKhoan = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        txtMatKhau = new javax.swing.JTextField();
         btnThoat = new javax.swing.JButton();
         btnDangNhap = new javax.swing.JButton();
+        txtMatKhau = new javax.swing.JPasswordField();
+
+        jScrollPane1.setViewportView(jTree1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -53,7 +80,7 @@ public class DangNhapView extends javax.swing.JFrame {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 271, Short.MAX_VALUE)
+            .addGap(0, 258, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -61,15 +88,18 @@ public class DangNhapView extends javax.swing.JFrame {
         );
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel1.setText("Đăng nhập");
+        jLabel1.setText("ĐĂNG NHẬP");
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/user.png"))); // NOI18N
 
         txtTaiKhoan.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
+        txtTaiKhoan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTaiKhoanActionPerformed(evt);
+            }
+        });
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/locked.png"))); // NOI18N
-
-        txtMatKhau.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
 
         btnThoat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/close.png"))); // NOI18N
         btnThoat.setText("Thoát");
@@ -85,7 +115,18 @@ public class DangNhapView extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnDangNhapMouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnDangNhapMouseEntered(evt);
+            }
         });
+        btnDangNhap.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDangNhapActionPerformed(evt);
+            }
+        });
+
+        txtMatKhau.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
+        txtMatKhau.setPreferredSize(new java.awt.Dimension(64, 17));
 
         javax.swing.GroupLayout PanelMainLayout = new javax.swing.GroupLayout(PanelMain);
         PanelMain.setLayout(PanelMainLayout);
@@ -95,33 +136,33 @@ public class DangNhapView extends javax.swing.JFrame {
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(PanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PanelMainLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(82, 82, 82))
-                    .addGroup(PanelMainLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(PanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(PanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(PanelMainLayout.createSequentialGroup()
-                                .addGap(17, 17, 17)
+                                .addGap(48, 48, 48)
                                 .addComponent(btnDangNhap)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(btnThoat))
-                            .addGroup(PanelMainLayout.createSequentialGroup()
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelMainLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(PanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(PanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtTaiKhoan, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtMatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addContainerGap(16, Short.MAX_VALUE))))
+                                .addGroup(PanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtTaiKhoan, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)
+                                    .addComponent(txtMatKhau, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addContainerGap(29, Short.MAX_VALUE))
+                    .addGroup(PanelMainLayout.createSequentialGroup()
+                        .addGap(83, 83, 83)
+                        .addComponent(jLabel1)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         PanelMainLayout.setVerticalGroup(
             PanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelMainLayout.createSequentialGroup()
-                .addGap(31, 31, 31)
+                .addGap(28, 28, 28)
                 .addComponent(jLabel1)
-                .addGap(42, 42, 42)
+                .addGap(45, 45, 45)
                 .addGroup(PanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtTaiKhoan, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -129,14 +170,15 @@ public class DangNhapView extends javax.swing.JFrame {
                 .addGroup(PanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PanelMainLayout.createSequentialGroup()
                         .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(140, 140, 140))
-                    .addGroup(PanelMainLayout.createSequentialGroup()
-                        .addComponent(txtMatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(PanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnThoat, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnDangNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(14, 14, 14))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelMainLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(txtMatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(31, 31, 31)))
+                .addGroup(PanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnThoat, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnDangNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
             .addGroup(PanelMainLayout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
@@ -146,11 +188,11 @@ public class DangNhapView extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(PanelMain, javax.swing.GroupLayout.DEFAULT_SIZE, 541, Short.MAX_VALUE)
+            .addComponent(PanelMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(PanelMain, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(PanelMain, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -158,13 +200,38 @@ public class DangNhapView extends javax.swing.JFrame {
 
     private void btnThoatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnThoatMouseClicked
         // TODO add your handling code here:
-        System.exit(0);
+        int check = JOptionPane.showConfirmDialog(this, "Ban co chac chan muon Thoat ?");
+        if (check == 0) {
+            System.exit(0);
+        }
     }//GEN-LAST:event_btnThoatMouseClicked
-
+//    Connection con;
     private void btnDangNhapMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDangNhapMouseClicked
         // TODO add your handling code here:
+
+        if (checkEmpty()) {
+            String userName = txtTaiKhoan.getText();
+            String passWord = String.valueOf(txtMatKhau.getText());
+            if (service.isExistedUser(userName, passWord)) {
+                this.setVisible(false);
+                new AdamStoreView().setVisible(true);
+            } else {
+                JOptionPane.showMessageDialog(this, "UserName hoac Password sai !");
+            }
+        }
     }//GEN-LAST:event_btnDangNhapMouseClicked
 
+    private void txtTaiKhoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTaiKhoanActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTaiKhoanActionPerformed
+
+    private void btnDangNhapMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDangNhapMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnDangNhapMouseEntered
+
+    private void btnDangNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangNhapActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnDangNhapActionPerformed
     /**
      * @param args the command line arguments
      */
@@ -208,7 +275,9 @@ public class DangNhapView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JTextField txtMatKhau;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTree jTree1;
+    private javax.swing.JPasswordField txtMatKhau;
     private javax.swing.JTextField txtTaiKhoan;
     // End of variables declaration//GEN-END:variables
 }
