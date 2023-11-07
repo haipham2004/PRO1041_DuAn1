@@ -10,7 +10,7 @@ import java.util.Date;
  *
  * @author Admin BVCN88 02
  */
-public class Eventa {
+public class KhuyenMai {
    private String maEventa;
    private String tenEvent;
    private String hinhThuc;
@@ -20,10 +20,10 @@ public class Eventa {
    private String moTa;
    private String trangThai;
 
-    public Eventa() {
+    public KhuyenMai() {
     }
 
-    public Eventa(String maEventa, String tenEvent, String hinhThuc, String mucGiamGia, Date thoiGianBatDau, Date thoiGianKetThuc, String moTa, String trangThai) {
+    public KhuyenMai(String maEventa, String tenEvent, String hinhThuc, String mucGiamGia, Date thoiGianBatDau, Date thoiGianKetThuc, String moTa, String trangThai) {
         this.maEventa = maEventa;
         this.tenEvent = tenEvent;
         this.hinhThuc = hinhThuc;

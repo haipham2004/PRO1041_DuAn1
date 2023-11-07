@@ -19,12 +19,12 @@ public class HoaDon {
     private double tongTien;
     private boolean trangThai;
     private String ghiChu;
-    private Voucher voucher;
+    private KhuyenMai voucher;
 
     public HoaDon() {
     }
 
-    public HoaDon(String maHoaDon, NhanVien nhanVien, KhachHang khachHang, HinhThucThanhToan hinhThucThanhToan, Date ngayTao, double tongTien, boolean trangThai, String ghiChu, Voucher voucher) {
+    public HoaDon(String maHoaDon, NhanVien nhanVien, KhachHang khachHang, HinhThucThanhToan hinhThucThanhToan, Date ngayTao, double tongTien, boolean trangThai, String ghiChu, KhuyenMai voucher) {
         this.maHoaDon = maHoaDon;
         this.nhanVien = nhanVien;
         this.khachHang = khachHang;
@@ -100,11 +100,11 @@ public class HoaDon {
         this.ghiChu = ghiChu;
     }
 
-    public Voucher getVoucher() {
+    public KhuyenMai getVoucher() {
         return voucher;
     }
 
-    public void setVoucher(Voucher voucher) {
+    public void setVoucher(KhuyenMai voucher) {
         this.voucher = voucher;
     }
     
