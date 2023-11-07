@@ -25,7 +25,7 @@ public class DoiMKRepository {
         try {
             conn = DBConnect.getConnection();
             pst = conn.prepareStatement(sql);
-
+            return pst.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
             return 0;
