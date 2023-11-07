@@ -484,6 +484,11 @@ public class itf_NhanVien extends javax.swing.JInternalFrame {
         jPanel10.setBorder(javax.swing.BorderFactory.createTitledBorder("Tìm kiếm"));
 
         btnTimNV.setText("Reset");
+        btnTimNV.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTimNVActionPerformed(evt);
+            }
+        });
 
         cboTimKiemNV.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mã NV", "Họ tên", "SĐT", "CCCD" }));
 
@@ -747,6 +752,10 @@ public class itf_NhanVien extends javax.swing.JInternalFrame {
             }
         }
     }//GEN-LAST:event_cboDiaChiActionPerformed
+
+    private void btnTimNVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimNVActionPerformed
+        //Check
+    }//GEN-LAST:event_btnTimNVActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
