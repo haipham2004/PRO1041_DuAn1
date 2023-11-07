@@ -125,7 +125,7 @@ public class ChiTietSanPhamRepository {
     }
 
     public List<ChiTietSanPham> getList(String name) {
-        List<ChiTietSanPham> listChiTietSanPham2 = new ArrayList<>();
+        List<ChiTietSanPham> listChiTietSanPham3 = new ArrayList<>();
         try {
             conn = DBConnect.getConnection();
             sql = "SELECT CTSP.MaCTSP,CTSP.MaSanPham,SP.TenSanPham,MS.MaMauSac,MS.TenMauSac,CL.MaChatLieu,CL.TenChatLieu,\n"
@@ -136,7 +136,6 @@ public class ChiTietSanPhamRepository {
                     + "INNER JOIN SanPham SP ON CTSP.MaSanPham=SP.MaSanPham where SP.TenSanPham like ?";
             pst = conn.prepareStatement(sql);
             pst.setObject(1, name);
-
             rs = pst.executeQuery();
             while (rs.next()) {
                 SanPham sp = new SanPham(rs.getString(2), rs.getString(3));
@@ -145,13 +144,13 @@ public class ChiTietSanPhamRepository {
                 KichThuoc kt = new KichThuoc(rs.getString(8), rs.getString(9));
                 ChiTietSanPham ctsp = new ChiTietSanPham(rs.getString(1), sp,
                         ms, cl, kt, rs.getInt(10), rs.getDouble(11), rs.getBoolean(12));
-                listChiTietSanPham2.add(ctsp);
+                listChiTietSanPham3.add(ctsp);
             }
         } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
-        return listChiTietSanPham2;
+        return listChiTietSanPham3;
     }
 
     public List<ChiTietSanPham> getListGia(double giaMin, double giaMax) {
