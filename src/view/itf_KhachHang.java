@@ -20,7 +20,7 @@ public class itf_KhachHang extends javax.swing.JInternalFrame {
         this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
         BasicInternalFrameUI uI = (BasicInternalFrameUI) this.getUI();
         uI.setNorthPane(null);
-        this.setSize(950,655);
+        this.setSize(1300, 755);
     }
 
     /**
