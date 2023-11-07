@@ -73,7 +73,6 @@ CREATE TABLE [HoaDon] (
   [MaHTTT] varchar(10)not null,
   CONSTRAINT FK_HD_TT foreign key(MaHTTT) references HinhThucThanhToan(MaHTTT),
   [NgayTao] datetime,
-  [TongTien] Money,
   [TrangThai] bit,
   [GhiChu] nvarchar(100),
   [MaVoucher] varchar(10) not null,
@@ -103,6 +102,7 @@ CREATE TABLE [SanPham] (
   [TrangThai] bit,
   [MaLSP] varchar(10) not null,
   CONSTRAINT FK_SP_LSP foreign key(MaLSP) references LoaiSanPham(MaLSP),
+  [XuatXu] nvarchar(50),
   PRIMARY KEY ([MaSanPham])
 );
 
@@ -139,6 +139,7 @@ CREATE TABLE [ChiTietSanPham] (
    CONSTRAINT FK_CTSP_KT foreign key(MaKichThuoc) references KichThuoc(MaKichThuoc),
   [SoLuong] int,
   [Gia] money,
+  [TongTien] Money,
   [TrangThai] bit,
   PRIMARY KEY ([MaCTSP])
 );
@@ -159,7 +160,4 @@ CREATE TABLE [HoaDonChiTiet] (
   PRIMARY KEY ([MaHoaDonChiTiet])
 );
 
-ALTER TABLE SanPham
-ADD  XuatXU NVARCHAR(50)
-UPDATE SanPham set XuatXU=N'Quảng Châu' where MaSanPham='SP06'
-
+--Update:2023-11-07--
