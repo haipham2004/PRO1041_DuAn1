@@ -22,18 +22,18 @@ INSERT INTO LoaiSanPham VALUES
 ('LSP04',N'Áo polo Nam',0,N'Hàng đẹp'),
 ('LSP05',N'Áo jeans Nam',1,N'Hàng đẹp')
 INSERT INTO SanPham VALUES
-('SP01',N'OLD NAVY',1,'LSP05'),
-('SP02',N'GAP',1,'LSP05'),
-('SP03',N'LEVI',1,'LSP05'),
-('SP04',N'Basic Tee',1,'LSP01'),
-('SP05',N'Graphic Tee',1,'LSP01'),
-('SP06',N'Longline Tee',1,'LSP01'),
-('SP07',N'Flannel Shirt',1,'LSP03'),
-('SP08',N'inen Shirt',1,'LSP03'),
-('SP09',N'Western Shirt',1,'LSP03'),
-('SP10',N'Denim Jacket',1,'LSP02'),
-('SP11',N'Down Jacket',1,'LSP02'),
-('SP12',N'Pea Coat ',1,'LSP02')
+('SP01',N'OLD NAVY',1,'LSP05',N'Việt Nam'),
+('SP02',N'GAP',1,'LSP05',N'Việt Nam'),
+('SP03',N'LEVI',1,'LSP05',N'Việt Nam'),
+('SP04',N'Basic Tee',1,'LSP01',N'Việt Nam'),
+('SP05',N'Graphic Tee',1,'LSP01',N'Việt Nam'),
+('SP06',N'Longline Tee',1,'LSP01',N'Việt Nam'),
+('SP07',N'Flannel Shirt',1,'LSP03',N'Việt Nam'),
+('SP08',N'inen Shirt',1,'LSP03',N'Việt Nam'),
+('SP09',N'Western Shirt',1,'LSP03',N'Việt Nam'),
+('SP10',N'Denim Jacket',1,'LSP02',N'Việt Nam'),
+('SP11',N'Down Jacket',1,'LSP02',N'Việt Nam'),
+('SP12',N'Pea Coat ',1,'LSP02',N'Việt Nam')
 INSERT INTO MauSac VALUES
 ('MS01',N'Đỏ',1),
 ('MS02',N'Đen',1),
@@ -62,3 +62,5 @@ INSERT INTO ChiTietSanPham VALUES
 ('CTSP03','SP06','MS02','CL03','KT02',4,297000,1)
 SELECT*FROM KhachHang
 DELETE FROM KhachHang
+
+SELECT*FROM NhanVien

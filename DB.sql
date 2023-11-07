@@ -159,10 +159,7 @@ CREATE TABLE [HoaDonChiTiet] (
   PRIMARY KEY ([MaHoaDonChiTiet])
 );
 
---ALTER TABLE SanPham--
---ADD  XuatXU NVARCHAR(50)--
---UPDATE SanPham set XuatXU=N'Quảng Châu' where MaSanPham='SP06'--
-
-
-
+ALTER TABLE SanPham
+ADD  XuatXU NVARCHAR(50)
+UPDATE SanPham set XuatXU=N'Quảng Châu' where MaSanPham='SP06'
 
