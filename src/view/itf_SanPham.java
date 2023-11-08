@@ -989,6 +989,11 @@ public class itf_SanPham extends javax.swing.JInternalFrame {
                 btnSearchGiaActionPerformed(evt);
             }
         });
+        btnSearchGia.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                btnSearchGiaKeyReleased(evt);
+            }
+        });
 
         jLabel8.setText("VND");
 
@@ -2062,6 +2067,170 @@ public class itf_SanPham extends javax.swing.JInternalFrame {
             loadPageSP();
         }
     }//GEN-LAST:event_txtTimKiemKeyReleased
+
+
+    private void btnDau1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDau1ActionPerformed
+        // TODO add your handling code here:
+        trangSP = 1;
+        fillTableSamPham(serviceSP.listPageSP(trangSP));
+        lbSoTrang.setText(trangSP + " of " + soTrangSP);
+
+    }//GEN-LAST:event_btnDau1ActionPerformed
+
+    private void btnCuoi1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCuoi1ActionPerformed
+        // TODO add your handling code here:
+        trangSP = soTrangSP;
+        fillTableSamPham(serviceSP.listPageSP(trangSP));
+        lbSoTrang.setText(trangSP + " of " + soTrangSP);
+    }//GEN-LAST:event_btnCuoi1ActionPerformed
+
+    private void btnLui1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLui1ActionPerformed
+        // TODO add your handling code here:
+        if (trangSP > 1) {
+            trangSP--;
+            fillTableSamPham(serviceSP.listPageSP(trangSP));
+            lbSoTrang.setText(trangSP + " of " + soTrangSP);
+        }
+
+    }//GEN-LAST:event_btnLui1ActionPerformed
+
+    private void btnTien1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTien1ActionPerformed
+        // TODO add your handling code here:
+        if (trangSP < soTrangSP) {
+            trangSP++;
+            fillTableSamPham(serviceSP.listPageSP(trangSP));
+            lbSoTrang.setText(trangSP + " of " + soTrangSP);
+        }
+    }//GEN-LAST:event_btnTien1ActionPerformed
+
+    private void btnDau2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDau2ActionPerformed
+        // TODO add your handling code here:
+        trangCTSP = 1;
+        fillTableChiTietSanPham(serviceCTSP.listPageCTSP(trangCTSP));
+        lbSoTrang2.setText(trangCTSP + " of " + soTrangCTSP);
+    }//GEN-LAST:event_btnDau2ActionPerformed
+
+    private void btnCuoi2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCuoi2ActionPerformed
+        // TODO add your handling code here:
+        trangCTSP = soTrangCTSP;
+        fillTableChiTietSanPham(serviceCTSP.listPageCTSP(trangCTSP));
+        lbSoTrang2.setText(trangCTSP + " of " + soTrangCTSP);
+    }//GEN-LAST:event_btnCuoi2ActionPerformed
+
+    private void btnLui2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLui2ActionPerformed
+        // TODO add your handling code here:
+        if (trangCTSP > 1) {
+            trangCTSP--;
+            fillTableChiTietSanPham(serviceCTSP.listPageCTSP(trangCTSP));
+            lbSoTrang2.setText(trangCTSP + " of " + soTrangCTSP);
+        }
+    }//GEN-LAST:event_btnLui2ActionPerformed
+
+    private void btnTien2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTien2ActionPerformed
+        // TODO add your handling code here:
+        if (trangCTSP < soTrangCTSP) {
+            trangCTSP++;
+            fillTableChiTietSanPham(serviceCTSP.listPageCTSP(trangCTSP));
+            lbSoTrang2.setText(trangCTSP + " of " + soTrangCTSP);
+        }
+    }//GEN-LAST:event_btnTien2ActionPerformed
+
+    private void btnCuoi3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCuoi3ActionPerformed
+        // TODO add your handling code here:
+        if (rdMauSac.isSelected()) {
+            trangMS = soTrangMS;
+            fillMauSac(serviceMS.listPageMS(trangMS));
+            lbSoTrang3.setText(trangMS + " of " + soTrangMS);
+        } else if (rdChatLieu.isSelected()) {
+            trangCL = soTrangCL;
+            fillChatLieu(serviceCl.listPageCL(trangCL));
+            lbSoTrang3.setText(trangCL + " of " + soTrangCL);
+        } else {
+            trangKT = soTrangKT;
+            fillKichThuoc(serviceKT.listPageKT(trangKT));
+            lbSoTrang3.setText(trangKT + " of " + soTrangKT);
+        }
+    }//GEN-LAST:event_btnCuoi3ActionPerformed
+
+    private void btnDau3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDau3ActionPerformed
+        // TODO add your handling code here:
+        if (rdMauSac.isSelected()) {
+            trangMS = 1;
+            fillMauSac(serviceMS.listPageMS(trangMS));
+            lbSoTrang3.setText(trangMS + " of " + soTrangMS);
+        } else if (rdChatLieu.isSelected()) {
+            trangCL = 1;
+            fillChatLieu(serviceCl.listPageCL(trangCL));
+            lbSoTrang3.setText(trangCL + " of " + soTrangCL);
+        } else {
+            trangKT = 1;
+            fillKichThuoc(serviceKT.listPageKT(trangKT));
+            lbSoTrang3.setText(trangKT + " of " + soTrangKT);
+        }
+    }//GEN-LAST:event_btnDau3ActionPerformed
+
+    private void btnTien3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTien3ActionPerformed
+        // TODO add your handling code here:
+        if (rdMauSac.isSelected()) {
+            if (trangMS < soTrangMS) {
+                trangMS++;
+                fillMauSac(serviceMS.listPageMS(trangMS));
+                lbSoTrang3.setText(trangMS + " of " + soTrangMS);
+            }
+        } else if (rdChatLieu.isSelected()) {
+            if (trangCL < soTrangCL) {
+                trangCL++;
+                fillChatLieu(serviceCl.listPageCL(trangCL));
+                lbSoTrang3.setText(trangCL + " of " + soTrangCL);
+            }
+        } else {
+            if (trangKT < soTrangKT) {
+                trangKT++;
+                fillKichThuoc(serviceKT.listPageKT(trangKT));
+                lbSoTrang3.setText(trangKT + " of " + soTrangKT);
+            }
+        }
+
+    }//GEN-LAST:event_btnTien3ActionPerformed
+
+    private void btnLui3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLui3ActionPerformed
+        // TODO add your handling code here:
+        if (rdMauSac.isSelected()) {
+            if (trangMS > 1) {
+                trangMS--;
+                fillMauSac(serviceMS.listPageMS(trangMS));
+                lbSoTrang3.setText(trangMS + " of " + soTrangMS);
+            }
+        } else if (rdChatLieu.isSelected()) {
+            if (trangCL > 1) {
+                trangCL--;
+                fillChatLieu(serviceCl.listPageCL(trangCL));
+                lbSoTrang3.setText(trangCL + " of " + soTrangCL);
+            }
+        } else {
+            if (trangKT > 1) {
+                trangKT--;
+                fillChatLieu(serviceCl.listPageCL(trangCL));
+                lbSoTrang3.setText(trangCL + " of " + soTrangCL);
+            }
+        }
+
+    }//GEN-LAST:event_btnLui3ActionPerformed
+
+    private void txtTimKiemKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKiemKeyReleased
+        // TODO add your handling code here:
+        if (!txtTimKiem.getText().equals("")) {
+            String name = txtTimKiem.getText();
+            fillTableSamPham(serviceSP.getList(name));
+        } else {
+            loadPageSP();
+        }
+    }//GEN-LAST:event_txtTimKiemKeyReleased
+
+    private void btnSearchGiaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnSearchGiaKeyReleased
+        // TODO add your handling code here:  
+    }//GEN-LAST:event_btnSearchGiaKeyReleased
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

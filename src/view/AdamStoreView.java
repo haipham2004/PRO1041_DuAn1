@@ -194,6 +194,7 @@ public class AdamStoreView extends javax.swing.JFrame {
         );
 
 
+
         pnlThongKe.setBackground(new java.awt.Color(0, 153, 153));
 
         pnlThongKe.setBackground(new java.awt.Color(51, 204, 255));
