@@ -4,27 +4,21 @@
  */
 package view;
 
-import java.awt.CardLayout;
 import java.awt.Color;
-import java.awt.Image;
-import java.io.File;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import javax.swing.ComboBoxModel;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.ImageIcon;
-import javax.swing.JFileChooser;
+import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
+import javax.swing.JPanel;
+import javax.swing.border.Border;
 
 /**
  *
  * @author Admin
  */
 public class AdamStoreView extends javax.swing.JFrame {
+
+    Color defaultColor = new Color(51, 204, 255);
+    Color selectedColor = new Color(204, 204, 204);
+    Color enterColor = new Color(228, 227, 227);
 
     /**
      * Creates new form AdamStoreView
@@ -38,6 +32,12 @@ public class AdamStoreView extends javax.swing.JFrame {
         itf_ThongKe thongKe = new itf_ThongKe();
         jdpMain.removeAll();
         jdpMain.add(thongKe).setVisible(true);
+
+    }
+
+    public void setBorder(JPanel jpanel) {
+        Border border = BorderFactory.createEmptyBorder(0, 0, 0, 0);
+        jpanel.setBorder(border);
     }
 
     /**
@@ -57,6 +57,7 @@ public class AdamStoreView extends javax.swing.JFrame {
         pnlTitle = new javax.swing.JPanel();
         btnExit = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
         pnlMenu = new javax.swing.JPanel();
         pnlSanPham = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -103,7 +104,7 @@ public class AdamStoreView extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlTitleLayout.createSequentialGroup()
                 .addGap(60, 60, 60)
                 .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 903, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1219, Short.MAX_VALUE)
                 .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -114,7 +115,7 @@ public class AdamStoreView extends javax.swing.JFrame {
                 .addGroup(pnlTitleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlTitleLayout.createSequentialGroup()
                         .addComponent(btnExit)
-                        .addGap(0, 13, Short.MAX_VALUE))
+                        .addGap(0, 22, Short.MAX_VALUE))
                     .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
@@ -124,6 +125,12 @@ public class AdamStoreView extends javax.swing.JFrame {
         pnlSanPham.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 pnlSanPhamMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                pnlSanPhamMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                pnlSanPhamMouseExited(evt);
             }
         });
 
@@ -138,7 +145,7 @@ public class AdamStoreView extends javax.swing.JFrame {
         pnlSanPhamLayout.setHorizontalGroup(
             pnlSanPhamLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlSanPhamLayout.createSequentialGroup()
-                .addContainerGap(45, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -154,6 +161,12 @@ public class AdamStoreView extends javax.swing.JFrame {
         pnlNhanVien.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 pnlNhanVienMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                pnlNhanVienMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                pnlNhanVienMouseExited(evt);
             }
         });
 
@@ -180,13 +193,16 @@ public class AdamStoreView extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        pnlThongKe.setBackground(new java.awt.Color(204, 204, 204));
+        pnlThongKe.setBackground(new java.awt.Color(51, 204, 255));
         pnlThongKe.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 pnlThongKeMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 pnlThongKeMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                pnlThongKeMouseExited(evt);
             }
         });
 
@@ -201,7 +217,7 @@ public class AdamStoreView extends javax.swing.JFrame {
         pnlThongKeLayout.setHorizontalGroup(
             pnlThongKeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlThongKeLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(39, Short.MAX_VALUE)
                 .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -217,6 +233,12 @@ public class AdamStoreView extends javax.swing.JFrame {
         pnlHoaDon.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 pnlHoaDonMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                pnlHoaDonMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                pnlHoaDonMouseExited(evt);
             }
         });
 
@@ -248,6 +270,12 @@ public class AdamStoreView extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 pnlLichSuMouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                pnlLichSuMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                pnlLichSuMouseExited(evt);
+            }
         });
 
         jLabel5.setBackground(new java.awt.Color(51, 204, 255));
@@ -277,6 +305,12 @@ public class AdamStoreView extends javax.swing.JFrame {
         pnlKhuyenMai.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 pnlKhuyenMaiMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                pnlKhuyenMaiMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                pnlKhuyenMaiMouseExited(evt);
             }
         });
 
@@ -308,6 +342,12 @@ public class AdamStoreView extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 pnlKhachHangMouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                pnlKhachHangMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                pnlKhachHangMouseExited(evt);
+            }
         });
 
         jLabel8.setBackground(new java.awt.Color(51, 204, 255));
@@ -320,27 +360,32 @@ public class AdamStoreView extends javax.swing.JFrame {
         pnlKhachHang.setLayout(pnlKhachHangLayout);
         pnlKhachHangLayout.setHorizontalGroup(
             pnlKhachHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 205, Short.MAX_VALUE)
             .addGroup(pnlKhachHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlKhachHangLayout.createSequentialGroup()
-                    .addContainerGap(45, Short.MAX_VALUE)
+                    .addContainerGap(39, Short.MAX_VALUE)
                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addContainerGap()))
         );
         pnlKhachHangLayout.setVerticalGroup(
             pnlKhachHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 68, Short.MAX_VALUE)
+            .addGap(0, 56, Short.MAX_VALUE)
             .addGroup(pnlKhachHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(pnlKhachHangLayout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
-                    .addContainerGap()))
+                    .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)))
         );
 
         pnlDoiMatKhau.setBackground(new java.awt.Color(51, 204, 255));
         pnlDoiMatKhau.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 pnlDoiMatKhauMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                pnlDoiMatKhauMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                pnlDoiMatKhauMouseExited(evt);
             }
         });
 
@@ -357,7 +402,7 @@ public class AdamStoreView extends javax.swing.JFrame {
             .addGap(0, 0, Short.MAX_VALUE)
             .addGroup(pnlDoiMatKhauLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlDoiMatKhauLayout.createSequentialGroup()
-                    .addContainerGap(45, Short.MAX_VALUE)
+                    .addContainerGap(39, Short.MAX_VALUE)
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addContainerGap()))
         );
@@ -376,6 +421,12 @@ public class AdamStoreView extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 pnlDangXuatMouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                pnlDangXuatMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                pnlDangXuatMouseExited(evt);
+            }
         });
 
         jLabel9.setBackground(new java.awt.Color(51, 204, 255));
@@ -391,7 +442,7 @@ public class AdamStoreView extends javax.swing.JFrame {
             .addGap(0, 0, Short.MAX_VALUE)
             .addGroup(pnlDangXuatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlDangXuatLayout.createSequentialGroup()
-                    .addContainerGap(45, Short.MAX_VALUE)
+                    .addContainerGap(39, Short.MAX_VALUE)
                     .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addContainerGap()))
         );
@@ -409,15 +460,15 @@ public class AdamStoreView extends javax.swing.JFrame {
         pnlMenu.setLayout(pnlMenuLayout);
         pnlMenuLayout.setHorizontalGroup(
             pnlMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlSanPham, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(pnlNhanVien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(pnlHoaDon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(pnlKhachHang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(pnlLichSu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(pnlKhuyenMai, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(pnlDoiMatKhau, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(pnlDangXuat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(pnlThongKe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pnlNhanVien, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pnlSanPham, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pnlHoaDon, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pnlKhachHang, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pnlLichSu, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pnlKhuyenMai, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pnlDoiMatKhau, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pnlDangXuat, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         pnlMenuLayout.setVerticalGroup(
             pnlMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -439,18 +490,38 @@ public class AdamStoreView extends javax.swing.JFrame {
                 .addComponent(pnlDoiMatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlDangXuat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(143, Short.MAX_VALUE))
+                .addContainerGap(231, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jdpMainLayout = new javax.swing.GroupLayout(jdpMain);
         jdpMain.setLayout(jdpMainLayout);
         jdpMainLayout.setHorizontalGroup(
             jdpMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 1295, Short.MAX_VALUE)
         );
         jdpMainLayout.setVerticalGroup(
             jdpMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 791, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(205, Short.MAX_VALUE)
+                .addComponent(jdpMain, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28))
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addComponent(pnlMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 1323, Short.MAX_VALUE)))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jdpMain, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(pnlMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -458,34 +529,34 @@ public class AdamStoreView extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(pnlMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jdpMain))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(pnlTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 1182, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(pnlTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 1498, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addComponent(pnlTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jdpMain)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(pnlMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(pnlTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 792, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGap(54, 54, 54)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1498, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -493,6 +564,7 @@ public class AdamStoreView extends javax.swing.JFrame {
 
     private void pnlDangXuatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlDangXuatMouseClicked
         // TODO add your handling code here:
+        onClickMenu(pnlDangXuat);
         DangNhapView dangNhapView = new DangNhapView();
         int check = JOptionPane.showConfirmDialog(this, "Xác nhận đăng xuất?");
         if (check == 0) {
@@ -503,8 +575,7 @@ public class AdamStoreView extends javax.swing.JFrame {
 
     private void pnlDoiMatKhauMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlDoiMatKhauMouseClicked
         // TODO add your handling code here:
-        resetBackGroundColor();
-        pnlDoiMatKhau.setBackground(new Color(204, 204, 204));
+        onClickMenu(pnlDoiMatKhau);
         itf_DoiMatKhau doiMatKhau = new itf_DoiMatKhau();
         jdpMain.removeAll();
         jdpMain.add(doiMatKhau).setVisible(true);
@@ -512,8 +583,7 @@ public class AdamStoreView extends javax.swing.JFrame {
 
     private void pnlKhachHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlKhachHangMouseClicked
         // TODO add your handling code here:
-        resetBackGroundColor();
-        pnlKhachHang.setBackground(new Color(204, 204, 204));
+        onClickMenu(pnlKhachHang);
         itf_KhachHang khachHang = new itf_KhachHang();
         jdpMain.removeAll();
         jdpMain.add(khachHang).setVisible(true);
@@ -521,8 +591,7 @@ public class AdamStoreView extends javax.swing.JFrame {
 
     private void pnlKhuyenMaiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlKhuyenMaiMouseClicked
         // TODO add your handling code here:
-        resetBackGroundColor();
-        pnlKhuyenMai.setBackground(new Color(204, 204, 204));
+        onClickMenu(pnlKhuyenMai);
         itf_KhuyenMai khuyenMai = new itf_KhuyenMai();
         jdpMain.removeAll();
         jdpMain.add(khuyenMai).setVisible(true);
@@ -530,8 +599,7 @@ public class AdamStoreView extends javax.swing.JFrame {
 
     private void pnlLichSuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlLichSuMouseClicked
         // TODO add your handling code here:
-        resetBackGroundColor();
-        pnlLichSu.setBackground(new Color(204, 204, 204));
+        onClickMenu(pnlLichSu);
         itf_LichSu lichSu = new itf_LichSu();
         jdpMain.removeAll();
         jdpMain.add(lichSu).setVisible(true);
@@ -539,8 +607,7 @@ public class AdamStoreView extends javax.swing.JFrame {
 
     private void pnlHoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlHoaDonMouseClicked
         // TODO add your handling code here:
-        resetBackGroundColor();
-        pnlHoaDon.setBackground(new Color(204, 204, 204));
+        onClickMenu(pnlHoaDon);
         itf_HoaDon hoaDon = new itf_HoaDon();
         jdpMain.removeAll();
         jdpMain.add(hoaDon).setVisible(true);
@@ -548,12 +615,12 @@ public class AdamStoreView extends javax.swing.JFrame {
 
     private void pnlThongKeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlThongKeMouseEntered
         // TODO add your handling code here:
+        enterMenu(pnlThongKe);
     }//GEN-LAST:event_pnlThongKeMouseEntered
 
     private void pnlThongKeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlThongKeMouseClicked
         // TODO add your handling code here:
-        resetBackGroundColor();
-        pnlThongKe.setBackground(new Color(204, 204, 204));
+        onClickMenu(pnlThongKe);
         itf_ThongKe thongKe = new itf_ThongKe();
         jdpMain.removeAll();
         jdpMain.add(thongKe).setVisible(true);
@@ -561,8 +628,7 @@ public class AdamStoreView extends javax.swing.JFrame {
 
     private void pnlNhanVienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlNhanVienMouseClicked
         // TODO add your handling code here:
-        resetBackGroundColor();
-        pnlNhanVien.setBackground(new Color(204, 204, 204));
+        onClickMenu(pnlNhanVien);
         itf_NhanVien nhanVien = new itf_NhanVien();
         jdpMain.removeAll();
         jdpMain.add(nhanVien).setVisible(true);
@@ -570,8 +636,7 @@ public class AdamStoreView extends javax.swing.JFrame {
 
     private void pnlSanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlSanPhamMouseClicked
         // TODO add your handling code here:
-        resetBackGroundColor();
-        pnlSanPham.setBackground(new Color(204, 204, 204));
+        onClickMenu(pnlSanPham);
         itf_SanPham sanPham = new itf_SanPham();
         jdpMain.removeAll();
         jdpMain.add(sanPham).setVisible(true);
@@ -581,6 +646,91 @@ public class AdamStoreView extends javax.swing.JFrame {
         // TODO add your handling code here:
         System.exit(0);
     }//GEN-LAST:event_btnExitMouseClicked
+
+    private void pnlSanPhamMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlSanPhamMouseEntered
+        // TODO add your handling code here:
+        enterMenu(pnlSanPham);
+    }//GEN-LAST:event_pnlSanPhamMouseEntered
+
+    private void pnlNhanVienMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlNhanVienMouseEntered
+        // TODO add your handling code here:
+        enterMenu(pnlNhanVien);
+    }//GEN-LAST:event_pnlNhanVienMouseEntered
+
+    private void pnlHoaDonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlHoaDonMouseEntered
+        // TODO add your handling code here:
+        enterMenu(pnlHoaDon);
+    }//GEN-LAST:event_pnlHoaDonMouseEntered
+
+    private void pnlKhachHangMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlKhachHangMouseEntered
+        // TODO add your handling code here:
+        enterMenu(pnlKhachHang);
+    }//GEN-LAST:event_pnlKhachHangMouseEntered
+
+    private void pnlLichSuMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlLichSuMouseEntered
+        // TODO add your handling code here:
+        enterMenu(pnlLichSu);
+    }//GEN-LAST:event_pnlLichSuMouseEntered
+
+    private void pnlKhuyenMaiMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlKhuyenMaiMouseEntered
+        // TODO add your handling code here:
+        enterMenu(pnlKhuyenMai);
+    }//GEN-LAST:event_pnlKhuyenMaiMouseEntered
+
+    private void pnlDoiMatKhauMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlDoiMatKhauMouseEntered
+        // TODO add your handling code here:
+        enterMenu(pnlDoiMatKhau);
+    }//GEN-LAST:event_pnlDoiMatKhauMouseEntered
+
+    private void pnlDangXuatMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlDangXuatMouseEntered
+        // TODO add your handling code here:
+        enterMenu(pnlDangXuat);
+    }//GEN-LAST:event_pnlDangXuatMouseEntered
+
+    private void pnlThongKeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlThongKeMouseExited
+        // TODO add your handling code here:
+        exitMenu(pnlThongKe);
+    }//GEN-LAST:event_pnlThongKeMouseExited
+
+    private void pnlSanPhamMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlSanPhamMouseExited
+        // TODO add your handling code here:
+        exitMenu(pnlSanPham);
+    }//GEN-LAST:event_pnlSanPhamMouseExited
+
+    private void pnlNhanVienMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlNhanVienMouseExited
+        // TODO add your handling code here:
+        exitMenu(pnlNhanVien);
+    }//GEN-LAST:event_pnlNhanVienMouseExited
+
+    private void pnlHoaDonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlHoaDonMouseExited
+        // TODO add your handling code here:
+        exitMenu(pnlHoaDon);
+    }//GEN-LAST:event_pnlHoaDonMouseExited
+
+    private void pnlKhachHangMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlKhachHangMouseExited
+        // TODO add your handling code here:
+        exitMenu(pnlKhachHang);
+    }//GEN-LAST:event_pnlKhachHangMouseExited
+
+    private void pnlLichSuMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlLichSuMouseExited
+        // TODO add your handling code here:
+        exitMenu(pnlLichSu);
+    }//GEN-LAST:event_pnlLichSuMouseExited
+
+    private void pnlKhuyenMaiMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlKhuyenMaiMouseExited
+        // TODO add your handling code here:
+        exitMenu(pnlKhuyenMai);
+    }//GEN-LAST:event_pnlKhuyenMaiMouseExited
+
+    private void pnlDoiMatKhauMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlDoiMatKhauMouseExited
+        // TODO add your handling code here:
+        exitMenu(pnlDoiMatKhau);
+    }//GEN-LAST:event_pnlDoiMatKhauMouseExited
+
+    private void pnlDangXuatMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlDangXuatMouseExited
+        // TODO add your handling code here:
+        exitMenu(pnlDangXuat);
+    }//GEN-LAST:event_pnlDangXuatMouseExited
 
     /**
      * @param args the command line arguments
@@ -617,15 +767,29 @@ public class AdamStoreView extends javax.swing.JFrame {
         });
     }
 
-    public void resetBackGroundColor() {
-        pnlThongKe.setBackground(new Color(51, 204, 255));
-        pnlHoaDon.setBackground(new Color(51, 204, 255));
-        pnlSanPham.setBackground(new Color(51, 204, 255));
-        pnlDoiMatKhau.setBackground(new Color(51, 204, 255));
-        pnlKhachHang.setBackground(new Color(51, 204, 255));
-        pnlKhuyenMai.setBackground(new Color(51, 204, 255));
-        pnlLichSu.setBackground(new Color(51, 204, 255));
-        pnlNhanVien.setBackground(new Color(51, 204, 255));
+    public void onClickMenu(JPanel panel) {
+        pnlThongKe.setBackground(defaultColor);
+        pnlSanPham.setBackground(defaultColor);
+        pnlKhachHang.setBackground(defaultColor);
+        pnlDangXuat.setBackground(defaultColor);
+        pnlHoaDon.setBackground(defaultColor);
+        pnlDoiMatKhau.setBackground(defaultColor);
+        pnlKhuyenMai.setBackground(defaultColor);
+        pnlLichSu.setBackground(defaultColor);
+        pnlNhanVien.setBackground(defaultColor);
+        panel.setBackground(selectedColor);
+    }
+
+    public void enterMenu(JPanel panel) {
+        if (panel.getBackground().equals(defaultColor)) {
+            panel.setBackground(enterColor);
+        }
+    }
+
+    public void exitMenu(JPanel panel) {
+        if (panel.getBackground().equals(enterColor)) {
+            panel.setBackground(defaultColor);
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -645,6 +809,7 @@ public class AdamStoreView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JDesktopPane jdpMain;
     private javax.swing.JPanel pnlDangXuat;
     private javax.swing.JPanel pnlDoiMatKhau;
