@@ -18,6 +18,7 @@ import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.RowSorter;
 import javax.swing.SortOrder;
@@ -103,13 +104,50 @@ public class itf_NhanVien extends javax.swing.JInternalFrame {
             }
 
             public void txtNVChange() {
+                cboDiaChi.setSelectedIndex(-1);
+                cboGioiTinh.setSelectedIndex(-1);
                 String hai = txtTimNV.getText();
                 String mot = getCboTimKiem();
                 fillTableNV(serviceNV.getList3(mot, hai));
             }
-
         };
         txtTimNV.getDocument().addDocumentListener(dl);
+    }
+
+    public Boolean valid() {
+        String SDTVali = "^[0-9]{10}$";
+        String CCCDVali = "^[0-9]{12}$";
+        if (txtMaNV.getText().isBlank()) {
+            JOptionPane.showMessageDialog(this, "Mã NV trống");
+            return false;
+        }
+        if (txtMaTK.getText().isBlank()) {
+            JOptionPane.showMessageDialog(this, "Mã TK trống");
+            return false;
+        }
+        if (txtHoTen.getText().isBlank()) {
+            JOptionPane.showMessageDialog(this, "Họ tên trống");
+            return false;
+        }
+        if (txtDiaChi.getText().isBlank()) {
+            JOptionPane.showMessageDialog(this, "Địa chỉ trống");
+            return false;
+        }
+        if (txtSDT.getText().isBlank()) {
+            JOptionPane.showMessageDialog(this, "Số điện thoại trống");
+            return false;
+        } else if (!txtSDT.getText().trim().matches(SDTVali)) {
+            JOptionPane.showMessageDialog(this, "Định dạng số điện thoại");
+            return false;
+        }
+        if (txtCCCD.getText().isBlank()) {
+            JOptionPane.showMessageDialog(this, "Số căn cước nhân dân trống");
+            return false;
+        } else if (!txtCCCD.getText().trim().matches(CCCDVali)) {
+            JOptionPane.showMessageDialog(this, "Định dạng số căn cước nhân dân");
+            return false;
+        }
+        return true;
     }
 
     public void detailNhanVien(JTable table, int index, boolean dangLamViec) {
@@ -206,12 +244,29 @@ public class itf_NhanVien extends javax.swing.JInternalFrame {
 
     public void themNV() {
         NhanVien nv = this.getFormNV();
+        if (serviceNV.getOne(nv.getMaNhanVien()) == null) {
+            try {
+                serviceNV.them(nv);
+                fillTableNV(serviceNV.getAll());
+                loadCboDiaChi(serviceNV.getAll());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Trùng mã nhân viên");
+        }
+
+    }
+
+    public void sua(JTable tbl) {
+        String ma = tbl.getValueAt(index, 0).toString();
+        NhanVien nv = this.getFormNV();
         try {
-            serviceNV.them(nv);
+            serviceNV.sua(nv, ma);
             fillTableNV(serviceNV.getAll());
-            loadCboDiaChi(serviceNV.getAll());
+            JOptionPane.showMessageDialog(this, "Sửa thành công");
         } catch (Exception e) {
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Sửa thất bại công");
         }
     }
 
@@ -523,8 +578,18 @@ public class itf_NhanVien extends javax.swing.JInternalFrame {
         jPanel10.setBorder(javax.swing.BorderFactory.createTitledBorder("Tìm kiếm"));
 
         btnRSTimNV.setText("Reset");
+        btnRSTimNV.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRSTimNVActionPerformed(evt);
+            }
+        });
 
         cboTimKiemNV.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mã NV", "Họ tên", "SĐT", "CCCD" }));
+        cboTimKiemNV.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboTimKiemNVActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
@@ -681,7 +746,9 @@ public class itf_NhanVien extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnThemNVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemNVActionPerformed
-        this.themNV();
+        if (valid()) {
+            themNV();
+        }
     }//GEN-LAST:event_btnThemNVActionPerformed
 
     private void btnMoiNVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoiNVActionPerformed
@@ -737,23 +804,22 @@ public class itf_NhanVien extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_tblNV0MouseClicked
 
     private void btnSuaNVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaNVActionPerformed
-        index = tblNV0.getSelectedRow();
-        if (index != -1) {
-            String ma = tblNV0.getValueAt(index, 0).toString();
-            NhanVien nv = this.getFormNV();
-            serviceNV.sua(nv, ma);
-            fillTableNV(serviceNV.getAll());
-        } else {
-            index = tblNV1.getSelectedRow();
-            String ma = tblNV1.getValueAt(index, 0).toString();
-            NhanVien nv = this.getFormNV();
-            serviceNV.sua(nv, ma);
-            fillTableNV(serviceNV.getAll());
+        if (valid()) {
+            index = tblNV0.getSelectedRow();
+            if (index != -1) {
+                sua(tblNV0);
+            } else {
+                index = tblNV1.getSelectedRow();
+                sua(tblNV1);
+            }
         }
     }//GEN-LAST:event_btnSuaNVActionPerformed
 
     private void btnRSDiaChiNVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRSDiaChiNVActionPerformed
-        fillTableNV(serviceNV.getAll());
+//        fillTableNV(serviceNV.getAll());
+        if (cboDiaChi.getSelectedIndex() == -1 && cboGioiTinh.getSelectedIndex() == -1) {
+            return;
+        }
         cboDiaChi.setSelectedIndex(-1);
         cboGioiTinh.setSelectedIndex(-1);
     }//GEN-LAST:event_btnRSDiaChiNVActionPerformed
@@ -764,13 +830,11 @@ public class itf_NhanVien extends javax.swing.JInternalFrame {
         if (cboGioiTinh.getSelectedIndex() == -1) {
             fillTableNV(serviceNV.getAll());
             return;
-        } else if (cboGioiTinh.getSelectedIndex() == 0) {
-            mot = "1";
         } else {
-            mot = "0";
+            mot = cboGioiTinh.getSelectedIndex() == 0 ? "1" : "0";
         }
         if (cboDiaChi.getSelectedIndex() == -1) {
-            fillTableNV(serviceNV.getList3("GioiTinh",mot));
+            fillTableNV(serviceNV.getList3("GioiTinh", mot));
         } else {
             hai = cboDiaChi.getSelectedItem().toString();
             fillTableNV(serviceNV.getList2(mot, hai));
@@ -783,13 +847,21 @@ public class itf_NhanVien extends javax.swing.JInternalFrame {
         if (cboDiaChi.getSelectedIndex() != -1) {
             mot = cboDiaChi.getSelectedItem().toString();
             if (cboGioiTinh.getSelectedIndex() == -1) {
-                fillTableNV(serviceNV.getList3("DiaChi",mot));
+                fillTableNV(serviceNV.getList3("DiaChi", mot));
             } else {
                 hai = cboGioiTinh.getSelectedIndex() == 1 ? "0" : "1";
                 fillTableNV(serviceNV.getList2(hai, mot));
             }
         }
     }//GEN-LAST:event_cboDiaChiActionPerformed
+
+    private void btnRSTimNVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRSTimNVActionPerformed
+        txtTimNV.setText("");
+    }//GEN-LAST:event_btnRSTimNVActionPerformed
+
+    private void cboTimKiemNVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboTimKiemNVActionPerformed
+        txtTimNV.setText("");
+    }//GEN-LAST:event_cboTimKiemNVActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
