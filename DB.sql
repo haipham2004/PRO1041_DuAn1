@@ -1,5 +1,7 @@
 ﻿
+
 ----Update:2023-11-0--lúc 18g35p--
+
 CREATE DATABASE AdamStores
 GO
 USE AdamStores
