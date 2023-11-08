@@ -989,6 +989,11 @@ public class itf_SanPham extends javax.swing.JInternalFrame {
                 btnSearchGiaActionPerformed(evt);
             }
         });
+        btnSearchGia.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                btnSearchGiaKeyReleased(evt);
+            }
+        });
 
         jLabel8.setText("VND");
 
@@ -2062,6 +2067,10 @@ public class itf_SanPham extends javax.swing.JInternalFrame {
             loadPageSP();
         }
     }//GEN-LAST:event_txtTimKiemKeyReleased
+
+    private void btnSearchGiaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnSearchGiaKeyReleased
+        // TODO add your handling code here:  
+    }//GEN-LAST:event_btnSearchGiaKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
