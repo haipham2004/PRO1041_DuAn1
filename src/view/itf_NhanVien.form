@@ -526,9 +526,6 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Reset"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRSTimNVActionPerformed"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JComboBox" name="cboTimKiemNV">
               <Properties>
@@ -541,9 +538,6 @@
                   </StringArray>
                 </Property>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cboTimKiemNVActionPerformed"/>
-              </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
               </AuxValues>

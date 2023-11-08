@@ -39,7 +39,7 @@ public class NhanVienServiceImp implements AdamStore<NhanVien, String>{
 
     @Override
     public NhanVien getOne(String e) {
-        return repo.getOne(e);
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override

@@ -127,7 +127,7 @@ public class NhanVienRepository {
             conn = DBConnect.getConnection();
             sql = "select nv.MaNV,nv.MaTK,nv.HoTen,nv.GioiTinh,nv.DiaChi,nv.SoDienThoai"
                     + ",nv.CCCD,nv.NgayVaoLam,nv.TrangThai,nv.Anh,tk.UserName,tk.PassWord,tk.Role,tk.TrangThai \n"
-                    + "from NhanVien nv join TaiKhoan tk on tk.MaTK = nv.MaTK where " + mot + " like ? ";
+                    + "from NhanVien nv join TaiKhoan tk on tk.MaTK = nv.MaTK where " + mot +" like ? ";
             pst = conn.prepareStatement(sql);
             pst.setObject(1, "%" + hai + "%");
             rs = pst.executeQuery();
@@ -145,31 +145,5 @@ public class NhanVienRepository {
             return null;
         }
         return listNhanVien;
-    }
-
-    public NhanVien getOne(String ma) {
-        NhanVien nv = null;
-        listNhanVien.clear();
-        try {
-            conn = DBConnect.getConnection();
-            sql = "select nv.MaNV,nv.MaTK,nv.HoTen,nv.GioiTinh,nv.DiaChi,nv.SoDienThoai"
-                    + ",nv.CCCD,nv.NgayVaoLam,nv.TrangThai,nv.Anh,tk.UserName,tk.PassWord,tk.Role,tk.TrangThai \n"
-                    + "from NhanVien nv join TaiKhoan tk on tk.MaTK = nv.MaTK where MaNV = ?";
-            pst = conn.prepareStatement(sql);
-            pst.setObject(1, ma);
-            rs = pst.executeQuery();
-            while (rs.next()) {
-                TaiKhoan tk = new TaiKhoan(rs.getString(2), rs.getString(11),
-                        rs.getString(12), rs.getString(13), rs.getInt(14));
-                nv = new NhanVien(rs.getString(1), tk,
-                        rs.getString(3), rs.getBoolean(4), rs.getString(5),
-                        rs.getString(6), rs.getString(7), rs.getDate(8),
-                        rs.getBoolean(9), rs.getString(10));
-            }
-            return nv;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
     }
 }
