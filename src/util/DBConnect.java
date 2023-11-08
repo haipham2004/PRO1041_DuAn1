@@ -10,33 +10,31 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
 /**
  *
  * @author Windows 10 Pro
  */
 public class DBConnect {
-    
-  private static final String USERNAME = "sa";
-    private static final String PASSWORD = "1222";
+
+    private static final String USERNAME = "sa";
+    private static final String PASSWORD = "Haitam77";
     private static final String SERVER = "localhost";
     private static final String PORT = "1433";
     private static final String DATABASE_NAME = "AdamStores";
     private static final boolean USING_SSL = false;
-   
+
     private static String CONNECT_STRING;
-   
+
     static {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-           
+
             StringBuilder connectStringBuilder = new StringBuilder();
             connectStringBuilder.append("jdbc:sqlserver://")
                     .append(SERVER).append(":").append(PORT).append(";")
                     .append("databaseName=").append(DATABASE_NAME).append(";")
                     .append("user=").append(USERNAME).append(";")
-                    .append("password=").append(PASSWORD).append(";")
-                    ;
+                    .append("password=").append(PASSWORD).append(";");
             if (USING_SSL) {
                 connectStringBuilder.append("encrypt=true;trustServerCertificate=true;");
             }
@@ -46,17 +44,17 @@ public class DBConnect {
             Logger.getLogger(DBConnect.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-   
-    public static Connection getConnection()  {
-         try {
-             return DriverManager.getConnection(CONNECT_STRING);
-         } catch (SQLException ex) {
-             ex.printStackTrace();
-             Logger.getLogger(DBConnect.class.getName()).log(Level.SEVERE, null, ex);
-             return null;
-         }
+
+    public static Connection getConnection() {
+        try {
+            return DriverManager.getConnection(CONNECT_STRING);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            Logger.getLogger(DBConnect.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
     }
-   
+
     public static void main(String[] args) throws Exception {
         Connection conn = getConnection();
     }

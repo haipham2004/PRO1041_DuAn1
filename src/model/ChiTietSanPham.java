@@ -97,4 +97,9 @@ public class ChiTietSanPham {
         this.trangThai = trangThai;
     }
 
+    @Override
+    public String toString() {
+        return "ChiTietSanPham{" + "maChiTietSanPham=" + maChiTietSanPham + ", sanPham=" + sanPham + ", mauSac=" + mauSac + ", chatLieu=" + chatLieu + ", kichThuoc=" + kichThuoc + ", soLuong=" + soLuong + ", gia=" + gia + ", trangThai=" + trangThai + '}';
+    }
+
 }
