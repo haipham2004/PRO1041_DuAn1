@@ -4,31 +4,39 @@
  */
 package repository;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+import model.Voucher;
 import util.DBConnect;
 
 /**
  *
  * @author Admin
  */
-public class DoiMKRepository {
+public class VoucherRepository {
 
     PreparedStatement pst = null;
     Connection conn = null;
     ResultSet rs = null;
     String sql = null;
+    List<Voucher> listVoucher = new ArrayList<>();
 
-    public int updatePass(String maTK) {
-        sql = "update TaiKhoan set Password=? where MaTK=?";
+    public List<Voucher> getAll() {
+        listVoucher.clear();
         try {
             conn = DBConnect.getConnection();
+            sql = "SELECT * FROM Voucher";
             pst = conn.prepareStatement(sql);
-            return pst.executeUpdate();
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                Voucher vc = new Voucher(rs.getString(1), rs.getString(2),
+                        rs.getInt(3), rs.getBoolean(4));
+            }
         } catch (Exception e) {
             e.printStackTrace();
-            return 0;
+            return null;
         }
+        return listVoucher;
     }
 }

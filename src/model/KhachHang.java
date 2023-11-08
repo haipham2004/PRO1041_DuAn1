@@ -18,12 +18,11 @@ public class KhachHang {
     private String email;
     private boolean gioiTinh;
     private String diaChi;
-    private boolean trangThai;
 
     public KhachHang() {
     }
 
-    public KhachHang(String maKhachHang, String hoTen, Date ngaySinh, String soDienThoai, String email, boolean gioiTinh, String diaChi, boolean trangThai) {
+    public KhachHang(String maKhachHang, String hoTen, Date ngaySinh, String soDienThoai, String email, boolean gioiTinh, String diaChi) {
         this.maKhachHang = maKhachHang;
         this.hoTen = hoTen;
         this.ngaySinh = ngaySinh;
@@ -31,7 +30,6 @@ public class KhachHang {
         this.email = email;
         this.gioiTinh = gioiTinh;
         this.diaChi = diaChi;
-        this.trangThai = trangThai;
     }
 
     public String getMaKhachHang() {
@@ -89,14 +87,12 @@ public class KhachHang {
     public void setDiaChi(String diaChi) {
         this.diaChi = diaChi;
     }
-
-    public boolean isTrangThai() {
-        return trangThai;
-    }
-
-    public void setTrangThai(boolean trangThai) {
-        this.trangThai = trangThai;
-    }
     
-    
+    public String chiTietGioiTinh(){
+        if (gioiTinh) {
+            return "Nam";
+        } else {
+            return "Nữ";
+        }
+    }
 }

@@ -5,31 +5,31 @@
 package service.servicImp;
 
 import java.util.List;
-import model.NhanVien;
-
-import repository.NhanVienRepository;
+import model.Events;
+import repository.KhuyenMaiRepository;
 import service.AdamStore;
 
 /**
  *
  * @author Admin
  */
-public class NhanVienServiceImp implements AdamStore<NhanVien, String>{
-    NhanVienRepository repo = new NhanVienRepository();
+public class KhuyenMaiServiceImp implements AdamStore<Events, String> {
+
+    KhuyenMaiRepository repo = new KhuyenMaiRepository();
 
     @Override
-    public List<NhanVien> getAll() {
+    public List<Events> getAll() {
         return repo.getAll();
     }
 
     @Override
-    public int them(NhanVien k) {
-        return repo.insert(k);
+    public int them(Events k) {
+        return repo.themEvents(k);
     }
 
     @Override
-    public int sua(NhanVien k, String e) {
-        return repo.update(k, e);
+    public int sua(Events k, String e) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
@@ -38,19 +38,13 @@ public class NhanVienServiceImp implements AdamStore<NhanVien, String>{
     }
 
     @Override
-    public NhanVien getOne(String e) {
-        return repo.getOne(e);
+    public Events getOne(String e) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public List<NhanVien> getList(String e) {
+    public List<Events> getList(String e) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
-    public List<NhanVien> getList2(String e, String f){
-        return repo.getList2(e, f);
-    }
-    public List<NhanVien> getList3(String e, String f){
-        return repo.getList3(e, f);
-    }
+
 }
