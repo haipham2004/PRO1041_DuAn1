@@ -1,5 +1,5 @@
 ﻿
-----Update:2023-11-07--lúc 15g50p--
+----Update:2023-11-0--lúc 16g50p--
 CREATE DATABASE AdamStores
 GO
 USE AdamStores
@@ -35,7 +35,6 @@ CREATE TABLE [KhachHang] (
   [Email] varchar(100),
   [GioiTInh] bit,
   [DiaChi] nvarchar(100),
-  [TrangThai] bit,
   PRIMARY KEY ([MaKH])
 );
 
@@ -45,7 +44,7 @@ CREATE TABLE [HinhThucThanhToan] (
   [TrangThai] bit,
   PRIMARY KEY ([MaHTTT])
 );
-CREATE TABLE [Eventa] (
+CREATE TABLE [Events] (
   [MaEV] varchar(10),
   [TenEV] nvarchar(50),
   [HinhThuc] nvarchar(100),
@@ -54,13 +53,14 @@ CREATE TABLE [Eventa] (
   [ThoiGianKetThuc] date,
   [MoTa] nvarchar(100),
   [TrangThai] bit,
+  [DieuKienApDung] nvarchar(100),
   PRIMARY KEY ([MaEV])
 );
 
 CREATE TABLE [MaVoucher] (
   [MaVoucher] varchar(10),
   [MaEV] varchar(10),
-  CONSTRAINT FK_VC_EV foreign key(MaEV) references Eventa(MaEV),
+  CONSTRAINT FK_VC_EV foreign key(MaEV) references Events(MaEV),
   [SoLuong] int,
   [TrangThai] bit,
   PRIMARY KEY ([MaVoucher])
@@ -162,4 +162,4 @@ CREATE TABLE [HoaDonChiTiet] (
   [TrangThai] bit,
   PRIMARY KEY ([MaHoaDonChiTiet])
 );
---Update:2023-11-07--
+--Update:2023-11-08--
