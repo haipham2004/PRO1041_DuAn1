@@ -5,30 +5,30 @@
 package service.servicImp;
 
 import java.util.List;
-import model.Events;
-import repository.KhuyenMaiRepository;
+import model.Voucher;
+import repository.VoucherRepository;
 import service.AdamStore;
 
 /**
  *
  * @author Admin
  */
-public class KhuyenMaiServiceImp implements AdamStore<Events, String> {
+public class VoucherServiceImp implements AdamStore<Voucher, String> {
 
-    KhuyenMaiRepository repo = new KhuyenMaiRepository();
+    VoucherRepository repo = new VoucherRepository();
 
     @Override
-    public List<Events> getAll() {
+    public List<Voucher> getAll() {
         return repo.getAll();
     }
 
     @Override
-    public int them(Events k) {
-        return repo.themEvents(k);
+    public int them(Voucher k) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public int sua(Events k, String e) {
+    public int sua(Voucher k, String e) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
@@ -38,12 +38,12 @@ public class KhuyenMaiServiceImp implements AdamStore<Events, String> {
     }
 
     @Override
-    public Events getOne(String e) {
+    public Voucher getOne(String e) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public List<Events> getList(String e) {
+    public List<Voucher> getList(String e) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
