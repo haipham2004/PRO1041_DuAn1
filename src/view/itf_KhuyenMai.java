@@ -136,22 +136,6 @@ public class itf_KhuyenMai extends javax.swing.JInternalFrame {
         return true;
     }
 
-//    public void trangThai() {
-//        try {
-//            int index = tblKM.getSelectedRow();
-//            Date today = new Date();
-//            Date ngayKetThuc = new SimpleDateFormat("yyyy-MM-dd").parse(tblKM.getValueAt(index, 7).toString());
-//            txtNgayKetThuc.setDate(ngayKetThuc);
-//            int compare = ngayKetThuc.compareTo(today);
-//            String ma = tblKM.getValueAt(index, 0).toString();
-//            Events ev = readForm();
-//            if (compare <0) {
-//                service.suaTrangThai(ev, ma);
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

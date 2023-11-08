@@ -35,7 +35,8 @@ INSERT INTO SanPham VALUES
 ('SP09',N'Western Shirt',1,'LSP03',N'Nhật Bản'),
 ('SP10',N'Denim Jacket',1,'LSP02',N'Việt Nam'),
 ('SP11',N'Down Jacket',1,'LSP02',N'Việt Nam'),
-('SP12',N'Pea Coat ',0,'LSP02',N'Đài Loan')
+('SP12',N'Pea Coat ',0,'LSP02',N'Đài Loan'),
+('SP13',N'Nuker',0,'LSP02',N'Quảng Châu')
 INSERT INTO MauSac VALUES
 ('MS01',N'Đỏ',1),
 ('MS02',N'Đen',1),
@@ -52,7 +53,8 @@ INSERT INTO KichThuoc VALUES
 ('KT01','S',1),
 ('KT02','M',1),
 ('KT03','L',1),
-('KT04','XL',1)
+('KT04','XL',1),
+('KT05','XXL',0)
 
 INSERT INTO Events VALUES
 ('EV01',N'Sinh nhật cửa hàng',1,'20000','2023-03-11','2023-03-15',N'Siêu giảm giá',1,1,'2000000'),
@@ -66,7 +68,9 @@ INSERT INTO MaVoucher VALUES
 INSERT INTO ChiTietSanPham VALUES
 ('CTSP01','SP02','MS05','CL03','KT04',2,400000,1),
 ('CTSP02','SP05','MS02','CL01','KT01',1,356000,0),
-('CTSP03','SP06','MS02','CL03','KT02',4,200000,1)
+('CTSP03','SP06','MS02','CL03','KT02',4,200000,1),
+('CTSP04','SP03','MS01','CL05','KT03',12,567000,0),
+('CTSP05','SP07','MS04','CL02','KT03',12,567000,0)
 
 INSERT INTO HoaDon VALUES
 ('HD01','NV05','KH03','HTTT01',getDate(),450000,50000,400000,1,N'Thành công','VC03'),
