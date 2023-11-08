@@ -524,7 +524,7 @@ public class itf_SanPham extends javax.swing.JInternalFrame {
         rdHetHang = new javax.swing.JRadioButton();
         jPanel4 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
-        txtTimKiem = new javax.swing.JTextField();
+        txtTimKiems = new javax.swing.JTextField();
         jPanel9 = new javax.swing.JPanel();
         cbo1 = new javax.swing.JComboBox<>();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -536,10 +536,10 @@ public class itf_SanPham extends javax.swing.JInternalFrame {
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         lbSoTrang = new javax.swing.JLabel();
-        btnDau1 = new javax.swing.JButton();
-        btnCuoi1 = new javax.swing.JButton();
-        btnLui1 = new javax.swing.JButton();
-        btnTien1 = new javax.swing.JButton();
+        btnDau1s = new javax.swing.JButton();
+        btnCuoi1s = new javax.swing.JButton();
+        btnLui1s = new javax.swing.JButton();
+        btnTien1s = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jPanel16 = new javax.swing.JPanel();
         jLabel45 = new javax.swing.JLabel();
@@ -580,10 +580,10 @@ public class itf_SanPham extends javax.swing.JInternalFrame {
         btnSuaCTSP = new javax.swing.JButton();
         btnClearCTSP = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
-        btnDau2 = new javax.swing.JButton();
-        btnLui2 = new javax.swing.JButton();
-        btnTien2 = new javax.swing.JButton();
-        btnCuoi2 = new javax.swing.JButton();
+        btnDau2s = new javax.swing.JButton();
+        btnLui2s = new javax.swing.JButton();
+        btnTien2s = new javax.swing.JButton();
+        btnCuoi2s = new javax.swing.JButton();
         lbSoTrang2 = new javax.swing.JLabel();
         jPanel28 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
@@ -605,11 +605,11 @@ public class itf_SanPham extends javax.swing.JInternalFrame {
         btnSuaThuocTinh = new javax.swing.JButton();
         btnClearThuocTinh = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
-        btnDau3 = new javax.swing.JButton();
-        btnCuoi3 = new javax.swing.JButton();
-        btnLui3 = new javax.swing.JButton();
-        btnTien3 = new javax.swing.JButton();
+        btnDau3s = new javax.swing.JButton();
+        btnCuoi3s = new javax.swing.JButton();
+        btnTien3s = new javax.swing.JButton();
         lbSoTrang3 = new javax.swing.JLabel();
+        btnLui3s = new javax.swing.JButton();
 
         jPanel29.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Quản lý sản phẩm", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
 
@@ -699,14 +699,9 @@ public class itf_SanPham extends javax.swing.JInternalFrame {
 
         jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder("Tìm kiếm"));
 
-        txtTimKiem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtTimKiemActionPerformed(evt);
-            }
-        });
-        txtTimKiem.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtTimKiems.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtTimKiemKeyReleased(evt);
+                txtTimKiemsKeyReleased(evt);
             }
         });
 
@@ -715,15 +710,16 @@ public class itf_SanPham extends javax.swing.JInternalFrame {
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap()
+                .addComponent(txtTimKiems, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(31, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+                .addContainerGap(31, Short.MAX_VALUE)
+                .addComponent(txtTimKiems, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(24, 24, 24))
         );
 
         jPanel9.setBorder(javax.swing.BorderFactory.createTitledBorder("Loại sản phẩm"));
@@ -830,31 +826,31 @@ public class itf_SanPham extends javax.swing.JInternalFrame {
 
         lbSoTrang.setText("Số Trang");
 
-        btnDau1.setText("Pre");
-        btnDau1.addActionListener(new java.awt.event.ActionListener() {
+        btnDau1s.setText("Pre");
+        btnDau1s.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDau1ActionPerformed(evt);
+                btnDau1sActionPerformed(evt);
             }
         });
 
-        btnCuoi1.setText("Next");
-        btnCuoi1.addActionListener(new java.awt.event.ActionListener() {
+        btnCuoi1s.setText("Next");
+        btnCuoi1s.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCuoi1ActionPerformed(evt);
+                btnCuoi1sActionPerformed(evt);
             }
         });
 
-        btnLui1.setText("Lùi");
-        btnLui1.addActionListener(new java.awt.event.ActionListener() {
+        btnLui1s.setText("Lùi");
+        btnLui1s.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLui1ActionPerformed(evt);
+                btnLui1sActionPerformed(evt);
             }
         });
 
-        btnTien1.setText("Tiến");
-        btnTien1.addActionListener(new java.awt.event.ActionListener() {
+        btnTien1s.setText("Tiến");
+        btnTien1s.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTien1ActionPerformed(evt);
+                btnTien1sActionPerformed(evt);
             }
         });
 
@@ -887,15 +883,15 @@ public class itf_SanPham extends javax.swing.JInternalFrame {
                         .addComponent(jButton5))
                     .addGroup(jPanel29Layout.createSequentialGroup()
                         .addGap(90, 90, 90)
-                        .addComponent(btnDau1)
+                        .addComponent(btnDau1s)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnLui1)
+                        .addComponent(btnLui1s)
                         .addGap(62, 62, 62)
                         .addComponent(lbSoTrang)
                         .addGap(39, 39, 39)
-                        .addComponent(btnTien1)
+                        .addComponent(btnTien1s)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnCuoi1)))
+                        .addComponent(btnCuoi1s)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel29Layout.setVerticalGroup(
@@ -918,10 +914,10 @@ public class itf_SanPham extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbSoTrang)
-                    .addComponent(btnDau1)
-                    .addComponent(btnCuoi1)
-                    .addComponent(btnLui1)
-                    .addComponent(btnTien1))
+                    .addComponent(btnDau1s)
+                    .addComponent(btnCuoi1s)
+                    .addComponent(btnLui1s)
+                    .addComponent(btnTien1s))
                 .addContainerGap(12, Short.MAX_VALUE))
         );
 
@@ -1145,31 +1141,31 @@ public class itf_SanPham extends javax.swing.JInternalFrame {
 
         jButton4.setText("Xuất file");
 
-        btnDau2.setText("Pre");
-        btnDau2.addActionListener(new java.awt.event.ActionListener() {
+        btnDau2s.setText("Pre");
+        btnDau2s.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDau2ActionPerformed(evt);
+                btnDau2sActionPerformed(evt);
             }
         });
 
-        btnLui2.setText("Lùi");
-        btnLui2.addActionListener(new java.awt.event.ActionListener() {
+        btnLui2s.setText("Lùi");
+        btnLui2s.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLui2ActionPerformed(evt);
+                btnLui2sActionPerformed(evt);
             }
         });
 
-        btnTien2.setText("Tiến");
-        btnTien2.addActionListener(new java.awt.event.ActionListener() {
+        btnTien2s.setText("Tiến");
+        btnTien2s.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTien2ActionPerformed(evt);
+                btnTien2sActionPerformed(evt);
             }
         });
 
-        btnCuoi2.setText("Next");
-        btnCuoi2.addActionListener(new java.awt.event.ActionListener() {
+        btnCuoi2s.setText("Next");
+        btnCuoi2s.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCuoi2ActionPerformed(evt);
+                btnCuoi2sActionPerformed(evt);
             }
         });
 
@@ -1255,15 +1251,15 @@ public class itf_SanPham extends javax.swing.JInternalFrame {
                 .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel16Layout.createSequentialGroup()
                         .addGap(165, 165, 165)
-                        .addComponent(btnDau2)
+                        .addComponent(btnDau2s)
                         .addGap(38, 38, 38)
-                        .addComponent(btnLui2)
+                        .addComponent(btnLui2s)
                         .addGap(15, 15, 15)
                         .addComponent(lbSoTrang2)
                         .addGap(18, 18, 18)
-                        .addComponent(btnTien2)
+                        .addComponent(btnTien2s)
                         .addGap(33, 33, 33)
-                        .addComponent(btnCuoi2))
+                        .addComponent(btnCuoi2s))
                     .addComponent(jPanel18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
@@ -1322,12 +1318,12 @@ public class itf_SanPham extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnDau2)
-                        .addComponent(btnLui2)
+                        .addComponent(btnDau2s)
+                        .addComponent(btnLui2s)
                         .addComponent(lbSoTrang2))
                     .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnTien2)
-                        .addComponent(btnCuoi2)))
+                        .addComponent(btnTien2s)
+                        .addComponent(btnCuoi2s)))
                 .addGap(43, 43, 43))
         );
 
@@ -1495,35 +1491,35 @@ public class itf_SanPham extends javax.swing.JInternalFrame {
 
         jButton1.setText("Xuất file");
 
-        btnDau3.setText("Đầu ");
-        btnDau3.addActionListener(new java.awt.event.ActionListener() {
+        btnDau3s.setText("Đầu ");
+        btnDau3s.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDau3ActionPerformed(evt);
+                btnDau3sActionPerformed(evt);
             }
         });
 
-        btnCuoi3.setText("Cuối");
-        btnCuoi3.addActionListener(new java.awt.event.ActionListener() {
+        btnCuoi3s.setText("Cuối");
+        btnCuoi3s.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCuoi3ActionPerformed(evt);
+                btnCuoi3sActionPerformed(evt);
             }
         });
 
-        btnLui3.setText("Lùi");
-        btnLui3.addActionListener(new java.awt.event.ActionListener() {
+        btnTien3s.setText("Tiến");
+        btnTien3s.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLui3ActionPerformed(evt);
-            }
-        });
-
-        btnTien3.setText("Tiến");
-        btnTien3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTien3ActionPerformed(evt);
+                btnTien3sActionPerformed(evt);
             }
         });
 
         lbSoTrang3.setText("Số trang");
+
+        btnLui3s.setText("Lùi");
+        btnLui3s.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLui3sActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -1554,15 +1550,15 @@ public class itf_SanPham extends javax.swing.JInternalFrame {
                                         .addComponent(jButton1))))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(157, 157, 157)
-                        .addComponent(btnDau3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnLui3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnDau3s)
+                        .addGap(96, 96, 96)
                         .addComponent(lbSoTrang3)
                         .addGap(22, 22, 22)
-                        .addComponent(btnTien3)
+                        .addComponent(btnTien3s)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnCuoi3)))
+                        .addComponent(btnCuoi3s)
+                        .addGap(44, 44, 44)
+                        .addComponent(btnLui3s)))
                 .addContainerGap(51, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -1582,11 +1578,11 @@ public class itf_SanPham extends javax.swing.JInternalFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnDau3)
-                    .addComponent(btnCuoi3)
-                    .addComponent(btnLui3)
-                    .addComponent(btnTien3)
-                    .addComponent(lbSoTrang3))
+                    .addComponent(btnDau3s)
+                    .addComponent(btnCuoi3s)
+                    .addComponent(btnTien3s)
+                    .addComponent(lbSoTrang3)
+                    .addComponent(btnLui3s))
                 .addContainerGap(8, Short.MAX_VALUE))
         );
 
@@ -1627,10 +1623,6 @@ public class itf_SanPham extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void txtTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTimKiemActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtTimKiemActionPerformed
 
     private void cbo1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbo1MouseClicked
         // TODO add your handling code here:
@@ -1910,22 +1902,22 @@ public class itf_SanPham extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btnSuaThuocTinhActionPerformed
 
-    private void btnDau1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDau1ActionPerformed
+    private void btnDau1ActionPerformed(java.awt.event.ActionEvent evt) {                                        
         // TODO add your handling code here:
         trangSP = 1;
         fillTableSamPham(serviceSP.listPageSP(trangSP));
         lbSoTrang.setText(trangSP + " of " + soTrangSP);
 
-    }//GEN-LAST:event_btnDau1ActionPerformed
+    }                                       
 
-    private void btnCuoi1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCuoi1ActionPerformed
+    private void btnCuoi1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
         trangSP = soTrangSP;
         fillTableSamPham(serviceSP.listPageSP(trangSP));
         lbSoTrang.setText(trangSP + " of " + soTrangSP);
-    }//GEN-LAST:event_btnCuoi1ActionPerformed
+    }                                        
 
-    private void btnLui1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLui1ActionPerformed
+    private void btnLui1ActionPerformed(java.awt.event.ActionEvent evt) {                                        
         // TODO add your handling code here:
         if (trangSP > 1) {
             trangSP--;
@@ -1933,50 +1925,50 @@ public class itf_SanPham extends javax.swing.JInternalFrame {
             lbSoTrang.setText(trangSP + " of " + soTrangSP);
         }
 
-    }//GEN-LAST:event_btnLui1ActionPerformed
+    }                                       
 
-    private void btnTien1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTien1ActionPerformed
+    private void btnTien1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
         if (trangSP < soTrangSP) {
             trangSP++;
             fillTableSamPham(serviceSP.listPageSP(trangSP));
             lbSoTrang.setText(trangSP + " of " + soTrangSP);
         }
-    }//GEN-LAST:event_btnTien1ActionPerformed
+    }                                        
 
-    private void btnDau2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDau2ActionPerformed
+    private void btnDau2ActionPerformed(java.awt.event.ActionEvent evt) {                                        
         // TODO add your handling code here:
         trangCTSP = 1;
         fillTableChiTietSanPham(serviceCTSP.listPageCTSP(trangCTSP));
         lbSoTrang2.setText(trangCTSP + " of " + soTrangCTSP);
-    }//GEN-LAST:event_btnDau2ActionPerformed
+    }                                       
 
-    private void btnCuoi2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCuoi2ActionPerformed
+    private void btnCuoi2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
         trangCTSP = soTrangCTSP;
         fillTableChiTietSanPham(serviceCTSP.listPageCTSP(trangCTSP));
         lbSoTrang2.setText(trangCTSP + " of " + soTrangCTSP);
-    }//GEN-LAST:event_btnCuoi2ActionPerformed
+    }                                        
 
-    private void btnLui2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLui2ActionPerformed
+    private void btnLui2ActionPerformed(java.awt.event.ActionEvent evt) {                                        
         // TODO add your handling code here:
         if (trangCTSP > 1) {
             trangCTSP--;
             fillTableChiTietSanPham(serviceCTSP.listPageCTSP(trangCTSP));
             lbSoTrang2.setText(trangCTSP + " of " + soTrangCTSP);
         }
-    }//GEN-LAST:event_btnLui2ActionPerformed
+    }                                       
 
-    private void btnTien2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTien2ActionPerformed
+    private void btnTien2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
         if (trangCTSP < soTrangCTSP) {
             trangCTSP++;
             fillTableChiTietSanPham(serviceCTSP.listPageCTSP(trangCTSP));
             lbSoTrang2.setText(trangCTSP + " of " + soTrangCTSP);
         }
-    }//GEN-LAST:event_btnTien2ActionPerformed
+    }                                        
 
-    private void btnCuoi3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCuoi3ActionPerformed
+    private void btnCuoi3ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
         if (rdMauSac.isSelected()) {
             trangMS = soTrangMS;
@@ -1991,9 +1983,9 @@ public class itf_SanPham extends javax.swing.JInternalFrame {
             fillKichThuoc(serviceKT.listPageKT(trangKT));
             lbSoTrang3.setText(trangKT + " of " + soTrangKT);
         }
-    }//GEN-LAST:event_btnCuoi3ActionPerformed
+    }                                        
 
-    private void btnDau3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDau3ActionPerformed
+    private void btnDau3ActionPerformed(java.awt.event.ActionEvent evt) {                                        
         // TODO add your handling code here:
         if (rdMauSac.isSelected()) {
             trangMS = 1;
@@ -2008,9 +2000,9 @@ public class itf_SanPham extends javax.swing.JInternalFrame {
             fillKichThuoc(serviceKT.listPageKT(trangKT));
             lbSoTrang3.setText(trangKT + " of " + soTrangKT);
         }
-    }//GEN-LAST:event_btnDau3ActionPerformed
+    }                                       
 
-    private void btnTien3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTien3ActionPerformed
+    private void btnTien3ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
         if (rdMauSac.isSelected()) {
             if (trangMS < soTrangMS) {
@@ -2032,9 +2024,9 @@ public class itf_SanPham extends javax.swing.JInternalFrame {
             }
         }
 
-    }//GEN-LAST:event_btnTien3ActionPerformed
+    }                                        
 
-    private void btnLui3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLui3ActionPerformed
+    private void btnLui3ActionPerformed(java.awt.event.ActionEvent evt) {                                        
         // TODO add your handling code here:
         if (rdMauSac.isSelected()) {
             if (trangMS > 1) {
@@ -2056,35 +2048,30 @@ public class itf_SanPham extends javax.swing.JInternalFrame {
             }
         }
 
-    }//GEN-LAST:event_btnLui3ActionPerformed
+    }                                       
 
-    private void txtTimKiemKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKiemKeyReleased
+    private void txtTimKiemKeyReleased(java.awt.event.KeyEvent evt) {                                       
         // TODO add your handling code here:
-        if (!txtTimKiem.getText().equals("")) {
-            String name = txtTimKiem.getText();
-            fillTableSamPham(serviceSP.getList(name));
-        } else {
-            loadPageSP();
-        }
-    }//GEN-LAST:event_txtTimKiemKeyReleased
+        
+    }                                      
 
 
-    private void btnDau1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDau1ActionPerformed
+    private void btnDau1sActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDau1sActionPerformed
         // TODO add your handling code here:
         trangSP = 1;
         fillTableSamPham(serviceSP.listPageSP(trangSP));
         lbSoTrang.setText(trangSP + " of " + soTrangSP);
 
-    }//GEN-LAST:event_btnDau1ActionPerformed
+    }//GEN-LAST:event_btnDau1sActionPerformed
 
-    private void btnCuoi1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCuoi1ActionPerformed
+    private void btnCuoi1sActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCuoi1sActionPerformed
         // TODO add your handling code here:
         trangSP = soTrangSP;
         fillTableSamPham(serviceSP.listPageSP(trangSP));
         lbSoTrang.setText(trangSP + " of " + soTrangSP);
-    }//GEN-LAST:event_btnCuoi1ActionPerformed
+    }//GEN-LAST:event_btnCuoi1sActionPerformed
 
-    private void btnLui1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLui1ActionPerformed
+    private void btnLui1sActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLui1sActionPerformed
         // TODO add your handling code here:
         if (trangSP > 1) {
             trangSP--;
@@ -2092,50 +2079,50 @@ public class itf_SanPham extends javax.swing.JInternalFrame {
             lbSoTrang.setText(trangSP + " of " + soTrangSP);
         }
 
-    }//GEN-LAST:event_btnLui1ActionPerformed
+    }//GEN-LAST:event_btnLui1sActionPerformed
 
-    private void btnTien1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTien1ActionPerformed
+    private void btnTien1sActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTien1sActionPerformed
         // TODO add your handling code here:
         if (trangSP < soTrangSP) {
             trangSP++;
             fillTableSamPham(serviceSP.listPageSP(trangSP));
             lbSoTrang.setText(trangSP + " of " + soTrangSP);
         }
-    }//GEN-LAST:event_btnTien1ActionPerformed
+    }//GEN-LAST:event_btnTien1sActionPerformed
 
-    private void btnDau2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDau2ActionPerformed
+    private void btnDau2sActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDau2sActionPerformed
         // TODO add your handling code here:
         trangCTSP = 1;
         fillTableChiTietSanPham(serviceCTSP.listPageCTSP(trangCTSP));
         lbSoTrang2.setText(trangCTSP + " of " + soTrangCTSP);
-    }//GEN-LAST:event_btnDau2ActionPerformed
+    }//GEN-LAST:event_btnDau2sActionPerformed
 
-    private void btnCuoi2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCuoi2ActionPerformed
+    private void btnCuoi2sActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCuoi2sActionPerformed
         // TODO add your handling code here:
         trangCTSP = soTrangCTSP;
         fillTableChiTietSanPham(serviceCTSP.listPageCTSP(trangCTSP));
         lbSoTrang2.setText(trangCTSP + " of " + soTrangCTSP);
-    }//GEN-LAST:event_btnCuoi2ActionPerformed
+    }//GEN-LAST:event_btnCuoi2sActionPerformed
 
-    private void btnLui2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLui2ActionPerformed
+    private void btnLui2sActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLui2sActionPerformed
         // TODO add your handling code here:
         if (trangCTSP > 1) {
             trangCTSP--;
             fillTableChiTietSanPham(serviceCTSP.listPageCTSP(trangCTSP));
             lbSoTrang2.setText(trangCTSP + " of " + soTrangCTSP);
         }
-    }//GEN-LAST:event_btnLui2ActionPerformed
+    }//GEN-LAST:event_btnLui2sActionPerformed
 
-    private void btnTien2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTien2ActionPerformed
+    private void btnTien2sActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTien2sActionPerformed
         // TODO add your handling code here:
         if (trangCTSP < soTrangCTSP) {
             trangCTSP++;
             fillTableChiTietSanPham(serviceCTSP.listPageCTSP(trangCTSP));
             lbSoTrang2.setText(trangCTSP + " of " + soTrangCTSP);
         }
-    }//GEN-LAST:event_btnTien2ActionPerformed
+    }//GEN-LAST:event_btnTien2sActionPerformed
 
-    private void btnCuoi3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCuoi3ActionPerformed
+    private void btnCuoi3sActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCuoi3sActionPerformed
         // TODO add your handling code here:
         if (rdMauSac.isSelected()) {
             trangMS = soTrangMS;
@@ -2150,9 +2137,9 @@ public class itf_SanPham extends javax.swing.JInternalFrame {
             fillKichThuoc(serviceKT.listPageKT(trangKT));
             lbSoTrang3.setText(trangKT + " of " + soTrangKT);
         }
-    }//GEN-LAST:event_btnCuoi3ActionPerformed
+    }//GEN-LAST:event_btnCuoi3sActionPerformed
 
-    private void btnDau3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDau3ActionPerformed
+    private void btnDau3sActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDau3sActionPerformed
         // TODO add your handling code here:
         if (rdMauSac.isSelected()) {
             trangMS = 1;
@@ -2167,9 +2154,9 @@ public class itf_SanPham extends javax.swing.JInternalFrame {
             fillKichThuoc(serviceKT.listPageKT(trangKT));
             lbSoTrang3.setText(trangKT + " of " + soTrangKT);
         }
-    }//GEN-LAST:event_btnDau3ActionPerformed
+    }//GEN-LAST:event_btnDau3sActionPerformed
 
-    private void btnTien3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTien3ActionPerformed
+    private void btnTien3sActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTien3sActionPerformed
         // TODO add your handling code here:
         if (rdMauSac.isSelected()) {
             if (trangMS < soTrangMS) {
@@ -2191,45 +2178,44 @@ public class itf_SanPham extends javax.swing.JInternalFrame {
             }
         }
 
-    }//GEN-LAST:event_btnTien3ActionPerformed
-
-    private void btnLui3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLui3ActionPerformed
-        // TODO add your handling code here:
-        if (rdMauSac.isSelected()) {
-            if (trangMS > 1) {
-                trangMS--;
-                fillMauSac(serviceMS.listPageMS(trangMS));
-                lbSoTrang3.setText(trangMS + " of " + soTrangMS);
-            }
-        } else if (rdChatLieu.isSelected()) {
-            if (trangCL > 1) {
-                trangCL--;
-                fillChatLieu(serviceCl.listPageCL(trangCL));
-                lbSoTrang3.setText(trangCL + " of " + soTrangCL);
-            }
-        } else {
-            if (trangKT > 1) {
-                trangKT--;
-                fillChatLieu(serviceCl.listPageCL(trangCL));
-                lbSoTrang3.setText(trangCL + " of " + soTrangCL);
-            }
-        }
-
-    }//GEN-LAST:event_btnLui3ActionPerformed
-
-    private void txtTimKiemKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKiemKeyReleased
-        // TODO add your handling code here:
-        if (!txtTimKiem.getText().equals("")) {
-            String name = txtTimKiem.getText();
-            fillTableSamPham(serviceSP.getList(name));
-        } else {
-            loadPageSP();
-        }
-    }//GEN-LAST:event_txtTimKiemKeyReleased
+    }//GEN-LAST:event_btnTien3sActionPerformed
 
     private void btnSearchGiaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnSearchGiaKeyReleased
         // TODO add your handling code here:  
     }//GEN-LAST:event_btnSearchGiaKeyReleased
+
+    private void txtTimKiemsKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKiemsKeyReleased
+        // TODO add your handling code here:
+        if (!txtTimKiems.getText().equals("")) {
+            String name = txtTimKiems.getText();
+            fillTableSamPham(serviceSP.getList(name));
+        } else {
+            loadPageSP();
+        }
+    }//GEN-LAST:event_txtTimKiemsKeyReleased
+
+    private void btnLui3sActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLui3sActionPerformed
+        // TODO add your handling code here:
+          if (rdMauSac.isSelected()) {
+            if (trangMS > 1) {
+                trangMS--;
+                fillMauSac(serviceMS.listPageMS(trangMS));
+                lbSoTrang3.setText(trangMS + " of " + soTrangMS);
+            }
+        } else if (rdChatLieu.isSelected()) {
+            if (trangCL > 1) {
+                trangCL--;
+                fillChatLieu(serviceCl.listPageCL(trangCL));
+                lbSoTrang3.setText(trangCL + " of " + soTrangCL);
+            }
+        } else {
+            if (trangKT > 1) {
+                trangKT--;
+                fillChatLieu(serviceCl.listPageCL(trangCL));
+                lbSoTrang3.setText(trangCL + " of " + soTrangCL);
+            }
+        }
+    }//GEN-LAST:event_btnLui3sActionPerformed
 
 
 
@@ -2237,15 +2223,15 @@ public class itf_SanPham extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnClearCTSP;
     private javax.swing.JButton btnClearSP;
     private javax.swing.JButton btnClearThuocTinh;
-    private javax.swing.JButton btnCuoi1;
-    private javax.swing.JButton btnCuoi2;
-    private javax.swing.JButton btnCuoi3;
-    private javax.swing.JButton btnDau1;
-    private javax.swing.JButton btnDau2;
-    private javax.swing.JButton btnDau3;
-    private javax.swing.JButton btnLui1;
-    private javax.swing.JButton btnLui2;
-    private javax.swing.JButton btnLui3;
+    private javax.swing.JButton btnCuoi1s;
+    private javax.swing.JButton btnCuoi2s;
+    private javax.swing.JButton btnCuoi3s;
+    private javax.swing.JButton btnDau1s;
+    private javax.swing.JButton btnDau2s;
+    private javax.swing.JButton btnDau3s;
+    private javax.swing.JButton btnLui1s;
+    private javax.swing.JButton btnLui2s;
+    private javax.swing.JButton btnLui3s;
     private javax.swing.JButton btnQuayLai;
     private javax.swing.JButton btnSearch2a;
     private javax.swing.JButton btnSearchGia;
@@ -2255,9 +2241,9 @@ public class itf_SanPham extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnThemCTSP;
     private javax.swing.JButton btnThemSP;
     private javax.swing.JButton btnThemThuocTinh;
-    private javax.swing.JButton btnTien1;
-    private javax.swing.JButton btnTien2;
-    private javax.swing.JButton btnTien3;
+    private javax.swing.JButton btnTien1s;
+    private javax.swing.JButton btnTien2s;
+    private javax.swing.JButton btnTien3s;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.ButtonGroup buttonGroup3;
@@ -2340,7 +2326,7 @@ public class itf_SanPham extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtTenThuocTinh;
     private javax.swing.JTextField txtTienMax;
     private javax.swing.JTextField txtTienMin;
-    private javax.swing.JTextField txtTimKiem;
+    private javax.swing.JTextField txtTimKiems;
     private javax.swing.JTextField txtXuatXu;
     // End of variables declaration//GEN-END:variables
 }

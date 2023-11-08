@@ -125,15 +125,15 @@
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="90" max="-2" attributes="0"/>
-                                  <Component id="btnDau1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnDau1s" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="btnLui1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnLui1s" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
                                   <Component id="lbSoTrang" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
-                                  <Component id="btnTien1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnTien1s" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="btnCuoi1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnCuoi1s" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace max="32767" attributes="0"/>
@@ -161,10 +161,10 @@
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="lbSoTrang" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="btnDau1" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="btnCuoi1" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="btnLui1" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="btnTien1" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnDau1s" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnCuoi1s" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnLui1s" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnTien1s" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace pref="12" max="32767" attributes="0"/>
                       </Group>
@@ -366,26 +366,26 @@
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace max="32767" attributes="0"/>
-                                  <Component id="txtTimKiem" min="-2" pref="209" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="txtTimKiems" pref="205" max="32767" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
                         <DimensionLayout dim="1">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
-                                  <Component id="txtTimKiem" min="-2" max="-2" attributes="0"/>
+                              <Group type="102" alignment="1" attributes="0">
                                   <EmptySpace pref="31" max="32767" attributes="0"/>
+                                  <Component id="txtTimKiems" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
                       </Layout>
                       <SubComponents>
-                        <Component class="javax.swing.JTextField" name="txtTimKiem">
+                        <Component class="javax.swing.JTextField" name="txtTimKiems">
                           <Events>
-                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtTimKiemActionPerformed"/>
-                            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtTimKiemKeyReleased"/>
+                            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtTimKiemsKeyReleased"/>
                           </Events>
                         </Component>
                       </SubComponents>
@@ -518,36 +518,36 @@
                     <Property name="text" type="java.lang.String" value="S&#x1ed1; Trang"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JButton" name="btnDau1">
+                <Component class="javax.swing.JButton" name="btnDau1s">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Pre"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDau1ActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDau1sActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JButton" name="btnCuoi1">
+                <Component class="javax.swing.JButton" name="btnCuoi1s">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Next"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCuoi1ActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCuoi1sActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JButton" name="btnLui1">
+                <Component class="javax.swing.JButton" name="btnLui1s">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="L&#xf9;i"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLui1ActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLui1sActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JButton" name="btnTien1">
+                <Component class="javax.swing.JButton" name="btnTien1s">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Ti&#x1ebf;n"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTien1ActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTien1sActionPerformed"/>
                   </Events>
                 </Component>
               </SubComponents>
@@ -701,15 +701,15 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="165" max="-2" attributes="0"/>
-                                  <Component id="btnDau2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnDau2s" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
-                                  <Component id="btnLui2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnLui2s" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                                   <Component id="lbSoTrang2" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="btnTien2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnTien2s" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
-                                  <Component id="btnCuoi2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnCuoi2s" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <Component id="jPanel18" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
@@ -786,13 +786,13 @@
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                                  <Component id="btnDau2" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="btnLui2" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnDau2s" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnLui2s" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="lbSoTrang2" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                                  <Component id="btnTien2" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="btnCuoi2" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnTien2s" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnCuoi2s" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
@@ -1223,36 +1223,36 @@
                     <Property name="text" type="java.lang.String" value="Xu&#x1ea5;t file"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JButton" name="btnDau2">
+                <Component class="javax.swing.JButton" name="btnDau2s">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Pre"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDau2ActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDau2sActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JButton" name="btnLui2">
+                <Component class="javax.swing.JButton" name="btnLui2s">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="L&#xf9;i"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLui2ActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLui2sActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JButton" name="btnTien2">
+                <Component class="javax.swing.JButton" name="btnTien2s">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Ti&#x1ebf;n"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTien2ActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTien2sActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JButton" name="btnCuoi2">
+                <Component class="javax.swing.JButton" name="btnCuoi2s">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Next"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCuoi2ActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCuoi2sActionPerformed"/>
                   </Events>
                 </Component>
                 <Component class="javax.swing.JLabel" name="lbSoTrang2">
@@ -1339,15 +1339,15 @@
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="157" max="-2" attributes="0"/>
-                                  <Component id="btnDau3" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="btnLui3" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="btnDau3s" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="96" max="-2" attributes="0"/>
                                   <Component id="lbSoTrang3" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
-                                  <Component id="btnTien3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnTien3s" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="btnCuoi3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnCuoi3s" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
+                                  <Component id="btnLui3s" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace pref="51" max="32767" attributes="0"/>
@@ -1373,11 +1373,11 @@
                           <Component id="jScrollPane1" min="-2" pref="202" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="btnDau3" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="btnCuoi3" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="btnLui3" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="btnTien3" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnDau3s" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnCuoi3s" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnTien3s" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="lbSoTrang3" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnLui3s" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace pref="8" max="32767" attributes="0"/>
                       </Group>
@@ -1618,42 +1618,42 @@
                     <Property name="text" type="java.lang.String" value="Xu&#x1ea5;t file"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JButton" name="btnDau3">
+                <Component class="javax.swing.JButton" name="btnDau3s">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="&#x110;&#x1ea7;u "/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDau3ActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDau3sActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JButton" name="btnCuoi3">
+                <Component class="javax.swing.JButton" name="btnCuoi3s">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Cu&#x1ed1;i"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCuoi3ActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCuoi3sActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JButton" name="btnLui3">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="L&#xf9;i"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLui3ActionPerformed"/>
-                  </Events>
-                </Component>
-                <Component class="javax.swing.JButton" name="btnTien3">
+                <Component class="javax.swing.JButton" name="btnTien3s">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Ti&#x1ebf;n"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTien3ActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTien3sActionPerformed"/>
                   </Events>
                 </Component>
                 <Component class="javax.swing.JLabel" name="lbSoTrang3">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="S&#x1ed1; trang"/>
                   </Properties>
+                </Component>
+                <Component class="javax.swing.JButton" name="btnLui3s">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="L&#xf9;i"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLui3sActionPerformed"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
