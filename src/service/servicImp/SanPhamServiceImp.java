@@ -13,9 +13,8 @@ import service.AdamStore;
  *
  * @author Admin BVCN88 02
  */
-public class SanPhamServiceImp implements AdamStore<SanPham, String> {
-
-    SanPhamRepository repo = new SanPhamRepository();
+public class SanPhamServiceImp implements AdamStore<SanPham, String>{
+    SanPhamRepository repo=new SanPhamRepository();
 
     @Override
     public List<SanPham> getAll() {
@@ -46,12 +45,5 @@ public class SanPhamServiceImp implements AdamStore<SanPham, String> {
     public List<SanPham> getList(String e) {
         return repo.getList(e);
     }
-
-    public List<SanPham> listPageSP(int index) {
-        return repo.listPageSP(index);
-    }
     
-    public int tongBanGhi(){
-        return repo.tongBanGhi();
-    }
 }

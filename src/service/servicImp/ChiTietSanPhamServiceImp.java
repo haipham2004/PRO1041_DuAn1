@@ -3,7 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package service.servicImp;
-
 import java.util.List;
 import model.ChiTietSanPham;
 import repository.ChiTietSanPhamRepository;
@@ -14,9 +13,8 @@ import view.AdamStoreView;
  *
  * @author Admin BVCN88 02
  */
-public class ChiTietSanPhamServiceImp implements AdamStore<ChiTietSanPham, String> {
-
-    ChiTietSanPhamRepository repo = new ChiTietSanPhamRepository();
+public class ChiTietSanPhamServiceImp implements AdamStore<ChiTietSanPham, String>{
+    ChiTietSanPhamRepository repo=new ChiTietSanPhamRepository();
 
     @Override
     public List<ChiTietSanPham> getAll() {
@@ -47,17 +45,10 @@ public class ChiTietSanPhamServiceImp implements AdamStore<ChiTietSanPham, Strin
     public List<ChiTietSanPham> getList(String e) {
         return repo.getList(e);
     }
-
-    public List<ChiTietSanPham> getListGia(double giaMin, double giaMax) {
+    
+    public List<ChiTietSanPham> getListGia(double giaMin,double giaMax) {
         return repo.getListGia(giaMin, giaMax);
     }
 
-    public List<ChiTietSanPham> listPageCTSP(int index) {
-        return repo.listPageCTSP(index);
-    }
-
-    public int tongBanGhi() {
-        return repo.tongBanGhi();
-    }
-
+    
 }
