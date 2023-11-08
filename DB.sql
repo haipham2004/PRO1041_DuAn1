@@ -53,7 +53,7 @@ CREATE TABLE [Events] (
   [ThoiGianKetThuc] date,
   [MoTa] nvarchar(100),
   [TrangThai] bit,
-  [DieuKienApDung] nvarchar(100),
+  [DieuKienApDung] bit,--1:tien--0%
   PRIMARY KEY ([MaEV])
 );
 
