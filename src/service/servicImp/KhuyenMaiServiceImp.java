@@ -29,7 +29,7 @@ public class KhuyenMaiServiceImp implements AdamStore<Events, String> {
 
     @Override
     public int sua(Events k, String e) {
-        return repo.suaEvents(k, e);
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
@@ -39,19 +39,12 @@ public class KhuyenMaiServiceImp implements AdamStore<Events, String> {
 
     @Override
     public Events getOne(String e) {
-        return repo.getOne(e);
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
     public List<Events> getList(String e) {
-        return repo.getList(e);
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-    public List<Events> getList2(boolean tt) {
-        return repo.searchTheoTrangThai(tt);
-    }
-
-    public int suaTrangThai() {
-        return repo.updateTrangThai();
-    }
 }
