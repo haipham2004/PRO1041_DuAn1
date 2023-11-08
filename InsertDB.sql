@@ -1,4 +1,4 @@
-﻿----Update:2023-11-08--lúc 16g50p--
+﻿----Update:2023-11-08--lúc 18g00p--
 
 INSERT INTO TaiKhoan VALUES
 ('TK01','hoilamgi1','khongnoidau1','Admin',1),
@@ -55,9 +55,9 @@ INSERT INTO KichThuoc VALUES
 ('KT04','XL',1)
 
 INSERT INTO Events VALUES
-('EV01',N'Sinh nhật cửa hàng',N'Giảm giá','20%','2023-03-11','2023-03-15',N'Siêu giảm giá',1,1),
-('EV02',N'Quốc tế Nam giới',N'Giảm giá','50%','2023-10-19','2023-10-21',N'Siêu giảm giá',1,0),
-('EV03',N'Giáng sinh',N'Giảm giá','40%','2023-11-03','2023-11-05',N'Siêu giảm giá',1,1)
+('EV01',N'Sinh nhật cửa hàng',1,'20%','2023-03-11','2023-03-15',N'Siêu giảm giá',1,1,N'ok'),
+('EV02',N'Quốc tế Nam giới',1,'50%','2023-10-19','2023-10-21',N'Siêu giảm giá',1,0,N'ok'),
+('EV03',N'Giáng sinh',0,'40%','2023-11-03','2023-11-05',N'Siêu giảm giá',1,1,N'ok')
 INSERT INTO MaVoucher VALUES
 ('VC01','EV01',10,1),
 ('VC02','EV03',15,1),
