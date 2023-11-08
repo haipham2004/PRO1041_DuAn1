@@ -3,30 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
-            <file>file:/F:/FPT%20Polytechnic/DA1/PRO1041_DuAn1/src/repository/KhuyenMaiRepository.java</file>
-            <file>file:/F:/FPT%20Polytechnic/DA1/PRO1041_DuAn1/src/service/servicImp/KhuyenMaiServiceImp.java</file>
-            <file>file:/F:/FPT%20Polytechnic/DA1/PRO1041_DuAn1/src/model/Events.java</file>
             <file>file:/F:/FPT%20Polytechnic/DA1/PRO1041_DuAn1/src/view/itf_KhuyenMai.java</file>
-=======
-
-            <file>file:/D:/PRO1041_DuAn1/PRO1041_DuAn1/src/view/itf_SanPham.java</file>
-            <file>file:/D:/PRO1041_DuAn1/PRO1041_DuAn1/src/service/servicImp/ChiTietSanPhamServiceImp.java</file>
-            <file>file:/D:/PRO1041_DuAn1/PRO1041_DuAn1/src/repository/SanPhamRepository.java</file>
-            <file>file:/D:/PRO1041_DuAn1/PRO1041_DuAn1/src/repository/ChiTietSanPhamRepository.java</file>
-            <file>file:/D:/PRO1041_DuAn1/PRO1041_DuAn1/src/view/AdamStoreView.java</file>
-
-            <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/view/AdamStoreView.java</file>
-            <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/view/itf_DoiMatKhau.java</file>
-            <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/view/itf_KhachHang.java</file>
-            <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/repository/NhanVienRepository.java</file>
-            <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/repository/KhachHangRepository.java</file>
-            <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/model/TaiKhoan.java</file>
-            <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/repository/KhuyenMaiRepository.java</file>
-            <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/view/itf_SanPham.java</file>
-            <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/service/servicImp/SanPhamServiceImp.java</file>
-            <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/model/KhachHang.java</file>
->>>>>>> 461338bcda9a48e0eb472d98d4be3b7b274d1ddc
+            <file>file:/F:/FPT%20Polytechnic/DA1/PRO1041_DuAn1/src/view/AdamStoreView.java</file>
         </group>
     </open-files>
 </project-private>
