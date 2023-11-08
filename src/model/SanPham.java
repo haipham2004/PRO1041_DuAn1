@@ -78,7 +78,7 @@ public class SanPham {
 
     @Override
     public String toString() {
-        return tenSanPham;
+        return maSanPham;
     }
 
    
