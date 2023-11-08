@@ -1,5 +1,5 @@
 ﻿
-----Update:2023-11-0--lúc 16g50p--
+----Update:2023-11-0--lúc 18g00p--
 CREATE DATABASE AdamStores
 GO
 USE AdamStores
@@ -47,13 +47,14 @@ CREATE TABLE [HinhThucThanhToan] (
 CREATE TABLE [Events] (
   [MaEV] varchar(10),
   [TenEV] nvarchar(50),
-  [HinhThuc] nvarchar(100),
+  [HinhThuc] bit,
   [MucGiamGia] varchar(100),
   [ThoiGianBatDau] date,
   [ThoiGianKetThuc] date,
   [MoTa] nvarchar(100),
   [TrangThai] bit,
   [DieuKienApDung] bit,--1:tien--0%
+  [DieuKienTongTien] nvarchar(50)
   PRIMARY KEY ([MaEV])
 );
 
