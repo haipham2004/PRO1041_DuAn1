@@ -154,7 +154,6 @@
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="txtSDT" alignment="0" min="-2" pref="225" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
@@ -403,7 +402,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="cboDiaChi" min="-2" pref="109" max="-2" attributes="0"/>
                       <EmptySpace pref="101" max="32767" attributes="0"/>
-                      <Component id="btnResetNV" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnRSDiaChiNV" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -415,7 +414,7 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="cboGioiTinh" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="cboDiaChi" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnResetNV" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnRSDiaChiNV" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="11" max="32767" attributes="0"/>
                   </Group>
@@ -473,12 +472,12 @@
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
               </AuxValues>
             </Component>
-            <Component class="javax.swing.JButton" name="btnResetNV">
+            <Component class="javax.swing.JButton" name="btnRSDiaChiNV">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Reset"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnResetNVActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRSDiaChiNVActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>
@@ -501,7 +500,7 @@
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="txtTimNV" max="32767" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="btnTimNV" min="-2" pref="67" max="-2" attributes="0"/>
+                      <Component id="btnRSTimNV" min="-2" pref="67" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -513,7 +512,7 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="cboTimKiemNV" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txtTimNV" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnTimNV" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnRSTimNV" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
@@ -523,7 +522,7 @@
           <SubComponents>
             <Component class="javax.swing.JTextField" name="txtTimNV">
             </Component>
-            <Component class="javax.swing.JButton" name="btnTimNV">
+            <Component class="javax.swing.JButton" name="btnRSTimNV">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Reset"/>
               </Properties>
