@@ -88,5 +88,44 @@ public class ChatLieuRepository {
             return 0;
         }
     }
+    
+      public List<ChatLieu> listPageCL(int index) {
+        List<ChatLieu> listChatLieu3 = new ArrayList<>();
+        try {
+            conn = DBConnect.getConnection();
+            sql = "SELECT*FROM ChatLieu\n"
+                    + "order by MaChatLieu DESC\n"
+                    + "OFFSET ? rows fetch next 4 rows only";
+            pst = conn.prepareStatement(sql);
+            pst.setInt(1, (index - 1) * 4);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                ChatLieu cl = new ChatLieu(rs.getString(1),
+                        rs.getString(2), rs.getBoolean(3));
+                listChatLieu3.add(cl);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+        return listChatLieu3;
+    }
+
+    public int tongBanGhi() {
+        int tong = 0;
+        try {
+            conn = DBConnect.getConnection();
+            sql = "SELECT COUNT(*) FROM ChatLieu";
+            pst = conn.prepareStatement(sql);
+            rs = pst.executeQuery();
+            if (rs.next()) {
+                tong = rs.getInt(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
+        return tong;
+    }
 
 }
