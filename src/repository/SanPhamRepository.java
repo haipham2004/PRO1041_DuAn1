@@ -32,7 +32,6 @@ public class SanPhamRepository {
             conn = DBConnect.getConnection();
             sql = "SELECT SP.MaSanPham,SP.TenSanPham,SP.TrangThai,LSP.MaLSP,LSP.TenLSP,SP.XuatXU \n"
                     + "FROm SanPham SP INNER JOIN LoaiSanPham LSP ON SP.MaLSP=LSP.MaLSP";
-
             pst = conn.prepareStatement(sql);
             rs = pst.executeQuery();
             while (rs.next()) {
@@ -49,7 +48,6 @@ public class SanPhamRepository {
         return listSanPham;
     }
 
-   
     public int them(SanPham sp) {
         try {
             conn = DBConnect.getConnection();
@@ -127,8 +125,8 @@ public class SanPhamRepository {
             sql = "SELECT SP.MaSanPham,SP.TenSanPham,SP.TrangThai,LSP.MaLSP,LSP.TenLSP,SP.XuatXU \n"
                     + "FROm SanPham SP INNER JOIN LoaiSanPham LSP ON SP.MaLSP=LSP.MaLSP where SP.TenSanPham like ? or LSP.TenLSP like ?";
             pst = conn.prepareStatement(sql);
-            pst.setObject(1, '%'+name+'%');
-            pst.setObject(2, '%'+name+'%');
+            pst.setObject(1, name);
+            pst.setObject(2, name);
             rs = pst.executeQuery();
             while (rs.next()) {
                 LoaiSanPham lsp = new LoaiSanPham(rs.getString(4),
@@ -143,46 +141,4 @@ public class SanPhamRepository {
         }
         return listSanPham2;
     }
-    
-     public List<SanPham> listPageSP(int index) {
-        List<SanPham> listSanPham3 = new ArrayList<>();
-        try {
-            conn = DBConnect.getConnection();
-            sql = "SELECT SP.MaSanPham,SP.TenSanPham,SP.TrangThai,LSP.MaLSP,LSP.TenLSP,SP.XuatXU \n"
-                    + "FROm SanPham SP INNER JOIN LoaiSanPham LSP ON SP.MaLSP=LSP.MaLSP\n"
-                    + "order by SP.MaSanPham\n"
-                    + "offset ? rows fetch next 4 rows only ";
-            pst = conn.prepareStatement(sql);
-            pst.setInt(1, (index - 1) * 4);
-            rs = pst.executeQuery();
-            while (rs.next()) {
-                LoaiSanPham lsp = new LoaiSanPham(rs.getString(4),
-                        rs.getString(5));
-                SanPham sp = new SanPham(rs.getString(1), rs.getString(2),
-                        rs.getBoolean(3), lsp, rs.getString(6));
-                listSanPham3.add(sp);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-        return listSanPham3;
-    }
-    public int tongBanGhi(){
-        int tong=0;
-        try {
-            conn=DBConnect.getConnection();
-            sql="SELECT COUNT(*) FROM SanPham";
-            pst=conn.prepareStatement(sql);
-            rs=pst.executeQuery();
-            if(rs.next()){
-                tong=rs.getInt(1);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            return 0;
-        }
-        return tong;
-    }
-
 }
