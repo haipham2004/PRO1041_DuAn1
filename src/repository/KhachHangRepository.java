@@ -26,7 +26,7 @@ public class KhachHangRepository {
         listKhachHang.clear();
         try {
             con = DBConnect.getConnection();
-            sql = "Select MaKH,HoTen,NgaySinh,SoDienThoai,Email,GioiTInh,DiaChi,TrangThai From KhachHang";
+            sql = "Select MaKH,HoTen,NgaySinh,SoDienThoai,Email,GioiTInh,DiaChi From KhachHang";
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
@@ -36,8 +36,7 @@ public class KhachHangRepository {
                         rs.getString(4),
                         rs.getString(5),
                         rs.getBoolean(6),
-                        rs.getString(7),
-                        rs.getBoolean(8));
+                        rs.getString(7));
                 listKhachHang.add(kh);
             }
         } catch (Exception e) {
@@ -50,8 +49,8 @@ public class KhachHangRepository {
     public int Them(KhachHang kh) {
         try {
             con = DBConnect.getConnection();
-            sql = "INSERT INTO KhachHang(MaKH,HoTen,NgaySinh,SoDienThoai,Email,GioiTInh,DiaChi,TrangThai) \n"
-                    + "Values (?,?,?,?,?,?,?,?)";
+            sql = "INSERT INTO KhachHang(MaKH,HoTen,NgaySinh,SoDienThoai,Email,GioiTInh,DiaChi) \n"
+                    + "Values (?,?,?,?,?,?,?)";
             ps = con.prepareStatement(sql);
             ps.setObject(1, kh.getMaKhachHang());
             ps.setObject(2, kh.getHoTen());
@@ -60,7 +59,6 @@ public class KhachHangRepository {
             ps.setObject(5, kh.getEmail());
             ps.setObject(6, kh.isGioiTinh());
             ps.setObject(7, kh.getDiaChi());
-            ps.setObject(8, kh.isGioiTinh());
             return ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
@@ -72,7 +70,7 @@ public class KhachHangRepository {
         try {
             con = DBConnect.getConnection();
             sql = "Update KhachHang set HoTen = ?, NgaySinh = ?,SoDienThoai = ?,Email = ?,\n"
-                    + "GioiTInh = ?,DiaChi = ? ,TrangThai = ? where MaKH = ?";
+                    + "GioiTInh = ?,DiaChi = ? where MaKH = ?";
             ps = con.prepareStatement(sql);
             ps.setObject(8, maKH);
             ps.setObject(1, kh.getHoTen());
@@ -81,7 +79,6 @@ public class KhachHangRepository {
             ps.setObject(4, kh.getEmail());
             ps.setObject(5, kh.isGioiTinh());
             ps.setObject(6, kh.getDiaChi());
-            ps.setObject(7, kh.isGioiTinh());
             return ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
@@ -93,7 +90,7 @@ public class KhachHangRepository {
         KhachHang kh = null;
         try {
             con = DBConnect.getConnection();
-            sql = "Select MaKH,HoTen,NgaySinh,SoDienThoai,Email,GioiTInh,DiaChi,TrangThai From KhachHang where MaKH = ?";
+            sql = "Select MaKH,HoTen,NgaySinh,SoDienThoai,Email,GioiTInh,DiaChi From KhachHang where MaKH = ?";
             ps = con.prepareStatement(sql);
             ps.setObject(1, maKH);
             rs = ps.executeQuery();
@@ -104,8 +101,7 @@ public class KhachHangRepository {
                         rs.getString(4),
                         rs.getString(5),
                         rs.getBoolean(6),
-                        rs.getString(7),
-                        rs.getBoolean(8));
+                        rs.getString(7));
             }
             return kh;
         } catch (Exception e) {
@@ -118,7 +114,7 @@ public class KhachHangRepository {
         listKhachHang.clear();
         try {
             con = DBConnect.getConnection();
-            sql = "Select MaKH,HoTen,NgaySinh,SoDienThoai,Email,GioiTInh,DiaChi,TrangThai From KhachHang where HoTen like ?";
+            sql = "Select MaKH,HoTen,NgaySinh,SoDienThoai,Email,GioiTInh,DiaChi From KhachHang where HoTen like ?";
             ps = con.prepareStatement(sql);
             ps.setObject(1, ten);
             rs = ps.executeQuery();
@@ -129,8 +125,7 @@ public class KhachHangRepository {
                         rs.getString(4),
                         rs.getString(5),
                         rs.getBoolean(6),
-                        rs.getString(7),
-                        rs.getBoolean(8));
+                        rs.getString(7));
                 listKhachHang.add(kh);
             }
         } catch (Exception e) {
