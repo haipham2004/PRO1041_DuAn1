@@ -45,5 +45,10 @@ public class ChatLieuServiceImp implements AdamStore<ChatLieu, String>{
     public List<ChatLieu> getList(String e) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
+        public List<ChatLieu> listPageCL(int index){
+        return repo.listPageCL(index);
+    }
+    public int tongBanGhi(){
+        return repo.tongBanGhi();
+    }
 }

@@ -13,8 +13,9 @@ import service.AdamStore;
  *
  * @author Admin BVCN88 02
  */
-public class MauSacServiceImp implements AdamStore<MauSac, String>{
-    MauSacRepository repo=new MauSacRepository();
+public class MauSacServiceImp implements AdamStore<MauSac, String> {
+
+    MauSacRepository repo = new MauSacRepository();
 
     @Override
     public List<MauSac> getAll() {
@@ -45,6 +46,12 @@ public class MauSacServiceImp implements AdamStore<MauSac, String>{
     public List<MauSac> getList(String e) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
-    
+
+    public List<MauSac> listPageMS(int index) {
+        return repo.listPageMS(index);
+    }
+
+    public int tongBanGhi() {
+        return repo.tongBanGhi();
+    }
 }

@@ -46,4 +46,11 @@ public class KichThuocServiceImp implements AdamStore<KichThuoc, String>{
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
+     public List<KichThuoc> listPageKT(int index) {
+        return repo.listPageKT(index);
+    }
+
+    public int tongBanGhi() {
+        return repo.tongBanGhi();
+    }
 }

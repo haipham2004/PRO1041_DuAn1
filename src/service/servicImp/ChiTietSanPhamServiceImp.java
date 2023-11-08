@@ -49,6 +49,14 @@ public class ChiTietSanPhamServiceImp implements AdamStore<ChiTietSanPham, Strin
     public List<ChiTietSanPham> getListGia(double giaMin,double giaMax) {
         return repo.getListGia(giaMin, giaMax);
     }
+    
+    public List<ChiTietSanPham> listPageCTSP(int index) {
+        return repo.listPageCTSP(index);
+    }
+
+    public int tongBanGhi() {
+        return repo.tongBanGhi();
+    }
 
     
 }
