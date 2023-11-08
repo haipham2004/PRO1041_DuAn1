@@ -3,31 +3,35 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package repository;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import model.LoaiSanPham;
 import model.MauSac;
 import util.DBConnect;
+
 /**
  *
  * @author Admin BVCN88 02
  */
 public class MauSacRepository {
+
     PreparedStatement pst = null;
     Connection conn = null;
     ResultSet rs = null;
     String sql = null;
     List<MauSac> listMauSac = new ArrayList<>();
-     public List<MauSac> getAll() {
-         listMauSac.clear();
+
+    public List<MauSac> getAll() {
+        listMauSac.clear();
         try {
             conn = DBConnect.getConnection();
             sql = "SELECT*FROM MauSac";
             pst = conn.prepareStatement(sql);
             rs = pst.executeQuery();
             while (rs.next()) {
-                MauSac ms=new MauSac(rs.getString(1), 
+                MauSac ms = new MauSac(rs.getString(1),
                         rs.getString(2), rs.getBoolean(3));
                 listMauSac.add(ms);
             }
@@ -37,29 +41,31 @@ public class MauSacRepository {
         }
         return listMauSac;
     }
-     public MauSac getOne(String ma){
-           MauSac ms=null;
-            try {
+
+    public MauSac getOne(String ma) {
+        MauSac ms = null;
+        try {
             conn = DBConnect.getConnection();
             sql = "SELECT*FROM MauSac where MaMauSac=?";
             pst = conn.prepareStatement(sql);
             pst.setObject(1, ma);
             rs = pst.executeQuery();
             while (rs.next()) {
-            ms=new MauSac(rs.getString(1), 
+                ms = new MauSac(rs.getString(1),
                         rs.getString(2), rs.getBoolean(3));
             }
         } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
-           return ms;
-       }
-      public int them(MauSac ms){
+        return ms;
+    }
+
+    public int them(MauSac ms) {
         try {
-            conn=DBConnect.getConnection();
-            sql="INSERT INTO MauSac VALUES(?,?,?)";
-            pst=conn.prepareStatement(sql);
+            conn = DBConnect.getConnection();
+            sql = "INSERT INTO MauSac VALUES(?,?,?)";
+            pst = conn.prepareStatement(sql);
             pst.setObject(1, ms.getMaMauSac());
             pst.setObject(2, ms.getTenMauSac());
             pst.setObject(3, ms.isTrangThai());
@@ -69,12 +75,12 @@ public class MauSacRepository {
             return 0;
         }
     }
-      
-      public int sua(MauSac ms,String ma){
+
+    public int sua(MauSac ms, String ma) {
         try {
-            conn=DBConnect.getConnection();
-            sql="UPDATE MauSac set TenMauSac=?,TrangThai=? where MaMauSac=?";
-            pst=conn.prepareStatement(sql);
+            conn = DBConnect.getConnection();
+            sql = "UPDATE MauSac set TenMauSac=?,TrangThai=? where MaMauSac=?";
+            pst = conn.prepareStatement(sql);
             pst.setObject(1, ms.getTenMauSac());
             pst.setObject(2, ms.isTrangThai());
             pst.setObject(3, ma);
@@ -84,4 +90,44 @@ public class MauSacRepository {
             return 0;
         }
     }
+
+    public List<MauSac> listPageMS(int index) {
+        List<MauSac> listMauSac3 = new ArrayList<>();
+        try {
+            conn = DBConnect.getConnection();
+            sql = "SELECT*FROM MauSac\n"
+                    + "order by MaMauSac DESC\n"
+                    + "OFFSET ? rows fetch next 4 rows only";
+            pst = conn.prepareStatement(sql);
+            pst.setInt(1, (index - 1) * 4);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                MauSac ms = new MauSac(rs.getString(1),
+                        rs.getString(2), rs.getBoolean(3));
+                listMauSac3.add(ms);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+        return listMauSac3;
+    }
+
+    public int tongBanGhi() {
+        int tong = 0;
+        try {
+            conn = DBConnect.getConnection();
+            sql = "SELECT COUNT(*) FROM MauSac";
+            pst = conn.prepareStatement(sql);
+            rs = pst.executeQuery();
+            if (rs.next()) {
+                tong = rs.getInt(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
+        return tong;
+    }
+
 }

@@ -82,7 +82,7 @@ public class AdamStoreView extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(51, 204, 255));
 
-        pnlTitle.setBackground(new java.awt.Color(51, 204, 255));
+        pnlTitle.setBackground(new java.awt.Color(0, 153, 153));
         pnlTitle.setPreferredSize(new java.awt.Dimension(1000, 100));
 
         btnExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/close.png"))); // NOI18N
@@ -118,9 +118,9 @@ public class AdamStoreView extends javax.swing.JFrame {
                     .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
-        pnlMenu.setBackground(new java.awt.Color(51, 204, 255));
+        pnlMenu.setBackground(new java.awt.Color(0, 153, 153));
 
-        pnlSanPham.setBackground(new java.awt.Color(51, 204, 255));
+        pnlSanPham.setBackground(new java.awt.Color(0, 153, 153));
         pnlSanPham.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 pnlSanPhamMouseClicked(evt);
@@ -150,7 +150,7 @@ public class AdamStoreView extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        pnlNhanVien.setBackground(new java.awt.Color(51, 204, 255));
+        pnlNhanVien.setBackground(new java.awt.Color(0, 153, 153));
         pnlNhanVien.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 pnlNhanVienMouseClicked(evt);
@@ -180,7 +180,7 @@ public class AdamStoreView extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        pnlThongKe.setBackground(new java.awt.Color(204, 204, 204));
+        pnlThongKe.setBackground(new java.awt.Color(0, 153, 153));
         pnlThongKe.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 pnlThongKeMouseClicked(evt);
@@ -213,7 +213,7 @@ public class AdamStoreView extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        pnlHoaDon.setBackground(new java.awt.Color(51, 204, 255));
+        pnlHoaDon.setBackground(new java.awt.Color(0, 153, 153));
         pnlHoaDon.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 pnlHoaDonMouseClicked(evt);
@@ -243,7 +243,7 @@ public class AdamStoreView extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        pnlLichSu.setBackground(new java.awt.Color(51, 204, 255));
+        pnlLichSu.setBackground(new java.awt.Color(0, 153, 153));
         pnlLichSu.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 pnlLichSuMouseClicked(evt);
@@ -273,7 +273,7 @@ public class AdamStoreView extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        pnlKhuyenMai.setBackground(new java.awt.Color(51, 204, 255));
+        pnlKhuyenMai.setBackground(new java.awt.Color(0, 153, 153));
         pnlKhuyenMai.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 pnlKhuyenMaiMouseClicked(evt);
@@ -303,7 +303,7 @@ public class AdamStoreView extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        pnlKhachHang.setBackground(new java.awt.Color(51, 204, 255));
+        pnlKhachHang.setBackground(new java.awt.Color(0, 153, 153));
         pnlKhachHang.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 pnlKhachHangMouseClicked(evt);
@@ -337,7 +337,7 @@ public class AdamStoreView extends javax.swing.JFrame {
                     .addContainerGap()))
         );
 
-        pnlDoiMatKhau.setBackground(new java.awt.Color(51, 204, 255));
+        pnlDoiMatKhau.setBackground(new java.awt.Color(0, 153, 153));
         pnlDoiMatKhau.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 pnlDoiMatKhauMouseClicked(evt);
@@ -371,7 +371,7 @@ public class AdamStoreView extends javax.swing.JFrame {
                     .addContainerGap()))
         );
 
-        pnlDangXuat.setBackground(new java.awt.Color(51, 204, 255));
+        pnlDangXuat.setBackground(new java.awt.Color(0, 153, 153));
         pnlDangXuat.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 pnlDangXuatMouseClicked(evt);

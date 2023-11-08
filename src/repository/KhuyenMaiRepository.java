@@ -25,7 +25,7 @@ public class KhuyenMaiRepository {
         listKm.clear();
         try {
             con = DBConnect.getConnection();
-            sql = "select * from Eventa";
+            sql = "select * from Events";
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
