@@ -21,6 +21,8 @@ import javax.swing.JFileChooser;
 import javax.swing.JTable;
 import javax.swing.RowSorter;
 import javax.swing.SortOrder;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
@@ -58,6 +60,7 @@ public class itf_NhanVien extends javax.swing.JInternalFrame {
         loadCboGioiTinh();
         sort(tblNV0);
         sort(tblNV1);
+        find();
     }
 
     public void sort(JTable table) {
@@ -80,6 +83,33 @@ public class itf_NhanVien extends javax.swing.JInternalFrame {
                 }
             }
         });
+    }
+
+    public void find() {
+        DocumentListener dl = new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                txtNVChange();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                txtNVChange();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                txtNVChange();
+            }
+
+            public void txtNVChange() {
+                String hai = txtTimNV.getText();
+                String mot = getCboTimKiem();
+                fillTableNV(serviceNV.getList3(mot, hai));
+            }
+
+        };
+        txtTimNV.getDocument().addDocumentListener(dl);
     }
 
     public void detailNhanVien(JTable table, int index, boolean dangLamViec) {
@@ -185,6 +215,18 @@ public class itf_NhanVien extends javax.swing.JInternalFrame {
         }
     }
 
+    public String getCboTimKiem() {
+        if (cboTimKiemNV.getSelectedIndex() == 0) {
+            return "MaNV";
+        } else if (cboTimKiemNV.getSelectedIndex() == 1) {
+            return "HoTen";
+        } else if (cboTimKiemNV.getSelectedIndex() == 2) {
+            return "SoDienThoai";
+        } else {
+            return "CCCD";
+        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -227,10 +269,10 @@ public class itf_NhanVien extends javax.swing.JInternalFrame {
         jPanel8 = new javax.swing.JPanel();
         cboGioiTinh = new javax.swing.JComboBox<>();
         cboDiaChi = new javax.swing.JComboBox<>();
-        btnResetNV = new javax.swing.JButton();
+        btnRSDiaChiNV = new javax.swing.JButton();
         jPanel10 = new javax.swing.JPanel();
         txtTimNV = new javax.swing.JTextField();
-        btnTimNV = new javax.swing.JButton();
+        btnRSTimNV = new javax.swing.JButton();
         cboTimKiemNV = new javax.swing.JComboBox<>();
         jTabbedPane3 = new javax.swing.JTabbedPane();
         jPanel11 = new javax.swing.JPanel();
@@ -358,7 +400,6 @@ public class itf_NhanVien extends javax.swing.JInternalFrame {
                                     .addComponent(jLabel35)
                                     .addComponent(jLabel34)
                                     .addComponent(jLabel32, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel61Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(txtSDT, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel61Layout.createSequentialGroup()
@@ -448,10 +489,10 @@ public class itf_NhanVien extends javax.swing.JInternalFrame {
             }
         });
 
-        btnResetNV.setText("Reset");
-        btnResetNV.addActionListener(new java.awt.event.ActionListener() {
+        btnRSDiaChiNV.setText("Reset");
+        btnRSDiaChiNV.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnResetNVActionPerformed(evt);
+                btnRSDiaChiNVActionPerformed(evt);
             }
         });
 
@@ -465,7 +506,7 @@ public class itf_NhanVien extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cboDiaChi, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 101, Short.MAX_VALUE)
-                .addComponent(btnResetNV)
+                .addComponent(btnRSDiaChiNV)
                 .addContainerGap())
         );
         jPanel8Layout.setVerticalGroup(
@@ -475,13 +516,13 @@ public class itf_NhanVien extends javax.swing.JInternalFrame {
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cboGioiTinh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cboDiaChi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnResetNV))
+                    .addComponent(btnRSDiaChiNV))
                 .addContainerGap(11, Short.MAX_VALUE))
         );
 
         jPanel10.setBorder(javax.swing.BorderFactory.createTitledBorder("Tìm kiếm"));
 
-        btnTimNV.setText("Reset");
+        btnRSTimNV.setText("Reset");
 
         cboTimKiemNV.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mã NV", "Họ tên", "SĐT", "CCCD" }));
 
@@ -495,7 +536,7 @@ public class itf_NhanVien extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtTimNV)
                 .addGap(18, 18, 18)
-                .addComponent(btnTimNV, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnRSTimNV, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(15, 15, 15))
         );
         jPanel10Layout.setVerticalGroup(
@@ -505,7 +546,7 @@ public class itf_NhanVien extends javax.swing.JInternalFrame {
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cboTimKiemNV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtTimNV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnTimNV))
+                    .addComponent(btnRSTimNV))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -711,11 +752,11 @@ public class itf_NhanVien extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btnSuaNVActionPerformed
 
-    private void btnResetNVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetNVActionPerformed
+    private void btnRSDiaChiNVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRSDiaChiNVActionPerformed
         fillTableNV(serviceNV.getAll());
         cboDiaChi.setSelectedIndex(-1);
         cboGioiTinh.setSelectedIndex(-1);
-    }//GEN-LAST:event_btnResetNVActionPerformed
+    }//GEN-LAST:event_btnRSDiaChiNVActionPerformed
 
     private void cboGioiTinhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboGioiTinhActionPerformed
         String mot;
@@ -729,7 +770,7 @@ public class itf_NhanVien extends javax.swing.JInternalFrame {
             mot = "0";
         }
         if (cboDiaChi.getSelectedIndex() == -1) {
-            fillTableNV(serviceNV.getList(mot));
+            fillTableNV(serviceNV.getList3("GioiTinh",mot));
         } else {
             hai = cboDiaChi.getSelectedItem().toString();
             fillTableNV(serviceNV.getList2(mot, hai));
@@ -742,7 +783,7 @@ public class itf_NhanVien extends javax.swing.JInternalFrame {
         if (cboDiaChi.getSelectedIndex() != -1) {
             mot = cboDiaChi.getSelectedItem().toString();
             if (cboGioiTinh.getSelectedIndex() == -1) {
-                fillTableNV(serviceNV.getList1(mot));
+                fillTableNV(serviceNV.getList3("DiaChi",mot));
             } else {
                 hai = cboGioiTinh.getSelectedIndex() == 1 ? "0" : "1";
                 fillTableNV(serviceNV.getList2(hai, mot));
@@ -754,10 +795,10 @@ public class itf_NhanVien extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup btgGioiTinhNV;
     private javax.swing.JButton btnMoiNV;
-    private javax.swing.JButton btnResetNV;
+    private javax.swing.JButton btnRSDiaChiNV;
+    private javax.swing.JButton btnRSTimNV;
     private javax.swing.JButton btnSuaNV;
     private javax.swing.JButton btnThemNV;
-    private javax.swing.JButton btnTimNV;
     private javax.swing.ButtonGroup btnTrangThaiNV;
     private javax.swing.JComboBox<String> cboDiaChi;
     private javax.swing.JComboBox<String> cboGioiTinh;

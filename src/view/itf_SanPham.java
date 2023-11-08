@@ -88,23 +88,28 @@ public class itf_SanPham extends javax.swing.JInternalFrame {
     }
 
     public ChiTietSanPham savesCTSP() {
-        String maCTSP;
-        int soLuong;
-        double gia;
-        boolean trangThai;
-        maCTSP = txtMaCTSP.getText();
+         String maCTSP;
+    int soLuong;
+    double gia;
+    boolean trangThai;
+    maCTSP = txtMaCTSP.getText();
+    try {
         soLuong = Integer.parseInt(txtSoLuong.getText());
         gia = Double.parseDouble(txtGia.getText());
-        SanPham sp = (SanPham) cbxSanPham.getSelectedItem();
-        ChatLieu cl = (ChatLieu) cbxChatLieu.getSelectedItem();
-        MauSac ms = (MauSac) cbxMauSac.getSelectedItem();
-        KichThuoc kt = (KichThuoc) cbxKichThuoc.getSelectedItem();
-        if (rdConhang1.isSelected()) {
-            trangThai = true;
-        } else {
-            trangThai = false;
-        }
-        return new ChiTietSanPham(maCTSP, sp, ms, cl, kt, soLuong, gia, trangThai);
+    } catch (Exception e) {
+//        JOptionPane.showMessageDialog(null, "Số lượng hoặc giá sản phẩm không đúng định dạng số.");
+        return null;
+    }
+    SanPham sp = (SanPham) cbxSanPham.getSelectedItem();
+    ChatLieu cl = (ChatLieu) cbxChatLieu.getSelectedItem();
+    MauSac ms = (MauSac) cbxMauSac.getSelectedItem();
+    KichThuoc kt = (KichThuoc) cbxKichThuoc.getSelectedItem();
+    if (rdConhang1.isSelected()) {
+        trangThai = true;
+    } else {
+        trangThai = false;
+    }
+    return new ChiTietSanPham(maCTSP, sp, ms, cl, kt, soLuong, gia, trangThai);
 
     }
 
@@ -377,7 +382,7 @@ public class itf_SanPham extends javax.swing.JInternalFrame {
         return true;
     }
 
-    public boolean validateCTSP() {
+    public boolean validateCTSPs() {
         if (txtMaCTSP.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Mã trống");
             return false;
@@ -1473,7 +1478,7 @@ public class itf_SanPham extends javax.swing.JInternalFrame {
     private void btnThemCTSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemCTSPActionPerformed
         // TODO add your handling code here:
         ChiTietSanPham ctsp = savesCTSP();
-//        if (validateCTSP()) {
+        if (validateCTSPs()) {
             if (serviceCTSP.getOne(ctsp.getMaChiTietSanPham()) != null) {
                 JOptionPane.showMessageDialog(this, "Mã chi tiết sản phẩm trùng");
                 return;
@@ -1485,7 +1490,7 @@ public class itf_SanPham extends javax.swing.JInternalFrame {
                     JOptionPane.showMessageDialog(this, "Thêm sản phẩm thất bại");
                 }
             }
-//        }
+        }
     }//GEN-LAST:event_btnThemCTSPActionPerformed
 
     private void btnThemThuocTinhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemThuocTinhActionPerformed
