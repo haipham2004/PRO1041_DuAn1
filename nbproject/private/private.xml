@@ -2,27 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-            <file>file:/F:/FPT%20Polytechnic/DA1/PRO1041_DuAn1/src/view/itf_KhuyenMai.java</file>
-            <file>file:/F:/FPT%20Polytechnic/DA1/PRO1041_DuAn1/src/view/AdamStoreView.java</file>
-
-=======
-=======
->>>>>>> parent of 461338b (Merge pull request #77 from haipham2004/nhanhHai)
-            <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/view/AdamStoreView.java</file>
-            <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/view/itf_DoiMatKhau.java</file>
-            <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/view/itf_KhachHang.java</file>
-            <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/repository/NhanVienRepository.java</file>
-            <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/repository/KhachHangRepository.java</file>
-            <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/model/TaiKhoan.java</file>
-            <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/repository/KhuyenMaiRepository.java</file>
-            <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/view/itf_SanPham.java</file>
-            <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/service/servicImp/SanPhamServiceImp.java</file>
-            <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/model/KhachHang.java</file>
->>>>>>> parent of 461338b (Merge pull request #77 from haipham2004/nhanhHai)
-        </group>
+        <group/>
     </open-files>
 </project-private>
