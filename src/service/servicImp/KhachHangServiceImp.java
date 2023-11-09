@@ -47,4 +47,11 @@ public class KhachHangServiceImp implements AdamStore<KhachHang, String>{
         return repo.getList(e);
     }
     
+    public List<KhachHang> listPageKH(int index){
+        return repo.listPageKH(index);
+    }
+            
+    public int tongBanGhi(){
+        return repo.tongBanGhi();
+    }     
 }

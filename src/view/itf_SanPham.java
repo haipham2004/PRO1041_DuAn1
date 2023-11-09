@@ -830,14 +830,14 @@ public class itf_SanPham extends javax.swing.JInternalFrame {
 
         lbSoTrang.setText("Số Trang");
 
-        btnDau1.setText("Pre");
+        btnDau1.setText("Đầu");
         btnDau1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDau1ActionPerformed(evt);
             }
         });
 
-        btnCuoi1.setText("Next");
+        btnCuoi1.setText("Cuối");
         btnCuoi1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCuoi1ActionPerformed(evt);
