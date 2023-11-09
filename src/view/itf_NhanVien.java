@@ -798,6 +798,7 @@ public class itf_NhanVien extends javax.swing.JInternalFrame {
         btnThemNV.setEnabled(false);
         txtMaNV.setEnabled(false);
         tblNV0.clearSelection();
+        
     }//GEN-LAST:event_tblNV1MouseClicked
 
     private void tblNV0MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblNV0MouseClicked
