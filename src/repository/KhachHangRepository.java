@@ -109,14 +109,16 @@ public class KhachHangRepository {
             return null;
         }
     }
-    
+
     public List<KhachHang> getList(String ten) {
         listKhachHang.clear();
         try {
             con = DBConnect.getConnection();
-            sql = "Select MaKH,HoTen,NgaySinh,SoDienThoai,Email,GioiTInh,DiaChi From KhachHang where HoTen like ?";
+            sql = "Select MaKH,HoTen,NgaySinh,SoDienThoai,Email,GioiTInh,DiaChi "
+                    + "From KhachHang where HoTen like ? or SoDienThoai like ?";
             ps = con.prepareStatement(sql);
-            ps.setObject(1, ten);
+            ps.setObject(1, '%' + ten + '%');
+            ps.setObject(2, '%' + ten + '%');
             rs = ps.executeQuery();
             while (rs.next()) {
                 KhachHang kh = new KhachHang(rs.getString(1),
