@@ -652,16 +652,7 @@
                 </Container>
                 <Component class="javax.swing.JButton" name="btnAnSP">
                   <Properties>
-<<<<<<< HEAD
                     <Property name="text" type="java.lang.String" value="&#x1ea8;n"/>
-=======
-                    <Property name="text" type="java.lang.String" value="S&#x1ed1; Trang"/>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JButton" name="btnDau1">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="&#x110;&#x1ea7;u"/>
->>>>>>> 934d73828f4b734eb43623f88c5b70c2195a7633
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAnSPActionPerformed"/>
@@ -669,11 +660,7 @@
                 </Component>
                 <Component class="javax.swing.JButton" name="btnKhoiPhuc">
                   <Properties>
-<<<<<<< HEAD
                     <Property name="text" type="java.lang.String" value="Kh&#xf4;i ph&#x1ee5;c"/>
-=======
-                    <Property name="text" type="java.lang.String" value="Cu&#x1ed1;i"/>
->>>>>>> 934d73828f4b734eb43623f88c5b70c2195a7633
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnKhoiPhucActionPerformed"/>
