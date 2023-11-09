@@ -32,12 +32,6 @@ public class AdamStoreView extends javax.swing.JFrame {
         itf_ThongKe thongKe = new itf_ThongKe();
         jdpMain.removeAll();
         jdpMain.add(thongKe).setVisible(true);
-
-    }
-
-    public void setBorder(JPanel jpanel) {
-        Border border = BorderFactory.createEmptyBorder(0, 0, 0, 0);
-        jpanel.setBorder(border);
     }
 
     /**
