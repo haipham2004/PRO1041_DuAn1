@@ -23,6 +23,29 @@ public class Events {
     private boolean dieuKienApDung;
     private String dieuKienTongTien;
 
+    public Events() {
+    }
+
+    public Events(String maEventa, String tenEvent, boolean hinhThuc, String mucGiamGia, Date thoiGianBatDau, Date thoiGianKetThuc, String moTa, boolean trangThai, boolean dieuKienApDung, String dieuKienTongTien) {
+        this.maEventa = maEventa;
+        this.tenEvent = tenEvent;
+        this.hinhThuc = hinhThuc;
+        this.mucGiamGia = mucGiamGia;
+        this.thoiGianBatDau = thoiGianBatDau;
+        this.thoiGianKetThuc = thoiGianKetThuc;
+        this.moTa = moTa;
+        this.trangThai = trangThai;
+        this.dieuKienApDung = dieuKienApDung;
+        this.dieuKienTongTien = dieuKienTongTien;
+    }
+
+    public Events(String maEventa, String tenEvent, boolean hinhThuc, String mucGiamGia) {
+        this.maEventa = maEventa;
+        this.tenEvent = tenEvent;
+        this.hinhThuc = hinhThuc;
+        this.mucGiamGia = mucGiamGia;
+    }
+
     public String getMaEventa() {
         return maEventa;
     }
@@ -79,8 +102,6 @@ public class Events {
         this.moTa = moTa;
     }
 
-   
-
     public boolean isDieuKienApDung() {
         return dieuKienApDung;
     }
@@ -97,19 +118,6 @@ public class Events {
         this.dieuKienTongTien = dieuKienTongTien;
     }
 
-    public Events(String maEventa, String tenEvent, boolean hinhThuc, String mucGiamGia, Date thoiGianBatDau, Date thoiGianKetThuc, String moTa, boolean trangThai, boolean dieuKienApDung, String dieuKienTongTien) {
-        this.maEventa = maEventa;
-        this.tenEvent = tenEvent;
-        this.hinhThuc = hinhThuc;
-        this.mucGiamGia = mucGiamGia;
-        this.thoiGianBatDau = thoiGianBatDau;
-        this.thoiGianKetThuc = thoiGianKetThuc;
-        this.moTa = moTa;
-        this.trangThai = trangThai;
-        this.dieuKienApDung = dieuKienApDung;
-        this.dieuKienTongTien = dieuKienTongTien;
-    }
-
     public boolean isTrangThai() {
         return trangThai;
     }
@@ -118,8 +126,9 @@ public class Events {
         this.trangThai = trangThai;
     }
 
-    
-    public Events() {
+    @Override
+    public String toString() {
+        return tenEvent ;
     }
 
 }
