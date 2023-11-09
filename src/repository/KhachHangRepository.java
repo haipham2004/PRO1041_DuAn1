@@ -72,7 +72,7 @@ public class KhachHangRepository {
             sql = "Update KhachHang set HoTen = ?, NgaySinh = ?,SoDienThoai = ?,Email = ?,\n"
                     + "GioiTInh = ?,DiaChi = ? where MaKH = ?";
             ps = con.prepareStatement(sql);
-            ps.setObject(8, maKH);
+            ps.setObject(7, maKH);
             ps.setObject(1, kh.getHoTen());
             ps.setObject(2, kh.getNgaySinh());
             ps.setObject(3, kh.getSoDienThoai());
@@ -109,14 +109,16 @@ public class KhachHangRepository {
             return null;
         }
     }
-    
+
     public List<KhachHang> getList(String ten) {
-        listKhachHang.clear();
+        List<KhachHang> listKhachHang2 = new ArrayList<>();
         try {
             con = DBConnect.getConnection();
-            sql = "Select MaKH,HoTen,NgaySinh,SoDienThoai,Email,GioiTInh,DiaChi From KhachHang where HoTen like ?";
+            sql = "Select MaKH,HoTen,NgaySinh,SoDienThoai,Email,GioiTInh,DiaChi "
+                    + "From KhachHang where HoTen like ? or SoDienThoai like ?";
             ps = con.prepareStatement(sql);
-            ps.setObject(1, ten);
+            ps.setObject(1, '%' + ten + '%');
+            ps.setObject(2, '%' + ten + '%');
             rs = ps.executeQuery();
             while (rs.next()) {
                 KhachHang kh = new KhachHang(rs.getString(1),
@@ -126,12 +128,56 @@ public class KhachHangRepository {
                         rs.getString(5),
                         rs.getBoolean(6),
                         rs.getString(7));
-                listKhachHang.add(kh);
+                listKhachHang2.add(kh);
             }
         } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
-        return listKhachHang;
+        return listKhachHang2;
+    }
+    
+    public List<KhachHang> listPageKH(int index) {
+        List<KhachHang> listKhachHang3 = new ArrayList<>();
+        try {
+            con = DBConnect.getConnection();
+            sql = "Select MaKH,HoTen,NgaySinh,SoDienThoai,Email,GioiTInh,DiaChi From KhachHang\n"
+                    + "order by MaKH\n"
+                    + "offset ? rows fetch next 4 rows only ";
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, (index-1)*4);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                KhachHang kh = new KhachHang(rs.getString(1),
+                        rs.getString(2),
+                        rs.getDate(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getBoolean(6),
+                        rs.getString(7));
+                listKhachHang3.add(kh);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+        return listKhachHang3;
+    }
+    
+    public int tongBanGhi() {
+        int tong = 0;
+        try {
+            con = DBConnect.getConnection();
+            sql = "SELECT COUNT(*) FROM KhachHang";
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                tong = rs.getInt(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
+        return tong;
     }
 }

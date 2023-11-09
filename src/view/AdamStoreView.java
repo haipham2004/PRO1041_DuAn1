@@ -23,6 +23,7 @@ public class AdamStoreView extends javax.swing.JFrame {
      */
     public AdamStoreView() {
         initComponents();
+
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         execute();
     }
@@ -107,6 +108,7 @@ public class AdamStoreView extends javax.swing.JFrame {
                 panelBody.add(new HoaDonView());
                 panelBody.repaint();
                 panelBody.revalidate();
+
             }
         });
         //Khuyến mại
@@ -131,12 +133,14 @@ public class AdamStoreView extends javax.swing.JFrame {
         addMenu(menuThongKe,menuMatHang,menuNhanVien,menuBanHang,menuKhachHang,menuKm,menuVoucher);
     }
 
+
     private void addMenu(MenuItem... menu) {
         for (int i = 0; i < menu.length; i++) {
             menus.add(menu[i]);
             ArrayList<MenuItem> subMenu = menu[i].getSubMenu();
             for (MenuItem m : subMenu) {
                 addMenu(m);
+
             }
         }
         menus.revalidate();
@@ -151,6 +155,7 @@ public class AdamStoreView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+
         panelHeader = new javax.swing.JPanel();
         panelMenu = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -158,6 +163,7 @@ public class AdamStoreView extends javax.swing.JFrame {
         panelBody = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
 
         panelHeader.setBackground(new java.awt.Color(45, 113, 248));
         panelHeader.setPreferredSize(new java.awt.Dimension(561, 50));
@@ -168,6 +174,7 @@ public class AdamStoreView extends javax.swing.JFrame {
             panelHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 855, Short.MAX_VALUE)
         );
+
         panelHeaderLayout.setVerticalGroup(
             panelHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 50, Short.MAX_VALUE)
@@ -184,15 +191,18 @@ public class AdamStoreView extends javax.swing.JFrame {
         menus.setLayout(new javax.swing.BoxLayout(menus, javax.swing.BoxLayout.Y_AXIS));
         jScrollPane1.setViewportView(menus);
 
+
         javax.swing.GroupLayout panelMenuLayout = new javax.swing.GroupLayout(panelMenu);
         panelMenu.setLayout(panelMenuLayout);
         panelMenuLayout.setHorizontalGroup(
             panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
         );
+
         panelMenuLayout.setVerticalGroup(
             panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 384, Short.MAX_VALUE)
+
         );
 
         getContentPane().add(panelMenu, java.awt.BorderLayout.LINE_START);
