@@ -4,6 +4,7 @@
  */
 package view;
 
+import java.awt.Component;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -112,6 +113,13 @@ public class itf_NhanVien extends javax.swing.JInternalFrame {
             }
         };
         txtTimNV.getDocument().addDocumentListener(dl);
+    }
+    
+    public void setForm(Boolean x) {
+        Component[] cpn = jPanel61.getComponents();
+        for (Component cp : cpn) {
+            cp.setEnabled(x);
+        }
     }
 
     public Boolean valid() {
@@ -400,12 +408,7 @@ public class itf_NhanVien extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton1.setText("Khôi phục");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
+        jButton1.setText("Nhập từ excel");
 
         javax.swing.GroupLayout jPanel61Layout = new javax.swing.GroupLayout(jPanel61);
         jPanel61.setLayout(jPanel61Layout);
@@ -651,7 +654,7 @@ public class itf_NhanVien extends javax.swing.JInternalFrame {
         jPanel11Layout.setHorizontalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel11Layout.createSequentialGroup()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 917, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 927, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel11Layout.setVerticalGroup(
@@ -694,7 +697,7 @@ public class itf_NhanVien extends javax.swing.JInternalFrame {
         jPanel14.setLayout(jPanel14Layout);
         jPanel14Layout.setHorizontalGroup(
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 923, Short.MAX_VALUE)
+            .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 933, Short.MAX_VALUE)
         );
         jPanel14Layout.setVerticalGroup(
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -736,7 +739,7 @@ public class itf_NhanVien extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 938, Short.MAX_VALUE)
+            .addGap(0, 948, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(pnlChiTietNhanVien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -768,8 +771,7 @@ public class itf_NhanVien extends javax.swing.JInternalFrame {
         txtCCCD.setText("");
         rdoDangLamViec.setSelected(true);
         lblAnhNV.setIcon(null);
-        btnThemNV.setEnabled(true);
-        txtMaNV.setEnabled(true);
+        setForm(true);
         tblNV1.clearSelection();
         tblNV0.clearSelection();
     }//GEN-LAST:event_btnMoiNVActionPerformed
@@ -795,6 +797,7 @@ public class itf_NhanVien extends javax.swing.JInternalFrame {
     private void tblNV1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblNV1MouseClicked
         index = tblNV1.getSelectedRow();
         detailNhanVien(tblNV1, index, true);
+        setForm(true);
         btnThemNV.setEnabled(false);
         txtMaNV.setEnabled(false);
         tblNV0.clearSelection();
@@ -803,8 +806,11 @@ public class itf_NhanVien extends javax.swing.JInternalFrame {
     private void tblNV0MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblNV0MouseClicked
         index = tblNV0.getSelectedRow();
         detailNhanVien(tblNV0, index, false);
-        btnThemNV.setEnabled(false);
-        txtMaNV.setEnabled(false);
+        setForm(false);
+        btnSuaNV.setEnabled(true);
+        btnMoiNV.setEnabled(true);
+        rdoDangLamViec.setEnabled(true);
+        rdoNghiViec.setEnabled(true);
         tblNV1.clearSelection();
     }//GEN-LAST:event_tblNV0MouseClicked
 
@@ -813,9 +819,11 @@ public class itf_NhanVien extends javax.swing.JInternalFrame {
             index = tblNV0.getSelectedRow();
             if (index != -1) {
                 sua(tblNV0);
+                setForm(true);
             } else {
                 index = tblNV1.getSelectedRow();
                 sua(tblNV1);
+                setForm(true);
             }
         }
     }//GEN-LAST:event_btnSuaNVActionPerformed
@@ -867,10 +875,6 @@ public class itf_NhanVien extends javax.swing.JInternalFrame {
     private void cboTimKiemNVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboTimKiemNVActionPerformed
         txtTimNV.setText("");
     }//GEN-LAST:event_cboTimKiemNVActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
