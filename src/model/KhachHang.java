@@ -95,4 +95,9 @@ public class KhachHang {
             return "Nữ";
         }
     }
+
+    @Override
+    public String toString() {
+        return diaChi;
+    }
 }
