@@ -7,6 +7,7 @@ package repository;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import model.Events;
 import model.Voucher;
 import util.DBConnect;
 
@@ -16,7 +17,7 @@ import util.DBConnect;
  */
 public class VoucherRepository {
 
-    PreparedStatement pst = null;
+    PreparedStatement ps = null;
     Connection conn = null;
     ResultSet rs = null;
     String sql = null;
@@ -26,12 +27,17 @@ public class VoucherRepository {
         listVoucher.clear();
         try {
             conn = DBConnect.getConnection();
-            sql = "SELECT * FROM Voucher";
-            pst = conn.prepareStatement(sql);
-            rs = pst.executeQuery();
+            sql = "SELECT EV.MaEV,EV.TenEV,EV.HinhThuc,EV.MucGiamGia,VC.MaVoucher,"
+                    + "VC.SoLuong,VC.TrangThai FROM Events EV\n"
+                    + "INNER JOIN MaVoucher VC ON EV.MaEV = VC.MaEV";
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
             while (rs.next()) {
-                Voucher vc = new Voucher(rs.getString(1), rs.getString(2),
-                        rs.getInt(3), rs.getBoolean(4));
+                Events ev=new Events(rs.getString(1), rs.getString(2), 
+                        rs.getBoolean(3), rs.getString(4));
+                Voucher vc = new Voucher(rs.getString(5),
+                        rs.getInt(6), rs.getBoolean(7),ev); 
+                listVoucher.add(vc);
             }
         } catch (Exception e) {
             e.printStackTrace();
