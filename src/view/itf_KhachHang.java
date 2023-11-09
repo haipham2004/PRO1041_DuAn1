@@ -33,6 +33,7 @@ public class itf_KhachHang extends javax.swing.JInternalFrame {
     DefaultTableModel tblmol = new DefaultTableModel();
     DefaultComboBoxModel<KhachHang> cbxKhachHang = new DefaultComboBoxModel<>();
     int index = -1;
+    int tongBanGhiKH, trangKH = 1, soTrangKH;
 
     /**
      * Creates new form itf_KhachHang
@@ -43,7 +44,7 @@ public class itf_KhachHang extends javax.swing.JInternalFrame {
         BasicInternalFrameUI uI = (BasicInternalFrameUI) this.getUI();
         uI.setNorthPane(null);
         this.setSize(1300, 755);
-        fillTableKH(serviceKH.getAll());
+        loadPageKH();
         sort();
         loadCboDiaChi(serviceKH.getAll());
         cboGioiTinh.setSelectedIndex(-1);
@@ -72,6 +73,17 @@ public class itf_KhachHang extends javax.swing.JInternalFrame {
         }
         cboDiaChi.setModel((ComboBoxModel) cbxKhachHang);
         cboDiaChi.setSelectedIndex(-1);
+    }
+
+    public void loadPageKH() {
+        tongBanGhiKH = serviceKH.tongBanGhi();
+        if (tongBanGhiKH % 4 == 0) {
+            soTrangKH = tongBanGhiKH / 4;
+        } else {
+            soTrangKH = tongBanGhiKH / 4 + 1;
+        }
+        lblSoTrangKH.setText(trangKH + " of " + soTrangKH);
+        fillTableKH(serviceKH.listPageKH(trangKH));
     }
 
     public void sort() {
@@ -179,6 +191,11 @@ public class itf_KhachHang extends javax.swing.JInternalFrame {
         cboGioiTinh = new javax.swing.JComboBox<>();
         jLabel10 = new javax.swing.JLabel();
         cboDiaChi = new javax.swing.JComboBox<>();
+        lblSoTrangKH = new javax.swing.JLabel();
+        btnDau = new javax.swing.JButton();
+        btnLui = new javax.swing.JButton();
+        btnTien = new javax.swing.JButton();
+        btnCuoi = new javax.swing.JButton();
 
         setMinimumSize(new java.awt.Dimension(940, 657));
         setPreferredSize(new java.awt.Dimension(1300, 700));
@@ -364,8 +381,8 @@ public class itf_KhachHang extends javax.swing.JInternalFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 554, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(169, Short.MAX_VALUE))
+                .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 686, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(37, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -379,6 +396,11 @@ public class itf_KhachHang extends javax.swing.JInternalFrame {
         jLabel8.setText("Giới tính: ");
 
         cboGioiTinh.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nam", "Nữ", " " }));
+        cboGioiTinh.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cboGioiTinhItemStateChanged(evt);
+            }
+        });
 
         jLabel10.setText("Địa chỉ: ");
 
@@ -414,6 +436,36 @@ public class itf_KhachHang extends javax.swing.JInternalFrame {
                 .addContainerGap(66, Short.MAX_VALUE))
         );
 
+        lblSoTrangKH.setText("Số trang");
+
+        btnDau.setText("<<");
+        btnDau.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnDauMouseClicked(evt);
+            }
+        });
+
+        btnLui.setText("<");
+        btnLui.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnLuiMouseClicked(evt);
+            }
+        });
+
+        btnTien.setText(">");
+        btnTien.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnTienMouseClicked(evt);
+            }
+        });
+
+        btnCuoi.setText(">>");
+        btnCuoi.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnCuoiMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -423,9 +475,21 @@ public class itf_KhachHang extends javax.swing.JInternalFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 758, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(15, 15, 15))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(174, 174, 174)
+                .addComponent(btnDau)
+                .addGap(33, 33, 33)
+                .addComponent(btnLui, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(43, 43, 43)
+                .addComponent(lblSoTrangKH)
+                .addGap(44, 44, 44)
+                .addComponent(btnTien, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(41, 41, 41)
+                .addComponent(btnCuoi, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -438,6 +502,14 @@ public class itf_KhachHang extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnDau)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnLui)
+                        .addComponent(lblSoTrangKH))
+                    .addComponent(btnTien)
+                    .addComponent(btnCuoi))
                 .addContainerGap(16, Short.MAX_VALUE))
         );
 
@@ -450,16 +522,16 @@ public class itf_KhachHang extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(154, Short.MAX_VALUE))
+                .addContainerGap(153, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(58, 58, 58))
+                .addGap(30, 30, 30))
         );
 
         pack();
@@ -478,7 +550,7 @@ public class itf_KhachHang extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Mã khách hàng trùng");
         } else {
             if (serviceKH.them(kh) > 0) {
-                fillTableKH(serviceKH.getAll());
+                loadPageKH();
                 JOptionPane.showMessageDialog(this, "Thêm khách hàng thành công");
             } else {
                 JOptionPane.showMessageDialog(this, "Thêm khách hàng thất bại");
@@ -496,7 +568,7 @@ public class itf_KhachHang extends javax.swing.JInternalFrame {
             KhachHang kh = this.getFormKH();
             String ma = tblKhachHang.getValueAt(index, 0).toString();
             if (serviceKH.sua(kh, ma) > 0) {
-                fillTableKH(serviceKH.getAll());
+                loadPageKH();
                 JOptionPane.showMessageDialog(this, "Sửa thông tin khách hàng thành công");
             } else {
                 JOptionPane.showMessageDialog(this, "Sửa thông tin khách hàng thất bại");
@@ -514,6 +586,7 @@ public class itf_KhachHang extends javax.swing.JInternalFrame {
         txtTenKhachHang.setText("");
         txtTimKiem.setText("");
         btngGioiTinh.clearSelection();
+        index = -1;
     }//GEN-LAST:event_btnLamMoiMouseClicked
 
     private void txtTimKiemKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKiemKeyReleased
@@ -526,12 +599,52 @@ public class itf_KhachHang extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_txtTimKiemKeyReleased
 
+    private void btnDauMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDauMouseClicked
+        // TODO add your handling code here:
+        trangKH = 1;
+        fillTableKH(serviceKH.listPageKH(trangKH));
+        lblSoTrangKH.setText(trangKH + " of " + soTrangKH);
+    }//GEN-LAST:event_btnDauMouseClicked
+
+    private void btnCuoiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCuoiMouseClicked
+        // TODO add your handling code here:
+        trangKH = soTrangKH;
+        fillTableKH(serviceKH.listPageKH(trangKH));
+        lblSoTrangKH.setText(trangKH + " of " + soTrangKH);
+    }//GEN-LAST:event_btnCuoiMouseClicked
+
+    private void btnTienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTienMouseClicked
+        // TODO add your handling code here:
+        if (trangKH < soTrangKH) {
+            trangKH++;
+            fillTableKH(serviceKH.listPageKH(trangKH));
+            lblSoTrangKH.setText(trangKH + " of " + soTrangKH);
+        }
+    }//GEN-LAST:event_btnTienMouseClicked
+
+    private void btnLuiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLuiMouseClicked
+        // TODO add your handling code here:
+        if (trangKH > 1) {
+            trangKH--;
+            fillTableKH(serviceKH.listPageKH(trangKH));
+            lblSoTrangKH.setText(trangKH + " of " + soTrangKH);
+        }
+    }//GEN-LAST:event_btnLuiMouseClicked
+
+    private void cboGioiTinhItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboGioiTinhItemStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cboGioiTinhItemStateChanged
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCapNhat;
+    private javax.swing.JButton btnCuoi;
+    private javax.swing.JButton btnDau;
     private javax.swing.JButton btnLamMoi;
+    private javax.swing.JButton btnLui;
     private javax.swing.JButton btnThem;
     private javax.swing.JButton btnThemTuExcel;
+    private javax.swing.JButton btnTien;
     private javax.swing.ButtonGroup btngGioiTinh;
     private javax.swing.ButtonGroup btngTrangThai;
     private javax.swing.JComboBox<String> cboDiaChi;
@@ -551,6 +664,7 @@ public class itf_KhachHang extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JLabel lblSoTrangKH;
     private javax.swing.JRadioButton rdNam;
     private javax.swing.JRadioButton rdNu;
     private javax.swing.JTable tblKhachHang;
