@@ -836,23 +836,13 @@ public class itf_SanPham extends javax.swing.JInternalFrame {
         });
         jScrollPane3.setViewportView(tblSanPham);
 
-        btnDau1.setText("Đầu");
+        btnDau1.setText("Pre");
         btnDau1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDau1ActionPerformed(evt);
             }
         });
 
-<<<<<<< HEAD
-=======
-        btnCuoi1.setText("Cuối");
-        btnCuoi1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCuoi1ActionPerformed(evt);
-            }
-        });
-
->>>>>>> 934d73828f4b734eb43623f88c5b70c2195a7633
         btnLui1.setText("Lùi");
         btnLui1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
