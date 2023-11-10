@@ -233,7 +233,6 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
         jLabel9 = new javax.swing.JLabel();
         jPanel11 = new javax.swing.JPanel();
         txtSanPhamCT = new javax.swing.JTextField();
-        btnSearch2a = new javax.swing.JButton();
         jScrollPane7 = new javax.swing.JScrollPane();
         tblChiTietSanPham = new javax.swing.JTable();
         cboMaSP = new javax.swing.JComboBox<>();
@@ -284,6 +283,18 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
         jPanel10.setToolTipText("");
 
         jLabel4.setText("Từ");
+
+        txtTienMin.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtTienMinKeyReleased(evt);
+            }
+        });
+
+        txtTienMax.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtTienMaxKeyReleased(evt);
+            }
+        });
 
         jLabel7.setText("Đến");
 
@@ -341,10 +352,9 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
         jPanel11.setBorder(javax.swing.BorderFactory.createTitledBorder("Tìm kiếm"));
         jPanel11.setToolTipText("");
 
-        btnSearch2a.setText("Search");
-        btnSearch2a.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSearch2aActionPerformed(evt);
+        txtSanPhamCT.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtSanPhamCTKeyReleased(evt);
             }
         });
 
@@ -353,19 +363,15 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
         jPanel11Layout.setHorizontalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel11Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(26, 26, 26)
                 .addComponent(txtSanPhamCT, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnSearch2a)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(76, Short.MAX_VALUE))
         );
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel11Layout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtSanPhamCT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSearch2a))
+                .addGap(28, 28, 28)
+                .addComponent(txtSanPhamCT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -672,13 +678,6 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
         fillTableChiTietSanPham(serviceCTSP.getListGia(giaMin, giaMax));
     }//GEN-LAST:event_btnSearchGiaActionPerformed
 
-    private void btnSearch2aActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearch2aActionPerformed
-        // TODO add your handling code here
-        String tenSP = txtSanPhamCT.getText();
-        tenSP = '%' + tenSP + '%';
-        fillTableChiTietSanPham(serviceCTSP.getList(tenSP));
-    }//GEN-LAST:event_btnSearch2aActionPerformed
-
     private void tblChiTietSanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblChiTietSanPhamMouseClicked
         // TODO add your handling code here:
         index = tblChiTietSanPham.getSelectedRow();
@@ -772,13 +771,32 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
         lbSoTrang2.setText(trangCTSP + " of " + soTrangCTSP);
     }//GEN-LAST:event_btnCuoi2ActionPerformed
 
+    private void txtSanPhamCTKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSanPhamCTKeyReleased
+        // TODO add your handling code here:
+         if (!txtSanPhamCT.getText().equals("")) {
+            String name = txtSanPhamCT.getText();
+             fillTableChiTietSanPham(serviceCTSP.getList(name));
+        } else {
+            loadPageCTSP();
+        }
+    }//GEN-LAST:event_txtSanPhamCTKeyReleased
+
+    private void txtTienMinKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTienMinKeyReleased
+        // TODO add your handling code here:
+    
+    }//GEN-LAST:event_txtTienMinKeyReleased
+
+    private void txtTienMaxKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTienMaxKeyReleased
+        // TODO add your handling code here:
+    
+    }//GEN-LAST:event_txtTienMaxKeyReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClearCTSP;
     private javax.swing.JButton btnCuoi2;
     private javax.swing.JButton btnDau2;
     private javax.swing.JButton btnLui2;
-    private javax.swing.JButton btnSearch2a;
     private javax.swing.JButton btnSearchGia;
     private javax.swing.JButton btnSuaCTSP;
     private javax.swing.JButton btnThemCTSP;
