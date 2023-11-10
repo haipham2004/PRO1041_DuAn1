@@ -15,6 +15,7 @@ public class CTSPView extends javax.swing.JPanel {
      */
     public CTSPView() {
         initComponents();
+        this.setSize(1300, 755);
     }
 
     /**
