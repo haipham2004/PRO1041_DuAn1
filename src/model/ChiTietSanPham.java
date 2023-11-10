@@ -18,6 +18,7 @@ public class ChiTietSanPham {
     private int soLuong;
     private double gia;
     private boolean trangThai;
+    private String qrCode;
 
     public ChiTietSanPham() {
     }
@@ -32,6 +33,20 @@ public class ChiTietSanPham {
         this.gia = gia;
         this.trangThai = trangThai;
     }
+
+    public ChiTietSanPham(String maChiTietSanPham, SanPham sanPham, MauSac mauSac, ChatLieu chatLieu, KichThuoc kichThuoc, int soLuong, double gia, boolean trangThai, String qrCode) {
+        this.maChiTietSanPham = maChiTietSanPham;
+        this.sanPham = sanPham;
+        this.mauSac = mauSac;
+        this.chatLieu = chatLieu;
+        this.kichThuoc = kichThuoc;
+        this.soLuong = soLuong;
+        this.gia = gia;
+        this.trangThai = trangThai;
+        this.qrCode = qrCode;
+    }
+
+   
 
     public String getMaChiTietSanPham() {
         return maChiTietSanPham;
@@ -95,6 +110,14 @@ public class ChiTietSanPham {
 
     public void setTrangThai(boolean trangThai) {
         this.trangThai = trangThai;
+    }
+
+    public String getQrCode() {
+        return qrCode;
+    }
+
+    public void setQrCode(String qrCode) {
+        this.qrCode = qrCode;
     }
 
 }
