@@ -5,12 +5,14 @@
  */
 package view;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 /**
  *
@@ -23,116 +25,123 @@ public class AdamStoreView extends javax.swing.JFrame {
      */
     public AdamStoreView() {
         initComponents();
-
-        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        this.dispose();
+        setUndecorated(true);
+        setSize(1500, 820);
+        this.setLocationRelativeTo(null);
         execute();
+    }
+
+    public void changePanelBody(JPanel panel) {
+        panelBody.removeAll();
+        panelBody.add(panel);
+        panelBody.repaint();
+        panelBody.revalidate();
     }
 
     private void execute() {
         //Thêm icon vào 
-//        ImageIcon iconStaff = new ImageIcon(getClass().getResource("/menu/user.png"));
-//        ImageIcon iconSetting = new ImageIcon(getClass().getResource("/menu/setting.png"));
-//        ImageIcon iconDatabase = new ImageIcon(getClass().getResource("/menu/database.png"));
-//        ImageIcon iconMessage = new ImageIcon(getClass().getResource("/menu/message.png"));
-//        ImageIcon iconSubMenu = new ImageIcon(getClass().getResource("/menu/subMenu.png"));
-//        ImageIcon iconNext = new ImageIcon(getClass().getResource("/menu/next.png"));
-        //  create submenu staff
+        ImageIcon iconThongKe = new ImageIcon(getClass().getResource("/icon/document.png"));
+        ImageIcon iconSanPham = new ImageIcon(getClass().getResource("/icon/shirt.png"));
+        ImageIcon iconDot = new ImageIcon(getClass().getResource("/icon/black-circle.png"));
+        ImageIcon iconNhanVien = new ImageIcon(getClass().getResource("/icon/multiple-users-silhouette.png"));
+        ImageIcon iconBanHang = new ImageIcon(getClass().getResource("/icon/shopping-cart.png"));
+        ImageIcon iconKhachHang = new ImageIcon(getClass().getResource("/icon/user (1).png"));
+        ImageIcon iconHoaDon = new ImageIcon(getClass().getResource("/icon/bill.png"));
+        ImageIcon iconKhuyenMai = new ImageIcon(getClass().getResource("/icon/discount.png"));
+        ImageIcon iconVoucher = new ImageIcon(getClass().getResource("/icon/voucher.png"));
+        ImageIcon iconDoiMatKhau = new ImageIcon(getClass().getResource("/icon/reset-password.png"));
+        ImageIcon iconDangXuat = new ImageIcon(getClass().getResource("/icon/power-off.png"));
         //Tạo thanh thống kê
-        MenuItem menuThongKe = new MenuItem(null, "Thống kê", new ActionListener() {
+        MenuItem menuThongKe = new MenuItem(iconThongKe, "Thống kê", new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                panelBody.add(new ThongKeView());
-                panelBody.repaint();
-                panelBody.revalidate();
+                changePanelBody(new ThongKeView());
             }
         });
         //Thanh bên trong sản phẩm
-        MenuItem menuSanPham1 = new MenuItem(null, "Sản phẩm", new ActionListener() {
+        MenuItem menuSanPham1 = new MenuItem(iconDot, "Sản phẩm", new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                panelBody.add(new SanPhamView());
-                panelBody.repaint();
-                panelBody.revalidate();
+                changePanelBody(new SanPhamView());
             }
         });
-        MenuItem menuCtsp = new MenuItem(null, "Chi tiết sản phẩm", new ActionListener() {
+        MenuItem menuCtsp = new MenuItem(iconDot, "Chi tiết sản phẩm", new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                panelBody.add(new CTSPView());
-                panelBody.repaint();
-                panelBody.revalidate();
+                changePanelBody(new CTSPView());
             }
         });
 
-        MenuItem menuThuoctinh = new MenuItem(null, "Thuộc tính", new ActionListener() {
+        MenuItem menuThuoctinh = new MenuItem(iconDot, "Thuộc tính", new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                panelBody.add(new ThuocTinhView());
-                panelBody.repaint();
-                panelBody.revalidate();
+                changePanelBody(new ThuocTinhView());
             }
         });
         // Sản phẩm chung
-        MenuItem menuMatHang = new MenuItem(null, "Mặt hàng", null, menuSanPham1, menuCtsp, menuThuoctinh);
+        MenuItem menuMatHang = new MenuItem(iconSanPham, "Mặt hàng", null, menuSanPham1, menuCtsp, menuThuoctinh);
         //Nhân viên
-        MenuItem menuNhanVien = new MenuItem(null, "Nhân viên", new ActionListener() {
+        MenuItem menuNhanVien = new MenuItem(iconNhanVien, "Nhân viên", new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                panelBody.add(new NhanVienView());
-                panelBody.repaint();
-                panelBody.revalidate();
+                changePanelBody(new NhanVienView());
             }
         });
         //Bán hàng
-        MenuItem menuBanHang = new MenuItem(null, "Bán hàng", new ActionListener() {
+        MenuItem menuBanHang = new MenuItem(iconBanHang, "Bán hàng", new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                panelBody.add(new BanHangView());
-                panelBody.repaint();
-                panelBody.revalidate();
+                changePanelBody(new BanHangView());
             }
         });
         //Khách  hàng
-        MenuItem menuKhachHang = new MenuItem(null, "Khách hàng", new ActionListener() {
+        MenuItem menuKhachHang = new MenuItem(iconKhachHang, "Khách hàng", new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                panelBody.add(new KhachHangView());
-                panelBody.repaint();
-                panelBody.revalidate();
+                changePanelBody(new KhachHangView());
             }
         });
         //Hóa đơn- lịch sử
-        MenuItem menuHoaDon = new MenuItem(null, "Hóa đơn", new ActionListener() {
+        MenuItem menuHoaDon = new MenuItem(iconHoaDon, "Hóa đơn", new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                panelBody.add(new HoaDonView());
-                panelBody.repaint();
-                panelBody.revalidate();
-
+                changePanelBody(new HoaDonView());
             }
         });
         //Khuyến mại
-        MenuItem menuKm = new MenuItem(null, "Khuyến mại", new ActionListener() {
+        MenuItem menuKm = new MenuItem(iconKhuyenMai, "Khuyến mại", new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                panelBody.add(new KhuyenMaiView());
-                panelBody.repaint();
-                panelBody.revalidate();
+                changePanelBody(new KhuyenMaiView());
             }
         });
         //Voucher
-        MenuItem menuVoucher = new MenuItem(null, "Voucher", new ActionListener() {
+        MenuItem menuVoucher = new MenuItem(iconVoucher, "Voucher", new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                panelBody.add(new VoucherView());
-                panelBody.repaint();
-                panelBody.revalidate();
+                changePanelBody(new VoucherView());
             }
         });
-        //Câu lệnh thêm vào menu
-        addMenu(menuThongKe,menuMatHang,menuNhanVien,menuBanHang,menuKhachHang,menuKm,menuVoucher);
-    }
 
+        //DoiMatKhau
+        MenuItem menuDoiMatKhau = new MenuItem(iconDoiMatKhau, "Đổi mật khẩu", new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                changePanelBody(new DoiMatKhauView());
+            }
+        });
+
+        //DangXuat
+        MenuItem menuDangXuat = new MenuItem(iconDangXuat, "Đăng xuất", new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+            }
+        });
+
+        //Câu lệnh thêm vào menu
+        addMenu(menuThongKe, menuMatHang, menuNhanVien, menuBanHang, menuKhachHang, menuKm, menuVoucher, menuDoiMatKhau, menuDangXuat);
+    }
 
     private void addMenu(MenuItem... menu) {
         for (int i = 0; i < menu.length; i++) {
@@ -155,8 +164,8 @@ public class AdamStoreView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-
         panelHeader = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
         panelMenu = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         menus = new javax.swing.JPanel();
@@ -164,20 +173,31 @@ public class AdamStoreView extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-
         panelHeader.setBackground(new java.awt.Color(45, 113, 248));
         panelHeader.setPreferredSize(new java.awt.Dimension(561, 50));
+
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/close.png"))); // NOI18N
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelHeaderLayout = new javax.swing.GroupLayout(panelHeader);
         panelHeader.setLayout(panelHeaderLayout);
         panelHeaderLayout.setHorizontalGroup(
             panelHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 855, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelHeaderLayout.createSequentialGroup()
+                .addContainerGap(1443, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
-
         panelHeaderLayout.setVerticalGroup(
             panelHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 50, Short.MAX_VALUE)
+            .addGroup(panelHeaderLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         getContentPane().add(panelHeader, java.awt.BorderLayout.PAGE_START);
@@ -187,10 +207,9 @@ public class AdamStoreView extends javax.swing.JFrame {
 
         jScrollPane1.setBorder(null);
 
-        menus.setBackground(new java.awt.Color(255, 255, 255));
+        menus.setBackground(new java.awt.Color(45, 113, 248));
         menus.setLayout(new javax.swing.BoxLayout(menus, javax.swing.BoxLayout.Y_AXIS));
         jScrollPane1.setViewportView(menus);
-
 
         javax.swing.GroupLayout panelMenuLayout = new javax.swing.GroupLayout(panelMenu);
         panelMenu.setLayout(panelMenuLayout);
@@ -198,11 +217,9 @@ public class AdamStoreView extends javax.swing.JFrame {
             panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
         );
-
         panelMenuLayout.setVerticalGroup(
             panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 384, Short.MAX_VALUE)
-
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 924, Short.MAX_VALUE)
         );
 
         getContentPane().add(panelMenu, java.awt.BorderLayout.LINE_START);
@@ -211,9 +228,14 @@ public class AdamStoreView extends javax.swing.JFrame {
         panelBody.setLayout(new java.awt.BorderLayout());
         getContentPane().add(panelBody, java.awt.BorderLayout.CENTER);
 
-        setSize(new java.awt.Dimension(871, 473));
+        setSize(new java.awt.Dimension(1514, 981));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_jButton1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -282,6 +304,7 @@ public class AdamStoreView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel menus;
     private javax.swing.JPanel panelBody;
