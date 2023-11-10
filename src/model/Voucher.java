@@ -11,18 +11,15 @@ package model;
 public class Voucher {
 
     private String maVoucher;
-    private String maEventa;
     private int soLuong;
     private boolean trangThai;
+    private Events ev;
 
-    public Voucher() {
-    }
-
-    public Voucher(String maVoucher, String maEventa, int soLuong, boolean trangThai) {
+    public Voucher(String maVoucher, int soLuong, boolean trangThai, Events ev) {
         this.maVoucher = maVoucher;
-        this.maEventa = maEventa;
         this.soLuong = soLuong;
         this.trangThai = trangThai;
+        this.ev = ev;
     }
 
     public String getMaVoucher() {
@@ -31,14 +28,6 @@ public class Voucher {
 
     public void setMaVoucher(String maVoucher) {
         this.maVoucher = maVoucher;
-    }
-
-    public String getMaEventa() {
-        return maEventa;
-    }
-
-    public void setMaEventa(String maEventa) {
-        this.maEventa = maEventa;
     }
 
     public int getSoLuong() {
@@ -56,8 +45,16 @@ public class Voucher {
     public void setTrangThai(boolean trangThai) {
         this.trangThai = trangThai;
     }
-    
 
-   
+    public Events getEv() {
+        return ev;
+    }
+
+    public void setEv(Events ev) {
+        this.ev = ev;
+    }
+
+    public Voucher() {
+    }
 
 }
