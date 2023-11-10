@@ -46,7 +46,7 @@ public class MenuItem extends javax.swing.JPanel {
             this.subMenu.add(subMenu[i]);
             subMenu[i].setVisible(false);
         }
-        this.setBackground(new Color(45,113,248));
+        this.setBackground(new Color(56,106,165));
     }
 
     /**
@@ -69,6 +69,7 @@ public class MenuItem extends javax.swing.JPanel {
             }
         });
 
+        lbName.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lbName.setText("Menu Name Here ...");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
