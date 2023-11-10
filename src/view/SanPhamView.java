@@ -42,6 +42,8 @@ public class SanPhamView extends javax.swing.JPanel {
         this.setSize(1300, 755);
         loadPageSP();
         loadCbxLoaiSanPham(serviceLSP.getAll());
+        loadCboTimLoaiSP(serviceLSP.getAll());
+        
     }
     public void fillTableSamPham(List<SanPham> list) {
         mol = (DefaultTableModel) tblSanPham.getModel();
@@ -101,6 +103,15 @@ public class SanPhamView extends javax.swing.JPanel {
         }
         cboLoaiSanPham.setModel((ComboBoxModel) cbxLoaiSanPham);
     }
+      
+       public void loadCboTimLoaiSP(List<LoaiSanPham> list) {
+        cbxLoaiSanPham.removeAllElements();
+        for (LoaiSanPham loaiSanPham : list) {
+            cbxLoaiSanPham.addElement(loaiSanPham);
+        }
+        cboLocLSP.setModel((ComboBoxModel) cbxLoaiSanPham);
+    }
+
 
     public boolean validateSP() {
         if (txtMaSanPham.getText().isEmpty()) {
@@ -129,6 +140,7 @@ public class SanPhamView extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel27 = new javax.swing.JPanel();
         jPanel29 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
@@ -147,7 +159,7 @@ public class SanPhamView extends javax.swing.JPanel {
         jPanel7 = new javax.swing.JPanel();
         txtTimKiem = new javax.swing.JTextField();
         jPanel9 = new javax.swing.JPanel();
-        cbo1 = new javax.swing.JComboBox<>();
+        cboLocLSP = new javax.swing.JComboBox<>();
         btnThemSP = new javax.swing.JButton();
         btnSuaSP = new javax.swing.JButton();
         btnQuayLai = new javax.swing.JButton();
@@ -188,8 +200,10 @@ public class SanPhamView extends javax.swing.JPanel {
 
         jLabel26.setText("Trạng thái sản phẩm");
 
+        buttonGroup1.add(rdConHang);
         rdConHang.setText("Còn hàng");
 
+        buttonGroup1.add(rdHetHang);
         rdHetHang.setText("Hết hàng");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -284,15 +298,15 @@ public class SanPhamView extends javax.swing.JPanel {
 
         jPanel9.setBorder(javax.swing.BorderFactory.createTitledBorder("Loại sản phẩm"));
 
-        cbo1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        cbo1.addMouseListener(new java.awt.event.MouseAdapter() {
+        cboLocLSP.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cboLocLSP.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                cbo1MouseClicked(evt);
+                cboLocLSPMouseClicked(evt);
             }
         });
-        cbo1.addActionListener(new java.awt.event.ActionListener() {
+        cboLocLSP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbo1ActionPerformed(evt);
+                cboLocLSPActionPerformed(evt);
             }
         });
 
@@ -302,14 +316,14 @@ public class SanPhamView extends javax.swing.JPanel {
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(cbo1, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cboLocLSP, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(23, Short.MAX_VALUE))
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
                 .addContainerGap(34, Short.MAX_VALUE)
-                .addComponent(cbo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cboLocLSP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(21, 21, 21))
         );
 
@@ -605,16 +619,20 @@ public class SanPhamView extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_txtTimKiemKeyReleased
 
-    private void cbo1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbo1MouseClicked
+    private void cboLocLSPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cboLocLSPMouseClicked
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_cboLocLSPMouseClicked
+
+    private void cboLocLSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboLocLSPActionPerformed
         // TODO add your handling code here:
         LoaiSanPham lsp = (LoaiSanPham) cbxLoaiSanPham.getSelectedItem();
+        lbSoTrang.setText(trangSP + " of " + soTrangSP);
         String name = lsp.toString();
+         loadPageSP();
         fillTableSamPham(serviceSP.getList(name));
-    }//GEN-LAST:event_cbo1MouseClicked
-
-    private void cbo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbo1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbo1ActionPerformed
+       
+    }//GEN-LAST:event_cboLocLSPActionPerformed
 
     private void btnThemSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemSPActionPerformed
         // TODO add your handling code here:
@@ -659,11 +677,12 @@ public class SanPhamView extends javax.swing.JPanel {
 
     private void btnClearSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearSPActionPerformed
         // TODO add your handling code here:
-        txtMaSanPham.setEnabled(false);
+        txtMaSanPham.setEnabled(true);
         txtMaSanPham.setText("");
         cboLoaiSanPham.setSelectedIndex(0);
         txtXuatXu.setText("");
         txtTenSanPham.setText("");
+        btnThemSP.setEnabled(true);
    
     }//GEN-LAST:event_btnClearSPActionPerformed
 
@@ -748,8 +767,9 @@ public class SanPhamView extends javax.swing.JPanel {
     private javax.swing.JButton btnSuaSP;
     private javax.swing.JButton btnThemSP;
     private javax.swing.JButton btnTien1;
-    private javax.swing.JComboBox<String> cbo1;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> cboLoaiSanPham;
+    private javax.swing.JComboBox<String> cboLocLSP;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel22;

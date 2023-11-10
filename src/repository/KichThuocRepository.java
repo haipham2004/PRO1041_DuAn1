@@ -116,7 +116,7 @@ public class KichThuocRepository {
         int tong = 0;
         try {
             conn = DBConnect.getConnection();
-            sql = "SELECT COUNT(*) KichThuoc";
+            sql = "SELECT COUNT(*) FROM KichThuoc";
             pst = conn.prepareStatement(sql);
             rs = pst.executeQuery();
             if (rs.next()) {

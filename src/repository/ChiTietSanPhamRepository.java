@@ -135,7 +135,7 @@ public class ChiTietSanPhamRepository {
                     + "INNER JOIN KichThuoc KT ON KT.MaKichThuoc=CTSP.MaKichThuoc \n"
                     + "INNER JOIN SanPham SP ON CTSP.MaSanPham=SP.MaSanPham where SP.TenSanPham like ?";
             pst = conn.prepareStatement(sql);
-            pst.setObject(1, name);
+            pst.setObject(1,'%'+ name+'%');
             rs = pst.executeQuery();
             while (rs.next()) {
                 SanPham sp = new SanPham(rs.getString(2), rs.getString(3));
