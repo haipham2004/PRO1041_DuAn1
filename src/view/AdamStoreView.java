@@ -77,7 +77,7 @@ public class AdamStoreView extends javax.swing.JFrame {
         MenuItem menuCtsp = new MenuItem(iconDot, "Chi tiết sản phẩm", new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                changePanelBody(new CTSPView());
+                changePanelBody(new ChiTietSanPhamView());
             }
         });
 

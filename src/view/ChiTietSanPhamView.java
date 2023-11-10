@@ -25,7 +25,7 @@ import service.servicImp.SanPhamServiceImp;
  *
  * @author Admin
  */
-public class CTSPView extends javax.swing.JPanel {
+public class ChiTietSanPhamView extends javax.swing.JPanel {
 
     DefaultTableModel mol = new DefaultTableModel();
     ChiTietSanPhamServiceImp serviceCTSP = new ChiTietSanPhamServiceImp();
@@ -43,7 +43,7 @@ public class CTSPView extends javax.swing.JPanel {
     /**
      * Creates new form CTSPView
      */
-    public CTSPView() {
+    public ChiTietSanPhamView() {
         initComponents();
         this.setSize(1300, 755);
         loadPageCTSP();
@@ -204,7 +204,6 @@ public class CTSPView extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
         jPanel16 = new javax.swing.JPanel();
         jLabel45 = new javax.swing.JLabel();
@@ -648,22 +647,21 @@ public class CTSPView extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Thông tin chi tiết", jPanel2);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jTabbedPane1)
-                .addContainerGap())
+                .addGap(0, 6, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 6, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 15, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 16, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -811,7 +809,6 @@ public class CTSPView extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel18;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane7;
-    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel lbSoTrang2;
     private javax.swing.JRadioButton rdConhang1;
     private javax.swing.JRadioButton rdHethang1;
