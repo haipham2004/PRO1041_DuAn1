@@ -15,6 +15,7 @@ public class SanPhamView extends javax.swing.JPanel {
      */
     public SanPhamView() {
         initComponents();
+        this.setSize(1300, 755);
     }
 
     /**

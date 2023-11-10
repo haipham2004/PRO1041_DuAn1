@@ -8,12 +8,12 @@ package view;
  *
  * @author Admin
  */
-public class ThuocTinhView extends javax.swing.JPanel {
+public class DoiMatKhauView extends javax.swing.JPanel {
 
     /**
-     * Creates new form ThuocTinhView
+     * Creates new form DoiMatKhauView
      */
-    public ThuocTinhView() {
+    public DoiMatKhauView() {
         initComponents();
         this.setSize(1300, 755);
     }

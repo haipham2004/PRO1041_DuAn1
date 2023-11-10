@@ -15,6 +15,7 @@ public class BanHangView extends javax.swing.JPanel {
      */
     public BanHangView() {
         initComponents();
+        this.setSize(1300, 755);
     }
 
     /**

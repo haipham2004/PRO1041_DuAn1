@@ -15,6 +15,7 @@ public class VoucherView extends javax.swing.JPanel {
      */
     public VoucherView() {
         initComponents();
+        this.setSize(1300, 755);
     }
 
     /**

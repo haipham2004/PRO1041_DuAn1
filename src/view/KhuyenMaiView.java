@@ -15,6 +15,7 @@ public class KhuyenMaiView extends javax.swing.JPanel {
      */
     public KhuyenMaiView() {
         initComponents();
+        this.setSize(1300, 755);
     }
 
     /**

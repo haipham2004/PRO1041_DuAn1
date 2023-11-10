@@ -15,6 +15,7 @@ public class ThongKeView extends javax.swing.JPanel {
      */
     public ThongKeView() {
         initComponents();
+        this.setSize(1300, 755);
     }
 
     /**

@@ -15,6 +15,7 @@ public class NhanVienView extends javax.swing.JPanel {
      */
     public NhanVienView() {
         initComponents();
+        this.setSize(1300, 755);
     }
 
     /**

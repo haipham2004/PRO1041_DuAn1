@@ -15,6 +15,7 @@ public class HoaDonView extends javax.swing.JPanel {
      */
     public HoaDonView() {
         initComponents();
+        this.setSize(1300, 755);
     }
 
     /**
