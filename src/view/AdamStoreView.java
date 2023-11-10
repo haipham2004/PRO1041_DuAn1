@@ -8,6 +8,8 @@ package view;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -19,6 +21,10 @@ import javax.swing.JPanel;
  * @author RavenPC
  */
 public class AdamStoreView extends javax.swing.JFrame {
+
+    Color defaultColor = new Color(45, 113, 248);
+    Color selectedColor = new Color(204, 204, 204);
+    Color enterColor = new Color(228, 227, 227);
 
     /**
      * Creates new form Main
@@ -59,11 +65,13 @@ public class AdamStoreView extends javax.swing.JFrame {
                 changePanelBody(new ThongKeView());
             }
         });
+
         //Thanh bên trong sản phẩm
         MenuItem menuSanPham1 = new MenuItem(iconDot, "Sản phẩm", new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 changePanelBody(new SanPhamView());
+                setBackground(selectedColor);
             }
         });
         MenuItem menuCtsp = new MenuItem(iconDot, "Chi tiết sản phẩm", new ActionListener() {
@@ -136,11 +144,26 @@ public class AdamStoreView extends javax.swing.JFrame {
         MenuItem menuDangXuat = new MenuItem(iconDangXuat, "Đăng xuất", new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
+                DangNhapView dangNhapView = new DangNhapView();
+                dispose();
+                dangNhapView.setVisible(true);
             }
         });
 
         //Câu lệnh thêm vào menu
         addMenu(menuThongKe, menuMatHang, menuNhanVien, menuBanHang, menuKhachHang, menuKm, menuVoucher, menuDoiMatKhau, menuDangXuat);
+        MenuItemColor(menuThongKe);
+        MenuItemColor(menuMatHang);
+        MenuItemColor(menuSanPham1);
+        MenuItemColor(menuCtsp);
+        MenuItemColor(menuThuoctinh);
+        MenuItemColor(menuNhanVien);
+        MenuItemColor(menuBanHang);
+        MenuItemColor(menuKhachHang);
+        MenuItemColor(menuKm);
+        MenuItemColor(menuVoucher);
+        MenuItemColor(menuDoiMatKhau);
+        MenuItemColor(menuDangXuat);
     }
 
     private void addMenu(MenuItem... menu) {
@@ -155,6 +178,35 @@ public class AdamStoreView extends javax.swing.JFrame {
         menus.revalidate();
     }
 
+    public void MenuItemColor(JPanel panel) {
+        panel.addMouseListener(new MouseAdapter() {
+            public void mouseEntered(MouseEvent e) {
+                if (panel.getBackground().equals(defaultColor)) {
+                    panel.setBackground(enterColor);
+                }
+            }
+
+            public void mouseExited(MouseEvent e) {
+                if (panel.getBackground().equals(enterColor)) {
+                    panel.setBackground(defaultColor);
+                }
+            }
+
+            public void mouseClicked(MouseEvent e) {
+                reColor((JPanel) panel.getParent());
+                panel.setBackground(selectedColor);
+            }
+        });
+    }
+
+    public void reColor(JPanel panel) {
+        for (int i = 0; i < panel.getComponentCount(); i++) {
+            if (panel.getComponent(i) instanceof JPanel) {
+                panel.getComponent(i).setBackground(defaultColor);
+            }
+        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -166,6 +218,7 @@ public class AdamStoreView extends javax.swing.JFrame {
 
         panelHeader = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
         panelMenu = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         menus = new javax.swing.JPanel();
@@ -183,12 +236,18 @@ public class AdamStoreView extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("ADAM STORE");
+
         javax.swing.GroupLayout panelHeaderLayout = new javax.swing.GroupLayout(panelHeader);
         panelHeader.setLayout(panelHeaderLayout);
         panelHeaderLayout.setHorizontalGroup(
             panelHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelHeaderLayout.createSequentialGroup()
-                .addContainerGap(1443, Short.MAX_VALUE)
+                .addGap(60, 60, 60)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1196, Short.MAX_VALUE)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -196,7 +255,11 @@ public class AdamStoreView extends javax.swing.JFrame {
             panelHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelHeaderLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+                .addGroup(panelHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelHeaderLayout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -305,6 +368,7 @@ public class AdamStoreView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel menus;
     private javax.swing.JPanel panelBody;
