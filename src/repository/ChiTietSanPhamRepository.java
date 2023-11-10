@@ -86,7 +86,7 @@ public class ChiTietSanPhamRepository {
     public int them(ChiTietSanPham ctsp) {
         try {
             conn = DBConnect.getConnection();
-            sql = "INSERT INTO ChiTietSanPham(MaCTSP,MaSanPham,MaMauSac,MaChatLieu,MaKichThuoc,SoLuong,Gia,TrangThai) VALUES(?,?,?,?,?,?,?,?)";
+            sql = "INSERT INTO ChiTietSanPham(MaCTSP,MaSanPham,MaMauSac,MaChatLieu,MaKichThuoc,SoLuong,Gia,TrangThai,qrCode) VALUES(?,?,?,?,?,?,?,?,?)";
             pst = conn.prepareStatement(sql);
             pst.setObject(1, ctsp.getMaChiTietSanPham());
             pst.setObject(2, ctsp.getSanPham().getMaSanPham());
@@ -96,6 +96,7 @@ public class ChiTietSanPhamRepository {
             pst.setObject(6, ctsp.getSoLuong());
             pst.setObject(7, ctsp.getGia());
             pst.setObject(8, ctsp.isTrangThai());
+            pst.setObject(9, ctsp.getQrCode());
             return pst.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
@@ -135,7 +136,7 @@ public class ChiTietSanPhamRepository {
                     + "INNER JOIN KichThuoc KT ON KT.MaKichThuoc=CTSP.MaKichThuoc \n"
                     + "INNER JOIN SanPham SP ON CTSP.MaSanPham=SP.MaSanPham where SP.TenSanPham like ?";
             pst = conn.prepareStatement(sql);
-            pst.setObject(1,'%'+ name+'%');
+            pst.setObject(1, '%' + name + '%');
             rs = pst.executeQuery();
             while (rs.next()) {
                 SanPham sp = new SanPham(rs.getString(2), rs.getString(3));
@@ -182,8 +183,8 @@ public class ChiTietSanPhamRepository {
         }
         return listChiTietSanPham2;
     }
-    
-     public List<ChiTietSanPham> listPageCTSP(int index) {
+
+    public List<ChiTietSanPham> listPageCTSP(int index) {
         List<ChiTietSanPham> listChiTietSanPham3 = new ArrayList<>();
         try {
             conn = DBConnect.getConnection();
@@ -196,7 +197,7 @@ public class ChiTietSanPhamRepository {
                     + "order by CTSP.MaCTSP\n"
                     + "offset ? rows fetch next 4 rows only";
             pst = conn.prepareStatement(sql);
-            pst.setInt(1, (index-1)*4);
+            pst.setInt(1, (index - 1) * 4);
             rs = pst.executeQuery();
             while (rs.next()) {
                 SanPham sp = new SanPham(rs.getString(2), rs.getString(3));
@@ -229,5 +230,22 @@ public class ChiTietSanPhamRepository {
             return 0;
         }
         return tong;
+    }
+
+    public boolean qrCode(String ma, String hinhAnh) {
+        try {
+            conn = DBConnect.getConnection();
+            sql = "UPDATE ChiTietSanPham\n"
+                    + "set qrCode=?\n"
+                    + "where MaCTSP=?";
+            pst = conn.prepareStatement(sql);
+            pst.setObject(1, ma);
+            pst.setObject(2, hinhAnh);
+            rs = pst.executeQuery();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
     }
 }
