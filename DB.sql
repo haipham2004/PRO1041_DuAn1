@@ -1,7 +1,4 @@
-﻿
-
-----Update:2023-11-0--lúc 18g35p--
-
+﻿----Update:2023-11-10--lúc 18g10p--
 CREATE DATABASE AdamStores
 GO
 USE AdamStores
@@ -60,13 +57,17 @@ CREATE TABLE [Events] (
   PRIMARY KEY ([MaEV])
 );
 
-CREATE TABLE [MaVoucher] (
-  [MaVoucher] varchar(10),
-  [MaEV] varchar(10),
-  CONSTRAINT FK_VC_EV foreign key(MaEV) references Events(MaEV),
-  [SoLuong] int,
-  [TrangThai] bit,
-  PRIMARY KEY ([MaVoucher])
+CREATE TABLE [Voucher](
+	[MaVoucher] VARCHAR(8) NOT NULL DEFAULT SUBSTRING(CONVERT(varchar(255), NEWID()), 25, 8),
+	[DieuKien] bit,
+	[topKhachHang] int,
+	[HinhThuc] bit,
+	[MucGiamGia] nvarchar(100),
+	[ThoiGianBatDau] date,
+    [ThoiGianKetThuc] date,
+    [MoTa] nvarchar(100),
+    [TrangThai] bit,
+	  PRIMARY KEY ([MaVoucher])
 );
 
 CREATE TABLE [HoaDon] (
@@ -83,8 +84,10 @@ CREATE TABLE [HoaDon] (
   [TongTienSauKM] Money,
   [TrangThai] bit,
   [GhiChu] nvarchar(100),
-  [MaVoucher] varchar(10) not null,
-  CONSTRAINT FK_HD_VC foreign key(MaVoucher) references MaVoucher(MaVoucher),
+   [MaVoucher] VARCHAR(8) ,
+  CONSTRAINT FK_HD_VC foreign key(MaVoucher) references Voucher(MaVoucher),
+   [MaEV] varchar(10),
+   CONSTRAINT FK_HD_EV foreign key(MaEV) references Events(MaEV),
   PRIMARY KEY ([MaHoaDon])
 );
 
