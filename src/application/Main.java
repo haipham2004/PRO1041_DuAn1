@@ -11,8 +11,9 @@ import view.AdamStoreView;
  * @author Admin BVCN88 02
  */
 public class Main {
+
     public static void main(String[] args) {
-        AdamStoreView adm=new AdamStoreView();
-         adm.setVisible(true);
+        AdamStoreView adm = new AdamStoreView();
+        adm.setVisible(true);
     }
 }
