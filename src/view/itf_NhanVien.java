@@ -214,7 +214,7 @@ public class itf_NhanVien extends javax.swing.JInternalFrame {
 
         for (NhanVien nv : list) {
             if (!addedValues.contains(nv.getDiaChi())) {
-                tempList.add(nv); 
+                tempList.add(nv);
                 addedValues.add(nv.getDiaChi());
             }
         }
@@ -262,6 +262,10 @@ public class itf_NhanVien extends javax.swing.JInternalFrame {
                 loadCboDiaChi(serviceNV.getAll());
                 fillTableNV(serviceNV.getAll());
                 JOptionPane.showMessageDialog(this, "Thêm nhân viên thành công");
+                int x = rdoDangLamViec.isSelected() == true ? 0 : 1;
+                tabs.setSelectedIndex(x);
+            } else {
+                JOptionPane.showMessageDialog(this, "Thêm nhân viên thất bại");
             }
         }
     }
@@ -269,11 +273,14 @@ public class itf_NhanVien extends javax.swing.JInternalFrame {
     public void sua(JTable tbl) {
         String ma = tbl.getValueAt(index, 0).toString();
         NhanVien nv = this.getFormNV();
-        try {
-            serviceNV.sua(nv, ma);
+
+        if (serviceNV.sua(nv, ma) > 0) {
+            loadCboDiaChi(serviceNV.getAll());
             fillTableNV(serviceNV.getAll());
+            int x = rdoDangLamViec.isSelected() == true ? 0 : 1;
+            tabs.setSelectedIndex(x);
             JOptionPane.showMessageDialog(this, "Sửa thành công");
-        } catch (Exception e) {
+        } else {
             JOptionPane.showMessageDialog(this, "Sửa thất bại công");
         }
     }
@@ -336,7 +343,7 @@ public class itf_NhanVien extends javax.swing.JInternalFrame {
         txtTimNV = new javax.swing.JTextField();
         btnRSTimNV = new javax.swing.JButton();
         cboTimKiemNV = new javax.swing.JComboBox<>();
-        jTabbedPane3 = new javax.swing.JTabbedPane();
+        tabs = new javax.swing.JTabbedPane();
         jPanel11 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         tblNV1 = new javax.swing.JTable();
@@ -486,12 +493,13 @@ public class itf_NhanVien extends javax.swing.JInternalFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel61Layout.createSequentialGroup()
                         .addGroup(jPanel61Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel61Layout.createSequentialGroup()
-                                .addGroup(jPanel61Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(txtSDT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel32)
+                                .addGroup(jPanel61Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel61Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(jLabel27)
-                                        .addComponent(txtMaNV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(txtMaNV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel61Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(txtSDT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel32)))
                                 .addGap(12, 12, 12)
                                 .addGroup(jPanel61Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(txtCCCD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -659,7 +667,7 @@ public class itf_NhanVien extends javax.swing.JInternalFrame {
                 .addContainerGap())
         );
 
-        jTabbedPane3.addTab("Đang làm việc", jPanel11);
+        tabs.addTab("Đang làm việc", jPanel11);
 
         tblNV0.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -700,7 +708,7 @@ public class itf_NhanVien extends javax.swing.JInternalFrame {
                 .addContainerGap())
         );
 
-        jTabbedPane3.addTab("Nghỉ việc", jPanel14);
+        tabs.addTab("Nghỉ việc", jPanel14);
 
         javax.swing.GroupLayout pnlChiTietNhanVienLayout = new javax.swing.GroupLayout(pnlChiTietNhanVien);
         pnlChiTietNhanVien.setLayout(pnlChiTietNhanVienLayout);
@@ -713,7 +721,7 @@ public class itf_NhanVien extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(jPanel61, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTabbedPane3))
+                    .addComponent(tabs))
                 .addContainerGap())
         );
         pnlChiTietNhanVienLayout.setVerticalGroup(
@@ -725,7 +733,7 @@ public class itf_NhanVien extends javax.swing.JInternalFrame {
                     .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
-                .addComponent(jTabbedPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(tabs, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -904,13 +912,13 @@ public class itf_NhanVien extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JTabbedPane jTabbedPane3;
     private javax.swing.JLabel lblAnhNV;
     private javax.swing.JPanel pnlChiTietNhanVien;
     private javax.swing.JRadioButton rdoDangLamViec;
     private javax.swing.JRadioButton rdoNam;
     private javax.swing.JRadioButton rdoNghiViec;
     private javax.swing.JRadioButton rdoNu;
+    private javax.swing.JTabbedPane tabs;
     private javax.swing.JTable tblNV0;
     private javax.swing.JTable tblNV1;
     private javax.swing.JTextField txtCCCD;
