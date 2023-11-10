@@ -7,13 +7,16 @@ package view;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 import javax.swing.table.DefaultTableModel;
 import model.Events;
+import model.Voucher;
 import repository.KhuyenMaiRepository;
 import service.servicImp.KhuyenMaiServiceImp;
+import service.servicImp.VoucherServiceImp;
 
 /**
  *
@@ -24,6 +27,7 @@ public class itf_KhuyenMai extends javax.swing.JInternalFrame {
     DefaultTableModel defaultTableModel = new DefaultTableModel();
     DefaultComboBoxModel<Events> cboEvents = new DefaultComboBoxModel<>();
     KhuyenMaiServiceImp service = new KhuyenMaiServiceImp();
+    VoucherServiceImp serviceVoucher = new VoucherServiceImp();
     int index;
 
     public itf_KhuyenMai() {
@@ -33,10 +37,12 @@ public class itf_KhuyenMai extends javax.swing.JInternalFrame {
         uI.setNorthPane(null);
         this.setSize(1300, 755);
         fillTable(service.getAll());
+        fillTableVoucher(serviceVoucher.getAll());
         rdKhongDK.setSelected(true);
         rdoDangKichHoat.setSelected(true);
         txtDieuKienTT.setVisible(false);
         lblVnd.setVisible(false);
+        loadCboEvent(service.getAll());
     }
 
     public void fillTable(List<Events> listKm) {
@@ -49,6 +55,27 @@ public class itf_KhuyenMai extends javax.swing.JInternalFrame {
                 khuyenMai.getDieuKienTongTien(), khuyenMai.getThoiGianBatDau(), khuyenMai.getThoiGianKetThuc(),
                 khuyenMai.isTrangThai() ? "Đang kích hoạt" : "Hết hiệu lực sử dụng", khuyenMai.getMoTa(),});
         }
+    }
+
+    public void fillTableVoucher(List<Voucher> listVoucher) {
+        defaultTableModel = (DefaultTableModel) tblVoucher.getModel();
+        defaultTableModel.setRowCount(0);
+        for (Voucher voucher : listVoucher) {
+            defaultTableModel.addRow(new Object[]{
+                voucher.getEv().getMaEventa(), voucher.getEv().getTenEvent(),
+                voucher.getEv().isHinhThuc() ? "Giảm theo số tiền" : "Giảm theo %",
+                voucher.getEv().getMucGiamGia(), voucher.getMaVoucher(), voucher.getSoLuong(),
+                voucher.isTrangThai() ? "Đã sử dụng" : "Chưa sử dụng"
+            });
+        }
+    }
+
+    public void loadCboEvent(List<Events> listEv) {
+        cboEvents.removeAllElements();
+        for (Events events : listEv) {
+            cboEvents.addElement(events);
+        }
+        cboEvent.setModel((ComboBoxModel) cboEvents);
     }
 
     public void showChiTiet(int index) {
@@ -81,6 +108,17 @@ public class itf_KhuyenMai extends javax.swing.JInternalFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void showChiTietVoucher(int index) {
+        txtMaVoucher.setText(tblVoucher.getValueAt(index, 4).toString());
+        txtSoLuong.setText(tblVoucher.getValueAt(index, 5).toString());
+        if (tblVoucher.getValueAt(index, 6).toString().equals("Đã sử dụng")) {
+            rdDaSd.setSelected(true);
+        } else {
+            rdChuaSd.setSelected(true);
+        }
+        
     }
 
     public Events readForm() {
@@ -152,6 +190,7 @@ public class itf_KhuyenMai extends javax.swing.JInternalFrame {
 
         btgDieuKien = new javax.swing.ButtonGroup();
         btgTrangThai = new javax.swing.ButtonGroup();
+        btgTrangThaiVoucher = new javax.swing.ButtonGroup();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
@@ -200,22 +239,21 @@ public class itf_KhuyenMai extends javax.swing.JInternalFrame {
         jLabel21 = new javax.swing.JLabel();
         rdDaSd = new javax.swing.JRadioButton();
         rdChuaSd = new javax.swing.JRadioButton();
-        jLabel22 = new javax.swing.JLabel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        txtMoTaVoucher = new javax.swing.JTextArea();
+        btnClearVoucher = new javax.swing.JButton();
+        btnTaoVoucher = new javax.swing.JButton();
         jPanel7 = new javax.swing.JPanel();
         jLabel23 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
-        txtTenKM2 = new javax.swing.JTextField();
         cboEvent = new javax.swing.JComboBox<>();
         jLabel15 = new javax.swing.JLabel();
         cbbHinhThucGG1 = new javax.swing.JComboBox<>();
         txtMucGiam1 = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
         txtMenhGia1 = new javax.swing.JLabel();
+        lblMaEvents = new javax.swing.JLabel();
         jPanel8 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
-        tblKM1 = new javax.swing.JTable();
+        tblVoucher = new javax.swing.JTable();
         txtSearch1 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
@@ -223,8 +261,6 @@ public class itf_KhuyenMai extends javax.swing.JInternalFrame {
         cbbSearchTT1 = new javax.swing.JComboBox<>();
         cbbSearchTT2 = new javax.swing.JComboBox<>();
         jLabel27 = new javax.swing.JLabel();
-        btnClearVoucher = new javax.swing.JButton();
-        btnTaoVoucher = new javax.swing.JButton();
 
         setMinimumSize(new java.awt.Dimension(940, 657));
         setPreferredSize(new java.awt.Dimension(940, 657));
@@ -533,7 +569,7 @@ public class itf_KhuyenMai extends javax.swing.JInternalFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(31, 31, 31))
+                        .addGap(37, 37, 37))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(227, 227, 227)
                         .addComponent(btnClearEvent)
@@ -571,18 +607,16 @@ public class itf_KhuyenMai extends javax.swing.JInternalFrame {
 
         jLabel21.setText("Trạng Thái: ");
 
-        btgTrangThai.add(rdDaSd);
+        btgTrangThaiVoucher.add(rdDaSd);
         rdDaSd.setSelected(true);
         rdDaSd.setText("Đã sử dụng");
 
-        btgTrangThai.add(rdChuaSd);
+        btgTrangThaiVoucher.add(rdChuaSd);
         rdChuaSd.setText("Chưa sử dụng");
 
-        jLabel22.setText("Mô Tả: ");
+        btnClearVoucher.setText("Clear Form");
 
-        txtMoTaVoucher.setColumns(20);
-        txtMoTaVoucher.setRows(5);
-        jScrollPane3.setViewportView(txtMoTaVoucher);
+        btnTaoVoucher.setText("Tạo voucher");
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -602,15 +636,21 @@ public class itf_KhuyenMai extends javax.swing.JInternalFrame {
                                 .addComponent(jLabel17)
                                 .addGap(22, 22, 22)
                                 .addComponent(txtMaVoucher))
-                            .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel21)
-                                .addGroup(jPanel6Layout.createSequentialGroup()
-                                    .addComponent(rdDaSd, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(rdChuaSd))
-                                .addComponent(jLabel22)
-                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 89, Short.MAX_VALUE))))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel6Layout.createSequentialGroup()
+                                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(btnClearVoucher)
+                                    .addComponent(rdDaSd, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel6Layout.createSequentialGroup()
+                                        .addGap(18, 18, 18)
+                                        .addComponent(rdChuaSd))
+                                    .addGroup(jPanel6Layout.createSequentialGroup()
+                                        .addGap(86, 86, 86)
+                                        .addComponent(btnTaoVoucher)))))
+                        .addGap(0, 89, Short.MAX_VALUE))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addComponent(jLabel21)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -629,11 +669,11 @@ public class itf_KhuyenMai extends javax.swing.JInternalFrame {
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(rdDaSd)
                     .addComponent(rdChuaSd))
-                .addGap(18, 18, 18)
-                .addComponent(jLabel22)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addGap(55, 55, 55)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnClearVoucher)
+                    .addComponent(btnTaoVoucher))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Chương trình khuyến mãi", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
@@ -658,6 +698,8 @@ public class itf_KhuyenMai extends javax.swing.JInternalFrame {
         txtMenhGia1.setFont(new java.awt.Font("Tahoma", 3, 12)); // NOI18N
         txtMenhGia1.setText("VND");
 
+        lblMaEvents.setText("jLabel18");
+
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
@@ -665,19 +707,21 @@ public class itf_KhuyenMai extends javax.swing.JInternalFrame {
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel15)
-                        .addGroup(jPanel7Layout.createSequentialGroup()
-                            .addComponent(jLabel23)
-                            .addGap(18, 18, 18)
-                            .addComponent(cboEvent, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPanel7Layout.createSequentialGroup()
-                            .addComponent(jLabel24)
-                            .addGap(18, 18, 18)
-                            .addComponent(txtTenKM2, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel15)
+                            .addGroup(jPanel7Layout.createSequentialGroup()
+                                .addComponent(jLabel23)
+                                .addGap(18, 18, 18)
+                                .addComponent(cboEvent, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel7Layout.createSequentialGroup()
+                                .addComponent(jLabel24)
+                                .addGap(18, 18, 18)
+                                .addComponent(lblMaEvents)))
+                        .addGap(8, 8, 8))
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addComponent(cbbHinhThucGG1, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(18, 18, 18)
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel16)
                             .addComponent(txtMucGiam1, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))))
@@ -688,11 +732,11 @@ public class itf_KhuyenMai extends javax.swing.JInternalFrame {
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
+                .addGap(23, 23, 23)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel24)
-                    .addComponent(txtTenKM2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28)
+                    .addComponent(lblMaEvents))
+                .addGap(31, 31, 31)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cboEvent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel23))
@@ -705,28 +749,28 @@ public class itf_KhuyenMai extends javax.swing.JInternalFrame {
                     .addComponent(cbbHinhThucGG1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtMucGiam1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtMenhGia1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(148, Short.MAX_VALUE))
         );
 
         jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Danh Sách Voucher", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 3, 14), new java.awt.Color(0, 51, 255))); // NOI18N
 
-        tblKM1.setModel(new javax.swing.table.DefaultTableModel(
+        tblVoucher.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Mã Event", "Tên Event", "Hình thức", "Mức giảm", "Mã voucher", "Số lượng", "Trạng thái", "Mô tả"
+                "Mã Event", "Tên Event", "Hình thức", "Mức giảm", "Mã voucher", "Số lượng", "Trạng thái"
             }
         ));
-        tblKM1.addMouseListener(new java.awt.event.MouseAdapter() {
+        tblVoucher.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblKM1MouseClicked(evt);
+                tblVoucherMouseClicked(evt);
             }
         });
-        jScrollPane4.setViewportView(tblKM1);
+        jScrollPane4.setViewportView(tblVoucher);
 
         txtSearch1.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -784,7 +828,7 @@ public class itf_KhuyenMai extends javax.swing.JInternalFrame {
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
-                .addGap(41, 41, 41)
+                .addGap(35, 35, 35)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel27)
@@ -796,13 +840,9 @@ public class itf_KhuyenMai extends javax.swing.JInternalFrame {
                         .addComponent(cbbSearchTT1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel2))
                 .addGap(15, 15, 15)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)
                 .addContainerGap())
         );
-
-        btnClearVoucher.setText("Clear Form");
-
-        btnTaoVoucher.setText("Tạo voucher");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -811,24 +851,14 @@ public class itf_KhuyenMai extends javax.swing.JInternalFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(16, 16, 16)
-                                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(74, 74, 74))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(btnClearVoucher)
-                                .addGap(85, 85, 85)))
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(btnTaoVoucher))
-                            .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 396, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(16, 16, 16)
+                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(74, 74, 74)
+                        .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 396, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(16, 16, 16)
                         .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(166, Short.MAX_VALUE))
+                .addContainerGap(150, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -840,11 +870,7 @@ public class itf_KhuyenMai extends javax.swing.JInternalFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(15, 15, 15)
                         .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnClearVoucher)
-                    .addComponent(btnTaoVoucher))
-                .addGap(10, 10, 10)
+                .addGap(39, 39, 39)
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -857,13 +883,13 @@ public class itf_KhuyenMai extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1061, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 649, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1)
                 .addContainerGap())
         );
 
@@ -953,9 +979,9 @@ public class itf_KhuyenMai extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cbbHinhThucGG1ActionPerformed
 
-    private void tblKM1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblKM1MouseClicked
+    private void tblVoucherMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblVoucherMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_tblKM1MouseClicked
+    }//GEN-LAST:event_tblVoucherMouseClicked
 
     private void txtSearch1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearch1KeyReleased
         // TODO add your handling code here:
@@ -1005,6 +1031,7 @@ public class itf_KhuyenMai extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup btgDieuKien;
     private javax.swing.ButtonGroup btgTrangThai;
+    private javax.swing.ButtonGroup btgTrangThaiVoucher;
     private javax.swing.JButton btnClearEvent;
     private javax.swing.JButton btnClearVoucher;
     private javax.swing.JButton btnSuaEvent;
@@ -1027,7 +1054,6 @@ public class itf_KhuyenMai extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
@@ -1050,9 +1076,9 @@ public class itf_KhuyenMai extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JLabel lblMaEvents;
     private javax.swing.JLabel lblVnd;
     private javax.swing.JRadioButton rdChuaSd;
     private javax.swing.JRadioButton rdDaSd;
@@ -1061,14 +1087,13 @@ public class itf_KhuyenMai extends javax.swing.JInternalFrame {
     private javax.swing.JRadioButton rdoDangKichHoat;
     private javax.swing.JRadioButton rdoHetHieuLuc;
     private javax.swing.JTable tblKM;
-    private javax.swing.JTable tblKM1;
+    private javax.swing.JTable tblVoucher;
     private javax.swing.JTextField txtDieuKienTT;
     private javax.swing.JTextField txtMaKM;
     private javax.swing.JTextField txtMaVoucher;
     private javax.swing.JLabel txtMenhGia;
     private javax.swing.JLabel txtMenhGia1;
     private javax.swing.JTextArea txtMoTa;
-    private javax.swing.JTextArea txtMoTaVoucher;
     private javax.swing.JTextField txtMucGiam;
     private javax.swing.JTextField txtMucGiam1;
     private com.toedter.calendar.JDateChooser txtNgayBatDau;
@@ -1077,6 +1102,5 @@ public class itf_KhuyenMai extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtSearchEvent;
     private javax.swing.JTextField txtSoLuong;
     private javax.swing.JTextField txtTenKM;
-    private javax.swing.JTextField txtTenKM2;
     // End of variables declaration//GEN-END:variables
 }
