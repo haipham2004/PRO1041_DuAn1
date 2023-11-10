@@ -22,7 +22,7 @@ import javax.swing.JPanel;
  */
 public class AdamStoreView extends javax.swing.JFrame {
 
-    Color defaultColor = new Color(45, 113, 248);
+    Color defaultColor = new Color(56,106,165);
     Color selectedColor = new Color(204, 204, 204);
     Color enterColor = new Color(228, 227, 227);
 
@@ -36,6 +36,7 @@ public class AdamStoreView extends javax.swing.JFrame {
         setSize(1500, 820);
         this.setLocationRelativeTo(null);
         execute();
+        changePanelBody(new ThongKeView());
     }
 
     public void changePanelBody(JPanel panel) {
@@ -226,7 +227,7 @@ public class AdamStoreView extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        panelHeader.setBackground(new java.awt.Color(45, 113, 248));
+        panelHeader.setBackground(new java.awt.Color(56, 106, 165));
         panelHeader.setPreferredSize(new java.awt.Dimension(561, 50));
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/close.png"))); // NOI18N
@@ -270,7 +271,7 @@ public class AdamStoreView extends javax.swing.JFrame {
 
         jScrollPane1.setBorder(null);
 
-        menus.setBackground(new java.awt.Color(45, 113, 248));
+        menus.setBackground(new java.awt.Color(56, 106, 165));
         menus.setLayout(new javax.swing.BoxLayout(menus, javax.swing.BoxLayout.Y_AXIS));
         jScrollPane1.setViewportView(menus);
 
@@ -325,40 +326,6 @@ public class AdamStoreView extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(AdamStoreView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new AdamStoreView().setVisible(true);

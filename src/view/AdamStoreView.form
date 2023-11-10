@@ -27,7 +27,7 @@
     <Container class="javax.swing.JPanel" name="panelHeader">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="f8" green="71" red="2d" type="rgb"/>
+          <Color blue="a5" green="6a" red="38" type="rgb"/>
         </Property>
         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[561, 50]"/>
@@ -131,7 +131,7 @@
             <Container class="javax.swing.JPanel" name="menus">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="f8" green="71" red="2d" type="rgb"/>
+                  <Color blue="a5" green="6a" red="38" type="rgb"/>
                 </Property>
               </Properties>
 

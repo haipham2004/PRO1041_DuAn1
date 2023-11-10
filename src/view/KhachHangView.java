@@ -4,12 +4,36 @@
  */
 package view;
 
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
+import javax.swing.ComboBoxModel;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
+import javax.swing.RowSorter;
+import javax.swing.SortOrder;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
+import model.KhachHang;
+import service.servicImp.KhachHangServiceImp;
+
 
 /**
  *
  * @author Admin
  */
 public class KhachHangView extends javax.swing.JPanel {
+    
+    KhachHangServiceImp serviceKH = new KhachHangServiceImp();
+    DefaultTableModel tblmol = new DefaultTableModel();
+    DefaultComboBoxModel<KhachHang> cbxKhachHang = new DefaultComboBoxModel<>();
+    int index = -1;
+    int tongBanGhiKH, trangKH = 1, soTrangKH;
 
     /**
      * Creates new form KhachHangView
@@ -17,9 +41,108 @@ public class KhachHangView extends javax.swing.JPanel {
     public KhachHangView() {
         initComponents();
         this.setSize(1300, 755);
-//        loadPageKH();
-//        sort();
-//        loadCboDiaChi(serviceKH.getAll());
+        loadPageKH();
+        sort();
+        loadCboDiaChi(serviceKH.getAll());
+        cboGioiTinh.setSelectedIndex(-1);
+    }
+    
+    public void fillTableKH(List<KhachHang> list) {
+        tblmol = (DefaultTableModel) tblKhachHang.getModel();
+        tblmol.setRowCount(0);
+        for (KhachHang item : list) {
+            tblmol.addRow(new Object[]{
+                item.getMaKhachHang(), item.getHoTen(), item.chiTietGioiTinh(),
+                item.getSoDienThoai(), item.getNgaySinh(),
+                item.getEmail(), item.getDiaChi()
+            });
+        }
+    }
+
+    public void loadCboDiaChi(List<KhachHang> list) {
+        cbxKhachHang.removeAllElements();
+        List<String> addedValues = new ArrayList<>();
+        for (KhachHang item : list) {
+            if (!addedValues.contains(item.getDiaChi())) {
+                cbxKhachHang.addElement(item);
+                addedValues.add(item.getDiaChi());
+            }
+        }
+        cboDiaChi.setModel((ComboBoxModel) cbxKhachHang);
+        cboDiaChi.setSelectedIndex(-1);
+    }
+
+    public void loadPageKH() {
+        tongBanGhiKH = serviceKH.tongBanGhi();
+        if (tongBanGhiKH % 4 == 0) {
+            soTrangKH = tongBanGhiKH / 4;
+        } else {
+            soTrangKH = tongBanGhiKH / 4 + 1;
+        }
+        lblSoTrangKH.setText(trangKH + " of " + soTrangKH);
+        fillTableKH(serviceKH.listPageKH(trangKH));
+    }
+
+    public void sort() {
+        tblKhachHang.getTableHeader().addMouseListener(new MouseAdapter() {
+            int sortType = 0; //Biến để theo dõi kiểu sắp xếp: 0 là tăng dần, 1 là giảm dần
+
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                int col = tblKhachHang.columnAtPoint(e.getPoint());
+                tblKhachHang.setAutoCreateRowSorter(true);
+                TableRowSorter<TableModel> sorter = new TableRowSorter<>(tblKhachHang.getModel());
+                tblKhachHang.setRowSorter(sorter);
+                // Kiểm tra kiểu sắp xếp hiện tại và cập nhật ngược lại
+                if (sortType == 0) {
+                    sorter.setSortKeys(Arrays.asList(new RowSorter.SortKey(col, SortOrder.DESCENDING)));
+                    sortType = 1; // Cập nhật kiểu sắp xếp ngược lại
+                } else {
+                    sorter.setSortKeys(Arrays.asList(new RowSorter.SortKey(col, SortOrder.ASCENDING)));
+                    sortType = 0; // Cập nhật kiểu sắp xếp ngược lại
+                }
+            }
+        });
+    }
+
+    public void detailKH(int index) {
+        txtMaKhachHang.setText(tblKhachHang.getValueAt(index, 0).toString());
+        txtTenKhachHang.setText(tblKhachHang.getValueAt(index, 1).toString());
+        txtSoDienThoai.setText(tblKhachHang.getValueAt(index, 3).toString());
+        txtNgaySinh.setText(tblKhachHang.getValueAt(index, 4).toString());
+        txtEmail.setText(tblKhachHang.getValueAt(index, 5).toString());
+        txtDiaChi.setText(tblKhachHang.getValueAt(index, 6).toString());
+        if (tblKhachHang.getValueAt(index, 2).toString().equals("Nam")) {
+            rdNam.setSelected(true);
+        } else {
+            rdNu.setSelected(true);
+        }
+    }
+
+    public KhachHang getFormKH() {
+        Boolean gioiTinh;
+        String maKH = txtMaKhachHang.getText();
+        String hoTen = txtTenKhachHang.getText();
+        String sdt = txtSoDienThoai.getText();
+        String diaChi = txtDiaChi.getText();
+        String email = txtEmail.getText();
+        Date ngaySinh = null;
+        try {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            ngaySinh = dateFormat.parse(txtNgaySinh.getText());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if (rdNam.isSelected()) {
+            gioiTinh = true;
+        } else {
+            gioiTinh = false;
+        }
+        return new KhachHang(maKH, hoTen, ngaySinh, sdt, email, gioiTinh, diaChi);
+    }
+
+    public boolean validateKH() {
+        return true;
     }
 
     /**
@@ -31,6 +154,7 @@ public class KhachHangView extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btngGioiTinh = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -404,63 +528,63 @@ public class KhachHangView extends javax.swing.JPanel {
 
     private void btnThemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnThemMouseClicked
         // TODO add your handling code here:
-//        KhachHang kh = this.getFormKH();
-//        if (serviceKH.getOne(kh.getMaKhachHang()) != null) {
-//            JOptionPane.showMessageDialog(this, "Mã khách hàng trùng");
-//        } else {
-//            if (serviceKH.them(kh) > 0) {
-//                loadPageKH();
-//                JOptionPane.showMessageDialog(this, "Thêm khách hàng thành công");
-//            } else {
-//                JOptionPane.showMessageDialog(this, "Thêm khách hàng thất bại");
-//            }
-//        }
+        KhachHang kh = this.getFormKH();
+        if (serviceKH.getOne(kh.getMaKhachHang()) != null) {
+            JOptionPane.showMessageDialog(this, "Mã khách hàng trùng");
+        } else {
+            if (serviceKH.them(kh) > 0) {
+                loadPageKH();
+                JOptionPane.showMessageDialog(this, "Thêm khách hàng thành công");
+            } else {
+                JOptionPane.showMessageDialog(this, "Thêm khách hàng thất bại");
+            }
+        }
     }//GEN-LAST:event_btnThemMouseClicked
 
     private void btnCapNhatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCapNhatMouseClicked
         // TODO add your handling code here:
-//        index = tblKhachHang.getSelectedRow();
-//        if (index < 0) {
-//            JOptionPane.showMessageDialog(this, "Bạn chưa chọn dòng dữ liệu nào");
-//        } else {
-//            KhachHang kh = this.getFormKH();
-//            String ma = tblKhachHang.getValueAt(index, 0).toString();
-//            if (serviceKH.sua(kh, ma) > 0) {
-//                loadPageKH();
-//                JOptionPane.showMessageDialog(this, "Sửa thông tin khách hàng thành công");
-//            } else {
-//                JOptionPane.showMessageDialog(this, "Sửa thông tin khách hàng thất bại");
-//            }
-//        }
+        index = tblKhachHang.getSelectedRow();
+        if (index < 0) {
+            JOptionPane.showMessageDialog(this, "Bạn chưa chọn dòng dữ liệu nào");
+        } else {
+            KhachHang kh = this.getFormKH();
+            String ma = tblKhachHang.getValueAt(index, 0).toString();
+            if (serviceKH.sua(kh, ma) > 0) {
+                loadPageKH();
+                JOptionPane.showMessageDialog(this, "Sửa thông tin khách hàng thành công");
+            } else {
+                JOptionPane.showMessageDialog(this, "Sửa thông tin khách hàng thất bại");
+            }
+        }
     }//GEN-LAST:event_btnCapNhatMouseClicked
 
     private void btnLamMoiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLamMoiMouseClicked
         // TODO add your handling code here:
-//        txtDiaChi.setText("");
-//        txtEmail.setText("");
-//        txtMaKhachHang.setText("");
-//        txtNgaySinh.setText("");
-//        txtSoDienThoai.setText("");
-//        txtTenKhachHang.setText("");
-//        txtTimKiem.setText("");
-//        btngGioiTinh.clearSelection();
-//        index = -1;
+        txtDiaChi.setText("");
+        txtEmail.setText("");
+        txtMaKhachHang.setText("");
+        txtNgaySinh.setText("");
+        txtSoDienThoai.setText("");
+        txtTenKhachHang.setText("");
+        txtTimKiem.setText("");
+        btngGioiTinh.clearSelection();
+        index = -1;
     }//GEN-LAST:event_btnLamMoiMouseClicked
 
     private void tblKhachHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblKhachHangMouseClicked
         // TODO add your handling code here:
-//        index = tblKhachHang.getSelectedRow();
-//        this.detailKH(index);
+        index = tblKhachHang.getSelectedRow();
+        this.detailKH(index);
     }//GEN-LAST:event_tblKhachHangMouseClicked
 
     private void txtTimKiemKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKiemKeyReleased
         // TODO add your handling code here:
-//        if (!txtTimKiem.getText().equals("")) {
-//            String name = txtTimKiem.getText();
-//            fillTableKH(serviceKH.getList(name));
-//        } else {
-//            fillTableKH(serviceKH.getAll());
-//        }
+        if (!txtTimKiem.getText().equals("")) {
+            String name = txtTimKiem.getText();
+            fillTableKH(serviceKH.getList(name));
+        } else {
+            fillTableKH(serviceKH.getAll());
+        }
     }//GEN-LAST:event_txtTimKiemKeyReleased
 
     private void cboGioiTinhItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboGioiTinhItemStateChanged
@@ -469,34 +593,34 @@ public class KhachHangView extends javax.swing.JPanel {
 
     private void btnDauMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDauMouseClicked
         // TODO add your handling code here:
-//        trangKH = 1;
-//        fillTableKH(serviceKH.listPageKH(trangKH));
-//        lblSoTrangKH.setText(trangKH + " of " + soTrangKH);
+        trangKH = 1;
+        fillTableKH(serviceKH.listPageKH(trangKH));
+        lblSoTrangKH.setText(trangKH + " of " + soTrangKH);
     }//GEN-LAST:event_btnDauMouseClicked
 
     private void btnLuiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLuiMouseClicked
         // TODO add your handling code here:
-//        if (trangKH > 1) {
-//            trangKH--;
-//            fillTableKH(serviceKH.listPageKH(trangKH));
-//            lblSoTrangKH.setText(trangKH + " of " + soTrangKH);
-//        }
+        if (trangKH > 1) {
+            trangKH--;
+            fillTableKH(serviceKH.listPageKH(trangKH));
+            lblSoTrangKH.setText(trangKH + " of " + soTrangKH);
+        }
     }//GEN-LAST:event_btnLuiMouseClicked
 
     private void btnTienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTienMouseClicked
         // TODO add your handling code here:
-//        if (trangKH < soTrangKH) {
-//            trangKH++;
-//            fillTableKH(serviceKH.listPageKH(trangKH));
-//            lblSoTrangKH.setText(trangKH + " of " + soTrangKH);
-//        }
+        if (trangKH < soTrangKH) {
+            trangKH++;
+            fillTableKH(serviceKH.listPageKH(trangKH));
+            lblSoTrangKH.setText(trangKH + " of " + soTrangKH);
+        }
     }//GEN-LAST:event_btnTienMouseClicked
 
     private void btnCuoiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCuoiMouseClicked
         // TODO add your handling code here:
-//        trangKH = soTrangKH;
-//        fillTableKH(serviceKH.listPageKH(trangKH));
-//        lblSoTrangKH.setText(trangKH + " of " + soTrangKH);
+        trangKH = soTrangKH;
+        fillTableKH(serviceKH.listPageKH(trangKH));
+        lblSoTrangKH.setText(trangKH + " of " + soTrangKH);
     }//GEN-LAST:event_btnCuoiMouseClicked
 
 
@@ -509,6 +633,7 @@ public class KhachHangView extends javax.swing.JPanel {
     private javax.swing.JButton btnThem;
     private javax.swing.JButton btnThemTuExcel;
     private javax.swing.JButton btnTien;
+    private javax.swing.ButtonGroup btngGioiTinh;
     private javax.swing.JComboBox<String> cboDiaChi;
     private javax.swing.JComboBox<String> cboGioiTinh;
     private javax.swing.JLabel jLabel1;
