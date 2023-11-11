@@ -36,7 +36,7 @@ public class NhanVienRepository {
             rs = pst.executeQuery();
             while (rs.next()) {
                 TaiKhoan tk = new TaiKhoan(rs.getString(2), rs.getString(11),
-                        rs.getString(12), rs.getString(13), rs.getInt(14));
+                        rs.getString(12), rs.getString(13), rs.getBoolean(14));
                 NhanVien nv = new NhanVien(rs.getString(1), tk,
                         rs.getString(3), rs.getBoolean(4), rs.getString(5),
                         rs.getString(6), rs.getString(7), rs.getDate(8),
@@ -107,7 +107,7 @@ public class NhanVienRepository {
             rs = pst.executeQuery();
             while (rs.next()) {
                 TaiKhoan tk = new TaiKhoan(rs.getString(2), rs.getString(11),
-                        rs.getString(12), rs.getString(13), rs.getInt(14));
+                        rs.getString(12), rs.getString(13), rs.getBoolean(14));
                 NhanVien nv = new NhanVien(rs.getString(1), tk,
                         rs.getString(3), rs.getBoolean(4), rs.getString(5),
                         rs.getString(6), rs.getString(7), rs.getDate(8),
@@ -133,7 +133,7 @@ public class NhanVienRepository {
             rs = pst.executeQuery();
             while (rs.next()) {
                 TaiKhoan tk = new TaiKhoan(rs.getString(2), rs.getString(11),
-                        rs.getString(12), rs.getString(13), rs.getInt(14));
+                        rs.getString(12), rs.getString(13), rs.getBoolean(14));
                 NhanVien nv = new NhanVien(rs.getString(1), tk,
                         rs.getString(3), rs.getBoolean(4), rs.getString(5),
                         rs.getString(6), rs.getString(7), rs.getDate(8),
@@ -160,7 +160,7 @@ public class NhanVienRepository {
             rs = pst.executeQuery();
             while (rs.next()) {
                 TaiKhoan tk = new TaiKhoan(rs.getString(2), rs.getString(11),
-                        rs.getString(12), rs.getString(13), rs.getInt(14));
+                        rs.getString(12), rs.getString(13), rs.getBoolean(14));
                 nv = new NhanVien(rs.getString(1), tk,
                         rs.getString(3), rs.getBoolean(4), rs.getString(5),
                         rs.getString(6), rs.getString(7), rs.getDate(8),
@@ -171,5 +171,52 @@ public class NhanVienRepository {
             e.printStackTrace();
             return null;
         }
+    }
+
+    public List<NhanVien> listPageNV(int tt, int index) {
+        List<NhanVien> list = new ArrayList<>();
+        try {
+            conn = DBConnect.getConnection();
+            sql = "select nv.MaNV,nv.MaTK,nv.HoTen,nv.GioiTinh,nv.DiaChi,nv.SoDienThoai, "
+                    + "nv.CCCD,nv.NgayVaoLam,nv.TrangThai,nv.Anh,tk.UserName,tk.PassWord, "
+                    + "tk.Role,tk.TrangThai \n"
+                    + "from NhanVien nv join TaiKhoan tk on tk.MaTK = nv.MaTK where nv.TrangThai = ? "
+                    + "order by nv.MaNV "
+                    + "offset ? rows fetch next 4 rows only ";
+            pst = conn.prepareStatement(sql);
+            pst.setObject(1, tt);
+            pst.setObject(2, (index - 1) * 4);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                TaiKhoan tk = new TaiKhoan(rs.getString(2), rs.getString(11),
+                        rs.getString(12), rs.getString(13), rs.getInt(14));
+                NhanVien nv = new NhanVien(rs.getString(1), tk,
+                        rs.getString(3), rs.getBoolean(4), rs.getString(5),
+                        rs.getString(6), rs.getString(7), rs.getDate(8),
+                        rs.getBoolean(9), rs.getString(10));
+                list.add(nv);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+        return list;
+    }
+    public int tongBanGhi(int index) {
+        int tong = 0;
+        try {
+            conn = DBConnect.getConnection();
+            sql = "SELECT COUNT(*) FROM NhanVien where TrangThai = ?";
+            pst = conn.prepareStatement(sql);
+            pst.setObject(1, index);
+            rs = pst.executeQuery();
+            if (rs.next()) {
+                tong = rs.getInt(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
+        return tong;
     }
 }

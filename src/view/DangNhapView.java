@@ -19,7 +19,7 @@ import repository.LoginRepository;
 public class DangNhapView extends javax.swing.JFrame {
 
 //    private LoginRepository mLoginRepository;
-    private LoginRepository service = new LoginRepository();
+    private LoginRepository repository = new LoginRepository();
 
     /**
      * Creates new form DangNhapView
@@ -212,10 +212,10 @@ public class DangNhapView extends javax.swing.JFrame {
         if (checkEmpty()) {
             String userName = txtTaiKhoan.getText();
             String passWord = String.valueOf(txtMatKhau.getText());
-            if (service.isExistedUser(userName, passWord)) {
+            if (repository.isExistedUser(userName, passWord)) {
                 this.setVisible(false);
                 new AdamStoreView().setVisible(true);
-            } else {
+            } else {  
                 JOptionPane.showMessageDialog(this, "UserName hoac Password sai !");
             }
         }

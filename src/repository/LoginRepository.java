@@ -5,7 +5,12 @@
 package repository;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.MauSac;
+import model.TaiKhoan;
 import util.DBConnect;
 
 /**
@@ -35,5 +40,75 @@ public class LoginRepository {
             return false;
         }
         return false;
+    }
+
+    public boolean checkMaTK(String MaTK) {
+        try {
+            conn = DBConnect.getConnection();
+            sql = "Select MaTK from TaiKhoan where MaTK=?";
+            pst = conn.prepareStatement(sql);
+            pst.setString(1, MaTK);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                return true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return false;
+    }
+
+    public TaiKhoan getMatKhau(String userName, String matKhau) {
+        TaiKhoan tk = null;
+        try {
+            conn = DBConnect.getConnection();
+            sql = "Select PassWord from TaiKhoan where UserName=?";
+            pst = conn.prepareStatement(sql);
+            pst.setString(1, userName);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                tk = new TaiKhoan(rs.getString(sql));
+            }
+            return tk;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public boolean isCurrentPasswordValid(String maTK, String enterPassWord) {
+        sql = "SELECT PassWord FROM TaiKhoan WHERE MaTK = ?";
+        try {
+            conn = DBConnect.getConnection();
+            pst = conn.prepareStatement(sql);
+            pst.setString(1, maTK); // Thay thế "user_username" bằng tên người dùng hiện tại 
+            rs = pst.executeQuery();
+            if (rs.next()) {
+                String currentPassword = rs.getString("PassWord");
+                System.out.println("isCurrentPasswordValid : " + currentPassword);
+                if (currentPassword.equals(enterPassWord)) {
+                    return true;
+                }
+            }
+        } catch (Exception ex) {
+            System.out.println("isCurrentPasswordValid(): " + ex.toString());
+            return false;
+        }
+        return false;
+    }
+
+    public int updatePass(String userName, String passWord) {
+        sql = "update TaiKhoan set Password=? where MaTK=?";
+        try {
+            conn = DBConnect.getConnection();
+            pst = conn.prepareStatement(sql);
+            pst.setString(1, passWord);
+            pst.setString(2, userName);
+            return pst.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
     }
 }
