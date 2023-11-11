@@ -4,11 +4,14 @@
  */
 package view;
 
+import java.awt.Component;
 import java.util.List;
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import model.ChatLieu;
 import model.ChiTietSanPham;
 import model.KichThuoc;
@@ -26,7 +29,7 @@ public class SanPhamView extends javax.swing.JPanel {
 
     DefaultTableModel mol = new DefaultTableModel();
     DefaultTableModel mols = new DefaultTableModel();
-    
+
     LoaiSanPhamServiceImp serviceLSP = new LoaiSanPhamServiceImp();
     SanPhamServiceImp serviceSP = new SanPhamServiceImp();
     DefaultComboBoxModel<SanPham> cbxSanPham = new DefaultComboBoxModel<>();
@@ -43,8 +46,9 @@ public class SanPhamView extends javax.swing.JPanel {
         loadPageSP();
         loadCbxLoaiSanPham(serviceLSP.getAll());
         loadCboTimLoaiSP(serviceLSP.getAll());
-        
+
     }
+
     public void fillTableSamPham(List<SanPham> list) {
         mol = (DefaultTableModel) tblSanPham.getModel();
         mol.setRowCount(0);
@@ -56,8 +60,8 @@ public class SanPhamView extends javax.swing.JPanel {
             });
         }
     }
-    
-     public SanPham savesSP() {
+
+    public SanPham savesSP() {
         String maSP, tenSP, xuatXu;
         boolean trangThai;
         maSP = txtMaSanPham.getText();
@@ -71,8 +75,8 @@ public class SanPhamView extends javax.swing.JPanel {
         LoaiSanPham lsp = (LoaiSanPham) cbxLoaiSanPham.getSelectedItem();
         return new SanPham(maSP, tenSP, trangThai, lsp, xuatXu);
     }
-     
-      public void detailSP(int index) {
+
+    public void detailSP(int index) {
         txtMaSanPham.setText(tblSanPham.getValueAt(index, 0).toString());
         txtTenSanPham.setText(tblSanPham.getValueAt(index, 1).toString());
         if (tblSanPham.getValueAt(index, 2).toString().equals("Còn hàng")) {
@@ -84,7 +88,7 @@ public class SanPhamView extends javax.swing.JPanel {
         LoaiSanPham lsp = (LoaiSanPham) tblSanPham.getValueAt(index, 4);
         cbxLoaiSanPham.setSelectedItem(lsp);
     }
-     
+
     public void loadPageSP() {
         tongBanGhiSP = serviceSP.tongBanGhi();
         if (tongBanGhiSP % 4 == 0) {
@@ -95,16 +99,16 @@ public class SanPhamView extends javax.swing.JPanel {
         lbSoTrang.setText(trangSP + " of " + soTrangSP);
         fillTableSamPham(serviceSP.listPageSP(trangSP));
     }
-    
-      public void loadCbxLoaiSanPham(List<LoaiSanPham> list) {
+
+    public void loadCbxLoaiSanPham(List<LoaiSanPham> list) {
         cbxLoaiSanPham.removeAllElements();
         for (LoaiSanPham loaiSanPham : list) {
             cbxLoaiSanPham.addElement(loaiSanPham);
         }
         cboLoaiSanPham.setModel((ComboBoxModel) cbxLoaiSanPham);
     }
-      
-       public void loadCboTimLoaiSP(List<LoaiSanPham> list) {
+
+    public void loadCboTimLoaiSP(List<LoaiSanPham> list) {
         cbxLoaiSanPham.removeAllElements();
         for (LoaiSanPham loaiSanPham : list) {
             cbxLoaiSanPham.addElement(loaiSanPham);
@@ -112,7 +116,27 @@ public class SanPhamView extends javax.swing.JPanel {
         cboLocLSP.setModel((ComboBoxModel) cbxLoaiSanPham);
     }
 
-
+//    public void anSP(JTable tbl) {
+//        String ma = tbl.getValueAt(index, 0).toString();
+//        SanPham sp = savesSP();
+//
+//        if (serviceSP.sua(sp, ma) > 0) {
+//
+//            fillTableSamPham(serviceSP.getAll());
+//            int x = rdConHang.isSelected() == true ? 0 : 1;
+//            pnlSP.setSelectedIndex(x);
+//            JOptionPane.showMessageDialog(this, "Sửa thành công");
+//        } else {
+//            JOptionPane.showMessageDialog(this, "Sửa thất bại công");
+//        }
+//    }
+//
+//    public void setForm(Boolean x) {
+//        Component[] cpn = jPanel29.getComponents();
+//        for (Component cp : cpn) {
+//            cp.setEnabled(x);
+//        }
+//    }
     public boolean validateSP() {
         if (txtMaSanPham.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Mã trống");
@@ -128,9 +152,7 @@ public class SanPhamView extends javax.swing.JPanel {
         }
         return true;
     }
-    
-     
-     
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -166,7 +188,7 @@ public class SanPhamView extends javax.swing.JPanel {
         btnClearSP = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
-        jTabbedPane2 = new javax.swing.JTabbedPane();
+        pnlSP = new javax.swing.JTabbedPane();
         jPanel8 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblSanPham = new javax.swing.JTable();
@@ -464,7 +486,7 @@ public class SanPhamView extends javax.swing.JPanel {
                 .addContainerGap(20, Short.MAX_VALUE))
         );
 
-        jTabbedPane2.addTab("Sản Phẩm", jPanel8);
+        pnlSP.addTab("Sản Phẩm", jPanel8);
 
         tblSanPhams.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -496,7 +518,7 @@ public class SanPhamView extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jTabbedPane2.addTab("Sản Phẩm Rác", jPanel12);
+        pnlSP.addTab("Sản Phẩm Rác", jPanel12);
 
         btnAnSP.setText("Ẩn");
         btnAnSP.addActionListener(new java.awt.event.ActionListener() {
@@ -540,7 +562,7 @@ public class SanPhamView extends javax.swing.JPanel {
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel29Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jTabbedPane2, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(pnlSP, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGap(0, 10, Short.MAX_VALUE))
         );
@@ -562,7 +584,7 @@ public class SanPhamView extends javax.swing.JPanel {
                     .addComponent(btnAnSP)
                     .addComponent(btnKhoiPhuc))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pnlSP, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(32, Short.MAX_VALUE))
         );
 
@@ -621,17 +643,18 @@ public class SanPhamView extends javax.swing.JPanel {
 
     private void cboLocLSPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cboLocLSPMouseClicked
         // TODO add your handling code here:
-        
+        LoaiSanPham lsp = (LoaiSanPham) cbxLoaiSanPham.getSelectedItem();
+        lbSoTrang.setText(trangSP + " of " + soTrangSP);
+        String name = lsp.toString();
+        loadPageSP();
+        fillTableSamPham(serviceSP.getList(name));
+
     }//GEN-LAST:event_cboLocLSPMouseClicked
 
     private void cboLocLSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboLocLSPActionPerformed
         // TODO add your handling code here:
-        LoaiSanPham lsp = (LoaiSanPham) cbxLoaiSanPham.getSelectedItem();
-        lbSoTrang.setText(trangSP + " of " + soTrangSP);
-        String name = lsp.toString();
-         loadPageSP();
-        fillTableSamPham(serviceSP.getList(name));
-       
+
+
     }//GEN-LAST:event_cboLocLSPActionPerformed
 
     private void btnThemSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemSPActionPerformed
@@ -672,7 +695,7 @@ public class SanPhamView extends javax.swing.JPanel {
 
     private void btnQuayLaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuayLaiActionPerformed
         // TODO add your handling code here:
-        fillTableSamPham(serviceSP.getAll());
+        loadPageSP();
     }//GEN-LAST:event_btnQuayLaiActionPerformed
 
     private void btnClearSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearSPActionPerformed
@@ -683,7 +706,7 @@ public class SanPhamView extends javax.swing.JPanel {
         txtXuatXu.setText("");
         txtTenSanPham.setText("");
         btnThemSP.setEnabled(true);
-   
+
     }//GEN-LAST:event_btnClearSPActionPerformed
 
     private void tblSanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSanPhamMouseClicked
@@ -726,21 +749,6 @@ public class SanPhamView extends javax.swing.JPanel {
         lbSoTrang.setText(trangSP + " of " + soTrangSP);
     }//GEN-LAST:event_btnCuoi1ActionPerformed
 
-    private void btnAnSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnSPActionPerformed
-        // TODO add your handling code here:
-        mol = (DefaultTableModel) tblSanPham.getModel();
-        mols = (DefaultTableModel) tblSanPhams.getModel();
-        mols.setRowCount(0);
-        index = tblSanPham.getSelectedRow();
-        if (index != -1) {
-            mols.addRow(mol.getDataVector().elementAt(index));
-            mol.removeRow(index);
-        } else {
-            loadPageSP();
-        }
-
-    }//GEN-LAST:event_btnAnSPActionPerformed
-
     private void btnKhoiPhucActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKhoiPhucActionPerformed
         // TODO add your handling code here:
         mol = (DefaultTableModel) tblSanPham.getModel();
@@ -754,6 +762,32 @@ public class SanPhamView extends javax.swing.JPanel {
             loadPageSP();
         }
     }//GEN-LAST:event_btnKhoiPhucActionPerformed
+
+    private void btnAnSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnSPActionPerformed
+        // TODO add your handling code here:
+
+        mols.setRowCount(0);
+        index = tblSanPham.getSelectedRow();
+        if (index != -1) {
+            mols.addRow(mol.getDataVector().elementAt(index));
+            mol.removeRow(index);
+        } else {
+            loadPageSP();
+        }
+        index = tblSanPhams.getSelectedRow();
+//        if (index != -1) {
+//            anSP(tblSanPhams);
+//            setForm(true);
+//            txtMaSanPham.setEnabled(false);
+//            btnThemSP.setEnabled(false);
+//        } else {
+//            index = tblSanPham.getSelectedRow();
+//            anSP(tblSanPham);
+//            setForm(true);
+//            txtMaSanPham.setEnabled(false);
+//            btnThemSP.setEnabled(false);
+//        }
+    }//GEN-LAST:event_btnAnSPActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -787,8 +821,8 @@ public class SanPhamView extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JLabel lbSoTrang;
+    private javax.swing.JTabbedPane pnlSP;
     private javax.swing.JRadioButton rdConHang;
     private javax.swing.JRadioButton rdHetHang;
     private javax.swing.JTable tblSanPham;
