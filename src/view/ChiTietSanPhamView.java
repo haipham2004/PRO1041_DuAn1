@@ -10,13 +10,19 @@ import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import model.ChatLieu;
 import model.ChiTietSanPham;
@@ -29,6 +35,16 @@ import service.servicImp.ChiTietSanPhamServiceImp;
 import service.servicImp.KichThuocServiceImp;
 import service.servicImp.MauSacServiceImp;
 import service.servicImp.SanPhamServiceImp;
+//
+import org.apache.poi.ss.usermodel.BorderStyle;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.FillPatternType;
+import org.apache.poi.ss.usermodel.IndexedColors;
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFFont;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
  *
@@ -98,8 +114,8 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
         } else {
             trangThai = false;
         }
-        String qrCodes=qrCode(maCTSP);
-        return new ChiTietSanPham(maCTSP, sp, ms, cl, kt, soLuong, gia, trangThai,qrCodes);
+        String qrCodes = qrCode(maCTSP);
+        return new ChiTietSanPham(maCTSP, sp, ms, cl, kt, soLuong, gia, trangThai, qrCodes);
 
     }
 
@@ -133,7 +149,7 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
         lbSoTrang2.setText(trangCTSP + " of " + soTrangCTSP);
         fillTableChiTietSanPham(serviceCTSP.listPageCTSP(trangCTSP));
     }
-    
+
     public void loadCbxSanPham(List<SanPham> list) {
         cbxSanPham.removeAllElements();
         for (SanPham sanPham : list) {
@@ -141,8 +157,8 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
         }
         cboMaSP.setModel((ComboBoxModel) cbxSanPham);
     }
-    
-     public void loadCbxMauSac(List<MauSac> list) {
+
+    public void loadCbxMauSac(List<MauSac> list) {
         cbxMauSac.removeAllElements();
         for (MauSac mauSac : list) {
             cbxMauSac.addElement(mauSac);
@@ -165,8 +181,8 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
         }
         cboChatLieu.setModel((ComboBoxModel) cbxChatLieu);
     }
-    
-     public String qrCode(String qrcode) {
+
+    public String qrCode(String qrcode) {
         try {
             String qrCodeData = qrcode;
             String filePath = "D:\\PRO1041_DuAn1\\PRO1041_DuAn1\\src\\qr\\" + qrcode + ".png";
@@ -182,8 +198,8 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
         }
         return qrcode;
     }
-     
-     public void qrCode2(int index) {
+
+    public void qrCode2(int index) {
         try {
             String qrs = tblChiTietSanPham.getValueAt(index, 0).toString();
             String qrCodeData = qrs;
@@ -198,6 +214,23 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public static CellStyle createStyleForHeader(XSSFSheet sheet) {
+        // Create font
+        XSSFFont font = sheet.getWorkbook().createFont();
+        font.setFontName("Times New Roman");
+        font.setBold(true);
+        font.setFontHeightInPoints((short) 14); // font size
+        font.setColor(IndexedColors.BLACK.getIndex()); // text color
+
+        // Create CellStyle
+        CellStyle cellStyle = sheet.getWorkbook().createCellStyle();
+        cellStyle.setFont(font);
+        cellStyle.setFillForegroundColor(IndexedColors.BLUE_GREY.getIndex());
+        cellStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+        cellStyle.setBorderBottom(BorderStyle.THIN);
+        return cellStyle;
     }
 
     public boolean validateCTSPs() {
@@ -494,6 +527,11 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
         });
 
         jButton4.setText("Xuất file");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         btnDau2.setText("Pre");
         btnDau2.addActionListener(new java.awt.event.ActionListener() {
@@ -827,9 +865,9 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
 
     private void txtSanPhamCTKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSanPhamCTKeyReleased
         // TODO add your handling code here:
-         if (!txtSanPhamCT.getText().equals("")) {
+        if (!txtSanPhamCT.getText().equals("")) {
             String name = txtSanPhamCT.getText();
-             fillTableChiTietSanPham(serviceCTSP.getList(name));
+            fillTableChiTietSanPham(serviceCTSP.getList(name));
         } else {
             loadPageCTSP();
         }
@@ -837,17 +875,17 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
 
     private void txtTienMinKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTienMinKeyReleased
         // TODO add your handling code here:
-    
+
     }//GEN-LAST:event_txtTienMinKeyReleased
 
     private void txtTienMaxKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTienMaxKeyReleased
         // TODO add your handling code here:
-    
+
     }//GEN-LAST:event_txtTienMaxKeyReleased
 
     private void btnQRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQRActionPerformed
         // TODO add your handling code here:
-            index = tblChiTietSanPham.getSelectedRow();
+        index = tblChiTietSanPham.getSelectedRow();
         if (index != -1) {
             qrCode2((index));
             deltailChiTietSanPham(index);
@@ -858,6 +896,92 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Tạo QR thất bại");
         }
     }//GEN-LAST:event_btnQRActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        FileOutputStream excelFOU = null;
+        BufferedOutputStream excelBOU = null;
+        XSSFWorkbook excelJtableExporter;
+
+        JFileChooser excel = new JFileChooser("D:");
+        excel.setDialogTitle("Save as");
+        FileNameExtensionFilter file = new FileNameExtensionFilter("EXCEL FILE", "xls", "xlsx", "xlsm");
+        excel.setFileFilter(file);
+
+        int excelChooser = excel.showSaveDialog(null);
+        if (excelChooser == JFileChooser.APPROVE_OPTION) {
+            excelJtableExporter = new XSSFWorkbook();
+            XSSFSheet excelsheet = excelJtableExporter.createSheet("Hoa Don");
+            CellStyle style = createStyleForHeader(excelsheet);
+            XSSFRow a = excelsheet.createRow(0);
+            XSSFCell cell1 = a.createCell(0);
+            cell1.setCellStyle(style);
+            cell1.setCellValue("Mã chi tiết SP");
+
+            XSSFCell cell2 = a.createCell(1);
+            cell2.setCellStyle(style);
+            cell2.setCellValue("Số lượng");
+
+            XSSFCell cell3 = a.createCell(2);
+            cell3.setCellStyle(style);
+            cell3.setCellValue("Giá");
+
+            XSSFCell cell4 = a.createCell(3);
+            cell4.setCellStyle(style);
+            cell4.setCellValue("Mã SP");
+
+            XSSFCell cell5 = a.createCell(4);
+            cell5.setCellStyle(style);
+            cell5.setCellValue("Chất liệu");
+
+            XSSFCell cell6 = a.createCell(5);
+            cell6.setCellStyle(style);
+            cell6.setCellValue("Màu sắc");
+
+            XSSFCell cell7 = a.createCell(6);
+            cell7.setCellStyle(style);
+            cell7.setCellValue("Kích thước");
+
+            XSSFCell cell8 = a.createCell(7);
+            cell8.setCellStyle(style);
+            cell8.setCellValue("Trạng thái");
+
+            for (int i = 0; i < tblChiTietSanPham.getRowCount(); i++) {
+                try {
+                    XSSFRow excelRow = excelsheet.createRow(i + 1);
+
+                    for (int j = 0; j < tblChiTietSanPham.getColumnCount(); j++) {
+                        XSSFCell excelCell = excelRow.createCell(j);
+                        excelCell.setCellValue(tblChiTietSanPham.getValueAt(i, j).toString());
+                    }
+
+                    excelFOU = new FileOutputStream(excel.getSelectedFile() + ".xlsx");
+                    excelBOU = new BufferedOutputStream(excelFOU);
+                    try {
+                        excelJtableExporter.write(excelBOU);
+
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
+                } catch (FileNotFoundException ex) {
+                    ex.printStackTrace();
+                } finally {
+                    try {
+                        if (excelBOU != null) {
+                            excelBOU.close();
+                        }
+                        if (excelFOU != null) {
+                            excelFOU.close();
+                        }
+
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
+                }
+            }
+            JOptionPane.showMessageDialog(this, "Xuất file  thành công: " + file.toString());
+        }
+    }//GEN-LAST:event_jButton4ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
