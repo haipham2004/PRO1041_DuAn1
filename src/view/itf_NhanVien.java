@@ -46,6 +46,8 @@ public class itf_NhanVien extends javax.swing.JInternalFrame {
     NhanVienServiceImp serviceNV = new NhanVienServiceImp();
     String anhNV;
     int index = -1;
+    int trang = 1, soTrang, tongBanGhi;
+    int trang0 = 1, soTrang0, tongBanGhi0;
 
     /**
      * Creates new form itf_NhanVien
@@ -56,12 +58,13 @@ public class itf_NhanVien extends javax.swing.JInternalFrame {
         BasicInternalFrameUI uI = (BasicInternalFrameUI) this.getUI();
         uI.setNorthPane(null);
         this.setSize(1300, 755);
-        fillTableNV(serviceNV.getAll());
+//        fillTableNV(serviceNV.getAll());
         loadCboDiaChi(serviceNV.getAll());
         loadCboGioiTinh();
         sort(tblNV0);
         sort(tblNV1);
-        find();
+        loadPage0();
+        loadPage();
     }
 
     public void sort(JTable table) {
@@ -86,32 +89,32 @@ public class itf_NhanVien extends javax.swing.JInternalFrame {
         });
     }
 
-    public void find() {
-        DocumentListener dl = new DocumentListener() {
-            @Override
-            public void insertUpdate(DocumentEvent e) {
-                txtNVChange();
-            }
+    public void loadPage() {
+        tongBanGhi = serviceNV.tongBanGhi(1);
+        if (tongBanGhi % 4 == 0) {
+            soTrang = tongBanGhi / 4;
+        } else {
+            soTrang = tongBanGhi / 4 + 1;
+        }
+        if (trang > soTrang) {
+            trang = soTrang;
+        }
+        lblSoTrang.setText(trang + " of " + soTrang);
+        fillTableNVPage(serviceNV.listPageNV(1, trang), tblNV1);
+    }
 
-            @Override
-            public void removeUpdate(DocumentEvent e) {
-                txtNVChange();
-            }
-
-            @Override
-            public void changedUpdate(DocumentEvent e) {
-                txtNVChange();
-            }
-
-            public void txtNVChange() {
-                cboDiaChi.setSelectedIndex(-1);
-                cboGioiTinh.setSelectedIndex(-1);
-                String hai = txtTimNV.getText();
-                String mot = getCboTimKiem();
-                fillTableNV(serviceNV.getList3(mot, hai));
-            }
-        };
-        txtTimNV.getDocument().addDocumentListener(dl);
+    public void loadPage0() {
+        tongBanGhi0 = serviceNV.tongBanGhi(0);
+        if (tongBanGhi0 % 4 == 0) {
+            soTrang0 = tongBanGhi0 / 4;
+        } else {
+            soTrang0 = tongBanGhi0 / 4 + 1;
+        }
+        if (trang0 > soTrang0) {
+            trang0 = soTrang0;
+        }
+        lblSoTrang.setText(trang0 + " of " + soTrang0);
+        fillTableNVPage(serviceNV.listPageNV(0, trang0), tblNV0);
     }
 
     public void setForm(Boolean x) {
@@ -177,8 +180,8 @@ public class itf_NhanVien extends javax.swing.JInternalFrame {
             } else {
                 rdoNghiViec.setSelected(true);
             }
-
-            ImageIcon icon = new ImageIcon(table.getValueAt(index, 8).toString());
+            anhNV = table.getValueAt(index, 8).toString();
+            ImageIcon icon = new ImageIcon(anhNV);
             Image image = icon.getImage().getScaledInstance(146, 206, Image.SCALE_SMOOTH);
             lblAnhNV.setIcon(new ImageIcon(image));
         } catch (Exception e) {
@@ -204,6 +207,19 @@ public class itf_NhanVien extends javax.swing.JInternalFrame {
                     nv.getCCCD(), nv.getNgayVaoLam(), nv.getAnh()
                 });
             }
+        }
+    }
+
+    public void fillTableNVPage(List<NhanVien> list, JTable tbl) {
+        mol = (DefaultTableModel) tbl.getModel();
+        mol.setRowCount(0);
+        for (NhanVien nv : list) {
+            mol.addRow(new Object[]{
+                nv.getMaNhanVien(), nv.getTaiKhoan().getMaTaiKhoan(), nv.getHoTen(),
+                nv.isGioiTinh() ? "Nam" : "Nữ", nv.getDiaChi(), nv.getSoDienThoai(),
+                nv.getCCCD(), nv.getNgayVaoLam(), nv.getAnh()
+            });
+
         }
     }
 
@@ -260,7 +276,8 @@ public class itf_NhanVien extends javax.swing.JInternalFrame {
         } else {
             if (serviceNV.them(nv) > 0) {
                 loadCboDiaChi(serviceNV.getAll());
-                fillTableNV(serviceNV.getAll());
+                loadPage0();
+                loadPage();
                 JOptionPane.showMessageDialog(this, "Thêm nhân viên thành công");
                 int x = rdoDangLamViec.isSelected() == true ? 0 : 1;
                 tabs.setSelectedIndex(x);
@@ -273,10 +290,15 @@ public class itf_NhanVien extends javax.swing.JInternalFrame {
     public void sua(JTable tbl) {
         String ma = tbl.getValueAt(index, 0).toString();
         NhanVien nv = this.getFormNV();
-
         if (serviceNV.sua(nv, ma) > 0) {
             loadCboDiaChi(serviceNV.getAll());
-            fillTableNV(serviceNV.getAll());
+            if (nv.isTrangThai() == true) {
+                loadPage0();
+                loadPage();
+            } else {
+                loadPage();
+                loadPage0();
+            }
             int x = rdoDangLamViec.isSelected() == true ? 0 : 1;
             tabs.setSelectedIndex(x);
             JOptionPane.showMessageDialog(this, "Sửa thành công");
@@ -350,6 +372,11 @@ public class itf_NhanVien extends javax.swing.JInternalFrame {
         jPanel14 = new javax.swing.JPanel();
         jScrollPane5 = new javax.swing.JScrollPane();
         tblNV0 = new javax.swing.JTable();
+        btnFirst = new javax.swing.JButton();
+        btnPrev = new javax.swing.JButton();
+        lblSoTrang = new javax.swing.JLabel();
+        btnNext = new javax.swing.JButton();
+        btnLast = new javax.swing.JButton();
 
         jPanel61.setBorder(javax.swing.BorderFactory.createTitledBorder("Thiết lập thông tin"));
 
@@ -590,6 +617,12 @@ public class itf_NhanVien extends javax.swing.JInternalFrame {
 
         jPanel10.setBorder(javax.swing.BorderFactory.createTitledBorder("Tìm kiếm"));
 
+        txtTimNV.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtTimNVKeyReleased(evt);
+            }
+        });
+
         btnRSTimNV.setText("Reset");
         btnRSTimNV.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -627,6 +660,12 @@ public class itf_NhanVien extends javax.swing.JInternalFrame {
                     .addComponent(btnRSTimNV))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        tabs.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabsMouseClicked(evt);
+            }
+        });
 
         tblNV1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -710,6 +749,36 @@ public class itf_NhanVien extends javax.swing.JInternalFrame {
 
         tabs.addTab("Nghỉ việc", jPanel14);
 
+        btnFirst.setText("Đầu");
+        btnFirst.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFirstActionPerformed(evt);
+            }
+        });
+
+        btnPrev.setText("Lùi");
+        btnPrev.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPrevActionPerformed(evt);
+            }
+        });
+
+        lblSoTrang.setText("jLabel1");
+
+        btnNext.setText("Tiến");
+        btnNext.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNextActionPerformed(evt);
+            }
+        });
+
+        btnLast.setText("Cuối");
+        btnLast.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLastActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnlChiTietNhanVienLayout = new javax.swing.GroupLayout(pnlChiTietNhanVien);
         pnlChiTietNhanVien.setLayout(pnlChiTietNhanVienLayout);
         pnlChiTietNhanVienLayout.setHorizontalGroup(
@@ -723,6 +792,18 @@ public class itf_NhanVien extends javax.swing.JInternalFrame {
                     .addComponent(jPanel61, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(tabs))
                 .addContainerGap())
+            .addGroup(pnlChiTietNhanVienLayout.createSequentialGroup()
+                .addGap(128, 128, 128)
+                .addComponent(btnFirst)
+                .addGap(18, 18, 18)
+                .addComponent(btnPrev)
+                .addGap(100, 100, 100)
+                .addComponent(lblSoTrang)
+                .addGap(120, 120, 120)
+                .addComponent(btnNext)
+                .addGap(18, 18, 18)
+                .addComponent(btnLast)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnlChiTietNhanVienLayout.setVerticalGroup(
             pnlChiTietNhanVienLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -734,7 +815,14 @@ public class itf_NhanVien extends javax.swing.JInternalFrame {
                     .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(tabs, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(pnlChiTietNhanVienLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnFirst)
+                    .addComponent(btnPrev)
+                    .addComponent(lblSoTrang)
+                    .addComponent(btnNext)
+                    .addComponent(btnLast))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -747,7 +835,7 @@ public class itf_NhanVien extends javax.swing.JInternalFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 647, Short.MAX_VALUE)
+            .addGap(0, 707, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(pnlChiTietNhanVien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -803,7 +891,6 @@ public class itf_NhanVien extends javax.swing.JInternalFrame {
         btnThemNV.setEnabled(false);
         txtMaNV.setEnabled(false);
         tblNV0.clearSelection();
-        
     }//GEN-LAST:event_tblNV1MouseClicked
 
     private void tblNV0MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblNV0MouseClicked
@@ -819,6 +906,9 @@ public class itf_NhanVien extends javax.swing.JInternalFrame {
 
     private void btnSuaNVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaNVActionPerformed
         if (valid()) {
+            if (tblNV0.getSelectedRow() == 0 && tblNV1.getSelectedRow() == 0) {
+                JOptionPane.showMessageDialog(this, "Bạn đang không chọn dòng nào");
+            }
             index = tblNV0.getSelectedRow();
             if (index != -1) {
                 sua(tblNV0);
@@ -848,7 +938,8 @@ public class itf_NhanVien extends javax.swing.JInternalFrame {
         String mot;
         String hai = null;
         if (cboGioiTinh.getSelectedIndex() == -1) {
-            fillTableNV(serviceNV.getAll());
+            loadPage0();
+            loadPage();
             return;
         } else {
             mot = cboGioiTinh.getSelectedIndex() == 0 ? "1" : "0";
@@ -876,17 +967,114 @@ public class itf_NhanVien extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cboDiaChiActionPerformed
 
     private void btnRSTimNVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRSTimNVActionPerformed
+        cboTimKiemNV.setSelectedIndex(0);
         txtTimNV.setText("");
+        loadPage0();
+        loadPage();
     }//GEN-LAST:event_btnRSTimNVActionPerformed
 
     private void cboTimKiemNVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboTimKiemNVActionPerformed
         txtTimNV.setText("");
+        loadPage0();
+        loadPage();
     }//GEN-LAST:event_cboTimKiemNVActionPerformed
+
+    private void btnFirstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFirstActionPerformed
+        if (tabs.getSelectedIndex() == 1) {
+            index = 0;
+            trang0 = 1;
+            fillTableNV(serviceNV.listPageNV(index, trang0));
+            lblSoTrang.setText(trang0 + " of " + soTrang0);
+        } else {
+            index = 1;
+            trang = 1;
+            fillTableNV(serviceNV.listPageNV(index, trang));
+            lblSoTrang.setText(trang + " of " + soTrang);
+        }
+
+    }//GEN-LAST:event_btnFirstActionPerformed
+
+    private void btnPrevActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrevActionPerformed
+        if (tabs.getSelectedIndex() == 1) {
+            index = 0;
+            if (trang0 > 1) {
+                trang0--;
+                fillTableNV(serviceNV.listPageNV(index, trang0));
+                lblSoTrang.setText(trang0 + " of " + soTrang0);
+            }
+        } else {
+            index = 1;
+            if (trang > 1) {
+                trang--;
+                fillTableNV(serviceNV.listPageNV(index, trang));
+                lblSoTrang.setText(trang + " of " + soTrang);
+            }
+        }
+
+    }//GEN-LAST:event_btnPrevActionPerformed
+
+    private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
+        if (tabs.getSelectedIndex() == 1) {
+            index = 0;
+            if (trang0 < soTrang0) {
+                trang0++;
+                fillTableNV(serviceNV.listPageNV(index, trang0));
+                lblSoTrang.setText(trang0 + " of " + soTrang0);
+            }
+        } else {
+            index = 1;
+            if (trang < soTrang) {
+                trang++;
+                fillTableNV(serviceNV.listPageNV(index, trang));
+                lblSoTrang.setText(trang + " of " + soTrang);
+            }
+        }
+    }//GEN-LAST:event_btnNextActionPerformed
+
+    private void btnLastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLastActionPerformed
+        if (tabs.getSelectedIndex() == 1) {
+            index = 0;
+            trang0 = soTrang0;
+            fillTableNV(serviceNV.listPageNV(index, trang0));
+            lblSoTrang.setText(trang0 + " of " + soTrang0);
+        } else {
+            index = 1;
+            trang = soTrang;
+            fillTableNV(serviceNV.listPageNV(index, trang));
+            lblSoTrang.setText(trang + " of " + soTrang);
+        }
+    }//GEN-LAST:event_btnLastActionPerformed
+
+    private void tabsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabsMouseClicked
+        if (tabs.getSelectedIndex() == 1) {
+            loadPage0();
+        }
+        if (tabs.getSelectedIndex() == 0) {
+            loadPage();
+        }
+    }//GEN-LAST:event_tabsMouseClicked
+
+    private void txtTimNVKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimNVKeyReleased
+        if (!txtTimNV.getText().equals("")) {
+            cboDiaChi.setSelectedIndex(-1);
+            cboGioiTinh.setSelectedIndex(-1);
+            String hai = txtTimNV.getText();
+            String mot = getCboTimKiem();
+            fillTableNV(serviceNV.getList3(mot, hai));
+        } else {
+            loadPage0();
+            loadPage();
+        }
+    }//GEN-LAST:event_txtTimNVKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup btgGioiTinhNV;
+    private javax.swing.JButton btnFirst;
+    private javax.swing.JButton btnLast;
     private javax.swing.JButton btnMoiNV;
+    private javax.swing.JButton btnNext;
+    private javax.swing.JButton btnPrev;
     private javax.swing.JButton btnRSDiaChiNV;
     private javax.swing.JButton btnRSTimNV;
     private javax.swing.JButton btnSuaNV;
@@ -913,6 +1101,7 @@ public class itf_NhanVien extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JLabel lblAnhNV;
+    private javax.swing.JLabel lblSoTrang;
     private javax.swing.JPanel pnlChiTietNhanVien;
     private javax.swing.JRadioButton rdoDangLamViec;
     private javax.swing.JRadioButton rdoNam;

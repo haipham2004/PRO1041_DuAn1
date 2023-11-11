@@ -53,4 +53,10 @@ public class NhanVienServiceImp implements AdamStore<NhanVien, String>{
     public List<NhanVien> getList3(String e, String f){
         return repo.getList3(e, f);
     }
+    public List<NhanVien> listPageNV(int tt,int index) {
+        return repo.listPageNV(tt,index);
+    }
+    public int tongBanGhi(int index) {
+        return repo.tongBanGhi(index);
+    }
 }
