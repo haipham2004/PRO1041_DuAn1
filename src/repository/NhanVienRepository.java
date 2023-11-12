@@ -189,7 +189,7 @@ public class NhanVienRepository {
             rs = pst.executeQuery();
             while (rs.next()) {
                 TaiKhoan tk = new TaiKhoan(rs.getString(2), rs.getString(11),
-                        rs.getString(12), rs.getString(13), rs.getInt(14));
+                        rs.getString(12), rs.getString(13), rs.getBoolean(14));
                 NhanVien nv = new NhanVien(rs.getString(1), tk,
                         rs.getString(3), rs.getBoolean(4), rs.getString(5),
                         rs.getString(6), rs.getString(7), rs.getDate(8),
