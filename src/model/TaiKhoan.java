@@ -13,12 +13,16 @@ public class TaiKhoan {
     private String UserName;
     private String PassWord;
     private String role;
-    private int trangThai;
+    private boolean trangThai;
 
     public TaiKhoan() {
     }
 
-    public TaiKhoan(String maTaiKhoan, String UserName, String PassWord, String role, int trangThai) {
+    public TaiKhoan(String PassWord) {
+        this.PassWord = PassWord;
+    }
+
+    public TaiKhoan(String maTaiKhoan, String UserName, String PassWord, String role, boolean trangThai) {
         this.maTaiKhoan = maTaiKhoan;
         this.UserName = UserName;
         this.PassWord = PassWord;
@@ -58,11 +62,11 @@ public class TaiKhoan {
         this.role = role;
     }
 
-    public int getTrangThai() {
+    public boolean getTrangThai() {
         return trangThai;
     }
 
-    public void setTrangThai(int trangThai) {
+    public void setTrangThai(boolean trangThai) {
         this.trangThai = trangThai;
     }
     
