@@ -324,7 +324,6 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
         btnThemCTSP = new javax.swing.JButton();
         btnSuaCTSP = new javax.swing.JButton();
         btnClearCTSP = new javax.swing.JButton();
-        btnXuatFile = new javax.swing.JButton();
         btnDau2 = new javax.swing.JButton();
         btnLui2 = new javax.swing.JButton();
         btnTien2 = new javax.swing.JButton();
@@ -332,6 +331,7 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
         lbSoTrang2 = new javax.swing.JLabel();
         btnQR = new javax.swing.JButton();
         btnNhapFile = new javax.swing.JButton();
+        btnXuatfile = new javax.swing.JButton();
 
         jPanel16.setBorder(javax.swing.BorderFactory.createTitledBorder("Thông tin sản phẩm"));
 
@@ -532,13 +532,6 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
             }
         });
 
-        btnXuatFile.setText("Xuất file");
-        btnXuatFile.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnXuatFileActionPerformed(evt);
-            }
-        });
-
         btnDau2.setText("Pre");
         btnDau2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -580,6 +573,13 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
         btnNhapFile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNhapFileActionPerformed(evt);
+            }
+        });
+
+        btnXuatfile.setText("Xuất file");
+        btnXuatfile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXuatfileActionPerformed(evt);
             }
         });
 
@@ -658,8 +658,8 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
                                 .addGap(31, 31, 31)
                                 .addComponent(btnClearCTSP)
                                 .addGap(18, 18, 18)
-                                .addComponent(btnXuatFile)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnXuatfile)
+                                .addGap(5, 5, 5)
                                 .addComponent(btnNhapFile)))))
                 .addGap(34, 34, 34))
             .addGroup(jPanel16Layout.createSequentialGroup()
@@ -725,9 +725,9 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
                     .addComponent(btnThemCTSP)
                     .addComponent(btnSuaCTSP)
                     .addComponent(btnClearCTSP)
-                    .addComponent(btnXuatFile)
                     .addComponent(btnQR)
-                    .addComponent(btnNhapFile))
+                    .addComponent(btnNhapFile)
+                    .addComponent(btnXuatfile))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -913,92 +913,6 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnQRActionPerformed
 
-    private void btnXuatFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXuatFileActionPerformed
-        // TODO add your handling code here:
-        FileOutputStream excelFOU = null;
-        BufferedOutputStream excelBOU = null;
-        XSSFWorkbook excelJtableExporter;
-
-        JFileChooser excel = new JFileChooser("D:");
-        excel.setDialogTitle("Save as");
-        FileNameExtensionFilter file = new FileNameExtensionFilter("EXCEL FILE", "xls", "xlsx", "xlsm");
-        excel.setFileFilter(file);
-
-        int excelChooser = excel.showSaveDialog(null);
-        if (excelChooser == JFileChooser.APPROVE_OPTION) {
-            excelJtableExporter = new XSSFWorkbook();
-            XSSFSheet excelsheet = excelJtableExporter.createSheet("Hoa Don");
-            CellStyle style = createStyleForHeader(excelsheet);
-            XSSFRow a = excelsheet.createRow(0);
-            XSSFCell cell1 = a.createCell(0);
-            cell1.setCellStyle(style);
-            cell1.setCellValue("Mã chi tiết SP");
-
-            XSSFCell cell2 = a.createCell(1);
-            cell2.setCellStyle(style);
-            cell2.setCellValue("Số lượng");
-
-            XSSFCell cell3 = a.createCell(2);
-            cell3.setCellStyle(style);
-            cell3.setCellValue("Giá");
-
-            XSSFCell cell4 = a.createCell(3);
-            cell4.setCellStyle(style);
-            cell4.setCellValue("Mã SP");
-
-            XSSFCell cell5 = a.createCell(4);
-            cell5.setCellStyle(style);
-            cell5.setCellValue("Chất liệu");
-
-            XSSFCell cell6 = a.createCell(5);
-            cell6.setCellStyle(style);
-            cell6.setCellValue("Màu sắc");
-
-            XSSFCell cell7 = a.createCell(6);
-            cell7.setCellStyle(style);
-            cell7.setCellValue("Kích thước");
-
-            XSSFCell cell8 = a.createCell(7);
-            cell8.setCellStyle(style);
-            cell8.setCellValue("Trạng thái");
-
-            for (int i = 0; i < tblChiTietSanPham.getRowCount(); i++) {
-                try {
-                    XSSFRow excelRow = excelsheet.createRow(i + 1);
-
-                    for (int j = 0; j < tblChiTietSanPham.getColumnCount(); j++) {
-                        XSSFCell excelCell = excelRow.createCell(j);
-                        excelCell.setCellValue(tblChiTietSanPham.getValueAt(i, j).toString());
-                    }
-
-                    excelFOU = new FileOutputStream(excel.getSelectedFile() + ".xlsx");
-                    excelBOU = new BufferedOutputStream(excelFOU);
-                    try {
-                        excelJtableExporter.write(excelBOU);
-
-                    } catch (IOException ex) {
-                        ex.printStackTrace();
-                    }
-                } catch (FileNotFoundException ex) {
-                    ex.printStackTrace();
-                } finally {
-                    try {
-                        if (excelBOU != null) {
-                            excelBOU.close();
-                        }
-                        if (excelFOU != null) {
-                            excelFOU.close();
-                        }
-
-                    } catch (IOException ex) {
-                        ex.printStackTrace();
-                    }
-                }
-            }
-            JOptionPane.showMessageDialog(this, "Xuất file  thành công: " + file.toString());
-        }
-    }//GEN-LAST:event_btnXuatFileActionPerformed
-
     private void btnNhapFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNhapFileActionPerformed
         // TODO add your handling code here:
         File excelFile;
@@ -1082,6 +996,93 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnNhapFileActionPerformed
 
+    private void btnXuatfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXuatfileActionPerformed
+        // TODO add your handling code here:
+        fillTableChiTietSanPham(serviceCTSP.getAll());
+              FileOutputStream excelFOU = null;
+        BufferedOutputStream excelBOU = null;
+        XSSFWorkbook excelJtableExporter;
+
+        JFileChooser excel = new JFileChooser("D:");
+        excel.setDialogTitle("Save as");
+        FileNameExtensionFilter file = new FileNameExtensionFilter("EXCEL FILE", "xls", "xlsx", "xlsm");
+        excel.setFileFilter(file);
+
+        int excelChooser = excel.showSaveDialog(null);
+        if (excelChooser == JFileChooser.APPROVE_OPTION) {
+            excelJtableExporter = new XSSFWorkbook();
+            XSSFSheet excelsheet = excelJtableExporter.createSheet("Hoa Don");
+            CellStyle style = createStyleForHeader(excelsheet);
+            XSSFRow a = excelsheet.createRow(0);
+            XSSFCell cell1 = a.createCell(0);
+            cell1.setCellStyle(style);
+            cell1.setCellValue("Mã chi tiết SP");
+
+            XSSFCell cell2 = a.createCell(1);
+            cell2.setCellStyle(style);
+            cell2.setCellValue("Số lượng");
+
+            XSSFCell cell3 = a.createCell(2);
+            cell3.setCellStyle(style);
+            cell3.setCellValue("Giá");
+
+            XSSFCell cell4 = a.createCell(3);
+            cell4.setCellStyle(style);
+            cell4.setCellValue("Mã SP");
+
+            XSSFCell cell5 = a.createCell(4);
+            cell5.setCellStyle(style);
+            cell5.setCellValue("Chất liệu");
+
+            XSSFCell cell6 = a.createCell(5);
+            cell6.setCellStyle(style);
+            cell6.setCellValue("Màu sắc");
+
+            XSSFCell cell7 = a.createCell(6);
+            cell7.setCellStyle(style);
+            cell7.setCellValue("Kích thước");
+
+            XSSFCell cell8 = a.createCell(7);
+            cell8.setCellStyle(style);
+            cell8.setCellValue("Trạng thái");
+
+            for (int i = 0; i < tblChiTietSanPham.getRowCount(); i++) {
+                try {
+                    XSSFRow excelRow = excelsheet.createRow(i + 1);
+
+                    for (int j = 0; j < tblChiTietSanPham.getColumnCount(); j++) {
+                        XSSFCell excelCell = excelRow.createCell(j);
+                        excelCell.setCellValue(tblChiTietSanPham.getValueAt(i, j).toString());
+                    }
+
+                    excelFOU = new FileOutputStream(excel.getSelectedFile() + ".xlsx");
+                    excelBOU = new BufferedOutputStream(excelFOU);
+                    try {
+                        excelJtableExporter.write(excelBOU);
+
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
+                } catch (FileNotFoundException ex) {
+                    ex.printStackTrace();
+                } finally {
+                    try {
+                        if (excelBOU != null) {
+                            excelBOU.close();
+                        }
+                        if (excelFOU != null) {
+                            excelFOU.close();
+                        }
+
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
+                }
+            }
+            JOptionPane.showMessageDialog(this, "Xuất file  thành công: " + file.toString());
+        }
+    }//GEN-LAST:event_btnXuatfileActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClearCTSP;
@@ -1094,7 +1095,7 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
     private javax.swing.JButton btnSuaCTSP;
     private javax.swing.JButton btnThemCTSP;
     private javax.swing.JButton btnTien2;
-    private javax.swing.JButton btnXuatFile;
+    private javax.swing.JButton btnXuatfile;
     private javax.swing.JComboBox<String> cboChatLieu;
     private javax.swing.JComboBox<String> cboKichThuoc;
     private javax.swing.JComboBox<String> cboMaSP;

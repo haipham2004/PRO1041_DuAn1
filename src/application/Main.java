@@ -13,7 +13,7 @@ import view.AdamStoreView;
 public class Main {
 
     public static void main(String[] args) {
-        AdamStoreView adm = new AdamStoreView();
-        adm.setVisible(true);
+        AdamStoreView adms = new AdamStoreView();
+        adms.setVisible(true);
     }
 }
