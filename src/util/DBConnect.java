@@ -18,10 +18,14 @@ public class DBConnect {
 
     private static final String USERNAME = "sa";
 <<<<<<< HEAD
+<<<<<<< HEAD
     private static final String PASSWORD = "Haitam77";
 =======
     private static final String PASSWORD = "12345678";
 >>>>>>> 7d7b75f922a2fee61d4e2c5f752bbdb08a74ae92
+=======
+    private static final String PASSWORD = "Haitam77";
+>>>>>>> bd4eb910822887c82c4f97f7ed383293a7add0dc
     private static final String SERVER = "localhost";
     private static final String PORT = "1433";
     private static final String DATABASE_NAME = "AdamStores";
