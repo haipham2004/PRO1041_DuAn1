@@ -4,18 +4,11 @@
  */
 package view;
 
-import java.util.ArrayList;
+import java.time.LocalDate;
 import java.util.List;
-import javax.swing.JOptionPane;
-import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import model.ChatLieu;
-import model.ChiTietSanPham;
-import model.KichThuoc;
-import model.MauSac;
-import model.SanPham;
-import service.servicImp.ChiTietSanPhamServiceImp;
-import javax.swing.JTable;
+import model.HoaDon;
+import service.servicImp.HoaDonServiceImp;
 
 /**
  *
@@ -23,10 +16,9 @@ import javax.swing.JTable;
  */
 public class BanHangView extends javax.swing.JPanel {
 
-    DefaultTableModel molCTSP = new DefaultTableModel();
-    DefaultTableModel molGH = new DefaultTableModel();
-    ChiTietSanPhamServiceImp serviceCTSP = new ChiTietSanPhamServiceImp();
-    int index = -1;
+    HoaDonServiceImp serviceHD = new HoaDonServiceImp();
+    DefaultTableModel tblmol = new DefaultTableModel();
+    int so = 0;
 
     /**
      * Creates new form BanHangView
@@ -34,48 +26,34 @@ public class BanHangView extends javax.swing.JPanel {
     public BanHangView() {
         initComponents();
         this.setSize(1300, 755);
-        fillTableChiTietSanPham(serviceCTSP.getAll());
+        fillTableHDC(serviceHD.getHoaDonCho());
     }
 
-    // Hải
-    public void fillTableChiTietSanPham(List<ChiTietSanPham> list) {
-        molCTSP = (DefaultTableModel) tblChiTietSanPham.getModel();
-        molCTSP.setRowCount(0);
-        for (ChiTietSanPham chiTietSanPham : list) {
-            molCTSP.addRow(new Object[]{
-                chiTietSanPham.getMaChiTietSanPham(),
-                chiTietSanPham.getSoLuong(), chiTietSanPham.getGia(),
-                chiTietSanPham.getSanPham(),
-                chiTietSanPham.getChatLieu(), chiTietSanPham.getMauSac(),
-                chiTietSanPham.getKichThuoc()
+    public void fillTableHDC(List<HoaDon> list) {
+        tblmol = (DefaultTableModel) tblHoaDonCho.getModel();
+        tblmol.setRowCount(0);
+        for (HoaDon item : list) {
+            tblmol.addRow(new Object[]{
+                this.tblHoaDonCho.getRowCount() + 1, item.getMaHoaDon(), item.getNhanVien().getHoTen(),
+                item.getNgayTao(), item.chiTietTrangThai()
             });
         }
     }
 
-    public void fillTableGioHang(List<ChiTietSanPham> list) {
-        molGH = (DefaultTableModel) tblChiTietSanPham.getModel();
-        molGH.setRowCount(0);
-        for (ChiTietSanPham chiTietSanPham : list) {
-            molGH.addRow(new Object[]{
-                chiTietSanPham.getMaChiTietSanPham(),
-                chiTietSanPham.getSoLuong(), chiTietSanPham.getGia(),
-                chiTietSanPham.getSoLuong() * chiTietSanPham.getGia(),
-                chiTietSanPham.getSanPham().getTenSanPham()
-            });
-        }
+    public String maTangTuDong(String HD) {
+        so++;
+        String maHD = HD + String.format("%04d", so);;
+        return maHD;
     }
 
-    public double TinhTongTien(JTable tbl) {
-        double tongTien = 0;
-
-        for (int i = 0; i < tbl.getRowCount(); i++) {
-            tongTien = tongTien + Double.parseDouble(tbl.getValueAt(i, 3).toString());
-            System.out.println(tongTien);
-        }
-        return tongTien;
+    public void fillTableHDC2() {
+        String maHD = maTangTuDong("HD");
+        LocalDate ngayTao = LocalDate.now();
+        tblmol.addRow(new Object[]{
+            this.tblHoaDonCho.getRowCount() + 1, maHD, "", ngayTao, "Chờ thanh toán"
+        });
     }
 
-    // Hải
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -88,36 +66,36 @@ public class BanHangView extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblHoaDonCho = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tblGioHang = new javax.swing.JTable();
+        jTable2 = new javax.swing.JTable();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        tblChiTietSanPham = new javax.swing.JTable();
-        btnThemGioHang = new javax.swing.JButton();
-        txtTimKiemCTSP = new javax.swing.JTextField();
+        jTable3 = new javax.swing.JTable();
+        jButton4 = new javax.swing.JButton();
+        jButton7 = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Hóa đơn chờ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.ABOVE_TOP, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblHoaDonCho.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "STT", "Mã hóa đơn", "Tên nhân viên", "Ngày tạo", "Trạng thái"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblHoaDonCho);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -138,23 +116,18 @@ public class BanHangView extends javax.swing.JPanel {
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Giỏ hàng", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.ABOVE_TOP, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
 
-        tblGioHang.setModel(new javax.swing.table.DefaultTableModel(
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Mã", "Số lượng", "Giá", "Thành tiền", "TênSP"
+                "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        tblGioHang.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblGioHangMouseClicked(evt);
-            }
-        });
-        jScrollPane2.setViewportView(tblGioHang);
+        jScrollPane2.setViewportView(jTable2);
 
         jButton2.setText("Quét QR");
 
@@ -199,36 +172,22 @@ public class BanHangView extends javax.swing.JPanel {
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Danh sách sản phẩm", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.ABOVE_TOP, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
 
-        tblChiTietSanPham.setModel(new javax.swing.table.DefaultTableModel(
+        jTable3.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Mã CTSP", "Số lượng tồn", "Giá", "Tên SP", "Chất liệu", "Màu sắc", "Kích thước"
+                "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        tblChiTietSanPham.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblChiTietSanPhamMouseClicked(evt);
-            }
-        });
-        jScrollPane3.setViewportView(tblChiTietSanPham);
+        jScrollPane3.setViewportView(jTable3);
 
-        btnThemGioHang.setText("Thêm vào giỏ hàng");
-        btnThemGioHang.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnThemGioHangActionPerformed(evt);
-            }
-        });
+        jButton4.setText("Tìm kiếm sản phẩm");
 
-        txtTimKiemCTSP.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtTimKiemCTSPKeyReleased(evt);
-            }
-        });
+        jButton7.setText("Thêm vào giỏ hàng");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -239,20 +198,19 @@ public class BanHangView extends javax.swing.JPanel {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane3)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(txtTimKiemCTSP, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(69, 69, 69)
-                        .addComponent(btnThemGioHang, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton4)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnThemGioHang, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtTimKiemCTSP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27))
         );
@@ -260,6 +218,11 @@ public class BanHangView extends javax.swing.JPanel {
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Đơn hàng", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.ABOVE_TOP, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
 
         jButton1.setText("Tạo hóa đơn");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -321,96 +284,20 @@ public class BanHangView extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnThemGioHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemGioHangActionPerformed
-        int indexs = tblChiTietSanPham.getSelectedRow();
-        if (indexs == -1) {
-            JOptionPane.showMessageDialog(this, "Vui lòng chọn một sản phẩm");
-            return;
-        }
-        String input = JOptionPane.showInputDialog(this, "Mời nhập số lượng");
-        if (input == null || input.isEmpty()) {
-            return;
-        }
-        try {
-            int soLuongMua = Integer.parseInt(input);
-            int soLuongTon = Integer.parseInt(tblChiTietSanPham.getValueAt(indexs, 1).toString());
-            if (soLuongMua > soLuongTon) {
-                JOptionPane.showMessageDialog(this, "Số lượng không đủ");
-                return;
-            }
-
-            String ma = tblChiTietSanPham.getValueAt(indexs, 0).toString();
-            String soLuong = tblChiTietSanPham.getValueAt(indexs, 1).toString();
-            String gia = tblChiTietSanPham.getValueAt(indexs, 2).toString();
-            String ten = tblChiTietSanPham.getValueAt(indexs, 3).toString();
-
-            // Kiểm tra xem tblGioHang đã có sản phẩm này hay chưa
-            int indexGioHang = -1;
-//            for (int i = 0; i < tblGioHang.getRowCount(); i++) {
-//                if (tblGioHang.getValueAt(i, 0).toString().equals(ma)) {
-//                    indexGioHang = i;
-//                    break;
-//                }
-//            }
-
-            if (indexGioHang != -1) {
-          
-                int soLuongMuaTruocKhiSua = Integer.parseInt(tblGioHang.getValueAt(indexGioHang, 1).toString());
-                int soLuongMuaSauKhiSua = soLuongMuaTruocKhiSua + soLuongMua;
-                tblGioHang.setValueAt(String.valueOf(soLuongMuaSauKhiSua), indexGioHang, 1);
-                double thanhTien = soLuongMuaSauKhiSua * Double.parseDouble(tblGioHang.getValueAt(indexGioHang, 2).toString());
-                tblGioHang.setValueAt(String.valueOf(thanhTien), indexGioHang, 3);
-            } else {
-                        
-                for (int i = 0; i < tblGioHang.getRowCount(); i++) {
-
-                    tblGioHang.setValueAt(ma, i, 0);
-                    tblGioHang.setValueAt(soLuongMua, i, 1);
-                    tblGioHang.setValueAt(gia, i, 2);
-                    double thanhTien = soLuongMua * Double.parseDouble(tblGioHang.getValueAt(i, 2).toString());
-                    tblGioHang.setValueAt(String.valueOf(thanhTien), i, 3);
-                    tblGioHang.setValueAt(ten, i, 4);
-                    fillTableGioHang(serviceCTSP.getAll());
-                    break;
-                }
-                fillTableChiTietSanPham(serviceCTSP.getAll());
-                soLuongTon = soLuongTon - soLuongMua;
-                tblChiTietSanPham.setValueAt(soLuongTon, indexs, 1);
-
-            }
-        } catch (NumberFormatException e) {
-            return;
-        }
-
-    }//GEN-LAST:event_btnThemGioHangActionPerformed
-
-    private void tblChiTietSanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblChiTietSanPhamMouseClicked
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         // TODO add your handling code here:
-        index = tblChiTietSanPham.getSelectedRow();
-
-
-    }//GEN-LAST:event_tblChiTietSanPhamMouseClicked
-
-    private void txtTimKiemCTSPKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKiemCTSPKeyReleased
-        // TODO add your handling code here:
-        if (!txtTimKiemCTSP.getText().equals("")) {
-            String name = txtTimKiemCTSP.getText();
-            fillTableChiTietSanPham(serviceCTSP.getList(name));
-        }
-    }//GEN-LAST:event_txtTimKiemCTSPKeyReleased
-
-    private void tblGioHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblGioHangMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tblGioHangMouseClicked
+        fillTableHDC2();
+    }//GEN-LAST:event_jButton1MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnThemGioHang;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -419,9 +306,8 @@ public class BanHangView extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable tblChiTietSanPham;
-    private javax.swing.JTable tblGioHang;
-    private javax.swing.JTextField txtTimKiemCTSP;
+    private javax.swing.JTable jTable2;
+    private javax.swing.JTable jTable3;
+    private javax.swing.JTable tblHoaDonCho;
     // End of variables declaration//GEN-END:variables
 }
