@@ -93,7 +93,7 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
                 chiTietSanPham.getSanPham(),
                 chiTietSanPham.getChatLieu(), chiTietSanPham.getMauSac(),
                 chiTietSanPham.getKichThuoc(), chiTietSanPham.isTrangThai() ? "Còn hàng" : "Hết hàng",
-                chiTietSanPham.getSanPham().getTenSanPham()
+
             });
         }
     }
@@ -488,7 +488,7 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
                 {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Mã SPCT", "Số lượng", "Giá", "Mã SP", "Chất liệu", "Màu sắc ", "Kích thước", "Trạng thái"
+                "Mã SPCT", "Số lượng tồn", "Giá", "Mã SP", "Chất liệu", "Màu sắc ", "Kích thước", "Trạng thái"
             }
         ));
         tblChiTietSanPham.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -978,21 +978,22 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(null, "Imported Successfully !!.....");
             } catch (IOException iOException) {
                 JOptionPane.showMessageDialog(null, iOException.getMessage());
-            } finally {
-                try {
-                    if (excelFIS != null) {
-                        excelFIS.close();
-                    }
-                    if (excelBIS != null) {
-                        excelBIS.close();
-                    }
-                    if (excelImportToJTable != null) {
-                        excelImportToJTable.close();
-                    }
-                } catch (IOException iOException) {
-                    JOptionPane.showMessageDialog(null, iOException.getMessage());
-                }
             }
+//            } finally {
+//                try {
+//                    if (excelFIS != null) {
+//                        excelFIS.close();
+//                    }
+//                    if (excelBIS != null) {
+//                        excelBIS.close();
+//                    }
+//                    if (excelImportToJTable != null) {
+//                        excelImportToJTable.close();
+//                    }
+//                } catch (IOException iOException) {
+//                    JOptionPane.showMessageDialog(null, iOException.getMessage());
+//                }
+//            }
         }
     }//GEN-LAST:event_btnNhapFileActionPerformed
 
