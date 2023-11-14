@@ -31,11 +31,11 @@ public class ChiTietSanPhamRepository {
         try {
             conn = DBConnect.getConnection();
             sql = "SELECT CTSP.MaCTSP,CTSP.MaSanPham,SP.TenSanPham,MS.MaMauSac,MS.TenMauSac,CL.MaChatLieu,CL.TenChatLieu,\n"
-                    + " KT.MaKichThuoc,KT.TenKichThuoc,CTSP.SoLuong,CTSP.Gia,CTSP.TrangThai\n"
-                    + " FROM ChiTietSanPham CTSP INNER JOIN ChatLieu CL On CL.MaChatLieu=CTSP.MaChatLieu\n"
-                    + " INNER JOIn MauSac MS ON MS.MaMauSac=CTSP.MaMauSac\n"
-                    + " INNER JOIN KichThuoc KT ON KT.MaKichThuoc=CTSP.MaKichThuoc \n"
-                    + "	INNER JOIN SanPham SP ON CTSP.MaSanPham=SP.MaSanPham";
+                    + "KT.MaKichThuoc,KT.TenKichThuoc,CTSP.SoLuong,CTSP.Gia,CTSP.TrangThai\n"
+                    + "FROM ChiTietSanPham CTSP INNER JOIN ChatLieu CL On CL.MaChatLieu=CTSP.MaChatLieu\n"
+                    + "INNER JOIn MauSac MS ON MS.MaMauSac=CTSP.MaMauSac\n"
+                    + "INNER JOIN KichThuoc KT ON KT.MaKichThuoc=CTSP.MaKichThuoc \n"
+                    + "INNER JOIN SanPham SP ON CTSP.MaSanPham=SP.MaSanPham ";
             pst = conn.prepareStatement(sql);
             rs = pst.executeQuery();
             while (rs.next()) {
@@ -63,7 +63,7 @@ public class ChiTietSanPhamRepository {
                     + " FROM ChiTietSanPham CTSP INNER JOIN ChatLieu CL On CL.MaChatLieu=CTSP.MaChatLieu\n"
                     + " INNER JOIn MauSac MS ON MS.MaMauSac=CTSP.MaMauSac\n"
                     + " INNER JOIN KichThuoc KT ON KT.MaKichThuoc=CTSP.MaKichThuoc \n"
-                    + "	INNER JOIN SanPham SP ON CTSP.MaSanPham=SP.MaSanPham where CTSP.MaCTSP=?";
+                    + "	INNER JOIN SanPham SP ON CTSP.MaSanPham=SP.MaSanPham where CTSP.MaCTSP=? order by CTSP.TrangThai DESC";
             pst = conn.prepareStatement(sql);
             pst.setObject(1, ma);
             rs = pst.executeQuery();
@@ -134,7 +134,7 @@ public class ChiTietSanPhamRepository {
                     + "FROM ChiTietSanPham CTSP INNER JOIN ChatLieu CL On CL.MaChatLieu=CTSP.MaChatLieu\n"
                     + "INNER JOIn MauSac MS ON MS.MaMauSac=CTSP.MaMauSac\n"
                     + "INNER JOIN KichThuoc KT ON KT.MaKichThuoc=CTSP.MaKichThuoc \n"
-                    + "INNER JOIN SanPham SP ON CTSP.MaSanPham=SP.MaSanPham where SP.TenSanPham like ?";
+                    + "INNER JOIN SanPham SP ON CTSP.MaSanPham=SP.MaSanPham where SP.TenSanPham like ? order by CTSP.TrangThai DESC ";
             pst = conn.prepareStatement(sql);
             pst.setObject(1, '%' + name + '%');
             rs = pst.executeQuery();
@@ -163,7 +163,7 @@ public class ChiTietSanPhamRepository {
                     + "FROM ChiTietSanPham CTSP INNER JOIN ChatLieu CL On CL.MaChatLieu=CTSP.MaChatLieu\n"
                     + "INNER JOIn MauSac MS ON MS.MaMauSac=CTSP.MaMauSac\n"
                     + "INNER JOIN KichThuoc KT ON KT.MaKichThuoc=CTSP.MaKichThuoc \n"
-                    + "INNER JOIN SanPham SP ON CTSP.MaSanPham=SP.MaSanPham where Gia between ? and ? ";
+                    + "INNER JOIN SanPham SP ON CTSP.MaSanPham=SP.MaSanPham where Gia between ? and ? order by CTSP.TrangThai DESC";
             pst = conn.prepareStatement(sql);
             pst.setObject(1, giaMin);
             pst.setObject(2, giaMax);
@@ -193,8 +193,8 @@ public class ChiTietSanPhamRepository {
                     + "FROM ChiTietSanPham CTSP INNER JOIN ChatLieu CL On CL.MaChatLieu=CTSP.MaChatLieu\n"
                     + "INNER JOIn MauSac MS ON MS.MaMauSac=CTSP.MaMauSac\n"
                     + "INNER JOIN KichThuoc KT ON KT.MaKichThuoc=CTSP.MaKichThuoc \n"
-                    + "INNER JOIN SanPham SP ON CTSP.MaSanPham=SP.MaSanPham\n"
-                    + "order by CTSP.MaCTSP\n"
+                    + "INNER JOIN SanPham SP ON CTSP.MaSanPham=SP.MaSanPham \n"
+                    + "order by CTSP.TrangThai DESC\n"
                     + "offset ? rows fetch next 4 rows only";
             pst = conn.prepareStatement(sql);
             pst.setInt(1, (index - 1) * 4);
@@ -247,5 +247,22 @@ public class ChiTietSanPhamRepository {
             return false;
         }
         return true;
+    }
+
+    public int updateTrangThaiSoLuong() {
+        try {
+            conn = DBConnect.getConnection();
+            sql = "UPDATE ChiTietSanPham\n"
+                    + "set TrangThai=0\n"
+                    + "where SoLuong=0\n"
+                    + "UPDATE ChiTietSanPham\n"
+                    + "set TrangThai=1\n"
+                    + "where SoLuong>0";
+            pst = conn.prepareStatement(sql);
+            return pst.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
     }
 }
