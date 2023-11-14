@@ -51,4 +51,8 @@ public class HoaDonServiceImp implements AdamStore<HoaDon, String>{
         return repo.getHoaDonCho();
     }
     
+    public int countHoaDon(){
+        return repo.countHoaDon();
+    }
+    
 }
