@@ -92,7 +92,6 @@ CREATE TABLE [SanPham] (
   [MaLSP] varchar(10) not null,
   CONSTRAINT FK_SP_LSP foreign key(MaLSP) references LoaiSanPham(MaLSP),
   [XuatXu] nvarchar(50),
-  qrCode varchar(50),
   PRIMARY KEY ([MaSanPham])
 );
 
@@ -130,6 +129,7 @@ CREATE TABLE [ChiTietSanPham] (
   [SoLuong] int,
   [Gia] money,
   [TrangThai] bit,
+  qrCode varchar(50),
   PRIMARY KEY ([MaCTSP])
 );
 
