@@ -1,4 +1,4 @@
-﻿----Update:2023-11-14--lúc 17g10p--
+﻿----Update:2023-11-14--lúc 21g20p--
 CREATE DATABASE AdamStores
 GO
 USE AdamStores
@@ -37,12 +37,6 @@ CREATE TABLE [KhachHang] (
   PRIMARY KEY ([MaKH])
 );
 
-CREATE TABLE [HinhThucThanhToan] (
-  [MaHTTT] varchar(10),
-  [TenHTTT] nvarchar(50),
-  [TrangThai] bit,
-  PRIMARY KEY ([MaHTTT])
-);
 CREATE TABLE [Events] (
   [MaEV] varchar(10),
   [TenEV] nvarchar(50),
@@ -64,8 +58,6 @@ CREATE TABLE [HoaDon] (
   CONSTRAINT FK_HD_NV foreign key(MaNV) references NhanVien(MaNV),
   [MaKH] varchar(10) not null,
   CONSTRAINT FK_HD_KH foreign key(MaKH) references KhachHang(MaKH),
-  [MaHTTT] varchar(10)not null,
-  CONSTRAINT FK_HD_TT foreign key(MaHTTT) references HinhThucThanhToan(MaHTTT),
   [NgayTao] datetime,
   [TongTien] Money,
   [TongTienKM] Money,
@@ -100,6 +92,7 @@ CREATE TABLE [SanPham] (
   [MaLSP] varchar(10) not null,
   CONSTRAINT FK_SP_LSP foreign key(MaLSP) references LoaiSanPham(MaLSP),
   [XuatXu] nvarchar(50),
+  qrCode varchar(50),
   PRIMARY KEY ([MaSanPham])
 );
 

@@ -1,5 +1,4 @@
-﻿----Update:2023-11-14--lúc 17g10p--
-
+﻿----Update:2023-11-14--lúc 21g20p--
 INSERT INTO TaiKhoan VALUES
 ('TK01','hoilamgi1','khongnoidau1','Admin',1),
 ('TK02','hoilamgi2','khongnoidau2','Staff',1),
@@ -17,9 +16,7 @@ INSERT INTO KhachHang Values
 ('KH02',N'Vũ Mạnh Trường','2004-07-09','0934832324','truongvmx@gmail.com',1,N'Nam Định'),
 ('KH03',N'Hoàng Minh Tâm','2004-01-15','0934832234','tamhm@gmail.com',0,N'Nghệ An')
 
-INSERT INTO HinhThucThanhToan Values
-('HTTT01',N'Tiền mặt',1),
-('HTTT02',N'Chuyển khoản',1)
+
 INSERT INTO LoaiSanPham VALUES
 ('LSP01',N'Áo thun nam',1,N'Hàng đẹp'),
 ('LSP02',N'Áo sơ mi nam',1,N'Hàng đẹp'),
@@ -27,30 +24,30 @@ INSERT INTO LoaiSanPham VALUES
 ('LSP04',N'Áo polo Nam',0,N'Hàng đẹp'),
 ('LSP05',N'Áo jeans Nam',1,N'Hàng đẹp')
 INSERT INTO SanPham VALUES
-('SP01',N'OLD NAVY',1,'LSP05',N'Việt Nam'),
-('SP02',N'GAP',1,'LSP05',N'Lào'),
-('SP03',N'LEVI',1,'LSP05',N'Thái Lan'),
-('SP04',N'Basic Tee',0,'LSP01',N'Hàn Quốc'),
-('SP05',N'Graphic Tee',0,'LSP01',N'Việt Nam'),
-('SP06',N'Longline Tee',1,'LSP01',N'Campuchia'),
-('SP07',N'Flannel Shirt',1,'LSP03',N'Việt Nam'),
-('SP08',N'inen Shirt',1,'LSP03',N'Việt Nam'),
-('SP09',N'Western Shirt',1,'LSP03',N'Nhật Bản'),
-('SP10',N'Denim Jacket',1,'LSP02',N'Việt Nam'),
-('SP11',N'Down Jacket',1,'LSP02',N'Việt Nam'),
-('SP12',N'Pea Coat ',0,'LSP02',N'Đài Loan')
+('SP01',N'OLD NAVY',1,'LSP05',N'Việt Nam',null),
+('SP02',N'GAP',1,'LSP05',N'Lào',null),
+('SP03',N'LEVI',1,'LSP05',N'Thái Lan',null),
+('SP04',N'Basic Tee',0,'LSP01',N'Hàn Quốc',null),
+('SP05',N'Graphic Tee',0,'LSP01',N'Việt Nam',null),
+('SP06',N'Longline Tee',1,'LSP01',N'Campuchia',null),
+('SP07',N'Flannel Shirt',1,'LSP03',N'Việt Nam',null),
+('SP08',N'inen Shirt',1,'LSP03',N'Việt Nam',null),
+('SP09',N'Western Shirt',1,'LSP03',N'Nhật Bản',null),
+('SP10',N'Denim Jacket',1,'LSP02',N'Việt Nam',null),
+('SP11',N'Down Jacket',1,'LSP02',N'Việt Nam',null),
+('SP12',N'Pea Coat ',0,'LSP02',N'Đài Loan',null)
 INSERT INTO MauSac VALUES
 ('MS01',N'Đỏ',1),
 ('MS02',N'Đen',1),
 ('MS03',N'Trắng',1),
 ('MS04',N'Xanh',1),
-('MS05',N'Vàng',1)
+('MS05',N'Vàng',0)
 INSERT INTO ChatLieu VALUES
 ('CL01',N'Vải cotton',1),
 ('CL02',N'Vải kaki',1),
 ('CL03',N'Vải Kate',1),
 ('CL04',N'Vải nỉ',1),
-('CL05',N'Vải Jean',1)
+('CL05',N'Vải Jean',0)
 INSERT INTO KichThuoc VALUES
 ('KT01','S',1),
 ('KT02','M',1),
@@ -72,9 +69,9 @@ INSERT INTO ChiTietSanPham VALUES
 ('CTSP05','SP01','MS01','CL05','KT05',4,200000,0)
 
 INSERT INTO HoaDon VALUES
-('HD01','NV05','KH03','HTTT01',getDate(),450000,50000,400000,1,N'Thành công','EV03'),
-('HD02','NV03','KH02','HTTT02',getDate(),130000,50000,90000,0,N'Thất bại','EV02'),
-('HD03','NV02','KH01','HTTT01',getDate(),750000,50000,700000,1,N'Thành công','EV01')
+('HD01','NV05','KH03',getDate(),450000,50000,400000,1,N'Thành công','EV03'),
+('HD02','NV03','KH02',getDate(),130000,50000,90000,0,N'Thất bại','EV02'),
+('HD03','NV02','KH01',getDate(),750000,50000,700000,1,N'Thành công','EV01')
 
 INSERT INTO HoaDonChiTiet VALUES
 ('HDCT01','CTSP02','HD03',3,170000,510000,N'Ok',1),

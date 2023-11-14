@@ -27,7 +27,7 @@ public class ChatLieuRepository {
         listChatLieu.clear();
         try {
             conn = DBConnect.getConnection();
-            sql = "SELECT*FROM ChatLieu";
+            sql = "SELECT*FROM ChatLieu where TrangThai=1";
             pst = conn.prepareStatement(sql);
             rs = pst.executeQuery();
             while (rs.next()) {

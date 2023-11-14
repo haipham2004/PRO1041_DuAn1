@@ -75,12 +75,13 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
      */
     public ChiTietSanPhamView() {
         initComponents();
-        this.setSize(1300, 755);
+        this.setSize(1300, 755); 
         loadPageCTSP();
         loadCbxSanPham(serviceSP.getAll());
         loadCbxKichThuoc(serviceKT.getAll());
         loadCbxMauSac(serviceMS.getAll());
         loadCbxChatLieu(serviceCl.getAll());
+        rdConhang1.setSelected(true);
 //        serviceCTSP.updateTrangThaiSoLuong();
     }
 
@@ -352,6 +353,11 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
         cboKichThuoc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         cboMauSac.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cboMauSac.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cboMauSacMouseClicked(evt);
+            }
+        });
 
         jLabel50.setText("Số lượng");
 
@@ -977,28 +983,13 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
                         loadPageCTSP();
                     } else {
                         System.out.println("Dòng " + i + " là null. Bỏ qua dòng này.");
-                        // Hoặc bạn có thể thực hiện các xử lý tùy ý khác ở đây
                     }
                 }
                 JOptionPane.showMessageDialog(null, "Imported Successfully !!.....");
             } catch (IOException iOException) {
                 JOptionPane.showMessageDialog(null, iOException.getMessage());
             }
-//            } finally {
-//                try {
-//                    if (excelFIS != null) {
-//                        excelFIS.close();
-//                    }
-//                    if (excelBIS != null) {
-//                        excelBIS.close();
-//                    }
-//                    if (excelImportToJTable != null) {
-//                        excelImportToJTable.close();
-//                    }
-//                } catch (IOException iOException) {
-//                    JOptionPane.showMessageDialog(null, iOException.getMessage());
-//                }
-//            }
+
         }
     }//GEN-LAST:event_btnNhapFileActionPerformed
 
@@ -1088,6 +1079,10 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Xuất file  thành công: " + file.toString());
         }
     }//GEN-LAST:event_btnXuatfileActionPerformed
+
+    private void cboMauSacMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cboMauSacMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cboMauSacMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
