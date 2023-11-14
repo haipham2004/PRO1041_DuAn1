@@ -42,4 +42,21 @@ public class HoaDonRepository {
         return listHoaDon;
     }
     
+    public int countHoaDon(){
+        int tongHoaDon = 0;
+        try {
+            sql = "Select COUNT(*) From HoaDon";
+            con = DBConnect.getConnection();
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                tongHoaDon = rs.getInt(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
+        return tongHoaDon;
+    }
+    
 }
