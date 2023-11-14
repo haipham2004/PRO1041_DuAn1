@@ -33,6 +33,7 @@ public class BanHangView extends javax.swing.JPanel {
     HoaDonServiceImp serviceHD = new HoaDonServiceImp();
     DefaultTableModel molHDC = new DefaultTableModel();
     AdamStoreView adamStoreView = new AdamStoreView();
+    
     int so = serviceHD.countHoaDon();
 
     /**
@@ -64,11 +65,13 @@ public class BanHangView extends javax.swing.JPanel {
     }
 
     public void fillTableHDC2() {
+        DangNhapView dangNhapView =new DangNhapView();
         String maHD = maTangTuDong("HD");
         LocalDate ngayTao = LocalDate.now();
         molHDC.addRow(new Object[]{
-            this.tblHoaDonCho.getRowCount() + 1, maHD, "", ngayTao, "Chờ thanh toán"
+            this.tblHoaDonCho.getRowCount() + 1, maHD, dangNhapView.getTenNV(), ngayTao, "Chờ thanh toán"
         });
+        System.err.println(dangNhapView.getTenNV());
     }
 
     // Hải
