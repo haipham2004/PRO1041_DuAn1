@@ -81,6 +81,7 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
         loadCbxKichThuoc(serviceKT.getAll());
         loadCbxMauSac(serviceMS.getAll());
         loadCbxChatLieu(serviceCl.getAll());
+//        serviceCTSP.updateTrangThaiSoLuong();
     }
 
     public void fillTableChiTietSanPham(List<ChiTietSanPham> list) {
@@ -286,6 +287,7 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel2 = new javax.swing.JPanel();
         jPanel16 = new javax.swing.JPanel();
         jLabel45 = new javax.swing.JLabel();
@@ -357,8 +359,10 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
 
         jLabel52.setText("Trạng thái");
 
+        buttonGroup1.add(rdConhang1);
         rdConhang1.setText("Còn hàng");
 
+        buttonGroup1.add(rdHethang1);
         rdHethang1.setText("Hết hàng");
 
         jPanel18.setBorder(javax.swing.BorderFactory.createTitledBorder("Lọc sản phẩm"));
@@ -826,6 +830,7 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
             ChiTietSanPham ctsp = savesCTSP();
             String ma = tblChiTietSanPham.getValueAt(index, 0).toString();
             if (serviceCTSP.sua(ctsp, ma) > 0) {
+                serviceCTSP.updateTrangThaiSoLuong();
                 JOptionPane.showMessageDialog(this, "Sửa chi tiết sản phẩm thành công");
                 loadPageCTSP();
             } else {
@@ -1097,6 +1102,7 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
     private javax.swing.JButton btnThemCTSP;
     private javax.swing.JButton btnTien2;
     private javax.swing.JButton btnXuatfile;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> cboChatLieu;
     private javax.swing.JComboBox<String> cboKichThuoc;
     private javax.swing.JComboBox<String> cboMaSP;
