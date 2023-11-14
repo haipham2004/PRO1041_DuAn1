@@ -40,6 +40,8 @@ public class KhuyenMaiView extends javax.swing.JPanel {
         rdoDangKichHoat.setSelected(true);
         txtDieuKienTT.setVisible(false);
         lblVnd.setVisible(false);
+        service.suaTrangThai();
+                
     }
 
     public void fillTable(List<Events> listKm) {

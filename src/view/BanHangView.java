@@ -362,6 +362,7 @@ public class BanHangView extends javax.swing.JPanel {
 
     private void btnThemGioHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemGioHangActionPerformed
         int indexs = tblChiTietSanPham.getSelectedRow();
+        int indexGioHang = -1;
         if (indexs == -1) {
             JOptionPane.showMessageDialog(this, "Vui lòng chọn một sản phẩm");
             return;
@@ -370,6 +371,7 @@ public class BanHangView extends javax.swing.JPanel {
         if (input == null || input.isEmpty()) {
             return;
         }
+
         try {
             int soLuongMua = Integer.parseInt(input);
             int soLuongTon = Integer.parseInt(tblChiTietSanPham.getValueAt(indexs, 1).toString());
@@ -377,14 +379,11 @@ public class BanHangView extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(this, "Số lượng không đủ");
                 return;
             }
-
             String ma = tblChiTietSanPham.getValueAt(indexs, 0).toString();
             String soLuong = tblChiTietSanPham.getValueAt(indexs, 1).toString();
             String gia = tblChiTietSanPham.getValueAt(indexs, 2).toString();
             String ten = tblChiTietSanPham.getValueAt(indexs, 3).toString();
-
             // Kiểm tra xem tblGioHang đã có sản phẩm này hay chưa
-            int indexGioHang = -1;
 //            for (int i = 0; i < tblGioHang.getRowCount(); i++) {
 //                if (tblGioHang.getValueAt(i, 0).toString().equals(ma)) {
 //                    indexGioHang = i;
@@ -401,26 +400,27 @@ public class BanHangView extends javax.swing.JPanel {
                 tblGioHang.setValueAt(String.valueOf(thanhTien), indexGioHang, 3);
             } else {
 
+            if (tblGioHang.getRowCount() > 0) {
+                tblGioHang.clearSelection();
                 for (int i = 0; i < tblGioHang.getRowCount(); i++) {
-
                     tblGioHang.setValueAt(ma, i, 0);
                     tblGioHang.setValueAt(soLuongMua, i, 1);
                     tblGioHang.setValueAt(gia, i, 2);
                     double thanhTien = soLuongMua * Double.parseDouble(tblGioHang.getValueAt(i, 2).toString());
                     tblGioHang.setValueAt(String.valueOf(thanhTien), i, 3);
                     tblGioHang.setValueAt(ten, i, 4);
-                    fillTableGioHang(serviceCTSP.getAll());
                     break;
                 }
-                fillTableChiTietSanPham(serviceCTSP.getAll());
-                soLuongTon = soLuongTon - soLuongMua;
-                tblChiTietSanPham.setValueAt(soLuongTon, indexs, 1);
-
             }
-        } catch (NumberFormatException e) {
+            fillTableGioHang(serviceCTSP.getAll());
+            fillTableChiTietSanPham(serviceCTSP.getAll());
+            soLuongTon = soLuongTon - soLuongMua;
+            tblChiTietSanPham.setValueAt(soLuongTon, indexs, 1);
+        }
+        }catch (NumberFormatException e) {
             return;
         }
-
+        
     }//GEN-LAST:event_btnThemGioHangActionPerformed
 
     private void tblChiTietSanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblChiTietSanPhamMouseClicked
