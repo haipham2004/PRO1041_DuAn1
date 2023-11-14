@@ -400,7 +400,7 @@ public class BanHangView extends javax.swing.JPanel {
 //                    int soLuongMuaSau = Integer.parseInt(input) + Integer.parseInt(String.valueOf(tblGioHang.getValueAt(indexGioHang, 1).toString()));
 //                    double thanhTienMuaSau = Integer.parseInt(tblGioHang.getValueAt(indexGioHang, 1).toString()) * Double.parseDouble(tblGioHang.getValueAt(indexGioHang, 2).toString());
 //                    molGH.insertRow(0, new Object[]{
-//                        ma, soLuongMuaSau, gia, thanhTien, ten
+//                        ma, soLuongMuaSau, gia, thanhTienMuaSau, ten
 //                    });
 //                } else {
 //                    JOptionPane.showMessageDialog(this, "Haha");
