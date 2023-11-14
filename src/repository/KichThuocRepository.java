@@ -26,7 +26,7 @@ public class KichThuocRepository {
         listKichThuoc.clear();
         try {
             conn = DBConnect.getConnection();
-            sql = "SELECT*FROM KichThuoc";
+            sql = "SELECT*FROM KichThuoc where TrangThai=1";
             pst = conn.prepareStatement(sql);
             rs = pst.executeQuery();
             while (rs.next()) {

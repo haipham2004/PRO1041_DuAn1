@@ -1,5 +1,4 @@
-﻿----Update:2023-11-14--lúc 17g10p--
-
+﻿----Update:2023-11-14--lúc 21g51p--
 INSERT INTO TaiKhoan VALUES
 ('TK01','hoilamgi1','khongnoidau1','Admin',1),
 ('TK02','hoilamgi2','khongnoidau2','Staff',1),
@@ -17,9 +16,7 @@ INSERT INTO KhachHang Values
 ('KH02',N'Vũ Mạnh Trường','2004-07-09','0934832324','truongvmx@gmail.com',1,N'Nam Định'),
 ('KH03',N'Hoàng Minh Tâm','2004-01-15','0934832234','tamhm@gmail.com',0,N'Nghệ An')
 
-INSERT INTO HinhThucThanhToan Values
-('HTTT01',N'Tiền mặt',1),
-('HTTT02',N'Chuyển khoản',1)
+
 INSERT INTO LoaiSanPham VALUES
 ('LSP01',N'Áo thun nam',1,N'Hàng đẹp'),
 ('LSP02',N'Áo sơ mi nam',1,N'Hàng đẹp'),
@@ -44,13 +41,13 @@ INSERT INTO MauSac VALUES
 ('MS02',N'Đen',1),
 ('MS03',N'Trắng',1),
 ('MS04',N'Xanh',1),
-('MS05',N'Vàng',1)
+('MS05',N'Vàng',0)
 INSERT INTO ChatLieu VALUES
 ('CL01',N'Vải cotton',1),
 ('CL02',N'Vải kaki',1),
 ('CL03',N'Vải Kate',1),
 ('CL04',N'Vải nỉ',1),
-('CL05',N'Vải Jean',1)
+('CL05',N'Vải Jean',0)
 INSERT INTO KichThuoc VALUES
 ('KT01','S',1),
 ('KT02','M',1),
@@ -65,18 +62,19 @@ INSERT INTO Events VALUES
 
 
 INSERT INTO ChiTietSanPham VALUES
-('CTSP01','SP02','MS05','CL03','KT04',2,400000,1),
-('CTSP02','SP05','MS02','CL01','KT01',1,356000,0),
-('CTSP03','SP04','MS03','CL02','KT03',4,200000,1),
-('CTSP04','SP03','MS04','CL04','KT02',4,200000,1),
-('CTSP05','SP01','MS01','CL05','KT05',4,200000,0)
+('CTSP01','SP02','MS05','CL03','KT04',50,400000,1,null),
+('CTSP02','SP05','MS02','CL01','KT01',50,356000,0,null),
+('CTSP03','SP04','MS03','CL02','KT03',50,200000,1,null),
+('CTSP04','SP03','MS04','CL04','KT02',50,200000,1,null),
+('CTSP05','SP01','MS01','CL05','KT05',50,200000,0,null)
 
 INSERT INTO HoaDon VALUES
-('HD01','NV05','KH03','HTTT01',getDate(),450000,50000,400000,1,N'Thành công','EV03'),
-('HD02','NV03','KH02','HTTT02',getDate(),130000,50000,90000,0,N'Thất bại','EV02'),
-('HD03','NV02','KH01','HTTT01',getDate(),750000,50000,700000,1,N'Thành công','EV01')
+('HD01','NV05','KH03',getDate(),450000,50000,400000,1,N'Thành công','EV03'),
+('HD02','NV03','KH02',getDate(),130000,50000,90000,0,N'Thất bại','EV02'),
+('HD03','NV02','KH01',getDate(),750000,50000,700000,1,N'Thành công','EV01')
 
 INSERT INTO HoaDonChiTiet VALUES
 ('HDCT01','CTSP02','HD03',3,170000,510000,N'Ok',1),
 ('HDCT02','CTSP03','HD02',4,170000,680000,N'Ok',1),
 ('HDCT03','CTSP01','HD01',3,210000,630000,N'Not Ok',0)
+

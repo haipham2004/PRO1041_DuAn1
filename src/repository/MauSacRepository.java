@@ -27,7 +27,7 @@ public class MauSacRepository {
         listMauSac.clear();
         try {
             conn = DBConnect.getConnection();
-            sql = "SELECT*FROM MauSac";
+            sql = "SELECT*FROM MauSac where TrangThai=1";
             pst = conn.prepareStatement(sql);
             rs = pst.executeQuery();
             while (rs.next()) {
