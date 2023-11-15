@@ -27,7 +27,7 @@ public class ChatLieuRepository {
         listChatLieu.clear();
         try {
             conn = DBConnect.getConnection();
-            sql = "SELECT*FROM ChatLieu";
+            sql = "SELECT*FROM ChatLieu where TrangThai=1";
             pst = conn.prepareStatement(sql);
             rs = pst.executeQuery();
             while (rs.next()) {
@@ -77,7 +77,7 @@ public class ChatLieuRepository {
     public int sua(ChatLieu cl, String ma) {
         try {
             conn = DBConnect.getConnection();
-            sql = "UPDATE ChatLieu set TenChatLieu=?,TrangThai=?,where MaChatLieu=?";
+            sql = "UPDATE ChatLieu set TenChatLieu=?,TrangThai=? where MaChatLieu=?";
             pst = conn.prepareStatement(sql);
             pst.setObject(1, cl.getTenChatLieu());
             pst.setObject(2, cl.isTrangThai());
@@ -127,5 +127,6 @@ public class ChatLieuRepository {
         }
         return tong;
     }
+       
 
 }

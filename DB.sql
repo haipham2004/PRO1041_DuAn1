@@ -1,4 +1,4 @@
-﻿----Update:2023-11-10--lúc 18g10p--
+﻿----Update:2023-11-14--lúc 21g20p--
 CREATE DATABASE AdamStores
 GO
 USE AdamStores
@@ -37,12 +37,6 @@ CREATE TABLE [KhachHang] (
   PRIMARY KEY ([MaKH])
 );
 
-CREATE TABLE [HinhThucThanhToan] (
-  [MaHTTT] varchar(10),
-  [TenHTTT] nvarchar(50),
-  [TrangThai] bit,
-  PRIMARY KEY ([MaHTTT])
-);
 CREATE TABLE [Events] (
   [MaEV] varchar(10),
   [TenEV] nvarchar(50),
@@ -57,18 +51,6 @@ CREATE TABLE [Events] (
   PRIMARY KEY ([MaEV])
 );
 
-CREATE TABLE [Voucher](
-	[MaVoucher] VARCHAR(8) NOT NULL DEFAULT SUBSTRING(CONVERT(varchar(255), NEWID()), 25, 8),
-	[DieuKien] bit,
-	[topKhachHang] int,
-	[HinhThuc] bit,
-	[MucGiamGia] nvarchar(100),
-	[ThoiGianBatDau] date,
-    [ThoiGianKetThuc] date,
-    [MoTa] nvarchar(100),
-    [TrangThai] bit,
-	  PRIMARY KEY ([MaVoucher])
-);
 
 CREATE TABLE [HoaDon] (
   [MaHoaDon] varchar(10),
@@ -76,16 +58,12 @@ CREATE TABLE [HoaDon] (
   CONSTRAINT FK_HD_NV foreign key(MaNV) references NhanVien(MaNV),
   [MaKH] varchar(10) not null,
   CONSTRAINT FK_HD_KH foreign key(MaKH) references KhachHang(MaKH),
-  [MaHTTT] varchar(10)not null,
-  CONSTRAINT FK_HD_TT foreign key(MaHTTT) references HinhThucThanhToan(MaHTTT),
   [NgayTao] datetime,
   [TongTien] Money,
   [TongTienKM] Money,
   [TongTienSauKM] Money,
   [TrangThai] bit,
   [GhiChu] nvarchar(100),
-   [MaVoucher] VARCHAR(8) ,
-  CONSTRAINT FK_HD_VC foreign key(MaVoucher) references Voucher(MaVoucher),
    [MaEV] varchar(10),
    CONSTRAINT FK_HD_EV foreign key(MaEV) references Events(MaEV),
   PRIMARY KEY ([MaHoaDon])
@@ -151,6 +129,7 @@ CREATE TABLE [ChiTietSanPham] (
   [SoLuong] int,
   [Gia] money,
   [TrangThai] bit,
+  qrCode varchar(50),
   PRIMARY KEY ([MaCTSP])
 );
 
