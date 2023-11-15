@@ -24,6 +24,13 @@ public class HoaDon {
     public HoaDon() {
     }
 
+    public HoaDon(String maHoaDon, NhanVien nhanVien, Date ngayTao, boolean trangThai) {
+        this.maHoaDon = maHoaDon;
+        this.nhanVien = nhanVien;
+        this.ngayTao = ngayTao;
+        this.trangThai = trangThai;
+    }
+
     public HoaDon(String maHoaDon, NhanVien nhanVien, KhachHang khachHang, HinhThucThanhToan hinhThucThanhToan, Date ngayTao, double tongTien, boolean trangThai, String ghiChu, Events voucher) {
         this.maHoaDon = maHoaDon;
         this.nhanVien = nhanVien;
@@ -108,4 +115,11 @@ public class HoaDon {
         this.voucher = voucher;
     }
     
+    public String chiTietTrangThai(){
+        if (trangThai) {
+            return "Đã thanh toán";
+        } else {
+            return "Chờ thanh toán";
+        }
+    }
 }
