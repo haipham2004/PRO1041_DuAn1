@@ -1,4 +1,4 @@
-﻿----Update:2023-11-15--lúc 22g00p--
+﻿----Update:2023-11-15--lúc 22g00p--okela
 INSERT INTO TaiKhoan VALUES
 ('TK01','hoilamgi1','khongnoidau1','Admin',1),
 ('TK02','hoilamgi2','khongnoidau2','Staff',1),
@@ -71,7 +71,9 @@ INSERT INTO ChiTietSanPham VALUES
 INSERT INTO HoaDon VALUES
 ('HD01','NV05','KH03',getDate(),450000,50000,400000,1,N'Thành công','EV03'),
 ('HD02','NV03','KH02',getDate(),130000,50000,90000,0,N'Thất bại','EV02'),
-('HD03','NV02','KH01',getDate(),750000,50000,700000,1,N'Thành công','EV01')
+('HD03','NV02','KH01',getDate(),750000,50000,700000,1,N'Thành công','EV01'),
+('HD04','NV03','KH02',getDate(),130000,50000,90000,0,N'Thất bại','EV02'),
+('HD05','NV02','KH01',getDate(),750000,50000,700000,1,N'Thành công','EV01')
 
 INSERT INTO HoaDonChiTiet VALUES
 ('HDCT01','CTSP02','HD03',3,170000,510000,N'Ok',1),
