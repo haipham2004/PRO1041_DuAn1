@@ -1,4 +1,4 @@
-﻿----Update:2023-11-14--lúc 21g51p--
+﻿----Update:2023-11-15--lúc 22g00p--
 INSERT INTO TaiKhoan VALUES
 ('TK01','hoilamgi1','khongnoidau1','Admin',1),
 ('TK02','hoilamgi2','khongnoidau2','Staff',1),
