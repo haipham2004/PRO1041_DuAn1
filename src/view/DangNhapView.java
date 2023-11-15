@@ -20,6 +20,8 @@ public class DangNhapView extends javax.swing.JFrame {
 
 //    private LoginRepository mLoginRepository;
     private LoginRepository repository = new LoginRepository();
+    AdamStoreView adamStoreView = new AdamStoreView();
+    BanHangView banHangView = new BanHangView();
 
     /**
      * Creates new form DangNhapView
@@ -213,8 +215,9 @@ public class DangNhapView extends javax.swing.JFrame {
             String userName = txtTaiKhoan.getText();
             String passWord = String.valueOf(txtMatKhau.getText());
             if (repository.isExistedUser(userName, passWord)) {
+                adamStoreView.setTenNV(repository.getTenNhanVien(userName));
                 this.setVisible(false);
-                new AdamStoreView().setVisible(true);
+                adamStoreView.setVisible(true);
             } else {  
                 JOptionPane.showMessageDialog(this, "UserName hoac Password sai !");
             }

@@ -59,24 +59,6 @@ public class LoginRepository {
         return false;
     }
 
-    public TaiKhoan getMatKhau(String userName, String matKhau) {
-        TaiKhoan tk = null;
-        try {
-            conn = DBConnect.getConnection();
-            sql = "Select PassWord from TaiKhoan where UserName=?";
-            pst = conn.prepareStatement(sql);
-            pst.setString(1, userName);
-            rs = pst.executeQuery();
-            while (rs.next()) {
-                tk = new TaiKhoan(rs.getString(sql));
-            }
-            return tk;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
     public boolean isCurrentPasswordValid(String maTK, String enterPassWord) {
         sql = "SELECT PassWord FROM TaiKhoan WHERE MaTK = ?";
         try {
@@ -109,6 +91,25 @@ public class LoginRepository {
         } catch (Exception e) {
             e.printStackTrace();
             return 0;
+        }
+    }
+
+    public String getTenNhanVien(String username) {
+        String tenNhanVien = null;
+        try {
+            conn = DBConnect.getConnection();
+            sql = "Select NV.HoTen From TaiKhoan TK Join NhanVien NV \n"
+                    + "ON TK.MaTK = NV.MaTK where TK.UserName = ?";
+            pst = conn.prepareStatement(sql);
+            pst.setObject(1, username);
+            rs = pst.executeQuery();
+            while(rs.next()){
+                tenNhanVien = rs.getString(1);
+            }
+            return tenNhanVien;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
         }
     }
 }

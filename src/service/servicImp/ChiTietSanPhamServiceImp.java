@@ -63,5 +63,8 @@ public class ChiTietSanPhamServiceImp implements AdamStore<ChiTietSanPham, Strin
     public boolean qrCode(String ma, String hinhAnh) {
         return repo.qrCode(ma, hinhAnh);
     }
+    public int updateTrangThaiSoLuong(){
+        return repo.updateTrangThaiSoLuong();
+    }
 
 }
