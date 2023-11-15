@@ -572,6 +572,7 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
 
         lbSoTrang2.setText("Số trang");
 
+        btnQR.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/z4883882330886_8f9a20df51f3b6cffdecf910e8a70379.jpg"))); // NOI18N
         btnQR.setText("Tạo QR");
         btnQR.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -579,6 +580,7 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
             }
         });
 
+        btnNhapFile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/z4883861072449_7ae13d74ca98dc15bf13cc3275ca5686.jpg"))); // NOI18N
         btnNhapFile.setText("Nhập file");
         btnNhapFile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -586,6 +588,7 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
             }
         });
 
+        btnXuatfile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/z4883861072449_7ae13d74ca98dc15bf13cc3275ca5686.jpg"))); // NOI18N
         btnXuatfile.setText("Xuất file");
         btnXuatfile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

@@ -733,6 +733,9 @@
             </Component>
             <Component class="javax.swing.JButton" name="btnQR">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/icon/z4883882330886_8f9a20df51f3b6cffdecf910e8a70379.jpg"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="T&#x1ea1;o QR"/>
               </Properties>
               <Events>
@@ -741,6 +744,9 @@
             </Component>
             <Component class="javax.swing.JButton" name="btnNhapFile">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/icon/z4883861072449_7ae13d74ca98dc15bf13cc3275ca5686.jpg"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Nh&#x1ead;p file"/>
               </Properties>
               <Events>
@@ -749,6 +755,9 @@
             </Component>
             <Component class="javax.swing.JButton" name="btnXuatfile">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/icon/z4883861072449_7ae13d74ca98dc15bf13cc3275ca5686.jpg"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Xu&#x1ea5;t file"/>
               </Properties>
               <Events>
