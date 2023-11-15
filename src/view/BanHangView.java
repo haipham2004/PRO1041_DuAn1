@@ -87,17 +87,16 @@ public class BanHangView extends javax.swing.JPanel {
         }
     }
 
-    public void fillTableGioHang(List<ChiTietSanPham> list) {
-        molGH = (DefaultTableModel) tblChiTietSanPham.getModel();
-        molGH.setRowCount(0);
-        for (ChiTietSanPham chiTietSanPham : list) {
-            molGH.addRow(new Object[]{
-                chiTietSanPham.getMaChiTietSanPham(),
-                chiTietSanPham.getSoLuong(), chiTietSanPham.getGia(),
-                chiTietSanPham.getSoLuong() * chiTietSanPham.getGia(),
-                chiTietSanPham.getSanPham().getTenSanPham()
-            });
-        }
+    public void fillTableGioHang(JTable tbl, ChiTietSanPham ctsp, int SoLuongMua) {
+        DefaultTableModel dtm = (DefaultTableModel) tbl.getModel();
+        Object[] rowData = {
+            ctsp.getMaChiTietSanPham(),
+            SoLuongMua,
+            ctsp.getGia(),
+            SoLuongMua * ctsp.getGia(),
+            ctsp.getSanPham().getTenSanPham()
+        };
+        dtm.insertRow(0, rowData);
 
     }
 
@@ -297,6 +296,11 @@ public class BanHangView extends javax.swing.JPanel {
                 jButton1MouseClicked(evt);
             }
         });
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -360,7 +364,6 @@ public class BanHangView extends javax.swing.JPanel {
 
     private void btnThemGioHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemGioHangActionPerformed
         int indexs = tblChiTietSanPham.getSelectedRow();
-        molGH = (DefaultTableModel) tblGioHang.getModel();
         int indexGioHang = -1;
         if (indexs == -1) {
             JOptionPane.showMessageDialog(this, "Vui lòng chọn một sản phẩm");
@@ -376,44 +379,39 @@ public class BanHangView extends javax.swing.JPanel {
             if (soLuongMua > soLuongTon) {
                 JOptionPane.showMessageDialog(this, "Số lượng không đủ");
                 return;
+            } else if (soLuongMua < 1) {
+                JOptionPane.showMessageDialog(this, "Số lượng không hợp lệ, vui lòng nhập lại");
+                return;
             }
             String ma = tblChiTietSanPham.getValueAt(indexs, 0).toString();
             int soLuong = Integer.parseInt(tblChiTietSanPham.getValueAt(indexs, 1).toString());
             double gia = Double.parseDouble(tblChiTietSanPham.getValueAt(indexs, 2).toString());
             String ten = tblChiTietSanPham.getValueAt(indexs, 3).toString();
-            double thanhTien = gia * soLuongMua;
-
-            molGH.insertRow(0, new Object[]{
-                ma, soLuongMua, gia, thanhTien, ten
-            });
-
-//            for (int i = 0; i < tblGioHang.getRowCount(); i++) {
-//                if (tblGioHang.getValueAt(i, 0).equals(ma)) {
-//                    indexGioHang = i;
-//                    break;
-//                }
-//            }
-//            if (indexGioHang != -1) {
-//                String check = tblGioHang.getValueAt(indexGioHang, 0).toString();
-//                if (ma.equals(check)) {
-//                    int soLuongMuaTruocKhiSua = Integer.parseInt(String.valueOf(tblGioHang.getValueAt(indexGioHang, 1).toString()));
-//                    int soLuongMuaSau = Integer.parseInt(input) + Integer.parseInt(String.valueOf(tblGioHang.getValueAt(indexGioHang, 1).toString()));
-//                    double thanhTienMuaSau = Integer.parseInt(tblGioHang.getValueAt(indexGioHang, 1).toString()) * Double.parseDouble(tblGioHang.getValueAt(indexGioHang, 2).toString());
-//                    molGH.insertRow(0, new Object[]{
-//                        ma, soLuongMuaSau, gia, thanhTienMuaSau, ten
-//                    });
-//                } else {
-//                    JOptionPane.showMessageDialog(this, "Haha");
-//                }
-//            }
-            fillTableChiTietSanPham(serviceCTSP.getAll());
+            double thanhTien = Math.round((soLuong * gia) * 100) / 100;
+            ChiTietSanPham ctsps = serviceCTSP.getOne(ma);
+            if (tblGioHang.getRowCount() > 0) {
+                for (int i = 0; i < tblGioHang.getRowCount(); i++) {
+                    if (tblGioHang.getValueAt(i, 0) != null) {
+                        if (tblGioHang.getValueAt(i, 0).toString().equals(ma)) {
+                            indexGioHang = i;
+                            break;                        }
+                    }
+                }
+            }
+            if (indexGioHang != -1) {
+                int soLuongHienTai = Integer.parseInt(tblGioHang.getValueAt(indexGioHang, 1).toString());
+                int soLuonngSauKhiThem = soLuongHienTai + Integer.parseInt(input);
+                tblGioHang.setValueAt(soLuonngSauKhiThem, indexGioHang, 1);
+                double thanhTienSauKhiThem = Math.round((soLuonngSauKhiThem * gia) * 100) / 100;
+                tblGioHang.setValueAt(thanhTienSauKhiThem, indexGioHang, 3); 
+            } else {
+                fillTableGioHang(tblGioHang, ctsps, Integer.parseInt(input));
+            }
             soLuongTon = soLuongTon - soLuongMua;
             tblChiTietSanPham.setValueAt(soLuongTon, indexs, 1);
-
-        } catch (NumberFormatException e) {
+        } catch (Exception e) {
             return;
         }
-
     }//GEN-LAST:event_btnThemGioHangActionPerformed
 
     private void tblChiTietSanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblChiTietSanPhamMouseClicked
@@ -433,12 +431,17 @@ public class BanHangView extends javax.swing.JPanel {
 
     private void tblGioHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblGioHangMouseClicked
         // TODO add your handling code here:
+
     }//GEN-LAST:event_tblGioHangMouseClicked
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         // TODO add your handling code here:
         fillTableHDC2();
     }//GEN-LAST:event_jButton1MouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
