@@ -10,6 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import util.DBConnect;
 import java.sql.*;
+import javax.swing.JLabel;
 import repository.LoginRepository;
 
 /**
@@ -22,7 +23,15 @@ public class DangNhapView extends javax.swing.JFrame {
     private LoginRepository repository = new LoginRepository();
     AdamStoreView adamStoreView = new AdamStoreView();
     BanHangView banHangView = new BanHangView();
+    private static String tenNV;
 
+    public String getTenNV() {
+        return tenNV;
+    }
+
+    public void setTenNV(String tenNV) {
+        this.tenNV = tenNV;
+    }
     /**
      * Creates new form DangNhapView
      */
@@ -47,6 +56,10 @@ public class DangNhapView extends javax.swing.JFrame {
             return false;
         }
         return true;
+    }
+    
+    public String getUsername(){
+        return txtTaiKhoan.getText();
     }
 
     /**
@@ -210,18 +223,19 @@ public class DangNhapView extends javax.swing.JFrame {
 //    Connection con;
     private void btnDangNhapMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDangNhapMouseClicked
         // TODO add your handling code here:
-
         if (checkEmpty()) {
             String userName = txtTaiKhoan.getText();
             String passWord = String.valueOf(txtMatKhau.getText());
             if (repository.isExistedUser(userName, passWord)) {
-                adamStoreView.setTenNV(repository.getTenNhanVien(userName));
+                tenNV = repository.getTenNhanVien(userName);
+                adamStoreView.setTenNV(tenNV);
                 this.setVisible(false);
                 adamStoreView.setVisible(true);
             } else {  
                 JOptionPane.showMessageDialog(this, "UserName hoac Password sai !");
             }
         }
+        
     }//GEN-LAST:event_btnDangNhapMouseClicked
 
     private void txtTaiKhoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTaiKhoanActionPerformed
