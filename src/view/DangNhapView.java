@@ -23,7 +23,7 @@ public class DangNhapView extends javax.swing.JFrame {
     private LoginRepository repository = new LoginRepository();
     AdamStoreView adamStoreView = new AdamStoreView();
     BanHangView banHangView = new BanHangView();
-    private String tenNV;
+    private static String tenNV;
 
     public String getTenNV() {
         return tenNV;

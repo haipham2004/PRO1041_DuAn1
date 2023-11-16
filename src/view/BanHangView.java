@@ -4,6 +4,13 @@
  */
 package view;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,11 +36,12 @@ public class BanHangView extends javax.swing.JPanel {
     DefaultTableModel molCTSP = new DefaultTableModel();
     DefaultTableModel molGH = new DefaultTableModel();
     ChiTietSanPhamServiceImp serviceCTSP = new ChiTietSanPhamServiceImp();
+    static int indexHoaDonCho = -1;
     int index = -1;
     HoaDonServiceImp serviceHD = new HoaDonServiceImp();
     DefaultTableModel molHDC = new DefaultTableModel();
     AdamStoreView adamStoreView = new AdamStoreView();
-    
+
     int so = serviceHD.countHoaDon();
 
     /**
@@ -44,7 +52,6 @@ public class BanHangView extends javax.swing.JPanel {
         this.setSize(1300, 755);
         fillTableChiTietSanPham(serviceCTSP.getAll());
         fillTableHDC(serviceHD.getHoaDonCho());
-
     }
 
     //Quân
@@ -66,13 +73,87 @@ public class BanHangView extends javax.swing.JPanel {
     }
 
     public void fillTableHDC2() {
-        DangNhapView dangNhapView =new DangNhapView();
+        DangNhapView dangNhapView = new DangNhapView();
         String maHD = maTangTuDong("HD");
         LocalDate ngayTao = LocalDate.now();
         molHDC.addRow(new Object[]{
             this.tblHoaDonCho.getRowCount() + 1, maHD, dangNhapView.getTenNV(), ngayTao, "Chờ thanh toán"
         });
-        System.err.println(dangNhapView.getTenNV());
+    }
+
+//    public void luuGioHangVaoFile(int indexHoaDonCho, String maHD) {
+//        try ( ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("invoice1.ser"))) {
+//            ChiTietSanPham gioHang = new ChiTietSanPham(FILE_PATH, sanPham, mauSac, chatLieu, kichThuoc, so, so, true);
+//            oos.writeObject(invoice1);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
+    public void luuGioHangVaoFile(String maHD, String parentDirectory, String newDirectoryName) {
+        molGH = (DefaultTableModel) tblGioHang.getModel();
+        // Tạo đường dẫn đến thư mục cha
+        String parentPath = parentDirectory + File.separator;
+
+        // Tạo đối tượng File để đại diện cho thư mục cha
+        File parentDir = new File(parentPath);
+        if (!parentDir.exists()) {
+            // Nếu thư mục cha không tồn tại, tạo mới
+            parentDir.mkdirs();
+        }
+
+        // Tạo đối tượng File để đại diện cho thư mục con với tên mới
+        File childDir = new File(parentPath + newDirectoryName);
+        if (!childDir.exists()) {
+            // Nếu thư mục con không tồn tại, tạo mới
+            childDir.mkdirs();
+        }
+
+        String fileName = "GioHang_" + maHD + ".csv";
+
+        // Tạo đường dẫn đến tệp tin trong thư mục con
+        String filePath = childDir.getPath() + File.separator + fileName;
+
+        try ( FileWriter fileWriter = new FileWriter(filePath)) {
+            // Ghi tiêu đề cột vào tệp tin
+            for (int i = 0; i < molGH.getColumnCount(); i++) {
+                fileWriter.append(molGH.getColumnName(i));
+                if (i < molGH.getColumnCount() - 1) {
+                    fileWriter.append(",");
+                }
+            }
+            fileWriter.append("\n");
+
+            // Ghi dữ liệu từ mô hình vào tệp tin
+            for (int row = 0; row < molGH.getRowCount(); row++) {
+                for (int col = 0; col < molGH.getColumnCount(); col++) {
+                    fileWriter.append(molGH.getValueAt(row, col).toString());
+                    if (col < molGH.getColumnCount() - 1) {
+                        fileWriter.append(",");
+                    }
+                }
+                fileWriter.append("\n");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void loadTableDataFromFile(String directory, String fileName) {
+        molGH = (DefaultTableModel) tblGioHang.getModel();
+        molGH.setRowCount(0); // Xóa dữ liệu hiện tại trong bảng
+
+        // Tạo đường dẫn đến tệp tin
+        String filePath = directory + "/" + fileName;
+
+        try ( BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] data = line.split(",");
+                molGH.addRow(data);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     // Hải
@@ -101,7 +182,6 @@ public class BanHangView extends javax.swing.JPanel {
                 chiTietSanPham.getSanPham().getTenSanPham()
             });
         }
-
     }
 
     // Hải
@@ -132,7 +212,7 @@ public class BanHangView extends javax.swing.JPanel {
         txtTimKiemCTSP = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        btnTaoHoaDonCho = new javax.swing.JButton();
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Hóa đơn chờ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.ABOVE_TOP, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
 
@@ -147,6 +227,11 @@ public class BanHangView extends javax.swing.JPanel {
                 "STT", "Mã hóa đơn", "Tên nhân viên", "Ngày tạo", "Trạng thái"
             }
         ));
+        tblHoaDonCho.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblHoaDonChoMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblHoaDonCho);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -294,10 +379,10 @@ public class BanHangView extends javax.swing.JPanel {
 
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Đơn hàng", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.ABOVE_TOP, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
 
-        jButton1.setText("Tạo hóa đơn");
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnTaoHoaDonCho.setText("Tạo hóa đơn");
+        btnTaoHoaDonCho.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton1MouseClicked(evt);
+                btnTaoHoaDonChoMouseClicked(evt);
             }
         });
 
@@ -307,14 +392,14 @@ public class BanHangView extends javax.swing.JPanel {
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                 .addContainerGap(178, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(btnTaoHoaDonCho)
                 .addGap(25, 25, 25))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGap(76, 76, 76)
-                .addComponent(jButton1)
+                .addComponent(btnTaoHoaDonCho)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -438,15 +523,31 @@ public class BanHangView extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_tblGioHangMouseClicked
 
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+    private void btnTaoHoaDonChoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTaoHoaDonChoMouseClicked
         // TODO add your handling code here:
         fillTableHDC2();
-    }//GEN-LAST:event_jButton1MouseClicked
+//        tblHoaDonCho.setRowSelectionInterval(1, 1);
+        molGH = (DefaultTableModel) tblGioHang.getModel();
+        if (molGH.getRowCount() > 0) {
+            molGH.setRowCount(0);
+        }
+        int dongCuoi = tblHoaDonCho.getRowCount()-1;
+        tblHoaDonCho.setRowSelectionInterval(dongCuoi, dongCuoi);
+    }//GEN-LAST:event_btnTaoHoaDonChoMouseClicked
+
+    private void tblHoaDonChoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblHoaDonChoMouseClicked
+        // TODO add your handling code here:
+//        indexHoaDonCho = tblHoaDonCho.getSelectedRow();
+//        String maHD = tblHoaDonCho.getValueAt(indexHoaDonCho, 1).toString();
+//        String parentDirectory = "D:\\FPT Polytechnic\\DuAn1\\PRO1041_DuAn1";
+//        String newDirectoryName = "GioHang";
+//        luuGioHangVaoFile(maHD, parentDirectory, newDirectoryName);
+    }//GEN-LAST:event_tblHoaDonChoMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnTaoHoaDonCho;
     private javax.swing.JButton btnThemGioHang;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton5;
