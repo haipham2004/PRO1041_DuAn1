@@ -4,6 +4,13 @@
  */
 package view;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,13 +33,15 @@ import service.servicImp.HoaDonServiceImp;
  */
 public class BanHangView extends javax.swing.JPanel {
 
-    DefaultTableModel molCTSP = new DefaultTableModel();
     DefaultTableModel molGH = new DefaultTableModel();
+    DefaultTableModel molCTSP = new DefaultTableModel();
     ChiTietSanPhamServiceImp serviceCTSP = new ChiTietSanPhamServiceImp();
+    static int indexHoaDonCho = -1;
     int index = -1;
     HoaDonServiceImp serviceHD = new HoaDonServiceImp();
     DefaultTableModel molHDC = new DefaultTableModel();
     AdamStoreView adamStoreView = new AdamStoreView();
+
     int so = serviceHD.countHoaDon();
 
     /**
@@ -41,9 +50,8 @@ public class BanHangView extends javax.swing.JPanel {
     public BanHangView() {
         initComponents();
         this.setSize(1300, 755);
-        fillTableChiTietSanPham(serviceCTSP.getAll());
         fillTableHDC(serviceHD.getHoaDonCho());
-
+        fillTableChiTietSanPham(serviceCTSP.getAll());
     }
 
     //Quân
@@ -64,16 +72,7 @@ public class BanHangView extends javax.swing.JPanel {
         }
     }
 
-    public void fillTableHDC2() {
-        String maHD = maTangTuDong("HD");
-        LocalDate ngayTao = LocalDate.now();
-        molHDC.addRow(new Object[]{
-            this.tblHoaDonCho.getRowCount() + 1, maHD, "", ngayTao, "Chờ thanh toán"
-        });
-    }
-
     // Hải
-    
     public void fillTableChiTietSanPham(List<ChiTietSanPham> list) {
         molCTSP = (DefaultTableModel) tblChiTietSanPham.getModel();
         molCTSP.setRowCount(0);
@@ -99,9 +98,94 @@ public class BanHangView extends javax.swing.JPanel {
         };
         dtm.insertRow(0, rowData);
     }
-    
-   
+
     // Hải
+    
+    // Quân
+    public void fillTableHDC2() {
+        DangNhapView dangNhapView = new DangNhapView();
+        String maHD = maTangTuDong("HD");
+        LocalDate ngayTao = LocalDate.now();
+        molHDC.addRow(new Object[]{
+            this.tblHoaDonCho.getRowCount() + 1, maHD, dangNhapView.getTenNV(), ngayTao, "Chờ thanh toán"
+        });
+    }
+
+//    public void luuGioHangVaoFile(int indexHoaDonCho, String maHD) {
+//        try ( ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("invoice1.ser"))) {
+//            ChiTietSanPham gioHang = new ChiTietSanPham(FILE_PATH, sanPham, mauSac, chatLieu, kichThuoc, so, so, true);
+//            oos.writeObject(invoice1);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
+    public void luuGioHangVaoFile(String maHD, String parentDirectory, String newDirectoryName) {
+        molGH = (DefaultTableModel) tblGioHang.getModel();
+        // Tạo đường dẫn đến thư mục cha
+        String parentPath = parentDirectory + File.separator;
+
+        // Tạo đối tượng File để đại diện cho thư mục cha
+        File parentDir = new File(parentPath);
+        if (!parentDir.exists()) {
+            // Nếu thư mục cha không tồn tại, tạo mới
+            parentDir.mkdirs();
+        }
+
+        // Tạo đối tượng File để đại diện cho thư mục con với tên mới
+        File childDir = new File(parentPath + newDirectoryName);
+        if (!childDir.exists()) {
+            // Nếu thư mục con không tồn tại, tạo mới
+            childDir.mkdirs();
+        }
+
+        String fileName = "GioHang_" + maHD + ".csv";
+
+        // Tạo đường dẫn đến tệp tin trong thư mục con
+        String filePath = childDir.getPath() + File.separator + fileName;
+
+        try ( FileWriter fileWriter = new FileWriter(filePath)) {
+            // Ghi tiêu đề cột vào tệp tin
+            for (int i = 0; i < molGH.getColumnCount(); i++) {
+                fileWriter.append(molGH.getColumnName(i));
+                if (i < molGH.getColumnCount() - 1) {
+                    fileWriter.append(",");
+                }
+            }
+            fileWriter.append("\n");
+
+            // Ghi dữ liệu từ mô hình vào tệp tin
+            for (int row = 0; row < molGH.getRowCount(); row++) {
+                for (int col = 0; col < molGH.getColumnCount(); col++) {
+                    fileWriter.append(molGH.getValueAt(row, col).toString());
+                    if (col < molGH.getColumnCount() - 1) {
+                        fileWriter.append(",");
+                    }
+                }
+                fileWriter.append("\n");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void loadTableDataFromFile(String directory, String fileName) {
+        molGH = (DefaultTableModel) tblGioHang.getModel();
+        molGH.setRowCount(0); // Xóa dữ liệu hiện tại trong bảng
+
+        // Tạo đường dẫn đến tệp tin
+        String filePath = directory + "/" + fileName;
+
+        try ( BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] data = line.split(",");
+                molGH.addRow(data);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -144,6 +228,11 @@ public class BanHangView extends javax.swing.JPanel {
                 "STT", "Mã hóa đơn", "Tên nhân viên", "Ngày tạo", "Trạng thái"
             }
         ));
+        tblHoaDonCho.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblHoaDonChoMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblHoaDonCho);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -188,11 +277,6 @@ public class BanHangView extends javax.swing.JPanel {
         btnNhapMaSPCT.setText("Nhập mã");
 
         btnXoaSP.setText("Xóa sản phẩm");
-        btnXoaSP.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnXoaSPMouseClicked(evt);
-            }
-        });
         btnXoaSP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnXoaSPActionPerformed(evt);
@@ -200,11 +284,6 @@ public class BanHangView extends javax.swing.JPanel {
         });
 
         btnXoaTatCaSP.setText("Xóa tất cả");
-        btnXoaTatCaSP.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnXoaTatCaSPActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -312,11 +391,6 @@ public class BanHangView extends javax.swing.JPanel {
                 btnTaoHoaDonChoMouseClicked(evt);
             }
         });
-        btnTaoHoaDonCho.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTaoHoaDonChoActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -379,6 +453,7 @@ public class BanHangView extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnThemGioHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemGioHangActionPerformed
+
         int indexs = tblChiTietSanPham.getSelectedRow();
         int indexGioHang = -1;
         if (indexs == -1) {
@@ -392,7 +467,7 @@ public class BanHangView extends javax.swing.JPanel {
         try {
             System.out.println("Hello");
             System.out.println("HaiPham");
-             System.out.println("12D");
+            System.out.println("12D");
             int soLuongMua = Integer.parseInt(input);
             int soLuongTon = Integer.parseInt(tblChiTietSanPham.getValueAt(indexs, 1).toString());
             if (soLuongMua > soLuongTon) {
@@ -443,26 +518,32 @@ public class BanHangView extends javax.swing.JPanel {
 
     private void txtTimKiemCTSPKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKiemCTSPKeyReleased
         // TODO add your handling code here:
-        if (!txtTimKiemCTSP.getText().equals("")) {
-            String name = txtTimKiemCTSP.getText();
-            fillTableChiTietSanPham(serviceCTSP.getList(name));
-        }
     }//GEN-LAST:event_txtTimKiemCTSPKeyReleased
 
     private void tblGioHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblGioHangMouseClicked
         // TODO add your handling code here:
-
-         
+        
     }//GEN-LAST:event_tblGioHangMouseClicked
 
     private void btnTaoHoaDonChoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTaoHoaDonChoMouseClicked
         // TODO add your handling code here:
         fillTableHDC2();
+//        tblHoaDonCho.setRowSelectionInterval(1, 1);
+        molGH = (DefaultTableModel) tblGioHang.getModel();
+        if (molGH.getRowCount() > 0) {
+            molGH.setRowCount(0);
+        }
+
     }//GEN-LAST:event_btnTaoHoaDonChoMouseClicked
 
-    private void btnTaoHoaDonChoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaoHoaDonChoActionPerformed
+    private void tblHoaDonChoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblHoaDonChoMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnTaoHoaDonChoActionPerformed
+//        indexHoaDonCho = tblHoaDonCho.getSelectedRow();
+//        String maHD = tblHoaDonCho.getValueAt(indexHoaDonCho, 1).toString();
+//        String parentDirectory = "D:\\FPT Polytechnic\\DuAn1\\PRO1041_DuAn1";
+//        String newDirectoryName = "GioHang";
+//        luuGioHangVaoFile(maHD, parentDirectory, newDirectoryName);
+    }//GEN-LAST:event_tblHoaDonChoMouseClicked
 
     private void btnXoaSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaSPActionPerformed
         // TODO add your handling code here:
@@ -476,17 +557,7 @@ public class BanHangView extends javax.swing.JPanel {
         }else{
             JOptionPane.showMessageDialog(this, "Not");
         }
-
     }//GEN-LAST:event_btnXoaSPActionPerformed
-
-    private void btnXoaSPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnXoaSPMouseClicked
-        // TODO add your handling code here:
-       
-    }//GEN-LAST:event_btnXoaSPMouseClicked
-
-    private void btnXoaTatCaSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaTatCaSPActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnXoaTatCaSPActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

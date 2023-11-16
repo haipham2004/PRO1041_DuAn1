@@ -18,7 +18,7 @@ public class DBConnect {
 
     private static final String USERNAME = "sa";
 
-    private static final String PASSWORD = "Haitam77";
+    private static final String PASSWORD = "quanpro123";
 
 
     private static final String SERVER = "localhost";

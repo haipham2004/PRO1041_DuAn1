@@ -24,6 +24,8 @@ public class AdamStoreView extends javax.swing.JFrame {
     Color defaultColor = new Color(56,106,165);
     Color selectedColor = new Color(204, 204, 204);
     Color enterColor = new Color(228, 227, 227);
+    
+    String tenNV;
 
     /**
      * Creates new form Main
