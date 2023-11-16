@@ -531,8 +531,7 @@ public class BanHangView extends javax.swing.JPanel {
         if (molGH.getRowCount() > 0) {
             molGH.setRowCount(0);
         }
-        int dongCuoi = tblHoaDonCho.getRowCount()-1;
-        tblHoaDonCho.setRowSelectionInterval(dongCuoi, dongCuoi);
+
     }//GEN-LAST:event_btnTaoHoaDonChoMouseClicked
 
     private void tblHoaDonChoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblHoaDonChoMouseClicked
