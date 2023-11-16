@@ -69,6 +69,39 @@ public class BanHangView extends javax.swing.JPanel {
         }
     }
 
+    // Hải
+
+    // Hải
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    // Quân
     public void fillTableHDC2() {
         DangNhapView dangNhapView = new DangNhapView();
         String maHD = maTangTuDong("HD");
@@ -152,10 +185,7 @@ public class BanHangView extends javax.swing.JPanel {
             e.printStackTrace();
         }
     }
-
-    // Hải
-
-    // Hải
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -418,7 +448,59 @@ public class BanHangView extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnThemGioHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemGioHangActionPerformed
-        
+
+        int indexs = tblChiTietSanPham.getSelectedRow();
+        int indexGioHang = -1;
+        if (indexs == -1) {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn một sản phẩm");
+            return;
+        }
+        String input = JOptionPane.showInputDialog(this, "Mời nhập số lượng");
+        if (input == null || input.isEmpty()) {
+            return;
+        }
+        try {
+            System.out.println("Hello");
+            System.out.println("HaiPham");
+            int soLuongMua = Integer.parseInt(input);
+            int soLuongTon = Integer.parseInt(tblChiTietSanPham.getValueAt(indexs, 1).toString());
+            if (soLuongMua > soLuongTon) {
+                JOptionPane.showMessageDialog(this, "Số lượng không đủ");
+                return;
+            } else if (soLuongMua < 1) {
+                JOptionPane.showMessageDialog(this, "Số lượng không hợp lệ, vui lòng nhập lại");
+                return;
+            }
+            String ma = tblChiTietSanPham.getValueAt(indexs, 0).toString();
+            int soLuong = Integer.parseInt(tblChiTietSanPham.getValueAt(indexs, 1).toString());
+            double gia = Double.parseDouble(tblChiTietSanPham.getValueAt(indexs, 2).toString());
+            String ten = tblChiTietSanPham.getValueAt(indexs, 3).toString();
+            double thanhTien = Math.round((soLuong * gia) * 100) / 100;
+            ChiTietSanPham ctsps = serviceCTSP.getOne(ma);
+            if (tblGioHang.getRowCount() > 0) {
+                for (int i = 0; i < tblGioHang.getRowCount(); i++) {
+                    if (tblGioHang.getValueAt(i, 0) != null) {
+                        if (tblGioHang.getValueAt(i, 0).toString().equals(ma)) {
+                            indexGioHang = i;
+                            break;
+                        }
+                    }
+                }
+            }
+            if (indexGioHang != -1) {
+                int soLuongHienTai = Integer.parseInt(tblGioHang.getValueAt(indexGioHang, 1).toString());
+                int soLuonngSauKhiThem = soLuongHienTai + Integer.parseInt(input);
+                tblGioHang.setValueAt(soLuonngSauKhiThem, indexGioHang, 1);
+                double thanhTienSauKhiThem = Math.round((soLuonngSauKhiThem * gia) * 100) / 100;
+                tblGioHang.setValueAt(thanhTienSauKhiThem, indexGioHang, 3);
+            } else {
+                fillTableGioHang(tblGioHang, ctsps, Integer.parseInt(input));
+            }
+            soLuongTon = soLuongTon - soLuongMua;
+            tblChiTietSanPham.setValueAt(soLuongTon, indexs, 1);
+        } catch (Exception e) {
+            return;
+        }
     }//GEN-LAST:event_btnThemGioHangActionPerformed
 
     private void tblChiTietSanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblChiTietSanPhamMouseClicked
