@@ -392,6 +392,7 @@ public class BanHangView extends javax.swing.JPanel {
         try {
             System.out.println("Hello");
             System.out.println("HaiPham");
+             System.out.println("12D");
             int soLuongMua = Integer.parseInt(input);
             int soLuongTon = Integer.parseInt(tblChiTietSanPham.getValueAt(indexs, 1).toString());
             if (soLuongMua > soLuongTon) {
