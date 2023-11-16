@@ -34,6 +34,8 @@ import service.servicImp.HoaDonServiceImp;
 public class BanHangView extends javax.swing.JPanel {
 
     DefaultTableModel molGH = new DefaultTableModel();
+    DefaultTableModel molCTSP = new DefaultTableModel();
+    ChiTietSanPhamServiceImp serviceCTSP = new ChiTietSanPhamServiceImp();
     static int indexHoaDonCho = -1;
     int index = -1;
     HoaDonServiceImp serviceHD = new HoaDonServiceImp();
@@ -49,6 +51,7 @@ public class BanHangView extends javax.swing.JPanel {
         initComponents();
         this.setSize(1300, 755);
         fillTableHDC(serviceHD.getHoaDonCho());
+        fillTableChiTietSanPham(serviceCTSP.getAll());
     }
 
     //Quân
@@ -70,36 +73,33 @@ public class BanHangView extends javax.swing.JPanel {
     }
 
     // Hải
+    public void fillTableChiTietSanPham(List<ChiTietSanPham> list) {
+        molCTSP = (DefaultTableModel) tblChiTietSanPham.getModel();
+        molCTSP.setRowCount(0);
+        for (ChiTietSanPham chiTietSanPham : list) {
+            molCTSP.addRow(new Object[]{
+                chiTietSanPham.getMaChiTietSanPham(),
+                chiTietSanPham.getSoLuong(), chiTietSanPham.getGia(),
+                chiTietSanPham.getSanPham(),
+                chiTietSanPham.getChatLieu(), chiTietSanPham.getMauSac(),
+                chiTietSanPham.getKichThuoc()
+            });
+        }
+    }
+
+    public void fillTableGioHang(JTable tbl, ChiTietSanPham ctsp, int SoLuongMua) {
+        DefaultTableModel dtm = (DefaultTableModel) tbl.getModel();
+        Object[] rowData = {
+            ctsp.getMaChiTietSanPham(),
+            SoLuongMua,
+            ctsp.getGia(),
+            SoLuongMua * ctsp.getGia(),
+            ctsp.getSanPham().getTenSanPham()
+        };
+        dtm.insertRow(0, rowData);
+    }
 
     // Hải
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     // Quân
     public void fillTableHDC2() {
@@ -185,7 +185,7 @@ public class BanHangView extends javax.swing.JPanel {
             e.printStackTrace();
         }
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -277,6 +277,11 @@ public class BanHangView extends javax.swing.JPanel {
         btnNhapMaSPCT.setText("Nhập mã");
 
         btnXoaSP.setText("Xóa sản phẩm");
+        btnXoaSP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXoaSPActionPerformed(evt);
+            }
+        });
 
         btnXoaTatCaSP.setText("Xóa tất cả");
 
@@ -462,7 +467,7 @@ public class BanHangView extends javax.swing.JPanel {
         try {
             System.out.println("Hello");
             System.out.println("HaiPham");
-             System.out.println("12D");
+            System.out.println("12D");
             int soLuongMua = Integer.parseInt(input);
             int soLuongTon = Integer.parseInt(tblChiTietSanPham.getValueAt(indexs, 1).toString());
             if (soLuongMua > soLuongTon) {
@@ -517,6 +522,7 @@ public class BanHangView extends javax.swing.JPanel {
 
     private void tblGioHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblGioHangMouseClicked
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_tblGioHangMouseClicked
 
     private void btnTaoHoaDonChoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTaoHoaDonChoMouseClicked
@@ -538,6 +544,20 @@ public class BanHangView extends javax.swing.JPanel {
 //        String newDirectoryName = "GioHang";
 //        luuGioHangVaoFile(maHD, parentDirectory, newDirectoryName);
     }//GEN-LAST:event_tblHoaDonChoMouseClicked
+
+    private void btnXoaSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaSPActionPerformed
+        // TODO add your handling code here:
+        molGH=(DefaultTableModel) tblGioHang.getModel();
+        int indexXoaGH =tblGioHang.getSelectedRow();
+        if(indexXoaGH!=-1){
+           int checkXoaGH=JOptionPane.showConfirmDialog(this,"Bạn có chắc mắc muốn xoá sản phẩm");
+           if(checkXoaGH==JOptionPane.YES_NO_OPTION){
+               molGH.removeRow(indexXoaGH);
+           }
+        }else{
+            JOptionPane.showMessageDialog(this, "Not");
+        }
+    }//GEN-LAST:event_btnXoaSPActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
