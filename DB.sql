@@ -1,4 +1,4 @@
-﻿----Update:2023-11-15--lúc 21g58p--
+﻿----Update:2023-11-16--lúc 21g58p--
 CREATE DATABASE AdamStores
 GO
 USE AdamStores
@@ -142,7 +142,6 @@ CREATE TABLE [HoaDonChiTiet] (
    CONSTRAINT FK_HDCT_HD foreign key(MaHoaDon) references HoaDon(MaHoaDon),
   [SoLuong] int,
   [DonGia] money,
-  [ThanhTien] money,
   [GhiChu] nvarchar(100),
   [TrangThai] bit,
   PRIMARY KEY ([MaHoaDonChiTiet])
