@@ -1,4 +1,4 @@
-﻿----Update:2023-11-15--lúc 22g00p--okela
+﻿----Update:2023-11-16--lúc 13g42--okela
 INSERT INTO TaiKhoan VALUES
 ('TK01','hoilamgi1','khongnoidau1','Admin',1),
 ('TK02','hoilamgi2','khongnoidau2','Staff',1),
@@ -6,11 +6,11 @@ INSERT INTO TaiKhoan VALUES
 ('TK04','hoilamgi4','khongnoidau4','Staff',1),
 ('TK05','hoilamgi5','khongnoidau5','Staff',0)
 INSERT INTO NhanVien VALUES
-('NV01','TK02',N'Phạm Ngọc Hải',1,N'Ninh Bình','0334294889','037643953721','2023-09-15',1,'anh1.png'),
+('NV01','TK01',N'Phạm Ngọc Hải',1,N'Ninh Bình','0334294889','037643953721','2023-09-15',1,'anh1.png'),
 ('NV02','TK02',N'Trần Anh Quân',1,N'Hà Nội','0958655432','037637459321','2023-09-15',1,'anh2.png'),
-('NV03','TK02',N'Nguyễn Khánh Li',0,N'Bắc Ninh','0394747324','0378475845','2023-08-13',1,'anh3.png'),
-('NV04','TK01',N'Nguyễn Đình Minh Hiếu',1,N'Ninh Bình','0334294653','037643953435','2023-07-15',0,'anh4.png'),
-('NV05','TK02',N'Mai Thuỳ Linh',0,N'Hà Nội','0334294878','037643953267','2023-07-19',0,'anh5.png')
+('NV03','TK03',N'Nguyễn Khánh Li',0,N'Bắc Ninh','0394747324','0378475845','2023-08-13',1,'anh3.png'),
+('NV04','TK04',N'Nguyễn Đình Minh Hiếu',1,N'Ninh Bình','0334294653','037643953435','2023-07-15',0,'anh4.png'),
+('NV05','TK05',N'Mai Thuỳ Linh',0,N'Hà Nội','0334294878','037643953267','2023-07-19',0,'anh5.png')
 INSERT INTO KhachHang Values
 ('KH01',N'Đoàn Xuân Bằng','2004-11-03','0934832745','bangdx@gmail.com',1,N'Nam Định'),
 ('KH02',N'Vũ Mạnh Trường','2004-07-09','0934832324','truongvmx@gmail.com',1,N'Nam Định'),
@@ -76,7 +76,7 @@ INSERT INTO HoaDon VALUES
 ('HD05','NV02','KH01',getDate(),750000,50000,700000,1,N'Thành công','EV01')
 
 INSERT INTO HoaDonChiTiet VALUES
-('HDCT01','CTSP02','HD03',3,170000,510000,N'Ok',1),
-('HDCT02','CTSP03','HD02',4,170000,680000,N'Ok',1),
-('HDCT03','CTSP01','HD01',3,210000,630000,N'Not Ok',0)
-
+('HDCT01','CTSP02','HD03',3,170000,N'Ok',1),
+('HDCT02','CTSP03','HD02',4,170000,N'Ok',1),
+('HDCT03','CTSP01','HD01',3,210000,N'Not Ok',0),
+('HDCT04','CTSP05','HD01',30,45000,N'Not Ok',0)
