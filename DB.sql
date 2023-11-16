@@ -1,4 +1,4 @@
-﻿----Update:2023-11-14--lúc 21g20p--
+﻿----Update:2023-11-15--lúc 21g58p--
 CREATE DATABASE AdamStores
 GO
 USE AdamStores

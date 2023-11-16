@@ -212,7 +212,7 @@ public class BanHangView extends javax.swing.JPanel {
         txtTimKiemCTSP = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
-        btnTaoHoaDonCho = new javax.swing.JButton();
+        JButton1 = new javax.swing.JButton();
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Hóa đơn chờ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.ABOVE_TOP, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
 
@@ -379,10 +379,10 @@ public class BanHangView extends javax.swing.JPanel {
 
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Đơn hàng", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.ABOVE_TOP, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
 
-        btnTaoHoaDonCho.setText("Tạo hóa đơn");
-        btnTaoHoaDonCho.addMouseListener(new java.awt.event.MouseAdapter() {
+        JButton1.setText("Tạo hóa đơn");
+        JButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnTaoHoaDonChoMouseClicked(evt);
+                JButton1MouseClicked(evt);
             }
         });
 
@@ -392,14 +392,14 @@ public class BanHangView extends javax.swing.JPanel {
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                 .addContainerGap(178, Short.MAX_VALUE)
-                .addComponent(btnTaoHoaDonCho)
+                .addComponent(JButton1)
                 .addGap(25, 25, 25))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGap(76, 76, 76)
-                .addComponent(btnTaoHoaDonCho)
+                .addComponent(JButton1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -523,7 +523,7 @@ public class BanHangView extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_tblGioHangMouseClicked
 
-    private void btnTaoHoaDonChoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTaoHoaDonChoMouseClicked
+    private void JButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JButton1MouseClicked
         // TODO add your handling code here:
         fillTableHDC2();
 //        tblHoaDonCho.setRowSelectionInterval(1, 1);
@@ -531,9 +531,8 @@ public class BanHangView extends javax.swing.JPanel {
         if (molGH.getRowCount() > 0) {
             molGH.setRowCount(0);
         }
-        int dongCuoi = tblHoaDonCho.getRowCount()-1;
-        tblHoaDonCho.setRowSelectionInterval(dongCuoi, dongCuoi);
-    }//GEN-LAST:event_btnTaoHoaDonChoMouseClicked
+
+    }//GEN-LAST:event_JButton1MouseClicked
 
     private void tblHoaDonChoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblHoaDonChoMouseClicked
         // TODO add your handling code here:
@@ -546,7 +545,7 @@ public class BanHangView extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnTaoHoaDonCho;
+    private javax.swing.JButton JButton1;
     private javax.swing.JButton btnThemGioHang;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
