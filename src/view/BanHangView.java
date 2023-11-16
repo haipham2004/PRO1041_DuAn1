@@ -33,9 +33,7 @@ import service.servicImp.HoaDonServiceImp;
  */
 public class BanHangView extends javax.swing.JPanel {
 
-    DefaultTableModel molCTSP = new DefaultTableModel();
     DefaultTableModel molGH = new DefaultTableModel();
-    ChiTietSanPhamServiceImp serviceCTSP = new ChiTietSanPhamServiceImp();
     static int indexHoaDonCho = -1;
     int index = -1;
     HoaDonServiceImp serviceHD = new HoaDonServiceImp();
@@ -50,7 +48,6 @@ public class BanHangView extends javax.swing.JPanel {
     public BanHangView() {
         initComponents();
         this.setSize(1300, 755);
-        fillTableChiTietSanPham(serviceCTSP.getAll());
         fillTableHDC(serviceHD.getHoaDonCho());
     }
 
@@ -157,32 +154,6 @@ public class BanHangView extends javax.swing.JPanel {
     }
 
     // Hải
-    public void fillTableChiTietSanPham(List<ChiTietSanPham> list) {
-        molCTSP = (DefaultTableModel) tblChiTietSanPham.getModel();
-        molCTSP.setRowCount(0);
-        for (ChiTietSanPham chiTietSanPham : list) {
-            molCTSP.addRow(new Object[]{
-                chiTietSanPham.getMaChiTietSanPham(),
-                chiTietSanPham.getSoLuong(), chiTietSanPham.getGia(),
-                chiTietSanPham.getSanPham(),
-                chiTietSanPham.getChatLieu(), chiTietSanPham.getMauSac(),
-                chiTietSanPham.getKichThuoc()
-            });
-        }
-    }
-
-    public void fillTableGioHang(List<ChiTietSanPham> list) {
-        molGH = (DefaultTableModel) tblChiTietSanPham.getModel();
-        molGH.setRowCount(0);
-        for (ChiTietSanPham chiTietSanPham : list) {
-            molGH.addRow(new Object[]{
-                chiTietSanPham.getMaChiTietSanPham(),
-                chiTietSanPham.getSoLuong(), chiTietSanPham.getGia(),
-                chiTietSanPham.getSoLuong() * chiTietSanPham.getGia(),
-                chiTietSanPham.getSanPham().getTenSanPham()
-            });
-        }
-    }
 
     // Hải
     /**
@@ -447,61 +418,7 @@ public class BanHangView extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnThemGioHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemGioHangActionPerformed
-        int indexs = tblChiTietSanPham.getSelectedRow();
-        molGH = (DefaultTableModel) tblGioHang.getModel();
-        int indexGioHang = -1;
-        if (indexs == -1) {
-            JOptionPane.showMessageDialog(this, "Vui lòng chọn một sản phẩm");
-            return;
-        }
-        String input = JOptionPane.showInputDialog(this, "Mời nhập số lượng");
-        if (input == null || input.isEmpty()) {
-            return;
-        }
-        try {
-            int soLuongMua = Integer.parseInt(input);
-            int soLuongTon = Integer.parseInt(tblChiTietSanPham.getValueAt(indexs, 1).toString());
-            if (soLuongMua > soLuongTon) {
-                JOptionPane.showMessageDialog(this, "Số lượng không đủ");
-                return;
-            }
-            String ma = tblChiTietSanPham.getValueAt(indexs, 0).toString();
-            int soLuong = Integer.parseInt(tblChiTietSanPham.getValueAt(indexs, 1).toString());
-            double gia = Double.parseDouble(tblChiTietSanPham.getValueAt(indexs, 2).toString());
-            String ten = tblChiTietSanPham.getValueAt(indexs, 3).toString();
-            double thanhTien = gia * soLuongMua;
-
-            molGH.insertRow(0, new Object[]{
-                ma, soLuongMua, gia, thanhTien, ten
-            });
-
-//            for (int i = 0; i < tblGioHang.getRowCount(); i++) {
-//                if (tblGioHang.getValueAt(i, 0).equals(ma)) {
-//                    indexGioHang = i;
-//                    break;
-//                }
-//            }
-//            if (indexGioHang != -1) {
-//                String check = tblGioHang.getValueAt(indexGioHang, 0).toString();
-//                if (ma.equals(check)) {
-//                    int soLuongMuaTruocKhiSua = Integer.parseInt(String.valueOf(tblGioHang.getValueAt(indexGioHang, 1).toString()));
-//                    int soLuongMuaSau = Integer.parseInt(input) + Integer.parseInt(String.valueOf(tblGioHang.getValueAt(indexGioHang, 1).toString()));
-//                    double thanhTienMuaSau = Integer.parseInt(tblGioHang.getValueAt(indexGioHang, 1).toString()) * Double.parseDouble(tblGioHang.getValueAt(indexGioHang, 2).toString());
-//                    molGH.insertRow(0, new Object[]{
-//                        ma, soLuongMuaSau, gia, thanhTienMuaSau, ten
-//                    });
-//                } else {
-//                    JOptionPane.showMessageDialog(this, "Haha");
-//                }
-//            }
-            fillTableChiTietSanPham(serviceCTSP.getAll());
-            soLuongTon = soLuongTon - soLuongMua;
-            tblChiTietSanPham.setValueAt(soLuongTon, indexs, 1);
-
-        } catch (NumberFormatException e) {
-            return;
-        }
-
+        
     }//GEN-LAST:event_btnThemGioHangActionPerformed
 
     private void tblChiTietSanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblChiTietSanPhamMouseClicked
@@ -513,10 +430,6 @@ public class BanHangView extends javax.swing.JPanel {
 
     private void txtTimKiemCTSPKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKiemCTSPKeyReleased
         // TODO add your handling code here:
-        if (!txtTimKiemCTSP.getText().equals("")) {
-            String name = txtTimKiemCTSP.getText();
-            fillTableChiTietSanPham(serviceCTSP.getList(name));
-        }
     }//GEN-LAST:event_txtTimKiemCTSPKeyReleased
 
     private void tblGioHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblGioHangMouseClicked
