@@ -99,7 +99,8 @@ public class BanHangView extends javax.swing.JPanel {
         dtm.insertRow(0, rowData);
 
     }
-
+    
+   
     // Hải
     /**
      * This method is called from within the constructor to initialize the form.
@@ -119,7 +120,7 @@ public class BanHangView extends javax.swing.JPanel {
         tblGioHang = new javax.swing.JTable();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        btnXoaSP = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -128,7 +129,7 @@ public class BanHangView extends javax.swing.JPanel {
         txtTimKiemCTSP = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        btnTaoHoaDonCho = new javax.swing.JButton();
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Hóa đơn chờ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.ABOVE_TOP, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
 
@@ -186,9 +187,24 @@ public class BanHangView extends javax.swing.JPanel {
 
         jButton3.setText("Nhập mã");
 
-        jButton5.setText("Xóa sản phẩm");
+        btnXoaSP.setText("Xóa sản phẩm");
+        btnXoaSP.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnXoaSPMouseClicked(evt);
+            }
+        });
+        btnXoaSP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXoaSPActionPerformed(evt);
+            }
+        });
 
         jButton6.setText("Xóa tất cả");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -203,7 +219,7 @@ public class BanHangView extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton5)
+                        .addComponent(btnXoaSP)
                         .addGap(18, 18, 18)
                         .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -218,7 +234,7 @@ public class BanHangView extends javax.swing.JPanel {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnXoaSP, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -290,15 +306,15 @@ public class BanHangView extends javax.swing.JPanel {
 
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Đơn hàng", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.ABOVE_TOP, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
 
-        jButton1.setText("Tạo hóa đơn");
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnTaoHoaDonCho.setText("Tạo hóa đơn");
+        btnTaoHoaDonCho.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton1MouseClicked(evt);
+                btnTaoHoaDonChoMouseClicked(evt);
             }
         });
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnTaoHoaDonCho.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnTaoHoaDonChoActionPerformed(evt);
             }
         });
 
@@ -308,14 +324,14 @@ public class BanHangView extends javax.swing.JPanel {
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                 .addContainerGap(178, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(btnTaoHoaDonCho)
                 .addGap(25, 25, 25))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGap(76, 76, 76)
-                .addComponent(jButton1)
+                .addComponent(btnTaoHoaDonCho)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -394,7 +410,8 @@ public class BanHangView extends javax.swing.JPanel {
                     if (tblGioHang.getValueAt(i, 0) != null) {
                         if (tblGioHang.getValueAt(i, 0).toString().equals(ma)) {
                             indexGioHang = i;
-                            break;                        }
+                            break;
+                        }
                     }
                 }
             }
@@ -403,7 +420,7 @@ public class BanHangView extends javax.swing.JPanel {
                 int soLuonngSauKhiThem = soLuongHienTai + Integer.parseInt(input);
                 tblGioHang.setValueAt(soLuonngSauKhiThem, indexGioHang, 1);
                 double thanhTienSauKhiThem = Math.round((soLuonngSauKhiThem * gia) * 100) / 100;
-                tblGioHang.setValueAt(thanhTienSauKhiThem, indexGioHang, 3); 
+                tblGioHang.setValueAt(thanhTienSauKhiThem, indexGioHang, 3);
             } else {
                 fillTableGioHang(tblGioHang, ctsps, Integer.parseInt(input));
             }
@@ -432,24 +449,49 @@ public class BanHangView extends javax.swing.JPanel {
     private void tblGioHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblGioHangMouseClicked
         // TODO add your handling code here:
 
+         
     }//GEN-LAST:event_tblGioHangMouseClicked
 
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+    private void btnTaoHoaDonChoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTaoHoaDonChoMouseClicked
         // TODO add your handling code here:
         fillTableHDC2();
-    }//GEN-LAST:event_jButton1MouseClicked
+    }//GEN-LAST:event_btnTaoHoaDonChoMouseClicked
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnTaoHoaDonChoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaoHoaDonChoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnTaoHoaDonChoActionPerformed
+
+    private void btnXoaSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaSPActionPerformed
+        // TODO add your handling code here:
+        molGH=(DefaultTableModel) tblGioHang.getModel();
+        int indexXoaGH =tblGioHang.getSelectedRow();
+        if(indexXoaGH!=-1){
+           int checkXoaGH=JOptionPane.showConfirmDialog(this,"Bạn có chắc mắc muốn xoá sản phẩm");
+           if(checkXoaGH==JOptionPane.YES_NO_OPTION){
+               molGH.removeRow(indexXoaGH);
+           }
+        }else{
+            JOptionPane.showMessageDialog(this, "Not");
+        }
+
+    }//GEN-LAST:event_btnXoaSPActionPerformed
+
+    private void btnXoaSPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnXoaSPMouseClicked
+        // TODO add your handling code here:
+       
+    }//GEN-LAST:event_btnXoaSPMouseClicked
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton6ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnTaoHoaDonCho;
     private javax.swing.JButton btnThemGioHang;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnXoaSP;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
