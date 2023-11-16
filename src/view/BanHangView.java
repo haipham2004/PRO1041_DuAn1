@@ -436,7 +436,6 @@ public class BanHangView extends javax.swing.JPanel {
 
     private void tblChiTietSanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblChiTietSanPhamMouseClicked
         // TODO add your handling code here:
-        index = tblChiTietSanPham.getSelectedRow();
 
 
     }//GEN-LAST:event_tblChiTietSanPhamMouseClicked
