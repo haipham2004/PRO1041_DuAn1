@@ -6,11 +6,20 @@ package view;
 
 import java.awt.CardLayout;
 import java.awt.Component;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.List;
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import model.ChatLieu;
@@ -19,8 +28,14 @@ import model.KichThuoc;
 import model.LoaiSanPham;
 import model.MauSac;
 import model.SanPham;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import service.servicImp.LoaiSanPhamServiceImp;
 import service.servicImp.SanPhamServiceImp;
+import static view.ChiTietSanPhamView.createStyleForHeader;
 
 /**
  *
@@ -407,8 +422,18 @@ public class SanPhamView extends javax.swing.JPanel {
         });
 
         btnXuatFile.setText("Xuất file");
+        btnXuatFile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXuatFileActionPerformed(evt);
+            }
+        });
 
         btnNhapFile.setText("Nhập file");
+        btnNhapFile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNhapFileActionPerformed(evt);
+            }
+        });
 
         tblSanPham.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -753,6 +778,138 @@ public class SanPhamView extends javax.swing.JPanel {
         pnlTong.repaint();
         pnlTong.revalidate();
     }//GEN-LAST:event_btnCTSPActionPerformed
+
+    private void btnNhapFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNhapFileActionPerformed
+        // TODO add your handling code here:
+        File excelFile;
+        FileInputStream excelFIS = null;
+        BufferedInputStream excelBIS = null;
+        XSSFWorkbook excelImportToJTable = null;
+        String defaultCurrentDirectoryPath = "D:\\";
+        JFileChooser excelFileChooser = new JFileChooser(defaultCurrentDirectoryPath);
+        excelFileChooser.setDialogTitle("Select Excel File");
+        FileNameExtensionFilter fnef = new FileNameExtensionFilter("EXCEL FILES", "xls", "xlsx", "xlsm");
+        excelFileChooser.setFileFilter(fnef);
+        int excelChooser = excelFileChooser.showOpenDialog(null);
+        if (excelChooser == JFileChooser.APPROVE_OPTION) {
+            try {
+                excelFile = excelFileChooser.getSelectedFile();
+                excelFIS = new FileInputStream(excelFile);
+                excelBIS = new BufferedInputStream(excelFIS);
+                excelImportToJTable = new XSSFWorkbook(excelBIS);
+                XSSFSheet excelSheet = excelImportToJTable.getSheetAt(0);
+
+                for (int i = 1; i < tblSanPham.getRowCount(); i++) {
+                    XSSFRow excelRow = excelSheet.getRow(i);
+                    if (excelRow != null) {
+                        XSSFCell exceMaSP = excelRow.getCell(0);
+                        XSSFCell excelTenSP = excelRow.getCell(1);
+                        XSSFCell excelTT = excelRow.getCell(2);
+                        XSSFCell excelXX = excelRow.getCell(3);
+                        XSSFCell excelLSP = excelRow.getCell(4);
+                        mol.addRow(new Object[]{exceMaSP, excelTenSP, excelTT, excelXX, excelLSP});
+                        String name = exceMaSP.toString();
+                        String exceMaSPs = exceMaSP.toString();
+                        String excelTenSPs = excelTenSP.toString();
+
+                        boolean trangThai;
+                        if(excelTT.toString().equals("Còn hàng")){
+                            trangThai=true;
+                        }else{
+                            trangThai=false;
+                        }
+                        LoaiSanPham lsp = new LoaiSanPham();
+                        String lsps = excelLSP.toString();
+                        lsp.setMaLoaiSanPham(lsps);
+                        String excelXXs = excelXX.toString();
+                        SanPham sp = new SanPham(exceMaSPs, excelTenSPs, trangThai, lsp, excelXXs);
+                        serviceSP.them(sp);
+                    } else {
+                        System.out.println("Dòng " + i + " là null. Bỏ qua dòng này.");
+                        // Hoặc bạn có thể thực hiện các xử lý tùy ý khác ở đây
+                    }
+                }
+                JOptionPane.showMessageDialog(null, "Imported Successfully !!.....");
+            } catch (IOException iOException) {
+                JOptionPane.showMessageDialog(null, iOException.getMessage());
+            } 
+        }
+    }//GEN-LAST:event_btnNhapFileActionPerformed
+
+    private void btnXuatFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXuatFileActionPerformed
+        // TODO add your handling code here:
+        fillTableSamPham(serviceSP.getAll());
+        FileOutputStream excelFOU = null;
+        BufferedOutputStream excelBOU = null;
+        XSSFWorkbook excelJtableExporter;
+
+        JFileChooser excel = new JFileChooser("D:\\");
+        excel.setDialogTitle("Save as");
+        FileNameExtensionFilter file = new FileNameExtensionFilter("EXCEL FILE", "xls", "xlsx", "xlsm");
+        excel.setFileFilter(file);
+
+        int excelChooser = excel.showSaveDialog(null);
+        if (excelChooser == JFileChooser.APPROVE_OPTION) {
+            excelJtableExporter = new XSSFWorkbook();
+            XSSFSheet excelsheet = excelJtableExporter.createSheet("Hoa Don");
+            CellStyle style = createStyleForHeader(excelsheet);
+            XSSFRow a = excelsheet.createRow(0);
+            XSSFCell cell1 = a.createCell(0);
+            cell1.setCellStyle(style);
+            cell1.setCellValue("MSP");
+
+            XSSFCell cell2 = a.createCell(1);
+            cell2.setCellStyle(style);
+            cell2.setCellValue("TÊN SP");
+
+            XSSFCell cell3 = a.createCell(2);
+            cell3.setCellStyle(style);
+            cell3.setCellValue("Trạng thái");
+
+            XSSFCell cell4 = a.createCell(3);
+            cell4.setCellStyle(style);
+            cell4.setCellValue("Xuất Xứ");
+
+            XSSFCell cell5 = a.createCell(4);
+            cell5.setCellStyle(style);
+            cell5.setCellValue("Loại SP");
+
+            for (int i = 0; i < tblSanPham.getRowCount(); i++) {
+                try {
+                    XSSFRow excelRow = excelsheet.createRow(i + 1);
+
+                    for (int j = 0; j < tblSanPham.getColumnCount(); j++) {
+                        XSSFCell excelCell = excelRow.createCell(j);
+                        excelCell.setCellValue(tblSanPham.getValueAt(i, j).toString());
+                    }
+
+                    excelFOU = new FileOutputStream(excel.getSelectedFile() + ".xlsx");
+                    excelBOU = new BufferedOutputStream(excelFOU);
+                    try {
+                        excelJtableExporter.write(excelBOU);
+
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
+                } catch (FileNotFoundException ex) {
+                    ex.printStackTrace();
+                } finally {
+                    try {
+                        if (excelBOU != null) {
+                            excelBOU.close();
+                        }
+                        if (excelFOU != null) {
+                            excelFOU.close();
+                        }
+
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
+                }
+            }
+            JOptionPane.showMessageDialog(this, "Xuất file  thành công: " + file);
+        }
+    }//GEN-LAST:event_btnXuatFileActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

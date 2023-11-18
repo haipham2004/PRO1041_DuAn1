@@ -424,11 +424,17 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Xu&#x1ea5;t file"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnXuatFileActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btnNhapFile">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Nh&#x1ead;p file"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNhapFileActionPerformed"/>
+              </Events>
             </Component>
             <Container class="javax.swing.JTabbedPane" name="pnlSP">
 
