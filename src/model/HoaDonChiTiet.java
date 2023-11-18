@@ -12,11 +12,11 @@ import model.HoaDon;
  * @author Admin
  */
 public class HoaDonChiTiet {
+    private String maHDCT;
     private ChiTietSanPham ctsp;
     private HoaDon HD;
     private int soLuong;
     private Double donGia ;
-    private Double thanhTien ;
     private String ghiChu;
     private Boolean trangThai;
 
@@ -29,14 +29,22 @@ public class HoaDonChiTiet {
         this.donGia = donGia;
     }
 
-    public HoaDonChiTiet(ChiTietSanPham ctsp, HoaDon HD, int soLuong, Double donGia, Double thanhTien, String ghiChu, Boolean trangThai) {
+    public HoaDonChiTiet(String maHDCT, ChiTietSanPham ctsp, HoaDon HD, int soLuong, Double donGia, String ghiChu, Boolean trangThai) {
+        this.maHDCT = maHDCT;
         this.ctsp = ctsp;
         this.HD = HD;
         this.soLuong = soLuong;
         this.donGia = donGia;
-        this.thanhTien = thanhTien;
         this.ghiChu = ghiChu;
         this.trangThai = trangThai;
+    }
+
+    public String getMaHDCT() {
+        return maHDCT;
+    }
+
+    public void setMaHDCT(String maHDCT) {
+        this.maHDCT = maHDCT;
     }
 
     public ChiTietSanPham getCtsp() {
@@ -69,14 +77,6 @@ public class HoaDonChiTiet {
 
     public void setDonGia(Double donGia) {
         this.donGia = donGia;
-    }
-
-    public Double getThanhTien() {
-        return thanhTien;
-    }
-
-    public void setThanhTien(Double thanhTien) {
-        this.thanhTien = thanhTien;
     }
 
     public String getGhiChu() {
