@@ -1167,7 +1167,7 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
                     }
                 }
             }
-            JOptionPane.showMessageDialog(this, "Xuất file  thành công: " + file);
+            JOptionPane.showMessageDialog(this, "Xuất file  thành công: ");
         }
     }//GEN-LAST:event_btnXuatfileActionPerformed
 
