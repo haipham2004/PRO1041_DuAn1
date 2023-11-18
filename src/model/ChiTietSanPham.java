@@ -34,6 +34,10 @@ public class ChiTietSanPham {
         this.trangThai = trangThai;
     }
 
+    public ChiTietSanPham(SanPham sanPham) {
+        this.sanPham = sanPham;
+    }
+
     public ChiTietSanPham(String maChiTietSanPham, SanPham sanPham, MauSac mauSac, ChatLieu chatLieu, KichThuoc kichThuoc, int soLuong, double gia, boolean trangThai, String qrCode) {
         this.maChiTietSanPham = maChiTietSanPham;
         this.sanPham = sanPham;
@@ -46,6 +50,11 @@ public class ChiTietSanPham {
         this.qrCode = qrCode;
     }
 
+    public ChiTietSanPham(String maChiTietSanPham) {
+        this.maChiTietSanPham = maChiTietSanPham;
+    }
+
+   
     public String getMaChiTietSanPham() {
         return maChiTietSanPham;
     }

@@ -15,7 +15,7 @@ public class SanPham {
     private boolean trangThai;
     private LoaiSanPham loaiSanPham;
     private String xuatXu;
-
+    private int tongSP;
     public SanPham() {
     }
 
@@ -26,6 +26,11 @@ public class SanPham {
     public SanPham(String maSanPham, String tenSanPham) {
         this.maSanPham = maSanPham;
         this.tenSanPham = tenSanPham;
+    }
+
+    public SanPham(String tenSanPham, int tongSP) {
+        this.tenSanPham = tenSanPham;
+        this.tongSP = tongSP;
     }
 
     public SanPham(String maSanPham, String tenSanPham, boolean trangThai, LoaiSanPham loaiSanPham, String xuatXu) {

@@ -11,6 +11,7 @@ import java.util.Date;
  * @author Admin BVCN88 02
  */
 public class HoaDon {
+
     private String maHoaDon;
     private NhanVien nhanVien;
     private KhachHang khachHang;
@@ -19,8 +20,31 @@ public class HoaDon {
     private boolean trangThai;
     private String ghiChu;
     private Events voucher;
+    private int soLuongHoaDon;
 
     public HoaDon() {
+    }
+
+    public HoaDon(String maHoaDon, Date ngayTao) {
+        this.maHoaDon = maHoaDon;
+        this.ngayTao = ngayTao;
+    }
+
+    public HoaDon(Date ngayTao) {
+        this.ngayTao = ngayTao;
+    }
+
+    public HoaDon(Date ngayTao, int soLuongHoaDon) {
+        this.ngayTao = ngayTao;
+        this.soLuongHoaDon = soLuongHoaDon;
+    }
+
+    public int getSoLuongHoaDon() {
+        return soLuongHoaDon;
+    }
+
+    public void setSoLuongHoaDon(int soLuongHoaDon) {
+        this.soLuongHoaDon = soLuongHoaDon;
     }
 
     public HoaDon(String maHoaDon, NhanVien nhanVien, Date ngayTao, boolean trangThai) {
@@ -39,6 +63,18 @@ public class HoaDon {
         this.trangThai = trangThai;
         this.ghiChu = ghiChu;
         this.voucher = voucher;
+    }
+
+    public HoaDon(String maHoaDon, Date ngayTao, double tongTien, int soLuongHoaDon) {
+        this.maHoaDon = maHoaDon;
+        this.ngayTao = ngayTao;
+        this.tongTien = tongTien;
+        this.soLuongHoaDon = soLuongHoaDon;
+    }
+
+    @Override
+    public String toString() {
+        return "HoaDon{" + "maHoaDon=" + maHoaDon + ", nhanVien=" + nhanVien + ", tongTien=" + tongTien + '}';
     }
 
     public String getMaHoaDon() {
@@ -104,8 +140,8 @@ public class HoaDon {
     public void setVoucher(Events voucher) {
         this.voucher = voucher;
     }
-    
-    public String chiTietTrangThai(){
+
+    public String chiTietTrangThai() {
         if (trangThai) {
             return "Đã thanh toán";
         } else {

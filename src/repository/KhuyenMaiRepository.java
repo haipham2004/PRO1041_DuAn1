@@ -167,5 +167,43 @@ public class KhuyenMaiRepository {
             return 0;
         }
     }
-    
+
+    public List<Events> listPageKm(int index) {
+        List<Events> listKm4 = new ArrayList<>();
+        try {
+            con = DBConnect.getConnection();
+            sql = "select * from Events \n"
+                    + "order by MaEV\n"
+                    + "offset ? rows fetch next 4 rows only ";
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, (index - 1) * 4);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Events ev = new Events(rs.getString(1), rs.getString(2), rs.getBoolean(3), rs.getString(4),
+                        rs.getDate(5), rs.getDate(6), rs.getString(7), rs.getBoolean(8),
+                        rs.getBoolean(9), rs.getString(10));
+                listKm4.add(ev);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+        return listKm4;
+    }
+     public int tongBanGhi() {
+        int tong = 0;
+        try {
+            con = DBConnect.getConnection();
+            sql = "SELECT COUNT(*) FROM Events";
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                tong = rs.getInt(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
+        return tong;
+    }
 }

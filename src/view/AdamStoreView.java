@@ -35,19 +35,18 @@ public class AdamStoreView extends javax.swing.JFrame {
         setSize(1500, 820);
         this.setLocationRelativeTo(null);
         execute();
-        changePanelBody(new ThongKeView());
-        
-        
+        changePanelBody(new ThongKeSLView()); 
+
     }
- 
+
     public void changePanelBody(JPanel panel) {
         panelBody.removeAll();
         panelBody.add(panel);
         panelBody.repaint();
         panelBody.revalidate();
     }
-    
-    public void sangCTSP(){
+
+    public void sangCTSP() {
         panelBody.removeAll();
         panelBody.add(new ChiTietSanPhamView());
         panelBody.repaint();
@@ -76,13 +75,21 @@ public class AdamStoreView extends javax.swing.JFrame {
         ImageIcon iconDoiMatKhau = new ImageIcon(getClass().getResource("/icon/reset-password.png"));
         ImageIcon iconDangXuat = new ImageIcon(getClass().getResource("/icon/power-off.png"));
         //Tạo thanh thống kê
-        MenuItem menuThongKe = new MenuItem(iconThongKe, "Thống kê", new ActionListener() {
+        MenuItem menuThongKeDT = new MenuItem(iconDot, "Thống kê doanh thu", new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                changePanelBody(new ThongKeView());
+                changePanelBody(new ThongKeDTView());
             }
         });
 
+        MenuItem menuThongKeSL = new MenuItem(iconDot, "Thống kê số lượng", new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                changePanelBody(new ThongKeSLView());
+            }
+        });
+        // Sản phẩm chung
+        MenuItem menuThongKe = new MenuItem(iconThongKe, "Thống kê", null, menuThongKeDT, menuThongKeSL);
         //Thanh bên trong sản phẩm
         MenuItem menuSanPham1 = new MenuItem(iconDot, "Sản phẩm", new ActionListener() {
             @Override
@@ -172,6 +179,10 @@ public class AdamStoreView extends javax.swing.JFrame {
         MenuItemColor(menuKhachHang);
         MenuItemColor(menuHoaDon);
         MenuItemColor(menuKm);
+
+        MenuItemColor(menuThongKeDT);
+        MenuItemColor(menuThongKeSL);
+
         MenuItemColor(menuDoiMatKhau);
         MenuItemColor(menuDangXuat);
     }
