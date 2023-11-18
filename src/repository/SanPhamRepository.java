@@ -101,7 +101,8 @@ public class SanPhamRepository {
         try {
             conn = DBConnect.getConnection();
             sql = "SELECT SP.MaSanPham,SP.TenSanPham,SP.TrangThai,LSP.MaLSP,LSP.TenLSP,SP.XuatXU \n"
-                    + "FROm SanPham SP INNER JOIN LoaiSanPham LSP ON SP.MaLSP=LSP.MaLSP order by SP.TrangThai DESC";
+                    + "FROm SanPham SP INNER JOIN LoaiSanPham LSP ON SP.MaLSP=LSP.MaLSP where SP.MaSanPham=? "
+                    + "order by SP.TrangThai DESC";
             pst = conn.prepareStatement(sql);
             pst.setObject(1, ma);
             rs = pst.executeQuery();

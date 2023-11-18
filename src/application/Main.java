@@ -5,6 +5,7 @@
 package application;
 
 import view.AdamStoreView;
+import view.DangNhapView;
 
 /**
  *
@@ -15,5 +16,6 @@ public class Main {
     public static void main(String[] args) {
         AdamStoreView adms = new AdamStoreView();
         adms.setVisible(true);
+//        new DangNhapView().setVisible(true);
     }
 }
