@@ -4,7 +4,9 @@
  */
 package application;
 
+
 import view.AdamStoreView;
+
 
 /**
  *
@@ -15,5 +17,6 @@ public class Main {
     public static void main(String[] args) {
         AdamStoreView adms = new AdamStoreView();
         adms.setVisible(true);
+
     }
 }

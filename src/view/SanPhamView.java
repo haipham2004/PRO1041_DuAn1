@@ -4,11 +4,16 @@
  */
 package view;
 
+import java.awt.CardLayout;
 import java.awt.Component;
 import java.util.List;
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
@@ -48,6 +53,9 @@ public class SanPhamView extends javax.swing.JPanel {
         loadCboTimLoaiSP(serviceLSP.getAll());
 
     }
+
+
+   
 
     public void fillTableSamPham(List<SanPham> list) {
         mol = (DefaultTableModel) tblSanPham.getModel();
@@ -116,27 +124,6 @@ public class SanPhamView extends javax.swing.JPanel {
         cboLocLSP.setModel((ComboBoxModel) cbxLoaiSanPham);
     }
 
-//    public void anSP(JTable tbl) {
-//        String ma = tbl.getValueAt(index, 0).toString();
-//        SanPham sp = savesSP();
-//
-//        if (serviceSP.sua(sp, ma) > 0) {
-//
-//            fillTableSamPham(serviceSP.getAll());
-//            int x = rdConHang.isSelected() == true ? 0 : 1;
-//            pnlSP.setSelectedIndex(x);
-//            JOptionPane.showMessageDialog(this, "Sửa thành công");
-//        } else {
-//            JOptionPane.showMessageDialog(this, "Sửa thất bại công");
-//        }
-//    }
-//
-//    public void setForm(Boolean x) {
-//        Component[] cpn = jPanel29.getComponents();
-//        for (Component cp : cpn) {
-//            cp.setEnabled(x);
-//        }
-//    }
     public boolean validateSP() {
         if (txtMaSanPham.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Mã trống");
@@ -182,6 +169,7 @@ public class SanPhamView extends javax.swing.JPanel {
         txtTimKiem = new javax.swing.JTextField();
         jPanel9 = new javax.swing.JPanel();
         cboLocLSP = new javax.swing.JComboBox<>();
+        jToggleButton1 = new javax.swing.JToggleButton();
         btnThemSP = new javax.swing.JButton();
         btnSuaSP = new javax.swing.JButton();
         btnQuayLai = new javax.swing.JButton();
@@ -202,6 +190,8 @@ public class SanPhamView extends javax.swing.JPanel {
         tblSanPhams = new javax.swing.JTable();
         btnAnSP = new javax.swing.JButton();
         btnKhoiPhuc = new javax.swing.JButton();
+
+        setLayout(new java.awt.CardLayout());
 
         jPanel29.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Quản lý sản phẩm", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.ABOVE_TOP, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
 
@@ -349,6 +339,13 @@ public class SanPhamView extends javax.swing.JPanel {
                 .addGap(21, 21, 21))
         );
 
+        jToggleButton1.setText("Test");
+        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -358,6 +355,8 @@ public class SanPhamView extends javax.swing.JPanel {
                 .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(79, 79, 79)
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(54, 54, 54)
+                .addComponent(jToggleButton1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
@@ -368,6 +367,10 @@ public class SanPhamView extends javax.swing.JPanel {
                     .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jToggleButton1)
+                .addGap(41, 41, 41))
         );
 
         btnThemSP.setText("Thêm");
@@ -469,7 +472,7 @@ public class SanPhamView extends javax.swing.JPanel {
                 .addComponent(btnTien1)
                 .addGap(18, 18, 18)
                 .addComponent(btnCuoi1)
-                .addContainerGap(274, Short.MAX_VALUE))
+                .addContainerGap(275, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -507,7 +510,7 @@ public class SanPhamView extends javax.swing.JPanel {
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel12Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 792, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 793, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel12Layout.setVerticalGroup(
@@ -602,25 +605,10 @@ public class SanPhamView extends javax.swing.JPanel {
             .addGroup(jPanel27Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel29, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap(60, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jPanel27, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(0, 15, Short.MAX_VALUE)
-                .addComponent(jPanel27, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 15, Short.MAX_VALUE))
-        );
+        add(jPanel27, "card2");
     }// </editor-fold>//GEN-END:initComponents
 
     private void cboLoaiSanPhamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboLoaiSanPhamActionPerformed
@@ -775,19 +763,16 @@ public class SanPhamView extends javax.swing.JPanel {
             loadPageSP();
         }
         index = tblSanPhams.getSelectedRow();
-//        if (index != -1) {
-//            anSP(tblSanPhams);
-//            setForm(true);
-//            txtMaSanPham.setEnabled(false);
-//            btnThemSP.setEnabled(false);
-//        } else {
-//            index = tblSanPham.getSelectedRow();
-//            anSP(tblSanPham);
-//            setForm(true);
-//            txtMaSanPham.setEnabled(false);
-//            btnThemSP.setEnabled(false);
-//        }
+
     }//GEN-LAST:event_btnAnSPActionPerformed
+
+    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
+        // TODO add your handling code here:
+        ChiTietSanPhamView ctspView= new ChiTietSanPhamView();
+        SanPhamView sanPhamView = new SanPhamView();
+        sanPhamView.setVisible(false);
+        ctspView.setVisible(true);
+    }//GEN-LAST:event_jToggleButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -821,6 +806,7 @@ public class SanPhamView extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JLabel lbSoTrang;
     private javax.swing.JTabbedPane pnlSP;
     private javax.swing.JRadioButton rdConHang;

@@ -55,4 +55,12 @@ public class KhuyenMaiServiceImp implements AdamStore<Events, String> {
         return repo.updateTrangThai();
     }
 
+    public List<Events> listPageKm(int index) {
+        return repo.listPageKm(index);
+    }
+
+    public int tongBanGhi() {
+        return repo.tongBanGhi();
+    }
+
 }

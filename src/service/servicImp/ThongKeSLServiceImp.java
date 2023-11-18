@@ -4,31 +4,33 @@
  */
 package service.servicImp;
 
+import java.util.Date;
 import java.util.List;
-import model.Voucher;
-import repository.VoucherRepository;
+import model.ChiTietHoaDon;
+import model.HoaDon;
+import repository.ThongKeSLRepository;
 import service.AdamStore;
 
 /**
  *
  * @author Admin
  */
-public class VoucherServiceImp implements AdamStore<Voucher, String> {
+public class ThongKeSLServiceImp implements AdamStore<ChiTietHoaDon, String> {
 
-    VoucherRepository repo = new VoucherRepository();
-
-    @Override
-    public List<Voucher> getAll() {
-        return repo.getAll();
-    }
+    ThongKeSLRepository repo = new ThongKeSLRepository();
 
     @Override
-    public int them(Voucher k) {
+    public List<ChiTietHoaDon> getAll() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public int sua(Voucher k, String e) {
+    public int them(ChiTietHoaDon k) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public int sua(ChiTietHoaDon k, String e) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
@@ -38,13 +40,14 @@ public class VoucherServiceImp implements AdamStore<Voucher, String> {
     }
 
     @Override
-    public Voucher getOne(String e) {
+    public ChiTietHoaDon getOne(String e) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public List<Voucher> getList(String e) {
+    public List<ChiTietHoaDon> getList(String e) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-
+    
+  
 }
