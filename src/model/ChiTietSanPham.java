@@ -46,8 +46,6 @@ public class ChiTietSanPham {
         this.qrCode = qrCode;
     }
 
-   
-
     public String getMaChiTietSanPham() {
         return maChiTietSanPham;
     }
@@ -120,4 +118,8 @@ public class ChiTietSanPham {
         this.qrCode = qrCode;
     }
 
+    @Override
+    public String toString() {
+        return sanPham + "(" + mauSac + "/ " + chatLieu + "/ " + kichThuoc + ')';
+    }
 }
