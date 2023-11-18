@@ -14,7 +14,6 @@ import java.util.Date;
 import model.ChiTietHoaDon;
 import model.ChiTietSanPham;
 import model.SanPham;
-import org.jfree.data.category.DefaultCategoryDataset;
 
 /**
  *

@@ -367,6 +367,7 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
         btnXuatfile = new javax.swing.JButton();
         btnTest = new javax.swing.JButton();
         btnBackSP = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
 
         setLayout(new java.awt.CardLayout());
 
@@ -715,7 +716,7 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
                                         .addGap(206, 206, 206))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel16Layout.createSequentialGroup()
                                         .addComponent(btnBackSP)
-                                        .addGap(23, 23, 23))))
+                                        .addGap(28, 28, 28))))
                             .addGroup(jPanel16Layout.createSequentialGroup()
                                 .addComponent(jLabel52, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
@@ -823,7 +824,7 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addContainerGap(103, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -834,6 +835,19 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
         );
 
         add(jPanel2, "card2");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1071, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 675, Short.MAX_VALUE)
+        );
+
+        add(jPanel1, "card3");
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSearchGiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchGiaActionPerformed
@@ -853,7 +867,8 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        fillTableChiTietSanPham(serviceCTSP.getAll());
+//        fillTableChiTietSanPham(serviceCTSP.getAll());
+        loadPageCTSP();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void btnThemCTSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemCTSPActionPerformed
@@ -1176,9 +1191,9 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
     private void btnBackSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackSPActionPerformed
         // TODO add your handling code here:
         jPanel2.removeAll();
-            jPanel2.add(new SanPhamView());
-            jPanel2.repaint();
-            jPanel2.revalidate();
+        jPanel2.add(new SanPhamView());
+        jPanel2.repaint();
+        jPanel2.revalidate();
     }//GEN-LAST:event_btnBackSPActionPerformed
 
 
@@ -1217,6 +1232,7 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel16;
