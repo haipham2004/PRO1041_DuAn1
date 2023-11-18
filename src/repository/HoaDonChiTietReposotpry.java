@@ -103,7 +103,7 @@ public class HoaDonChiTietReposotpry {
                     ChiTietSanPham ctsp = new ChiTietSanPham(rs.getString(1), sp,
                             ms, cl, kt, rs.getInt(10), rs.getDouble(11), rs.getBoolean(12));
 //                    HoaDon hd = BHView.getFormBH();
-                    HoaDonChiTiet hdct = new HoaDonChiTiet(ctsp, hd, soLuong, gia, soLuong * gia, null, true);
+                    HoaDonChiTiet hdct = new HoaDonChiTiet(ctsp.getMaChiTietSanPham()+hd.getMaHoaDon(), ctsp, hd, soLuong, gia, null, true);
                     list.add(hdct);
                 }
             }
@@ -114,15 +114,15 @@ public class HoaDonChiTietReposotpry {
 
     public int insert(List<HoaDonChiTiet> list) {
         try {
-            sql = "insert into HoaDonChiTiet(MaCTSP,MaHoaDon,SoLuong,DonGia,ThanhTien,GhiChu,TrangThai) values (?,?,?,?,?,?,?)";
+            sql = "insert into HoaDonChiTiet(MaHoaDonChiTiet,MaCTSP,MaHoaDon,SoLuong,DonGia,GhiChu,TrangThai) values (?,?,?,?,?,?,?)";
             con = DBConnect.getConnection();
             ps = con.prepareStatement(sql);
             for (HoaDonChiTiet hdct : list) {
-                ps.setObject(1, hdct.getCtsp().getMaChiTietSanPham());
-                ps.setObject(2, hdct.getHD().getMaHoaDon());
-                ps.setObject(3, hdct.getSoLuong());
-                ps.setObject(4, hdct.getDonGia());
-                ps.setObject(5, hdct.getThanhTien());
+                ps.setObject(1, hdct.getMaHDCT());
+                ps.setObject(2, hdct.getCtsp().getMaChiTietSanPham());
+                ps.setObject(3, hdct.getHD().getMaHoaDon());
+                ps.setObject(4, hdct.getSoLuong());
+                ps.setObject(5, hdct.getDonGia());
                 ps.setObject(6, hdct.getGhiChu());
                 ps.setObject(7, hdct.getTrangThai());
                 ps.executeUpdate();
