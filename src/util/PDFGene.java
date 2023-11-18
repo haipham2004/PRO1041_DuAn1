@@ -23,6 +23,11 @@ import com.itextpdf.layout.element.Image;
 import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.element.Table;
 import com.itextpdf.layout.property.TextAlignment;
+import java.awt.AWTException;
+import java.awt.Desktop;
+import java.awt.Robot;
+import java.awt.event.KeyEvent;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.DecimalFormat;
@@ -182,6 +187,39 @@ public class PDFGene {
         document.add(new Paragraph("2. Thời hạn đổi trả sản phẩm do lỗi bên phía người bán là bảy (7) ngày kể từ ngày mua.").setFont(font));
 
         document.close();
+        
+        try {
+            File file = new File(path);
+
+            if (file.exists()) {
+                Desktop desktop = Desktop.getDesktop();
+                desktop.open(file); // Mở file PDF bằng ứng dụng mặc định
+                try {
+            Robot robot = new Robot();
+
+            // Đợi 1 giây trước khi bắt đầu nhấn phím
+            robot.delay(1000);
+
+            // Nhấn phím Ctrl
+            robot.keyPress(KeyEvent.VK_CONTROL);
+
+            // Nhấn phím P
+            robot.keyPress(KeyEvent.VK_P);
+
+            // Nhả phím Ctrl
+            robot.keyRelease(KeyEvent.VK_CONTROL);
+
+            // Nhả phím P
+            robot.keyRelease(KeyEvent.VK_P);
+        } catch (AWTException e) {
+            e.printStackTrace();
+        }
+            } else {
+                System.out.println("File không tồn tại");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public static Cell getHeaderTextCell(String textValue) {
