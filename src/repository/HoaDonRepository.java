@@ -41,8 +41,8 @@ public class HoaDonRepository {
         }
         return listHoaDon;
     }
-    
-    public int countHoaDon(){
+
+    public int countHoaDon() {
         int tongHoaDon = 0;
         try {
             sql = "Select COUNT(*) From HoaDon";
@@ -58,5 +58,38 @@ public class HoaDonRepository {
         }
         return tongHoaDon;
     }
-    
+
+    public int themHoaDon(HoaDon hd) {
+        try {
+            Timestamp currentTime = new Timestamp(System.currentTimeMillis());
+            sql = "insert into HoaDon(MaHoaDon, MaNV,MaKH,NgayTao,TongTien,TongTienKM,TongTienSauKM,TrangThai,GhiChu,MaEV) values (?,?,?,?,?,?,?,?,?,?)";
+            con = DBConnect.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setObject(1, hd.getMaHoaDon());
+            ps.setObject(2, hd.getNhanVien().getMaNhanVien());
+            ps.setObject(3, hd.getKhachHang().getMaKhachHang());
+            ps.setTimestamp(4, currentTime);
+            Double mucGiam;
+            if (hd.getVoucher() == null) {
+                mucGiam = 0.0;
+                ps.setObject(10, null);
+                ps.setObject(5, hd.getTongTien());
+                ps.setObject(6, 0);
+                ps.setObject(7, hd.getTongTien());
+            } else {
+                mucGiam = Double.parseDouble(hd.getVoucher().getMucGiamGia()) / 100;
+                ps.setObject(10, hd.getVoucher().getMaEventa());
+                ps.setObject(5, hd.getTongTien() / (1-mucGiam));
+                ps.setObject(6, (hd.getTongTien() / (1-mucGiam)) - hd.getTongTien());
+                ps.setObject(7, hd.getTongTien());
+            }
+            ps.setObject(8, hd.isTrangThai());
+            ps.setObject(9, hd.getGhiChu());
+            return ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+
 }
