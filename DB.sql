@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-﻿----Update:2023-11-15--lúc 21g58p--
-=======
 ﻿----Update:2023-11-16--lúc 21g58p--
->>>>>>> 208c24cdcd260b1edfa56f78bf000a832b499490
 CREATE DATABASE AdamStores
 GO
 USE AdamStores
