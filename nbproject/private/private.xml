@@ -12,13 +12,10 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/F:/FPT%20Polytechnic/DA1/PRO1041_DuAn1/src/view/SanPhamView.java</file>
+            <file>file:/F:/FPT%20Polytechnic/DA1/PRO1041_DuAn1/src/view/ThongKeSLView.java</file>
             <file>file:/F:/FPT%20Polytechnic/DA1/PRO1041_DuAn1/src/model/ChiTietSanPham.java</file>
-            <file>file:/F:/FPT%20Polytechnic/DA1/PRO1041_DuAn1/src/view/ThongKeDTView.java</file>
-            <file>file:/F:/FPT%20Polytechnic/DA1/PRO1041_DuAn1/src/util/DBConnect.java</file>
-            <file>file:/F:/FPT%20Polytechnic/DA1/PRO1041_DuAn1/src/view/ChiTietSanPhamView.java</file>
-            <file>file:/F:/FPT%20Polytechnic/DA1/PRO1041_DuAn1/src/util/PDFGene.java</file>
-            <file>file:/F:/FPT%20Polytechnic/DA1/PRO1041_DuAn1/src/view/KhuyenMaiView.java</file>
+            <file>file:/F:/FPT%20Polytechnic/DA1/PRO1041_DuAn1/src/model/SanPham.java</file>
+            <file>file:/F:/FPT%20Polytechnic/DA1/PRO1041_DuAn1/src/repository/ThongKeSLRepository.java</file>
             <file>file:/F:/FPT%20Polytechnic/DA1/PRO1041_DuAn1/src/view/AdamStoreView.java</file>
         </group>
     </open-files>

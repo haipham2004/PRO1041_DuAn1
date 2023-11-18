@@ -23,6 +23,19 @@ public class SanPham {
         this.maSanPham = maSanPham;
     }
 
+    public SanPham(int tongSP) {
+        this.tongSP = tongSP;
+    }
+
+    public int getTongSP() {
+        return tongSP;
+    }
+
+    public void setTongSP(int tongSP) {
+        this.tongSP = tongSP;
+    }
+    
+
     public SanPham(String maSanPham, String tenSanPham) {
         this.maSanPham = maSanPham;
         this.tenSanPham = tenSanPham;

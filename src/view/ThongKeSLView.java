@@ -46,7 +46,7 @@ public class ThongKeSLView extends javax.swing.JPanel {
         this.setSize(1300, 755);
         fillTableCTHD(repo.getListCTHD());
         setDataToChart(panelChartHoaDon);
-//        setDataToChart2(panelTopSP);
+        setDataToChart2(panelTopSP);
     }
 
     public void fillTableCTHD(List<ChiTietHoaDon> listCTHD) {
@@ -89,13 +89,13 @@ public class ThongKeSLView extends javax.swing.JPanel {
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         if (listTop != null) {
             for (ChiTietHoaDon chiTietHoaDon : listTop) {
-                dataset.addValue(chiTietHoaDon.getHoaDon().getSoLuongHoaDon(), "Hóa đơn",
-                        chiTietHoaDon.getHoaDon().getNgayTao());
+                dataset.addValue(chiTietHoaDon.getChiTietSanPham().getSanPham().getTongSP(), "Tổng sản phẩm",
+                        chiTietHoaDon.getChiTietSanPham().getSanPham().getTenSanPham());
             }
         }
         JFreeChart barChart = ChartFactory.createBarChart("Top sản phẩm bán được".toUpperCase(),
                 "Sản phẩm", "Số lượng bán", dataset, PlotOrientation.VERTICAL,
-                true, true, false);
+                false, true, false);
         ChartPanel chartPanel = new ChartPanel(barChart);
         chartPanel.setPreferredSize(new Dimension(859, 236));
         panelTopSP.removeAll();

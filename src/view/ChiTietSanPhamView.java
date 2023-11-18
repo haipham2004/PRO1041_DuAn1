@@ -1176,9 +1176,9 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
     private void btnBackSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackSPActionPerformed
         // TODO add your handling code here:
         jPanel2.removeAll();
-            jPanel2.add(new SanPhamView());
-            jPanel2.repaint();
-            jPanel2.revalidate();
+        jPanel2.add(new SanPhamView());
+        jPanel2.repaint();
+        jPanel2.revalidate();
     }//GEN-LAST:event_btnBackSPActionPerformed
 
 
