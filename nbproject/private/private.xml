@@ -17,22 +17,10 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/view/AdamStoreView.java</file>
-            <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/model/ChiTietSanPham.java</file>
-            <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/repository/KhachHangRepository.java</file>
-            <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/view/SanPhamView.java</file>
-            <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/model/HoaDon.java</file>
-            <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/view/NhanVienView.java</file>
-            <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/view/KhachHangView.java</file>
-            <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/view/KhuyenMaiView.java</file>
-            <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/util/DBConnect.java</file>
-            <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/view/DoiMatKhauView.java</file>
-            <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/view/DangNhapView.java</file>
-            <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/view/BanHangView.java</file>
-            <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/service/servicImp/HoaDonServiceImp.java</file>
-            <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/view/ChiTietSanPhamView.java</file>
-            <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/application/Main.java</file>
-            <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/repository/LoginRepository.java</file>
+            <file>file:/D:/PRO1041_DuAn1/PRO1041_DuAn1/src/application/Main.java</file>
+            <file>file:/D:/PRO1041_DuAn1/PRO1041_DuAn1/src/view/AdamStoreView.java</file>
+            <file>file:/D:/PRO1041_DuAn1/PRO1041_DuAn1/src/view/SanPhamView.java</file>
+            <file>file:/D:/PRO1041_DuAn1/PRO1041_DuAn1/src/view/ChiTietSanPhamView.java</file>
         </group>
     </open-files>
 </project-private>
