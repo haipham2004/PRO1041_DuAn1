@@ -28,9 +28,7 @@ import java.io.IOException;
 import java.text.DecimalFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
-import model.ChiTietSanPham;
 import model.HoaDon;
 import model.HoaDonChiTiet;
 
@@ -69,6 +67,7 @@ public class PDFGene {
 //        img3.setOpacity(0.1f);
         String fontPath = "C:\\Windows\\Fonts\\Arial.ttf";
         PdfFont font = PdfFontFactory.createFont(fontPath, PdfEncodings.IDENTITY_H);
+        document.setFont(font);
 
         Double sum = 0.0;
         float threecol = 190f;
@@ -82,7 +81,6 @@ public class PDFGene {
 
         Table table = new Table(twocolumnWidth);
 
-        table.setFont(font);
 
         Barcode128 barcode = new Barcode128(pdfDocument);
         barcode.setCode(hd.getMaHoaDon());
@@ -107,7 +105,6 @@ public class PDFGene {
         document.add(onesp);
 
         Table twoColTable = new Table(twocolumnWidth);
-        twoColTable.setFont(font);
         twoColTable.addCell(getBillingandCustomCell("Thông tin hóa đơn").setHeight(25f));
         twoColTable.addCell(getBillingandCustomCell("Thông tin khách hàng").setHeight(25f));
         twoColTable.addCell(getCell10fLeft("Cửa hàng", true));
@@ -121,7 +118,6 @@ public class PDFGene {
         document.add(twoColTable);
 
         Table oneColTable = new Table(onecolumnWidth);
-        oneColTable.setFont(font);
         oneColTable.addCell(getCell10fLeft("Địa chỉ", true));
         oneColTable.addCell(getCell10fLeft("Địa chỉ cửa hàng", false));
         oneColTable.addCell(getCell10fLeft("Email", true));
@@ -136,7 +132,6 @@ public class PDFGene {
         document.add(productPara.setFont(font).setBold());
 
         Table threeColTable = new Table(threecolWidth);
-        threeColTable.setFont(font);
         threeColTable.setBackgroundColor(Color.BLACK, 0.7f);
         threeColTable.addCell(new Cell().add("Tên").setBold().setFontColor(Color.WHITE).setBorder(Border.NO_BORDER));
         threeColTable.addCell(new Cell().add("Số lượng").setBold().setTextAlignment(TextAlignment.CENTER).setFontColor(Color.WHITE).setBorder(Border.NO_BORDER));
@@ -157,24 +152,22 @@ public class PDFGene {
 
         float onetwo[] = {threecol + 125f, threecol * 2 + 35f};
         Table threeColTable3 = new Table(onetwo);
-        threeColTable3.setFont(font);
         threeColTable3.addCell(new Cell().add("").setBorder(Border.NO_BORDER));
         threeColTable3.addCell(new Cell().add("").setBorder(Border.NO_BORDER).setBorderTop(dgb));
         document.add(threeColTable3.setBorder(Border.NO_BORDER));
 
         Table threeColTable4 = new Table(threecolWidth);
-        threeColTable4.setFont(font);
         Double mucGiam;
         if (hd.getVoucher() == null) {
             mucGiam = 0.0;
         } else {
             mucGiam = Double.parseDouble(hd.getVoucher().getMucGiamGia()) / 100;
         }
-        
+
         threeColTable4.addCell(new Cell().add("").setBorder(Border.NO_BORDER));
         threeColTable4.addCell(new Cell().add("Giảm giá").setTextAlignment(TextAlignment.CENTER).setBorder(Border.NO_BORDER));
-        threeColTable4.addCell(new Cell().add(df.format(sum*mucGiam)).setTextAlignment(TextAlignment.RIGHT).setBorder(Border.NO_BORDER));
-                
+        threeColTable4.addCell(new Cell().add(df.format(sum * mucGiam)).setTextAlignment(TextAlignment.RIGHT).setBorder(Border.NO_BORDER));
+
         Double sumSauKM = sum * (1 - mucGiam);
         threeColTable4.addCell(new Cell().add("").setBorder(Border.NO_BORDER));
         threeColTable4.addCell(new Cell().add("Tổng tiền").setTextAlignment(TextAlignment.CENTER).setBorder(Border.NO_BORDER));
