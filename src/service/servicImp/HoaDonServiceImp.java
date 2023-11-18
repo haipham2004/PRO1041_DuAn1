@@ -13,8 +13,8 @@ import service.AdamStore;
  *
  * @author Admin
  */
-public class HoaDonServiceImp implements AdamStore<HoaDon, String>{
-    
+public class HoaDonServiceImp implements AdamStore<HoaDon, String> {
+
     HoaDonRepository repo = new HoaDonRepository();
 
     @Override
@@ -24,7 +24,7 @@ public class HoaDonServiceImp implements AdamStore<HoaDon, String>{
 
     @Override
     public int them(HoaDon k) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return repo.themHoaDon(k);
     }
 
     @Override
@@ -46,13 +46,13 @@ public class HoaDonServiceImp implements AdamStore<HoaDon, String>{
     public List<HoaDon> getList(String e) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
-    public List<HoaDon> getHoaDonCho(){
+
+    public List<HoaDon> getHoaDonCho() {
         return repo.getHoaDonCho();
     }
-    
-    public int countHoaDon(){
+
+    public int countHoaDon() {
         return repo.countHoaDon();
     }
-    
+
 }
