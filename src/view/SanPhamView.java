@@ -772,11 +772,17 @@ public class SanPhamView extends javax.swing.JPanel {
 
     private void btnCTSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCTSPActionPerformed
         // TODO add your handling code here:
-        CardLayout cardLayout = new CardLayout();
-        pnlTong.removeAll();
-        pnlTong.add(new ChiTietSanPhamView());
-        pnlTong.repaint();
-        pnlTong.revalidate();
+        index = tblSanPham.getSelectedRow();
+        if (index < 0) {
+            JOptionPane.showMessageDialog(this, "Bạn chưa chọn sản phẩm để hiển thị");
+        } else {
+            tenSanPham = tblSanPham.getValueAt(index, 1).toString();
+            pnlTong.removeAll();
+            pnlTong.add(new ChiTietSanPhamView());
+            pnlTong.repaint();
+            pnlTong.revalidate();
+        }
+        
     }//GEN-LAST:event_btnCTSPActionPerformed
 
     private void btnNhapFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNhapFileActionPerformed
@@ -824,6 +830,7 @@ public class SanPhamView extends javax.swing.JPanel {
                         String excelXXs = excelXX.toString();
                         SanPham sp = new SanPham(exceMaSPs, excelTenSPs, trangThai, lsp, excelXXs);
                         serviceSP.them(sp);
+                        loadPageSP();
                     } else {
                         System.out.println("Dòng " + i + " là null. Bỏ qua dòng này.");
                         // Hoặc bạn có thể thực hiện các xử lý tùy ý khác ở đây

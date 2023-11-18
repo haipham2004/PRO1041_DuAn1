@@ -46,7 +46,7 @@ public class PDFGene {
         String formattedDateTime = currentDateTime.format(formatter);
         DecimalFormat df = new DecimalFormat("#,###");
 
-        String path = "C:\\New folder\\" + hd.getMaHoaDon() + ".pdf";
+        String path = "D:\\PDF\\" + hd.getMaHoaDon() + ".pdf";
         PdfWriter pdfWriter = new PdfWriter(path);
         PdfDocument pdfDocument = new PdfDocument(pdfWriter);
         pdfDocument.setDefaultPageSize(PageSize.A4);
