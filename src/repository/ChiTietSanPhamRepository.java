@@ -265,4 +265,31 @@ public class ChiTietSanPhamRepository {
             return 0;
         }
     }
+
+    public boolean checkMaQR(String qrCode) throws SQLException {
+        conn = DBConnect.getConnection();
+        sql = "SELECT * FROM ChiTietSanPham WHERE qrCode=?";
+        pst = conn.prepareStatement(sql);
+        pst.setString(1, qrCode);
+        rs = pst.executeQuery();
+        if (rs.next()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public int taoQR(String qrCode) {
+        try {
+            conn = DBConnect.getConnection();
+            sql = "UPDATE ChiTietSanPham set qrCode=? where MaCTSP=? ";
+            pst = conn.prepareStatement(sql);
+            pst.setString(1, qrCode);
+            pst.setString(2, qrCode);
+            return pst.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
 }

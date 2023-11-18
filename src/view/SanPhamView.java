@@ -37,6 +37,7 @@ public class SanPhamView extends javax.swing.JPanel {
     DefaultComboBoxModel<LoaiSanPham> cbxLoaiSanPham = new DefaultComboBoxModel<>();
     int index = -1;
     int trangSP = 1, soTrangSP, tongBanGhiSP;
+    public static String tenSanPham;
 
     /**
      * Creates new form SanPhamView
@@ -49,6 +50,10 @@ public class SanPhamView extends javax.swing.JPanel {
         loadCboTimLoaiSP(serviceLSP.getAll());
         rdConHang.setSelected(true);
 
+    }
+    
+    public String getTenSPs(){
+        return tenSanPham;
     }
 
     public void fillTableSamPham(List<SanPham> list) {
@@ -184,14 +189,12 @@ public class SanPhamView extends javax.swing.JPanel {
         txtTimKiem = new javax.swing.JTextField();
         jPanel9 = new javax.swing.JPanel();
         cboLocLSP = new javax.swing.JComboBox<>();
-        btnAnSP = new javax.swing.JButton();
-        btnKhoiPhuc = new javax.swing.JButton();
         btnThemSP = new javax.swing.JButton();
         btnSuaSP = new javax.swing.JButton();
         btnQuayLai = new javax.swing.JButton();
         btnClearSP = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
+        btnXuatFile = new javax.swing.JButton();
+        btnNhapFile = new javax.swing.JButton();
         pnlSP = new javax.swing.JTabbedPane();
         jPanel8 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -204,7 +207,7 @@ public class SanPhamView extends javax.swing.JPanel {
         jPanel12 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         tblSanPhams = new javax.swing.JTable();
-        jButton7 = new javax.swing.JButton();
+        btnCTSP = new javax.swing.JButton();
         pnlSPCT = new javax.swing.JPanel();
 
         pnlTong.setLayout(new java.awt.CardLayout());
@@ -354,20 +357,6 @@ public class SanPhamView extends javax.swing.JPanel {
                 .addGap(27, 27, 27))
         );
 
-        btnAnSP.setText("Ẩn");
-        btnAnSP.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAnSPActionPerformed(evt);
-            }
-        });
-
-        btnKhoiPhuc.setText("Khôi phục");
-        btnKhoiPhuc.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnKhoiPhucActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -377,26 +366,15 @@ public class SanPhamView extends javax.swing.JPanel {
                 .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(79, 79, 79)
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnAnSP)
-                    .addComponent(btnKhoiPhuc))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(15, 15, 15)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(38, 38, 38)
-                        .addComponent(btnAnSP)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnKhoiPhuc)))
+                    .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -428,9 +406,9 @@ public class SanPhamView extends javax.swing.JPanel {
             }
         });
 
-        jButton5.setText("Xuất file");
+        btnXuatFile.setText("Xuất file");
 
-        jButton6.setText("Nhập file");
+        btnNhapFile.setText("Nhập file");
 
         tblSanPham.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -550,10 +528,10 @@ public class SanPhamView extends javax.swing.JPanel {
 
         pnlSP.addTab("Sản Phẩm Rác", jPanel12);
 
-        jButton7.setText("Chi tiết sản phẩm");
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
+        btnCTSP.setText("Chi tiết sản phẩm");
+        btnCTSP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
+                btnCTSPActionPerformed(evt);
             }
         });
 
@@ -571,11 +549,11 @@ public class SanPhamView extends javax.swing.JPanel {
                 .addGap(28, 28, 28)
                 .addComponent(btnQuayLai)
                 .addGap(28, 28, 28)
-                .addComponent(jButton6)
+                .addComponent(btnNhapFile)
                 .addGap(18, 18, 18)
-                .addComponent(jButton5)
+                .addComponent(btnXuatFile)
                 .addGap(18, 18, 18)
-                .addComponent(jButton7)
+                .addComponent(btnCTSP)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(pnlSanPhamLayout.createSequentialGroup()
                 .addGroup(pnlSanPhamLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -600,9 +578,9 @@ public class SanPhamView extends javax.swing.JPanel {
                     .addComponent(btnSuaSP)
                     .addComponent(btnQuayLai)
                     .addComponent(btnClearSP)
-                    .addComponent(jButton5)
-                    .addComponent(jButton6)
-                    .addComponent(jButton7))
+                    .addComponent(btnXuatFile)
+                    .addComponent(btnNhapFile)
+                    .addComponent(btnCTSP))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlSP, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(41, Short.MAX_VALUE))
@@ -767,72 +745,31 @@ public class SanPhamView extends javax.swing.JPanel {
         lbSoTrang.setText(trangSP + " of " + soTrangSP);
     }//GEN-LAST:event_btnCuoi1ActionPerformed
 
-    private void btnKhoiPhucActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKhoiPhucActionPerformed
+    private void btnCTSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCTSPActionPerformed
         // TODO add your handling code here:
-        mol = (DefaultTableModel) tblSanPham.getModel();
-        mols = (DefaultTableModel) tblSanPhams.getModel();
-        mols.setRowCount(0);
-        index = tblSanPham.getSelectedRow();
-        if (index != -1) {
-            mol.addRow(mol.getDataVector().elementAt(index));
-            mols.removeRow(index);
-        } else {
-            loadPageSP();
-        }
-    }//GEN-LAST:event_btnKhoiPhucActionPerformed
-
-    private void btnAnSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnSPActionPerformed
-        // TODO add your handling code here:
-
-        mols.setRowCount(0);
-        index = tblSanPham.getSelectedRow();
-        if (index != -1) {
-            mols.addRow(mol.getDataVector().elementAt(index));
-            mol.removeRow(index);
-        } else {
-            loadPageSP();
-        }
-        index = tblSanPhams.getSelectedRow();
-//        if (index != -1) {
-//            anSP(tblSanPhams);
-//            setForm(true);
-//            txtMaSanPham.setEnabled(false);
-//            btnThemSP.setEnabled(false);
-//        } else {
-//            index = tblSanPham.getSelectedRow();
-//            anSP(tblSanPham);
-//            setForm(true);
-//            txtMaSanPham.setEnabled(false);
-//            btnThemSP.setEnabled(false);
-//        }
-    }//GEN-LAST:event_btnAnSPActionPerformed
-
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        // TODO add your handling code here:
+        CardLayout cardLayout = new CardLayout();
         pnlTong.removeAll();
         pnlTong.add(new ChiTietSanPhamView());
         pnlTong.repaint();
         pnlTong.revalidate();
-    }//GEN-LAST:event_jButton7ActionPerformed
+    }//GEN-LAST:event_btnCTSPActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAnSP;
+    private javax.swing.JButton btnCTSP;
     private javax.swing.JButton btnClearSP;
     private javax.swing.JButton btnCuoi1;
     private javax.swing.JButton btnDau1;
-    private javax.swing.JButton btnKhoiPhuc;
     private javax.swing.JButton btnLui1;
+    private javax.swing.JButton btnNhapFile;
     private javax.swing.JButton btnQuayLai;
     private javax.swing.JButton btnSuaSP;
     private javax.swing.JButton btnThemSP;
     private javax.swing.JButton btnTien1;
+    private javax.swing.JButton btnXuatFile;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> cboLoaiSanPham;
     private javax.swing.JComboBox<String> cboLocLSP;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;

@@ -13,9 +13,8 @@ import javax.swing.JOptionPane;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 import javax.swing.table.DefaultTableModel;
 import model.Events;
-import model.Voucher;
 import service.servicImp.KhuyenMaiServiceImp;
-import service.servicImp.VoucherServiceImp;
+
 
 /**
  *
@@ -26,7 +25,6 @@ public class KhuyenMaiView extends javax.swing.JPanel {
     DefaultTableModel defaultTableModel = new DefaultTableModel();
     DefaultComboBoxModel<Events> cboEvents = new DefaultComboBoxModel<>();
     KhuyenMaiServiceImp service = new KhuyenMaiServiceImp();
-    VoucherServiceImp serviceVoucher = new VoucherServiceImp();
     int index;
 
     /**
