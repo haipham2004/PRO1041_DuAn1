@@ -25,7 +25,9 @@ import java.util.concurrent.ThreadFactory;
  * @author Admin BVCN88 02
  */
 public class Test extends javax.swing.JFrame implements ThreadFactory{
-
+private WebcamPanel panel = null;
+    private Webcam webcam = null;
+    private Executor executor = Executors.newSingleThreadExecutor(this);
     /**
      * Creates new form Test
      */
