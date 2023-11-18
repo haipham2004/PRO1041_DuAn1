@@ -139,14 +139,6 @@ public class BanHangView extends javax.swing.JPanel {
         });
     }
 
-//    public void luuGioHangVaoFile(int indexHoaDonCho, String maHD) {
-//        try ( ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("invoice1.ser"))) {
-//            ChiTietSanPham gioHang = new ChiTietSanPham(FILE_PATH, sanPham, mauSac, chatLieu, kichThuoc, so, so, true);
-//            oos.writeObject(invoice1);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
     public void luuGioHangVaoFile(String maHD, String parentDirectory, String newDirectoryName) {
         molGH = (DefaultTableModel) tblGioHang.getModel();
         // Tạo đường dẫn đến thư mục cha
@@ -201,11 +193,21 @@ public class BanHangView extends javax.swing.JPanel {
         molGH.setRowCount(0); // Xóa dữ liệu hiện tại trong bảng
 
         // Tạo đường dẫn đến tệp tin
-        String filePath = directory + "/" + fileName;
+        String filePath = directory + File.separator + fileName;
+        File file = new File(filePath);
+        
+        if (!file.exists()) {
+            return;
+        }
 
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line;
+            boolean skipFirstLine = true;
             while ((line = br.readLine()) != null) {
+                if (skipFirstLine) {
+                    skipFirstLine = false;
+                    continue;
+                }
                 String[] data = line.split(",");
                 molGH.addRow(data);
             }
@@ -562,6 +564,14 @@ public class BanHangView extends javax.swing.JPanel {
             }
             soLuongTon = soLuongTon - soLuongMua;
             tblChiTietSanPham.setValueAt(soLuongTon, indexs, 1);
+            
+            //Quân
+            //Nhớ đổi đường dẫn thư mục
+            indexHoaDonCho = tblHoaDonCho.getSelectedRow();
+            String maHD = tblHoaDonCho.getValueAt(indexHoaDonCho, 1).toString();
+            String parentDirectory = "D:\\FPT Polytechnic\\DuAn1\\PRO1041_DuAn1";
+            String newDirectoryName = "GioHang";
+            luuGioHangVaoFile(maHD, parentDirectory, newDirectoryName);
         } catch (Exception e) {
             return;
         }
@@ -569,8 +579,6 @@ public class BanHangView extends javax.swing.JPanel {
 
     private void tblChiTietSanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblChiTietSanPhamMouseClicked
         // TODO add your handling code here:
-
-
     }//GEN-LAST:event_tblChiTietSanPhamMouseClicked
 
     private void txtTimKiemCTSPKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKiemCTSPKeyReleased
@@ -579,7 +587,6 @@ public class BanHangView extends javax.swing.JPanel {
 
     private void tblGioHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblGioHangMouseClicked
         // TODO add your handling code here:
-
     }//GEN-LAST:event_tblGioHangMouseClicked
 
     private void btnTaoHoaDonChoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTaoHoaDonChoMouseClicked
@@ -590,15 +597,16 @@ public class BanHangView extends javax.swing.JPanel {
         if (molGH.getRowCount() > 0) {
             molGH.setRowCount(0);
         }
+        int indexDongCuoi = tblHoaDonCho.getRowCount()-1;
+        tblHoaDonCho.setRowSelectionInterval(indexDongCuoi, indexDongCuoi);
     }//GEN-LAST:event_btnTaoHoaDonChoMouseClicked
 
     private void tblHoaDonChoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblHoaDonChoMouseClicked
         // TODO add your handling code here:
-//        indexHoaDonCho = tblHoaDonCho.getSelectedRow();
-//        String maHD = tblHoaDonCho.getValueAt(indexHoaDonCho, 1).toString();
-//        String parentDirectory = "D:\\FPT Polytechnic\\DuAn1\\PRO1041_DuAn1";
-//        String newDirectoryName = "GioHang";
-//        luuGioHangVaoFile(maHD, parentDirectory, newDirectoryName);
+        indexHoaDonCho = tblHoaDonCho.getSelectedRow();
+        String fileName = "GioHang_" + tblHoaDonCho.getValueAt(indexHoaDonCho, 1) + ".csv";
+        //Nhớ đổi đường dẫn thư mục
+        loadTableDataFromFile("D:\\FPT Polytechnic\\DuAn1\\PRO1041_DuAn1\\GioHang", fileName);
     }//GEN-LAST:event_tblHoaDonChoMouseClicked
 
     private void btnXoaSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaSPActionPerformed

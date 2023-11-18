@@ -12,8 +12,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
@@ -25,7 +23,6 @@ public class AdamStoreView extends javax.swing.JFrame {
     Color defaultColor = new Color(56, 106, 165);
     Color selectedColor = new Color(204, 204, 204);
     Color enterColor = new Color(228, 227, 227);
-
     String tenNV;
 
     /**
@@ -39,11 +36,20 @@ public class AdamStoreView extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         execute();
         changePanelBody(new ThongKeView());
+        
+        
     }
  
     public void changePanelBody(JPanel panel) {
         panelBody.removeAll();
         panelBody.add(panel);
+        panelBody.repaint();
+        panelBody.revalidate();
+    }
+    
+    public void sangCTSP(){
+        panelBody.removeAll();
+        panelBody.add(new ChiTietSanPhamView());
         panelBody.repaint();
         panelBody.revalidate();
     }

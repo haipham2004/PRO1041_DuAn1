@@ -44,6 +44,7 @@ public class KhachHangView extends javax.swing.JPanel {
         sort();
         loadCboDiaChi(serviceKH.getAll());
         cboGioiTinh.setSelectedIndex(-1);
+        rdNam.setSelected(true);
     }
 
     public void fillTableKH(List<KhachHang> list) {
@@ -140,7 +141,18 @@ public class KhachHangView extends javax.swing.JPanel {
     }
 
     public boolean validateKH() {
-
+        if (txtMaKhachHang.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Chưa điền mã khách hàng");
+            return false;
+        }
+        if (txtMaKhachHang.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Chưa điền tên khách hàng");
+            return false;
+        }
+        if (txtMaKhachHang.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Chưa điền email khách hàng");
+            return false;
+        }
         return true;
     }
 
@@ -564,7 +576,7 @@ public class KhachHangView extends javax.swing.JPanel {
         txtSoDienThoai.setText("");
         txtTenKhachHang.setText("");
         txtTimKiem.setText("");
-        btngGioiTinh.clearSelection();
+        rdNam.setSelected(true);
         index = -1;
     }//GEN-LAST:event_btnLamMoiMouseClicked
 
