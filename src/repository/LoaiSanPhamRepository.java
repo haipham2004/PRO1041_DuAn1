@@ -27,7 +27,7 @@ public class LoaiSanPhamRepository {
         listLoaiSanPham.clear();
         try {
             conn = DBConnect.getConnection();
-            sql = "SELECT * FROM LoaiSanPham";
+            sql = "SELECT * FROM LoaiSanPham where trangThai=1";
             pst = conn.prepareStatement(sql);
             rs = pst.executeQuery();
             while (rs.next()) {

@@ -123,6 +123,11 @@ public class DangNhapView extends javax.swing.JFrame {
                 btnThoatMouseClicked(evt);
             }
         });
+        btnThoat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThoatActionPerformed(evt);
+            }
+        });
 
         btnDangNhap.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/enter.png"))); // NOI18N
         btnDangNhap.setText("Đăng nhập");
@@ -141,7 +146,6 @@ public class DangNhapView extends javax.swing.JFrame {
         });
 
         txtMatKhau.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
-        txtMatKhau.setPreferredSize(new java.awt.Dimension(64, 17));
 
         javax.swing.GroupLayout PanelMainLayout = new javax.swing.GroupLayout(PanelMain);
         PanelMain.setLayout(PanelMainLayout);
@@ -165,7 +169,7 @@ public class DangNhapView extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(PanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(txtTaiKhoan, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)
-                                    .addComponent(txtMatKhau, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                    .addComponent(txtMatKhau))))
                         .addContainerGap(29, Short.MAX_VALUE))
                     .addGroup(PanelMainLayout.createSequentialGroup()
                         .addGap(83, 83, 83)
@@ -249,6 +253,10 @@ public class DangNhapView extends javax.swing.JFrame {
     private void btnDangNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangNhapActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnDangNhapActionPerformed
+
+    private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoatActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnThoatActionPerformed
     /**
      * @param args the command line arguments
      */

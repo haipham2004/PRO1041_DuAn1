@@ -37,7 +37,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jPanel6" max="32767" attributes="0"/>
+                          <Component id="pnlQR" max="32767" attributes="0"/>
                       </Group>
                       <Component id="jPanel4" alignment="0" max="32767" attributes="0"/>
                       <Component id="jPanel3" alignment="0" max="32767" attributes="0"/>
@@ -59,7 +59,7 @@
                               <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
                               <Group type="102" attributes="0">
                                   <EmptySpace min="20" pref="20" max="-2" attributes="0"/>
-                                  <Component id="jPanel6" max="32767" attributes="0"/>
+                                  <Component id="pnlQR" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
@@ -182,19 +182,24 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jScrollPane2" alignment="0" max="32767" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="btnQR" min="-2" pref="97" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+                              <Component id="btnQR" min="-2" pref="91" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="btnNhapMaSPCT" min="-2" pref="97" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="btnXoaSP" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="btnXoaTatCaSP" min="-2" pref="106" max="-2" attributes="0"/>
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              <EmptySpace pref="163" max="32767" attributes="0"/>
+                              <Component id="txtTest" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="121" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Component id="jScrollPane2" max="32767" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -205,10 +210,11 @@
                       <Component id="jScrollPane2" min="-2" pref="152" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="btnQR" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
                           <Component id="btnNhapMaSPCT" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
                           <Component id="btnXoaSP" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
                           <Component id="btnXoaTatCaSP" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
+                          <Component id="txtTest" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnQR" min="-2" pref="35" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
@@ -273,11 +279,6 @@
                 </Component>
               </SubComponents>
             </Container>
-            <Component class="javax.swing.JButton" name="btnQR">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Qu&#xe9;t QR"/>
-              </Properties>
-            </Component>
             <Component class="javax.swing.JButton" name="btnNhapMaSPCT">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Nh&#x1ead;p m&#xe3;"/>
@@ -295,6 +296,16 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="X&#xf3;a t&#x1ea5;t c&#x1ea3;"/>
               </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="txtTest">
+            </Component>
+            <Component class="javax.swing.JButton" name="btnQR">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Qu&#xe9;t QR"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnQRActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -477,7 +488,7 @@
             </Component>
           </SubComponents>
         </Container>
-        <Container class="javax.swing.JPanel" name="jPanel6">
+        <Container class="javax.swing.JPanel" name="pnlQR">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="cc" green="cc" red="cc" type="rgb"/>

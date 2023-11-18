@@ -4,6 +4,7 @@
  */
 package service.servicImp;
 
+import java.sql.SQLException;
 import java.util.List;
 import model.ChiTietSanPham;
 import repository.ChiTietSanPhamRepository;
@@ -65,6 +66,12 @@ public class ChiTietSanPhamServiceImp implements AdamStore<ChiTietSanPham, Strin
     }
     public int updateTrangThaiSoLuong(){
         return repo.updateTrangThaiSoLuong();
+    }
+    public boolean checkMaQR(String qrCode) throws SQLException{
+        return repo.checkMaQR(qrCode);
+    }
+    public int taoQR(String qrCode) {
+        return repo.taoQR(qrCode);
     }
 
 }
