@@ -10,6 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import util.DBConnect;
 import java.sql.*;
+import javax.swing.JLabel;
 import repository.LoginRepository;
 
 /**
@@ -22,7 +23,15 @@ public class DangNhapView extends javax.swing.JFrame {
     private LoginRepository repository = new LoginRepository();
     AdamStoreView adamStoreView = new AdamStoreView();
     BanHangView banHangView = new BanHangView();
+    private static String tenNV;
 
+    public String getTenNV() {
+        return tenNV;
+    }
+
+    public void setTenNV(String tenNV) {
+        this.tenNV = tenNV;
+    }
     /**
      * Creates new form DangNhapView
      */
@@ -47,6 +56,10 @@ public class DangNhapView extends javax.swing.JFrame {
             return false;
         }
         return true;
+    }
+    
+    public String getUsername(){
+        return txtTaiKhoan.getText();
     }
 
     /**
@@ -110,6 +123,11 @@ public class DangNhapView extends javax.swing.JFrame {
                 btnThoatMouseClicked(evt);
             }
         });
+        btnThoat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThoatActionPerformed(evt);
+            }
+        });
 
         btnDangNhap.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/enter.png"))); // NOI18N
         btnDangNhap.setText("Đăng nhập");
@@ -128,7 +146,6 @@ public class DangNhapView extends javax.swing.JFrame {
         });
 
         txtMatKhau.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
-        txtMatKhau.setPreferredSize(new java.awt.Dimension(64, 17));
 
         javax.swing.GroupLayout PanelMainLayout = new javax.swing.GroupLayout(PanelMain);
         PanelMain.setLayout(PanelMainLayout);
@@ -152,7 +169,7 @@ public class DangNhapView extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(PanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(txtTaiKhoan, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)
-                                    .addComponent(txtMatKhau, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                    .addComponent(txtMatKhau))))
                         .addContainerGap(29, Short.MAX_VALUE))
                     .addGroup(PanelMainLayout.createSequentialGroup()
                         .addGap(83, 83, 83)
@@ -210,18 +227,19 @@ public class DangNhapView extends javax.swing.JFrame {
 //    Connection con;
     private void btnDangNhapMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDangNhapMouseClicked
         // TODO add your handling code here:
-
         if (checkEmpty()) {
             String userName = txtTaiKhoan.getText();
             String passWord = String.valueOf(txtMatKhau.getText());
             if (repository.isExistedUser(userName, passWord)) {
-                adamStoreView.setTenNV(repository.getTenNhanVien(userName));
+                tenNV = repository.getTenNhanVien(userName);
+                adamStoreView.setTenNV(tenNV);
                 this.setVisible(false);
                 adamStoreView.setVisible(true);
             } else {  
                 JOptionPane.showMessageDialog(this, "UserName hoac Password sai !");
             }
         }
+        
     }//GEN-LAST:event_btnDangNhapMouseClicked
 
     private void txtTaiKhoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTaiKhoanActionPerformed
@@ -235,6 +253,10 @@ public class DangNhapView extends javax.swing.JFrame {
     private void btnDangNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangNhapActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnDangNhapActionPerformed
+
+    private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoatActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnThoatActionPerformed
     /**
      * @param args the command line arguments
      */

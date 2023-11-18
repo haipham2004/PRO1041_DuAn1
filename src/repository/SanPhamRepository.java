@@ -31,7 +31,7 @@ public class SanPhamRepository {
         try {
             conn = DBConnect.getConnection();
             sql = "SELECT SP.MaSanPham,SP.TenSanPham,SP.TrangThai,LSP.MaLSP,LSP.TenLSP,SP.XuatXU \n"
-                    + "FROm SanPham SP INNER JOIN LoaiSanPham LSP ON SP.MaLSP=LSP.MaLSP";
+                    + "FROm SanPham SP INNER JOIN LoaiSanPham LSP ON SP.MaLSP=LSP.MaLSP where SP.TrangThai=1";
 
             pst = conn.prepareStatement(sql);
             rs = pst.executeQuery();
@@ -101,7 +101,8 @@ public class SanPhamRepository {
         try {
             conn = DBConnect.getConnection();
             sql = "SELECT SP.MaSanPham,SP.TenSanPham,SP.TrangThai,LSP.MaLSP,LSP.TenLSP,SP.XuatXU \n"
-                    + "FROm SanPham SP INNER JOIN LoaiSanPham LSP ON SP.MaLSP=LSP.MaLSP where SP.MaSanPham=?";
+                    + "FROm SanPham SP INNER JOIN LoaiSanPham LSP ON SP.MaLSP=LSP.MaLSP where SP.MaSanPham=? "
+                    + "order by SP.TrangThai DESC";
             pst = conn.prepareStatement(sql);
             pst.setObject(1, ma);
             rs = pst.executeQuery();
@@ -124,7 +125,7 @@ public class SanPhamRepository {
         try {
             conn = DBConnect.getConnection();
             sql = "SELECT SP.MaSanPham,SP.TenSanPham,SP.TrangThai,LSP.MaLSP,LSP.TenLSP,SP.XuatXU \n"
-                    + "FROm SanPham SP INNER JOIN LoaiSanPham LSP ON SP.MaLSP=LSP.MaLSP where SP.TenSanPham like ? or LSP.TenLSP like ?";
+                    + "FROm SanPham SP INNER JOIN LoaiSanPham LSP ON SP.MaLSP=LSP.MaLSP where SP.TenSanPham like ? or LSP.TenLSP like ? order by SP.TrangThai DESC";
             pst = conn.prepareStatement(sql);
             pst.setObject(1, '%' + name + '%');
             pst.setObject(2, '%' + name + '%');
@@ -149,7 +150,7 @@ public class SanPhamRepository {
             conn = DBConnect.getConnection();
             sql = "SELECT SP.MaSanPham,SP.TenSanPham,SP.TrangThai,LSP.MaLSP,LSP.TenLSP,SP.XuatXU \n"
                     + "FROm SanPham SP INNER JOIN LoaiSanPham LSP ON SP.MaLSP=LSP.MaLSP\n"
-                    + "order by SP.MaSanPham\n"
+                    + "order by SP.TrangThai DESC\n"
                     + "offset ? rows fetch next 4 rows only ";
             pst = conn.prepareStatement(sql);
             pst.setInt(1, (index - 1) * 4);

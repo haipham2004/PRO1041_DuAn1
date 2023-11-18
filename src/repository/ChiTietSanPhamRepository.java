@@ -35,7 +35,7 @@ public class ChiTietSanPhamRepository {
                     + "FROM ChiTietSanPham CTSP INNER JOIN ChatLieu CL On CL.MaChatLieu=CTSP.MaChatLieu\n"
                     + "INNER JOIn MauSac MS ON MS.MaMauSac=CTSP.MaMauSac\n"
                     + "INNER JOIN KichThuoc KT ON KT.MaKichThuoc=CTSP.MaKichThuoc \n"
-                    + "INNER JOIN SanPham SP ON CTSP.MaSanPham=SP.MaSanPham ";
+                    + "INNER JOIN SanPham SP ON CTSP.MaSanPham=SP.MaSanPham order by CTSP.SoLuong DESC";
             pst = conn.prepareStatement(sql);
             rs = pst.executeQuery();
             while (rs.next()) {
@@ -259,6 +259,33 @@ public class ChiTietSanPhamRepository {
                     + "set TrangThai=1\n"
                     + "where SoLuong>0";
             pst = conn.prepareStatement(sql);
+            return pst.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+
+    public boolean checkMaQR(String qrCode) throws SQLException {
+        conn = DBConnect.getConnection();
+        sql = "SELECT * FROM ChiTietSanPham WHERE qrCode=?";
+        pst = conn.prepareStatement(sql);
+        pst.setString(1, qrCode);
+        rs = pst.executeQuery();
+        if (rs.next()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public int taoQR(String qrCode) {
+        try {
+            conn = DBConnect.getConnection();
+            sql = "UPDATE ChiTietSanPham set qrCode=? where MaCTSP=? ";
+            pst = conn.prepareStatement(sql);
+            pst.setString(1, qrCode);
+            pst.setString(2, qrCode);
             return pst.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();

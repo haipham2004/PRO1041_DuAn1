@@ -17,28 +17,14 @@
     <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
   </AuxValues>
 
-  <Layout>
-    <DimensionLayout dim="0">
-      <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
-              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-              <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-          </Group>
-      </Group>
-    </DimensionLayout>
-    <DimensionLayout dim="1">
-      <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
-              <EmptySpace min="0" pref="15" max="32767" attributes="0"/>
-              <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="0" pref="16" max="32767" attributes="0"/>
-          </Group>
-      </Group>
-    </DimensionLayout>
-  </Layout>
+  <Layout class="org.netbeans.modules.form.compat2.layouts.DesignCardLayout"/>
   <SubComponents>
     <Container class="javax.swing.JPanel" name="jPanel2">
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
+          <CardConstraints cardName="card2"/>
+        </Constraint>
+      </Constraints>
 
       <Layout>
         <DimensionLayout dim="0">
@@ -52,7 +38,7 @@
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
+              <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jPanel16" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
@@ -150,7 +136,17 @@
                                               </Group>
                                           </Group>
                                       </Group>
-                                      <EmptySpace min="-2" pref="287" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="102" attributes="0">
+                                              <Component id="btnTest" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" pref="206" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" alignment="1" attributes="0">
+                                              <Component id="btnBackSP" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
                                   </Group>
                                   <Group type="102" alignment="1" attributes="0">
                                       <Component id="jLabel52" min="-2" pref="67" max="-2" attributes="0"/>
@@ -166,7 +162,7 @@
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Component id="btnXuatfile" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
-                                      <Component id="btnNhapFile" min="-2" max="-2" attributes="0"/>
+                                      <Component id="btnNhapFileExcel" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -202,8 +198,9 @@
                           <Component id="jLabel47" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txtMaCTSP" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel45" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnBackSP" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="94" max="-2" attributes="0"/>
@@ -226,6 +223,7 @@
                                       <Group type="103" groupAlignment="3" attributes="0">
                                           <Component id="jLabel49" alignment="3" min="-2" max="-2" attributes="0"/>
                                           <Component id="cboKichThuoc" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="btnTest" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
@@ -248,14 +246,16 @@
                           </Group>
                       </Group>
                       <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jButton3" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
-                          <Component id="btnThemCTSP" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnSuaCTSP" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnClearCTSP" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnQR" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnNhapFile" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnXuatfile" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="btnNhapFileExcel" alignment="0" min="-2" pref="23" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="jButton3" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
+                              <Component id="btnThemCTSP" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnSuaCTSP" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnClearCTSP" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnQR" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnXuatfile" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jPanel18" min="-2" max="-2" attributes="0"/>
@@ -536,27 +536,40 @@
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-                              <Component id="txtSanPhamCT" min="-2" pref="216" max="-2" attributes="0"/>
-                              <EmptySpace pref="76" max="32767" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="cboTimCTSP" min="-2" pref="252" max="-2" attributes="0"/>
+                              <EmptySpace pref="60" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                              <Component id="txtSanPhamCT" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
+                              <Component id="cboTimCTSP" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
                   </Layout>
                   <SubComponents>
-                    <Component class="javax.swing.JTextField" name="txtSanPhamCT">
+                    <Component class="javax.swing.JComboBox" name="cboTimCTSP">
+                      <Properties>
+                        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                          <StringArray count="4">
+                            <StringItem index="0" value="Item 1"/>
+                            <StringItem index="1" value="Item 2"/>
+                            <StringItem index="2" value="Item 3"/>
+                            <StringItem index="3" value="Item 4"/>
+                          </StringArray>
+                        </Property>
+                      </Properties>
                       <Events>
-                        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtSanPhamCTKeyReleased"/>
+                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="cboTimCTSPMouseClicked"/>
                       </Events>
+                      <AuxValues>
+                        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                      </AuxValues>
                     </Component>
                   </SubComponents>
                 </Container>
@@ -576,7 +589,7 @@
                         <Column editable="true" title="M&#xe3; SPCT" type="java.lang.Object"/>
                         <Column editable="true" title="S&#x1ed1; l&#x1b0;&#x1ee3;ng t&#x1ed3;n" type="java.lang.Object"/>
                         <Column editable="true" title="Gi&#xe1;" type="java.lang.Object"/>
-                        <Column editable="true" title="M&#xe3; SP" type="java.lang.Object"/>
+                        <Column editable="true" title="T&#xea;n s&#x1ea3;n ph&#x1ea9;m" type="java.lang.Object"/>
                         <Column editable="true" title="Ch&#x1ea5;t li&#x1ec7;u" type="java.lang.Object"/>
                         <Column editable="true" title="M&#xe0;u s&#x1eaf;c " type="java.lang.Object"/>
                         <Column editable="true" title="K&#xed;ch th&#x1b0;&#x1edb;c" type="java.lang.Object"/>
@@ -733,26 +746,51 @@
             </Component>
             <Component class="javax.swing.JButton" name="btnQR">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/icon/z4883882330886_8f9a20df51f3b6cffdecf910e8a70379.jpg"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="T&#x1ea1;o QR"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnQRActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="btnNhapFile">
+            <Component class="javax.swing.JButton" name="btnNhapFileExcel">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/icon/z4883861072449_7ae13d74ca98dc15bf13cc3275ca5686.jpg"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Nh&#x1ead;p file"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNhapFileActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNhapFileExcelActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btnXuatfile">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/icon/z4883861072449_7ae13d74ca98dc15bf13cc3275ca5686.jpg"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Xu&#x1ea5;t file"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnXuatfileActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="btnTest">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Test"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTestActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="btnBackSP">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Back to s&#x1ea3;n ph&#x1ea9;m"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBackSPActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>
