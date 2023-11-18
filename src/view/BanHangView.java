@@ -569,7 +569,7 @@ public class BanHangView extends javax.swing.JPanel {
             //Nhớ đổi đường dẫn thư mục
             indexHoaDonCho = tblHoaDonCho.getSelectedRow();
             String maHD = tblHoaDonCho.getValueAt(indexHoaDonCho, 1).toString();
-            String parentDirectory = "D:\\FPT Polytechnic\\DuAn1\\PRO1041_DuAn1";
+            String parentDirectory = "D:\\PRO1041_DuAn1";
             String newDirectoryName = "GioHang";
             luuGioHangVaoFile(maHD, parentDirectory, newDirectoryName);
         } catch (Exception e) {
@@ -606,7 +606,7 @@ public class BanHangView extends javax.swing.JPanel {
         indexHoaDonCho = tblHoaDonCho.getSelectedRow();
         String fileName = "GioHang_" + tblHoaDonCho.getValueAt(indexHoaDonCho, 1) + ".csv";
         //Nhớ đổi đường dẫn thư mục
-        loadTableDataFromFile("D:\\FPT Polytechnic\\DuAn1\\PRO1041_DuAn1\\GioHang", fileName);
+        loadTableDataFromFile("D:\\PRO1041_DuAn1\\GioHang", fileName);
     }//GEN-LAST:event_tblHoaDonChoMouseClicked
 
     private void btnXoaSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaSPActionPerformed
