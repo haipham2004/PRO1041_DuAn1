@@ -44,7 +44,6 @@ import static view.ChiTietSanPhamView.createStyleForHeader;
 public class SanPhamView extends javax.swing.JPanel {
 
     DefaultTableModel mol = new DefaultTableModel();
-    DefaultTableModel mols = new DefaultTableModel();
     private AdamStoreView adamStoreView;
     LoaiSanPhamServiceImp serviceLSP = new LoaiSanPhamServiceImp();
     SanPhamServiceImp serviceSP = new SanPhamServiceImp();
@@ -138,27 +137,6 @@ public class SanPhamView extends javax.swing.JPanel {
         cboLocLSP.setModel((ComboBoxModel) cbxLoaiSanPham);
     }
 
-//    public void anSP(JTable tbl) {
-//        String ma = tbl.getValueAt(index, 0).toString();
-//        SanPham sp = savesSP();
-//
-//        if (serviceSP.sua(sp, ma) > 0) {
-//
-//            fillTableSamPham(serviceSP.getAll());
-//            int x = rdConHang.isSelected() == true ? 0 : 1;
-//            pnlSP.setSelectedIndex(x);
-//            JOptionPane.showMessageDialog(this, "Sửa thành công");
-//        } else {
-//            JOptionPane.showMessageDialog(this, "Sửa thất bại công");
-//        }
-//    }
-//
-//    public void setForm(Boolean x) {
-//        Component[] cpn = jPanel29.getComponents();
-//        for (Component cp : cpn) {
-//            cp.setEnabled(x);
-//        }
-//    }
     public boolean validateSP() {
         if (txtMaSanPham.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Mã trống");

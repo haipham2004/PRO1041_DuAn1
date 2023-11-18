@@ -852,7 +852,8 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        fillTableChiTietSanPham(serviceCTSP.getAll());
+//        fillTableChiTietSanPham(serviceCTSP.getAll());
+        loadPageCTSP();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void btnThemCTSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemCTSPActionPerformed
