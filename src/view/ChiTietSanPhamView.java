@@ -81,6 +81,7 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
     public ChiTietSanPhamView() {
         initComponents();
         this.setSize(1300, 755);
+//        loadSPCT();
         loadSPCT();
         loadCbxSanPham(serviceSP.getAll());
         loadCbxTimSanPham(serviceSP.getAll());
@@ -89,13 +90,13 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
         loadCbxChatLieu(serviceCl.getAll());
         rdConhang1.setSelected(true);
     }
-    
-    public void loadSPCT(){
+
+    public void loadSPCT() {
         String tenSP = new SanPhamView().getTenSPs();
         if (tenSP == null) {
             loadPageCTSP();
-        }else{
-            fillTableChiTietSanPham(serviceCTSP.getList(tenSP));    
+        } else {
+            fillTableChiTietSanPham(serviceCTSP.getList(tenSP));
         }
     }
 
@@ -168,7 +169,7 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
         lbSoTrang2.setText(trangCTSP + " of " + soTrangCTSP);
         fillTableChiTietSanPham(serviceCTSP.listPageCTSP(trangCTSP));
     }
-    
+
 //       public void loadPageTheoTenCTSP() {
 //        tongBanGhiCTSP = serviceCTSP.tongBanGhi();
 //        if (tongBanGhiCTSP % 4 == 0) {
@@ -179,7 +180,6 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
 //        lbSoTrang2.setText(trangCTSP + " of " + soTrangCTSP);
 //        fillTableChiTietSanPham(serviceCTSP.getList(new SanPhamView().getTenSPs()));
 //    }
-
     public void loadCbxSanPham(List<SanPham> list) {
         cbxSanPham.removeAllElements();
         for (SanPham sanPham : list) {
@@ -823,7 +823,7 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(168, Short.MAX_VALUE))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1055,7 +1055,6 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
                         }
 
                         ChiTietSanPham ctsp2 = new ChiTietSanPham(mactsp, sp, ms, cl, kt, soLuong, gia, trangThai);
-
                         serviceCTSP.them(ctsp2);
                         loadPageCTSP();
                     } else {

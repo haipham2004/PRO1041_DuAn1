@@ -15,7 +15,6 @@ public class HoaDon {
     private String maHoaDon;
     private NhanVien nhanVien;
     private KhachHang khachHang;
-    private HinhThucThanhToan hinhThucThanhToan;
     private Date ngayTao;
     private double tongTien;
     private boolean trangThai;
@@ -55,11 +54,10 @@ public class HoaDon {
         this.trangThai = trangThai;
     }
 
-    public HoaDon(String maHoaDon, NhanVien nhanVien, KhachHang khachHang, HinhThucThanhToan hinhThucThanhToan, Date ngayTao, double tongTien, boolean trangThai, String ghiChu, Events voucher) {
+    public HoaDon(String maHoaDon, NhanVien nhanVien, KhachHang khachHang, Date ngayTao, double tongTien, boolean trangThai, String ghiChu, Events voucher) {
         this.maHoaDon = maHoaDon;
         this.nhanVien = nhanVien;
         this.khachHang = khachHang;
-        this.hinhThucThanhToan = hinhThucThanhToan;
         this.ngayTao = ngayTao;
         this.tongTien = tongTien;
         this.trangThai = trangThai;
@@ -101,14 +99,6 @@ public class HoaDon {
 
     public void setKhachHang(KhachHang khachHang) {
         this.khachHang = khachHang;
-    }
-
-    public HinhThucThanhToan getHinhThucThanhToan() {
-        return hinhThucThanhToan;
-    }
-
-    public void setHinhThucThanhToan(HinhThucThanhToan hinhThucThanhToan) {
-        this.hinhThucThanhToan = hinhThucThanhToan;
     }
 
     public Date getNgayTao() {
