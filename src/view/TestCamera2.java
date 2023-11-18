@@ -16,6 +16,7 @@ import com.google.zxing.client.j2se.BufferedImageLuminanceSource;
 import com.google.zxing.common.HybridBinarizer;
 import java.awt.Dimension;
 import java.awt.image.BufferedImage;
+import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
@@ -28,7 +29,6 @@ public class TestCamera2 extends javax.swing.JFrame implements Runnable, ThreadF
 
     private WebcamPanel panel = null;
     private Webcam webcam = null;
-    private static final long serialVersionUID = 6441489157408381878L;
     private Executor executor = Executors.newSingleThreadExecutor(this);
 
     /**
@@ -36,19 +36,30 @@ public class TestCamera2 extends javax.swing.JFrame implements Runnable, ThreadF
      */
     public TestCamera2() {
         initComponents();
-      
+         this.setSize(1300, 755);
+        test();
+    }
+
+    public void test() {
+        List<Webcam> webcams = Webcam.getWebcams();
+
+// Duyệt qua danh sách
+        for (Webcam webcam : webcams) {
+            System.out.println("Tên: " + webcam);
+            // Thực hiện các thao tác với webcam
+        }
     }
 
     private void initWebcam() {
         Dimension size = WebcamResolution.QVGA.getSize();
-        webcam = Webcam.getWebcams().get(0); //0 is default webcam
+        webcam = Webcam.getWebcams().get(0);
         webcam.setViewSize(size);
 
         panel = new WebcamPanel(webcam);
         panel.setPreferredSize(size);
         panel.setFPSDisplayed(true);
 
-//        pnlWebCam.add(panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 320, 300));
+        pnlWebCams.add(panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 320, 300));
 
         executor.execute(this);
     }
@@ -81,7 +92,7 @@ public class TestCamera2 extends javax.swing.JFrame implements Runnable, ThreadF
             }
 
             if (result != null) {
-                txtTest.getText();
+                txtTest.setText(result.getText());
 
             }
         } while (true);
@@ -103,14 +114,14 @@ public class TestCamera2 extends javax.swing.JFrame implements Runnable, ThreadF
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        pnlWebCam = new javax.swing.JPanel();
+        pnlWebCams = new javax.swing.JPanel();
         txtTest = new javax.swing.JTextField();
         btnQR = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        pnlWebCam.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 0)));
-        pnlWebCam.setForeground(new java.awt.Color(0, 51, 255));
+        pnlWebCams.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 0)));
+        pnlWebCams.setForeground(new java.awt.Color(0, 51, 255));
 
         btnQR.setText("jButton1");
         btnQR.addActionListener(new java.awt.event.ActionListener() {
@@ -132,7 +143,7 @@ public class TestCamera2 extends javax.swing.JFrame implements Runnable, ThreadF
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(56, 56, 56)
-                    .addComponent(pnlWebCam, javax.swing.GroupLayout.PREFERRED_SIZE, 392, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pnlWebCams, javax.swing.GroupLayout.PREFERRED_SIZE, 392, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addContainerGap(81, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
@@ -146,7 +157,7 @@ public class TestCamera2 extends javax.swing.JFrame implements Runnable, ThreadF
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(27, 27, 27)
-                    .addComponent(pnlWebCam, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pnlWebCams, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addContainerGap(50, Short.MAX_VALUE)))
         );
 
@@ -195,7 +206,7 @@ public class TestCamera2 extends javax.swing.JFrame implements Runnable, ThreadF
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnQR;
-    private javax.swing.JPanel pnlWebCam;
+    private javax.swing.JPanel pnlWebCams;
     private javax.swing.JTextField txtTest;
     // End of variables declaration//GEN-END:variables
 }
