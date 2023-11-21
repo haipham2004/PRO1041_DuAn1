@@ -26,49 +26,7 @@ public class ThongKeSLRepository {
     ResultSet rs = null;
     String sql = null;
 
-//    public List<HoaDon> getlistHoaDon() {
-//        List<HoaDon> listTKHoaDon = new ArrayList<>();
-//        try {
-//            con = DBConnect.getConnection();
-//            sql = "select NgayTao, count(*) as TongHd from HoaDon\n"
-//                    + "group by NgayTao";
-//            ps = con.prepareStatement(sql);
-//            rs = ps.executeQuery();
-//            while (rs.next()) {
-//                HoaDon hoaDon = new HoaDon(rs.getDate(1), rs.getInt(2));
-//                listTKHoaDon.add(hoaDon);
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            return null;
-//        }
-//        return listTKHoaDon;
-//    }
-//
-//    public List<HoaDon> listBieuDoTKHoaDon(Date ngayBd, Date ngayKt) {
-//        List<HoaDon> listTKHoaDon2 = new ArrayList<>();
-//        try {
-//            con = DBConnect.getConnection();
-//            sql = "select NgayTao,count(*) as TongHd from HoaDon\n"
-//                    + "where NgayTao  between  ? and ? \n"
-//                    + "or NgayTao  between  ? and ? \n"
-//                    + "group by NgayTao";
-//            ps = con.prepareStatement(sql);
-//            ps.setObject(1, ngayBd);
-//            ps.setObject(2, ngayKt);
-//            ps.setObject(3, ngayBd);
-//            ps.setObject(4, ngayKt);
-//            rs = ps.executeQuery();
-//            while (rs.next()) {
-//                HoaDon hoaDon = new HoaDon(rs.getDate(1), rs.getInt(2));
-//                listTKHoaDon2.add(hoaDon);
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            return null;
-//        }
-//        return listTKHoaDon2;
-//    }
+
     public List<ChiTietHoaDon> getListCTHD() {
         List<ChiTietHoaDon> listCTHD = new ArrayList<>();
         try {
@@ -174,11 +132,13 @@ public class ThongKeSLRepository {
         List<ChiTietHoaDon> listBieuDo1 = new ArrayList<>();
         try {
             con = DBConnect.getConnection();
-            sql = "select sp.TenSanPham,count(sp.MaSanPham) from HoaDonChiTiet cthd\n"
-                    + "inner join HoaDon HD on cthd.MaHoaDon = hd.MaHoaDon\n"
-                    + "inner join ChiTietSanPham ctsp on cthd.MaCTSP = ctsp.MaCTSP\n"
-                    + "inner join SanPham sp on ctsp.MaSanPham = sp.MaSanPham\n"
-                    + "group by sp.TenSanPham,sp.MaSanPham";
+            sql = "SELECT TOP (5) sp.TenSanPham, COUNT(sp.MaSanPham) AS TotalCount\n"
+                    + "FROM HoaDonChiTiet hdct\n"
+                    + "INNER JOIN HoaDon hd ON hdct.MaHoaDon = hd.MaHoaDon\n"
+                    + "INNER JOIN ChiTietSanPham ctsp ON hdct.MaCTSP = ctsp.MaCTSP\n"
+                    + "INNER JOIN SanPham sp ON ctsp.MaSanPham = sp.MaSanPham\n"
+                    + "GROUP BY sp.TenSanPham, sp.MaSanPham\n"
+                    + "ORDER BY TotalCount DESC;";
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
