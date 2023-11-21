@@ -124,6 +124,19 @@ public class ChiTietSanPhamRepository {
             return 0;
         }
     }
+    
+    public boolean checkExitCTSP(String maCTSP) throws SQLException {
+        conn = DBConnect.getConnection();
+        sql = "SELECT*FROM ChiTietSanPham where MaCTSP=?";
+        pst = conn.prepareStatement(sql);
+        pst.setString(1, maCTSP);
+        rs = pst.executeQuery();
+        if (rs.next()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     public List<ChiTietSanPham> getList(String name) {
         List<ChiTietSanPham> listChiTietSanPham3 = new ArrayList<>();
@@ -134,9 +147,10 @@ public class ChiTietSanPhamRepository {
                     + "FROM ChiTietSanPham CTSP INNER JOIN ChatLieu CL On CL.MaChatLieu=CTSP.MaChatLieu\n"
                     + "INNER JOIn MauSac MS ON MS.MaMauSac=CTSP.MaMauSac\n"
                     + "INNER JOIN KichThuoc KT ON KT.MaKichThuoc=CTSP.MaKichThuoc \n"
-                    + "INNER JOIN SanPham SP ON CTSP.MaSanPham=SP.MaSanPham where SP.TenSanPham like ? order by CTSP.TrangThai DESC ";
+                    + "INNER JOIN SanPham SP ON CTSP.MaSanPham=SP.MaSanPham where SP.TenSanPham like ? or CTSP.MaCTSP=? order by CTSP.TrangThai DESC ";
             pst = conn.prepareStatement(sql);
             pst.setObject(1, '%' + name + '%');
+            pst.setObject(2, name);
             rs = pst.executeQuery();
             while (rs.next()) {
                 SanPham sp = new SanPham(rs.getString(2), rs.getString(3));

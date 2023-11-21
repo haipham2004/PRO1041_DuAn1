@@ -4,6 +4,7 @@
  */
 package service.servicImp;
 
+import java.sql.SQLException;
 import java.util.List;
 import model.SanPham;
 import repository.SanPhamRepository;
@@ -53,5 +54,9 @@ public class SanPhamServiceImp implements AdamStore<SanPham, String> {
     
     public int tongBanGhi(){
         return repo.tongBanGhi();
+    }
+    
+    public boolean checkExitSP(String maSP) throws SQLException{
+        return repo.checkExitSP(maSP);
     }
 }

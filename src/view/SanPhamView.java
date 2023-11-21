@@ -13,7 +13,10 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFileChooser;
@@ -63,10 +66,9 @@ public class SanPhamView extends javax.swing.JPanel {
         loadCbxLoaiSanPham(serviceLSP.getAll());
         loadCboTimLoaiSP(serviceLSP.getAll());
         rdConHang.setSelected(true);
-
     }
-    
-    public String getTenSPs(){
+
+    public String getTenSPs() {
         return tenSanPham;
     }
 
@@ -197,9 +199,6 @@ public class SanPhamView extends javax.swing.JPanel {
         lbSoTrang = new javax.swing.JLabel();
         btnTien1 = new javax.swing.JButton();
         btnCuoi1 = new javax.swing.JButton();
-        jPanel12 = new javax.swing.JPanel();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        tblSanPhams = new javax.swing.JTable();
         btnCTSP = new javax.swing.JButton();
         pnlSPCT = new javax.swing.JPanel();
 
@@ -499,38 +498,6 @@ public class SanPhamView extends javax.swing.JPanel {
 
         pnlSP.addTab("Sản Phẩm", jPanel8);
 
-        tblSanPhams.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
-            },
-            new String [] {
-                "Mã SP", "Tên SP", "Trạng thái", "Xuất xứ", "Tên loại SP"
-            }
-        ));
-        jScrollPane4.setViewportView(tblSanPhams);
-
-        javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
-        jPanel12.setLayout(jPanel12Layout);
-        jPanel12Layout.setHorizontalGroup(
-            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel12Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 792, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        jPanel12Layout.setVerticalGroup(
-            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel12Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        pnlSP.addTab("Sản Phẩm Rác", jPanel12);
-
         btnCTSP.setText("Chi tiết sản phẩm");
         btnCTSP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -645,7 +612,10 @@ public class SanPhamView extends javax.swing.JPanel {
         LoaiSanPham lsp = (LoaiSanPham) cbxLoaiSanPham.getSelectedItem();
         lbSoTrang.setText(trangSP + " of " + soTrangSP);
         String name = lsp.toString();
+        loadPageSP();
         fillTableSamPham(serviceSP.getList(name));
+//
+
 
     }//GEN-LAST:event_cboLocLSPMouseClicked
 
@@ -719,7 +689,7 @@ public class SanPhamView extends javax.swing.JPanel {
             pnlTong.repaint();
             pnlTong.revalidate();
         }
-        
+
     }//GEN-LAST:event_btnCTSPActionPerformed
 
     private void btnNhapFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNhapFileActionPerformed
@@ -746,37 +716,44 @@ public class SanPhamView extends javax.swing.JPanel {
                     XSSFRow excelRow = excelSheet.getRow(i);
                     if (excelRow != null) {
                         XSSFCell exceMaSP = excelRow.getCell(0);
-                        XSSFCell excelTenSP = excelRow.getCell(1);
-                        XSSFCell excelTT = excelRow.getCell(2);
-                        XSSFCell excelXX = excelRow.getCell(3);
-                        XSSFCell excelLSP = excelRow.getCell(4);
-                        mol.addRow(new Object[]{exceMaSP, excelTenSP, excelTT, excelXX, excelLSP});
-                        String name = exceMaSP.toString();
-                        String exceMaSPs = exceMaSP.toString();
-                        String excelTenSPs = excelTenSP.toString();
+                        String maCheck = exceMaSP.toString();
+                        if (!serviceSP.checkExitSP(maCheck)) {
+                            XSSFCell excelTenSP = excelRow.getCell(1);
+                            XSSFCell excelTT = excelRow.getCell(2);
+                            XSSFCell excelXX = excelRow.getCell(3);
+                            XSSFCell excelLSP = excelRow.getCell(4);
+                            mol.addRow(new Object[]{exceMaSP, excelTenSP, excelTT, excelXX, excelLSP});
+                            String name = exceMaSP.toString();
+                            String exceMaSPs = exceMaSP.toString();
+                            String excelTenSPs = excelTenSP.toString();
 
-                        boolean trangThai;
-                        if(excelTT.toString().equals("Còn hàng")){
-                            trangThai=true;
+                            boolean trangThai;
+                            if (excelTT.toString().equals("Còn hàng")) {
+                                trangThai = true;
+                            } else {
+                                trangThai = false;
+                            }
+                            LoaiSanPham lsp = new LoaiSanPham();
+                            String lsps = excelLSP.toString();
+                            lsp.setMaLoaiSanPham(lsps);
+                            String excelXXs = excelXX.toString();
+                            SanPham sp = new SanPham(exceMaSPs, excelTenSPs, trangThai, lsp, excelXXs);
+                            serviceSP.them(sp);
+                            loadPageSP();
                         }else{
-                            trangThai=false;
+                             System.out.println("Sản phẩm có mã: " + maCheck + "Đã tồn tại. Bỏ qua bản ghi" + i);
                         }
-                        LoaiSanPham lsp = new LoaiSanPham();
-                        String lsps = excelLSP.toString();
-                        lsp.setMaLoaiSanPham(lsps);
-                        String excelXXs = excelXX.toString();
-                        SanPham sp = new SanPham(exceMaSPs, excelTenSPs, trangThai, lsp, excelXXs);
-                        serviceSP.them(sp);
-                        loadPageSP();
+
                     } else {
-                        System.out.println("Dòng " + i + " là null. Bỏ qua dòng này.");
-                        // Hoặc bạn có thể thực hiện các xử lý tùy ý khác ở đây
+                        System.out.println("Dòng " + i + " là null. Bỏ qua dòng này");
                     }
                 }
                 JOptionPane.showMessageDialog(null, "Imported Successfully !!.....");
             } catch (IOException iOException) {
                 JOptionPane.showMessageDialog(null, iOException.getMessage());
-            } 
+            } catch (SQLException ex) {
+                Logger.getLogger(SanPhamView.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }//GEN-LAST:event_btnNhapFileActionPerformed
 
@@ -851,7 +828,7 @@ public class SanPhamView extends javax.swing.JPanel {
                     }
                 }
             }
-            JOptionPane.showMessageDialog(this, "Xuất file  thành công: " );
+            JOptionPane.showMessageDialog(this, "Xuất file  thành công: ");
         }
     }//GEN-LAST:event_btnXuatFileActionPerformed
 
@@ -916,14 +893,12 @@ public class SanPhamView extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
-    private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JLabel lbSoTrang;
     private javax.swing.JTabbedPane pnlSP;
     private javax.swing.JPanel pnlSPCT;
@@ -932,7 +907,6 @@ public class SanPhamView extends javax.swing.JPanel {
     private javax.swing.JRadioButton rdConHang;
     private javax.swing.JRadioButton rdHetHang;
     private javax.swing.JTable tblSanPham;
-    private javax.swing.JTable tblSanPhams;
     private javax.swing.JTextField txtMaSanPham;
     private javax.swing.JTextField txtTenSanPham;
     private javax.swing.JTextField txtTimKiem;

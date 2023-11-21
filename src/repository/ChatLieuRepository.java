@@ -41,29 +41,31 @@ public class ChatLieuRepository {
         }
         return listChatLieu;
     }
-      public ChatLieu getOne(String ma){
-           ChatLieu cl=null;
-            try {
+
+    public ChatLieu getOne(String ma) {
+        ChatLieu cl = null;
+        try {
             conn = DBConnect.getConnection();
             sql = "SELECT*FROM ChatLieu where MaChatLieu=?";
             pst = conn.prepareStatement(sql);
             pst.setObject(1, ma);
             rs = pst.executeQuery();
             while (rs.next()) {
-            cl=new ChatLieu(rs.getString(1), 
+                cl = new ChatLieu(rs.getString(1),
                         rs.getString(2), rs.getBoolean(3));
             }
         } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
-           return cl;
-       }
-    public int them(ChatLieu cl){
+        return cl;
+    }
+
+    public int them(ChatLieu cl) {
         try {
-            conn=DBConnect.getConnection();
-            sql="INSERT INTO ChatLieu VALUES(?,?,?)";
-            pst=conn.prepareStatement(sql);
+            conn = DBConnect.getConnection();
+            sql = "INSERT INTO ChatLieu VALUES(?,?,?)";
+            pst = conn.prepareStatement(sql);
             pst.setObject(1, cl.getMaChatLieu());
             pst.setObject(2, cl.getTenChatLieu());
             pst.setObject(3, cl.isTrangThai());
@@ -73,7 +75,7 @@ public class ChatLieuRepository {
             return 0;
         }
     }
-    
+
     public int sua(ChatLieu cl, String ma) {
         try {
             conn = DBConnect.getConnection();
@@ -88,8 +90,28 @@ public class ChatLieuRepository {
             return 0;
         }
     }
-    
-      public List<ChatLieu> listPageCL(int index) {
+
+    public List<ChatLieu> getList(String name) {
+        List<ChatLieu> listChatLieu4 = new ArrayList<>();
+        try {
+            conn = DBConnect.getConnection();
+            sql = "SELECT*FROM ChatLieu where tenChatLieu like ?";
+            pst = conn.prepareStatement(sql);
+            pst.setObject(1, '%'+name+'%');
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                ChatLieu cl = new ChatLieu(rs.getString(1),
+                        rs.getString(2), rs.getBoolean(3));
+                listChatLieu4.add(cl);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+        return listChatLieu4;
+    }
+
+    public List<ChatLieu> listPageCL(int index) {
         List<ChatLieu> listChatLieu3 = new ArrayList<>();
         try {
             conn = DBConnect.getConnection();
@@ -127,6 +149,5 @@ public class ChatLieuRepository {
         }
         return tong;
     }
-       
 
 }

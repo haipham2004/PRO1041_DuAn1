@@ -144,6 +144,19 @@ public class SanPhamRepository {
         return listSanPham2;
     }
 
+    public boolean checkExitSP(String maSP) throws SQLException {
+        conn = DBConnect.getConnection();
+        sql = "SELECT*FROM SanPham where MaSanPham=?";
+        pst = conn.prepareStatement(sql);
+        pst.setString(1, maSP);
+        rs = pst.executeQuery();
+        if (rs.next()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public List<SanPham> listPageSP(int index) {
         List<SanPham> listSanPham3 = new ArrayList<>();
         try {
