@@ -95,8 +95,7 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
         fillTableChiTietSanPham(serviceCTSP.getAll());
         molGH = (DefaultTableModel) tblGioHang.getModel();
         molGH.setRowCount(0);
-
-//        initWebcam();
+        initWebcam();
     }
 
     private void initWebcam() {
@@ -223,7 +222,7 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-
+         fillDonHang2();
             }
         } while (true);
     }
