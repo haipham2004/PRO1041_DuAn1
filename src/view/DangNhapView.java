@@ -11,7 +11,7 @@ import javax.swing.JOptionPane;
 import util.DBConnect;
 import java.sql.*;
 import javax.swing.JLabel;
-import repository.LoginRepository;
+import repository.DangNhapRepository;
 
 /**
  *
@@ -20,7 +20,7 @@ import repository.LoginRepository;
 public class DangNhapView extends javax.swing.JFrame {
 
 //    private LoginRepository mLoginRepository;
-    private LoginRepository repository = new LoginRepository();
+    private DangNhapRepository repository = new DangNhapRepository();
     AdamStoreView adamStoreView = new AdamStoreView();
     BanHangView banHangView = new BanHangView();
     private static String tenNV;

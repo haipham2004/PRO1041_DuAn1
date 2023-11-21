@@ -23,6 +23,14 @@ public class ChiTietSanPham {
     public ChiTietSanPham() {
     }
 
+    public ChiTietSanPham(String maChiTietSanPham, SanPham sanPham, int soLuong, double gia, boolean trangThai) {
+        this.maChiTietSanPham = maChiTietSanPham;
+        this.sanPham = sanPham;
+        this.soLuong = soLuong;
+        this.gia = gia;
+        this.trangThai = trangThai;
+    }
+
     public ChiTietSanPham(String maChiTietSanPham, SanPham sanPham, MauSac mauSac, ChatLieu chatLieu, KichThuoc kichThuoc, int soLuong, double gia, boolean trangThai) {
         this.maChiTietSanPham = maChiTietSanPham;
         this.sanPham = sanPham;

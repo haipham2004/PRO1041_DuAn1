@@ -64,18 +64,25 @@ public class ChiTietSanPhamServiceImp implements AdamStore<ChiTietSanPham, Strin
     public boolean qrCode(String ma, String hinhAnh) {
         return repo.qrCode(ma, hinhAnh);
     }
-    public int updateTrangThaiSoLuong(){
+
+    public int updateTrangThaiSoLuong() {
         return repo.updateTrangThaiSoLuong();
     }
-    public boolean checkMaQR(String qrCode) throws SQLException{
+
+    public boolean checkMaQR(String qrCode) throws SQLException {
         return repo.checkMaQR(qrCode);
     }
+
     public int taoQR(String qrCode) {
         return repo.taoQR(qrCode);
     }
+
+    public boolean checkExitCTSP(String maCTSP) throws SQLException {
+        return repo.checkExitCTSP(maCTSP);
+    }
     
-      public boolean checkExitCTSP(String maCTSP) throws SQLException {
-          return repo.checkExitCTSP(maCTSP);
-      }
+    public List<ChiTietSanPham> getDanhSachSPCT(String maHoadon) {
+        return repo.getDanhSachSPCT(maHoadon);
+    }
 
 }
