@@ -1,6 +1,5 @@
-
-﻿----Update:2023-11-15--lúc 22g00p--okela
-
+--bản full
+﻿----Update:2023-11-20--lúc 21g00p--okela
 INSERT INTO TaiKhoan VALUES
 ('TK01','hoilamgi1','khongnoidau1','Admin',1),
 ('TK02','hoilamgi2','khongnoidau2','Staff',1),
@@ -95,4 +94,16 @@ INSERT INTO HoaDonChiTiet VALUES
 ('HDCT08','CTSP01','HD06',3,210000,N'Not Ok',0),
 ('HDCT09','CTSP01','HD08',3,210000,N'Not Ok',0),
 ('HDCT10','CTSP01','HD09',3,210000,N'Not Ok',0)
+
+INSERT INTO DoiHang VALUES
+('DH01','NV02','HD03','2023-11-07',0,1),
+('DH02','NV04','HD06','2023-11-14',90000,1),
+('DH03','NV05','HD08','2023-11-19',700000,1)
+
+INSERT INTO DoiHangChiTiet VALUES
+('DHCT01','CTSP02','DH03',2,170000,N'Áo bị chật',1),
+('DHCT02','CTSP02','DH01',1,170000,N'Áo bị rộng',1),
+('DHCT03','CTSP03','DH02',1,210000,N'Áo bị chật',1),
+('DHCT04','CTSP01','DH02',1,210000,N'Áo bị rộng',1),
+('DHCT05','CTSP03','DH03',1,170000,N'Áo bị chật',1)
 

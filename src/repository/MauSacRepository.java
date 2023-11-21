@@ -90,6 +90,26 @@ public class MauSacRepository {
             return 0;
         }
     }
+    
+    public List<MauSac> getList(String name) {
+        List<MauSac> listMauSac4 = new ArrayList<>();
+        try {
+            conn = DBConnect.getConnection();
+            sql = "SELECT * FROM MauSac where tenMauSac like ?";
+            pst = conn.prepareStatement(sql);
+            pst.setObject(1,'%'+name+'%');
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                MauSac ms = new MauSac(rs.getString(1),
+                        rs.getString(2), rs.getBoolean(3));
+                listMauSac4.add(ms);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+        return listMauSac4;
+    }
 
     public List<MauSac> listPageMS(int index) {
         List<MauSac> listMauSac3 = new ArrayList<>();
