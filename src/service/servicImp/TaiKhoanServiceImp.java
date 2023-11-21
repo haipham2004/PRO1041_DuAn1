@@ -5,30 +5,29 @@
 package service.servicImp;
 
 import java.util.List;
-import model.HoaDon;
-import repository.HoaDonRepository;
+import model.TaiKhoan;
+import repository.DoiMatKhauRepository;
 import service.AdamStore;
 
 /**
  *
  * @author Admin
  */
-public class HoaDonServiceImp implements AdamStore<HoaDon, String> {
-
-    HoaDonRepository repo = new HoaDonRepository();
+public class TaiKhoanServiceImp implements AdamStore<TaiKhoan, String>{
+    DoiMatKhauRepository repo = new DoiMatKhauRepository();
 
     @Override
-    public List<HoaDon> getAll() {
+    public List<TaiKhoan> getAll() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public int them(HoaDon k) {
-        return repo.themHoaDon(k);
+    public int them(TaiKhoan k) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public int sua(HoaDon k, String e) {
+    public int sua(TaiKhoan k, String e) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
@@ -38,25 +37,24 @@ public class HoaDonServiceImp implements AdamStore<HoaDon, String> {
     }
 
     @Override
-    public HoaDon getOne(String e) {
+    public TaiKhoan getOne(String e) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public List<HoaDon> getList(String e) {
+    public List<TaiKhoan> getList(String e) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-
-    public List<HoaDon> getHoaDonCho() {
-        return repo.getHoaDonCho();
-    }
-
-    public int countHoaDon() {
-        return repo.countHoaDon();
+    
+    public int updatePass(String userName, String passWord) {
+        return repo.updatePass(userName, passWord);
     }
     
-    public List<HoaDon> getLSHoaDon() {
-        return repo.getLSHoaDon();
+    public boolean checkMaTK(String MaTK) {
+        return repo.checkMaTK(MaTK);
     }
-
+    
+    public boolean isCurrentPasswordValid(String maTK, String enterPassWord) {
+        return repo.isCurrentPasswordValid(maTK, enterPassWord);
+    }
 }
