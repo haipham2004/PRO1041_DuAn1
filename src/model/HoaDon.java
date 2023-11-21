@@ -29,6 +29,11 @@ public class HoaDon {
         this.maHoaDon = maHoaDon;
         this.ngayTao = ngayTao;
     }
+    
+        public HoaDon(String maHoaDon, KhachHang khachHang) {
+        this.maHoaDon = maHoaDon;
+        this.khachHang = khachHang;
+    }
 
     public HoaDon(Date ngayTao) {
         this.ngayTao = ngayTao;
