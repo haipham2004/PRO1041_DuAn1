@@ -960,7 +960,7 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
         if (webcam.isOpen()) {
             webcam.close();
         } else {
-
+          initWebcam();
         }
     }//GEN-LAST:event_btnQRActionPerformed
 
