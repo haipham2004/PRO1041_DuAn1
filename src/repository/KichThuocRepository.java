@@ -89,6 +89,26 @@ public class KichThuocRepository {
             return 0;
         }
     }
+    
+    public List<KichThuoc> getList(String name) {
+        List<KichThuoc> listKichThuoc4 = new ArrayList<>();
+        try {
+            conn = DBConnect.getConnection();
+            sql = "SELECT*FROM KichThuoc where tenKichThuoc like ?";
+            pst = conn.prepareStatement(sql);
+            pst.setObject(1, '%'+name+'%');
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                KichThuoc kt = new KichThuoc(rs.getString(1),
+                        rs.getString(2), rs.getBoolean(3));
+                listKichThuoc4.add(kt);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+        return listKichThuoc4;
+    }
 
     public List<KichThuoc> listPageKT(int index) {
         List<KichThuoc> listKichThuoc3 = new ArrayList<>();

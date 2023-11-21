@@ -880,7 +880,8 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
                 return;
             } else {
                 if (serviceCTSP.them(ctsp) > 0) {
-                    loadPageCTSP();
+//                    loadPageCTSP();
+                    fillTableChiTietSanPham(serviceCTSP.getList(new SanPhamView().getTenSPs()));
                     JOptionPane.showMessageDialog(this, "Thêm sản phẩm thành công");
                 } else {
                     JOptionPane.showMessageDialog(this, "Thêm sản phẩm thất bại");
@@ -901,7 +902,8 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
             if (serviceCTSP.sua(ctsp, ma) > 0) {
                 serviceCTSP.updateTrangThaiSoLuong();
                 JOptionPane.showMessageDialog(this, "Sửa chi tiết sản phẩm thành công");
-                loadPageCTSP();
+//                loadPageCTSP();
+                fillTableChiTietSanPham(serviceCTSP.getList(new SanPhamView().getTenSPs()));
             } else {
                 JOptionPane.showMessageDialog(this, "Sửa chi tiết sản phẩm thất bại");
             }
@@ -911,7 +913,8 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
 
     private void btnClearCTSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearCTSPActionPerformed
         // TODO add your handling code here:
-        loadPageCTSP();
+//        loadPageCTSP();
+        fillTableChiTietSanPham(serviceCTSP.getList(new SanPhamView().getTenSPs()));
         btnThemCTSP.setEnabled(true);
         txtMaCTSP.setEnabled(true);
         txtMaCTSP.setText("");
@@ -975,6 +978,9 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
         if (index != -1) {
             try {
                 String ma = (String) tblChiTietSanPham.getValueAt(index, 0);
+//                int soLuong=Integer.parseInt(tblChiTietSanPham.getValueAt(index, 1).toString());
+//                double gia=Double.parseDouble(tblChiTietSanPham.getValueAt(index, 2).toString());
+//                String tenSP = (String) tblChiTietSanPham.getValueAt(index, 3).toString();
                 if (serviceCTSP.checkMaQR(ma)) {
                     System.out.println("Hihi");
                     JOptionPane.showMessageDialog(this, "Mã QR của chi tiết này sản phẩm đã tồn tại");
@@ -1020,58 +1026,68 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
                     if (excelRow != null) {
 
                         XSSFCell excelMaSPCT = excelRow.getCell(0);
-                        XSSFCell excelSoLuong = excelRow.getCell(1);
-                        XSSFCell excelGia = excelRow.getCell(2);
-                        XSSFCell excelSP = excelRow.getCell(3);
-                        XSSFCell excelCL = excelRow.getCell(4);
-                        XSSFCell excelMS = excelRow.getCell(5);
-                        XSSFCell excelKT = excelRow.getCell(6);
-                        XSSFCell excelTT = excelRow.getCell(7);
-                        mol.addRow(new Object[]{excelMaSPCT, excelSoLuong, excelGia, excelSP, excelCL, excelKT, excelMS, excelTT});
-                        String mactsp = excelMaSPCT.toString();
+                        String maCheck = excelMaSPCT.toString();
+                        try {
+                            if (!serviceCTSP.checkExitCTSP(maCheck)) {
+                                XSSFCell excelSoLuong = excelRow.getCell(1);
+                                XSSFCell excelGia = excelRow.getCell(2);
+                                XSSFCell excelSP = excelRow.getCell(3);
+                                XSSFCell excelCL = excelRow.getCell(4);
+                                XSSFCell excelMS = excelRow.getCell(5);
+                                XSSFCell excelKT = excelRow.getCell(6);
+                                XSSFCell excelTT = excelRow.getCell(7);
+                                mol.addRow(new Object[]{excelMaSPCT, excelSoLuong, excelGia, excelSP, excelCL, excelKT, excelMS, excelTT});
+                                String mactsp = excelMaSPCT.toString();
 
-                        ChiTietSanPham ctsp = new ChiTietSanPham();
-                        int soLuong;
+                                ChiTietSanPham ctsp = new ChiTietSanPham();
+                                int soLuong;
 
-                        if (excelSoLuong.getCellType() == CellType.NUMERIC) {
-                            soLuong = (int) excelSoLuong.getNumericCellValue();
-                        } else {
-                            soLuong = (int) Double.parseDouble(excelSoLuong.toString());
+                                if (excelSoLuong.getCellType() == CellType.NUMERIC) {
+                                    soLuong = (int) excelSoLuong.getNumericCellValue();
+                                } else {
+                                    soLuong = (int) Double.parseDouble(excelSoLuong.toString());
+                                }
+
+                                ctsp.setSoLuong(soLuong);
+
+                                double gia;
+
+                                if (excelGia.getCellType() == CellType.NUMERIC) {
+                                    gia = excelGia.getNumericCellValue();
+                                } else {
+                                    gia = Double.parseDouble(excelGia.toString());
+                                }
+
+                                ctsp.setGia(gia);
+                                SanPham sp = new SanPham();
+                                String sps = excelSP.toString();
+                                sp.setMaSanPham(sps);
+                                ChatLieu cl = new ChatLieu();
+                                String cls = excelCL.toString();
+                                cl.setMaChatLieu(cls);
+                                MauSac ms = new MauSac();
+                                String mss = excelMS.toString();
+                                ms.setMaMauSac(mss);
+                                KichThuoc kt = new KichThuoc();
+                                String kts = excelKT.toString();
+                                kt.setMaKichThuoc(kts);
+                                boolean trangThai;
+                                if (soLuong > 0) {
+                                    trangThai = true;
+                                } else {
+                                    trangThai = false;
+                                }
+
+                                ChiTietSanPham ctsp2 = new ChiTietSanPham(mactsp, sp, ms, cl, kt, soLuong, gia, trangThai);
+                                serviceCTSP.them(ctsp2);
+                                loadPageCTSP();
+                            }
+                            else{
+                             System.out.println("Sản phẩm chi tiết có mã: " + maCheck + " Đã tồn tại. Bỏ qua bản ghi" + i);
                         }
-
-                        ctsp.setSoLuong(soLuong);
-
-                        double gia;
-
-                        if (excelGia.getCellType() == CellType.NUMERIC) {
-                            gia = excelGia.getNumericCellValue();
-                        } else {
-                            gia = Double.parseDouble(excelGia.toString());
+                        } catch (SQLException ex) {
+                            Logger.getLogger(ChiTietSanPhamView.class.getName()).log(Level.SEVERE, null, ex);
                         }
-
-                        ctsp.setGia(gia);
-                        SanPham sp = new SanPham();
-                        String sps = excelSP.toString();
-                        sp.setMaSanPham(sps);
-                        ChatLieu cl = new ChatLieu();
-                        String cls = excelCL.toString();
-                        cl.setMaChatLieu(cls);
-                        MauSac ms = new MauSac();
-                        String mss = excelMS.toString();
-                        ms.setMaMauSac(mss);
-                        KichThuoc kt = new KichThuoc();
-                        String kts = excelKT.toString();
-                        kt.setMaKichThuoc(kts);
-                        boolean trangThai;
-                        if (soLuong > 0) {
-                            trangThai = true;
-                        } else {
-                            trangThai = false;
-                        }
-
-                        ChiTietSanPham ctsp2 = new ChiTietSanPham(mactsp, sp, ms, cl, kt, soLuong, gia, trangThai);
-                        serviceCTSP.them(ctsp2);
-                        loadPageCTSP();
                     } else {
                         System.out.println("Dòng " + i + " là null. Bỏ qua dòng này.");
                     }
@@ -1167,7 +1183,7 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
                     }
                 }
             }
-            JOptionPane.showMessageDialog(this, "Xuất file  thành công: " + file);
+            JOptionPane.showMessageDialog(this, "Xuất file  thành công: ");
         }
     }//GEN-LAST:event_btnXuatfileActionPerformed
 

@@ -44,7 +44,7 @@ public class MauSacServiceImp implements AdamStore<MauSac, String> {
 
     @Override
     public List<MauSac> getList(String e) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return repo.getList(e);
     }
 
     public List<MauSac> listPageMS(int index) {

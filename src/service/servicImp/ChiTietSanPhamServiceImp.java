@@ -73,5 +73,9 @@ public class ChiTietSanPhamServiceImp implements AdamStore<ChiTietSanPham, Strin
     public int taoQR(String qrCode) {
         return repo.taoQR(qrCode);
     }
+    
+      public boolean checkExitCTSP(String maCTSP) throws SQLException {
+          return repo.checkExitCTSP(maCTSP);
+      }
 
 }

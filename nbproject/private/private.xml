@@ -1,13 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="2">
+        <file>
+            <url>src/application/Main.java</url>
+            <bookmark id="1">
+                <name/>
+                <line>0</line>
+                <key/>
+            </bookmark>
+            <bookmark id="2">
+                <name/>
+                <line>16</line>
+                <key/>
+            </bookmark>
+        </file>
+    </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/F:/FPT%20Polytechnic/DA1/PRO1041_DuAn1/src/repository/ThongKeDTRepository.java</file>
-            <file>file:/F:/FPT%20Polytechnic/DA1/PRO1041_DuAn1/src/view/ThongKeSLView.java</file>
-            <file>file:/F:/FPT%20Polytechnic/DA1/PRO1041_DuAn1/src/view/ThongKeDTView.java</file>
-            <file>file:/F:/FPT%20Polytechnic/DA1/PRO1041_DuAn1/src/repository/ThongKeSLRepository.java</file>
-            <file>file:/F:/FPT%20Polytechnic/DA1/PRO1041_DuAn1/src/view/AdamStoreView.java</file>
+            <file>file:/D:/PRO1041_DuAn1/PRO1041_DuAn1/src/model/SanPham.java</file>
+            <file>file:/D:/PRO1041_DuAn1/PRO1041_DuAn1/src/application/Main.java</file>
+            <file>file:/D:/PRO1041_DuAn1/PRO1041_DuAn1/src/view/ThuocTinhView.java</file>
+            <file>file:/D:/PRO1041_DuAn1/PRO1041_DuAn1/src/model/TaiKhoan.java</file>
+            <file>file:/D:/PRO1041_DuAn1/PRO1041_DuAn1/src/model/LoaiSanPham.java</file>
+            <file>file:/D:/PRO1041_DuAn1/PRO1041_DuAn1/src/repository/SanPhamRepository.java</file>
+            <file>file:/D:/PRO1041_DuAn1/PRO1041_DuAn1/src/model/ChatLieu.java</file>
         </group>
     </open-files>
 </project-private>
