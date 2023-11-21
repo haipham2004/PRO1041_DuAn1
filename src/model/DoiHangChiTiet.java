@@ -14,20 +14,18 @@ public class DoiHangChiTiet {
     private ChiTietHoaDon chiTietHoaDon;
     private ChiTietSanPham chiTietSanPham;
     private int soLuong;
-    private boolean mucDich;
     private boolean trangThai;
     private String moTa;
 
     public DoiHangChiTiet() {
     }
 
-    public DoiHangChiTiet(String maDHCT, DoiHang doiHang, ChiTietHoaDon chiTietHoaDon, ChiTietSanPham chiTietSanPham, int soLuong, boolean mucDich, boolean trangThai, String moTa) {
+    public DoiHangChiTiet(String maDHCT, DoiHang doiHang, ChiTietHoaDon chiTietHoaDon, ChiTietSanPham chiTietSanPham, int soLuong, boolean trangThai, String moTa) {
         this.maDHCT = maDHCT;
         this.doiHang = doiHang;
         this.chiTietHoaDon = chiTietHoaDon;
         this.chiTietSanPham = chiTietSanPham;
         this.soLuong = soLuong;
-        this.mucDich = mucDich;
         this.trangThai = trangThai;
         this.moTa = moTa;
     }
@@ -70,14 +68,6 @@ public class DoiHangChiTiet {
 
     public void setSoLuong(int soLuong) {
         this.soLuong = soLuong;
-    }
-
-    public boolean isMucDich() {
-        return mucDich;
-    }
-
-    public void setMucDich(boolean mucDich) {
-        this.mucDich = mucDich;
     }
 
     public boolean isTrangThai() {
