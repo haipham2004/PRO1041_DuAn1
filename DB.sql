@@ -1,5 +1,7 @@
+
 ﻿--bản full
 ﻿----Update:2023-11-20--lúc 21g00p--okela
+
 CREATE DATABASE AdamStores
 GO
 USE AdamStores
@@ -41,7 +43,7 @@ CREATE TABLE [KhachHang] (
 CREATE TABLE [Events] (
   [MaEV] varchar(10),
   [TenEV] nvarchar(50),
-  [HinhThuc] bit,
+  [HinhThuc] bit,x
   [MucGiamGia] varchar(100),
   [ThoiGianBatDau] date,
   [ThoiGianKetThuc] date,
@@ -155,7 +157,6 @@ CREATE TABLE [DoiHang] (
    [MaHoaDon] varchar(10) not null,
    CONSTRAINT FK_DH_HD foreign key(MaHoaDon) references HoaDon(MaHoaDon),
   [NgayDoiTra] date,
-  [TienTraKhach] money,
   [TrangThai] bit,
   PRIMARY KEY ([MaDoiHang])
 );
@@ -166,8 +167,6 @@ CREATE TABLE [DoiHangChiTiet] (
    CONSTRAINT FK_DHCT_SPCT foreign key(MaCTSP) references ChiTietSanPham(MaCTSP),
    [MaDoiHang] varchar(10) not null,
    CONSTRAINT FK_DHCT_DH foreign key(MaDoiHang) references DoiHang(MaDoiHang),
-  [SoLuong] int,
-  [DonGia] money,
   [MoTa] nvarchar(MAX),
   [TrangThai] bit,
   PRIMARY KEY ([MaDHCT])
