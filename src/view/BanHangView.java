@@ -103,22 +103,23 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
         txtMaHDBH2.setEnabled(false);
         txtTongTienBH2.setEnabled(false);
         txtTienThuaBH2.setEnabled(false);
-//        initWebcam();
+        initWebcam();
+
     }
 
-//    private void initWebcam() {
-//        Dimension size = WebcamResolution.QVGA.getSize();
-//        webcam = Webcam.getWebcams().get(0); //0 is default webcam
-//        webcam.setViewSize(size);
-//
-//        panel = new WebcamPanel(webcam);
-//        panel.setPreferredSize(size);
-//        panel.setFPSDisplayed(true);
-//
-//        pnlQR.add(panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 500, 500));
-//
-//        executor.execute(this);
-//    }
+    private void initWebcam() {
+        Dimension size = WebcamResolution.QVGA.getSize();
+        webcam = Webcam.getWebcams().get(0); //0 is default webcam
+        webcam.setViewSize(size);
+
+        panel = new WebcamPanel(webcam);
+        panel.setPreferredSize(size);
+        panel.setFPSDisplayed(true);
+
+        pnlQR.add(panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 500, 500));
+
+        executor.execute(this);
+    }
     @Override
     public void run() {
         do {
@@ -229,7 +230,7 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-
+         fillDonHang2();
             }
         } while (true);
     }
