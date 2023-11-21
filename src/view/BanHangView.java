@@ -401,10 +401,6 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
         return true;
     }
 
-    public void fillDonHang() {
-        txtMaNVBH2.setText("");
-    }
-
     public void fillDonHang2() {
         int x = tblGioHang.getRowCount();
         if (x == 0) {
@@ -456,10 +452,6 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
         txtTienThuaBH2.setText(phanCach(tienThua));
     }
 
-    public void layMaNV() {
-        DangNhapView dnv = new DangNhapView();
-        txtMaNVBH2.setText(serviceNV.timTheoUserName(dnv.getUsername()).getMaNhanVien());
-    }
 
     /**
      * This method is called from within the constructor to initialize the form.
