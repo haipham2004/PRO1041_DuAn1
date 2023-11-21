@@ -1,5 +1,7 @@
+
 ﻿--bản full
 ﻿----Update:2023-11-20--lúc 21g00p--okela
+
 CREATE DATABASE AdamStores
 GO
 USE AdamStores
@@ -41,7 +43,7 @@ CREATE TABLE [KhachHang] (
 CREATE TABLE [Events] (
   [MaEV] varchar(10),
   [TenEV] nvarchar(50),
-  [HinhThuc] bit,
+  [HinhThuc] bit,x
   [MucGiamGia] varchar(100),
   [ThoiGianBatDau] date,
   [ThoiGianKetThuc] date,
