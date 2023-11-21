@@ -59,4 +59,7 @@ public class NhanVienServiceImp implements AdamStore<NhanVien, String>{
     public int tongBanGhi(int index) {
         return repo.tongBanGhi(index);
     }
+    public NhanVien timTheoUserName(String e) {
+        return repo.timTheoUserName(e);
+    }
 }
