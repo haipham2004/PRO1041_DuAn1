@@ -112,7 +112,7 @@ public class AdamStoreView extends javax.swing.JFrame {
             }
         });
         // Sản phẩm chung
-        MenuItem menuMatHang = new MenuItem(iconSanPham, "Mặt hàng", null, menuSanPham1, menuCtsp, menuThuoctinh);
+        MenuItem menuMatHang = new MenuItem(iconSanPham, "Mặt hàng", null, menuSanPham1, menuThuoctinh);
         //Nhân viên
         MenuItem menuNhanVien = new MenuItem(iconNhanVien, "Nhân viên", new ActionListener() {
             @Override
@@ -189,7 +189,6 @@ public class AdamStoreView extends javax.swing.JFrame {
         MenuItemColor(menuThongKe);
         MenuItemColor(menuMatHang);
         MenuItemColor(menuSanPham1);
-        MenuItemColor(menuCtsp);
         MenuItemColor(menuThuoctinh);
         MenuItemColor(menuNhanVien);
         MenuItemColor(menuBanHang);
