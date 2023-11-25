@@ -88,17 +88,16 @@ public class ChiTietSanPhamRepository {
     public int them(ChiTietSanPham ctsp) {
         try {
             conn = DBConnect.getConnection();
-            sql = "INSERT INTO ChiTietSanPham(MaCTSP,MaSanPham,MaMauSac,MaChatLieu,MaKichThuoc,SoLuong,Gia,TrangThai,qrCode) VALUES(?,?,?,?,?,?,?,?,?)";
+            sql = "INSERT INTO ChiTietSanPham(MaSanPham,MaMauSac,MaChatLieu,MaKichThuoc,SoLuong,Gia,TrangThai,qrCode) VALUES(?,?,?,?,?,?,?,?)";
             pst = conn.prepareStatement(sql);
-            pst.setObject(1, ctsp.getMaChiTietSanPham());
-            pst.setObject(2, ctsp.getSanPham().getMaSanPham());
-            pst.setObject(3, ctsp.getMauSac().getMaMauSac());
-            pst.setObject(4, ctsp.getChatLieu().getMaChatLieu());
-            pst.setObject(5, ctsp.getKichThuoc().getMaKichThuoc());
-            pst.setObject(6, ctsp.getSoLuong());
-            pst.setObject(7, ctsp.getGia());
-            pst.setObject(8, ctsp.isTrangThai());
-            pst.setObject(9, ctsp.getQrCode());
+            pst.setObject(1, ctsp.getSanPham().getMaSanPham());
+            pst.setObject(2, ctsp.getMauSac().getMaMauSac());
+            pst.setObject(3, ctsp.getChatLieu().getMaChatLieu());
+            pst.setObject(4, ctsp.getKichThuoc().getMaKichThuoc());
+            pst.setObject(5, ctsp.getSoLuong());
+            pst.setObject(6, ctsp.getGia());
+            pst.setObject(7, ctsp.isTrangThai());
+            pst.setObject(8, ctsp.getQrCode());
             return pst.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
@@ -168,6 +167,39 @@ public class ChiTietSanPhamRepository {
             return null;
         }
         return listChiTietSanPham3;
+    }
+
+    public List<ChiTietSanPham> getListLoc(String name1, String name2, String name3, String name4) {
+        List<ChiTietSanPham> listChiTietSanPham4 = new ArrayList<>();
+        try {
+            conn = DBConnect.getConnection();
+            sql = "  SELECT CTSP.MaCTSP,CTSP.MaSanPham,SP.TenSanPham,MS.MaMauSac,MS.TenMauSac,CL.MaChatLieu,CL.TenChatLieu,\n"
+                    + "                   KT.MaKichThuoc,KT.TenKichThuoc,CTSP.SoLuong,CTSP.Gia,CTSP.TrangThai\n"
+                    + "                   FROM ChiTietSanPham CTSP INNER JOIN ChatLieu CL On CL.MaChatLieu=CTSP.MaChatLieu\n"
+                    + "                    INNER JOIn MauSac MS ON MS.MaMauSac=CTSP.MaMauSac\n"
+                    + "                    INNER JOIN KichThuoc KT ON KT.MaKichThuoc=CTSP.MaKichThuoc \n"
+                    + "                   INNER JOIN SanPham SP ON CTSP.MaSanPham=SP.MaSanPham"
+                    + " where SP.TenSanPham like ? and CL.TenChatLieu like ? and MS.TenMauSac like ? and KT.TenKichThuoc like ?";
+            pst = conn.prepareStatement(sql);
+            pst.setObject(1, '%' + name1 + '%');
+            pst.setObject(2, '%' + name2 + '%');
+            pst.setObject(3, '%' + name3 + '%');
+            pst.setObject(4, '%' + name4 + '%');
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                SanPham sp = new SanPham(rs.getString(2), rs.getString(3));
+                MauSac ms = new MauSac(rs.getString(4), rs.getString(5));
+                ChatLieu cl = new ChatLieu(rs.getString(6), rs.getString(7));
+                KichThuoc kt = new KichThuoc(rs.getString(8), rs.getString(9));
+                ChiTietSanPham ctsp = new ChiTietSanPham(rs.getString(1), sp,
+                        ms, cl, kt, rs.getInt(10), rs.getDouble(11), rs.getBoolean(12));
+                listChiTietSanPham4.add(ctsp);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+        return listChiTietSanPham4;
     }
 
     public List<ChiTietSanPham> getListGia(double giaMin, double giaMax) {
@@ -273,23 +305,6 @@ public class ChiTietSanPhamRepository {
         return tong;
     }
 
-    public boolean qrCode(String ma, String hinhAnh) {
-        try {
-            conn = DBConnect.getConnection();
-            sql = "UPDATE ChiTietSanPham\n"
-                    + "set qrCode=?\n"
-                    + "where MaCTSP=?";
-            pst = conn.prepareStatement(sql);
-            pst.setObject(1, ma);
-            pst.setObject(2, hinhAnh);
-            rs = pst.executeQuery();
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
-        return true;
-    }
-
     public int updateTrangThaiSoLuong() {
         try {
             conn = DBConnect.getConnection();
@@ -328,6 +343,41 @@ public class ChiTietSanPhamRepository {
             pst.setString(1, qrCode);
             pst.setString(2, qrCode);
             return pst.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+
+    public boolean checkTrungCTSP(String name) throws SQLException {
+        conn = DBConnect.getConnection();
+        sql = "SELECT DISTINCT MaChatLieu,MaMauSac,MaKichThuoc\n"
+                + "FROM ChiTietSanPham CTSP\n"
+                + "INNER JOIN SanPham SP On CTSP.MaSanPham=SP.MaSanPham\n"
+                + "WHERE SP.TenSanPham like ?";
+        pst = conn.prepareStatement(sql);
+        pst.setString(1, '%' + name + '%');
+        rs = pst.executeQuery();
+        if (rs.next()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public int sua2(List<HoaDonChiTiet> list) {
+        int so = 0;
+        try {
+            conn = DBConnect.getConnection();
+            sql = "UPDATE ChiTietSanPham set SoLuong=SoLuong-?\n"
+                    + "where MaCTSP=?";
+            pst = conn.prepareStatement(sql);
+            for (HoaDonChiTiet ctsp : list) {
+                pst.setObject(2, ctsp.getCtsp().getMaChiTietSanPham());
+                pst.setObject(1, ctsp.getSoLuong());
+                so += pst.executeUpdate();
+            }
+            return so;
         } catch (Exception e) {
             e.printStackTrace();
             return 0;

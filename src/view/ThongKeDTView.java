@@ -36,7 +36,7 @@ public class ThongKeDTView extends javax.swing.JPanel {
     public ThongKeDTView() {
         initComponents();
         this.setSize(1300, 755);
-        setDataToChart(panelTKDT);
+//        setDataToChart(panelTKDT);
     }
 
     public void setDataToChart(JPanel panelHoaDon) {

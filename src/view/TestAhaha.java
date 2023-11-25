@@ -17,86 +17,39 @@ import com.google.zxing.client.j2se.BufferedImageLuminanceSource;
 import com.google.zxing.common.HybridBinarizer;
 import java.awt.Dimension;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
+import javax.swing.JComboBox;
+import model.SanPham;
+import service.servicImp.SanPhamServiceImp;
 
 /**
  *
  * @author Admin BVCN88 02
  */
-public class TestAhaha extends javax.swing.JFrame implements Runnable, ThreadFactory {
+public class TestAhaha extends javax.swing.JFrame {
 
-    private WebcamPanel panel = null;
-    private Webcam webcam = null;
-    private Executor executor = Executors.newSingleThreadExecutor(this);
+    public List<SanPham> list = new ArrayList<>();
+    SanPhamServiceImp serviceSp = new SanPhamServiceImp();
 
     /**
      * Creates new form TestAhaha
      */
     public TestAhaha() {
         initComponents();
-        List<Webcam> webcams = Webcam.getWebcams();
-        for (Webcam webcam : webcams) {
-            System.out.println("Tên: " + webcam);
+        loadCombox();
+
+        cboTest.setSelectedItem("GAP");
+    }
+
+    public void loadCombox() {
+        cboTest.removeAllItems();
+        for (SanPham sp : serviceSp.getAll()) {
+            cboTest.addItem(sp.getTenSanPham());
         }
-        System.out.println("Dell ok");
-        initWebcam();
-    }
-
-    private void initWebcam() {
-        Dimension size = WebcamResolution.QVGA.getSize();
-        webcam = Webcam.getWebcams().get(0); //0 is default webcam
-        webcam.setViewSize(size);
-
-        panel = new WebcamPanel(webcam);
-        panel.setPreferredSize(size);
-        panel.setFPSDisplayed(true);
-
-        pnlQR.add(panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 500, 500));
-
-        executor.execute(this);
-    }
-
-    @Override
-    public void run() {
-        do {
-            try {
-                Thread.sleep(100);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-
-            Result result = null;
-            BufferedImage image = null;
-
-            if (webcam.isOpen()) {
-                if ((image = webcam.getImage()) == null) {
-                    continue;
-                }
-            }
-
-            LuminanceSource source = new BufferedImageLuminanceSource(image);
-            BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(source));
-
-            try {
-                result = new MultiFormatReader().decode(bitmap);
-            } catch (NotFoundException e) {
-                //No result...
-            }
-
-            if (result != null) {
-                txtTest.setText(result.getText());
-            }
-        } while (true);
-    }
-
-    @Override
-    public Thread newThread(Runnable r) {
-        Thread t = new Thread(r, "My Thread");
-        t.setDaemon(true);
-        return t;
     }
 
     /**
@@ -108,14 +61,11 @@ public class TestAhaha extends javax.swing.JFrame implements Runnable, ThreadFac
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        pnlQR = new javax.swing.JPanel();
         txtTest = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        cboTest = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        pnlQR.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 0)));
-        pnlQR.setForeground(new java.awt.Color(0, 51, 255));
 
         txtTest.setText("jTextField1");
 
@@ -126,32 +76,31 @@ public class TestAhaha extends javax.swing.JFrame implements Runnable, ThreadFac
             }
         });
 
+        cboTest.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(59, 59, 59)
-                .addComponent(pnlQR, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 118, Short.MAX_VALUE)
+                .addGap(106, 106, 106)
+                .addComponent(cboTest, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(txtTest, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(105, 105, 105))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(303, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addGap(265, 265, 265))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(144, 144, 144)
-                        .addComponent(txtTest, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(85, 85, 85)
-                        .addComponent(pnlQR, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(48, 48, 48)
+                .addGap(144, 144, 144)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtTest, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cboTest, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(152, 152, 152)
                 .addComponent(jButton1)
                 .addContainerGap(200, Short.MAX_VALUE))
         );
@@ -161,15 +110,7 @@ public class TestAhaha extends javax.swing.JFrame implements Runnable, ThreadFac
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        if (webcam.isOpen()) {
-            try {
-                webcam.close();
-            } catch (Exception e) {
-                // Handle the error
-            }
-        } else {
-            initWebcam();
-        }
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -208,8 +149,8 @@ public class TestAhaha extends javax.swing.JFrame implements Runnable, ThreadFac
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> cboTest;
     private javax.swing.JButton jButton1;
-    private javax.swing.JPanel pnlQR;
     private javax.swing.JTextField txtTest;
     // End of variables declaration//GEN-END:variables
 }

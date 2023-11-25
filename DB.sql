@@ -1,6 +1,6 @@
 
 ﻿--bản full
-﻿----Update:2023-11-20--lúc 21g00p--okela
+﻿----Update:2023-11-25--lúc 14g32p--okela
 
 CREATE DATABASE AdamStores
 GO
@@ -120,7 +120,7 @@ PRIMARY KEY ([MaKichThuoc])
 );
 
 CREATE TABLE [ChiTietSanPham] (
-  [MaCTSP] varchar(10),
+  [MaCTSP] VARCHAR(10) NOT NULL DEFAULT SUBSTRING(CONVERT(varchar(255), NEWID()), 25, 5),
   [MaSanPham] varchar(10) not null,
   CONSTRAINT FK_CTSP_SP foreign key(MaSanPham) references SanPham(MaSanPham),
   [MaMauSac] varchar(10) not null,
@@ -167,6 +167,8 @@ CREATE TABLE [DoiHangChiTiet] (
    CONSTRAINT FK_DHCT_SPCT foreign key(MaCTSP) references ChiTietSanPham(MaCTSP),
    [MaDoiHang] varchar(10) not null,
    CONSTRAINT FK_DHCT_DH foreign key(MaDoiHang) references DoiHang(MaDoiHang),
+   [MaHoaDonChiTiet] varchar(20) not null,
+   CONSTRAINT FK_DHCT_DHCT foreign key(MaHoaDonChiTiet) references HoaDonChiTiet(MaHoaDonChiTiet),
   [MoTa] nvarchar(MAX),
   [TrangThai] bit,
   PRIMARY KEY ([MaDHCT])

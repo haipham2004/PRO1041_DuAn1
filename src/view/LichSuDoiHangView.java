@@ -10,6 +10,7 @@ import model.DoiHang;
 import model.DoiHangChiTiet;
 import service.servicImp.DoiHangChiTietServiceImp;
 import service.servicImp.DoiHangServiceImp;
+import service.servicImp.HoaDonChiTietServiceImp;
 
 /**
  *
@@ -59,7 +60,7 @@ public class LichSuDoiHangView extends javax.swing.JPanel {
         for (DoiHangChiTiet dhct : list) {
             tblmDHCT.addRow(new Object[]{
                 this.tblmDHCT.getRowCount() + 1, dhct.getMaDHCT(),
-                dhct.getChiTietSanPham().getSanPham().getTenSanPham(),
+                dhct.getChiTietHoaDon().getChiTietSanPham().getSanPham().getTenSanPham(),
                 dhct.getChiTietHoaDon().getChiTietSanPham().getMaChiTietSanPham(),
                 dhct.getChiTietSanPham().getMaChiTietSanPham(),
                 dhct.getSoLuong(), dhct.isTrangThai() ? "Thành công" : "Thất bại", dhct.getMoTa()
@@ -162,7 +163,7 @@ public class LichSuDoiHangView extends javax.swing.JPanel {
                 {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "STT", "Mã đổi hàng", "Tên SP", "Mã CTSP cũ", "Mã CTSP mới", "Số lượng", "Trạng thái", "Mô tả"
+                "STT", "Mã ĐHCT", "Tên SP", "Mã CTSP cũ", "Mã CTSP mới", "Số lượng", "Trạng thái", "Mô tả"
             }
         ));
         jScrollPane3.setViewportView(tblCTDH);
