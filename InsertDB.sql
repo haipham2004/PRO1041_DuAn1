@@ -1,6 +1,6 @@
 
 ﻿--bản full
-﻿----Update:2023-11-21--lúc 15g22p--okela
+﻿----Update:2023-11-25--lúc 15g22p--okela
 
 INSERT INTO TaiKhoan VALUES
 ('TK01','hoilamgi1','khongnoidau1','Admin',1),
@@ -44,19 +44,19 @@ INSERT INTO MauSac VALUES
 ('MS02',N'Đen',1),
 ('MS03',N'Trắng',1),
 ('MS04',N'Xanh',1),
-('MS05',N'Vàng',0)
+('MS05',N'Vàng',1)
 INSERT INTO ChatLieu VALUES
 ('CL01',N'Vải cotton',1),
 ('CL02',N'Vải kaki',1),
 ('CL03',N'Vải Kate',1),
 ('CL04',N'Vải nỉ',1),
-('CL05',N'Vải Jean',0)
+('CL05',N'Vải Jean',1)
 INSERT INTO KichThuoc VALUES
 ('KT01','S',1),
 ('KT02','M',1),
 ('KT03','L',1),
 ('KT04','XL',1),
-('KT05','XXL',0)
+('KT05','XXL',1)
 INSERT INTO Events VALUES
 ('EV01',N'Sinh nhật cửa hàng',1,'20000','2023-03-11','2023-03-15',N'Siêu giảm giá',1,1,'2000000'),
 ('EV02',N'Quốc tế Nam giới',1,'15000','2023-10-19','2023-10-21',N'Siêu giảm giá',1,0,''),
@@ -70,7 +70,7 @@ INSERT INTO ChiTietSanPham(MaSanPham,MaMauSac,MaChatLieu,MaKichThuoc,SoLuong,Gia
 ('SP04','MS03','CL02','KT03',50,200000,1,null),
 ('SP03','MS04','CL04','KT02',50,200000,1,null),
 ('SP01','MS01','CL05','KT05',50,200000,0,null),
-('SP01','MS05','CL04','KT01',70,320000,1,null),
+('SP02','MS05','CL04','KT01',70,320000,1,null),
 ('SP03','MS05','CL05','KT02',80,650000,1,null),
 ('SP05','MS03','CL03','KT05',90,780000,1,null),
 ('SP01','MS04','CL04','KT04',100,210000,1,null)
@@ -157,7 +157,7 @@ INSERT INTO DoiHang VALUES
 ('DH03','NV05','HD08','2023-11-19',1)
 
 INSERT INTO DoiHangChiTiet VALUES
-('DHCT01','CTSP02','DH03',N'Áo bị chật',1),
+('DHCT01','CTSP02','DH03','Tự viet ma ctsp',N'Áo bị chật',1),
 ('DHCT02','CTSP02','DH01',N'Áo bị rộng',1),
 ('DHCT03','CTSP03','DH02',N'Áo bị chật',1),
 ('DHCT04','CTSP01','DH02',N'Áo bị rộng',1),
