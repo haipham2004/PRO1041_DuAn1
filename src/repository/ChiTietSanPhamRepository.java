@@ -10,6 +10,7 @@ import java.util.List;
 import model.ChatLieu;
 import model.ChiTietSanPham;
 import model.HoaDon;
+import model.HoaDonChiTiet;
 import model.KichThuoc;
 import model.MauSac;
 import model.SanPham;
@@ -359,6 +360,25 @@ public class ChiTietSanPhamRepository {
             return true;
         } else {
             return false;
+        }
+    }
+
+    public int sua2(List<HoaDonChiTiet> list) {
+        int so = 0;
+        try {
+            conn = DBConnect.getConnection();
+            sql = "UPDATE ChiTietSanPham set SoLuong=SoLuong-?\n"
+                    + "where MaCTSP=?";
+            pst = conn.prepareStatement(sql);
+            for (HoaDonChiTiet ctsp : list) {
+                pst.setObject(2, ctsp.getCtsp().getMaChiTietSanPham());
+                pst.setObject(1, ctsp.getSoLuong());
+                so += pst.executeUpdate();
+            }
+            return so;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
         }
     }
 }
