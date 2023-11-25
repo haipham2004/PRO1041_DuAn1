@@ -43,7 +43,7 @@ CREATE TABLE [KhachHang] (
 CREATE TABLE [Events] (
   [MaEV] varchar(10),
   [TenEV] nvarchar(50),
-  [HinhThuc] bit,x
+  [HinhThuc] bit,
   [MucGiamGia] varchar(100),
   [ThoiGianBatDau] date,
   [ThoiGianKetThuc] date,

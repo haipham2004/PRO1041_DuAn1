@@ -20,7 +20,26 @@ public class HoaDonChiTiet {
     private String ghiChu;
     private Boolean trangThai;
 
+    public HoaDonChiTiet(int soLuong) {
+        this.soLuong = soLuong;
+    }
+
+    public HoaDonChiTiet(ChiTietSanPham ctsp, int soLuong) {
+        this.ctsp = ctsp;
+        this.soLuong = soLuong;
+    }
+
+    public HoaDonChiTiet(ChiTietSanPham ctsp) {
+        this.ctsp = ctsp;
+    }
+
     public HoaDonChiTiet() {
+    }
+
+    public HoaDonChiTiet(ChiTietSanPham ctsp, int soLuong, Boolean trangThai) {
+        this.ctsp = ctsp;
+        this.soLuong = soLuong;
+        this.trangThai = trangThai;
     }
 
     public HoaDonChiTiet(ChiTietSanPham ctsp, int soLuong, Double donGia) {

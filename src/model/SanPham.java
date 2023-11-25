@@ -16,12 +16,14 @@ public class SanPham {
     private LoaiSanPham loaiSanPham;
     private String xuatXu;
     private int tongSP;
+
     public SanPham() {
     }
 
     public SanPham(String maSanPham) {
         this.maSanPham = maSanPham;
     }
+
 
     public SanPham(int tongSP) {
         this.tongSP = tongSP;
@@ -34,7 +36,6 @@ public class SanPham {
     public void setTongSP(int tongSP) {
         this.tongSP = tongSP;
     }
-    
 
     public SanPham(String maSanPham, String tenSanPham) {
         this.maSanPham = maSanPham;
