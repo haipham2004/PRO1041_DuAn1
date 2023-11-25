@@ -34,28 +34,25 @@ public class DoiHangChiTietRepository {
         List<DoiHangChiTiet> listDHCT = new ArrayList<>();
         listDHCT.clear();
         try {
-            sql = "SELECT DH.MaDoiHang, SP.MaSanPham, SP.TenSanPham, CTSPCu.MaCTSP, CTSPMoi.MaCTSP, HDCT.SoLuong,\n" +
-"                    DHCT.TrangThai, DHCT.MoTa, HD.MaHoaDon, DHCT.MaDHCT, HDCT.MaHoaDonChiTiet\n" +
-"                    FROM DoiHangChiTiet DHCT JOIN DoiHang DH ON DH.MaDoiHang = DHCT.MaDoiHang \n" +
-"                    JOIN HoaDon HD ON DH.MaHoaDon = HD.MaHoaDon\n" +
-"                    JOIN HoaDonChiTiet HDCT ON HDCT.MaHoaDonChiTiet = DHCT.MaHoaDonChiTiet\n" +
-"					JOIN ChiTietSanPham CTSPCu ON HDCT.MaCTSP = CTSPCu.MaCTSP\n" +
-"					JOIN ChiTietSanPham CTSPMoi ON DHCT.MaCTSP = CTSPMoi.MaCTSP\n" +
-"                    JOIN SanPham SP ON SP.MaSanPham = CTSPCu.MaSanPham\n" +
-"					WHERE DH.MaDoiHang = ?";
+            sql = "SELECT DH.MaDoiHang, SP.MaSanPham, SP.TenSanPham, CTSPCu.MaCTSP, CTSPMoi.MaCTSP, DHCT.SoLuong,\n"
+                    + "DHCT.TrangThai, DHCT.MoTa, HD.MaHoaDon, DHCT.MaDHCT, HDCT.MaHoaDonChiTiet FROM DoiHangChiTiet DHCT\n"
+                    + "JOIN DoiHang DH ON DH.MaDoiHang = DHCT.MaDoiHang  JOIN HoaDon HD ON DH.MaHoaDon = HD.MaHoaDon \n"
+                    + "JOIN HoaDonChiTiet HDCT ON HDCT.MaHoaDonChiTiet = DHCT.MaHoaDonChiTiet JOIN ChiTietSanPham CTSPCu\n"
+                    + "ON HDCT.MaCTSP = CTSPCu.MaCTSP JOIN ChiTietSanPham CTSPMoi ON DHCT.MaCTSP = CTSPMoi.MaCTSP JOIN SanPham SP ON SP.MaSanPham = CTSPCu.MaSanPham"
+                    + "					WHERE DH.MaDoiHang = ?";
             con = DBConnect.getConnection();
             ps = con.prepareStatement(sql);
             ps.setObject(1, maDoiHang);
             rs = ps.executeQuery();
             while (rs.next()) {
                 HoaDon hd = new HoaDon(rs.getString(9));
-                DoiHang dh = new DoiHang(rs.getString(1),hd);
+                DoiHang dh = new DoiHang(rs.getString(1), hd);
                 SanPham sp = new SanPham(rs.getString(2), rs.getString(3));
-                ChiTietSanPham ctspCu = new ChiTietSanPham(rs.getString(4),sp);
+                ChiTietSanPham ctspCu = new ChiTietSanPham(rs.getString(4), sp);
                 ChiTietSanPham ctspMoi = new ChiTietSanPham(rs.getString(5));
-                ChiTietHoaDon hdct = new ChiTietHoaDon(ctspCu, rs.getInt(6));
+                ChiTietHoaDon hdct = new ChiTietHoaDon(rs.getString(11), ctspCu);
                 DoiHangChiTiet dhct = new DoiHangChiTiet(rs.getString(10), dh, hdct,
-                        ctspMoi, rs.getBoolean(7), rs.getString(8));
+                        ctspMoi,rs.getInt(6), rs.getBoolean(7), rs.getString(8));
                 listDHCT.add(dhct);
             }
             return listDHCT;
