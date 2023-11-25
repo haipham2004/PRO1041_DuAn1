@@ -52,6 +52,7 @@ public class SanPhamView extends javax.swing.JPanel {
     SanPhamServiceImp serviceSP = new SanPhamServiceImp();
     DefaultComboBoxModel<SanPham> cbxSanPham = new DefaultComboBoxModel<>();
     DefaultComboBoxModel<LoaiSanPham> cbxLoaiSanPham = new DefaultComboBoxModel<>();
+      DefaultComboBoxModel<LoaiSanPham> cbxLoaiSanPhamLoc = new DefaultComboBoxModel<>();
     int index = -1;
     int trangSP = 1, soTrangSP, tongBanGhiSP;
     public static String tenSanPham;
@@ -132,11 +133,11 @@ public class SanPhamView extends javax.swing.JPanel {
     }
 
     public void loadCboTimLoaiSP(List<LoaiSanPham> list) {
-        cbxLoaiSanPham.removeAllElements();
+        cbxLoaiSanPhamLoc.removeAllElements();
         for (LoaiSanPham loaiSanPham : list) {
-            cbxLoaiSanPham.addElement(loaiSanPham);
+            cbxLoaiSanPhamLoc.addElement(loaiSanPham);
         }
-        cboLocLSP.setModel((ComboBoxModel) cbxLoaiSanPham);
+        cboLocLSP.setModel((ComboBoxModel) cbxLoaiSanPhamLoc);
     }
 
     public boolean validateSP() {
@@ -609,7 +610,7 @@ public class SanPhamView extends javax.swing.JPanel {
 
     private void cboLocLSPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cboLocLSPMouseClicked
         // TODO add your handling code here:
-        LoaiSanPham lsp = (LoaiSanPham) cbxLoaiSanPham.getSelectedItem();
+        LoaiSanPham lsp = (LoaiSanPham) cbxLoaiSanPhamLoc.getSelectedItem();
         lbSoTrang.setText(trangSP + " of " + soTrangSP);
         String name = lsp.toString();
         loadPageSP();

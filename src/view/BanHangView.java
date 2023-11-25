@@ -70,7 +70,7 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
     ChiTietSanPhamServiceImp serviceCTSP = new ChiTietSanPhamServiceImp();
     static int indexHoaDonCho = -1;
     int index = -1;
-    String userName ;
+    String userName;
     HoaDonServiceImp serviceHD = new HoaDonServiceImp();
     DefaultTableModel molHDC = new DefaultTableModel();
     AdamStoreView adamStoreView = new AdamStoreView();
@@ -103,7 +103,7 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
         txtMaHDBH2.setEnabled(false);
         txtTongTienBH2.setEnabled(false);
         txtTienThuaBH2.setEnabled(false);
-        initWebcam();
+//        initWebcam();
 
     }
 
@@ -120,6 +120,7 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
 
         executor.execute(this);
     }
+
     @Override
     public void run() {
         do {
@@ -159,9 +160,7 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
                     }
                 } catch (SQLException ex) {
                 }
-
                 try {
-                    System.out.println("MinhTam");
                     String input = JOptionPane.showInputDialog(this, "Mời nhập số lượng");
                     if (input == null || input.isEmpty()) {
                         return;
@@ -202,19 +201,15 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
                     if (indexGioHang != -1) {
                         for (ChiTietSanPham chiTietSanPham : list) {
                             if (chiTietSanPham.getMaChiTietSanPham().equals(result.getText())) {
-                                System.out.println("haitam1");
                                 int soLuongHienTai = Integer.parseInt(tblGioHang.getValueAt(indexGioHang, 1).toString());
                                 int soLuonngSauKhiThem = soLuongHienTai + Integer.parseInt(input);
                                 if (soLuonngSauKhiThem > chiTietSanPham.getSoLuong()) {
                                     JOptionPane.showMessageDialog(this, "Số lượng không đủ ạ");
                                     return;
                                 }
-                                System.out.println("Haitam2");
                                 tblGioHang.setValueAt(soLuonngSauKhiThem, indexGioHang, 1);
                                 double thanhTienSauKhiThem = Math.round((soLuonngSauKhiThem * giaFake) * 100) / 100;
-                                System.out.println("Haitam5");
                                 tblGioHang.setValueAt(thanhTienSauKhiThem, indexGioHang, 3);
-                                System.out.println("haitam3");
                                 soLuongTonFake = chiTietSanPham.getSoLuong() - soLuonngSauKhiThem;
                             }
                         }
@@ -230,7 +225,7 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-         fillDonHang2();
+//                fillDonHang2();
             }
         } while (true);
     }
@@ -452,7 +447,6 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
         txtTienThuaBH2.setText(phanCach(tienThua));
     }
 
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -469,7 +463,6 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
         jPanel3 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblGioHang = new javax.swing.JTable();
-        btnNhapMaSPCT = new javax.swing.JButton();
         btnXoaSP = new javax.swing.JButton();
         btnXoaTatCaSP = new javax.swing.JButton();
         txtTest = new javax.swing.JTextField();
@@ -555,8 +548,6 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
         });
         jScrollPane2.setViewportView(tblGioHang);
 
-        btnNhapMaSPCT.setText("Nhập mã");
-
         btnXoaSP.setText("Xóa sản phẩm");
         btnXoaSP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -565,6 +556,11 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
         });
 
         btnXoaTatCaSP.setText("Xóa tất cả");
+        btnXoaTatCaSP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXoaTatCaSPActionPerformed(evt);
+            }
+        });
 
         btnQR.setText("Quét QR");
         btnQR.addActionListener(new java.awt.event.ActionListener() {
@@ -583,15 +579,13 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(6, 6, 6)
                         .addComponent(btnQR, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnNhapMaSPCT, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addGap(26, 26, 26)
                         .addComponent(btnXoaSP)
-                        .addGap(18, 18, 18)
+                        .addGap(35, 35, 35)
                         .addComponent(btnXoaTatCaSP, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(70, 70, 70)
+                        .addGap(160, 160, 160)
                         .addComponent(txtTest, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap(174, Short.MAX_VALUE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jScrollPane2)
                         .addContainerGap())))
@@ -603,7 +597,6 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnNhapMaSPCT, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnXoaSP, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnXoaTatCaSP, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnQR, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -711,6 +704,11 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
         btnTaoHoaDonCho.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnTaoHoaDonChoMouseClicked(evt);
+            }
+        });
+        btnTaoHoaDonCho.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTaoHoaDonChoActionPerformed(evt);
             }
         });
 
@@ -845,9 +843,6 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
             return;
         }
         try {
-            System.out.println("Hello");
-            System.out.println("HaiPham");
-            System.out.println("12D");
             int soLuongMua = Integer.parseInt(input);
             int soLuongTon = Integer.parseInt(tblChiTietSanPham.getValueAt(indexs, 1).toString());
             if (soLuongMua > soLuongTon) {
@@ -881,17 +876,18 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
                 tblGioHang.setValueAt(thanhTienSauKhiThem, indexGioHang, 3);
             } else {
                 fillTableGioHang(tblGioHang, ctsps, Integer.parseInt(input));
+                indexHoaDonCho = tblHoaDonCho.getSelectedRow();
+            String maHD = tblHoaDonCho.getValueAt(indexHoaDonCho, 1).toString();
+            String parentDirectory = "D:\\PRO1041_DuAn1";
+            String newDirectoryName = "GioHang";
+            luuGioHangVaoFile(maHD, parentDirectory, newDirectoryName);
             }
             soLuongTon = soLuongTon - soLuongMua;
             tblChiTietSanPham.setValueAt(soLuongTon, indexs, 1);
             fillDonHang2();
             //Quân
             //Nhớ đổi đường dẫn thư mục
-            indexHoaDonCho = tblHoaDonCho.getSelectedRow();
-            String maHD = tblHoaDonCho.getValueAt(indexHoaDonCho, 1).toString();
-            String parentDirectory = "D:\\PRO1041_DuAn1";
-            String newDirectoryName = "GioHang";
-            luuGioHangVaoFile(maHD, parentDirectory, newDirectoryName);
+            
         } catch (Exception e) {
             return;
         }
@@ -930,14 +926,31 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
     }//GEN-LAST:event_tblHoaDonChoMouseClicked
 
     private void btnXoaSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaSPActionPerformed
-        // TODO add your handling code here:
-        molGH = (DefaultTableModel) tblGioHang.getModel();
+        // TODO add your handling code here:     
         int indexXoaGH = tblGioHang.getSelectedRow();
-        if (indexXoaGH != -1) {
-            int checkXoaGH = JOptionPane.showConfirmDialog(this, "Bạn có chắc mắc muốn xoá sản phẩm");
-            if (checkXoaGH == JOptionPane.YES_NO_OPTION) {
-                molGH.removeRow(indexXoaGH);
+        if (indexXoaGH == -1) {
+            JOptionPane.showMessageDialog(this, "Chọn sản phẩm để xoá");
+            return;
+        }
+
+        int checkXoaGH = JOptionPane.showConfirmDialog(this, "Bạn có chắc mắc muốn xoá sản phẩm");
+        if (checkXoaGH == JOptionPane.YES_NO_OPTION) {
+
+            String productID = tblGioHang.getValueAt(indexXoaGH, 0).toString();
+            int quantity = Integer.parseInt(tblGioHang.getValueAt(indexXoaGH, 1).toString());
+            int indexSanPham = -1;
+            for (int i = 0; i < tblChiTietSanPham.getRowCount(); i++) {
+                if (tblChiTietSanPham.getValueAt(i, 0).toString().equals(productID)) {
+                    indexSanPham = i;
+                    break;
+                }
             }
+            if (indexSanPham != -1) {
+                int currentQuantity = Integer.parseInt(tblChiTietSanPham.getValueAt(indexSanPham, 1).toString());
+                int updatedQuantity = currentQuantity + quantity;
+                tblChiTietSanPham.setValueAt(updatedQuantity, indexSanPham, 1);
+            }
+            molGH.removeRow(indexXoaGH);
         } else {
             JOptionPane.showMessageDialog(this, "Not");
         }
@@ -945,10 +958,13 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
 
     private void btnQRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQRActionPerformed
         // TODO add your handling code here:
-        if (webcam.isOpen()) {
-            webcam.close();
-        } else {
-          initWebcam();
+        try {
+            if (webcam.isOpen()) {
+                webcam.close();
+            } else {
+                initWebcam();
+            }
+        } catch (Exception e) {
         }
     }//GEN-LAST:event_btnQRActionPerformed
 
@@ -977,9 +993,45 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
         tinhThua();
     }//GEN-LAST:event_txtTienKhachBH2tienKhachNhap
 
+    private void btnXoaTatCaSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaTatCaSPActionPerformed
+        // TODO add your handling code here:
+        int checkXoaGH = JOptionPane.showConfirmDialog(this, "Bạn có chắc mắc muốn xoá tất cả sản phẩm chưa được đặt hàng");
+        if (checkXoaGH == JOptionPane.YES_NO_OPTION) {
+
+            for (int i = 0; i < tblGioHang.getRowCount(); i++) {
+                String productID = tblGioHang.getValueAt(i, 0).toString();
+                int quantity = Integer.parseInt(tblGioHang.getValueAt(i, 1).toString());
+
+                int indexSanPham = -1;
+                for (int j = 0; j < tblChiTietSanPham.getRowCount(); j++) {
+                    if (tblChiTietSanPham.getValueAt(j, 0).toString().equals(productID)) {
+                        indexSanPham = j;
+                        break;
+                    }
+                }
+
+                if (indexSanPham != -1) {
+                    int currentQuantity = Integer.parseInt(tblChiTietSanPham.getValueAt(indexSanPham, 1).toString());
+                    int updatedQuantity = currentQuantity + quantity;
+                    tblChiTietSanPham.setValueAt(updatedQuantity, indexSanPham, 1);
+                }
+            }
+
+            molGH.setRowCount(0);
+        } else {
+            JOptionPane.showMessageDialog(this, "Not");
+        }
+
+
+    }//GEN-LAST:event_btnXoaTatCaSPActionPerformed
+
+    private void btnTaoHoaDonChoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaoHoaDonChoActionPerformed
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_btnTaoHoaDonChoActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnNhapMaSPCT;
     private javax.swing.JButton btnQR;
     private javax.swing.JButton btnTaoHoaDonCho;
     private javax.swing.JButton btnThanhToanBH2;
