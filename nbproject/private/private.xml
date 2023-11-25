@@ -17,11 +17,24 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
+            <file>file:/D:/FPOLY/DuAn1/PRO1041_DuAn1/src/service/servicImp/HoaDonServiceImp.java</file>
+            <file>file:/D:/FPOLY/DuAn1/PRO1041_DuAn1/src/model/ChiTietSanPham.java</file>
+            <file>file:/D:/FPOLY/DuAn1/PRO1041_DuAn1/src/service/servicImp/HoaDonChiTietServiceImp.java</file>
+            <file>file:/D:/FPOLY/DuAn1/PRO1041_DuAn1/src/repository/ChiTietSanPhamRepository.java</file>
+            <file>file:/D:/FPOLY/DuAn1/PRO1041_DuAn1/src/model/DoiHang.java</file>
+            <file>file:/D:/FPOLY/DuAn1/PRO1041_DuAn1/src/view/LichSuDoiHangView.java</file>
+            <file>file:/D:/FPOLY/DuAn1/PRO1041_DuAn1/src/repository/DoiHangChiTietRepository.java</file>
+            <file>file:/D:/FPOLY/DuAn1/PRO1041_DuAn1/src/view/AdamStoreView.java</file>
+            <file>file:/D:/FPOLY/DuAn1/PRO1041_DuAn1/src/service/servicImp/DoiHangChiTietServiceImp.java</file>
+            <file>file:/D:/FPOLY/DuAn1/PRO1041_DuAn1/src/repository/HoaDonRepository.java</file>
+=======
             <file>file:/D:/PRO1041_DuAn1/PRO1041_DuAn1/src/application/Main.java</file>
             <file>file:/D:/PRO1041_DuAn1/PRO1041_DuAn1/src/service/servicImp/ChiTietSanPhamServiceImp.java</file>
             <file>file:/D:/PRO1041_DuAn1/PRO1041_DuAn1/src/repository/ChiTietSanPhamRepository.java</file>
             <file>file:/D:/PRO1041_DuAn1/PRO1041_DuAn1/src/view/ChiTietSanPhamView.java</file>
             <file>file:/D:/PRO1041_DuAn1/PRO1041_DuAn1/src/view/BanHangView.java</file>
+>>>>>>> 1872f0d8f66a40d73487401aa93e45c62139cf02
         </group>
     </open-files>
 </project-private>

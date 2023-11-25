@@ -266,17 +266,19 @@ public class ChiTietSanPhamRepository {
     public List<ChiTietSanPham> getDanhSachSPCT(String maHoadon) {
         List<ChiTietSanPham> listCTSP = new ArrayList<>();
         try {
-            sql = "SELECT CTSP.MaCTSP, CTSP.MASANPHAM, HD.MAHOADON, CTSP.SOLUONG, CTSP.GIA, CTSP.TRANGTHAI \n"
-                    + " FROM ChiTietSanPham CTSP JOIN HoaDonChiTiet HDCT \n"
-                    + "                  ON CTSP.MaCTSP = HDCT.MaCTSP JOIN HoaDon HD ON HD.MaHoaDon = HDCT.MaHoaDon WHERE HD.MaHoaDon = ?";
+            sql = "SELECT CTSP.MaCTSP, CTSP.MASANPHAM, SP.TenSanPham, HD.MAHOADON, HDCT.SOLUONG, CTSP.GIA, CTSP.TRANGTHAI \n"
+                    + "                   FROM ChiTietSanPham CTSP JOIN HoaDonChiTiet HDCT \n"
+                    + "                      ON CTSP.MaCTSP = HDCT.MaCTSP JOIN HoaDon HD ON HD.MaHoaDon = HDCT.MaHoaDon\n"
+                    + "					  JOIN SanPham SP ON CTSP.MaSanPham = SP.MaSanPham WHERE HD.MaHoaDon = ?";
             conn = DBConnect.getConnection();
             pst = conn.prepareStatement(sql);
             pst.setObject(1, maHoadon);
             rs = pst.executeQuery();
             while (rs.next()) {
-                HoaDon hd = new HoaDon(rs.getString(3));
-                SanPham sp = new SanPham(rs.getString(2));
-                ChiTietSanPham ctsp = new ChiTietSanPham(rs.getString(1), sp, Integer.parseInt(rs.getString(4)), rs.getDouble(5), rs.getBoolean(6));
+                HoaDon hd = new HoaDon(rs.getString(4));
+                SanPham sp = new SanPham(rs.getString(2), rs.getString(3));
+                HoaDonChiTiet hdct = new HoaDonChiTiet(4);
+                ChiTietSanPham ctsp = new ChiTietSanPham(rs.getString(1), sp, Integer.parseInt(rs.getString(5)), rs.getDouble(6), rs.getBoolean(7));
                 listCTSP.add(ctsp);
             }
             return listCTSP;

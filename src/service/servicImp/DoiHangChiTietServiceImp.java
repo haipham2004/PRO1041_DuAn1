@@ -5,30 +5,29 @@
 package service.servicImp;
 
 import java.util.List;
-import model.DoiHang;
-import repository.DoiHangRepository;
+import model.DoiHangChiTiet;
+import repository.DoiHangChiTietRepository;
 import service.AdamStore;
 
 /**
  *
  * @author Admin
  */
-public class DoiHangServiceImp implements AdamStore<DoiHang, String> {
-
-    DoiHangRepository repo = new DoiHangRepository();
-
-    @Override
-    public List<DoiHang> getAll() {
-        return repo.getAll();
-    }
+public class DoiHangChiTietServiceImp implements AdamStore<DoiHangChiTiet, String>{
+    DoiHangChiTietRepository repo = new DoiHangChiTietRepository();
 
     @Override
-    public int them(DoiHang k) {
+    public List<DoiHangChiTiet> getAll() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public int sua(DoiHang k, String e) {
+    public int them(DoiHangChiTiet k) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public int sua(DoiHangChiTiet k, String e) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
@@ -38,13 +37,15 @@ public class DoiHangServiceImp implements AdamStore<DoiHang, String> {
     }
 
     @Override
-    public DoiHang getOne(String e) {
+    public DoiHangChiTiet getOne(String e) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public List<DoiHang> getList(String e) {
-        return repo.getList(e);
+    public List<DoiHangChiTiet> getList(String e) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-
+     public List<DoiHangChiTiet> getDHCT(String maDoiHang) {
+        return repo.getDHCT(maDoiHang);
+    }
 }

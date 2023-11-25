@@ -20,6 +20,15 @@ public class DoiHang {
     public DoiHang() {
     }
 
+    public DoiHang(String maDoiHang) {
+        this.maDoiHang = maDoiHang;
+    }
+
+    public DoiHang(String maDoiHang, HoaDon hoaDon) {
+        this.maDoiHang = maDoiHang;
+        this.hoaDon = hoaDon;
+    }
+
     public DoiHang(String maDoiHang, HoaDon hoaDon, NhanVien nhanVien, Date ngayDoiTra, boolean trangThai) {
         this.maDoiHang = maDoiHang;
         this.hoaDon = hoaDon;
