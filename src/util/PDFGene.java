@@ -43,7 +43,7 @@ import model.HoaDonChiTiet;
  */
 public class PDFGene {
 
-    public void genPDF(List<HoaDonChiTiet> list, HoaDon hd) throws FileNotFoundException, IOException {
+    public void genPDF(List<HoaDonChiTiet> list, HoaDon hd, Double tong, Double tongCuoi) throws FileNotFoundException, IOException {
         LocalDateTime currentDateTime = LocalDateTime.now();
 
         // Định dạng ngày giờ theo ý muốn
@@ -171,12 +171,12 @@ public class PDFGene {
 
         threeColTable4.addCell(new Cell().add("").setBorder(Border.NO_BORDER));
         threeColTable4.addCell(new Cell().add("Giảm giá").setTextAlignment(TextAlignment.CENTER).setBorder(Border.NO_BORDER));
-        threeColTable4.addCell(new Cell().add(df.format(sum * mucGiam)).setTextAlignment(TextAlignment.RIGHT).setBorder(Border.NO_BORDER));
+        threeColTable4.addCell(new Cell().add(df.format(tong-tongCuoi)).setTextAlignment(TextAlignment.RIGHT).setBorder(Border.NO_BORDER));
 
         Double sumSauKM = sum * (1 - mucGiam);
         threeColTable4.addCell(new Cell().add("").setBorder(Border.NO_BORDER));
         threeColTable4.addCell(new Cell().add("Tổng tiền").setTextAlignment(TextAlignment.CENTER).setBorder(Border.NO_BORDER));
-        threeColTable4.addCell(new Cell().add(df.format(sumSauKM)).setTextAlignment(TextAlignment.RIGHT).setBorder(Border.NO_BORDER));
+        threeColTable4.addCell(new Cell().add(df.format(tongCuoi)).setTextAlignment(TextAlignment.RIGHT).setBorder(Border.NO_BORDER));
         document.add(threeColTable4.setMargin(10f));
 
         document.add(tableDevider.setBorder(dgb));
