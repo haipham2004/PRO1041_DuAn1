@@ -18,6 +18,11 @@ public class ChiTietHoaDon {
     private String ghiChu;
     private boolean trangThai;
 
+    public ChiTietHoaDon(String MaHoaDonChiTiet, ChiTietSanPham chiTietSanPham) {
+        this.MaHoaDonChiTiet = MaHoaDonChiTiet;
+        this.chiTietSanPham = chiTietSanPham;
+    }
+
     public ChiTietHoaDon() {
     }
 

@@ -19,7 +19,7 @@ public class DoiHangChiTiet {
 
     public DoiHangChiTiet() {
     }
-
+    
     public DoiHangChiTiet(ChiTietSanPham chiTietSanPham, boolean trangThai, String moTa) {
         this.chiTietSanPham = chiTietSanPham;
         this.trangThai = trangThai;
