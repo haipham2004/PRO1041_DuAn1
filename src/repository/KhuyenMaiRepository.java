@@ -208,12 +208,13 @@ public class KhuyenMaiRepository {
         return tong;
     }
 
-    public Events getActive() {
+    public Events getActive(Double so) {
         Events ev = null;
         try {
             con = DBConnect.getConnection();
-            sql = "SELECT*FROM Events where TrangThai = 1";
+            sql = "SELECT*FROM Events where TrangThai = 1 and CAST(DieuKienTongTien AS INT) < ?";
             ps = con.prepareStatement(sql);
+            ps.setObject(1, so);
             rs = ps.executeQuery();
             while (rs.next()) {
                 ev = new Events(rs.getString(1), rs.getString(2), rs.getBoolean(3),
@@ -221,6 +222,81 @@ public class KhuyenMaiRepository {
                         rs.getString(7), rs.getBoolean(8),
                         rs.getBoolean(9), rs.getString(10));
                 listKm.add(ev);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+        return ev;
+    }
+
+    public Events getActive2(Double so) {
+        List<Events> list = new ArrayList<>();
+        Double luongGia = 1.0;
+        String maEV = "";
+        Events newEV = null;
+        try {
+            con = DBConnect.getConnection();
+            sql = "SELECT*FROM Events where TrangThai = 1 and CAST(DieuKienTongTien AS INT) < ? order by ThoiGianBatDau";
+            ps = con.prepareStatement(sql);
+            ps.setObject(1, so);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Events ev = new Events(rs.getString(1), rs.getString(2), rs.getBoolean(3),
+                        rs.getString(4), rs.getDate(5), rs.getDate(6),
+                        rs.getString(7), rs.getBoolean(8),
+                        rs.getBoolean(9), rs.getString(10));
+                list.add(ev);
+                maEV += ev.getMaEventa();
+                Double giam = Double.valueOf(ev.getMucGiamGia()) / 100;
+                luongGia *= (1 - giam);
+            }
+            
+            if (list.isEmpty()) {
+                return null;
+            }
+            String giamGia = String.valueOf(Math.round((1 - luongGia)*100));
+            newEV = new Events(maEV, null, true, giamGia, null, null, null, true, true, null);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+        return newEV;
+    }
+    public List<Events> getActive3(Double so) {
+        List<Events> list = new ArrayList<>();
+        try {
+            con = DBConnect.getConnection();
+            sql = "SELECT*FROM Events where TrangThai = 1 and CAST(DieuKienTongTien AS INT) < ?";
+            ps = con.prepareStatement(sql);
+            ps.setObject(1, so);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Events ev = new Events(rs.getString(1), rs.getString(2), rs.getBoolean(3),
+                        rs.getString(4), rs.getDate(5), rs.getDate(6),
+                        rs.getString(7), rs.getBoolean(8),
+                        rs.getBoolean(9), rs.getString(10));
+                list.add(ev);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+        return list;
+    }
+    public Events searchTen(String ten) {
+        Events ev = null;
+        try {
+            con = DBConnect.getConnection();
+            sql = "SELECT*FROM Events where TenEV = ?";
+            ps = con.prepareStatement(sql);
+            ps.setObject(1, ten);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                ev = new Events(rs.getString(1), rs.getString(2), rs.getBoolean(3),
+                        rs.getString(4), rs.getDate(5), rs.getDate(6),
+                        rs.getString(7), rs.getBoolean(8),
+                        rs.getBoolean(9), rs.getString(10));
             }
         } catch (Exception e) {
             e.printStackTrace();
