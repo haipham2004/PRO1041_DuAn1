@@ -61,9 +61,6 @@ public class ChiTietSanPhamServiceImp implements AdamStore<ChiTietSanPham, Strin
         return repo.tongBanGhi();
     }
 
-    public boolean qrCode(String ma, String hinhAnh) {
-        return repo.qrCode(ma, hinhAnh);
-    }
 
     public int updateTrangThaiSoLuong() {
         return repo.updateTrangThaiSoLuong();
@@ -85,4 +82,11 @@ public class ChiTietSanPhamServiceImp implements AdamStore<ChiTietSanPham, Strin
         return repo.getDanhSachSPCT(maHoadon);
     }
 
+     public boolean checkTrungCTSP(String name) throws SQLException{
+         return repo.checkTrungCTSP(name);
+     }
+     
+     public List<ChiTietSanPham> getListLoc(String name1, String name2,String name3, String name4){
+         return repo.getListLoc(name1, name2, name3, name4);
+     }
 }

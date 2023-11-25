@@ -12,10 +12,12 @@ import view.DangNhapView;
  * @author Admin BVCN88 02
  */
 public class Main {
+
     public static void main(String[] args) {
         AdamStoreView adms = new AdamStoreView();
         adms.setVisible(true);
         System.out.println("Okela");
-        
+//        new DangNhapView().setVisible(true);
+
     }
 }

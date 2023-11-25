@@ -1,6 +1,6 @@
 
 ﻿--bản full
-﻿----Update:2023-11-20--lúc 21g00p--okela
+﻿----Update:2023-11-24--lúc 21g00p--okela
 
 CREATE DATABASE AdamStores
 GO
@@ -43,7 +43,7 @@ CREATE TABLE [KhachHang] (
 CREATE TABLE [Events] (
   [MaEV] varchar(10),
   [TenEV] nvarchar(50),
-  [HinhThuc] bit,x
+  [HinhThuc] bit,
   [MucGiamGia] varchar(100),
   [ThoiGianBatDau] date,
   [ThoiGianKetThuc] date,
@@ -120,7 +120,7 @@ PRIMARY KEY ([MaKichThuoc])
 );
 
 CREATE TABLE [ChiTietSanPham] (
-  [MaCTSP] varchar(10),
+  [MaCTSP] VARCHAR(10) NOT NULL DEFAULT SUBSTRING(CONVERT(varchar(255), NEWID()), 25, 5),
   [MaSanPham] varchar(10) not null,
   CONSTRAINT FK_CTSP_SP foreign key(MaSanPham) references SanPham(MaSanPham),
   [MaMauSac] varchar(10) not null,
