@@ -23,6 +23,11 @@ public class HoaDonRepository {
     ResultSet rs = null;
     String sql = null;
 
+    public String giuSo(String x) {
+        String so = x.replaceAll("[^0-9]", "");
+        return so;
+    }
+
     public List<HoaDon> getHoaDonCho() {
         List<HoaDon> listHoaDon = new ArrayList<>();
         try {
@@ -59,7 +64,7 @@ public class HoaDonRepository {
         }
         return tongHoaDon;
     }
-    
+
     public List<HoaDon> getLSHoaDon() {
         List<HoaDon> listHD = new ArrayList<>();
         try {
@@ -100,11 +105,18 @@ public class HoaDonRepository {
                 ps.setObject(6, 0);
                 ps.setObject(7, hd.getTongTien());
             } else {
-                mucGiam = Double.parseDouble(hd.getVoucher().getMucGiamGia()) / 100;
                 ps.setObject(10, hd.getVoucher().getMaEventa());
-                ps.setObject(5, hd.getTongTien() / (1-mucGiam));
-                ps.setObject(6, (hd.getTongTien() / (1-mucGiam)) - hd.getTongTien());
-                ps.setObject(7, hd.getTongTien());
+                if (!hd.getVoucher().isHinhThuc()) {
+                    mucGiam = Double.parseDouble(giuSo(hd.getVoucher().getMucGiamGia())) / 100;
+                    ps.setObject(5, hd.getTongTien() / (1 - mucGiam));
+                    ps.setObject(6, (hd.getTongTien() / (1 - mucGiam)) - hd.getTongTien());
+                    ps.setObject(7, hd.getTongTien());
+                } else {
+                    mucGiam = Double.parseDouble(giuSo(hd.getVoucher().getMucGiamGia()));
+                    ps.setObject(5, hd.getTongTien() + mucGiam);
+                    ps.setObject(6, mucGiam);
+                    ps.setObject(7, hd.getTongTien());
+                }
             }
             ps.setObject(8, hd.isTrangThai());
             ps.setObject(9, hd.getGhiChu());
