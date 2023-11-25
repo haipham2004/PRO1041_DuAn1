@@ -11,7 +11,7 @@ import javax.swing.JOptionPane;
 import util.DBConnect;
 import java.sql.*;
 import javax.swing.JLabel;
-import repository.LoginRepository;
+import repository.DangNhapRepository;
 
 /**
  *
@@ -20,10 +20,11 @@ import repository.LoginRepository;
 public class DangNhapView extends javax.swing.JFrame {
 
 //    private LoginRepository mLoginRepository;
-    private LoginRepository repository = new LoginRepository();
+    private DangNhapRepository repository = new DangNhapRepository();
     AdamStoreView adamStoreView = new AdamStoreView();
     BanHangView banHangView = new BanHangView();
     private static String tenNV;
+    private static String taiKhoan;
 
     public String getTenNV() {
         return tenNV;
@@ -32,6 +33,16 @@ public class DangNhapView extends javax.swing.JFrame {
     public void setTenNV(String tenNV) {
         this.tenNV = tenNV;
     }
+
+    public static String getTaiKhoan() {
+        return taiKhoan;
+    }
+
+    public void setTaiKhoan(String taiKhoan) {
+        this.taiKhoan = taiKhoan;
+    }
+    
+    
     /**
      * Creates new form DangNhapView
      */
@@ -229,6 +240,7 @@ public class DangNhapView extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (checkEmpty()) {
             String userName = txtTaiKhoan.getText();
+            taiKhoan = userName;
             String passWord = String.valueOf(txtMatKhau.getText());
             if (repository.isExistedUser(userName, passWord)) {
                 tenNV = repository.getTenNhanVien(userName);

@@ -34,7 +34,7 @@ public class LichSuDoiHangView extends javax.swing.JPanel {
             molLSDT.addRow(new Object[]{
                 this.tblDoiTra.getRowCount() + 1, item.getMaDoiHang(), item.getHoaDon().getMaHoaDon(), item.getNhanVien().getHoTen(),
                 item.getHoaDon().getKhachHang().getHoTen(), item.getNgayDoiTra(),
-                item.getTienTraKhach(), item.chiTietTrangThai()
+                item.chiTietTrangThai()
             });
         }
     }
@@ -83,13 +83,13 @@ public class LichSuDoiHangView extends javax.swing.JPanel {
 
         tblDoiTra.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "STT", "Mã đổi trả", "Mã hóa đơn", "Người tạo", "Khách hàng", "Thời gian", "Tiền trả khách", "Trạng thái"
+                "STT", "Mã đổi trả", "Mã hóa đơn", "Người tạo", "Khách hàng", "Thời gian", "Trạng thái"
             }
         ));
         jScrollPane1.setViewportView(tblDoiTra);

@@ -29,7 +29,7 @@ public class DoiHangRepository {
         listDoiHang.clear();
         try {
             con = DBConnect.getConnection();
-            sql = "SELECT DH.MaDoiHang,DH.NgayDoiTra,DH.TienTraKhach,DH.TrangThai,\n"
+            sql = "SELECT DH.MaDoiHang,DH.NgayDoiTra,DH.TrangThai,\n"
                     + "HD.MaHoaDon,NV.MaNV,NV.HoTen,KH.MaKH,KH.HoTen\n"
                     + "From DoiHang DH join HoaDon HD ON DH.MaHoaDon = HD.MaHoaDon\n"
                     + "join KhachHang KH ON KH.MaKH = HD.MaKH\n"
@@ -37,11 +37,11 @@ public class DoiHangRepository {
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
-                KhachHang kh = new KhachHang(rs.getString(8), rs.getString(9));
-                NhanVien nv = new NhanVien(rs.getString(6), rs.getString(7));
-                HoaDon hd = new HoaDon(rs.getString(5), kh);
+                KhachHang kh = new KhachHang(rs.getString(7), rs.getString(8));
+                NhanVien nv = new NhanVien(rs.getString(5), rs.getString(6));
+                HoaDon hd = new HoaDon(rs.getString(4), kh);
                 DoiHang dh = new DoiHang(rs.getString(1), hd, nv,
-                        rs.getDate(2), rs.getBoolean(4), rs.getDouble(3));
+                        rs.getDate(2), rs.getBoolean(3));
                 listDoiHang.add(dh);
             }
         } catch (Exception e) {

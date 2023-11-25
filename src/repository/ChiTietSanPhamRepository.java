@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import model.ChatLieu;
 import model.ChiTietSanPham;
+import model.HoaDon;
 import model.KichThuoc;
 import model.MauSac;
 import model.SanPham;
@@ -227,6 +228,29 @@ public class ChiTietSanPhamRepository {
             return null;
         }
         return listChiTietSanPham3;
+    }
+    
+     public List<ChiTietSanPham> getDanhSachSPCT(String maHoadon) {
+        List<ChiTietSanPham> listCTSP = new ArrayList<>();
+        try {
+            sql = "SELECT CTSP.MaCTSP, CTSP.MASANPHAM, HD.MAHOADON, CTSP.SOLUONG, CTSP.GIA, CTSP.TRANGTHAI \n"
+                    + " FROM ChiTietSanPham CTSP JOIN HoaDonChiTiet HDCT \n"
+                    + "                  ON CTSP.MaCTSP = HDCT.MaCTSP JOIN HoaDon HD ON HD.MaHoaDon = HDCT.MaHoaDon WHERE HD.MaHoaDon = ?";
+            conn = DBConnect.getConnection();
+            pst = conn.prepareStatement(sql);
+            pst.setObject(1, maHoadon);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                HoaDon hd = new HoaDon(rs.getString(3));
+                SanPham sp = new SanPham(rs.getString(2));
+                ChiTietSanPham ctsp = new ChiTietSanPham(rs.getString(1), sp, Integer.parseInt(rs.getString(4)), rs.getDouble(5), rs.getBoolean(6));
+                listCTSP.add(ctsp);
+            }
+            return listCTSP;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     public int tongBanGhi() {

@@ -190,7 +190,8 @@ public class KhuyenMaiRepository {
         }
         return listKm4;
     }
-     public int tongBanGhi() {
+
+    public int tongBanGhi() {
         int tong = 0;
         try {
             con = DBConnect.getConnection();
@@ -205,5 +206,26 @@ public class KhuyenMaiRepository {
             return 0;
         }
         return tong;
+    }
+
+    public Events getActive() {
+        Events ev = null;
+        try {
+            con = DBConnect.getConnection();
+            sql = "SELECT*FROM Events where TrangThai = 1";
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                ev = new Events(rs.getString(1), rs.getString(2), rs.getBoolean(3),
+                        rs.getString(4), rs.getDate(5), rs.getDate(6),
+                        rs.getString(7), rs.getBoolean(8),
+                        rs.getBoolean(9), rs.getString(10));
+                listKm.add(ev);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+        return ev;
     }
 }
