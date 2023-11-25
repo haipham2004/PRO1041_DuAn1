@@ -7,6 +7,7 @@ package service.servicImp;
 import java.sql.SQLException;
 import java.util.List;
 import model.ChiTietSanPham;
+import model.HoaDonChiTiet;
 import repository.ChiTietSanPhamRepository;
 import service.AdamStore;
 import view.AdamStoreView;
@@ -88,5 +89,8 @@ public class ChiTietSanPhamServiceImp implements AdamStore<ChiTietSanPham, Strin
      
      public List<ChiTietSanPham> getListLoc(String name1, String name2,String name3, String name4){
          return repo.getListLoc(name1, name2, name3, name4);
+     }
+     public int sua2(List<HoaDonChiTiet> list) {
+         return repo.sua2(list);
      }
 }
