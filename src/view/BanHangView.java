@@ -53,6 +53,7 @@ import model.Events;
 import model.HoaDon;
 import model.KhachHang;
 import model.NhanVien;
+import org.bouncycastle.pqc.crypto.gemss.GeMSSParameters;
 import service.servicImp.HoaDonChiTietServiceImp;
 import service.servicImp.HoaDonServiceImp;
 import service.servicImp.KhachHangServiceImp;
@@ -1039,7 +1040,9 @@ initWebcam();
             hd = this.getFormBH();
             Double tongSau = hd.getTongTien();
             Double tong = fillDonHang();
-            pdf.genPDF(serviceHDCT.getJoHang(tblGioHang), hd, tong, tongSau);
+            Double dua = Double.valueOf(boPhanCach(txtTienKhachBH2.getText()));
+            Double tra = Double.valueOf(boPhanCach(txtTienThuaBH2.getText()));
+            pdf.genPDF(serviceHDCT.getJoHang(tblGioHang), hd, tong, tongSau, dua, tra);
             serviceHD.them(hd);
             serviceCTSP.sua2(serviceHDCT.getJoHang(tblGioHang));
             serviceHDCT.insert(serviceHDCT.getJoHang2(tblGioHang, hd));
@@ -1098,8 +1101,10 @@ initWebcam();
         if (cboEventBH.getSelectedIndex() == -1) {
             Double sum = fillDonHang();
             txtTongTienBH2.setText(phanCach(sum));
+            tinhThua();
             return;
         }
+
         String x = cboEventBH.getSelectedItem().toString();
         Events ev = serviceKM.searchTen(x);
         Double tien = fillDonHang();
@@ -1118,6 +1123,7 @@ initWebcam();
             newTien = tien * (1 - giam);
             txtTongTienBH2.setText(phanCach(newTien));
         }
+        tinhThua();
     }//GEN-LAST:event_cboEventBHActionPerformed
 
 
