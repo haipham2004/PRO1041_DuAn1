@@ -23,6 +23,14 @@ public class ChiTietSanPham {
     public ChiTietSanPham() {
     }
 
+    public ChiTietSanPham(String maChiTietSanPham, SanPham sanPham, int soLuong, double gia, boolean trangThai) {
+        this.maChiTietSanPham = maChiTietSanPham;
+        this.sanPham = sanPham;
+        this.soLuong = soLuong;
+        this.gia = gia;
+        this.trangThai = trangThai;
+    }
+
     public ChiTietSanPham(String maChiTietSanPham, SanPham sanPham, MauSac mauSac, ChatLieu chatLieu, KichThuoc kichThuoc, int soLuong, double gia, boolean trangThai) {
         this.maChiTietSanPham = maChiTietSanPham;
         this.sanPham = sanPham;
@@ -38,14 +46,14 @@ public class ChiTietSanPham {
         this.sanPham = sanPham;
     }
 
-    public ChiTietSanPham(SanPham sanPham, int soLuong) {
+
+    public ChiTietSanPham(String maChiTietSanPham, SanPham sanPham) {
+
+        this.maChiTietSanPham = maChiTietSanPham;
         this.sanPham = sanPham;
-        this.soLuong = soLuong;
     }
 
-    
-    public ChiTietSanPham(String maChiTietSanPham, SanPham sanPham, MauSac mauSac, ChatLieu chatLieu, KichThuoc kichThuoc, int soLuong, double gia, boolean trangThai, String qrCode) {
-        this.maChiTietSanPham = maChiTietSanPham;
+    public ChiTietSanPham(SanPham sanPham, MauSac mauSac, ChatLieu chatLieu, KichThuoc kichThuoc, int soLuong, double gia, boolean trangThai) {
         this.sanPham = sanPham;
         this.mauSac = mauSac;
         this.chatLieu = chatLieu;
@@ -53,8 +61,20 @@ public class ChiTietSanPham {
         this.soLuong = soLuong;
         this.gia = gia;
         this.trangThai = trangThai;
-        this.qrCode = qrCode;
+
     }
+
+//    public ChiTietSanPham(String maChiTietSanPham, SanPham sanPham, MauSac mauSac, ChatLieu chatLieu, KichThuoc kichThuoc, int soLuong, double gia, boolean trangThai, String qrCode) {
+//        this.maChiTietSanPham = maChiTietSanPham;
+//        this.sanPham = sanPham;
+//        this.mauSac = mauSac;
+//        this.chatLieu = chatLieu;
+//        this.kichThuoc = kichThuoc;
+//        this.soLuong = soLuong;
+//        this.gia = gia;
+//        this.trangThai = trangThai;
+//        this.qrCode = qrCode;
+//    }
 
     public ChiTietSanPham(String maChiTietSanPham) {
         this.maChiTietSanPham = maChiTietSanPham;

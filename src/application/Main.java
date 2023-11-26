@@ -17,5 +17,7 @@ public class Main {
         AdamStoreView adms = new AdamStoreView();
         adms.setVisible(true);
         System.out.println("Okela");
+//        new DangNhapView().setVisible(true);
+
     }
 }

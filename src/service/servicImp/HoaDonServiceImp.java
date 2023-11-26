@@ -54,5 +54,9 @@ public class HoaDonServiceImp implements AdamStore<HoaDon, String> {
     public int countHoaDon() {
         return repo.countHoaDon();
     }
+    
+    public List<HoaDon> getLSHoaDon() {
+        return repo.getLSHoaDon();
+    }
 
 }

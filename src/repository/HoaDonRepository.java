@@ -8,6 +8,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import model.HoaDon;
+import model.KhachHang;
 import model.NhanVien;
 import util.DBConnect;
 
@@ -21,6 +22,11 @@ public class HoaDonRepository {
     Connection con = null;
     ResultSet rs = null;
     String sql = null;
+
+    public String giuSo(String x) {
+        String so = x.replaceAll("[^0-9]", "");
+        return so;
+    }
 
     public List<HoaDon> getHoaDonCho() {
         List<HoaDon> listHoaDon = new ArrayList<>();
@@ -59,6 +65,28 @@ public class HoaDonRepository {
         return tongHoaDon;
     }
 
+    public List<HoaDon> getLSHoaDon() {
+        List<HoaDon> listHD = new ArrayList<>();
+        try {
+            sql = "Select HD.MaHoaDon,NV.MaNV,KH.MaKH,HD.NgayTao,HD.TongTien, HD.TrangThai,HD.GhiChu\n"
+                    + "From HoaDon HD Join NhanVien NV ON HD.MaNV=NV.MaNV Join KhachHang KH ON HD.MaKH = KH.MaKH ";
+            con = DBConnect.getConnection();
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                NhanVien nv = new NhanVien(rs.getString(2));
+                KhachHang kh = new KhachHang(rs.getString(3));
+                HoaDon hd = new HoaDon(rs.getString(1), nv, kh, rs.getDate(4), rs.getDouble(5),
+                        rs.getBoolean(6), rs.getString(7));
+                listHD.add(hd);
+            }
+            return listHD;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     public int themHoaDon(HoaDon hd) {
         try {
             Timestamp currentTime = new Timestamp(System.currentTimeMillis());
@@ -77,11 +105,18 @@ public class HoaDonRepository {
                 ps.setObject(6, 0);
                 ps.setObject(7, hd.getTongTien());
             } else {
-                mucGiam = Double.parseDouble(hd.getVoucher().getMucGiamGia()) / 100;
                 ps.setObject(10, hd.getVoucher().getMaEventa());
-                ps.setObject(5, hd.getTongTien() / (1-mucGiam));
-                ps.setObject(6, (hd.getTongTien() / (1-mucGiam)) - hd.getTongTien());
-                ps.setObject(7, hd.getTongTien());
+                if (!hd.getVoucher().isHinhThuc()) {
+                    mucGiam = Double.parseDouble(giuSo(hd.getVoucher().getMucGiamGia())) / 100;
+                    ps.setObject(5, hd.getTongTien() / (1 - mucGiam));
+                    ps.setObject(6, (hd.getTongTien() / (1 - mucGiam)) - hd.getTongTien());
+                    ps.setObject(7, hd.getTongTien());
+                } else {
+                    mucGiam = Double.parseDouble(giuSo(hd.getVoucher().getMucGiamGia()));
+                    ps.setObject(5, hd.getTongTien() + mucGiam);
+                    ps.setObject(6, mucGiam);
+                    ps.setObject(7, hd.getTongTien());
+                }
             }
             ps.setObject(8, hd.isTrangThai());
             ps.setObject(9, hd.getGhiChu());

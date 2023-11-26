@@ -7,6 +7,7 @@ package service.servicImp;
 import java.sql.SQLException;
 import java.util.List;
 import model.ChiTietSanPham;
+import model.HoaDonChiTiet;
 import repository.ChiTietSanPhamRepository;
 import service.AdamStore;
 import view.AdamStoreView;
@@ -61,21 +62,35 @@ public class ChiTietSanPhamServiceImp implements AdamStore<ChiTietSanPham, Strin
         return repo.tongBanGhi();
     }
 
-    public boolean qrCode(String ma, String hinhAnh) {
-        return repo.qrCode(ma, hinhAnh);
-    }
-    public int updateTrangThaiSoLuong(){
+
+    public int updateTrangThaiSoLuong() {
         return repo.updateTrangThaiSoLuong();
     }
-    public boolean checkMaQR(String qrCode) throws SQLException{
+
+    public boolean checkMaQR(String qrCode) throws SQLException {
         return repo.checkMaQR(qrCode);
     }
+
     public int taoQR(String qrCode) {
         return repo.taoQR(qrCode);
     }
-    
-      public boolean checkExitCTSP(String maCTSP) throws SQLException {
-          return repo.checkExitCTSP(maCTSP);
-      }
 
+    public boolean checkExitCTSP(String maCTSP) throws SQLException {
+        return repo.checkExitCTSP(maCTSP);
+    }
+    
+    public List<ChiTietSanPham> getDanhSachSPCT(String maHoadon) {
+        return repo.getDanhSachSPCT(maHoadon);
+    }
+
+     public boolean checkTrungCTSP(String name) throws SQLException{
+         return repo.checkTrungCTSP(name);
+     }
+     
+     public List<ChiTietSanPham> getListLoc(String name1, String name2,String name3, String name4){
+         return repo.getListLoc(name1, name2, name3, name4);
+     }
+     public int sua2(List<HoaDonChiTiet> list) {
+         return repo.sua2(list);
+     }
 }

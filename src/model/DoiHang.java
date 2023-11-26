@@ -16,18 +16,25 @@ public class DoiHang {
     private NhanVien nhanVien;
     private Date ngayDoiTra;
     private boolean trangThai;
-    private double tienTraKhach;
 
     public DoiHang() {
     }
 
-    public DoiHang(String maDoiHang, HoaDon hoaDon, NhanVien nhanVien, Date ngayDoiTra, boolean trangThai, double tienTraKhach) {
+    public DoiHang(String maDoiHang) {
+        this.maDoiHang = maDoiHang;
+    }
+
+    public DoiHang(String maDoiHang, HoaDon hoaDon) {
+        this.maDoiHang = maDoiHang;
+        this.hoaDon = hoaDon;
+    }
+
+    public DoiHang(String maDoiHang, HoaDon hoaDon, NhanVien nhanVien, Date ngayDoiTra, boolean trangThai) {
         this.maDoiHang = maDoiHang;
         this.hoaDon = hoaDon;
         this.nhanVien = nhanVien;
         this.ngayDoiTra = ngayDoiTra;
         this.trangThai = trangThai;
-        this.tienTraKhach = tienTraKhach;
     }
 
     public String getMaDoiHang() {
@@ -68,14 +75,6 @@ public class DoiHang {
 
     public void setTrangThai(boolean trangThai) {
         this.trangThai = trangThai;
-    }
-
-    public double getTienTraKhach() {
-        return tienTraKhach;
-    }
-
-    public void setTienTraKhach(double tienTraKhach) {
-        this.tienTraKhach = tienTraKhach;
     }
     
     public String chiTietTrangThai(){

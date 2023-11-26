@@ -99,8 +99,8 @@ public class ThongKeSLView extends javax.swing.JPanel {
     public ThongKeSLView() {
         initComponents();
         this.setSize(1300, 755);
-        setDataToChart(panelChartHoaDon);
-        setDataToChart2(panelTopSP);
+//        setDataToChart(panelChartHoaDon);
+//        setDataToChart2(panelTopSP);
     }
 
     public void setDataToChart(JPanel panelHoaDon) {

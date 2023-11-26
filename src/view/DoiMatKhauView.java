@@ -6,7 +6,7 @@ package view;
 
 import java.awt.Color;
 import javax.swing.JOptionPane;
-import repository.LoginRepository;
+import service.servicImp.TaiKhoanServiceImp;
 
 /**
  *
@@ -14,7 +14,7 @@ import repository.LoginRepository;
  */
 public class DoiMatKhauView extends javax.swing.JPanel {
 
-    private LoginRepository repository = new LoginRepository();
+    TaiKhoanServiceImp serviceDMK = new TaiKhoanServiceImp();
 
     /**
      * Creates new form DoiMatKhauView
@@ -57,11 +57,11 @@ public class DoiMatKhauView extends javax.swing.JPanel {
 //            JOptionPane.showMessageDialog(this, "Mat khau moi phai co it nhat mot chu cai viet hoa, mot chu cai viet thuong, mot so va mot ki tu dac biet !");
 //            return false;
 //        }
-        if (!repository.checkMaTK(maTK)) {
+        if (!serviceDMK.checkMaTK(maTK)) {
             JOptionPane.showMessageDialog(this, "Khong ton tai ma tai khoan vua nhap !");
             return false;
         }
-        if (!repository.isCurrentPasswordValid(maTK, mkHienTai)) {
+        if (!serviceDMK.isCurrentPasswordValid(maTK, mkHienTai)) {
             JOptionPane.showMessageDialog(this, "Mat khau hien tai khong dung !");
             return false;
         }
@@ -240,7 +240,7 @@ public class DoiMatKhauView extends javax.swing.JPanel {
             String matKhauMoi = new String(txtMatKhauM.getPassword());
             String matKhauMoi2 = new String(txtMatKhauM2.getPassword());
             if (checkHopLe(maTK, matKhauHT, matKhauMoi, matKhauMoi2)) {
-                if (repository.updatePass(maTK, matKhauMoi) > 0) {
+                if (serviceDMK.updatePass(maTK, matKhauMoi) > 0) {
                     JOptionPane.showMessageDialog(this, "Doi mat khau thanh cong !");
                 } else {
                     JOptionPane.showMessageDialog(this, "Doi mat khau that bai !");

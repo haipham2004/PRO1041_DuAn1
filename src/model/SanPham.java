@@ -24,6 +24,7 @@ public class SanPham {
         this.maSanPham = maSanPham;
     }
 
+
     public SanPham(int tongSP) {
         this.tongSP = tongSP;
     }

@@ -1,4 +1,9 @@
 
+<<<<<<< HEAD
+=======
+﻿--bản full
+﻿----Update:2023-11-25--lúc 14g32p--okela
+>>>>>>> 3660feb27028b0151f68056db1b8e15c408d6acd
 
 CREATE DATABASE AdamStores
 GO
@@ -118,7 +123,7 @@ PRIMARY KEY ([MaKichThuoc])
 );
 
 CREATE TABLE [ChiTietSanPham] (
-  [MaCTSP] varchar(10),
+  [MaCTSP] VARCHAR(10) NOT NULL DEFAULT SUBSTRING(CONVERT(varchar(255), NEWID()), 25, 5),
   [MaSanPham] varchar(10) not null,
   CONSTRAINT FK_CTSP_SP foreign key(MaSanPham) references SanPham(MaSanPham),
   [MaMauSac] varchar(10) not null,
@@ -165,6 +170,11 @@ CREATE TABLE [DoiHangChiTiet] (
    CONSTRAINT FK_DHCT_SPCT foreign key(MaCTSP) references ChiTietSanPham(MaCTSP),
    [MaDoiHang] varchar(10) not null,
    CONSTRAINT FK_DHCT_DH foreign key(MaDoiHang) references DoiHang(MaDoiHang),
+<<<<<<< HEAD
+=======
+   [MaHoaDonChiTiet] varchar(20) not null,
+   CONSTRAINT FK_DHCT_DHCT foreign key(MaHoaDonChiTiet) references HoaDonChiTiet(MaHoaDonChiTiet),
+>>>>>>> 3660feb27028b0151f68056db1b8e15c408d6acd
   [MoTa] nvarchar(MAX),
   [TrangThai] bit,
   PRIMARY KEY ([MaDHCT])

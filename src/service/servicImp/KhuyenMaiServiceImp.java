@@ -62,8 +62,16 @@ public class KhuyenMaiServiceImp implements AdamStore<Events, String> {
     public int tongBanGhi() {
         return repo.tongBanGhi();
     }
-    public Events getActive() {
-        return repo.getActive();
+    public Events getActive(Double so) {
+        return repo.getActive(so);
     }
-
+    public Events getActive2(Double so) {
+        return repo.getActive2(so);
+    }
+    public List<Events> getActive3(Double so) {
+        return repo.getActive3(so);
+    }
+    public Events searchTen(String ten) {
+        return repo.searchTen(ten);
+    }
 }
