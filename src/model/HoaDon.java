@@ -25,9 +25,18 @@ public class HoaDon {
     public HoaDon() {
     }
 
+    public HoaDon(int soLuongHoaDon) {
+        this.soLuongHoaDon = soLuongHoaDon;
+    }
+
     public HoaDon(String maHoaDon, Date ngayTao) {
         this.maHoaDon = maHoaDon;
         this.ngayTao = ngayTao;
+    }
+    
+        public HoaDon(String maHoaDon, KhachHang khachHang) {
+        this.maHoaDon = maHoaDon;
+        this.khachHang = khachHang;
     }
 
     public HoaDon(Date ngayTao) {

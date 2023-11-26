@@ -5,6 +5,8 @@
 package view;
 
 import java.util.List;
+import javax.swing.ComboBoxModel;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.ChatLieu;
@@ -24,6 +26,9 @@ public class ThuocTinhView extends javax.swing.JPanel {
     MauSacServiceImp serviceMS = new MauSacServiceImp();
     ChatLieuServiceImp serviceCl = new ChatLieuServiceImp();
     KichThuocServiceImp serviceKT = new KichThuocServiceImp();
+    DefaultComboBoxModel<ChatLieu> cbxChatLieu = new DefaultComboBoxModel<>();
+    DefaultComboBoxModel<MauSac> cbxMauSac = new DefaultComboBoxModel<>();
+    DefaultComboBoxModel<KichThuoc> cbxKichThuoc = new DefaultComboBoxModel<>();
     int index = -1;
     int trangMS = 1, soTrangMS, tongBanGhiMS;
     int trangCL = 1, soTrangCL, tongBanGhiCL;
@@ -38,7 +43,20 @@ public class ThuocTinhView extends javax.swing.JPanel {
         loadPageCL();
         loadPageMS();
         loadPageKT();
+//        loadCboChatLieu(serviceCl.getAll());
+        rdConhang2.setSelected(true);
+    }
 
+    public void loadData() {
+        int indexs = pnlThuocTinh.getSelectedIndex();
+        if (indexs == 0) {
+            loadCboChatLieu(serviceCl.getAll());
+        } else if (indexs == 1) {
+            loadCboMauSac(serviceMS.getAll());
+        } else {
+            loadCboxKichThuoc(serviceKT.getAll());
+
+        }
     }
 
     public ChatLieu savesCL() {
@@ -52,6 +70,30 @@ public class ThuocTinhView extends javax.swing.JPanel {
             trangThai = false;
         }
         return new ChatLieu(maCL, tenCL, trangThai);
+    }
+
+    public void loadCboChatLieu(List<ChatLieu> list) {
+        cbxChatLieu.removeAllElements();
+        for (ChatLieu chatLieu : list) {
+            cbxChatLieu.addElement(chatLieu);
+        }
+        cboThuọcTinh.setModel((ComboBoxModel) cbxChatLieu);
+    }
+
+    public void loadCboMauSac(List<MauSac> list) {
+        cbxMauSac.removeAllElements();
+        for (MauSac mauSac : list) {
+            cbxMauSac.addElement(mauSac);
+        }
+        cboThuọcTinh.setModel((ComboBoxModel) cbxMauSac);
+    }
+
+    public void loadCboxKichThuoc(List<KichThuoc> list) {
+        cbxKichThuoc.removeAllElements();
+        for (KichThuoc kichThuoc : list) {
+            cbxKichThuoc.addElement(kichThuoc);
+        }
+        cboThuọcTinh.setModel((ComboBoxModel) cbxKichThuoc);
     }
 
     public MauSac savesMS() {
@@ -226,6 +268,7 @@ public class ThuocTinhView extends javax.swing.JPanel {
         jPanel4 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         tblKichThuoc = new javax.swing.JTable();
+        cboThuọcTinh = new javax.swing.JComboBox<>();
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Quản lý thuộc tính"));
 
@@ -453,6 +496,13 @@ public class ThuocTinhView extends javax.swing.JPanel {
 
         pnlThuocTinh.addTab("Kích Thước", jPanel4);
 
+        cboThuọcTinh.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cboThuọcTinh.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cboThuọcTinhMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -470,8 +520,13 @@ public class ThuocTinhView extends javax.swing.JPanel {
                                 .addGap(18, 18, 18)
                                 .addComponent(btnClearThuocTinh))
                             .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(14, 14, 14)
-                        .addComponent(jButton1))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(14, 14, 14)
+                                .addComponent(jButton1))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(55, 55, 55)
+                                .addComponent(cboThuọcTinh, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(157, 157, 157)
                         .addComponent(btnDauTT)
@@ -489,8 +544,13 @@ public class ThuocTinhView extends javax.swing.JPanel {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(cboThuọcTinh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(55, 55, 55)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnThemThuocTinh)
@@ -631,6 +691,7 @@ public class ThuocTinhView extends javax.swing.JPanel {
         txtTenMa.setEnabled(true);
         txtTenMa.setText("");
         txtTenThuocTinh.setText("");
+        btnThemThuocTinh.setEnabled(true);
     }//GEN-LAST:event_btnClearThuocTinhActionPerformed
 
     private void btnDauTTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDauTTActionPerformed
@@ -724,12 +785,14 @@ public class ThuocTinhView extends javax.swing.JPanel {
         index = tblChatLieu.getSelectedRow();
         txtTenMa.setEnabled(false);
         detailThuocTinhCL(index);
+        btnThemThuocTinh.setEnabled(false);
     }//GEN-LAST:event_tblChatLieuMouseClicked
 
     private void tblMauSacMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblMauSacMouseClicked
         // TODO add your handling code here:
         index = tblMauSac.getSelectedRow();
         txtTenMa.setEnabled(false);
+        btnThemThuocTinh.setEnabled(false);
         detailThuocTinhMS(index);
     }//GEN-LAST:event_tblMauSacMouseClicked
 
@@ -737,12 +800,43 @@ public class ThuocTinhView extends javax.swing.JPanel {
         // TODO add your handling code here:
         index = tblKichThuoc.getSelectedRow();
         txtTenMa.setEnabled(false);
+        btnThemThuocTinh.setEnabled(false);
         detailThuocTinhKT(index);
     }//GEN-LAST:event_tblKichThuocMouseClicked
 
     private void pnlThuocTinhMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlThuocTinhMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_pnlThuocTinhMouseClicked
+
+    private void cboThuọcTinhMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cboThuọcTinhMouseClicked
+        // TODO add your handling code here:
+        try {
+             int indexs = pnlThuocTinh.getSelectedIndex();
+        if (indexs == 0) {
+            ChatLieu cl = (ChatLieu) cbxChatLieu.getSelectedItem();
+            loadCboChatLieu(serviceCl.getAll());
+               String cls = cl.toString();
+            fillChatLieu(serviceCl.getList(cls));
+        } else if (indexs == 1) {
+
+            MauSac ms = (MauSac) cbxMauSac.getSelectedItem();
+            loadCboMauSac(serviceMS.getAll());
+            String mss = ms.toString();
+            fillMauSac(serviceMS.getList(mss));
+        } else {
+
+            KichThuoc kt = (KichThuoc) cbxKichThuoc.getSelectedItem();
+            loadCboxKichThuoc(serviceKT.getAll());
+            String kts = kt.toString();
+            fillKichThuoc(serviceKT.getList(kts));
+        }
+        } catch (Exception e) {
+          
+        }
+//            ChatLieu cl = (ChatLieu) cbxChatLieu.getSelectedItem();
+//            String cls = cl.toString();
+//            fillChatLieu(serviceCl.getList(cls));
+    }//GEN-LAST:event_cboThuọcTinhMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -755,6 +849,7 @@ public class ThuocTinhView extends javax.swing.JPanel {
     private javax.swing.JButton btnTienTT;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
+    private javax.swing.JComboBox<String> cboThuọcTinh;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

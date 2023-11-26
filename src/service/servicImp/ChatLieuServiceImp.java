@@ -43,7 +43,7 @@ public class ChatLieuServiceImp implements AdamStore<ChatLieu, String>{
 
     @Override
     public List<ChatLieu> getList(String e) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return repo.getList(e);
     }
         public List<ChatLieu> listPageCL(int index){
         return repo.listPageCL(index);

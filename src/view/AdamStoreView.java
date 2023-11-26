@@ -35,7 +35,7 @@ public class AdamStoreView extends javax.swing.JFrame {
         setSize(1500, 820);
         this.setLocationRelativeTo(null);
         execute();
-        changePanelBody(new ThongKeSLView()); 
+        changePanelBody(new ThongKeSLView());
 
     }
 
@@ -88,8 +88,14 @@ public class AdamStoreView extends javax.swing.JFrame {
                 changePanelBody(new ThongKeSLView());
             }
         });
+        MenuItem menuThongKe3 = new MenuItem(iconDot, "Thống kê khác", new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                changePanelBody(new ThongKeKhacView());
+            }
+        });
         // Sản phẩm chung
-        MenuItem menuThongKe = new MenuItem(iconThongKe, "Thống kê", null, menuThongKeDT, menuThongKeSL);
+        MenuItem menuThongKe = new MenuItem(iconThongKe, "Thống kê", null, menuThongKeDT, menuThongKeSL, menuThongKe3);
         //Thanh bên trong sản phẩm
         MenuItem menuSanPham1 = new MenuItem(iconDot, "Sản phẩm", new ActionListener() {
             @Override
@@ -141,6 +147,23 @@ public class AdamStoreView extends javax.swing.JFrame {
                 changePanelBody(new HoaDonView());
             }
         });
+
+        //Lịch sử đổi trả
+        MenuItem menuLsuDoiHang = new MenuItem(null, "Lịch sử đổi hàng", new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                changePanelBody(new LichSuDoiHangView());
+            }
+        });
+
+        //Đổi trả
+        MenuItem menuDoiHang = new MenuItem(null, "Đổi hàng", new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                changePanelBody(new DoiHangView());
+            }
+        });
+
         //Khuyến mại
         MenuItem menuKm = new MenuItem(iconKhuyenMai, "Khuyến mại", new ActionListener() {
             @Override
@@ -168,7 +191,7 @@ public class AdamStoreView extends javax.swing.JFrame {
         });
 
         //Câu lệnh thêm vào menu
-        addMenu(menuThongKe, menuMatHang, menuNhanVien, menuBanHang, menuKhachHang, menuHoaDon, menuKm, menuDoiMatKhau, menuDangXuat);
+        addMenu(menuThongKe, menuMatHang, menuNhanVien, menuBanHang, menuKhachHang, menuHoaDon, menuDoiHang, menuLsuDoiHang, menuKm, menuDoiMatKhau, menuDangXuat);
         MenuItemColor(menuThongKe);
         MenuItemColor(menuMatHang);
         MenuItemColor(menuSanPham1);
@@ -179,10 +202,11 @@ public class AdamStoreView extends javax.swing.JFrame {
         MenuItemColor(menuKhachHang);
         MenuItemColor(menuHoaDon);
         MenuItemColor(menuKm);
-
+        MenuItemColor(menuDoiHang);
+        MenuItemColor(menuLsuDoiHang);
         MenuItemColor(menuThongKeDT);
         MenuItemColor(menuThongKeSL);
-
+        MenuItemColor(menuThongKe3);
         MenuItemColor(menuDoiMatKhau);
         MenuItemColor(menuDangXuat);
     }
