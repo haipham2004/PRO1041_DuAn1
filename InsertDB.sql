@@ -1,10 +1,4 @@
-
-﻿--bản full
-<<<<<<< HEAD
-﻿----Update:2023-11-21--lúc 15g22p--okela
-=======
-﻿----Update:2023-11-25--lúc 15g22p--okela
->>>>>>> 3660feb27028b0151f68056db1b8e15c408d6acd
+--update ﻿----Update:2023-11-27--lúc 14g32p--okela
 
 INSERT INTO TaiKhoan VALUES
 ('TK01','hoilamgi1','khongnoidau1','Admin',1),

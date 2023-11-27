@@ -33,7 +33,7 @@ public class HoaDonRepository {
         try {
             con = DBConnect.getConnection();
             sql = "Select HD.MaHoaDon,NV.MaNV,NV.HoTen,HD.NgayTao,HD.TrangThai\n"
-                    + "From HoaDon HD Join NhanVien NV ON HD.MaNV=NV.MaNV where HD.TrangThai = 0";
+                    + "From HoaDon HD Join NhanVien NV ON HD.MaNV=NV.MaNV where HD.TrangThai = 'Chờ thanh toán'";
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
