@@ -1,53 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
-<<<<<<< HEAD
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/F:/FPT%20Polytechnic/DA1/PRO1041_DuAn1/src/view/ThongKeSLView.java</file>
-            <file>file:/F:/FPT%20Polytechnic/DA1/PRO1041_DuAn1/src/view/ThongKeDTView.java</file>
-            <file>file:/F:/FPT%20Polytechnic/DA1/PRO1041_DuAn1/src/view/SendEmailView.java</file>
-            <file>file:/F:/FPT%20Polytechnic/DA1/PRO1041_DuAn1/src/view/AdamStoreView.java</file>
-            <file>file:/F:/FPT%20Polytechnic/DA1/PRO1041_DuAn1/src/view/ThongKeKhacView.java</file>
-=======
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="2">
-        <file>
-            <url>src/application/Main.java</url>
-            <bookmark id="1">
-                <name/>
-                <line>0</line>
-                <key/>
-            </bookmark>
-            <bookmark id="2">
-                <name/>
-                <line>16</line>
-                <key/>
-            </bookmark>
-        </file>
-    </editor-bookmarks>
-    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/D:/FPOLY/DuAn1/PRO1041_DuAn1/src/model/ChiTietHoaDon.java</file>
-            <file>file:/D:/FPOLY/DuAn1/PRO1041_DuAn1/src/model/HoaDonChiTiet.java</file>
-            <file>file:/D:/FPOLY/DuAn1/PRO1041_DuAn1/src/model/ChiTietSanPham.java</file>
-            <file>file:/D:/FPOLY/DuAn1/PRO1041_DuAn1/src/util/DBConnect.java</file>
-            <file>file:/D:/FPOLY/DuAn1/PRO1041_DuAn1/src/view/BanHangView.java</file>
-            <file>file:/D:/FPOLY/DuAn1/PRO1041_DuAn1/src/view/LichSuDoiHangView.java</file>
-            <file>file:/D:/FPOLY/DuAn1/PRO1041_DuAn1/src/view/AdamStoreView.java</file>
-            <file>file:/D:/FPOLY/DuAn1/PRO1041_DuAn1/src/repository/HoaDonRepository.java</file>
-            <file>file:/D:/FPOLY/DuAn1/PRO1041_DuAn1/src/service/servicImp/HoaDonServiceImp.java</file>
-            <file>file:/D:/FPOLY/DuAn1/PRO1041_DuAn1/src/service/servicImp/ChiTietSanPhamServiceImp.java</file>
-            <file>file:/D:/FPOLY/DuAn1/PRO1041_DuAn1/src/service/servicImp/HoaDonChiTietServiceImp.java</file>
-            <file>file:/D:/FPOLY/DuAn1/PRO1041_DuAn1/src/repository/ChiTietSanPhamRepository.java</file>
-            <file>file:/D:/FPOLY/DuAn1/PRO1041_DuAn1/src/model/DoiHang.java</file>
-            <file>file:/D:/FPOLY/DuAn1/PRO1041_DuAn1/src/view/ChiTietSanPhamView.java</file>
-            <file>file:/D:/FPOLY/DuAn1/PRO1041_DuAn1/src/model/DoiHangChiTiet.java</file>
-            <file>file:/D:/FPOLY/DuAn1/PRO1041_DuAn1/src/repository/DoiHangChiTietRepository.java</file>
-            <file>file:/D:/FPOLY/DuAn1/PRO1041_DuAn1/src/repository/HoaDonChiTietReposotpry.java</file>
-            <file>file:/D:/FPOLY/DuAn1/PRO1041_DuAn1/src/repository/DoiHangRepository.java</file>
-            <file>file:/D:/FPOLY/DuAn1/PRO1041_DuAn1/src/service/servicImp/DoiHangChiTietServiceImp.java</file>
-            <file>file:/D:/FPOLY/DuAn1/PRO1041_DuAn1/src/view/MenuItem.java</file>
->>>>>>> 3660feb27028b0151f68056db1b8e15c408d6acd
+            <file>file:/F:/FPT%20Polytechnic/DA1/PRO1041_DuAn1/src/repository/MauSacRepository.java</file>
+            <file>file:/F:/FPT%20Polytechnic/DA1/PRO1041_DuAn1/src/repository/NhanVienRepository.java</file>
+            <file>file:/F:/FPT%20Polytechnic/DA1/PRO1041_DuAn1/src/repository/SanPhamRepository.java</file>
+            <file>file:/F:/FPT%20Polytechnic/DA1/PRO1041_DuAn1/src/repository/LoaiSanPhamRepository.java</file>
         </group>
     </open-files>
 </project-private>
