@@ -18,11 +18,8 @@ import repository.DangNhapRepository;
  * @author Admin
  */
 public class DangNhapView extends javax.swing.JFrame {
-
-//    private LoginRepository mLoginRepository;
     private DangNhapRepository repository = new DangNhapRepository();
     AdamStoreView adamStoreView = new AdamStoreView();
-    BanHangView banHangView = new BanHangView();
     private static String tenNV;
     private static String taiKhoan;
 
@@ -52,7 +49,7 @@ public class DangNhapView extends javax.swing.JFrame {
         setUndecorated(true);
         setSize(541, 284);
         this.setLocationRelativeTo(null);
-//        mLoginRepository = new LoginRepository();
+
     }
 
     public boolean checkEmpty() {
