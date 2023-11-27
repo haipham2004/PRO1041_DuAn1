@@ -53,7 +53,6 @@ import model.Events;
 import model.HoaDon;
 import model.KhachHang;
 import model.NhanVien;
-//import org.bouncycastle.pqc.crypto.gemss.GeMSSParameters;
 import service.servicImp.HoaDonChiTietServiceImp;
 import service.servicImp.HoaDonServiceImp;
 import service.servicImp.KhachHangServiceImp;
@@ -113,14 +112,12 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
         Dimension size = WebcamResolution.QVGA.getSize();
         webcam = Webcam.getWebcams().get(0); // 0 is default webcam
         webcam.setViewSize(size);
-
         panel = new WebcamPanel(webcam);
         panel.setPreferredSize(size);
         panel.setFPSDisplayed(true);
 
         pnlWebCam.setLayout(new BorderLayout());
         pnlWebCam.add(panel, 0);
-
         executor.execute(this);
     }
 
@@ -935,11 +932,16 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
                 tblGioHang.setValueAt(soLuonngSauKhiThem, indexGioHang, 1);
                 double thanhTienSauKhiThem = Math.round((soLuonngSauKhiThem * gia) * 100) / 100;
                 tblGioHang.setValueAt(thanhTienSauKhiThem, indexGioHang, 3);
+
             } else {
                 fillTableGioHang(tblGioHang, ctsps, Integer.parseInt(input));
+
+                //Quân
+                //Nhớ đổi đường dẫn thư mục
                 indexHoaDonCho = tblHoaDonCho.getSelectedRow();
                 String maHD = tblHoaDonCho.getValueAt(indexHoaDonCho, 1).toString();
                 String parentDirectory = "D:\\PRO1041_DuAn1";
+
                 String newDirectoryName = "GioHang";
                 luuGioHangVaoFile(maHD, parentDirectory, newDirectoryName);
             }
@@ -948,7 +950,6 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
             fillDonHang2();
             //Quân
             //Nhớ đổi đường dẫn thư mục
-
         } catch (Exception e) {
             return;
         }
@@ -1020,17 +1021,10 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
         // TODO add your handling code here:
         if (webcam.isOpen()) {
             webcam.close();
-            new AdamStoreView().setSize(1510, 810);
             System.out.println("Close");
         } else {
-
-//            jPanel1.removeAll();
-//            jPanel1.add(new BanHangView());
-//            jPanel1.repaint();
-//            jPanel1.revalidate();
             initWebcam();
-           new AdamStoreView().setSize(1520, 820);
-            System.out.println("Open");
+
         }
     }//GEN-LAST:event_btnQRActionPerformed
 

@@ -18,11 +18,35 @@ public class ChiTietHoaDon {
     private String ghiChu;
     private boolean trangThai;
 
+    public ChiTietHoaDon(String MaHoaDonChiTiet, ChiTietSanPham chiTietSanPham) {
+        this.MaHoaDonChiTiet = MaHoaDonChiTiet;
+        this.chiTietSanPham = chiTietSanPham;
+    }
+
     public ChiTietHoaDon() {
     }
 
     public ChiTietHoaDon(ChiTietSanPham chiTietSanPham) {
         this.chiTietSanPham = chiTietSanPham;
+    }
+
+
+    public ChiTietHoaDon(ChiTietSanPham chiTietSanPham, HoaDon hoaDon, int SoLuong) {
+        this.chiTietSanPham = chiTietSanPham;
+        this.hoaDon = hoaDon;
+        this.SoLuong = SoLuong;
+    }
+
+
+    public ChiTietHoaDon(String MaHoaDonChiTiet, ChiTietSanPham chiTietSanPham, int SoLuong) {
+        this.MaHoaDonChiTiet = MaHoaDonChiTiet;
+        this.chiTietSanPham = chiTietSanPham;
+        this.SoLuong = SoLuong;
+    }
+
+    public ChiTietHoaDon(ChiTietSanPham chiTietSanPham, int SoLuong) {
+        this.chiTietSanPham = chiTietSanPham;
+        this.SoLuong = SoLuong;
     }
 
 
@@ -42,6 +66,7 @@ public class ChiTietHoaDon {
         this.SoLuong = SoLuong;
         this.DonGia = DonGia;
     }
+
 
     public ChiTietHoaDon(HoaDon hoaDon) {
         this.hoaDon = hoaDon;

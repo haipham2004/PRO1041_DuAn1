@@ -50,4 +50,33 @@ public class DoiHangRepository {
         }
         return listDoiHang;
     }
+
+    public List<DoiHang> getList(String name) {
+        List<DoiHang> listDH = new ArrayList<>();
+        try {
+            con = DBConnect.getConnection();
+            sql = "SELECT DH.MaDoiHang,DH.NgayDoiTra,DH.TrangThai,\n"
+                    + "                             HD.MaHoaDon,NV.MaNV,NV.HoTen,KH.MaKH,KH.HoTen\n"
+                    + "                            From DoiHang DH join HoaDon HD ON DH.MaHoaDon = HD.MaHoaDon\n"
+                    + "                 join KhachHang KH ON KH.MaKH = HD.MaKH\n"
+                    + "    join NhanVien NV ON NV.MaNV = DH.MaNV WHERE KH.HoTen Like ? or NV.HoTen Like ?";
+            ps = con.prepareStatement(sql);
+            ps.setObject(1, '%' + name + '%');
+            ps.setObject(2, '%' + name + '%');
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                KhachHang kh = new KhachHang(rs.getString(7), rs.getString(8));
+                NhanVien nv = new NhanVien(rs.getString(5), rs.getString(6));
+                HoaDon hd = new HoaDon(rs.getString(4), kh);
+                DoiHang dh = new DoiHang(rs.getString(1), hd, nv,
+                        rs.getDate(2), rs.getBoolean(3));
+                listDH.add(dh);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+        return listDH;
+    }
+
 }
