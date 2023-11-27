@@ -14,10 +14,10 @@ import view.DangNhapView;
 public class Main {
 
     public static void main(String[] args) {
-        AdamStoreView adms = new AdamStoreView();
-        adms.setVisible(true);
-        System.out.println("Okela");
-//        new DangNhapView().setVisible(true);
+//        AdamStoreView adms = new AdamStoreView();
+//        adms.setVisible(true);
+//        System.out.println("Okela");
+        new DangNhapView().setVisible(true);
 
     }
 }
