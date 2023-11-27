@@ -1032,9 +1032,9 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
                 if (serviceCTSP.checkMaQR(ma)) {
                     JOptionPane.showMessageDialog(this, "Mã QR của chi tiết này sản phẩm đã tồn tại");
                 } else {
-                    for (ChiTietSanPham chiTietSanPham : serviceCTSP.getAll()) {
-                        qrCode(chiTietSanPham.getMaChiTietSanPham());
-                    }
+//                    for (ChiTietSanPham chiTietSanPham : serviceCTSP.getAll()) {
+//                        qrCode(chiTietSanPham.getMaChiTietSanPham());
+//                    }
                     deltailChiTietSanPham(index);
                     txtMaCTSP.setEnabled(false);
                     btnThemCTSP.setEnabled(false);

@@ -3,6 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
+            <file>file:/D:/PRO1041_DuAn1/PRO1041_DuAn1/src/application/Main.java</file>
+            <file>file:/D:/PRO1041_DuAn1/PRO1041_DuAn1/src/service/servicImp/ChiTietSanPhamServiceImp.java</file>
+            <file>file:/D:/PRO1041_DuAn1/PRO1041_DuAn1/src/view/DangNhapView.java</file>
+            <file>file:/D:/PRO1041_DuAn1/PRO1041_DuAn1/src/view/AdamStoreView.java</file>
+            <file>file:/D:/PRO1041_DuAn1/PRO1041_DuAn1/src/view/ChiTietSanPhamView.java</file>
+            <file>file:/D:/PRO1041_DuAn1/PRO1041_DuAn1/src/view/TestCame2.java</file>
+            <file>file:/D:/PRO1041_DuAn1/PRO1041_DuAn1/src/view/BanHangView.java</file>
+=======
             <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/view/HoaDonView.java</file>
             <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/view/AdamStoreView.java</file>
             <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/view/ThongKeKhacView.java</file>
@@ -26,6 +35,7 @@
             <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/view/DoiHangView.java</file>
             <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/model/DoiHang.java</file>
             <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/view/ChiTietSanPhamView.java</file>
+>>>>>>> 882270c8af9308d2897bee598b6a5408afcf9bc9
         </group>
     </open-files>
 </project-private>
