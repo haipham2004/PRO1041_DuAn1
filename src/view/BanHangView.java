@@ -266,7 +266,7 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
         for (HoaDon item : list) {
             molHDC.addRow(new Object[]{
                 this.tblHoaDonCho.getRowCount() + 1, item.getMaHoaDon(), item.getNhanVien().getHoTen(),
-                item.getNgayTao(), item.chiTietTrangThai()
+                item.getNgayTao(), item.getTrangThai()
             });
         }
     }
@@ -446,7 +446,7 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
             String x = cboEventBH.getSelectedItem().toString();
             ev = serviceKM.searchTen(x);
         }
-        return new HoaDon(maHD, nhanVien, khachHang, ngayTao, tongTien, true, ghiChu, ev);
+        return new HoaDon(maHD, nhanVien, khachHang, ngayTao, tongTien, "Đã thanh toán", ghiChu, ev);
     }
 
     public String phanCach(Double x) {
