@@ -5,8 +5,12 @@
         <group>
             <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/view/HoaDonView.java</file>
             <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/view/AdamStoreView.java</file>
+            <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/view/ThongKeKhacView.java</file>
+            <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/repository/ThongKeKhacRepository.java</file>
+            <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/model/ChiTietSanPham.java</file>
             <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/repository/KhachHangRepository.java</file>
             <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/view/LichSuDoiHangView.java</file>
+            <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/util/PDFGene.java</file>
             <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/view/ChonCTSP.java</file>
             <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/model/DoiHangChiTiet.java</file>
             <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/model/HoaDon.java</file>

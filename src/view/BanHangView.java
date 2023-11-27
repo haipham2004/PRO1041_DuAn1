@@ -930,11 +930,16 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
                 tblGioHang.setValueAt(soLuonngSauKhiThem, indexGioHang, 1);
                 double thanhTienSauKhiThem = Math.round((soLuonngSauKhiThem * gia) * 100) / 100;
                 tblGioHang.setValueAt(thanhTienSauKhiThem, indexGioHang, 3);
+
             } else {
                 fillTableGioHang(tblGioHang, ctsps, Integer.parseInt(input));
+
+                //Quân
+                //Nhớ đổi đường dẫn thư mục
                 indexHoaDonCho = tblHoaDonCho.getSelectedRow();
                 String maHD = tblHoaDonCho.getValueAt(indexHoaDonCho, 1).toString();
-                String parentDirectory = "D:\\PRO1041_DuAn1";
+                String parentDirectory = "F:";
+
                 String newDirectoryName = "GioHang";
                 luuGioHangVaoFile(maHD, parentDirectory, newDirectoryName);
             }
@@ -1019,13 +1024,18 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
 
     private void btnQRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQRActionPerformed
         // TODO add your handling code here:
-        try {
-            if (webcam.isOpen()) {
-                webcam.close();
-            } else {
-                initWebcam();
+        if (webcam.isOpen()) {
+            webcam.close();
+        } else {
+            initWebcam();
+            try {
+                if (webcam.isOpen()) {
+                    webcam.close();
+                } else {
+                    initWebcam();
+                }
+            } catch (Exception e) {
             }
-        } catch (Exception e) {
         }
     }//GEN-LAST:event_btnQRActionPerformed
 

@@ -48,7 +48,9 @@ public class HoaDonView extends javax.swing.JPanel {
         tblmSanPhamHDChiTiet = (DefaultTableModel) tblLoaiSanPham.getModel();
         tblmSanPhamHDChiTiet.setRowCount(0);
         for (ChiTietSanPham ctsp : list) {
-            tblmSanPhamHDChiTiet.addRow(new Object[]{ctsp.getMaChiTietSanPham(), ctsp.getSanPham().getMaSanPham(), ctsp.getSanPham().getTenSanPham(),
+            tblmSanPhamHDChiTiet.addRow(new Object[]{tblmSanPhamHDChiTiet.getRowCount() + 1,
+                ctsp.getMaChiTietSanPham(), ctsp.getSanPham().getMaSanPham(),
+                ctsp.getSanPham().getTenSanPham(),
                 maHoadon, ctsp.getSoLuong(), ctsp.getGia(), ctsp.isTrangThai() ? "Thành công" : "Thất bại"
             });
         }
@@ -229,13 +231,13 @@ public class HoaDonView extends javax.swing.JPanel {
 
         tblLoaiSanPham.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Mã chi tiết SP", "Mã sản phẩm ", "Tên sản phẩm", "Mã hóa đơn", "Số lượng", "Giá", "Trạng thái"
+                "STT", "Mã chi tiết SP", "Mã sản phẩm ", "Tên sản phẩm", "Mã hóa đơn", "Số lượng", "Giá", "Trạng thái"
             }
         ));
         tblLoaiSanPham.addMouseListener(new java.awt.event.MouseAdapter() {

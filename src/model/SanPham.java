@@ -28,7 +28,6 @@ public class SanPham {
     public SanPham(int tongSP) {
         this.tongSP = tongSP;
     }
-
     public int getTongSP() {
         return tongSP;
     }
