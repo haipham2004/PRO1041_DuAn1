@@ -36,7 +36,6 @@ public class AdamStoreView extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         execute();
         changePanelBody(new ThongKeSLView());
-
     }
 
     public void changePanelBody(JPanel panel) {
