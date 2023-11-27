@@ -43,7 +43,7 @@ import model.HoaDonChiTiet;
  */
 public class PDFGene {
 
-    public void genPDF(List<HoaDonChiTiet> list, HoaDon hd) throws FileNotFoundException, IOException {
+    public void genPDF(List<HoaDonChiTiet> list, HoaDon hd, Double tong, Double tongCuoi, Double dua, Double tra) throws FileNotFoundException, IOException {
         LocalDateTime currentDateTime = LocalDateTime.now();
 
         // Định dạng ngày giờ theo ý muốn
@@ -85,7 +85,6 @@ public class PDFGene {
         Paragraph onesp = new Paragraph("\n");
 
         Table table = new Table(twocolumnWidth);
-
 
         Barcode128 barcode = new Barcode128(pdfDocument);
         barcode.setCode(hd.getMaHoaDon());
@@ -162,22 +161,38 @@ public class PDFGene {
         document.add(threeColTable3.setBorder(Border.NO_BORDER));
 
         Table threeColTable4 = new Table(threecolWidth);
-        Double mucGiam;
-        if (hd.getVoucher() == null) {
-            mucGiam = 0.0;
-        } else {
-            mucGiam = Double.parseDouble(hd.getVoucher().getMucGiamGia()) / 100;
-        }
+//        Double mucGiam;
+//        if (hd.getVoucher() == null) {
+//            mucGiam = 0.0;
+//        } else {
+//            mucGiam = Double.parseDouble(hd.getVoucher().getMucGiamGia()) / 100;
+//        }
 
         threeColTable4.addCell(new Cell().add("").setBorder(Border.NO_BORDER));
         threeColTable4.addCell(new Cell().add("Giảm giá").setTextAlignment(TextAlignment.CENTER).setBorder(Border.NO_BORDER));
-        threeColTable4.addCell(new Cell().add(df.format(sum * mucGiam)).setTextAlignment(TextAlignment.RIGHT).setBorder(Border.NO_BORDER));
+        threeColTable4.addCell(new Cell().add(df.format(tong - tongCuoi)).setTextAlignment(TextAlignment.RIGHT).setBorder(Border.NO_BORDER));
 
-        Double sumSauKM = sum * (1 - mucGiam);
+//        Double sumSauKM = sum * (1 - mucGiam);
         threeColTable4.addCell(new Cell().add("").setBorder(Border.NO_BORDER));
         threeColTable4.addCell(new Cell().add("Tổng tiền").setTextAlignment(TextAlignment.CENTER).setBorder(Border.NO_BORDER));
-        threeColTable4.addCell(new Cell().add(df.format(sumSauKM)).setTextAlignment(TextAlignment.RIGHT).setBorder(Border.NO_BORDER));
+        threeColTable4.addCell(new Cell().add(df.format(tongCuoi)).setTextAlignment(TextAlignment.RIGHT).setBorder(Border.NO_BORDER));
         document.add(threeColTable4.setMargin(10f));
+        
+        Table threeColTable5 = new Table(onetwo);
+        threeColTable5.addCell(new Cell().add("").setBorder(Border.NO_BORDER));
+        threeColTable5.addCell(new Cell().add("").setBorder(Border.NO_BORDER).setBorderTop(dgb));
+        document.add(threeColTable5.setBorder(Border.NO_BORDER));
+        
+        Table threeColTable6 = new Table(threecolWidth);
+        threeColTable6.addCell(new Cell().add("").setBorder(Border.NO_BORDER));
+        threeColTable6.addCell(new Cell().add("Tiền khách đưa").setTextAlignment(TextAlignment.CENTER).setBorder(Border.NO_BORDER));
+        threeColTable6.addCell(new Cell().add(df.format(dua)).setTextAlignment(TextAlignment.RIGHT).setBorder(Border.NO_BORDER));
+
+//        Double sumSauKM = sum * (1 - mucGiam);
+        threeColTable6.addCell(new Cell().add("").setBorder(Border.NO_BORDER));
+        threeColTable6.addCell(new Cell().add("Tiền thừa").setTextAlignment(TextAlignment.CENTER).setBorder(Border.NO_BORDER));
+        threeColTable6.addCell(new Cell().add(df.format(tra)).setTextAlignment(TextAlignment.RIGHT).setBorder(Border.NO_BORDER));
+        document.add(threeColTable6.setMargin(10f));
 
         document.add(tableDevider.setBorder(dgb));
         document.add(new Paragraph("\n"));
@@ -187,7 +202,7 @@ public class PDFGene {
         document.add(new Paragraph("2. Thời hạn đổi trả sản phẩm do lỗi bên phía người bán là bảy (7) ngày kể từ ngày mua.").setFont(font));
 
         document.close();
-        
+
         try {
             File file = new File(path);
 
@@ -195,31 +210,36 @@ public class PDFGene {
                 Desktop desktop = Desktop.getDesktop();
                 desktop.open(file); // Mở file PDF bằng ứng dụng mặc định
                 try {
-            Robot robot = new Robot();
+                    Robot robot = new Robot();
 
-            // Đợi 1 giây trước khi bắt đầu nhấn phím
-            robot.delay(1000);
+                    // Đợi 1 giây trước khi bắt đầu nhấn phím
+                    robot.delay(1000);
 
-            // Nhấn phím Ctrl
-            robot.keyPress(KeyEvent.VK_CONTROL);
+                    // Nhấn phím Ctrl
+                    robot.keyPress(KeyEvent.VK_CONTROL);
 
-            // Nhấn phím P
-            robot.keyPress(KeyEvent.VK_P);
+                    // Nhấn phím P
+                    robot.keyPress(KeyEvent.VK_P);
 
-            // Nhả phím Ctrl
-            robot.keyRelease(KeyEvent.VK_CONTROL);
+                    // Nhả phím Ctrl
+                    robot.keyRelease(KeyEvent.VK_CONTROL);
 
-            // Nhả phím P
-            robot.keyRelease(KeyEvent.VK_P);
-        } catch (AWTException e) {
-            e.printStackTrace();
-        }
+                    // Nhả phím P
+                    robot.keyRelease(KeyEvent.VK_P);
+                } catch (AWTException e) {
+                    e.printStackTrace();
+                }
             } else {
                 System.out.println("File không tồn tại");
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public String giuSo(String x) {
+        String so = x.replaceAll("[^0-9]", "");
+        return so;
     }
 
     public static Cell getHeaderTextCell(String textValue) {

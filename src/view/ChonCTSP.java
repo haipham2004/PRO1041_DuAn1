@@ -4,44 +4,20 @@
  */
 package view;
 
-import com.github.sarxos.webcam.Webcam;
-import java.util.concurrent.ThreadFactory;
-import com.github.sarxos.webcam.WebcamPanel;
-import com.github.sarxos.webcam.WebcamResolution;
-import com.google.zxing.BinaryBitmap;
-import com.google.zxing.LuminanceSource;
-import com.google.zxing.MultiFormatReader;
-import com.google.zxing.NotFoundException;
-import com.google.zxing.Result;
-import com.google.zxing.client.j2se.BufferedImageLuminanceSource;
-import com.google.zxing.common.HybridBinarizer;
-import java.awt.Dimension;
-import java.awt.image.BufferedImage;
-import java.util.List;
-import java.util.concurrent.Executor;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ThreadFactory;
-
 /**
  *
  * @author Admin
  */
-public class Test extends javax.swing.JFrame implements ThreadFactory{
-
-    private WebcamPanel panel = null;
-    private Webcam webcam = null;
-    private Executor executor = Executors.newSingleThreadExecutor((ThreadFactory) this);
+public class ChonCTSP extends javax.swing.JFrame {
 
     /**
-     * Creates new form Test
+     * Creates new form ChonCTSP
      */
-    public Test() {
+    public ChonCTSP() {
         initComponents();
-        List<Webcam> webcams = Webcam.getWebcams();
-        for (Webcam webcam : webcams) {
-            System.out.println("Tên: " + webcam);
-        }
-        System.out.println("Dell ok");
+        this.dispose();
+        setUndecorated(true);
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -86,27 +62,22 @@ public class Test extends javax.swing.JFrame implements ThreadFactory{
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Test.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ChonCTSP.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Test.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ChonCTSP.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Test.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ChonCTSP.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Test.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ChonCTSP.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Test().setVisible(true);
+                new ChonCTSP().setVisible(true);
             }
         });
-    }
-
-    @Override
-    public Thread newThread(Runnable r) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

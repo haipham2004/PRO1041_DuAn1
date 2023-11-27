@@ -20,6 +20,21 @@ public class DoiHangChiTiet {
     public DoiHangChiTiet() {
     }
 
+    public DoiHangChiTiet(ChiTietSanPham chiTietSanPham, boolean trangThai, String moTa) {
+        this.chiTietSanPham = chiTietSanPham;
+        this.trangThai = trangThai;
+        this.moTa = moTa;
+    }
+
+    public DoiHangChiTiet(String maDHCT, DoiHang doiHang, ChiTietHoaDon chiTietHoaDon, ChiTietSanPham chiTietSanPham, boolean trangThai, String moTa) {
+        this.maDHCT = maDHCT;
+        this.doiHang = doiHang;
+        this.chiTietHoaDon = chiTietHoaDon;
+        this.chiTietSanPham = chiTietSanPham;
+        this.trangThai = trangThai;
+        this.moTa = moTa;
+    }
+    
     public DoiHangChiTiet(String maDHCT, DoiHang doiHang, ChiTietHoaDon chiTietHoaDon, ChiTietSanPham chiTietSanPham, int soLuong, boolean trangThai, String moTa) {
         this.maDHCT = maDHCT;
         this.doiHang = doiHang;

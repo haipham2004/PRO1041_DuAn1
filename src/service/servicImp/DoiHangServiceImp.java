@@ -13,7 +13,8 @@ import service.AdamStore;
  *
  * @author Admin
  */
-public class DoiHangServiceImp implements AdamStore<DoiHang, String>{
+public class DoiHangServiceImp implements AdamStore<DoiHang, String> {
+
     DoiHangRepository repo = new DoiHangRepository();
 
     @Override
@@ -43,7 +44,7 @@ public class DoiHangServiceImp implements AdamStore<DoiHang, String>{
 
     @Override
     public List<DoiHang> getList(String e) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return repo.getList(e);
     }
-    
+
 }
