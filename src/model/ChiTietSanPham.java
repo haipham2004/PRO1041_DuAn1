@@ -46,7 +46,9 @@ public class ChiTietSanPham {
         this.sanPham = sanPham;
     }
 
+
     public ChiTietSanPham(String maChiTietSanPham, SanPham sanPham) {
+
         this.maChiTietSanPham = maChiTietSanPham;
         this.sanPham = sanPham;
     }

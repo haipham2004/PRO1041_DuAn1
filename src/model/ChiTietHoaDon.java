@@ -30,6 +30,14 @@ public class ChiTietHoaDon {
         this.chiTietSanPham = chiTietSanPham;
     }
 
+
+    public ChiTietHoaDon(ChiTietSanPham chiTietSanPham, HoaDon hoaDon, int SoLuong) {
+        this.chiTietSanPham = chiTietSanPham;
+        this.hoaDon = hoaDon;
+        this.SoLuong = SoLuong;
+    }
+
+
     public ChiTietHoaDon(String MaHoaDonChiTiet, ChiTietSanPham chiTietSanPham, int SoLuong) {
         this.MaHoaDonChiTiet = MaHoaDonChiTiet;
         this.chiTietSanPham = chiTietSanPham;
@@ -58,6 +66,7 @@ public class ChiTietHoaDon {
         this.SoLuong = SoLuong;
         this.DonGia = DonGia;
     }
+
 
     public ChiTietHoaDon(HoaDon hoaDon) {
         this.hoaDon = hoaDon;

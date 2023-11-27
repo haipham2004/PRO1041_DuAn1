@@ -15,8 +15,6 @@ import javax.swing.table.DefaultTableModel;
 import model.Events;
 import service.servicImp.KhuyenMaiServiceImp;
 
-
-
 /**
  *
  * @author Admin
@@ -39,6 +37,9 @@ public class KhuyenMaiView extends javax.swing.JPanel {
         rdKhongDK.setSelected(true);
         rdoDangKichHoat.setSelected(true);
         txtDieuKienTT.setVisible(false);
+        if (rdKhongDK.isSelected()) {
+            txtDieuKienTT.setText(" ");
+        }
         lblVnd.setVisible(false);
         service.suaTrangThai();
         loadPageKm();
@@ -104,6 +105,7 @@ public class KhuyenMaiView extends javax.swing.JPanel {
             mucGiam = txtMucGiam.getText() + "%";
         }
         if (rdKhongDK.isSelected()) {
+            txtDieuKienTT.setText(" ");
             dieuKien = false;
         } else {
             dieuKien = true;
@@ -653,6 +655,7 @@ public class KhuyenMaiView extends javax.swing.JPanel {
 
     private void rdKhongDKMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rdKhongDKMouseClicked
         // TODO add your handling code here:
+        txtDieuKienTT.setText("");
         txtDieuKienTT.setVisible(false);
         lblVnd.setVisible(false);
     }//GEN-LAST:event_rdKhongDKMouseClicked
@@ -695,7 +698,8 @@ public class KhuyenMaiView extends javax.swing.JPanel {
             } else {
                 if (service.them(ev) > 0) {
                     JOptionPane.showMessageDialog(this, "Thêm event thành công");
-                    fillTable(service.getAll());
+//                    fillTable(service.getAll());
+                    loadPageKm();
                 } else {
                     JOptionPane.showMessageDialog(this, "Thêm event không thành công");
                 }
@@ -716,7 +720,8 @@ public class KhuyenMaiView extends javax.swing.JPanel {
                 if (service.sua(ev, ma) > 0) {
                     txtMaKM.setEnabled(false);
                     service.suaTrangThai();
-                    fillTable(service.getAll());
+//                    fillTable(service.getAll());
+                    loadPageKm();
                     JOptionPane.showMessageDialog(this, "Sửa event thành công");
                 } else {
                     JOptionPane.showMessageDialog(this, "Sửa event thất bại");
