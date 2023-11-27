@@ -31,6 +31,11 @@ public class ChiTietSanPham {
         this.trangThai = trangThai;
     }
 
+    public ChiTietSanPham(SanPham sanPham, int soLuong) {
+        this.sanPham = sanPham;
+        this.soLuong = soLuong;
+    }
+
     public ChiTietSanPham(String maChiTietSanPham, SanPham sanPham, MauSac mauSac, ChatLieu chatLieu, KichThuoc kichThuoc, int soLuong, double gia, boolean trangThai) {
         this.maChiTietSanPham = maChiTietSanPham;
         this.sanPham = sanPham;

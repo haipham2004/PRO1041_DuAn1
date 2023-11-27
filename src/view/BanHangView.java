@@ -947,6 +947,13 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
             soLuongTon = soLuongTon - soLuongMua;
             tblChiTietSanPham.setValueAt(soLuongTon, indexs, 1);
 
+            //Quân
+            //Nhớ đổi đường dẫn thư mục
+            indexHoaDonCho = tblHoaDonCho.getSelectedRow();
+            String maHD = tblHoaDonCho.getValueAt(indexHoaDonCho, 1).toString();
+            String parentDirectory = "E:";
+            String newDirectoryName = "GioHang";
+            luuGioHangVaoFile(maHD, parentDirectory, newDirectoryName);
         } catch (Exception e) {
             return;
         }
@@ -981,7 +988,7 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
         indexHoaDonCho = tblHoaDonCho.getSelectedRow();
         String fileName = "GioHang_" + tblHoaDonCho.getValueAt(indexHoaDonCho, 1) + ".csv";
         //Nhớ đổi đường dẫn thư mục
-        loadTableDataFromFile("F:\\GioHang", fileName);
+        loadTableDataFromFile("E:\\GioHang", fileName);
     }//GEN-LAST:event_tblHoaDonChoMouseClicked
 
     private void btnXoaSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaSPActionPerformed
