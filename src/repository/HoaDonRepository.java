@@ -128,9 +128,13 @@ public class HoaDonRepository {
         }
     }
     
-    public int chuyenSangDoiHang(){
+    public int chuyenSangDoiHang(String maHD){
         try {
-            sql = "";
+            sql = "Update HoaDon set TrangThai = N'Đang đổi hàng' where MaHoaDon = ?";
+            con = DBConnect.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setObject(1, maHD);
+            return ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
             return 0;

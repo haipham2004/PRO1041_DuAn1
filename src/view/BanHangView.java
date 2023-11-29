@@ -106,7 +106,6 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
         txtTienThuaBH2.setEnabled(false);
         initWebcam();
     }
-    private Point previousPosition;
 
     private void initWebcam() {
         Dimension size = WebcamResolution.QVGA.getSize();
@@ -148,88 +147,93 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
             }
 
             if (result != null) {
-                List<ChiTietSanPham> list = serviceCTSP.getList(result.getText());
-                txtTest.setText(result.getText());
-                int indexs = tblChiTietSanPham.getSelectedRow();
-                int indexGioHang = -1;
-                try {
-                    if (!serviceCTSP.checkMaQR(result.getText())) {
-                        JOptionPane.showMessageDialog(this, "Mã QR không tồn tại");
-                        return;
-                    }
-                } catch (SQLException ex) {
-                }
-                try {
-                    String input = JOptionPane.showInputDialog(this, "Mời nhập số lượng");
-                    if (input == null || input.isEmpty()) {
-                        return;
-                    }
-                    String maFake = null;
-                    int soLuongFake = 0;
-                    double giaFake = 0;
-                    String tenFake = null;
-                    int soLuongTonFake = 0;
-
-                    for (ChiTietSanPham chiTietSanPham : list) {
-                        if (chiTietSanPham.getMaChiTietSanPham().equals(result.getText())) {
-                            maFake = chiTietSanPham.getMaChiTietSanPham();
-                            soLuongFake = Integer.parseInt(input);
-                            if (soLuongFake > chiTietSanPham.getSoLuong()) {
-                                JOptionPane.showMessageDialog(this, "Số lượng không đủ");
-                                return;
-                            }
-
-                            soLuongTonFake = chiTietSanPham.getSoLuong() - soLuongFake;
-                            giaFake = chiTietSanPham.getGia();
-                            tenFake = chiTietSanPham.getSanPham().getTenSanPham();
+                indexHoaDonCho = tblHoaDonCho.getSelectedRow();
+                if (indexHoaDonCho == -1) {
+                    JOptionPane.showMessageDialog(this, "Vui lòng Tạo hoá đơn");
+                } else {
+                    List<ChiTietSanPham> list = serviceCTSP.getList(result.getText());
+                    txtTest.setText(result.getText());
+                    int indexs = tblChiTietSanPham.getSelectedRow();
+                    int indexGioHang = -1;
+                    try {
+                        if (!serviceCTSP.checkMaQR(result.getText())) {
+                            JOptionPane.showMessageDialog(this, "Mã QR không tồn tại");
+                            return;
                         }
+                    } catch (SQLException ex) {
                     }
-                    ChiTietSanPham ctsps = serviceCTSP.getOne(maFake);
-
-                    if (tblGioHang.getRowCount() > 0) {
-                        for (int i = 0; i < tblGioHang.getRowCount(); i++) {
-                            if (tblGioHang.getValueAt(i, 0) != null) {
-                                if (tblGioHang.getValueAt(i, 0).toString().equals(maFake)) {
-                                    indexGioHang = i;
-                                    break;
-                                }
-                            }
+                    try {
+                        String input = JOptionPane.showInputDialog(this, "Mời nhập số lượng");
+                        if (input == null || input.isEmpty()) {
+                            return;
                         }
-                    }
+                        String maFake = null;
+                        int soLuongFake = 0;
+                        double giaFake = 0;
+                        String tenFake = null;
+                        int soLuongTonFake = 0;
 
-                    if (indexGioHang != -1) {
                         for (ChiTietSanPham chiTietSanPham : list) {
                             if (chiTietSanPham.getMaChiTietSanPham().equals(result.getText())) {
-                                int soLuongHienTai = Integer.parseInt(tblGioHang.getValueAt(indexGioHang, 1).toString());
-                                int soLuonngSauKhiThem = soLuongHienTai + Integer.parseInt(input);
-                                if (soLuonngSauKhiThem > chiTietSanPham.getSoLuong()) {
-                                    JOptionPane.showMessageDialog(this, "Số lượng không đủ ạ");
+                                maFake = chiTietSanPham.getMaChiTietSanPham();
+                                soLuongFake = Integer.parseInt(input);
+                                if (soLuongFake > chiTietSanPham.getSoLuong()) {
+                                    JOptionPane.showMessageDialog(this, "Số lượng không đủ");
                                     return;
                                 }
-                                tblGioHang.setValueAt(soLuonngSauKhiThem, indexGioHang, 1);
-                                double thanhTienSauKhiThem = Math.round((soLuonngSauKhiThem * giaFake) * 100) / 100;
-                                tblGioHang.setValueAt(thanhTienSauKhiThem, indexGioHang, 3);
-                                soLuongTonFake = chiTietSanPham.getSoLuong() - soLuonngSauKhiThem;
+
+                                soLuongTonFake = chiTietSanPham.getSoLuong() - soLuongFake;
+                                giaFake = chiTietSanPham.getGia();
+                                tenFake = chiTietSanPham.getSanPham().getTenSanPham();
                             }
                         }
-                    } else {
-                        fillTableGioHang(tblGioHang, ctsps, soLuongFake);
-                        indexHoaDonCho = tblHoaDonCho.getSelectedRow();
-                        String maHD = tblHoaDonCho.getValueAt(indexHoaDonCho, 1).toString();
-                        String parentDirectory = "D:\\PRO1041_DuAn1";
-                        String newDirectoryName = "GioHang";
-                        luuGioHangVaoFile(maHD, parentDirectory, newDirectoryName);
-                    }
-                    for (int i = 0; i < tblChiTietSanPham.getRowCount(); i++) {
-                        if (tblChiTietSanPham.getValueAt(i, 0).equals(maFake)) {
-                            tblChiTietSanPham.setValueAt(soLuongTonFake, i, 1);
+                        ChiTietSanPham ctsps = serviceCTSP.getOne(maFake);
+
+                        if (tblGioHang.getRowCount() > 0) {
+                            for (int i = 0; i < tblGioHang.getRowCount(); i++) {
+                                if (tblGioHang.getValueAt(i, 0) != null) {
+                                    if (tblGioHang.getValueAt(i, 0).toString().equals(maFake)) {
+                                        indexGioHang = i;
+                                        break;
+                                    }
+                                }
+                            }
                         }
 
-                    }
-                    fillDonHang2();
+                        if (indexGioHang != -1) {
+                            for (ChiTietSanPham chiTietSanPham : list) {
+                                if (chiTietSanPham.getMaChiTietSanPham().equals(result.getText())) {
+                                    int soLuongHienTai = Integer.parseInt(tblGioHang.getValueAt(indexGioHang, 1).toString());
+                                    int soLuonngSauKhiThem = soLuongHienTai + Integer.parseInt(input);
+                                    if (soLuonngSauKhiThem > chiTietSanPham.getSoLuong()) {
+                                        JOptionPane.showMessageDialog(this, "Số lượng không đủ ạ");
+                                        return;
+                                    }
+                                    tblGioHang.setValueAt(soLuonngSauKhiThem, indexGioHang, 1);
+                                    double thanhTienSauKhiThem = Math.round((soLuonngSauKhiThem * giaFake) * 100) / 100;
+                                    tblGioHang.setValueAt(thanhTienSauKhiThem, indexGioHang, 3);
+                                    soLuongTonFake = chiTietSanPham.getSoLuong() - soLuonngSauKhiThem;
+                                }
+                            }
+                        } else {
+                            fillTableGioHang(tblGioHang, ctsps, soLuongFake);
+                            indexHoaDonCho = tblHoaDonCho.getSelectedRow();
+                            String maHD = tblHoaDonCho.getValueAt(indexHoaDonCho, 1).toString();
+                            String parentDirectory = "D:\\PRO1041_DuAn1";
+                            String newDirectoryName = "GioHang";
+                            luuGioHangVaoFile(maHD, parentDirectory, newDirectoryName);
+                        }
+                        for (int i = 0; i < tblChiTietSanPham.getRowCount(); i++) {
+                            if (tblChiTietSanPham.getValueAt(i, 0).equals(maFake)) {
+                                tblChiTietSanPham.setValueAt(soLuongTonFake, i, 1);
+                            }
 
-                } catch (Exception e) {
-                    e.printStackTrace();
+                        }
+                        fillDonHang2();
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         } while (true);
@@ -883,66 +887,72 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
 
         int indexs = tblChiTietSanPham.getSelectedRow();
         int indexGioHang = -1;
-        if (indexs == -1) {
-            JOptionPane.showMessageDialog(this, "Vui lòng chọn một sản phẩm");
-            return;
-        }
-        String input = JOptionPane.showInputDialog(this, "Mời nhập số lượng");
-        if (input == null || input.isEmpty()) {
-            return;
-        }
-        try {
-            int soLuongMua = Integer.parseInt(input);
-            int soLuongTon = Integer.parseInt(tblChiTietSanPham.getValueAt(indexs, 1).toString());
-            if (soLuongMua > soLuongTon) {
-                JOptionPane.showMessageDialog(this, "Số lượng không đủ");
-                return;
-            } else if (soLuongMua < 1) {
-                JOptionPane.showMessageDialog(this, "Số lượng không hợp lệ, vui lòng nhập lại");
+        indexHoaDonCho = tblHoaDonCho.getSelectedRow();
+        if (indexHoaDonCho == -1) {
+            JOptionPane.showMessageDialog(this, "Vui lòng Tạo hoá đơn");
+        } else {
+            if (indexs == -1) {
+                JOptionPane.showMessageDialog(this, "Vui lòng chọn một sản phẩm");
                 return;
             }
-            String ma = tblChiTietSanPham.getValueAt(indexs, 0).toString();
-            int soLuong = Integer.parseInt(tblChiTietSanPham.getValueAt(indexs, 1).toString());
-            double gia = Double.parseDouble(tblChiTietSanPham.getValueAt(indexs, 2).toString());
-            String ten = tblChiTietSanPham.getValueAt(indexs, 3).toString();
-            double thanhTien = Math.round((soLuong * gia) * 100) / 100;
-            ChiTietSanPham ctsps = serviceCTSP.getOne(ma);
-            if (tblGioHang.getRowCount() > 0) {
-                for (int i = 0; i < tblGioHang.getRowCount(); i++) {
-                    if (tblGioHang.getValueAt(i, 0) != null) {
-                        if (tblGioHang.getValueAt(i, 0).toString().equals(ma)) {
-                            indexGioHang = i;
-                            break;
+            String input = JOptionPane.showInputDialog(this, "Mời nhập số lượng");
+            if (input == null || input.isEmpty()) {
+                return;
+            }
+            try {
+                int soLuongMua = Integer.parseInt(input);
+                int soLuongTon = Integer.parseInt(tblChiTietSanPham.getValueAt(indexs, 1).toString());
+                if (soLuongMua > soLuongTon) {
+                    JOptionPane.showMessageDialog(this, "Số lượng không đủ");
+                    return;
+                } else if (soLuongMua < 1) {
+                    JOptionPane.showMessageDialog(this, "Số lượng không hợp lệ, vui lòng nhập lại");
+                    return;
+                }
+                String ma = tblChiTietSanPham.getValueAt(indexs, 0).toString();
+                int soLuong = Integer.parseInt(tblChiTietSanPham.getValueAt(indexs, 1).toString());
+                double gia = Double.parseDouble(tblChiTietSanPham.getValueAt(indexs, 2).toString());
+                String ten = tblChiTietSanPham.getValueAt(indexs, 3).toString();
+                double thanhTien = Math.round((soLuong * gia) * 100) / 100;
+                ChiTietSanPham ctsps = serviceCTSP.getOne(ma);
+                if (tblGioHang.getRowCount() > 0) {
+                    for (int i = 0; i < tblGioHang.getRowCount(); i++) {
+                        if (tblGioHang.getValueAt(i, 0) != null) {
+                            if (tblGioHang.getValueAt(i, 0).toString().equals(ma)) {
+                                indexGioHang = i;
+                                break;
+                            }
                         }
                     }
                 }
-            }
-            if (indexGioHang != -1) {
-                int soLuongHienTai = Integer.parseInt(tblGioHang.getValueAt(indexGioHang, 1).toString());
-                int soLuonngSauKhiThem = soLuongHienTai + Integer.parseInt(input);
-                tblGioHang.setValueAt(soLuonngSauKhiThem, indexGioHang, 1);
-                double thanhTienSauKhiThem = Math.round((soLuonngSauKhiThem * gia) * 100) / 100;
-                tblGioHang.setValueAt(thanhTienSauKhiThem, indexGioHang, 3);
+                if (indexGioHang != -1) {
+                    int soLuongHienTai = Integer.parseInt(tblGioHang.getValueAt(indexGioHang, 1).toString());
+                    int soLuonngSauKhiThem = soLuongHienTai + Integer.parseInt(input);
+                    tblGioHang.setValueAt(soLuonngSauKhiThem, indexGioHang, 1);
+                    double thanhTienSauKhiThem = Math.round((soLuonngSauKhiThem * gia) * 100) / 100;
+                    tblGioHang.setValueAt(thanhTienSauKhiThem, indexGioHang, 3);
 
-            } else {
-                fillTableGioHang(tblGioHang, ctsps, Integer.parseInt(input));
+                } else {
+                    fillTableGioHang(tblGioHang, ctsps, Integer.parseInt(input));
+
+                    //Quân
+                    //Nhớ đổi đường dẫn thư mục
+                    indexHoaDonCho = tblHoaDonCho.getSelectedRow();
+                    String maHD = tblHoaDonCho.getValueAt(indexHoaDonCho, 1).toString();
+                    String parentDirectory = "D:\\PRO1041_DuAn1";
+
+                    String newDirectoryName = "GioHang";
+                    luuGioHangVaoFile(maHD, parentDirectory, newDirectoryName);
+                }
+                soLuongTon = soLuongTon - soLuongMua;
+                tblChiTietSanPham.setValueAt(soLuongTon, indexs, 1);
+                fillDonHang2();
 
                 //Quân
                 //Nhớ đổi đường dẫn thư mục
-                indexHoaDonCho = tblHoaDonCho.getSelectedRow();
-                String maHD = tblHoaDonCho.getValueAt(indexHoaDonCho, 1).toString();
-                String parentDirectory = "D:\\PRO1041_DuAn1";
-
-                String newDirectoryName = "GioHang";
-                luuGioHangVaoFile(maHD, parentDirectory, newDirectoryName);
+            } catch (Exception e) {
+                return;
             }
-            soLuongTon = soLuongTon - soLuongMua;
-            tblChiTietSanPham.setValueAt(soLuongTon, indexs, 1);
-            fillDonHang2();
-            //Quân
-            //Nhớ đổi đường dẫn thư mục
-        } catch (Exception e) {
-            return;
         }
     }//GEN-LAST:event_btnThemGioHangActionPerformed
 
