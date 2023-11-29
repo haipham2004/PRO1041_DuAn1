@@ -1,9 +1,7 @@
 
-<<<<<<< HEAD
-=======
+
 ﻿--bản full
 ﻿----Update:2023-11-25--lúc 14g32p--okela
->>>>>>> 3660feb27028b0151f68056db1b8e15c408d6acd
 
 CREATE DATABASE AdamStores
 GO
@@ -170,16 +168,9 @@ CREATE TABLE [DoiHangChiTiet] (
    CONSTRAINT FK_DHCT_SPCT foreign key(MaCTSP) references ChiTietSanPham(MaCTSP),
   [MaDoiHang] varchar(10) not null,
    CONSTRAINT FK_DHCT_DH foreign key(MaDoiHang) references DoiHang(MaDoiHang),
-<<<<<<< HEAD
-=======
    [MaHoaDonChiTiet] varchar(20) not null,
-<<<<<<< HEAD
    CONSTRAINT FK_DHCT_HDCT foreign key(MaHoaDonChiTiet) references HoaDonChiTiet(MaHoaDonChiTiet),
    [SoLuong] int,
-=======
-   CONSTRAINT FK_DHCT_DHCT foreign key(MaHoaDonChiTiet) references HoaDonChiTiet(MaHoaDonChiTiet),
->>>>>>> 3660feb27028b0151f68056db1b8e15c408d6acd
->>>>>>> bb02dcbf75111fb1840c4a802733e8a54b499e97
   [MoTa] nvarchar(MAX),
   [TrangThai] bit,
   PRIMARY KEY ([MaDHCT])
