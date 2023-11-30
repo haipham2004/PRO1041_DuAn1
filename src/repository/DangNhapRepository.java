@@ -60,4 +60,23 @@ public class DangNhapRepository {
             return null;
         }
     }
+    
+    public String getMaNhanVien(String username) {
+        String maNhanVien = null;
+        try {
+            conn = DBConnect.getConnection();
+            sql = "Select NV.MaNV From TaiKhoan TK Join NhanVien NV \n"
+                    + "ON TK.MaTK = NV.MaTK where TK.UserName = ?";
+            pst = conn.prepareStatement(sql);
+            pst.setObject(1, username);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                maNhanVien = rs.getString(1);
+            }
+            return maNhanVien;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }

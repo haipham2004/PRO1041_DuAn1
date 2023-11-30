@@ -28,7 +28,6 @@ public class SanPham {
     public SanPham(int tongSP) {
         this.tongSP = tongSP;
     }
-
     public int getTongSP() {
         return tongSP;
     }
@@ -94,6 +93,7 @@ public class SanPham {
     public void setXuatXu(String xuatXu) {
         this.xuatXu = xuatXu;
     }
+
 
     @Override
     public String toString() {

@@ -6,6 +6,7 @@ package service.servicImp;
 
 import java.util.List;
 import model.NhanVien;
+import model.TaiKhoan;
 
 import repository.NhanVienRepository;
 import service.AdamStore;
@@ -16,6 +17,9 @@ import service.AdamStore;
  */
 public class NhanVienServiceImp implements AdamStore<NhanVien, String>{
     NhanVienRepository repo = new NhanVienRepository();
+    public TaiKhoan getTK(String ma){
+        return repo.getTK(ma);
+    }
 
     @Override
     public List<NhanVien> getAll() {
@@ -61,5 +65,11 @@ public class NhanVienServiceImp implements AdamStore<NhanVien, String>{
     }
     public NhanVien timTheoUserName(String e) {
         return repo.timTheoUserName(e);
+    }
+    public int insertTK(TaiKhoan tk){
+        return repo.insertTK(tk);
+    }
+    public int updateTK(TaiKhoan tk) {
+        return repo.updateTK(tk);
     }
 }

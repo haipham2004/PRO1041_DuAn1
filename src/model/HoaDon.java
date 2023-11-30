@@ -17,12 +17,16 @@ public class HoaDon {
     private KhachHang khachHang;
     private Date ngayTao;
     private double tongTien;
-    private boolean trangThai;
+    private String trangThai;
     private String ghiChu;
     private Events voucher;
     private int soLuongHoaDon;
 
     public HoaDon() {
+    }
+
+    public HoaDon(int soLuongHoaDon) {
+        this.soLuongHoaDon = soLuongHoaDon;
     }
 
     public HoaDon(String maHoaDon, Date ngayTao) {
@@ -61,14 +65,14 @@ public class HoaDon {
         this.soLuongHoaDon = soLuongHoaDon;
     }
 
-    public HoaDon(String maHoaDon, NhanVien nhanVien, Date ngayTao, boolean trangThai) {
+    public HoaDon(String maHoaDon, NhanVien nhanVien, Date ngayTao, String trangThai) {
         this.maHoaDon = maHoaDon;
         this.nhanVien = nhanVien;
         this.ngayTao = ngayTao;
         this.trangThai = trangThai;
     }
 
-    public HoaDon(String maHoaDon, NhanVien nhanVien, KhachHang khachHang, Date ngayTao, double tongTien, boolean trangThai, String ghiChu, Events voucher) {
+    public HoaDon(String maHoaDon, NhanVien nhanVien, KhachHang khachHang, Date ngayTao, double tongTien, String trangThai, String ghiChu, Events voucher) {
         this.maHoaDon = maHoaDon;
         this.nhanVien = nhanVien;
         this.khachHang = khachHang;
@@ -79,7 +83,7 @@ public class HoaDon {
         this.voucher = voucher;
     }
 
-    public HoaDon(String maHoaDon, NhanVien nhanVien, KhachHang khachHang, Date ngayTao, double tongTien, boolean trangThai, String ghiChu) {
+    public HoaDon(String maHoaDon, NhanVien nhanVien, KhachHang khachHang, Date ngayTao, double tongTien, String trangThai, String ghiChu) {
         this.maHoaDon = maHoaDon;
         this.nhanVien = nhanVien;
         this.khachHang = khachHang;
@@ -141,11 +145,11 @@ public class HoaDon {
         this.tongTien = tongTien;
     }
 
-    public boolean isTrangThai() {
+    public String getTrangThai() {
         return trangThai;
     }
 
-    public void setTrangThai(boolean trangThai) {
+    public void setTrangThai(String trangThai) {
         this.trangThai = trangThai;
     }
 
@@ -163,13 +167,5 @@ public class HoaDon {
 
     public void setVoucher(Events voucher) {
         this.voucher = voucher;
-    }
-
-    public String chiTietTrangThai() {
-        if (trangThai) {
-            return "Đã thanh toán";
-        } else {
-            return "Chờ thanh toán";
-        }
     }
 }

@@ -126,19 +126,6 @@ public class ChiTietSanPhamRepository {
         }
     }
 
-    public boolean checkExitCTSP(String maCTSP) throws SQLException {
-        conn = DBConnect.getConnection();
-        sql = "SELECT*FROM ChiTietSanPham where MaCTSP=?";
-        pst = conn.prepareStatement(sql);
-        pst.setString(1, maCTSP);
-        rs = pst.executeQuery();
-        if (rs.next()) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
     public List<ChiTietSanPham> getList(String name) {
         List<ChiTietSanPham> listChiTietSanPham3 = new ArrayList<>();
         try {
@@ -232,7 +219,7 @@ public class ChiTietSanPhamRepository {
         return listChiTietSanPham2;
     }
 
-    public List<ChiTietSanPham> listPageCTSP(int index) {
+    public List<ChiTietSanPham> listPageCTSP(int index, String name) {
         List<ChiTietSanPham> listChiTietSanPham3 = new ArrayList<>();
         try {
             conn = DBConnect.getConnection();
@@ -241,11 +228,13 @@ public class ChiTietSanPhamRepository {
                     + "FROM ChiTietSanPham CTSP INNER JOIN ChatLieu CL On CL.MaChatLieu=CTSP.MaChatLieu\n"
                     + "INNER JOIn MauSac MS ON MS.MaMauSac=CTSP.MaMauSac\n"
                     + "INNER JOIN KichThuoc KT ON KT.MaKichThuoc=CTSP.MaKichThuoc \n"
-                    + "INNER JOIN SanPham SP ON CTSP.MaSanPham=SP.MaSanPham \n"
+                    + "INNER JOIN SanPham SP ON CTSP.MaSanPham=SP.MaSanPham where SP.TenSanPham like ?\n"
                     + "order by CTSP.TrangThai DESC\n"
-                    + "offset ? rows fetch next 4 rows only";
+                    + "offset ? rows fetch next 5 rows only";
             pst = conn.prepareStatement(sql);
-            pst.setInt(1, (index - 1) * 4);
+            pst.setString(1, '%' + name + '%');
+            pst.setInt(2, (index - 1) * 5);
+
             rs = pst.executeQuery();
             while (rs.next()) {
                 SanPham sp = new SanPham(rs.getString(2), rs.getString(3));
@@ -261,6 +250,37 @@ public class ChiTietSanPhamRepository {
             return null;
         }
         return listChiTietSanPham3;
+    }
+    
+    public List<ChiTietSanPham> listPageCTSP2(int index) {
+        List<ChiTietSanPham> listChiTietSanPham5 = new ArrayList<>();
+        try {
+            conn = DBConnect.getConnection();
+            sql = "SELECT CTSP.MaCTSP,CTSP.MaSanPham,SP.TenSanPham,MS.MaMauSac,MS.TenMauSac,CL.MaChatLieu,CL.TenChatLieu,\n"
+                    + "KT.MaKichThuoc,KT.TenKichThuoc,CTSP.SoLuong,CTSP.Gia,CTSP.TrangThai\n"
+                    + "FROM ChiTietSanPham CTSP INNER JOIN ChatLieu CL On CL.MaChatLieu=CTSP.MaChatLieu\n"
+                    + "INNER JOIn MauSac MS ON MS.MaMauSac=CTSP.MaMauSac\n"
+                    + "INNER JOIN KichThuoc KT ON KT.MaKichThuoc=CTSP.MaKichThuoc \n"
+                    + "INNER JOIN SanPham SP ON CTSP.MaSanPham=SP.MaSanPham \n"
+                    + "order by CTSP.TrangThai DESC\n"
+                    + "offset ? rows fetch next 5 rows only";
+            pst = conn.prepareStatement(sql);
+            pst.setInt(1, (index - 1) * 5);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                SanPham sp = new SanPham(rs.getString(2), rs.getString(3));
+                MauSac ms = new MauSac(rs.getString(4), rs.getString(5));
+                ChatLieu cl = new ChatLieu(rs.getString(6), rs.getString(7));
+                KichThuoc kt = new KichThuoc(rs.getString(8), rs.getString(9));
+                ChiTietSanPham ctsp = new ChiTietSanPham(rs.getString(1), sp,
+                        ms, cl, kt, rs.getInt(10), rs.getDouble(11), rs.getBoolean(12));
+                listChiTietSanPham5.add(ctsp);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+        return listChiTietSanPham5;
     }
 
     public List<ChiTietSanPham> getDanhSachSPCT(String maHoadon) {
@@ -288,7 +308,27 @@ public class ChiTietSanPhamRepository {
         }
     }
 
-    public int tongBanGhi() {
+    public int tongBanGhi(String name) {
+        int tong = 0;
+        try {
+            conn = DBConnect.getConnection();
+            sql = "SELECT COUNT(*) FROM ChiTietSanPham CTSP\n"
+                    + "INNER JOIN SanPham SP ON SP.MaSanPham=CTSP.MaSanPham\n"
+                    + "where SP.TenSanPham like ?";
+            pst = conn.prepareStatement(sql);
+            pst.setString(1, name);
+            rs = pst.executeQuery();
+            if (rs.next()) {
+                tong = rs.getInt(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
+        return tong;
+    }
+    
+    public int tongBanGhi2() {
         int tong = 0;
         try {
             conn = DBConnect.getConnection();
@@ -322,17 +362,20 @@ public class ChiTietSanPhamRepository {
         }
     }
 
-    public boolean checkMaQR(String qrCode) throws SQLException {
-        conn = DBConnect.getConnection();
-        sql = "SELECT * FROM ChiTietSanPham WHERE qrCode=?";
-        pst = conn.prepareStatement(sql);
-        pst.setString(1, qrCode);
-        rs = pst.executeQuery();
-        if (rs.next()) {
-            return true;
-        } else {
-            return false;
+    public boolean checkMaQR(String qrCode) {
+        try {
+            Connection conn = DBConnect.getConnection();
+            String sql = "SELECT * FROM ChiTietSanPham WHERE qrCode=?";
+            pst = conn.prepareStatement(sql);
+            pst.setString(1, qrCode);
+            rs = pst.executeQuery();
+            if (rs.next()) {
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
+        return false;
     }
 
     public int taoQR(String qrCode) {
@@ -349,38 +392,31 @@ public class ChiTietSanPhamRepository {
         }
     }
 
-    public boolean checkTrungCTSP(String name) throws SQLException {
-        conn = DBConnect.getConnection();
-        sql = "SELECT DISTINCT MaChatLieu,MaMauSac,MaKichThuoc\n"
-                + "FROM ChiTietSanPham CTSP\n"
-                + "INNER JOIN SanPham SP On CTSP.MaSanPham=SP.MaSanPham\n"
-                + "WHERE SP.TenSanPham like ?";
-        pst = conn.prepareStatement(sql);
-        pst.setString(1, '%' + name + '%');
-        rs = pst.executeQuery();
-        if (rs.next()) {
-            return true;
-        } else {
-            return false;
+    public boolean checkTrungCTSP(String name1, String name2, String name3, String name4) {
+        try {
+            Connection conn = DBConnect.getConnection();
+            String sql = "SELECT CTSP.MaChatLieu, CTSP.MaMauSac, CTSP.MaKichThuoc\n"
+                    + "FROM ChiTietSanPham CTSP INNER JOIN SanPham SP ON SP.MaSanPham = CTSP.MaSanPham\n"
+                    + "INNER JOIN ChatLieu CL ON CTSP.MaChatLieu = CL.MaChatLieu\n"
+                    + "INNER JOIN MauSac MS ON CTSP.MaMauSac = MS.MaMauSac\n"
+                    + "INNER JOIN KichThuoc KT ON CTSP.MaKichThuoc = KT.MaKichThuoc\n"
+                    + "WHERE CL.TenChatLieu LIKE ? AND MS.TenMauSac LIKE ? AND KT.TenKichThuoc LIKE ? and SP.TenSanPham like ?\n"
+                    + "GROUP BY CTSP.MaChatLieu, CTSP.MaMauSac, CTSP.MaKichThuoc\n"
+                    + "HAVING COUNT(*) >= 1";
+            pst = conn.prepareStatement(sql);
+            pst.setObject(1, name1);
+            pst.setObject(2, name2);
+            pst.setObject(3, name3);
+            pst.setObject(4, name4);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
+        return false;
     }
 
-    public int sua2(List<HoaDonChiTiet> list) {
-        int so = 0;
-        try {
-            conn = DBConnect.getConnection();
-            sql = "UPDATE ChiTietSanPham set SoLuong=SoLuong-?\n"
-                    + "where MaCTSP=?";
-            pst = conn.prepareStatement(sql);
-            for (HoaDonChiTiet ctsp : list) {
-                pst.setObject(2, ctsp.getCtsp().getMaChiTietSanPham());
-                pst.setObject(1, ctsp.getSoLuong());
-                so += pst.executeUpdate();
-            }
-            return so;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return 0;
-        }
-    }
+    
 }

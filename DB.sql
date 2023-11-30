@@ -1,7 +1,5 @@
-
-﻿--bản full
-﻿----Update:2023-11-25--lúc 14g32p--okela
-
+--bản full
+﻿----Update:2023-11-30--lúc 13g02p--okela
 CREATE DATABASE AdamStores
 GO
 USE AdamStores
@@ -49,7 +47,7 @@ CREATE TABLE [Events] (
   [ThoiGianKetThuc] date,
   [MoTa] nvarchar(100),
   [TrangThai] bit,
-  [DieuKienApDung] bit,--1:tien--0%
+  [DieuKienApDung] bit,
   [DieuKienTongTien] nvarchar(50)
   PRIMARY KEY ([MaEV])
 );
@@ -59,27 +57,19 @@ CREATE TABLE [HoaDon] (
   [MaHoaDon] varchar(10),
   [MaNV] varchar(10) not null,
   CONSTRAINT FK_HD_NV foreign key(MaNV) references NhanVien(MaNV),
-  [MaKH] varchar(10) not null,
+  [MaKH] varchar(10),
   CONSTRAINT FK_HD_KH foreign key(MaKH) references KhachHang(MaKH),
   [NgayTao] datetime,
   [TongTien] Money,
   [TongTienKM] Money,
   [TongTienSauKM] Money,
-  [TrangThai] bit,
+  [TrangThai] nvarchar(30),
   [GhiChu] nvarchar(100),
    [MaEV] varchar(10),
    CONSTRAINT FK_HD_EV foreign key(MaEV) references Events(MaEV),
   PRIMARY KEY ([MaHoaDon])
 );
 
-CREATE TABLE [DoiTra] (
-  [MaDoiTra] varchar(10),
-  [MaHoaDon] varchar(10) not null,
-  CONSTRAINT FK_DT_HD foreign key(MaHoaDon) references HoaDon(MaHoaDon),
-  [NgayDoiTra] date,
-  [TrangThai] bit,
-  PRIMARY KEY ([MaDoiTra])
-);
 
 CREATE TABLE [LoaiSanPham] (
   [MaLSP] varchar(10),
@@ -138,7 +128,7 @@ CREATE TABLE [ChiTietSanPham] (
 
 
 CREATE TABLE [HoaDonChiTiet] (
-  [MaHoaDonChiTiet] varchar(20),
+  [MaHoaDonChiTiet] varchar(10),
   [MaCTSP] varchar(10) not null,
    CONSTRAINT FK_HDCT_SPCT foreign key(MaCTSP) references ChiTietSanPham(MaCTSP),
    [MaHoaDon] varchar(10) not null,
@@ -165,13 +155,13 @@ CREATE TABLE [DoiHangChiTiet] (
   [MaDHCT] varchar(10),
   [MaCTSP] varchar(10) not null,
    CONSTRAINT FK_DHCT_SPCT foreign key(MaCTSP) references ChiTietSanPham(MaCTSP),
-   [MaDoiHang] varchar(10) not null,
+  [MaDoiHang] varchar(10) not null,
    CONSTRAINT FK_DHCT_DH foreign key(MaDoiHang) references DoiHang(MaDoiHang),
-   [MaHoaDonChiTiet] varchar(20) not null,
-   CONSTRAINT FK_DHCT_DHCT foreign key(MaHoaDonChiTiet) references HoaDonChiTiet(MaHoaDonChiTiet),
+   [MaHoaDonChiTiet] varchar(10) not null,
+   CONSTRAINT FK_DHCT_HDCT foreign key(MaHoaDonChiTiet) references HoaDonChiTiet(MaHoaDonChiTiet),
+   [SoLuong] int,
   [MoTa] nvarchar(MAX),
   [TrangThai] bit,
   PRIMARY KEY ([MaDHCT])
 );
 
---Update:2023-11-08--

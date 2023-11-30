@@ -30,6 +30,7 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.PasswordAuthentication;
 import java.text.DecimalFormat;
@@ -98,8 +99,8 @@ public class ThongKeSLView extends javax.swing.JPanel {
     public ThongKeSLView() {
         initComponents();
         this.setSize(1300, 755);
-//        setDataToChart(panelChartHoaDon);
-//        setDataToChart2(panelTopSP);
+        setDataToChart(panelChartHoaDon);
+        setDataToChart2(panelTopSP);
     }
 
     public void setDataToChart(JPanel panelHoaDon) {
@@ -124,7 +125,7 @@ public class ThongKeSLView extends javax.swing.JPanel {
             panelHoaDon.repaint();
             try {
                 final ChartRenderingInfo info1 = new ChartRenderingInfo(new StandardEntityCollection());
-                final File file1 = new File("ChartHD.png");
+                final File file1 = new File("F:\\FPT Polytechnic\\DA1\\PRO1041_DuAn1\\ChartImage\\ChartHD.png");
                 ChartUtilities.saveChartAsPNG(file1, lineChart, 859, 236, info1);
             } catch (Exception e) {
             }
@@ -152,7 +153,7 @@ public class ThongKeSLView extends javax.swing.JPanel {
         panelTopSP.repaint();
         try {
             final ChartRenderingInfo info2 = new ChartRenderingInfo(new StandardEntityCollection());
-            final File file2 = new File("ChartTop.png");
+            final File file2 = new File("F:\\FPT Polytechnic\\DA1\\PRO1041_DuAn1\\ChartImage\\ChartTop.png");
             ChartUtilities.saveChartAsPNG(file2, barChart, 859, 236, info2);
         } catch (Exception e) {
         }
@@ -167,10 +168,10 @@ public class ThongKeSLView extends javax.swing.JPanel {
         String formattedDateTime = currentDateTime.format(formatter);
         DecimalFormat df = new DecimalFormat("#,###");
 
-        String path = "F:\\PDF\\" + "Baocaothongke" + ".pdf";
+        String path = "F:\\FPT Polytechnic\\DA1\\PRO1041_DuAn1\\PDF\\" + "Thongkesoluong" + ".pdf";
         PdfWriter pdfWriter = new PdfWriter(path);
         PdfDocument pdfDocument = new PdfDocument(pdfWriter);
-//        pdfDocument.setDefaultPageSize(PageSize.A4);
+        pdfDocument.setDefaultPageSize(PageSize.A4);
         Document document = new Document(pdfDocument);
 
         String imgPath = "src\\img\\logo.png";
@@ -180,7 +181,7 @@ public class ThongKeSLView extends javax.swing.JPanel {
         img2.setOpacity(0.2f);
         document.add(img2);
 
-        String imgPath2 = "F:\\FPT Polytechnic\\DA1\\PRO1041_DuAn1\\ChartHD.png";
+        String imgPath2 = "F:\\FPT Polytechnic\\DA1\\PRO1041_DuAn1\\ChartImage\\ChartHD.png";
         ImageData imgData2 = ImageDataFactory.create(imgPath2);
         Image img3 = new Image(imgData2);
         img3.setHeight(300);
@@ -188,7 +189,7 @@ public class ThongKeSLView extends javax.swing.JPanel {
         img3.setFixedPosition(60, 400f);
         document.add(img3);
 
-        String imgPath3 = "F:\\FPT Polytechnic\\DA1\\PRO1041_DuAn1\\ChartTop.png";
+        String imgPath3 = "F:\\FPT Polytechnic\\DA1\\PRO1041_DuAn1\\ChartImage\\ChartTop.png";
         ImageData imgData3 = ImageDataFactory.create(imgPath3);
         Image img4 = new Image(imgData3);
         img4.setHeight(300);
@@ -213,8 +214,6 @@ public class ThongKeSLView extends javax.swing.JPanel {
 
     }
 
-    
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -232,7 +231,7 @@ public class ThongKeSLView extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         txtNgayKT = new com.toedter.calendar.JDateChooser();
-        btnXuatExcel = new javax.swing.JToggleButton();
+        btnXuatPDF = new javax.swing.JToggleButton();
         btnGuiEmail = new javax.swing.JToggleButton();
         btnTimKiem = new javax.swing.JToggleButton();
         panelChartHoaDon = new javax.swing.JPanel();
@@ -249,16 +248,21 @@ public class ThongKeSLView extends javax.swing.JPanel {
 
         jLabel3.setText("Đến");
 
-        btnXuatExcel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/pdf.png"))); // NOI18N
-        btnXuatExcel.setText("Xuất PDF");
-        btnXuatExcel.addActionListener(new java.awt.event.ActionListener() {
+        btnXuatPDF.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/pdf.png"))); // NOI18N
+        btnXuatPDF.setText("Xuất PDF");
+        btnXuatPDF.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnXuatExcelActionPerformed(evt);
+                btnXuatPDFActionPerformed(evt);
             }
         });
 
         btnGuiEmail.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/new (1).png"))); // NOI18N
         btnGuiEmail.setText("Gửi Email");
+        btnGuiEmail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuiEmailActionPerformed(evt);
+            }
+        });
 
         btnTimKiem.setText("Tìm Kiếm");
         btnTimKiem.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -290,7 +294,7 @@ public class ThongKeSLView extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addComponent(btnTimKiem)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnXuatExcel)
+                .addComponent(btnXuatPDF)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnGuiEmail)
                 .addGap(26, 26, 26))
@@ -301,7 +305,7 @@ public class ThongKeSLView extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnXuatExcel)
+                        .addComponent(btnXuatPDF)
                         .addComponent(btnGuiEmail)
                         .addComponent(btnTimKiem))
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -431,7 +435,7 @@ public class ThongKeSLView extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnXuatExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXuatExcelActionPerformed
+    private void btnXuatPDFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXuatPDFActionPerformed
         try {
             // TODO add your handling code here:
             genPDF();
@@ -441,7 +445,7 @@ public class ThongKeSLView extends javax.swing.JPanel {
             Logger.getLogger(ThongKeSLView.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-    }//GEN-LAST:event_btnXuatExcelActionPerformed
+    }//GEN-LAST:event_btnXuatPDFActionPerformed
 
     private void btnTimKiemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTimKiemMouseClicked
         // TODO add your handling code here:
@@ -476,11 +480,18 @@ public class ThongKeSLView extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnTimKiemActionPerformed
 
+    private void btnGuiEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuiEmailActionPerformed
+        // TODO add your handling code here:
+        SendEmailView sendEmail = new SendEmailView();
+        sendEmail.setVisible(true);
+        
+    }//GEN-LAST:event_btnGuiEmailActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton btnGuiEmail;
     private javax.swing.JToggleButton btnTimKiem;
-    private javax.swing.JToggleButton btnXuatExcel;
+    private javax.swing.JToggleButton btnXuatPDF;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

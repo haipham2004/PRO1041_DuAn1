@@ -18,12 +18,19 @@ import repository.DangNhapRepository;
  * @author Admin
  */
 public class DangNhapView extends javax.swing.JFrame {
-
     private DangNhapRepository repository = new DangNhapRepository();
     AdamStoreView adamStoreView = new AdamStoreView();
-    BanHangView banHangView = new BanHangView();
     private static String tenNV;
+    private static String maNV;
     private static String taiKhoan;
+
+    public String getMaNV() {
+        return maNV;
+    }
+
+    public void setMaNV(String maNV) {
+        DangNhapView.maNV = maNV;
+    }
 
     public String getTenNV() {
         return tenNV;
@@ -233,6 +240,7 @@ public class DangNhapView extends javax.swing.JFrame {
             String passWord = String.valueOf(txtMatKhau.getText());
             if (repository.checkNguoiDungTonTai(userName, passWord)) {
                 tenNV = repository.getTenNhanVien(userName);
+                maNV = repository.getMaNhanVien(userName);
                 adamStoreView.setTenNV(tenNV);
                 this.setVisible(false);
                 adamStoreView.setVisible(true);

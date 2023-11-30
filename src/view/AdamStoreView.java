@@ -37,7 +37,6 @@ public class AdamStoreView extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         execute();
         changePanelBody(new ThongKeSLView());
-
     }
 
     public void changePanelBody(JPanel panel) {
@@ -89,8 +88,14 @@ public class AdamStoreView extends javax.swing.JFrame {
                 changePanelBody(new ThongKeSLView());
             }
         });
+        MenuItem menuThongKe3 = new MenuItem(iconDot, "Thống kê khác", new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                changePanelBody(new ThongKeKhacView());
+            }
+        });
         // Sản phẩm chung
-        MenuItem menuThongKe = new MenuItem(iconThongKe, "Thống kê", null, menuThongKeDT, menuThongKeSL);
+        MenuItem menuThongKe = new MenuItem(iconThongKe, "Thống kê", null, menuThongKeDT, menuThongKeSL, menuThongKe3);
         //Thanh bên trong sản phẩm
         MenuItem menuSanPham1 = new MenuItem(iconDot, "Sản phẩm", new ActionListener() {
             @Override
@@ -113,7 +118,7 @@ public class AdamStoreView extends javax.swing.JFrame {
             }
         });
         // Sản phẩm chung
-        MenuItem menuMatHang = new MenuItem(iconSanPham, "Mặt hàng", null, menuSanPham1, menuCtsp, menuThuoctinh);
+        MenuItem menuMatHang = new MenuItem(iconSanPham, "Mặt hàng", null, menuSanPham1, menuThuoctinh);
         //Nhân viên
         MenuItem menuNhanVien = new MenuItem(iconNhanVien, "Nhân viên", new ActionListener() {
             @Override
@@ -195,7 +200,6 @@ public class AdamStoreView extends javax.swing.JFrame {
         MenuItemColor(menuThongKe);
         MenuItemColor(menuMatHang);
         MenuItemColor(menuSanPham1);
-        MenuItemColor(menuCtsp);
         MenuItemColor(menuThuoctinh);
         MenuItemColor(menuNhanVien);
         MenuItemColor(menuBanHang);
@@ -206,6 +210,7 @@ public class AdamStoreView extends javax.swing.JFrame {
         MenuItemColor(menuLsuDoiHang);
         MenuItemColor(menuThongKeDT);
         MenuItemColor(menuThongKeSL);
+        MenuItemColor(menuThongKe3);
         MenuItemColor(menuDoiMatKhau);
         MenuItemColor(menuDangXuat);
     }
