@@ -74,7 +74,7 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
     ChiTietSanPhamServiceImp serviceCTSP = new ChiTietSanPhamServiceImp();
     DefaultComboBoxModel<Events> cbxEvents = new DefaultComboBoxModel<>();
     static int indexHoaDonCho = -1;
-     int trangCTSP = 1, soTrangCTSP, tongBanGhiCTSP, index = -1;
+    int trangCTSP = 1, soTrangCTSP, tongBanGhiCTSP, index = -1;
     String userName;
     HoaDonServiceImp serviceHD = new HoaDonServiceImp();
     DefaultTableModel molHDC = new DefaultTableModel();
@@ -296,7 +296,7 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
         };
         dtm.insertRow(0, rowData);
     }
-    
+
     public void loadPageCTSP() {
         String tenPage = new SanPhamView().getTenSPs(null, new SanPhamView().getTenSanPham());
         tongBanGhiCTSP = serviceCTSP.tongBanGhi2();
@@ -1191,8 +1191,7 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
     private void btnDau2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDau2ActionPerformed
         // TODO add your handling code here:
         trangCTSP = 1;
-        String tenPage = new SanPhamView().getTenSPs(null, new SanPhamView().getTenSanPham());
-        fillTableChiTietSanPham(serviceCTSP.listPageCTSP(trangCTSP, tenPage));
+        fillTableChiTietSanPham(serviceCTSP.listPageCTSP2(trangCTSP));
         lbSoTrang2.setText(trangCTSP + " of " + soTrangCTSP);
     }//GEN-LAST:event_btnDau2ActionPerformed
 
@@ -1200,8 +1199,7 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
         // TODO add your handling code here:
         if (trangCTSP > 1) {
             trangCTSP--;
-            String tenPage = new SanPhamView().getTenSPs(null, new SanPhamView().getTenSanPham());
-            fillTableChiTietSanPham(serviceCTSP.listPageCTSP(trangCTSP, tenPage));
+            fillTableChiTietSanPham(serviceCTSP.listPageCTSP2(trangCTSP));
             lbSoTrang2.setText(trangCTSP + " of " + soTrangCTSP);
         }
     }//GEN-LAST:event_btnLui2ActionPerformed
@@ -1210,8 +1208,7 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
         // TODO add your handling code here:
         if (trangCTSP < soTrangCTSP) {
             trangCTSP++;
-            String tenPage = new SanPhamView().getTenSPs(null, new SanPhamView().getTenSanPham());
-            fillTableChiTietSanPham(serviceCTSP.listPageCTSP(trangCTSP, tenPage));
+            fillTableChiTietSanPham(serviceCTSP.listPageCTSP2(trangCTSP));
             lbSoTrang2.setText(trangCTSP + " of " + soTrangCTSP);
         }
     }//GEN-LAST:event_btnTien2ActionPerformed
@@ -1219,8 +1216,7 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
     private void btnCuoi2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCuoi2ActionPerformed
         // TODO add your handling code here:
         trangCTSP = soTrangCTSP;
-        String tenPage = new SanPhamView().getTenSPs(null, new SanPhamView().getTenSanPham());
-        fillTableChiTietSanPham(serviceCTSP.listPageCTSP(trangCTSP, tenPage));
+        fillTableChiTietSanPham(serviceCTSP.listPageCTSP2(trangCTSP));
         lbSoTrang2.setText(trangCTSP + " of " + soTrangCTSP);
     }//GEN-LAST:event_btnCuoi2ActionPerformed
 
