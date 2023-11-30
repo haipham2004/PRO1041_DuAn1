@@ -12,6 +12,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -178,9 +179,14 @@ public class AdamStoreView extends javax.swing.JFrame {
         MenuItem menuDangXuat = new MenuItem(iconDangXuat, "Đăng xuất", new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                DangNhapView dangNhapView = new DangNhapView();
-                dispose();
-                dangNhapView.setVisible(true);
+                // TODO add your handling code here:
+                int check = JOptionPane.showConfirmDialog(null, "Ban co chac chan muon dang xuat?");
+                if (check == 0) {
+                    DangNhapView dangNhapView = new DangNhapView();
+                    dispose();
+                    dangNhapView.setVisible(true);
+                }
+
             }
         });
 

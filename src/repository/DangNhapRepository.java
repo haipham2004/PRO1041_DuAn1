@@ -24,7 +24,7 @@ public class DangNhapRepository {
     ResultSet rs = null;
     String sql = null;
 
-    public boolean isExistedUser(String userName, String passWord) {
+    public boolean checkNguoiDungTonTai(String userName, String passWord) {
         try {
             conn = DBConnect.getConnection();
             sql = "Select UserName, PassWord from TaiKhoan where UserName=? and PassWord=?";
@@ -42,14 +42,14 @@ public class DangNhapRepository {
         return false;
     }
 
-    public String getTenNhanVien(String username) {
+    public String getTenNhanVien(String userName) {
         String tenNhanVien = null;
         try {
             conn = DBConnect.getConnection();
             sql = "Select NV.HoTen From TaiKhoan TK Join NhanVien NV \n"
                     + "ON TK.MaTK = NV.MaTK where TK.UserName = ?";
             pst = conn.prepareStatement(sql);
-            pst.setObject(1, username);
+            pst.setObject(1, userName);
             rs = pst.executeQuery();
             while (rs.next()) {
                 tenNhanVien = rs.getString(1);
