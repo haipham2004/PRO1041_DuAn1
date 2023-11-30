@@ -33,7 +33,7 @@ public class HoaDonRepository {
         try {
             con = DBConnect.getConnection();
             sql = "Select HD.MaHoaDon,NV.MaNV,NV.HoTen,HD.NgayTao,HD.TrangThai\n"
-                    + "From HoaDon HD Join NhanVien NV ON HD.MaNV=NV.MaNV where HD.TrangThai = 'Chờ thanh toán'";
+                    + "From HoaDon HD Join NhanVien NV ON HD.MaNV=NV.MaNV where HD.TrangThai like N'Chờ thanh toán'";
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
@@ -69,8 +69,8 @@ public class HoaDonRepository {
         List<HoaDon> listHD = new ArrayList<>();
         try {
             sql = "Select HD.MaHoaDon,NV.MaNV,KH.MaKH,HD.NgayTao,HD.TongTien, HD.TrangThai,HD.GhiChu\n"
-                    + "From HoaDon HD Join NhanVien NV ON HD.MaNV=NV.MaNV Join KhachHang KH ON HD.MaKH = KH.MaKH "
-                    + "order by HD.TrangThai DESC";
+                    + "From HoaDon HD Join NhanVien NV ON HD.MaNV=NV.MaNV Join KhachHang KH ON HD.MaKH = KH.MaKH\n"
+                    + "order by HD.TrangThai";
             con = DBConnect.getConnection();
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
@@ -127,8 +127,8 @@ public class HoaDonRepository {
             return 0;
         }
     }
-    
-    public int chuyenSangDoiHang(String maHD){
+
+    public int chuyenSangDoiHang(String maHD) {
         try {
             sql = "Update HoaDon set TrangThai = N'Đang đổi hàng' where MaHoaDon = ?";
             con = DBConnect.getConnection();
@@ -141,4 +141,42 @@ public class HoaDonRepository {
         }
     }
 
+    public List<HoaDon> getList(String MaHDorMaKH) {
+        List<HoaDon> listHD = new ArrayList<>();
+        try {
+            sql = "Select HD.MaHoaDon,NV.MaNV,KH.MaKH,HD.NgayTao,HD.TongTien, HD.TrangThai,HD.GhiChu\n"
+                    + "From HoaDon HD Join NhanVien NV ON HD.MaNV=NV.MaNV Join KhachHang KH ON HD.MaKH = KH.MaKH\n"
+                    + "where HD.MaHoaDon like ? or KH.MaKH like ? order by HD.TrangThai";
+            con = DBConnect.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setObject(1, '%' + MaHDorMaKH + '%');
+            ps.setObject(2, '%' + MaHDorMaKH + '%');
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                NhanVien nv = new NhanVien(rs.getString(2));
+                KhachHang kh = new KhachHang(rs.getString(3));
+                HoaDon hd = new HoaDon(rs.getString(1), nv, kh, rs.getDate(4), rs.getDouble(5),
+                        rs.getString(6), rs.getString(7));
+                listHD.add(hd);
+            }
+            return listHD;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+    
+    public int themHoaDonCho(HoaDon hd){
+        try {
+            sql = "Insert into HoaDon(MaHoaDon,MaNV,NgayTao,TrangThai) Values(?,?,GETDATE(),N'Chờ thanh toán')";
+            con = DBConnect.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setObject(1, hd.getMaHoaDon());
+            ps.setObject(2, hd.getNhanVien().getMaNhanVien());
+            return ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
 }
