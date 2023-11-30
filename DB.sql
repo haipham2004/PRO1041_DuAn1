@@ -1,8 +1,5 @@
-
 --bản full
 ﻿----Update:2023-11-27--lúc 14g32p--okela
-
-
 CREATE DATABASE AdamStores
 GO
 USE AdamStores
@@ -131,7 +128,7 @@ CREATE TABLE [ChiTietSanPham] (
 
 
 CREATE TABLE [HoaDonChiTiet] (
-  [MaHoaDonChiTiet] varchar(20),
+  [MaHoaDonChiTiet] varchar(10),
   [MaCTSP] varchar(10) not null,
    CONSTRAINT FK_HDCT_SPCT foreign key(MaCTSP) references ChiTietSanPham(MaCTSP),
    [MaHoaDon] varchar(10) not null,
@@ -160,7 +157,7 @@ CREATE TABLE [DoiHangChiTiet] (
    CONSTRAINT FK_DHCT_SPCT foreign key(MaCTSP) references ChiTietSanPham(MaCTSP),
   [MaDoiHang] varchar(10) not null,
    CONSTRAINT FK_DHCT_DH foreign key(MaDoiHang) references DoiHang(MaDoiHang),
-   [MaHoaDonChiTiet] varchar(20) not null,
+   [MaHoaDonChiTiet] varchar(10) not null,
    CONSTRAINT FK_DHCT_HDCT foreign key(MaHoaDonChiTiet) references HoaDonChiTiet(MaHoaDonChiTiet),
    [SoLuong] int,
   [MoTa] nvarchar(MAX),

@@ -69,7 +69,8 @@ public class HoaDonRepository {
         List<HoaDon> listHD = new ArrayList<>();
         try {
             sql = "Select HD.MaHoaDon,NV.MaNV,KH.MaKH,HD.NgayTao,HD.TongTien, HD.TrangThai,HD.GhiChu\n"
-                    + "From HoaDon HD Join NhanVien NV ON HD.MaNV=NV.MaNV Join KhachHang KH ON HD.MaKH = KH.MaKH ";
+                    + "From HoaDon HD Join NhanVien NV ON HD.MaNV=NV.MaNV Join KhachHang KH ON HD.MaKH = KH.MaKH "
+                    + "order by HD.TrangThai DESC";
             con = DBConnect.getConnection();
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
@@ -120,6 +121,19 @@ public class HoaDonRepository {
             }
             ps.setObject(8, hd.getTrangThai());
             ps.setObject(9, hd.getGhiChu());
+            return ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+    
+    public int chuyenSangDoiHang(String maHD){
+        try {
+            sql = "Update HoaDon set TrangThai = N'Đang đổi hàng' where MaHoaDon = ?";
+            con = DBConnect.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setObject(1, maHD);
             return ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();

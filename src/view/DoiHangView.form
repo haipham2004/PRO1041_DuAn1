@@ -27,8 +27,11 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="btnThemHoaDonDoiHang" min="-2" pref="191" max="-2" attributes="0"/>
                   <Component id="jPanel5" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnThemVaoDSDH" min="-2" pref="191" max="-2" attributes="0"/>
-                  <Component id="btnChonHang" min="-2" pref="191" max="-2" attributes="0"/>
+                  <Component id="btnThemVaoDSDH" alignment="0" min="-2" pref="191" max="-2" attributes="0"/>
+                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                      <Component id="btnChonHang1" alignment="0" max="32767" attributes="0"/>
+                      <Component id="btnChonHang" alignment="0" pref="191" max="32767" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
           </Group>
@@ -52,12 +55,14 @@
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jPanel3" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
                       <Component id="btnThemVaoDSDH" min="-2" pref="46" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="btnChonHang" min="-2" pref="46" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="btnChonHang1" min="-2" pref="46" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
@@ -525,6 +530,14 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Ch&#x1ecd;n h&#xe0;ng mu&#x1ed1;n &#x111;&#x1ed5;i"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnChonHang1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="L&#xe0;m m&#x1edb;i danh s&#xe1;ch &#x111;&#x1ed5;i h&#xe0;ng"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnChonHang1ActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
