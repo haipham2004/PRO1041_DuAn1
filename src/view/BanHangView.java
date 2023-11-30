@@ -995,8 +995,9 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
                     tblGioHang.setValueAt(thanhTienSauKhiThem, indexGioHang, 3);
 
                 } else {
-                    fillTableGioHang(tblGioHang, ctsps, Integer.parseInt(input));
 
+                    fillTableGioHang(tblGioHang, ctsps, Integer.parseInt(input));
+                    serviceCTSP.capNhatSoLuongThanhToanCong(Integer.parseInt(input), ma);
                     //Quân
                     //Nhớ đổi đường dẫn thư mục
                     indexHoaDonCho = tblHoaDonCho.getSelectedRow();
@@ -1075,6 +1076,7 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
                 tblChiTietSanPham.setValueAt(updatedQuantity, indexSanPham, 1);
             }
             molGH.removeRow(indexXoaGH);
+            serviceCTSP.capNhatSoLuongThanhToanTru(quantity, productID);
         } else {
             JOptionPane.showMessageDialog(this, "Not");
         }
@@ -1126,11 +1128,9 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
         // TODO add your handling code here:
         int checkXoaGH = JOptionPane.showConfirmDialog(this, "Bạn có chắc mắc muốn xoá tất cả sản phẩm chưa được đặt hàng");
         if (checkXoaGH == JOptionPane.YES_NO_OPTION) {
-
             for (int i = 0; i < tblGioHang.getRowCount(); i++) {
                 String productID = tblGioHang.getValueAt(i, 0).toString();
                 int quantity = Integer.parseInt(tblGioHang.getValueAt(i, 1).toString());
-
                 int indexSanPham = -1;
                 for (int j = 0; j < tblChiTietSanPham.getRowCount(); j++) {
                     if (tblChiTietSanPham.getValueAt(j, 0).toString().equals(productID)) {
@@ -1138,20 +1138,19 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
                         break;
                     }
                 }
-
                 if (indexSanPham != -1) {
                     int currentQuantity = Integer.parseInt(tblChiTietSanPham.getValueAt(indexSanPham, 1).toString());
                     int updatedQuantity = currentQuantity + quantity;
-                    tblChiTietSanPham.setValueAt(updatedQuantity, indexSanPham, 1);
+                    tblChiTietSanPham.setValueAt(updatedQuantity, indexSanPham, 1);  
+                    molGH.setRowCount(0);
+                    serviceCTSP.capNhatSoLuongThanhToanTru(updatedQuantity, productID);
+                    System.out.println("Số lượng update: "+updatedQuantity);
+                    System.out.println("Mã SP "+productID);
                 }
-            }
-
-            molGH.setRowCount(0);
+            }          
         } else {
             JOptionPane.showMessageDialog(this, "Not");
         }
-
-
     }//GEN-LAST:event_btnXoaTatCaSPActionPerformed
 
     private void btnTaoHoaDonChoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaoHoaDonChoActionPerformed

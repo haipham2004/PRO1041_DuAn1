@@ -251,7 +251,7 @@ public class ChiTietSanPhamRepository {
         }
         return listChiTietSanPham3;
     }
-    
+
     public List<ChiTietSanPham> listPageCTSP2(int index) {
         List<ChiTietSanPham> listChiTietSanPham5 = new ArrayList<>();
         try {
@@ -327,7 +327,7 @@ public class ChiTietSanPhamRepository {
         }
         return tong;
     }
-    
+
     public int tongBanGhi2() {
         int tong = 0;
         try {
@@ -418,5 +418,40 @@ public class ChiTietSanPhamRepository {
         return false;
     }
 
+    public int capNhatSoLuongThanhToanCong(int soLuong,String ma) {
+        int so = 0;
+        try {
+            conn = DBConnect.getConnection();
+            sql = "UPDATE ChiTietSanPham set SoLuong=SoLuong-?\n"
+                    + "where MaCTSP=?";
+            pst = conn.prepareStatement(sql);
+                pst.setObject(1, soLuong);
+                pst.setObject(2, ma);
+                so += pst.executeUpdate();
+            return so;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
     
+     public int capNhatSoLuongThanhToanTru(int soLuong,String ma) {
+        int so = 0;
+        try {
+            conn = DBConnect.getConnection();
+            sql = "UPDATE ChiTietSanPham set SoLuong=SoLuong+?\n"
+                    + "where MaCTSP=?";
+            pst = conn.prepareStatement(sql);
+                pst.setObject(1, soLuong);
+                pst.setObject(2, ma);
+                so += pst.executeUpdate();
+            return so;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+    
+  
+
 }

@@ -38,9 +38,12 @@ import service.servicImp.MauSacServiceImp;
 import service.servicImp.SanPhamServiceImp;
 //
 import java.io.BufferedOutputStream;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -77,7 +80,7 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
     ChatLieuServiceImp serviceCl = new ChatLieuServiceImp();
     KichThuocServiceImp serviceKT = new KichThuocServiceImp();
     SanPhamServiceImp serviceSP = new SanPhamServiceImp();
-    int trangCTSP = 1, soTrangCTSP, tongBanGhiCTSP, index = 0;
+    int trangCTSP = 1, soTrangCTSP, tongBanGhiCTSP, index = -1;
     public List<String> list = new ArrayList<>();
 
     /**
@@ -905,9 +908,9 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
         String tenTimMS = ms.toString();
         KichThuoc kt = (KichThuoc) cbxKichThuoc.getSelectedItem();
         String tenTimKT = kt.toString();
-        System.out.println("Mtam ơi: " + tenTimCL + tenTimMS + tenTimKT+ten);
+        System.out.println("Mtam ơi: " + tenTimCL + tenTimMS + tenTimKT + ten);
         if (validateCTSPs()) {
-            if (serviceCTSP.checkTrungCTSP(tenTimCL, tenTimMS, tenTimKT,ten)) {
+            if (serviceCTSP.checkTrungCTSP(tenTimCL, tenTimMS, tenTimKT, ten)) {
                 JOptionPane.showMessageDialog(this, "Chi tiết sản phẩm đã tồn tại, vui lòng kiểm tra lại", "Message", 2);
                 return;
             } else {
@@ -936,7 +939,7 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
         KichThuoc kt = (KichThuoc) cbxKichThuoc.getSelectedItem();
         String tenTimKT = kt.toString();
         System.out.println("Mtam ơi: " + tenTimCL + tenTimMS + tenTimKT);
-        if (serviceCTSP.checkTrungCTSP(tenTimCL, tenTimMS, tenTimKT,ten)) {
+        if (serviceCTSP.checkTrungCTSP(tenTimCL, tenTimMS, tenTimKT, ten)) {
             JOptionPane.showMessageDialog(this, "Chi tiết sản phẩm đã tồn tại, vui lòng sửa lại", "Message", 2);
             return;
         } else {
@@ -1037,6 +1040,18 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
 
     private void btnNhapFileExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNhapFileExcelActionPerformed
         // TODO add your handling code here:
+
+        //Nhớ đổi đường dẫn thư mục
+//        JFileChooser jf = new JFileChooser();
+//        int kq = jf.showOpenDialog(null);
+//        if (kq == JFileChooser.APPROVE_OPTION) {
+//            try {
+//                String fileName = jf.getSelectedFile().getName();
+//                loadTableDataFromFile("D:\\Excel", fileName);
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//        }
         mol = (DefaultTableModel) tblChiTietSanPham.getModel();
         for (int i = 0; i < 10; i++) {
             mol.addRow(new Object[]{
