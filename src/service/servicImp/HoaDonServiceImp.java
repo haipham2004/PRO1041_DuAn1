@@ -62,5 +62,7 @@ public class HoaDonServiceImp implements AdamStore<HoaDon, String> {
     public int chuyenSangDoiHang(String maHD){
         return repo.chuyenSangDoiHang(maHD);
     }
+    
+    
 
 }
