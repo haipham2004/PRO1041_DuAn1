@@ -164,9 +164,9 @@ public class SanPhamRepository {
             sql = "SELECT SP.MaSanPham,SP.TenSanPham,SP.TrangThai,LSP.MaLSP,LSP.TenLSP,SP.XuatXU \n"
                     + "FROm SanPham SP INNER JOIN LoaiSanPham LSP ON SP.MaLSP=LSP.MaLSP\n"
                     + "order by SP.TrangThai DESC\n"
-                    + "offset ? rows fetch next 4 rows only ";
+                    + "offset ? rows fetch next 5 rows only ";
             pst = conn.prepareStatement(sql);
-            pst.setInt(1, (index - 1) * 4);
+            pst.setInt(1, (index - 1) * 5);
             rs = pst.executeQuery();
             while (rs.next()) {
                 LoaiSanPham lsp = new LoaiSanPham(rs.getString(4),

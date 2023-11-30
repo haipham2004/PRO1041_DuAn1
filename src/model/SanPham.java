@@ -94,6 +94,7 @@ public class SanPham {
         this.xuatXu = xuatXu;
     }
 
+
     @Override
     public String toString() {
         return tenSanPham;

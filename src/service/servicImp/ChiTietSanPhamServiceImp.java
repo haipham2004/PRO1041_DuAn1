@@ -54,19 +54,27 @@ public class ChiTietSanPhamServiceImp implements AdamStore<ChiTietSanPham, Strin
         return repo.getListGia(giaMin, giaMax);
     }
 
-    public List<ChiTietSanPham> listPageCTSP(int index) {
-        return repo.listPageCTSP(index);
+    public List<ChiTietSanPham> listPageCTSP(int index,String name) {
+        return repo.listPageCTSP(index,name);
+    }
+    
+       public List<ChiTietSanPham> listPageCTSP2(int index) {
+        return repo.listPageCTSP2(index);
     }
 
-    public int tongBanGhi() {
-        return repo.tongBanGhi();
+    public int tongBanGhi(String name) {
+        return repo.tongBanGhi(name);
+    }
+    
+    public int tongBanGhi2(){
+        return repo.tongBanGhi2();
     }
 
     public int updateTrangThaiSoLuong() {
         return repo.updateTrangThaiSoLuong();
     }
 
-    public boolean checkMaQR(String qrCode) throws SQLException {
+    public boolean checkMaQR(String qrCode){
         return repo.checkMaQR(qrCode);
     }
 
@@ -74,24 +82,16 @@ public class ChiTietSanPhamServiceImp implements AdamStore<ChiTietSanPham, Strin
         return repo.taoQR(qrCode);
     }
 
-    public boolean checkExitCTSP(String maCTSP) throws SQLException {
-        return repo.checkExitCTSP(maCTSP);
-    }
-
     public List<ChiTietSanPham> getDanhSachSPCT(String maHoadon) {
         return repo.getDanhSachSPCT(maHoadon);
     }
 
-    public boolean checkTrungCTSP(String name) throws SQLException {
-        return repo.checkTrungCTSP(name);
+    public boolean checkTrungCTSP(String name1,String name2 ,String name3,String name4) {
+        return repo.checkTrungCTSP(name1, name2, name3,name4);
     }
 
     public List<ChiTietSanPham> getListLoc(String name1, String name2, String name3, String name4) {
         return repo.getListLoc(name1, name2, name3, name4);
     }
-
-
-    public int sua2(List<HoaDonChiTiet> list) {
-        return repo.sua2(list);
-    }
+ 
 }

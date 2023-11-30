@@ -27,4 +27,7 @@ public class HoaDonChiTietServiceImp {
     public int insert(List<HoaDonChiTiet> list) {
         return repo.insert(list);
     }
+    public int capNhatSoLuongThanhToan(List<HoaDonChiTiet> list) {
+        return repo.capNhatSoLuongThanhToan(list);
+    }
 }
