@@ -1,5 +1,5 @@
 --bản full
-﻿----Update:2023-11-27--lúc 14g32p--okela
+﻿----Update:2023-11-30--lúc 13g02p--okela
 CREATE DATABASE AdamStores
 GO
 USE AdamStores
@@ -57,7 +57,7 @@ CREATE TABLE [HoaDon] (
   [MaHoaDon] varchar(10),
   [MaNV] varchar(10) not null,
   CONSTRAINT FK_HD_NV foreign key(MaNV) references NhanVien(MaNV),
-  [MaKH] varchar(10) not null,
+  [MaKH] varchar(10),
   CONSTRAINT FK_HD_KH foreign key(MaKH) references KhachHang(MaKH),
   [NgayTao] datetime,
   [TongTien] Money,

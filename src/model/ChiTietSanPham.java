@@ -160,6 +160,8 @@ public class ChiTietSanPham {
 
     @Override
     public String toString() {
-        return sanPham + "(" + mauSac + "/ " + chatLieu + "/ " + kichThuoc + ')';
+        return  sanPham.getTenSanPham();
     }
+
+
 }
