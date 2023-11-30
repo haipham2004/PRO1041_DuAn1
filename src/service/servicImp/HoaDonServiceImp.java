@@ -44,7 +44,7 @@ public class HoaDonServiceImp implements AdamStore<HoaDon, String> {
 
     @Override
     public List<HoaDon> getList(String e) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return repo.getList(e);
     }
 
     public List<HoaDon> getHoaDonCho() {
@@ -58,5 +58,11 @@ public class HoaDonServiceImp implements AdamStore<HoaDon, String> {
     public List<HoaDon> getLSHoaDon() {
         return repo.getLSHoaDon();
     }
+    
+    public int chuyenSangDoiHang(String maHD){
+        return repo.chuyenSangDoiHang(maHD);
+    }
+    
+    
 
 }
