@@ -1,7 +1,5 @@
-
-﻿--bản full
---update ﻿----Update:2023-11-27--lúc 14g32p--okela
-
+--bản full
+﻿----Update:2023-11-30--lúc 13g02p--okela
 INSERT INTO TaiKhoan VALUES
 ('TK01','hoilamgi1','khongnoidau1','Admin',1),
 ('TK02','hoilamgi2','khongnoidau2','Staff',1),

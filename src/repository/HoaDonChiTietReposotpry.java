@@ -103,7 +103,7 @@ public class HoaDonChiTietReposotpry {
                     ChiTietSanPham ctsp = new ChiTietSanPham(rs.getString(1), sp,
                             ms, cl, kt, rs.getInt(10), rs.getDouble(11), rs.getBoolean(12));
 //                    HoaDon hd = BHView.getFormBH();
-                    HoaDonChiTiet hdct = new HoaDonChiTiet(ctsp.getMaChiTietSanPham()+hd.getMaHoaDon(), ctsp, hd, soLuong, gia, null, true);
+                    HoaDonChiTiet hdct = new HoaDonChiTiet(ctsp.getMaChiTietSanPham() + hd.getMaHoaDon(), ctsp, hd, soLuong, gia, null, true);
                     list.add(hdct);
                 }
             }
@@ -128,6 +128,25 @@ public class HoaDonChiTietReposotpry {
                 ps.executeUpdate();
             }
             return list.size();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+
+    public int capNhatSoLuongThanhToan(List<HoaDonChiTiet> list) {
+        int so = 0;
+        try {
+            con = DBConnect.getConnection();
+            sql = "UPDATE ChiTietSanPham set SoLuong=SoLuong-?\n"
+                    + "where MaCTSP=?";
+            ps = con.prepareStatement(sql);
+            for (HoaDonChiTiet ctsp : list) {
+                ps.setObject(2, ctsp.getCtsp().getMaChiTietSanPham());
+                ps.setObject(1, ctsp.getSoLuong());
+                so += ps.executeUpdate();
+            }
+            return so;
         } catch (Exception e) {
             e.printStackTrace();
             return 0;
