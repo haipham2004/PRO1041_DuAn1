@@ -106,6 +106,31 @@ public class HoaDonRepository {
         }
     }
 
+    public List<HoaDon> getList(String maHD, String maNV, String maKH) {
+        List<HoaDon> listHD = new ArrayList<>();
+        try {
+            sql = "Select HD.MaHoaDon,NV.MaNV,KH.MaKH,HD.NgayTao,HD.TongTien, HD.TrangThai,HD.GhiChu\n"
+                    + "From HoaDon HD Join NhanVien NV ON HD.MaNV=NV.MaNV Join KhachHang KH ON HD.MaKH = KH.MaKH Where HD.MaHoaDon=? or NV.MaNV=? or KH.MaKH=? ";
+            con = DBConnect.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setObject(1, maHD);
+            ps.setObject(2, maNV);
+            ps.setObject(3, maKH);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                NhanVien nv = new NhanVien(rs.getString(2));
+                KhachHang kh = new KhachHang(rs.getString(3));
+                HoaDon hd = new HoaDon(rs.getString(1), nv, kh, rs.getDate(4), rs.getDouble(5),
+                        rs.getString(6), rs.getString(7));
+                listHD.add(hd);
+            }
+            return listHD;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     public int themHoaDon(HoaDon hd) {
         try {
             Timestamp currentTime = new Timestamp(System.currentTimeMillis());
@@ -159,7 +184,7 @@ public class HoaDonRepository {
         }
     }
 
-    public List<HoaDon> getList(String MaHDorMaKH) {
+    public List<HoaDon> getList2(String MaHDorMaKH) {
         List<HoaDon> listHD = new ArrayList<>();
         try {
             sql = "Select HD.MaHoaDon,NV.MaNV,KH.MaKH,HD.NgayTao,HD.TongTien, HD.TrangThai,HD.GhiChu\n"
