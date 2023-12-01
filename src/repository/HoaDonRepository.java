@@ -223,4 +223,53 @@ public class HoaDonRepository {
             return 0;
         }
     }
+
+    public List<HoaDon> getLSHoaDonDuocDoiHang() {
+        List<HoaDon> listHD = new ArrayList<>();
+        try {
+            sql = "Select HD.MaHoaDon,NV.MaNV,KH.MaKH,HD.NgayTao,HD.TongTien, HD.TrangThai,HD.GhiChu\n"
+                    + "From HoaDon HD Join NhanVien NV ON HD.MaNV=NV.MaNV Join KhachHang KH ON HD.MaKH = KH.MaKH\n"
+                    + "where DATEDIFF(DAY,HD.NgayTao,GETDATE()) < 7 order by HD.TrangThai";
+            con = DBConnect.getConnection();
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                NhanVien nv = new NhanVien(rs.getString(2));
+                KhachHang kh = new KhachHang(rs.getString(3));
+                HoaDon hd = new HoaDon(rs.getString(1), nv, kh, rs.getDate(4), rs.getDouble(5),
+                        rs.getString(6), rs.getString(7));
+                listHD.add(hd);
+            }
+            return listHD;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public List<HoaDon> getListDuocDoiHang(String MaHDorMaKH) {
+        List<HoaDon> listHD = new ArrayList<>();
+        try {
+            sql = "Select HD.MaHoaDon,NV.MaNV,KH.MaKH,HD.NgayTao,HD.TongTien, HD.TrangThai,HD.GhiChu\n"
+                    + "From HoaDon HD Join NhanVien NV ON HD.MaNV=NV.MaNV Join KhachHang KH ON HD.MaKH = KH.MaKH\n"
+                    + "where (HD.MaHoaDon like N'%1%' or KH.MaKH like N'%1%') and DATEDIFF(DAY,HD.NgayTao,GETDATE()) < 7\n"
+                    + "and HD.TrangThai like N'Đã thanh toán' order by HD.TrangThai";
+            con = DBConnect.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setObject(1, '%' + MaHDorMaKH + '%');
+            ps.setObject(2, '%' + MaHDorMaKH + '%');
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                NhanVien nv = new NhanVien(rs.getString(2));
+                KhachHang kh = new KhachHang(rs.getString(3));
+                HoaDon hd = new HoaDon(rs.getString(1), nv, kh, rs.getDate(4), rs.getDouble(5),
+                        rs.getString(6), rs.getString(7));
+                listHD.add(hd);
+            }
+            return listHD;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }
