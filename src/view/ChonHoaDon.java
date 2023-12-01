@@ -38,7 +38,7 @@ public class ChonHoaDon extends javax.swing.JPanel {
         initComponents();
         this.setSize(1300, 755);
         addPlaceHolder(txtTimKiem, "Theo mã hóa đơn");
-        fillTable(serviceHD.getLSHoaDon());
+        fillTable(serviceHD.getLSHoaDonDuocDoiHang());
     }
 
     public String maTangTuDong(String DH) {

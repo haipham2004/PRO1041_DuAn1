@@ -299,6 +299,11 @@ public class DoiHangView extends javax.swing.JPanel {
         });
 
         btnChonHang.setText("Chọn hàng muốn đổi");
+        btnChonHang.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnChonHangMouseClicked(evt);
+            }
+        });
 
         btnChonHang1.setText("Làm mới danh sách đổi hàng");
         btnChonHang1.addActionListener(new java.awt.event.ActionListener() {
@@ -425,6 +430,14 @@ public class DoiHangView extends javax.swing.JPanel {
     private void tblHoaDonDoiHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblHoaDonDoiHangMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_tblHoaDonDoiHangMouseClicked
+
+    private void btnChonHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnChonHangMouseClicked
+        // TODO add your handling code here:
+        pnlTong.removeAll();
+        pnlTong.add(new ChonCTSP());
+        pnlTong.repaint();
+        pnlTong.revalidate();
+    }//GEN-LAST:event_btnChonHangMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
