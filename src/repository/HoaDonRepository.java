@@ -47,6 +47,24 @@ public class HoaDonRepository {
         }
         return listHoaDon;
     }
+    public HoaDon get1HoaDonCho(String maHD) {
+        HoaDon hd = new HoaDon();
+        try {
+            con = DBConnect.getConnection();
+            sql = "Select MaHoaDon,MaKH From HoaDon where MaHoaDon = ?";
+            ps = con.prepareStatement(sql);
+            ps.setObject(1, maHD);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                KhachHang kh = new KhachHang(rs.getString(2));
+                hd = new HoaDon(rs.getString(1), kh);
+            }
+            return hd;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 
     public int countHoaDon() {
         int tongHoaDon = 0;
@@ -88,39 +106,64 @@ public class HoaDonRepository {
         }
     }
 
+    public List<HoaDon> getList(String maHD, String maNV, String maKH) {
+        List<HoaDon> listHD = new ArrayList<>();
+        try {
+            sql = "Select HD.MaHoaDon,NV.MaNV,KH.MaKH,HD.NgayTao,HD.TongTien, HD.TrangThai,HD.GhiChu\n"
+                    + "From HoaDon HD Join NhanVien NV ON HD.MaNV=NV.MaNV Join KhachHang KH ON HD.MaKH = KH.MaKH Where HD.MaHoaDon=? or NV.MaNV=? or KH.MaKH=? ";
+            con = DBConnect.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setObject(1, maHD);
+            ps.setObject(2, maNV);
+            ps.setObject(3, maKH);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                NhanVien nv = new NhanVien(rs.getString(2));
+                KhachHang kh = new KhachHang(rs.getString(3));
+                HoaDon hd = new HoaDon(rs.getString(1), nv, kh, rs.getDate(4), rs.getDouble(5),
+                        rs.getString(6), rs.getString(7));
+                listHD.add(hd);
+            }
+            return listHD;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     public int themHoaDon(HoaDon hd) {
         try {
             Timestamp currentTime = new Timestamp(System.currentTimeMillis());
-            sql = "insert into HoaDon(MaHoaDon, MaNV,MaKH,NgayTao,TongTien,TongTienKM,TongTienSauKM,TrangThai,GhiChu,MaEV) values (?,?,?,?,?,?,?,?,?,?)";
+            sql = "UPDATE HoaDon SET MaNV = ?,MaKH = ?,NgayTao = ?,TongTien = ?,TongTienKM = ?,TongTienSauKM = ?,TrangThai = ?,GhiChu = ?,MaEV = ? where MaHoaDon = ?";
             con = DBConnect.getConnection();
             ps = con.prepareStatement(sql);
-            ps.setObject(1, hd.getMaHoaDon());
-            ps.setObject(2, hd.getNhanVien().getMaNhanVien());
-            ps.setObject(3, hd.getKhachHang().getMaKhachHang());
-            ps.setTimestamp(4, currentTime);
+            ps.setObject(10, hd.getMaHoaDon());
+            ps.setObject(1, hd.getNhanVien().getMaNhanVien());
+            ps.setObject(2, hd.getKhachHang().getMaKhachHang());
+            ps.setTimestamp(3, currentTime);
             Double mucGiam;
             if (hd.getVoucher() == null) {
                 mucGiam = 0.0;
-                ps.setObject(10, null);
-                ps.setObject(5, hd.getTongTien());
-                ps.setObject(6, 0);
-                ps.setObject(7, hd.getTongTien());
+                ps.setObject(9, null);
+                ps.setObject(4, hd.getTongTien());
+                ps.setObject(5, 0);
+                ps.setObject(6, hd.getTongTien());
             } else {
-                ps.setObject(10, hd.getVoucher().getMaEventa());
+                ps.setObject(9, hd.getVoucher().getMaEventa());
                 if (!hd.getVoucher().isHinhThuc()) {
                     mucGiam = Double.parseDouble(giuSo(hd.getVoucher().getMucGiamGia())) / 100;
-                    ps.setObject(5, hd.getTongTien() / (1 - mucGiam));
-                    ps.setObject(6, (hd.getTongTien() / (1 - mucGiam)) - hd.getTongTien());
-                    ps.setObject(7, hd.getTongTien());
+                    ps.setObject(4, hd.getTongTien() / (1 - mucGiam));
+                    ps.setObject(5, (hd.getTongTien() / (1 - mucGiam)) - hd.getTongTien());
+                    ps.setObject(6, hd.getTongTien());
                 } else {
                     mucGiam = Double.parseDouble(giuSo(hd.getVoucher().getMucGiamGia()));
-                    ps.setObject(5, hd.getTongTien() + mucGiam);
-                    ps.setObject(6, mucGiam);
-                    ps.setObject(7, hd.getTongTien());
+                    ps.setObject(4, hd.getTongTien() + mucGiam);
+                    ps.setObject(5, mucGiam);
+                    ps.setObject(6, hd.getTongTien());
                 }
             }
-            ps.setObject(8, hd.getTrangThai());
-            ps.setObject(9, hd.getGhiChu());
+            ps.setObject(7, hd.getTrangThai());
+            ps.setObject(8, hd.getGhiChu());
             return ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
@@ -141,7 +184,7 @@ public class HoaDonRepository {
         }
     }
 
-    public List<HoaDon> getList(String MaHDorMaKH) {
+    public List<HoaDon> getList2(String MaHDorMaKH) {
         List<HoaDon> listHD = new ArrayList<>();
         try {
             sql = "Select HD.MaHoaDon,NV.MaNV,KH.MaKH,HD.NgayTao,HD.TongTien, HD.TrangThai,HD.GhiChu\n"
@@ -168,11 +211,12 @@ public class HoaDonRepository {
 
     public int themHoaDonCho(HoaDon hd) {
         try {
-            sql = "Insert into HoaDon(MaHoaDon,MaNV,NgayTao,TrangThai) Values(?,?,GETDATE(),N'Chờ thanh toán')";
+            sql = "Insert into HoaDon(MaHoaDon,MaNV,MaKH,NgayTao,TrangThai) Values(?,?,?,GETDATE(),N'Chờ thanh toán')";
             con = DBConnect.getConnection();
             ps = con.prepareStatement(sql);
             ps.setObject(1, hd.getMaHoaDon());
             ps.setObject(2, hd.getNhanVien().getMaNhanVien());
+            ps.setObject(3, "KHNE");
             return ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();

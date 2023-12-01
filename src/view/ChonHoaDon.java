@@ -254,9 +254,9 @@ public class ChonHoaDon extends javax.swing.JPanel {
         // TODO add your handling code here:
         if (!txtTimKiem.getText().equals("")) {
             String name = txtTimKiem.getText();
-            fillTable(serviceHD.getList(name));
+            fillTable(serviceHD.getList2(name));
         } else {
-            fillTable(serviceHD.getLSHoaDon());
+            fillTable(serviceHD.getLSHoaDonDuocDoiHang());
         }
     }//GEN-LAST:event_txtTimKiemKeyReleased
 
