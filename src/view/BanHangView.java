@@ -416,9 +416,8 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
         if (txtMaKHBH2.getText().isBlank()) {
             JOptionPane.showMessageDialog(this, "Chưa nhập mã KH");
             return false;
-        }
-        if (txtTienKhachBH2.getText().isBlank()) {
-            JOptionPane.showMessageDialog(this, "Chưa nhập tiền khách đưa");
+        } else if (serviceKH.getOne(txtMaKHBH2.getText()) == null) {
+            JOptionPane.showMessageDialog(this, "Mã KH vừa nhập chưa được đăng ký");
             return false;
         }
         return true;
@@ -1173,18 +1172,20 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
             return;
         }
         HoaDon hd;
-        try {
+        if (validBH()) {
+            try {
             hd = this.getFormBH();
             Double tongSau = hd.getTongTien();
             Double tong = fillDonHang();
             Double dua = Double.valueOf(boPhanCach(txtTienKhachBH2.getText()));
             Double tra = Double.valueOf(boPhanCach(txtTienThuaBH2.getText()));
-            pdf.genPDF(serviceHDCT.getJoHang(tblGioHang), hd, tong, tongSau, dua, tra);
             serviceHD.them(hd);
             serviceHDCT.capNhatSoLuongThanhToan((serviceHDCT.getJoHang(tblGioHang)));
             serviceHDCT.insert(serviceHDCT.getJoHang2(tblGioHang, hd));
+            pdf.genPDF(serviceHDCT.getJoHang(tblGioHang), hd, tong, tongSau, dua, tra);
         } catch (IOException ex) {
             Logger.getLogger(BanHangView.class.getName()).log(Level.SEVERE, null, ex);
+        }
         }
     }//GEN-LAST:event_btnThanhToanBH2ActionPerformed
 
