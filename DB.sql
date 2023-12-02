@@ -128,7 +128,7 @@ CREATE TABLE [ChiTietSanPham] (
 
 
 CREATE TABLE [HoaDonChiTiet] (
-  [MaHoaDonChiTiet] varchar(10),
+  [MaHoaDonChiTiet] varchar(20),
   [MaCTSP] varchar(10) not null,
    CONSTRAINT FK_HDCT_SPCT foreign key(MaCTSP) references ChiTietSanPham(MaCTSP),
    [MaHoaDon] varchar(10) not null,
@@ -157,7 +157,7 @@ CREATE TABLE [DoiHangChiTiet] (
    CONSTRAINT FK_DHCT_SPCT foreign key(MaCTSP) references ChiTietSanPham(MaCTSP),
   [MaDoiHang] varchar(10) not null,
    CONSTRAINT FK_DHCT_DH foreign key(MaDoiHang) references DoiHang(MaDoiHang),
-   [MaHoaDonChiTiet] varchar(10) not null,
+   [MaHoaDonChiTiet] varchar(20) not null,
    CONSTRAINT FK_DHCT_HDCT foreign key(MaHoaDonChiTiet) references HoaDonChiTiet(MaHoaDonChiTiet),
    [SoLuong] int,
   [MoTa] nvarchar(MAX),
