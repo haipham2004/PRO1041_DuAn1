@@ -61,7 +61,7 @@ public class DoiMatKhauView extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Khong ton tai ma tai khoan vua nhap !");
             return false;
         }
-        if (!serviceDMK.isCurrentPasswordValid(maTK, mkHienTai)) {
+        if (!serviceDMK.checkPassword(maTK, mkHienTai)) {
             JOptionPane.showMessageDialog(this, "Mat khau hien tai khong dung !");
             return false;
         }

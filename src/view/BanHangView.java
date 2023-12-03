@@ -109,7 +109,7 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
         txtTongTienBH2.setEnabled(false);
         txtTenEV.setEnabled(false);
         txtMucGiam.setEnabled(false);
-        initWebcam();
+//        initWebcam();
     }
 
     private void initWebcam() {
@@ -241,7 +241,7 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                }
+            }
 //            }
         } while (true);
     }
@@ -420,9 +420,8 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
         if (txtMaKHBH2.getText().isBlank()) {
             JOptionPane.showMessageDialog(this, "Chưa nhập mã KH");
             return false;
-        }
-        if (txtTienKhachBH2.getText().isBlank()) {
-            JOptionPane.showMessageDialog(this, "Chưa nhập tiền khách đưa");
+        } else if (serviceKH.getOne(txtMaKHBH2.getText()) == null) {
+            JOptionPane.showMessageDialog(this, "Mã KH vừa nhập chưa được đăng ký");
             return false;
         }
         return true;
@@ -489,7 +488,7 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
         Events ev;
         Double sum = fillDonHang();
         List<Events> list = serviceKM.getActive3(sum);
-        if (list == null) {
+        if (list.size() == 0) {
             ev = null;
         } else if (list.size() == 1) {
             ev = list.get(0);
@@ -1148,13 +1147,14 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
 
     private void btnQRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQRActionPerformed
         // TODO add your handling code here:
-        if (webcam.isOpen()) {
-            webcam.close();
-//            this.setSize(1300, 755);
-            System.out.println("Close");
-        } else {
-            initWebcam();
-//             this.setSize(1301, 756);
+        try {
+            if (webcam.isOpen()) {
+                webcam.close();
+                System.out.println("Close");
+            } else {
+                initWebcam();
+            }
+        } catch (Exception e) {
         }
     }//GEN-LAST:event_btnQRActionPerformed
 
@@ -1164,17 +1164,19 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
             return;
         }
         HoaDon hd;
-        try {
-            hd = this.getFormBH();
-            Double tongSau = hd.getTongTien();
-            Double tong = fillDonHang();
-            Double dua = Double.valueOf(boPhanCach(txtTienKhachBH2.getText()));
-            Double tra = Double.valueOf(boPhanCach(txtTienThuaBH2.getText()));
-            pdf.genPDF(serviceHDCT.getJoHang(tblGioHang), hd, tong, tongSau, dua, tra);
-            serviceHD.them(hd);
-            serviceHDCT.insert(serviceHDCT.getJoHang2(tblGioHang, hd));
-        } catch (IOException ex) {
-            Logger.getLogger(BanHangView.class.getName()).log(Level.SEVERE, null, ex);
+        if (validBH()) {
+            try {
+                hd = this.getFormBH();
+                Double tongSau = hd.getTongTien();
+                Double tong = fillDonHang();
+                Double dua = Double.valueOf(boPhanCach(txtTienKhachBH2.getText()));
+                Double tra = Double.valueOf(boPhanCach(txtTienThuaBH2.getText()));
+                serviceHD.them(hd);
+                serviceHDCT.insert(serviceHDCT.getJoHang2(tblGioHang, hd));
+                pdf.genPDF(serviceHDCT.getJoHang(tblGioHang), hd, tong, tongSau, dua, tra);
+            } catch (IOException ex) {
+                Logger.getLogger(BanHangView.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }//GEN-LAST:event_btnThanhToanBH2ActionPerformed
 

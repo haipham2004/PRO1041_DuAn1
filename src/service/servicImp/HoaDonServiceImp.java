@@ -44,7 +44,8 @@ public class HoaDonServiceImp implements AdamStore<HoaDon, String> {
 
     @Override
     public List<HoaDon> getList(String e) {
-        return repo.getList(e);
+        return repo.getList(e, e, e);
+
     }
 
     public List<HoaDon> getHoaDonCho() {
@@ -54,19 +55,29 @@ public class HoaDonServiceImp implements AdamStore<HoaDon, String> {
     public int countHoaDon() {
         return repo.countHoaDon();
     }
-    
+
     public List<HoaDon> getLSHoaDon() {
         return repo.getLSHoaDon();
     }
-    
-    public int chuyenSangDoiHang(String maHD){
+
+    public int chuyenSangDoiHang(String maHD) {
         return repo.chuyenSangDoiHang(maHD);
     }
+
     
-    public int themHoaDonCho(HoaDon hd){
+    public List<HoaDon> getLSHoaDonDuocDoiHang() {
+        return repo.getLSHoaDonDuocDoiHang();
+    }
+
+    public int themHoaDonCho(HoaDon hd) {
         return repo.themHoaDonCho(hd);
     }
+
     public HoaDon get1HoaDonCho(String maHD) {
         return repo.get1HoaDonCho(maHD);
+    }
+
+    public List<HoaDon> getList2(String MaHDorMaKH) {
+        return repo.getList2(MaHDorMaKH);
     }
 }

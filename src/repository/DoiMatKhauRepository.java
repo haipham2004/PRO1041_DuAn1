@@ -20,12 +20,12 @@ public class DoiMatKhauRepository {
     ResultSet rs = null;
     String sql = null;
 
-    public boolean checkMaTK(String MaTK) {
+    public boolean checkMaTK(String maTK) {
         try {
             conn = DBConnect.getConnection();
             sql = "Select MaTK from TaiKhoan where MaTK=?";
             pst = conn.prepareStatement(sql);
-            pst.setString(1, MaTK);
+            pst.setString(1, maTK);
             rs = pst.executeQuery();
             while (rs.next()) {
                 return true;
@@ -37,17 +37,17 @@ public class DoiMatKhauRepository {
         return false;
     }
 
-    public boolean isCurrentPasswordValid(String maTK, String enterPassWord) {
+    public boolean checkPassword(String maTK, String passWord) {
         sql = "SELECT PassWord FROM TaiKhoan WHERE MaTK = ?";
         try {
             conn = DBConnect.getConnection();
             pst = conn.prepareStatement(sql);
-            pst.setString(1, maTK); // Thay thế "user_username" bằng tên người dùng hiện tại 
+            pst.setString(1, maTK);
             rs = pst.executeQuery();
             if (rs.next()) {
                 String currentPassword = rs.getString("PassWord");
                 System.out.println("isCurrentPasswordValid : " + currentPassword);
-                if (currentPassword.equals(enterPassWord)) {
+                if (currentPassword.equals(passWord)) {
                     return true;
                 }
             }

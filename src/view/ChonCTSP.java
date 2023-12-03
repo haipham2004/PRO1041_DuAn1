@@ -4,13 +4,21 @@
  */
 package view;
 
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import model.ChiTietSanPham;
+import service.servicImp.ChiTietSanPhamServiceImp;
+
 /**
  *
  * @author Admin
  */
 public class ChonCTSP extends javax.swing.JPanel {
-    
+
+    DefaultTableModel tblmol = new DefaultTableModel();
+    ChiTietSanPhamServiceImp serviceCTSP = new ChiTietSanPhamServiceImp();
     int indexCTSP = -1;
+    int trangCTSP = 1, soTrangCTSP, tongBanGhiCTSP, index = 0;
 
     /**
      * Creates new form ChonCTSP
@@ -19,12 +27,39 @@ public class ChonCTSP extends javax.swing.JPanel {
         initComponents();
         this.setSize(1300, 755);
     }
-    
-    public void quayLaiDoiHang(){
+
+    public void quayLaiDoiHang() {
         pnlTong.removeAll();
         pnlTong.add(new DoiHangView());
         pnlTong.repaint();
         pnlTong.revalidate();
+    }
+    
+    public void fillTableChiTietSanPham(List<ChiTietSanPham> list) {
+        tblmol = (DefaultTableModel) tblChiTietSanPham.getModel();
+        tblmol.setRowCount(0);
+        for (ChiTietSanPham chiTietSanPham : list) {
+            tblmol.addRow(new Object[]{
+                chiTietSanPham.getMaChiTietSanPham(),
+                chiTietSanPham.getSoLuong(), chiTietSanPham.getGia(),
+                chiTietSanPham.getSanPham(),
+                chiTietSanPham.getChatLieu(), chiTietSanPham.getMauSac(),
+                chiTietSanPham.getKichThuoc(), chiTietSanPham.isTrangThai() ? "Còn hàng" : "Hết hàng",});
+        }
+    }
+    
+    public void loadPageCTSP() {
+        String tenPage = new SanPhamView().getTenSPs(null, new SanPhamView().getTenSanPham());
+        tongBanGhiCTSP = serviceCTSP.tongBanGhi(tenPage);
+        if (tongBanGhiCTSP % 5 == 0) {
+            soTrangCTSP = tongBanGhiCTSP / 5;
+        } else {
+            soTrangCTSP = tongBanGhiCTSP / 5 + 1;
+        }
+        lbSoTrang2.setText(trangCTSP + " of " + soTrangCTSP);
+        System.out.println("Số trang: " + soTrangCTSP);
+        System.out.println("Số bản ghi: " + tongBanGhiCTSP);
+        fillTableChiTietSanPham(serviceCTSP.listPageCTSP(trangCTSP, tenPage));
     }
 
     /**
@@ -232,11 +267,11 @@ public class ChonCTSP extends javax.swing.JPanel {
     private void txtTimKiemKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKiemKeyReleased
         // TODO add your handling code here:
         //        if (!txtTimKiem.getText().equals("")) {
-            //            String name = txtTimKiem.getText();
-            //            fillTable(serviceHD.getList(name));
-            //        } else {
-            //            fillTable(serviceHD.getLSHoaDon());
-            //        }
+        //            String name = txtTimKiem.getText();
+        //            fillTable(serviceHD.getList(name));
+        //        } else {
+        //            fillTable(serviceHD.getLSHoaDon());
+        //        }
     }//GEN-LAST:event_txtTimKiemKeyReleased
 
     private void btnChonHoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnChonHoaDonMouseClicked
@@ -252,9 +287,11 @@ public class ChonCTSP extends javax.swing.JPanel {
 
     private void tblChiTietSanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblChiTietSanPhamMouseClicked
         // TODO add your handling code here:
+
 //        index = tblChiTietSanPham.getSelectedRow();
 //        deltailChiTietSanPham(index);
 //        btnThemCTSP.setEnabled(false);
+//        indexCTSP = tblChiTietSanPham.getSelectedRow();
     }//GEN-LAST:event_tblChiTietSanPhamMouseClicked
 
     private void btnDau2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDau2ActionPerformed
