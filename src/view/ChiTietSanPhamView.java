@@ -38,9 +38,12 @@ import service.servicImp.MauSacServiceImp;
 import service.servicImp.SanPhamServiceImp;
 //
 import java.io.BufferedOutputStream;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -77,7 +80,7 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
     ChatLieuServiceImp serviceCl = new ChatLieuServiceImp();
     KichThuocServiceImp serviceKT = new KichThuocServiceImp();
     SanPhamServiceImp serviceSP = new SanPhamServiceImp();
-    int trangCTSP = 1, soTrangCTSP, tongBanGhiCTSP, index = 0;
+    int trangCTSP = 1, soTrangCTSP, tongBanGhiCTSP, index = -1;
     public List<String> list = new ArrayList<>();
 
     /**
@@ -674,6 +677,7 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
             }
         });
 
+        btnTaoAllQR.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/z4883882330886_8f9a20df51f3b6cffdecf910e8a70379.jpg"))); // NOI18N
         btnTaoAllQR.setText("Tạo QR ALL");
         btnTaoAllQR.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -795,7 +799,7 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
                             .addComponent(jLabel51)
                             .addComponent(txtGia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel5))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
                         .addComponent(btnTaoAllQR)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
                     .addGroup(jPanel16Layout.createSequentialGroup()
@@ -819,7 +823,7 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
                             .addComponent(jLabel52)
                             .addComponent(rdConhang1)
                             .addComponent(rdHethang1))
-                        .addGap(21, 48, Short.MAX_VALUE)))
+                        .addGap(21, 51, Short.MAX_VALUE)))
                 .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnNhapFileExcel, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -870,7 +874,7 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 752, Short.MAX_VALUE)
+            .addGap(0, 755, Short.MAX_VALUE)
         );
 
         add(jPanel1, "card3");
@@ -878,9 +882,10 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
 
     private void btnSearchGiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchGiaActionPerformed
         // TODO add your handling code here:
+        String ten=new SanPhamView().getTenSanPham();
         double giaMin = Double.parseDouble(txtTienMin.getText());
         double giaMax = Double.parseDouble(txtTienMax.getText());
-        fillTableChiTietSanPham(serviceCTSP.getListGia(giaMin, giaMax));
+        fillTableChiTietSanPham(serviceCTSP.getListGia(giaMin, giaMax,ten));     
     }//GEN-LAST:event_btnSearchGiaActionPerformed
 
     private void tblChiTietSanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblChiTietSanPhamMouseClicked
@@ -905,9 +910,8 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
         String tenTimMS = ms.toString();
         KichThuoc kt = (KichThuoc) cbxKichThuoc.getSelectedItem();
         String tenTimKT = kt.toString();
-        System.out.println("Mtam ơi: " + tenTimCL + tenTimMS + tenTimKT+ten);
         if (validateCTSPs()) {
-            if (serviceCTSP.checkTrungCTSP(tenTimCL, tenTimMS, tenTimKT,ten)) {
+            if (serviceCTSP.checkTrungCTSP(tenTimCL, tenTimMS, tenTimKT, ten)) {
                 JOptionPane.showMessageDialog(this, "Chi tiết sản phẩm đã tồn tại, vui lòng kiểm tra lại", "Message", 2);
                 return;
             } else {
@@ -935,8 +939,7 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
         String tenTimMS = ms.toString();
         KichThuoc kt = (KichThuoc) cbxKichThuoc.getSelectedItem();
         String tenTimKT = kt.toString();
-        System.out.println("Mtam ơi: " + tenTimCL + tenTimMS + tenTimKT);
-        if (serviceCTSP.checkTrungCTSP(tenTimCL, tenTimMS, tenTimKT,ten)) {
+        if (serviceCTSP.checkTrungCTSP(tenTimCL, tenTimMS, tenTimKT, ten)) {
             JOptionPane.showMessageDialog(this, "Chi tiết sản phẩm đã tồn tại, vui lòng sửa lại", "Message", 2);
             return;
         } else {
@@ -1038,18 +1041,18 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
     private void btnNhapFileExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNhapFileExcelActionPerformed
         // TODO add your handling code here:
         mol = (DefaultTableModel) tblChiTietSanPham.getModel();
-        for (int i = 0; i < 10; i++) {
-            mol.addRow(new Object[]{
-                i, i, i, i, i, i, i, i
-            });
-        }
+//        for (int i = 0; i < 10; i++) {
+//            mol.addRow(new Object[]{
+//                i, i, i, i, i, i, i, i
+//            });
+//        }
 
         System.out.println("Nhập excel1");
         File excelFile;
         FileInputStream excelFIS = null;
         BufferedInputStream excelBIS = null;
         XSSFWorkbook excelImportToJTable = null;
-        String defaultCurrentDirectoryPath = "D:\\";
+        String defaultCurrentDirectoryPath = "D:\\PRO1041_DuAn1\\Excel";
         JFileChooser excelFileChooser = new JFileChooser(defaultCurrentDirectoryPath);
         excelFileChooser.setDialogTitle("Select Excel File");
         FileNameExtensionFilter fnef = new FileNameExtensionFilter("EXCEL FILES", "xls", "xlsx", "xlsm");
@@ -1122,7 +1125,7 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
                         System.out.println("Test1");
                         serviceCTSP.them(ctsp2);
                         System.out.println("Test2");
-                        fillTableChiTietSanPham(serviceCTSP.getList(new SanPhamView().getTenSPs(null, new SanPhamView().getTenSanPham())));
+                        loadPageCTSP();
 
                     } else {
                         System.out.println("Dòng " + i + " là null. Bỏ qua dòng này.");
@@ -1143,7 +1146,7 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
         BufferedOutputStream excelBOU = null;
         XSSFWorkbook excelJtableExporter;
 
-        JFileChooser excel = new JFileChooser("D:");
+        JFileChooser excel = new JFileChooser("D:\\PRO1041_DuAn1\\Excel");
         excel.setDialogTitle("Save as");
         FileNameExtensionFilter file = new FileNameExtensionFilter("EXCEL FILE", "xls", "xlsx", "xlsm");
         excel.setFileFilter(file);
@@ -1252,10 +1255,12 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
 
     private void btnTaoAllQRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaoAllQRActionPerformed
         // TODO add your handling code here:
-        for (ChiTietSanPham chiTietSanPham : serviceCTSP.getAll()) {
+        for (ChiTietSanPham chiTietSanPham : serviceCTSP.getList(new SanPhamView().getTenSPs(null, new SanPhamView().getTenSanPham()))) {
             qrCode(chiTietSanPham.getMaChiTietSanPham());
             serviceCTSP.taoQR(chiTietSanPham.getMaChiTietSanPham());
         }
+        JOptionPane.showMessageDialog(this, "Mã QR code đã được tạo");
+
     }//GEN-LAST:event_btnTaoAllQRActionPerformed
 
 

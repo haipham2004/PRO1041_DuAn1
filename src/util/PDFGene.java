@@ -51,7 +51,7 @@ public class PDFGene {
         String formattedDateTime = currentDateTime.format(formatter);
         DecimalFormat df = new DecimalFormat("#,###");
 
-        String path = "D:\\PDF\\" + hd.getMaHoaDon() + ".pdf";
+        String path = "D:\\PRO1041_DuAn1\\PDF\\" + hd.getMaHoaDon() + ".pdf";
         PdfWriter pdfWriter = new PdfWriter(path);
         PdfDocument pdfDocument = new PdfDocument(pdfWriter);
         pdfDocument.setDefaultPageSize(PageSize.A4);
@@ -64,12 +64,6 @@ public class PDFGene {
         img2.setOpacity(0.2f);
         document.add(img2);
 
-//        String imgPath2 = "src\\img\\watermark.png";
-//        ImageData imgData2 = ImageDataFactory.create(imgPath2);
-//        Image img3= new Image(imgData2);
-//        img3.setFixedPosition(60, 150);
-//        img3.setRotationAngle(45);
-//        img3.setOpacity(0.1f);
         String fontPath = "C:\\Windows\\Fonts\\Arial.ttf";
         PdfFont font = PdfFontFactory.createFont(fontPath, PdfEncodings.IDENTITY_H);
         document.setFont(font);
