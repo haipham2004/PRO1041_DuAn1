@@ -56,7 +56,7 @@ public class NhanVienRepository {
             sql = "INSERT INTO NhanVien (MaNV,MaTK,HoTen,GioiTinh,DiaChi,SoDienThoai,CCCD,NgayVaoLam,TrangThai,Anh) VALUES (?,?,?,?,?,?,?,?,?,?)";
             pst = conn.prepareStatement(sql);
             pst.setObject(1, nv.getMaNhanVien());
-            pst.setObject(2, nv.getMaTaiKhoan());
+            pst.setObject(2, nv.getTaiKhoan().getMaTaiKhoan());
             pst.setObject(3, nv.getHoTen());
             pst.setObject(4, nv.isGioiTinh());
             pst.setObject(5, nv.getDiaChi());
@@ -78,7 +78,7 @@ public class NhanVienRepository {
             sql = "UPDATE NhanVien SET MaTK=?, HoTen=?, GioiTinh=?, DiaChi=?, SoDienThoai=?, CCCD=?, NgayVaoLam=?, TrangThai=?, Anh=? WHERE MaNV=?";
             pst = conn.prepareStatement(sql);
             pst.setObject(10, maNV);
-            pst.setObject(1, nv.getMaTaiKhoan());
+            pst.setObject(1, nv.getTaiKhoan().getMaTaiKhoan());
             pst.setObject(2, nv.getHoTen());
             pst.setObject(3, nv.isGioiTinh());
             pst.setObject(4, nv.getDiaChi());
@@ -87,6 +87,20 @@ public class NhanVienRepository {
             pst.setObject(7, nv.getNgayVaoLam());
             pst.setObject(8, nv.isTrangThai());
             pst.setObject(9, nv.getAnh());
+            return pst.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+    public int updateTK(TaiKhoan tk) {
+        try {
+            conn = DBConnect.getConnection();
+            sql = "UPDATE TaiKhoan SET Role=?, TrangThai=? WHERE MaTK=?";
+            pst = conn.prepareStatement(sql);
+            pst.setObject(1, tk.getRole());
+            pst.setObject(2, tk.getTrangThai());
+            pst.setObject(3, tk.getMaTaiKhoan());
             return pst.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
@@ -202,13 +216,19 @@ public class NhanVienRepository {
         }
         return list;
     }
+
     public int tongBanGhi(int index) {
         int tong = 0;
         try {
             conn = DBConnect.getConnection();
-            sql = "SELECT COUNT(*) FROM NhanVien where TrangThai = ?";
-            pst = conn.prepareStatement(sql);
-            pst.setObject(1, index);
+            if (index == -1) {
+                sql = "SELECT COUNT(*) FROM NhanVien";
+                pst = conn.prepareStatement(sql);
+            } else {
+                sql = "SELECT COUNT(*) FROM NhanVien where TrangThai = ?";
+                pst = conn.prepareStatement(sql);
+                pst.setObject(1, index);
+            }
             rs = pst.executeQuery();
             if (rs.next()) {
                 tong = rs.getInt(1);
@@ -219,6 +239,7 @@ public class NhanVienRepository {
         }
         return tong;
     }
+
     public NhanVien timTheoUserName(String ma) {
         NhanVien nv = null;
         listNhanVien.clear();
@@ -242,6 +263,40 @@ public class NhanVienRepository {
         } catch (Exception e) {
             e.printStackTrace();
             return null;
+        }
+    }
+    public TaiKhoan getTK(String ma){
+        TaiKhoan tk = null;
+        try {
+            conn = DBConnect.getConnection();
+            sql = "select MaTK,UserName,PassWord,Role,TrangThai from TaiKhoan where MaTK = ?";
+            pst = conn.prepareStatement(sql);
+            pst.setObject(1, ma);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                tk = new TaiKhoan(rs.getString(1), rs.getString(2),
+                        rs.getString(3), rs.getString(4), rs.getBoolean(5));
+            }
+            return tk;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+    public int insertTK(TaiKhoan tk){
+        try {
+            conn = DBConnect.getConnection();
+            sql = "INSERT INTO TaiKhoan (MaTK,UserName,PassWord,Role,TrangThai) VALUES (?,?,?,?,?)";
+            pst = conn.prepareStatement(sql);
+            pst.setObject(1, tk.getMaTaiKhoan());
+            pst.setObject(2, tk.getUserName());
+            pst.setObject(3, tk.getPassWord());
+            pst.setObject(4, tk.getRole());
+            pst.setObject(5, tk.getTrangThai());
+            return pst.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
         }
     }
 }

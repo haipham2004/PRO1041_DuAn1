@@ -40,7 +40,7 @@ public class LichSuDoiHangView extends javax.swing.JPanel {
             tblmLSDH.addRow(new Object[]{
                 this.tblDoiHang.getRowCount() + 1, item.getMaDoiHang(), item.getHoaDon().getMaHoaDon(), item.getNhanVien().getHoTen(),
                 item.getHoaDon().getKhachHang().getHoTen(), item.getNgayDoiTra(),
-                item.chiTietTrangThai()
+                item.getTrangThai()
             });
         }
     }
