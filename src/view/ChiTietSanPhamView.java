@@ -96,20 +96,67 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
         loadCbxMauSac(serviceMS.getAll());
         loadCbxChatLieu(serviceCl.getAll());
         rdConhang1.setSelected(true);
-        loadLocMauSac(serviceMS.getAll());
         loadLocChatLieu(serviceCl.getAll());
+        loadLocMauSac(serviceMS.getAll());
         loadLocKichThuoc(serviceKT.getAll());
     }
 
-    public void mtam() {
-        ChatLieu cl = (ChatLieu) cbxChatLieuLoc.getSelectedItem();
-        String tenTimCL = cl.toString();
-        MauSac ms = (MauSac) cbxMauSacLoc.getSelectedItem();
-        String tenTimMS = ms.toString();
-        KichThuoc kt = (KichThuoc) cbxKichThuocLoc.getSelectedItem();
-        String tenTimKT = kt.toString();
-        String tenList = new SanPhamView().getTenSPs(null, new SanPhamView().getTenSanPham());
-        fillTableChiTietSanPham(serviceCTSP.getListLoc(tenList, tenTimCL, tenTimMS, tenTimKT));
+//    public void mtam() {
+//        ChatLieu cl = (ChatLieu) cbxChatLieuLoc.getSelectedItem();
+//        String tenTimCL = cl.toString();
+//        MauSac ms = (MauSac) cbxMauSacLoc.getSelectedItem();
+//        String tenTimMS = ms.toString();
+//        KichThuoc kt = (KichThuoc) cbxKichThuocLoc.getSelectedItem();
+//        String tenTimKT = kt.toString();
+//        String tenList = new SanPhamView().getTenSPs(null, new SanPhamView().getTenSanPham());
+//        fillTableChiTietSanPham(serviceCTSP.getListLoc(tenList, tenTimCL, tenTimMS, tenTimKT));
+//    }
+    public void mtam2() {
+//        ChatLieu cl = (ChatLieu) cbxChatLieuLoc.getSelectedItem();
+//        String tenTimCL = cl.toString();
+//        MauSac ms = (MauSac) cbxMauSacLoc.getSelectedItem();
+//        String tenTimMS = ms.toString();
+//        KichThuoc kt = (KichThuoc) cbxKichThuocLoc.getSelectedItem();
+//        String tenTimKT = kt.toString();
+       
+        if (cboLocChat.getSelectedIndex() != -1 && cboLocMau.getSelectedIndex() == -1 && cboLocKich.getSelectedIndex() == -1) {
+            ChatLieu cl = (ChatLieu) cbxChatLieuLoc.getSelectedItem();
+            String tenTimCL = cl.toString();
+             String tenList = new SanPhamView().getTenSPs(null, new SanPhamView().getTenSanPham());
+            fillTableChiTietSanPham(serviceCTSP.getListLocCL(tenList, tenTimCL));
+        } else if (cboLocChat.getSelectedIndex() == -1 && cboLocMau.getSelectedIndex() != -1 && cboLocKich.getSelectedIndex() == -1) {
+            MauSac ms = (MauSac) cbxMauSacLoc.getSelectedItem();
+            String tenTimMS = ms.toString();
+             String tenList = new SanPhamView().getTenSPs(null, new SanPhamView().getTenSanPham());
+            fillTableChiTietSanPham(serviceCTSP.getListLocMS(tenList, tenTimMS));
+        } else if (cboLocChat.getSelectedIndex() == -1 && cboLocMau.getSelectedIndex() == -1 && cboLocKich.getSelectedIndex() != -1) {
+            KichThuoc kt = (KichThuoc) cbxKichThuocLoc.getSelectedItem();
+            String tenTimKT = kt.toString();
+             String tenList = new SanPhamView().getTenSPs(null, new SanPhamView().getTenSanPham());
+            fillTableChiTietSanPham(serviceCTSP.getListLocKT(tenList, tenTimKT));
+        } else if (cboLocChat.getSelectedIndex() != -1 && cboLocMau.getSelectedIndex() != -1 && cboLocKich.getSelectedIndex() == -1) {
+            ChatLieu cl = (ChatLieu) cbxChatLieuLoc.getSelectedItem();
+            String tenTimCL = cl.toString();
+            MauSac ms = (MauSac) cbxMauSacLoc.getSelectedItem();
+            String tenTimMS = ms.toString();
+             String tenList = new SanPhamView().getTenSPs(null, new SanPhamView().getTenSanPham());
+            fillTableChiTietSanPham(serviceCTSP.getListLocCLMS(tenList, tenTimCL, tenTimMS));
+        } else if (cboLocChat.getSelectedIndex() == -1 && cboLocMau.getSelectedIndex() != -1 && cboLocKich.getSelectedIndex() != -1) {
+            MauSac ms = (MauSac) cbxMauSacLoc.getSelectedItem();
+            String tenTimMS = ms.toString();
+            KichThuoc kt = (KichThuoc) cbxKichThuocLoc.getSelectedItem();
+            String tenTimKT = kt.toString();
+             String tenList = new SanPhamView().getTenSPs(null, new SanPhamView().getTenSanPham());
+            fillTableChiTietSanPham(serviceCTSP.getListLocMSKT(tenList, tenTimMS, tenTimKT));
+        } else if (cboLocChat.getSelectedIndex() != -1 && cboLocMau.getSelectedIndex() == -1 && cboLocKich.getSelectedIndex() != -1) {
+            ChatLieu cl = (ChatLieu) cbxChatLieuLoc.getSelectedItem();
+            String tenTimCL = cl.toString();
+            KichThuoc kt = (KichThuoc) cbxKichThuocLoc.getSelectedItem();
+            String tenTimKT = kt.toString();
+             String tenList = new SanPhamView().getTenSPs(null, new SanPhamView().getTenSanPham());
+            fillTableChiTietSanPham(serviceCTSP.getListLocCLKT(tenList, tenTimCL, tenTimKT));
+        }
+
     }
 
     public void fillTableChiTietSanPham(List<ChiTietSanPham> list) {
@@ -194,12 +241,22 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
         cboMaSP.setModel((ComboBoxModel) cbxSanPham);
     }
 
+    public void loadLocChatLieu(List<ChatLieu> list) {
+        cbxChatLieuLoc.removeAllElements();
+        for (ChatLieu chatLieu : list) {
+            cbxChatLieuLoc.addElement(chatLieu);
+        }
+        cboLocChat.setModel((ComboBoxModel) cbxChatLieuLoc);
+        cboLocChat.setSelectedIndex(-1);
+    }
+
     public void loadLocMauSac(List<MauSac> list) {
         cbxMauSacLoc.removeAllElements();
         for (MauSac mauSac : list) {
             cbxMauSacLoc.addElement(mauSac);
         }
         cboLocMau.setModel((ComboBoxModel) cbxMauSacLoc);
+        cboLocMau.setSelectedIndex(-1);
     }
 
     public void loadLocKichThuoc(List<KichThuoc> list) {
@@ -208,14 +265,7 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
             cbxKichThuocLoc.addElement(kichThuoc);
         }
         cboLocKich.setModel((ComboBoxModel) cbxKichThuocLoc);
-    }
-
-    public void loadLocChatLieu(List<ChatLieu> list) {
-        cbxChatLieuLoc.removeAllElements();
-        for (ChatLieu chatLieu : list) {
-            cbxChatLieuLoc.addElement(chatLieu);
-        }
-        cboLocChat.setModel((ComboBoxModel) cbxChatLieuLoc);
+        cboLocKich.setSelectedIndex(-1);
     }
 
     public void loadCbxMauSac(List<MauSac> list) {
@@ -350,6 +400,9 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
         cboLocMau = new javax.swing.JComboBox<>();
         cboLocKich = new javax.swing.JComboBox<>();
         cboLocChat = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         jScrollPane7 = new javax.swing.JScrollPane();
         tblChiTietSanPham = new javax.swing.JTable();
         cboMaSP = new javax.swing.JComboBox<>();
@@ -487,11 +540,21 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
                 cboLocMauMouseClicked(evt);
             }
         });
+        cboLocMau.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboLocMauActionPerformed(evt);
+            }
+        });
 
         cboLocKich.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cboLocKich.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 cboLocKichMouseClicked(evt);
+            }
+        });
+        cboLocKich.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboLocKichActionPerformed(evt);
             }
         });
 
@@ -501,28 +564,50 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
                 cboLocChatMouseClicked(evt);
             }
         });
+        cboLocChat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboLocChatActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Chất liệu");
+
+        jLabel2.setText("Màu sắc");
+
+        jLabel3.setText("Kích thước");
 
         javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
         jPanel11.setLayout(jPanel11Layout);
         jPanel11Layout.setHorizontalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel11Layout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addComponent(cboLocMau, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38)
-                .addComponent(cboLocKich, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(52, 52, 52)
-                .addComponent(cboLocChat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(105, Short.MAX_VALUE))
+                .addGap(14, 14, 14)
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cboLocChat, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(39, 39, 39)
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cboLocMau, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 82, Short.MAX_VALUE)
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cboLocKich, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(49, 49, 49))
         );
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel11Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
+                .addContainerGap()
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cboLocChat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cboLocMau, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cboLocKich, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cboLocChat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cboLocKich, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -882,10 +967,10 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
 
     private void btnSearchGiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchGiaActionPerformed
         // TODO add your handling code here:
-        String ten=new SanPhamView().getTenSanPham();
+        String ten = new SanPhamView().getTenSanPham();
         double giaMin = Double.parseDouble(txtTienMin.getText());
         double giaMax = Double.parseDouble(txtTienMax.getText());
-        fillTableChiTietSanPham(serviceCTSP.getListGia(giaMin, giaMax,ten));     
+        fillTableChiTietSanPham(serviceCTSP.getListGia(giaMin, giaMax, ten));
     }//GEN-LAST:event_btnSearchGiaActionPerformed
 
     private void tblChiTietSanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblChiTietSanPhamMouseClicked
@@ -1240,17 +1325,17 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
 
     private void cboLocMauMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cboLocMauMouseClicked
         // TODO add your handling code here: 
-        mtam();
+//        mtam();
     }//GEN-LAST:event_cboLocMauMouseClicked
 
     private void cboLocKichMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cboLocKichMouseClicked
         // TODO add your handling code here:
-        mtam();
+//        mtam();
     }//GEN-LAST:event_cboLocKichMouseClicked
 
     private void cboLocChatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cboLocChatMouseClicked
         // TODO add your handling code here:
-        mtam();
+//        mtam();
     }//GEN-LAST:event_cboLocChatMouseClicked
 
     private void btnTaoAllQRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaoAllQRActionPerformed
@@ -1262,6 +1347,91 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
         JOptionPane.showMessageDialog(this, "Mã QR code đã được tạo");
 
     }//GEN-LAST:event_btnTaoAllQRActionPerformed
+
+    private void cboLocMauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboLocMauActionPerformed
+        // TODO add your handling code here:
+  
+  
+        if (cboLocChat.getSelectedIndex() != -1 && cboLocMau.getSelectedIndex() == -1 && cboLocKich.getSelectedIndex() == -1) {
+            // Người dùng chỉ chọn chất liệu
+            mtam2();
+        } else if (cboLocChat.getSelectedIndex() == -1 && cboLocMau.getSelectedIndex() != -1 && cboLocKich.getSelectedIndex() == -1) {
+            // Người dùng chỉ chọn màu sắc
+            mtam2();
+        } else if (cboLocChat.getSelectedIndex() == -1 && cboLocMau.getSelectedIndex() == -1 && cboLocKich.getSelectedIndex() != -1) {
+            // Người dùng chỉ chọn kích thước
+            mtam2();
+        } else if (cboLocChat.getSelectedIndex() != -1 && cboLocMau.getSelectedIndex() != -1 && cboLocKich.getSelectedIndex() == -1) {
+            // Người dùng chọn chất liệu và màu sắc
+            mtam2();
+        } else if (cboLocChat.getSelectedIndex() == -1 && cboLocMau.getSelectedIndex() != -1 && cboLocKich.getSelectedIndex() != -1) {
+            // Người dùng chọn màu sắc và kích thước
+            mtam2();
+        } else if (cboLocChat.getSelectedIndex() != -1 && cboLocMau.getSelectedIndex() == -1 && cboLocKich.getSelectedIndex() != -1) {
+            // Người dùng chọn chất liệu và kích thước
+            mtam2();
+        } else if (cboLocChat.getSelectedIndex() != -1 && cboLocMau.getSelectedIndex() != -1 && cboLocKich.getSelectedIndex() != -1) {
+            // Người dùng chọn cả ba
+            mtam2();
+        }
+
+    }//GEN-LAST:event_cboLocMauActionPerformed
+
+    private void cboLocChatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboLocChatActionPerformed
+        // TODO add your handling code here:
+
+        //
+        if (cboLocChat.getSelectedIndex() != -1 && cboLocMau.getSelectedIndex() == -1 && cboLocKich.getSelectedIndex() == -1) {
+            // Người dùng chỉ chọn chất liệu
+            mtam2();
+        } else if (cboLocChat.getSelectedIndex() == -1 && cboLocMau.getSelectedIndex() != -1 && cboLocKich.getSelectedIndex() == -1) {
+            // Người dùng chỉ chọn màu sắc
+            mtam2();
+        } else if (cboLocChat.getSelectedIndex() == -1 && cboLocMau.getSelectedIndex() == -1 && cboLocKich.getSelectedIndex() != -1) {
+            // Người dùng chỉ chọn kích thước
+            mtam2();
+        } else if (cboLocChat.getSelectedIndex() != -1 && cboLocMau.getSelectedIndex() != -1 && cboLocKich.getSelectedIndex() == -1) {
+            // Người dùng chọn chất liệu và màu sắc
+            mtam2();
+        } else if (cboLocChat.getSelectedIndex() == -1 && cboLocMau.getSelectedIndex() != -1 && cboLocKich.getSelectedIndex() != -1) {
+            // Người dùng chọn màu sắc và kích thước
+            mtam2();
+        } else if (cboLocChat.getSelectedIndex() != -1 && cboLocMau.getSelectedIndex() == -1 && cboLocKich.getSelectedIndex() != -1) {
+            // Người dùng chọn chất liệu và kích thước
+            mtam2();
+        } else if (cboLocChat.getSelectedIndex() != -1 && cboLocMau.getSelectedIndex() != -1 && cboLocKich.getSelectedIndex() != -1) {
+            // Người dùng chọn cả ba
+            mtam2();
+        }
+
+    }//GEN-LAST:event_cboLocChatActionPerformed
+
+    private void cboLocKichActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboLocKichActionPerformed
+        // TODO add your handling code here:
+        if (cboLocChat.getSelectedIndex() != -1 && cboLocMau.getSelectedIndex() == -1 && cboLocKich.getSelectedIndex() == -1) {
+            // Người dùng chỉ chọn chất liệu
+            mtam2();
+        } else if (cboLocChat.getSelectedIndex() == -1 && cboLocMau.getSelectedIndex() != -1 && cboLocKich.getSelectedIndex() == -1) {
+            // Người dùng chỉ chọn màu sắc
+            mtam2();
+        } else if (cboLocChat.getSelectedIndex() == -1 && cboLocMau.getSelectedIndex() == -1 && cboLocKich.getSelectedIndex() != -1) {
+            // Người dùng chỉ chọn kích thước
+            mtam2();
+        } else if (cboLocChat.getSelectedIndex() != -1 && cboLocMau.getSelectedIndex() != -1 && cboLocKich.getSelectedIndex() == -1) {
+            // Người dùng chọn chất liệu và màu sắc
+            mtam2();
+        } else if (cboLocChat.getSelectedIndex() == -1 && cboLocMau.getSelectedIndex() != -1 && cboLocKich.getSelectedIndex() != -1) {
+            // Người dùng chọn màu sắc và kích thước
+            mtam2();
+        } else if (cboLocChat.getSelectedIndex() != -1 && cboLocMau.getSelectedIndex() == -1 && cboLocKich.getSelectedIndex() != -1) {
+            // Người dùng chọn chất liệu và kích thước
+            mtam2();
+        } else if (cboLocChat.getSelectedIndex() != -1 && cboLocMau.getSelectedIndex() != -1 && cboLocKich.getSelectedIndex() != -1) {
+            // Người dùng chọn cả ba
+            mtam2();
+        }
+
+    }//GEN-LAST:event_cboLocKichActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1287,6 +1457,9 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> cboLocMau;
     private javax.swing.JComboBox<String> cboMaSP;
     private javax.swing.JComboBox<String> cboMauSac;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel46;
     private javax.swing.JLabel jLabel47;

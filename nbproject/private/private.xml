@@ -17,39 +17,13 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-            <file>file:/D:/FPOLY/DuAn1/PRO1041_DuAn1/src/view/DangNhapView.java</file>
-            <file>file:/D:/FPOLY/DuAn1/PRO1041_DuAn1/src/service/servicImp/TaiKhoanServiceImp.java</file>
-            <file>file:/D:/FPOLY/DuAn1/PRO1041_DuAn1/src/view/QuenMatKhauView.java</file>
-            <file>file:/D:/FPOLY/DuAn1/PRO1041_DuAn1/src/view/AdamStoreView.java</file>
-=======
-<<<<<<< HEAD
-            <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/view/AdamStoreView.java</file>
-            <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/view/SanPhamView.java</file>
-            <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/view/LichSuDoiHangView.java</file>
-            <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/repository/DangNhapRepository.java</file>
-            <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/repository/DoiHangRepository.java</file>
-            <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/service/servicImp/DoiHangServiceImp.java</file>
-            <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/util/DBConnect.java</file>
-            <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/view/ChonHoaDon.java</file>
-            <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/repository/HoaDonRepository.java</file>
-            <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/view/DangNhapView.java</file>
-            <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/view/DoiHangView.java</file>
-            <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/view/BanHangView.java</file>
-            <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/service/servicImp/HoaDonServiceImp.java</file>
-            <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/model/DoiHang.java</file>
-=======
->>>>>>> c0ec7191fcd437946d53c1065150416401db36e3
             <file>file:/D:/PRO1041_DuAn1/PRO1041_DuAn1/src/application/Main.java</file>
-            <file>file:/D:/PRO1041_DuAn1/PRO1041_DuAn1/src/view/BanHangView.java</file>
-<<<<<<< HEAD
-=======
+            <file>file:/D:/PRO1041_DuAn1/PRO1041_DuAn1/src/view/NhanVienView.java</file>
+            <file>file:/D:/PRO1041_DuAn1/PRO1041_DuAn1/src/util/PDFGene.java</file>
+            <file>file:/D:/PRO1041_DuAn1/PRO1041_DuAn1/src/service/servicImp/ChiTietSanPhamServiceImp.java</file>
+            <file>file:/D:/PRO1041_DuAn1/PRO1041_DuAn1/src/repository/ChiTietSanPhamRepository.java</file>
             <file>file:/D:/PRO1041_DuAn1/PRO1041_DuAn1/src/view/ChiTietSanPhamView.java</file>
->>>>>>> ffe877e8e24a9bb150a0bebcfb4d75cfaaa5c0d8
->>>>>>> bc1619b6cdca35eef84363698d0259559084a9c9
->>>>>>> c0ec7191fcd437946d53c1065150416401db36e3
+            <file>file:/D:/PRO1041_DuAn1/PRO1041_DuAn1/src/view/BanHangView.java</file>
         </group>
     </open-files>
 </project-private>
