@@ -50,8 +50,8 @@ public class ChiTietSanPhamServiceImp implements AdamStore<ChiTietSanPham, Strin
         return repo.getList(e);
     }
 
-    public List<ChiTietSanPham> getListGia(double giaMin, double giaMax) {
-        return repo.getListGia(giaMin, giaMax);
+    public List<ChiTietSanPham> getListGia(double giaMin, double giaMax,String name) {
+        return repo.getListGia(giaMin, giaMax,name);
     }
 
     public List<ChiTietSanPham> listPageCTSP(int index,String name) {
@@ -93,5 +93,13 @@ public class ChiTietSanPhamServiceImp implements AdamStore<ChiTietSanPham, Strin
     public List<ChiTietSanPham> getListLoc(String name1, String name2, String name3, String name4) {
         return repo.getListLoc(name1, name2, name3, name4);
     }
+    
+    public int capNhatSoLuongThanhToanCong(int soLuong,String ma){
+        return repo.capNhatSoLuongThanhToanCong(soLuong, ma);
+    }
+    public int capNhatSoLuongThanhToanTru(int soLuong,String ma){
+        return repo.capNhatSoLuongThanhToanTru(soLuong, ma);
+    }
+    
  
 }

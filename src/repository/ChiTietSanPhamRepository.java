@@ -160,12 +160,12 @@ public class ChiTietSanPhamRepository {
         List<ChiTietSanPham> listChiTietSanPham4 = new ArrayList<>();
         try {
             conn = DBConnect.getConnection();
-            sql = "  SELECT CTSP.MaCTSP,CTSP.MaSanPham,SP.TenSanPham,MS.MaMauSac,MS.TenMauSac,CL.MaChatLieu,CL.TenChatLieu,\n"
-                    + "                   KT.MaKichThuoc,KT.TenKichThuoc,CTSP.SoLuong,CTSP.Gia,CTSP.TrangThai\n"
-                    + "                   FROM ChiTietSanPham CTSP INNER JOIN ChatLieu CL On CL.MaChatLieu=CTSP.MaChatLieu\n"
-                    + "                    INNER JOIn MauSac MS ON MS.MaMauSac=CTSP.MaMauSac\n"
-                    + "                    INNER JOIN KichThuoc KT ON KT.MaKichThuoc=CTSP.MaKichThuoc \n"
-                    + "                   INNER JOIN SanPham SP ON CTSP.MaSanPham=SP.MaSanPham"
+            sql = "SELECT CTSP.MaCTSP,CTSP.MaSanPham,SP.TenSanPham,MS.MaMauSac,MS.TenMauSac,CL.MaChatLieu,CL.TenChatLieu,\n"
+                    + "KT.MaKichThuoc,KT.TenKichThuoc,CTSP.SoLuong,CTSP.Gia,CTSP.TrangThai\n"
+                    + "FROM ChiTietSanPham CTSP INNER JOIN ChatLieu CL On CL.MaChatLieu=CTSP.MaChatLieu\n"
+                    + "INNER JOIn MauSac MS ON MS.MaMauSac=CTSP.MaMauSac\n"
+                    + "INNER JOIN KichThuoc KT ON KT.MaKichThuoc=CTSP.MaKichThuoc \n"
+                    + "INNER JOIN SanPham SP ON CTSP.MaSanPham=SP.MaSanPham"
                     + " where SP.TenSanPham like ? and CL.TenChatLieu like ? and MS.TenMauSac like ? and KT.TenKichThuoc like ?";
             pst = conn.prepareStatement(sql);
             pst.setObject(1, '%' + name1 + '%');
@@ -189,7 +189,7 @@ public class ChiTietSanPhamRepository {
         return listChiTietSanPham4;
     }
 
-    public List<ChiTietSanPham> getListGia(double giaMin, double giaMax) {
+    public List<ChiTietSanPham> getListGia(double giaMin, double giaMax,String name) {
         List<ChiTietSanPham> listChiTietSanPham2 = new ArrayList<>();
         try {
             conn = DBConnect.getConnection();
@@ -198,10 +198,11 @@ public class ChiTietSanPhamRepository {
                     + "FROM ChiTietSanPham CTSP INNER JOIN ChatLieu CL On CL.MaChatLieu=CTSP.MaChatLieu\n"
                     + "INNER JOIn MauSac MS ON MS.MaMauSac=CTSP.MaMauSac\n"
                     + "INNER JOIN KichThuoc KT ON KT.MaKichThuoc=CTSP.MaKichThuoc \n"
-                    + "INNER JOIN SanPham SP ON CTSP.MaSanPham=SP.MaSanPham where Gia between ? and ? order by CTSP.TrangThai DESC";
+                    + "INNER JOIN SanPham SP ON CTSP.MaSanPham=SP.MaSanPham where Gia between ? and ? and SP.TenSanPham like ? order by CTSP.TrangThai DESC";
             pst = conn.prepareStatement(sql);
             pst.setObject(1, giaMin);
             pst.setObject(2, giaMax);
+             pst.setObject(3, name);
             rs = pst.executeQuery();
             while (rs.next()) {
                 SanPham sp = new SanPham(rs.getString(2), rs.getString(3));
@@ -251,7 +252,7 @@ public class ChiTietSanPhamRepository {
         }
         return listChiTietSanPham3;
     }
-    
+
     public List<ChiTietSanPham> listPageCTSP2(int index) {
         List<ChiTietSanPham> listChiTietSanPham5 = new ArrayList<>();
         try {
@@ -287,9 +288,9 @@ public class ChiTietSanPhamRepository {
         List<ChiTietSanPham> listCTSP = new ArrayList<>();
         try {
             sql = "SELECT CTSP.MaCTSP, CTSP.MASANPHAM, SP.TenSanPham, HD.MAHOADON, HDCT.SOLUONG, CTSP.GIA, CTSP.TRANGTHAI \n"
-                    + "                   FROM ChiTietSanPham CTSP JOIN HoaDonChiTiet HDCT \n"
-                    + "                      ON CTSP.MaCTSP = HDCT.MaCTSP JOIN HoaDon HD ON HD.MaHoaDon = HDCT.MaHoaDon\n"
-                    + "					  JOIN SanPham SP ON CTSP.MaSanPham = SP.MaSanPham WHERE HD.MaHoaDon = ?";
+                    + "FROM ChiTietSanPham CTSP JOIN HoaDonChiTiet HDCT \n"
+                    + "ON CTSP.MaCTSP = HDCT.MaCTSP JOIN HoaDon HD ON HD.MaHoaDon = HDCT.MaHoaDon\n"
+                    + "JOIN SanPham SP ON CTSP.MaSanPham = SP.MaSanPham WHERE HD.MaHoaDon = ?";
             conn = DBConnect.getConnection();
             pst = conn.prepareStatement(sql);
             pst.setObject(1, maHoadon);
@@ -327,7 +328,7 @@ public class ChiTietSanPhamRepository {
         }
         return tong;
     }
-    
+
     public int tongBanGhi2() {
         int tong = 0;
         try {
@@ -418,5 +419,38 @@ public class ChiTietSanPhamRepository {
         return false;
     }
 
-    
+    public int capNhatSoLuongThanhToanCong(int soLuong, String ma) {
+        int so = 0;
+        try {
+            conn = DBConnect.getConnection();
+            sql = "UPDATE ChiTietSanPham set SoLuong=SoLuong-?\n"
+                    + "where MaCTSP=?";
+            pst = conn.prepareStatement(sql);
+            pst.setObject(1, soLuong);
+            pst.setObject(2, ma);
+            so += pst.executeUpdate();
+            return so;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+
+    public int capNhatSoLuongThanhToanTru(int soLuong, String ma) {
+        int so = 0;
+        try {
+            conn = DBConnect.getConnection();
+            sql = "UPDATE ChiTietSanPham set SoLuong=SoLuong+?\n"
+                    + "where MaCTSP=?";
+            pst = conn.prepareStatement(sql);
+            pst.setObject(1, soLuong);
+            pst.setObject(2, ma);
+            so += pst.executeUpdate();
+            return so;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+
 }

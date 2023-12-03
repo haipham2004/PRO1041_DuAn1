@@ -287,43 +287,47 @@ public class ChonCTSP extends javax.swing.JPanel {
 
     private void tblChiTietSanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblChiTietSanPhamMouseClicked
         // TODO add your handling code here:
-        indexCTSP = tblChiTietSanPham.getSelectedRow();
+
+//        index = tblChiTietSanPham.getSelectedRow();
+//        deltailChiTietSanPham(index);
+//        btnThemCTSP.setEnabled(false);
+//        indexCTSP = tblChiTietSanPham.getSelectedRow();
     }//GEN-LAST:event_tblChiTietSanPhamMouseClicked
 
     private void btnDau2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDau2ActionPerformed
         // TODO add your handling code here:
-        trangCTSP = 1;
-        String tenPage = new SanPhamView().getTenSPs(null, new SanPhamView().getTenSanPham());
-        fillTableChiTietSanPham(serviceCTSP.listPageCTSP(trangCTSP, tenPage));
-        lbSoTrang2.setText(trangCTSP + " of " + soTrangCTSP);
+//        trangCTSP = 1;
+//        String tenPage = new SanPhamView().getTenSPs(null, new SanPhamView().getTenSanPham());
+//        fillTableChiTietSanPham(serviceCTSP.listPageCTSP(trangCTSP, tenPage));
+//        lbSoTrang2.setText(trangCTSP + " of " + soTrangCTSP);
     }//GEN-LAST:event_btnDau2ActionPerformed
 
     private void btnLui2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLui2ActionPerformed
         // TODO add your handling code here:
-        if (trangCTSP > 1) {
-            trangCTSP--;
-            String tenPage = new SanPhamView().getTenSPs(null, new SanPhamView().getTenSanPham());
-            fillTableChiTietSanPham(serviceCTSP.listPageCTSP(trangCTSP, tenPage));
-            lbSoTrang2.setText(trangCTSP + " of " + soTrangCTSP);
-        }
+//        if (trangCTSP > 1) {
+//            trangCTSP--;
+//            String tenPage = new SanPhamView().getTenSPs(null, new SanPhamView().getTenSanPham());
+//            fillTableChiTietSanPham(serviceCTSP.listPageCTSP(trangCTSP, tenPage));
+//            lbSoTrang2.setText(trangCTSP + " of " + soTrangCTSP);
+//        }
     }//GEN-LAST:event_btnLui2ActionPerformed
 
     private void btnTien2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTien2ActionPerformed
         // TODO add your handling code here:
-        if (trangCTSP < soTrangCTSP) {
-            trangCTSP++;
-            String tenPage = new SanPhamView().getTenSPs(null, new SanPhamView().getTenSanPham());
-            fillTableChiTietSanPham(serviceCTSP.listPageCTSP(trangCTSP, tenPage));
-            lbSoTrang2.setText(trangCTSP + " of " + soTrangCTSP);
-        }
+//        if (trangCTSP < soTrangCTSP) {
+//            trangCTSP++;
+//            String tenPage = new SanPhamView().getTenSPs(null, new SanPhamView().getTenSanPham());
+//            fillTableChiTietSanPham(serviceCTSP.listPageCTSP(trangCTSP, tenPage));
+//            lbSoTrang2.setText(trangCTSP + " of " + soTrangCTSP);
+//        }
     }//GEN-LAST:event_btnTien2ActionPerformed
 
     private void btnCuoi2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCuoi2ActionPerformed
         // TODO add your handling code here:
-        trangCTSP = soTrangCTSP;
-        String tenPage = new SanPhamView().getTenSPs(null, new SanPhamView().getTenSanPham());
-        fillTableChiTietSanPham(serviceCTSP.listPageCTSP(trangCTSP, tenPage));
-        lbSoTrang2.setText(trangCTSP + " of " + soTrangCTSP);
+//        trangCTSP = soTrangCTSP;
+//        String tenPage = new SanPhamView().getTenSPs(null, new SanPhamView().getTenSanPham());
+//        fillTableChiTietSanPham(serviceCTSP.listPageCTSP(trangCTSP, tenPage));
+//        lbSoTrang2.setText(trangCTSP + " of " + soTrangCTSP);
     }//GEN-LAST:event_btnCuoi2ActionPerformed
 
 
