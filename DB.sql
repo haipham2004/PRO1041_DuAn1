@@ -1,5 +1,4 @@
---bản full
-﻿----Update:2023-12-01--lúc 18g15p--okela
+
 CREATE DATABASE AdamStores
 GO
 USE AdamStores

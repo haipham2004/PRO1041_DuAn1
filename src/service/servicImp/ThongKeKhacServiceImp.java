@@ -14,8 +14,10 @@ import service.AdamStore;
  *
  * @author Admin
  */
-public class ThongKeKhacServiceImp implements AdamStore<HoaDonChiTiet, String>{
+public class ThongKeKhacServiceImp implements AdamStore<HoaDonChiTiet, String> {
+
     ThongKeKhacRepository repo = new ThongKeKhacRepository();
+
     @Override
     public List<HoaDonChiTiet> getAll() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
@@ -45,6 +47,7 @@ public class ThongKeKhacServiceImp implements AdamStore<HoaDonChiTiet, String>{
     public List<HoaDonChiTiet> getList(String e) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+
     public List<HoaDonChiTiet> getList1() {
         return repo.getList1();
     }
@@ -61,7 +64,8 @@ public class ThongKeKhacServiceImp implements AdamStore<HoaDonChiTiet, String>{
         return repo.getList2(tenSP);
     }
 
-    public List<HoaDonChiTiet> getListTK2(String tenSP,java.util.Date ngayBd, java.util.Date ngayKt) {
+    public List<HoaDonChiTiet> getListTK2(String tenSP, java.util.Date ngayBd, java.util.Date ngayKt) {
         return repo.getListTK2(tenSP, ngayBd, ngayKt);
     }
+
 }

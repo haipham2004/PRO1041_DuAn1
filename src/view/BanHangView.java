@@ -1053,7 +1053,7 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
                     serviceCTSP.capNhatSoLuongThanhToanCong(Integer.parseInt(input), ma);
                     indexHoaDonCho = tblHoaDonCho.getSelectedRow();
                     String maHD = tblHoaDonCho.getValueAt(indexHoaDonCho, 1).toString();
-                    String parentDirectory = "D:\\PRO1041_DuAn1";
+                    String parentDirectory = "F:\\FPT Polytechnic\\DA1\\PRO1041_DuAn1";
                     String newDirectoryName = "GioHang";
                     luuGioHangVaoFile(maHD, parentDirectory, newDirectoryName);
                 }
@@ -1106,7 +1106,7 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
         HoaDon hd = serviceHD.get1HoaDonCho(ma);
         String fileName = "GioHang_" + tblHoaDonCho.getValueAt(indexHoaDonCho, 1) + ".csv";
         //Nhớ đổi đường dẫn thư mục
-        loadTableDataFromFile("D:\\PRO1041_DuAn1\\GioHang", fileName);
+        loadTableDataFromFile("F:\\FPT Polytechnic\\DA1\\PRO1041_DuAn1\\GioHang", fileName);
         detailHD(hd);
         fillDonHang2();
         txtTienKhachBH2.setText("0");

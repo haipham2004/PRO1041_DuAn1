@@ -19,7 +19,7 @@ import model.SanPham;
  *
  * @author Admin
  */
-public class ThongKeDTRepository {
+public class ThongKeDoanhThuRepository {
 
     PreparedStatement ps = null;
     Connection con = null;

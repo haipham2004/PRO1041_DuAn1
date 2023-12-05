@@ -8,16 +8,16 @@ import java.util.Date;
 import java.util.List;
 import model.HoaDonChiTiet;
 import model.HoaDon;
-import repository.ThongKeSLRepository;
+import repository.ThongKeSoLuongRepository;
 import service.AdamStore;
 
 /**
  *
  * @author Admin
  */
-public class ThongKeSLServiceImp implements AdamStore<HoaDonChiTiet, String> {
+public class ThongKeSoLuongServiceImp implements AdamStore<HoaDonChiTiet, String> {
 
-    ThongKeSLRepository repo = new ThongKeSLRepository();
+    ThongKeSoLuongRepository repo = new ThongKeSoLuongRepository();
 
     @Override
     public List<HoaDonChiTiet> getAll() {
