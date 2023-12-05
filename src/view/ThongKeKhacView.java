@@ -62,6 +62,7 @@ import org.jfree.data.gantt.TaskSeriesCollection;
 import org.jfree.data.xy.XYSeries;
 import repository.ThongKeKhacRepository;
 import repository.ThongKeSLRepository;
+import service.servicImp.ThongKeKhacServiceImp;
 import util.DBConnect;
 
 /**
@@ -70,7 +71,7 @@ import util.DBConnect;
  */
 public class ThongKeKhacView extends javax.swing.JPanel {
 
-    ThongKeKhacRepository repo = new ThongKeKhacRepository();
+    ThongKeKhacServiceImp service = new ThongKeKhacServiceImp();
     public static String tenSp;
     DefaultComboBoxModel<SanPham> cboSP = new DefaultComboBoxModel<>();
     private static final long serialVersionUID = 1L;
@@ -81,8 +82,7 @@ public class ThongKeKhacView extends javax.swing.JPanel {
     public ThongKeKhacView() {
         initComponents();
         setDataToChart(panel1);
-
-        loadCbo(repo.getTenSP(tenSp));
+        loadCbo(service.getTenSP(tenSp));
         setDataToChart2(panel2);
     }
 
@@ -99,7 +99,7 @@ public class ThongKeKhacView extends javax.swing.JPanel {
     }
 
     public void setDataToChart(JPanel panelTopSP) {
-        List<HoaDonChiTiet> list1 = repo.getList1();
+        List<HoaDonChiTiet> list1 = service.getList1();
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         if (list1 != null) {
             for (HoaDonChiTiet chiTietHoaDon : list1) {
@@ -134,7 +134,7 @@ public class ThongKeKhacView extends javax.swing.JPanel {
         java.util.Date ngayBd = txtNgayBD.getDate();
         java.util.Date ngayKt = txtNgayKT.getDate();
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-        List<HoaDonChiTiet> listTK1 = repo.getListTK1(txtNgayBD.getDate(), txtNgayKT.getDate());
+        List<HoaDonChiTiet> listTK1 = service.getListTK1(txtNgayBD.getDate(), txtNgayKT.getDate());
         if (listTK1 != null) {
             for (HoaDonChiTiet chiTietHoaDon : listTK1) {
                 dataset.addValue(chiTietHoaDon.getSoLuong() + chiTietHoaDon.getCtsp().getSoLuong(), "Tổng sản phẩm",
@@ -160,7 +160,7 @@ public class ThongKeKhacView extends javax.swing.JPanel {
     public void setDataToChart2(JPanel panel2) {
         SanPham sp = (SanPham) cboSP.getSelectedItem();
         tenSp = sp.toString();
-        List<HoaDonChiTiet> list2 = repo.getList2(tenSp);
+        List<HoaDonChiTiet> list2 = service.getList2(tenSp);
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         if (list2 != null) {
             for (HoaDonChiTiet chiTietHoaDon : list2) {
@@ -195,7 +195,7 @@ public class ThongKeKhacView extends javax.swing.JPanel {
         java.util.Date ngayBd = txtNgayBD2.getDate();
         java.util.Date ngayKt = txtNgayKT2.getDate();
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-        List<HoaDonChiTiet> listTK2 = repo.getListTK2(tenSp, ngayBd, ngayKt);
+        List<HoaDonChiTiet> listTK2 = service.getListTK2(tenSp, ngayBd, ngayKt);
         if (listTK2 != null) {
             for (HoaDonChiTiet chiTietHoaDon : listTK2) {
                 dataset.addValue(chiTietHoaDon.getHD().getSoLuongHoaDon() + chiTietHoaDon.getSoLuong(), "Tổng",
