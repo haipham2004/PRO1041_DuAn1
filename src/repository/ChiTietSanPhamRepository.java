@@ -757,5 +757,19 @@ public class ChiTietSanPhamRepository {
             return 0;
         }
     }
+    
+    public int capNhatSoLuongThanhToan(int soLuong,String ma){
+        try {
+            conn = DBConnect.getConnection();
+            sql = "UPDATE ChiTietSanPham set SoLuong=? where MaCTSP=?";
+            pst = conn.prepareStatement(sql);
+            pst.setObject(1, soLuong);
+            pst.setObject(2, ma);
+            return pst.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
 
 }

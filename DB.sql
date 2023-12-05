@@ -1,4 +1,3 @@
-
 CREATE DATABASE AdamStores
 GO
 USE AdamStores

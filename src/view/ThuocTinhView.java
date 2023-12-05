@@ -45,6 +45,7 @@ public class ThuocTinhView extends javax.swing.JPanel {
         loadPageKT();
         rdConhang2.setSelected(true);
         loadCboChatLieu(serviceCl.getAll());
+       
         cboMS.setSelectedIndex(-1);
         cboKT.setSelectedIndex(-1);
     }
@@ -872,14 +873,13 @@ public class ThuocTinhView extends javax.swing.JPanel {
 
     private void btnQuayLaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuayLaiActionPerformed
         // TODO add your handling code here:
-        int indexs = pnlThuocTinh.getSelectedIndex();
-        if (indexs == 0) {
+        int index = pnlThuocTinh.getSelectedIndex();
+        if (index == 0) {
             loadPageCL();
-        } else if (indexs == 1) {
+        } else if (index == 1) {
             loadPageMS();
         } else {
             loadPageKT();
-
         }
     }//GEN-LAST:event_btnQuayLaiActionPerformed
 

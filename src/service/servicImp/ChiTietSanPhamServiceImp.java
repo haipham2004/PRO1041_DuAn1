@@ -121,6 +121,10 @@ public class ChiTietSanPhamServiceImp implements AdamStore<ChiTietSanPham, Strin
     public int capNhatSoLuongThanhToanTru(int soLuong, String ma) {
         return repo.capNhatSoLuongThanhToanTru(soLuong, ma);
     }
+    
+    public int capNhatSoLuongThanhToan(int soLuong,String ma){
+        return repo.capNhatSoLuongThanhToan(soLuong, ma);
+    }
 
     //
     public List<ChiTietSanPham> getListLocCL(String name1, String name2) {

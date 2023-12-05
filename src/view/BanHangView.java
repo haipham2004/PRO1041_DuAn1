@@ -108,7 +108,7 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
         txtTongTienBH2.setEnabled(false);
         txtTenEV.setEnabled(false);
         txtMucGiam.setEnabled(false);
-        initWebcam();
+//        initWebcam();
     }
 
     private void initWebcam() {
@@ -118,6 +118,9 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
             webcam.close();
         }
         webcam.setViewSize(size);
+        if (webcam.isOpen()) {
+            webcam.close();
+        }
         panel = new WebcamPanel(webcam);
         panel.setPreferredSize(size);
         panel.setFPSDisplayed(true);
@@ -311,7 +314,10 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
             SoLuongMua,
             ctsp.getGia(),
             SoLuongMua * ctsp.getGia(),
-            ctsp.getSanPham().getTenSanPham()
+            ctsp.getSanPham().getTenSanPham(),
+            ctsp.getChatLieu().getTenChatLieu(),
+            ctsp.getMauSac().getTenMauSac(),
+            ctsp.getKichThuoc().getTenKichThuoc()
         };
         dtm.insertRow(0, rowData);
     }
@@ -565,6 +571,7 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
         btnXoaTatCaSP = new javax.swing.JButton();
         txtTest = new javax.swing.JTextField();
         btnQR = new javax.swing.JButton();
+        btnSuaSP = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblChiTietSanPham = new javax.swing.JTable();
@@ -639,13 +646,13 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
 
         tblGioHang.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Mã", "Số lượng", "Giá", "Thành tiền", "TênSP"
+                "Mã", "Số lượng", "Giá", "Thành tiền", "Tên sản phẩm", "Chất liệu", "Màu sắc", "Kích thước"
             }
         ));
         tblGioHang.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -676,6 +683,13 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
             }
         });
 
+        btnSuaSP.setText("Sửa sản phẩm");
+        btnSuaSP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSuaSPActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -690,9 +704,11 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
                         .addComponent(btnXoaSP)
                         .addGap(35, 35, 35)
                         .addComponent(btnXoaTatCaSP, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(160, 160, 160)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnSuaSP)
+                        .addGap(37, 37, 37)
                         .addComponent(txtTest, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(173, Short.MAX_VALUE))
+                        .addContainerGap(178, Short.MAX_VALUE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jScrollPane2)
                         .addContainerGap())))
@@ -707,7 +723,8 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
                     .addComponent(btnXoaSP, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnXoaTatCaSP, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnQR, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtTest))
+                    .addComponent(txtTest)
+                    .addComponent(btnSuaSP, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -721,7 +738,7 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
                 {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Mã CTSP", "Số lượng tồn", "Giá", "Tên SP", "Chất liệu", "Màu sắc", "Kích thước"
+                "Mã CTSP", "Số lượng tồn", "Giá", "Tên sản phẩm", "Chất liệu", "Màu sắc", "Kích thước"
             }
         ));
         tblChiTietSanPham.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1056,7 +1073,7 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
                     serviceCTSP.capNhatSoLuongThanhToanCong(Integer.parseInt(input), ma);
                     indexHoaDonCho = tblHoaDonCho.getSelectedRow();
                     String maHD = tblHoaDonCho.getValueAt(indexHoaDonCho, 1).toString();
-                    String parentDirectory = "F:\\FPT Polytechnic\\DA1\\PRO1041_DuAn1";
+                    String parentDirectory = "D:\\PRO1041_DuAn1";
                     String newDirectoryName = "GioHang";
                     luuGioHangVaoFile(maHD, parentDirectory, newDirectoryName);
                 }
@@ -1109,7 +1126,7 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
         HoaDon hd = serviceHD.get1HoaDonCho(ma);
         String fileName = "GioHang_" + tblHoaDonCho.getValueAt(indexHoaDonCho, 1) + ".csv";
         //Nhớ đổi đường dẫn thư mục
-        loadTableDataFromFile("F:\\FPT Polytechnic\\DA1\\PRO1041_DuAn1\\GioHang", fileName);
+        loadTableDataFromFile("D:\\PRO1041_DuAn1\\GioHang", fileName);
         detailHD(hd);
         fillDonHang2();
         txtTienKhachBH2.setText("0");
@@ -1126,7 +1143,6 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
 
         int checkXoaGH = JOptionPane.showConfirmDialog(this, "Bạn có chắc mắc muốn xoá sản phẩm");
         if (checkXoaGH == JOptionPane.YES_NO_OPTION) {
-
             String productID = tblGioHang.getValueAt(indexXoaGH, 0).toString();
             int quantity = Integer.parseInt(tblGioHang.getValueAt(indexXoaGH, 1).toString());
             int indexSanPham = -1;
@@ -1184,6 +1200,7 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
                 pdf.genPDF(serviceHDCT.getJoHang(tblGioHang), hd, tong, tongSau, dua, tra);
                 fillTableHDC(serviceHD.getHoaDonCho());
                 molGH.setRowCount(0);
+
             } catch (IOException ex) {
                 Logger.getLogger(BanHangView.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -1267,12 +1284,75 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
         lbSoTrang2.setText(trangCTSP + " of " + soTrangCTSP);
     }//GEN-LAST:event_btnCuoi2ActionPerformed
 
+    private void btnSuaSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaSPActionPerformed
+        // TODO add your handling code here:
+        int indexXoaGH = tblGioHang.getSelectedRow();
+        int indexCTSP = tblChiTietSanPham.getSelectedRow();
+        if (indexXoaGH == -1) {
+            JOptionPane.showMessageDialog(this, "Chọn sản phẩm để sửa");
+            return;
+        }
+        int checkXoaGH = JOptionPane.showConfirmDialog(this, "Bạn có chắc mắc muốn sửa sản phẩm");
+        if (checkXoaGH == JOptionPane.YES_NO_OPTION) {
+            String productID = tblGioHang.getValueAt(indexXoaGH, 0).toString();
+            int quantity = Integer.parseInt(tblGioHang.getValueAt(indexXoaGH, 1).toString());
+            ChiTietSanPham ctsps = serviceCTSP.getOne(productID);
+            int indexSanPham = -1;
+            for (int i = 0; i < tblChiTietSanPham.getRowCount(); i++) {
+                if (tblChiTietSanPham.getValueAt(i, 0).toString().equals(productID)) {
+                    indexSanPham = i;
+                    break;
+                }
+            }
+            if (indexSanPham != -1) {
+                System.out.println("HIHI");
+                String input = JOptionPane.showInputDialog(this, "Mời nhập số lượng");
+                int soLuongTon = Integer.parseInt(tblChiTietSanPham.getValueAt(indexCTSP, 1).toString());
+                int soLuongGioHangHienTai = Integer.parseInt(tblGioHang.getValueAt(tblGioHang.getSelectedRow(), 1).toString());
+                System.out.println("SL Hiện tại: " + soLuongGioHangHienTai);
+                if (Integer.parseInt(input) > soLuongGioHangHienTai) {
+                    System.out.println("Cộng");
+                    int soLuongSauKhiSua = soLuongTon - (Integer.parseInt(input) - soLuongGioHangHienTai);
+                    if (Integer.parseInt(input) <= soLuongTon) {
+                        System.out.println("Tồn: " + soLuongTon + " Sửa: " + soLuongSauKhiSua);
+                        serviceCTSP.capNhatSoLuongThanhToan(soLuongSauKhiSua, productID);
+                        tblChiTietSanPham.setValueAt(soLuongSauKhiSua, indexSanPham, 1);
+                        tblGioHang.setValueAt(input, tblGioHang.getSelectedRow(), 1);
+                    } else if (Integer.parseInt(input) <= 0) {
+                        JOptionPane.showMessageDialog(this, "Số lượng sản phẩm phải lớn hơn 0, vui lòng sửa lại");
+                        return;
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Số lượng sản phẩm không đủ, vui lòng sửa lại");
+                        return;
+                    }
+
+                } else {
+                    System.out.println("Trừ");
+                    int soLuongSauKhiSua = soLuongTon + (soLuongGioHangHienTai - Integer.parseInt(input));
+                    if (Integer.parseInt(input) <= 0) {
+                        JOptionPane.showMessageDialog(this, "Số lượng sản phẩm phải lớn hơn 0, vui lòng sửa lại");
+                        return;
+                    }
+                    serviceCTSP.capNhatSoLuongThanhToan(soLuongSauKhiSua, productID);
+                    tblChiTietSanPham.setValueAt(soLuongSauKhiSua, indexSanPham, 1);
+                    tblGioHang.setValueAt(input, tblGioHang.getSelectedRow(), 1);
+                }
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Not ok");
+        }
+        fillDonHang2();
+        tinhThua();
+        System.out.println("HAHAA");
+    }//GEN-LAST:event_btnSuaSPActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCuoi2;
     private javax.swing.JButton btnDau2;
     private javax.swing.JButton btnLui2;
     private javax.swing.JButton btnQR;
+    private javax.swing.JButton btnSuaSP;
     private javax.swing.JButton btnTaoHoaDonCho;
     private javax.swing.JButton btnThanhToanBH2;
     private javax.swing.JButton btnThemGioHang;
