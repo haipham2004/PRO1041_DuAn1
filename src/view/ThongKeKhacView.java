@@ -228,7 +228,7 @@ public class ThongKeKhacView extends javax.swing.JPanel {
         String formattedDateTime = currentDateTime.format(formatter);
         DecimalFormat df = new DecimalFormat("#,###");
 
-        String path = "F:\\FPT Polytechnic\\DA1\\PRO1041_DuAn1\\PDF\\" + "Thongkekhac" + ".pdf";
+        String path = "D:\\PRO1041_DuAn1\\PDF\\" + "Thongkekhac" + ".pdf";
         PdfWriter pdfWriter = new PdfWriter(path);
         PdfDocument pdfDocument = new PdfDocument(pdfWriter);
         pdfDocument.setDefaultPageSize(PageSize.A4);
@@ -241,7 +241,7 @@ public class ThongKeKhacView extends javax.swing.JPanel {
         img2.setOpacity(0.2f);
         document.add(img2);
 
-        String imgPath2 = "F:\\FPT Polytechnic\\DA1\\PRO1041_DuAn1\\ChartImage\\ChartDTSPchung.png";
+        String imgPath2 = "D:\\PRO1041_DuAn1\\ChartImage\\ChartDTSPchung.png";
         ImageData imgData2 = ImageDataFactory.create(imgPath2);
         Image img3 = new Image(imgData2);
         img3.setHeight(300);
@@ -249,7 +249,7 @@ public class ThongKeKhacView extends javax.swing.JPanel {
         img3.setFixedPosition(60, 400f);
         document.add(img3);
 
-        String imgPath3 = "F:\\FPT Polytechnic\\DA1\\PRO1041_DuAn1\\ChartImage\\ChartDTSPrieng.png";
+        String imgPath3 = "D:\\PRO1041_DuAn1\\ChartImage\\ChartDTSPrieng.png";
         ImageData imgData3 = ImageDataFactory.create(imgPath3);
         Image img4 = new Image(imgData3);
         img4.setHeight(300);

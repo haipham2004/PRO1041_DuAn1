@@ -51,7 +51,7 @@ public class PDFGene {
         String formattedDateTime = currentDateTime.format(formatter);
         DecimalFormat df = new DecimalFormat("#,###");
 
-        String path = "D:\\PDF\\" + hd.getMaHoaDon() + ".pdf";
+        String path = "D:\\PRO1041_DuAn1\\PDF\\" + hd.getMaHoaDon() + ".pdf";
         PdfWriter pdfWriter = new PdfWriter(path);
         PdfDocument pdfDocument = new PdfDocument(pdfWriter);
         pdfDocument.setDefaultPageSize(PageSize.A4);
@@ -64,12 +64,6 @@ public class PDFGene {
         img2.setOpacity(0.2f);
         document.add(img2);
 
-//        String imgPath2 = "src\\img\\watermark.png";
-//        ImageData imgData2 = ImageDataFactory.create(imgPath2);
-//        Image img3= new Image(imgData2);
-//        img3.setFixedPosition(60, 150);
-//        img3.setRotationAngle(45);
-//        img3.setOpacity(0.1f);
         String fontPath = "C:\\Windows\\Fonts\\Arial.ttf";
         PdfFont font = PdfFontFactory.createFont(fontPath, PdfEncodings.IDENTITY_H);
         document.setFont(font);
@@ -150,7 +144,7 @@ public class PDFGene {
             sum += total;
             threeColTable2.addCell(new Cell().add(hdct.getCtsp().toString()).setBorder(Border.NO_BORDER)).setMarginLeft(10f);
             threeColTable2.addCell(new Cell().add(String.valueOf(hdct.getSoLuong())).setTextAlignment(TextAlignment.CENTER).setBorder(Border.NO_BORDER));
-            threeColTable2.addCell(new Cell().add(df.format(total)).setTextAlignment(TextAlignment.RIGHT).setBorder(Border.NO_BORDER)).setMarginRight(10f);
+            threeColTable2.addCell(new Cell().add(df.format(total) + " VNĐ").setTextAlignment(TextAlignment.RIGHT).setBorder(Border.NO_BORDER)).setMarginRight(10f);
         }
         document.add(threeColTable2.setFontSize(10f).setMarginBottom(20f));
 
@@ -167,31 +161,34 @@ public class PDFGene {
 //        } else {
 //            mucGiam = Double.parseDouble(hd.getVoucher().getMucGiamGia()) / 100;
 //        }
+        threeColTable4.addCell(new Cell().add("").setBorder(Border.NO_BORDER));
+        threeColTable4.addCell(new Cell().add("Tiền hàng").setTextAlignment(TextAlignment.CENTER).setBorder(Border.NO_BORDER));
+        threeColTable4.addCell(new Cell().add(df.format(tong) + " VNĐ").setTextAlignment(TextAlignment.RIGHT).setBorder(Border.NO_BORDER));
 
         threeColTable4.addCell(new Cell().add("").setBorder(Border.NO_BORDER));
         threeColTable4.addCell(new Cell().add("Giảm giá").setTextAlignment(TextAlignment.CENTER).setBorder(Border.NO_BORDER));
-        threeColTable4.addCell(new Cell().add(df.format(tong - tongCuoi)).setTextAlignment(TextAlignment.RIGHT).setBorder(Border.NO_BORDER));
+        threeColTable4.addCell(new Cell().add(df.format(tong - tongCuoi) + " VNĐ").setTextAlignment(TextAlignment.RIGHT).setBorder(Border.NO_BORDER));
 
 //        Double sumSauKM = sum * (1 - mucGiam);
         threeColTable4.addCell(new Cell().add("").setBorder(Border.NO_BORDER));
         threeColTable4.addCell(new Cell().add("Tổng tiền").setTextAlignment(TextAlignment.CENTER).setBorder(Border.NO_BORDER));
-        threeColTable4.addCell(new Cell().add(df.format(tongCuoi)).setTextAlignment(TextAlignment.RIGHT).setBorder(Border.NO_BORDER));
+        threeColTable4.addCell(new Cell().add(df.format(tongCuoi) + " VNĐ").setTextAlignment(TextAlignment.RIGHT).setBorder(Border.NO_BORDER));
         document.add(threeColTable4.setMargin(10f));
-        
+
         Table threeColTable5 = new Table(onetwo);
         threeColTable5.addCell(new Cell().add("").setBorder(Border.NO_BORDER));
         threeColTable5.addCell(new Cell().add("").setBorder(Border.NO_BORDER).setBorderTop(dgb));
         document.add(threeColTable5.setBorder(Border.NO_BORDER));
-        
+
         Table threeColTable6 = new Table(threecolWidth);
         threeColTable6.addCell(new Cell().add("").setBorder(Border.NO_BORDER));
         threeColTable6.addCell(new Cell().add("Tiền khách đưa").setTextAlignment(TextAlignment.CENTER).setBorder(Border.NO_BORDER));
-        threeColTable6.addCell(new Cell().add(df.format(dua)).setTextAlignment(TextAlignment.RIGHT).setBorder(Border.NO_BORDER));
+        threeColTable6.addCell(new Cell().add(df.format(dua) + " VNĐ").setTextAlignment(TextAlignment.RIGHT).setBorder(Border.NO_BORDER));
 
 //        Double sumSauKM = sum * (1 - mucGiam);
         threeColTable6.addCell(new Cell().add("").setBorder(Border.NO_BORDER));
         threeColTable6.addCell(new Cell().add("Tiền thừa").setTextAlignment(TextAlignment.CENTER).setBorder(Border.NO_BORDER));
-        threeColTable6.addCell(new Cell().add(df.format(tra)).setTextAlignment(TextAlignment.RIGHT).setBorder(Border.NO_BORDER));
+        threeColTable6.addCell(new Cell().add(df.format(tra) + " VNĐ").setTextAlignment(TextAlignment.RIGHT).setBorder(Border.NO_BORDER));
         document.add(threeColTable6.setMargin(10f));
 
         document.add(tableDevider.setBorder(dgb));
@@ -199,7 +196,7 @@ public class PDFGene {
         document.add(divider.setBorder(new SolidBorder(Color.GRAY, 1)).setMarginBottom(15f));
         document.add(new Paragraph("Điều khoản và dịch vụ").setBold().setFont(font).setFontSize(15f));
         document.add(new Paragraph("1. Người bán không chịu trách nhiệm với bất kỳ tổn thất trực tiếp hay gián tiếp nào do người mua gây ra.").setFont(font));
-        document.add(new Paragraph("2. Thời hạn đổi trả sản phẩm do lỗi bên phía người bán là bảy (7) ngày kể từ ngày mua.").setFont(font));
+        document.add(new Paragraph("2. Thời hạn đổi sản phẩm do lỗi bên phía người bán là bảy (7) ngày kể từ ngày mua.").setFont(font));
 
         document.close();
 

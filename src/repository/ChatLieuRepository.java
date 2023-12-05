@@ -117,9 +117,9 @@ public class ChatLieuRepository {
             conn = DBConnect.getConnection();
             sql = "SELECT*FROM ChatLieu\n"
                     + "order by MaChatLieu DESC\n"
-                    + "OFFSET ? rows fetch next 4 rows only";
+                    + "OFFSET ? rows fetch next 5 rows only";
             pst = conn.prepareStatement(sql);
-            pst.setInt(1, (index - 1) * 4);
+            pst.setInt(1, (index - 1) * 5);
             rs = pst.executeQuery();
             while (rs.next()) {
                 ChatLieu cl = new ChatLieu(rs.getString(1),
