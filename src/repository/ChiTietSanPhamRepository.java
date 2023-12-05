@@ -349,6 +349,7 @@ public class ChiTietSanPhamRepository {
         }
     }
 
+
     public boolean checkTrungCTSP(String name) throws SQLException {
         conn = DBConnect.getConnection();
         sql = "SELECT DISTINCT MaChatLieu,MaMauSac,MaKichThuoc\n"

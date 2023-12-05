@@ -61,7 +61,7 @@ import org.jfree.data.gantt.TaskSeries;
 import org.jfree.data.gantt.TaskSeriesCollection;
 import org.jfree.data.xy.XYSeries;
 import repository.ThongKeKhacRepository;
-import repository.ThongKeSLRepository;
+import repository.ThongKeSoLuongRepository;
 import util.DBConnect;
 
 /**
@@ -155,6 +155,12 @@ public class ThongKeKhacView extends javax.swing.JPanel {
         panel1.add(chartPanel);
         panel1.validate();
         panel1.repaint();
+        try {
+            final ChartRenderingInfo info2 = new ChartRenderingInfo(new StandardEntityCollection());
+            final File file2 = new File("F:\\FPT Polytechnic\\DA1\\PRO1041_DuAn1\\ChartImage\\ChartDTSPchung.png");
+            ChartUtilities.saveChartAsPNG(file2, barChart, 859, 236, info2);
+        } catch (Exception e) {
+        }
     }
 
     public void setDataToChart2(JPanel panel2) {
@@ -183,12 +189,6 @@ public class ThongKeKhacView extends javax.swing.JPanel {
         panel2.add(chartPanel);
         panel2.validate();
         panel2.repaint();
-        try {
-            final ChartRenderingInfo info1 = new ChartRenderingInfo(new StandardEntityCollection());
-            final File file1 = new File("F:\\FPT Polytechnic\\DA1\\PRO1041_DuAn1\\ChartImage\\ChartDTSPrieng.png");
-            ChartUtilities.saveChartAsPNG(file1, lineChart, 859, 236, info1);
-        } catch (Exception e) {
-        }
     }
 
     public void timKiem2() {
@@ -299,6 +299,7 @@ public class ThongKeKhacView extends javax.swing.JPanel {
         jPanel6 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jToggleButton1 = new javax.swing.JToggleButton();
+        btnGmail = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         panel2 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
@@ -422,10 +423,18 @@ public class ThongKeKhacView extends javax.swing.JPanel {
         );
 
         jToggleButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/pdf.png"))); // NOI18N
-        jToggleButton1.setText("Xuất file PDF");
+        jToggleButton1.setText("Xuất PDF");
         jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jToggleButton1ActionPerformed(evt);
+            }
+        });
+
+        btnGmail.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/new (1).png"))); // NOI18N
+        btnGmail.setText("Gửi Email");
+        btnGmail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGmailActionPerformed(evt);
             }
         });
 
@@ -453,6 +462,8 @@ public class ThongKeKhacView extends javax.swing.JPanel {
                         .addComponent(btnTimKiem)
                         .addGap(18, 18, 18)
                         .addComponent(jToggleButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnGmail)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
@@ -472,7 +483,8 @@ public class ThongKeKhacView extends javax.swing.JPanel {
                     .addComponent(txtNgayKT, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btnTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addComponent(jToggleButton1)))
+                        .addComponent(jToggleButton1)
+                        .addComponent(btnGmail)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
@@ -579,12 +591,20 @@ public class ThongKeKhacView extends javax.swing.JPanel {
 
     private void btnTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemActionPerformed
         // TODO add your handling code here:
-        timKiem();
+        if (txtNgayKT.getCalendar().before(txtNgayBD.getCalendar())) {
+            JOptionPane.showMessageDialog(this, "Ngày kết thúc không hợp lệ");
+        } else {
+            timKiem();
+        }
     }//GEN-LAST:event_btnTimKiemActionPerformed
 
     private void btnTimKiem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiem2ActionPerformed
         // TODO add your handling code here:
-        timKiem2();
+        if (txtNgayKT2.getCalendar().before(txtNgayBD2.getCalendar())) {
+            JOptionPane.showMessageDialog(this, "Ngày kết thúc không hợp lệ");
+        } else {
+            timKiem2();
+        }       
     }//GEN-LAST:event_btnTimKiem2ActionPerformed
 
     private void cboTenSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboTenSPActionPerformed
@@ -599,12 +619,19 @@ public class ThongKeKhacView extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Xuất PDF thành công");
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(this, "Xuất PDF không thành công");
-            Logger.getLogger(ThongKeSLView.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ThongKeSoLuongView.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
+    private void btnGmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGmailActionPerformed
+        // TODO add your handling code here:
+        SendEmailView sendEmail = new SendEmailView();
+        sendEmail.setVisible(true);
+    }//GEN-LAST:event_btnGmailActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnGmail;
     private javax.swing.JToggleButton btnTimKiem;
     private javax.swing.JToggleButton btnTimKiem2;
     private javax.swing.JComboBox<String> cboTenSP;

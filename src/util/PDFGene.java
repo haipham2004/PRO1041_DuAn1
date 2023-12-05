@@ -123,9 +123,9 @@ public class PDFGene {
 
         Table oneColTable = new Table(onecolumnWidth);
         oneColTable.addCell(getCell10fLeft("Địa chỉ", true));
-        oneColTable.addCell(getCell10fLeft("Địa chỉ cửa hàng", false));
+        oneColTable.addCell(getCell10fLeft("Số 10 Láng Hạ, Quận Đống Đa, Thành phố Hà Nội", false));
         oneColTable.addCell(getCell10fLeft("Email", true));
-        oneColTable.addCell(getCell10fLeft("Email cửa hàng", false));
+        oneColTable.addCell(getCell10fLeft("AdamStores5ACE@gmail.com", false));
         document.add(oneColTable.setMarginBottom(10f));
 
         Table tableDevider = new Table(fullwidth);

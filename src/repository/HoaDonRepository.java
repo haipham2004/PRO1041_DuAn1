@@ -33,12 +33,12 @@ public class HoaDonRepository {
         try {
             con = DBConnect.getConnection();
             sql = "Select HD.MaHoaDon,NV.MaNV,NV.HoTen,HD.NgayTao,HD.TrangThai\n"
-                    + "From HoaDon HD Join NhanVien NV ON HD.MaNV=NV.MaNV where HD.TrangThai = 0";
+                    + "From HoaDon HD Join NhanVien NV ON HD.MaNV=NV.MaNV where HD.TrangThai = 'Chờ thanh toán'";
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
                 NhanVien nv = new NhanVien(rs.getString(2), rs.getString(3));
-                HoaDon hd = new HoaDon(rs.getString(1), nv, rs.getDate(4), rs.getBoolean(5));
+                HoaDon hd = new HoaDon(rs.getString(1), nv, rs.getDate(4), rs.getString(5));
                 listHoaDon.add(hd);
             }
         } catch (Exception e) {
@@ -77,7 +77,7 @@ public class HoaDonRepository {
                 NhanVien nv = new NhanVien(rs.getString(2));
                 KhachHang kh = new KhachHang(rs.getString(3));
                 HoaDon hd = new HoaDon(rs.getString(1), nv, kh, rs.getDate(4), rs.getDouble(5),
-                        rs.getBoolean(6), rs.getString(7));
+                        rs.getString(6), rs.getString(7));
                 listHD.add(hd);
             }
             return listHD;
@@ -118,7 +118,7 @@ public class HoaDonRepository {
                     ps.setObject(7, hd.getTongTien());
                 }
             }
-            ps.setObject(8, hd.isTrangThai());
+            ps.setObject(8, hd.getTrangThai());
             ps.setObject(9, hd.getGhiChu());
             return ps.executeUpdate();
         } catch (Exception e) {

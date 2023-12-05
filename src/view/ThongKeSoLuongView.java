@@ -40,7 +40,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import model.HoaDon;
-import service.servicImp.ThongKeSLServiceImp;
+import service.servicImp.ThongKeSoLuongServiceImp;
 
 import java.util.Date;
 import java.util.Properties;
@@ -76,8 +76,8 @@ import org.jfree.data.gantt.Task;
 import org.jfree.data.gantt.TaskSeries;
 import org.jfree.data.gantt.TaskSeriesCollection;
 import org.jfree.data.time.SimpleTimePeriod;
-import repository.ThongKeDTRepository;
-import repository.ThongKeSLRepository;
+import repository.ThongKeDoanhThuRepository;
+import repository.ThongKeSoLuongRepository;
 import util.PDFGene;
 import static util.PDFGene.getHeaderTextCell;
 import static util.PDFGene.getHeaderTextCellValue;
@@ -87,20 +87,20 @@ import static view.ChiTietSanPhamView.createStyleForHeader;
  *
  * @author Admin
  */
-public class ThongKeSLView extends javax.swing.JPanel {
+public class ThongKeSoLuongView extends javax.swing.JPanel {
 
     DefaultTableModel defaultTableModel = new DefaultTableModel();
-    ThongKeSLServiceImp service = new ThongKeSLServiceImp();
-    ThongKeSLRepository repo = new ThongKeSLRepository();
+    ThongKeSoLuongServiceImp service = new ThongKeSoLuongServiceImp();
+    ThongKeSoLuongRepository repo = new ThongKeSoLuongRepository();
 
     /**
      * Creates new form ThongKeView
      */
-    public ThongKeSLView() {
+    public ThongKeSoLuongView() {
         initComponents();
         this.setSize(1300, 755);
-//        setDataToChart(panelChartHoaDon);
-//        setDataToChart2(panelTopSP);
+        setDataToChart(panelChartHoaDon);
+        setDataToChart2(panelTopSP);
     }
 
     public void setDataToChart(JPanel panelHoaDon) {
@@ -442,34 +442,38 @@ public class ThongKeSLView extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Xuất PDF thành công");
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(this, "Xuất PDF không thành công");
-            Logger.getLogger(ThongKeSLView.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ThongKeSoLuongView.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }//GEN-LAST:event_btnXuatPDFActionPerformed
 
     private void btnTimKiemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTimKiemMouseClicked
         // TODO add your handling code here:
-        ThongKeSLRepository repo = new ThongKeSLRepository();
+        ThongKeSoLuongRepository repo = new ThongKeSoLuongRepository();
         Date ngayBd = txtNgayBd.getDate();
         Date ngayKt = txtNgayKT.getDate();
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         List<ChiTietHoaDon> listTKBD = repo.getListTKBieuDoHD(txtNgayBd.getDate(), txtNgayKT.getDate());
-        if (listTKBD != null) {
-            for (ChiTietHoaDon chiTietHoaDon : listTKBD) {
-                dataset.addValue(chiTietHoaDon.getHoaDon().getSoLuongHoaDon(), "Hóa đơn",
-                        chiTietHoaDon.getHoaDon().getNgayTao());
+        if (txtNgayKT.getCalendar().before(txtNgayBd.getCalendar())) {
+            JOptionPane.showMessageDialog(this, "Ngày kết thúc không hợp lệ");
+        } else {
+            if (listTKBD != null) {
+                for (ChiTietHoaDon chiTietHoaDon : listTKBD) {
+                    dataset.addValue(chiTietHoaDon.getHoaDon().getSoLuongHoaDon(), "Hóa đơn",
+                            chiTietHoaDon.getHoaDon().getNgayTao());
+                }
             }
+            JFreeChart lineChart = ChartFactory.createLineChart("Biểu đồ thống kê tổng số hóa đơn".toUpperCase(),
+                    "Ngày", "Hóa đơn", dataset, PlotOrientation.VERTICAL,
+                    true, true, false);
+            ChartPanel chartPanel = new ChartPanel(lineChart);
+            chartPanel.setPreferredSize(new Dimension(650, 236));
+            panelChartHoaDon.removeAll();
+            panelChartHoaDon.setLayout(new CardLayout());
+            panelChartHoaDon.add(chartPanel);
+            panelChartHoaDon.validate();
+            panelChartHoaDon.repaint();
         }
-        JFreeChart lineChart = ChartFactory.createLineChart("Biểu đồ thống kê tổng số hóa đơn".toUpperCase(),
-                "Ngày", "Hóa đơn", dataset, PlotOrientation.VERTICAL,
-                true, true, false);
-        ChartPanel chartPanel = new ChartPanel(lineChart);
-        chartPanel.setPreferredSize(new Dimension(650, 236));
-        panelChartHoaDon.removeAll();
-        panelChartHoaDon.setLayout(new CardLayout());
-        panelChartHoaDon.add(chartPanel);
-        panelChartHoaDon.validate();
-        panelChartHoaDon.repaint();
     }//GEN-LAST:event_btnTimKiemMouseClicked
 
     private void panelChartHoaDonKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_panelChartHoaDonKeyReleased
@@ -484,7 +488,7 @@ public class ThongKeSLView extends javax.swing.JPanel {
         // TODO add your handling code here:
         SendEmailView sendEmail = new SendEmailView();
         sendEmail.setVisible(true);
-        
+
     }//GEN-LAST:event_btnGuiEmailActionPerformed
 
 

@@ -38,7 +38,7 @@ public class HoaDonView extends javax.swing.JPanel {
         for (HoaDon hoaDon : list) {
             tblmHoaDon.addRow(new Object[]{
                 tblHoaDon.getRowCount() + 1, hoaDon.getMaHoaDon(), hoaDon.getNhanVien().getMaNhanVien(),
-                hoaDon.getKhachHang().getMaKhachHang(), hoaDon.getNgayTao(), hoaDon.getTongTien(), hoaDon.chiTietTrangThai(),
+                hoaDon.getKhachHang().getMaKhachHang(), hoaDon.getNgayTao(), hoaDon.getTongTien(), hoaDon.getTrangThai(),
                 hoaDon.getGhiChu()
             });
         }

@@ -35,8 +35,7 @@ public class AdamStoreView extends javax.swing.JFrame {
         setSize(1500, 820);
         this.setLocationRelativeTo(null);
         execute();
-        changePanelBody(new ThongKeSLView());
-
+        changePanelBody(new ThongKeSoLuongView());
     }
 
     public void changePanelBody(JPanel panel) {
@@ -78,14 +77,14 @@ public class AdamStoreView extends javax.swing.JFrame {
         MenuItem menuThongKeDT = new MenuItem(iconDot, "Thống kê doanh thu", new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                changePanelBody(new ThongKeDTView());
+                changePanelBody(new ThongKeDoanhThuView());
             }
         });
 
         MenuItem menuThongKeSL = new MenuItem(iconDot, "Thống kê số lượng", new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                changePanelBody(new ThongKeSLView());
+                changePanelBody(new ThongKeSoLuongView());
             }
         });
         MenuItem menuThongKe3 = new MenuItem(iconDot, "Thống kê khác", new ActionListener() {
@@ -118,7 +117,7 @@ public class AdamStoreView extends javax.swing.JFrame {
             }
         });
         // Sản phẩm chung
-        MenuItem menuMatHang = new MenuItem(iconSanPham, "Mặt hàng", null, menuSanPham1, menuCtsp, menuThuoctinh);
+        MenuItem menuMatHang = new MenuItem(iconSanPham, "Mặt hàng", null, menuSanPham1, menuThuoctinh);
         //Nhân viên
         MenuItem menuNhanVien = new MenuItem(iconNhanVien, "Nhân viên", new ActionListener() {
             @Override
@@ -195,7 +194,6 @@ public class AdamStoreView extends javax.swing.JFrame {
         MenuItemColor(menuThongKe);
         MenuItemColor(menuMatHang);
         MenuItemColor(menuSanPham1);
-        MenuItemColor(menuCtsp);
         MenuItemColor(menuThuoctinh);
         MenuItemColor(menuNhanVien);
         MenuItemColor(menuBanHang);

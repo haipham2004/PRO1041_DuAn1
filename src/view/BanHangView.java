@@ -60,6 +60,8 @@ import service.servicImp.KhuyenMaiServiceImp;
 import service.servicImp.NhanVienServiceImp;
 import util.PDFGene;
 //
+import java.awt.*;
+import javax.swing.*;
 
 /**
  *
@@ -94,10 +96,6 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
      */
     public BanHangView() {
         initComponents();
-        fillTableHDC(serviceHD.getHoaDonCho());
-        fillTableChiTietSanPham(serviceCTSP.getAll());
-        molGH = (DefaultTableModel) tblGioHang.getModel();
-        molGH.setRowCount(0);
         this.setSize(1300, 755);
         fillTableHDC(serviceHD.getHoaDonCho());
         fillTableChiTietSanPham(serviceCTSP.getAll());
@@ -106,21 +104,19 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
         txtMaHDBH2.setEnabled(false);
         txtTongTienBH2.setEnabled(false);
         txtTienThuaBH2.setEnabled(false);
-//        initWebcam();
-
+        initWebcam();
     }
 
     private void initWebcam() {
         Dimension size = WebcamResolution.QVGA.getSize();
-        webcam = Webcam.getWebcams().get(0); //0 is default webcam
+        webcam = Webcam.getWebcams().get(0); // 0 is default webcam
         webcam.setViewSize(size);
-
         panel = new WebcamPanel(webcam);
         panel.setPreferredSize(size);
         panel.setFPSDisplayed(true);
 
-        pnlQR.add(panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 500, 500));
-
+        pnlWebCam.setLayout(new BorderLayout());
+        pnlWebCam.add(panel, 0);
         executor.execute(this);
     }
 
@@ -142,93 +138,103 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
                 }
             }
 
-            LuminanceSource source = new BufferedImageLuminanceSource(image);
-            BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(source));
-
             try {
+                LuminanceSource source = new BufferedImageLuminanceSource(image);
+                BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(source));
                 result = new MultiFormatReader().decode(bitmap);
-            } catch (NotFoundException e) {
+            } catch (Exception e) {
 
             }
 
             if (result != null) {
-                List<ChiTietSanPham> list = serviceCTSP.getList(result.getText());
-                txtTest.setText(result.getText());
-                int indexs = tblChiTietSanPham.getSelectedRow();
-                int indexGioHang = -1;
-                try {
-                    if (!serviceCTSP.checkMaQR(result.getText())) {
-                        JOptionPane.showMessageDialog(this, "Mã QR không tồn tại");
-                        return;
-                    }
-                } catch (SQLException ex) {
-                }
-                try {
-                    String input = JOptionPane.showInputDialog(this, "Mời nhập số lượng");
-                    if (input == null || input.isEmpty()) {
-                        return;
-                    }
-                    String maFake = null;
-                    int soLuongFake = 0;
-                    double giaFake = 0;
-                    String tenFake = null;
-                    int soLuongTonFake = 0;
-
-                    for (ChiTietSanPham chiTietSanPham : list) {
-                        if (chiTietSanPham.getMaChiTietSanPham().equals(result.getText())) {
-                            maFake = chiTietSanPham.getMaChiTietSanPham();
-                            soLuongFake = Integer.parseInt(input);
-                            if (soLuongFake > chiTietSanPham.getSoLuong()) {
-                                JOptionPane.showMessageDialog(this, "Số lượng không đủ");
-                                return;
-                            }
-
-                            soLuongTonFake = chiTietSanPham.getSoLuong() - soLuongFake;
-                            giaFake = chiTietSanPham.getGia();
-                            tenFake = chiTietSanPham.getSanPham().getTenSanPham();
+                indexHoaDonCho = tblHoaDonCho.getSelectedRow();
+                if (indexHoaDonCho == -1) {
+                    JOptionPane.showMessageDialog(this, "Vui lòng Tạo hoá đơn");
+                } else {
+                    List<ChiTietSanPham> list = serviceCTSP.getList(result.getText());
+                    txtTest.setText(result.getText());
+                    int indexs = tblChiTietSanPham.getSelectedRow();
+                    int indexGioHang = -1;
+                    try {
+                        if (!serviceCTSP.checkMaQR(result.getText())) {
+                            JOptionPane.showMessageDialog(this, "Mã QR không tồn tại");
+                            return;
                         }
+                    } catch (SQLException ex) {
                     }
-                    ChiTietSanPham ctsps = serviceCTSP.getOne(maFake);
-
-                    if (tblGioHang.getRowCount() > 0) {
-                        for (int i = 0; i < tblGioHang.getRowCount(); i++) {
-                            if (tblGioHang.getValueAt(i, 0) != null) {
-                                if (tblGioHang.getValueAt(i, 0).toString().equals(maFake)) {
-                                    indexGioHang = i;
-                                    break;
-                                }
-                            }
+                    try {
+                        String input = JOptionPane.showInputDialog(this, "Mời nhập số lượng");
+                        if (input == null || input.isEmpty()) {
+                            return;
                         }
-                    }
+                        String maFake = null;
+                        int soLuongFake = 0;
+                        double giaFake = 0;
+                        String tenFake = null;
+                        int soLuongTonFake = 0;
 
-                    if (indexGioHang != -1) {
                         for (ChiTietSanPham chiTietSanPham : list) {
                             if (chiTietSanPham.getMaChiTietSanPham().equals(result.getText())) {
-                                int soLuongHienTai = Integer.parseInt(tblGioHang.getValueAt(indexGioHang, 1).toString());
-                                int soLuonngSauKhiThem = soLuongHienTai + Integer.parseInt(input);
-                                if (soLuonngSauKhiThem > chiTietSanPham.getSoLuong()) {
-                                    JOptionPane.showMessageDialog(this, "Số lượng không đủ ạ");
+                                maFake = chiTietSanPham.getMaChiTietSanPham();
+                                soLuongFake = Integer.parseInt(input);
+                                if (soLuongFake > chiTietSanPham.getSoLuong()) {
+                                    JOptionPane.showMessageDialog(this, "Số lượng không đủ");
                                     return;
                                 }
-                                tblGioHang.setValueAt(soLuonngSauKhiThem, indexGioHang, 1);
-                                double thanhTienSauKhiThem = Math.round((soLuonngSauKhiThem * giaFake) * 100) / 100;
-                                tblGioHang.setValueAt(thanhTienSauKhiThem, indexGioHang, 3);
-                                soLuongTonFake = chiTietSanPham.getSoLuong() - soLuonngSauKhiThem;
+
+                                soLuongTonFake = chiTietSanPham.getSoLuong() - soLuongFake;
+                                giaFake = chiTietSanPham.getGia();
+                                tenFake = chiTietSanPham.getSanPham().getTenSanPham();
                             }
                         }
-                    } else {
-                        fillTableGioHang(tblGioHang, ctsps, soLuongFake);
-                    }
-                    for (int i = 0; i < tblChiTietSanPham.getRowCount(); i++) {
-                        if (tblChiTietSanPham.getValueAt(i, 0).equals(maFake)) {
-                            tblChiTietSanPham.setValueAt(soLuongTonFake, i, 1);
-                        }
-                    }
+                        ChiTietSanPham ctsps = serviceCTSP.getOne(maFake);
 
-                } catch (Exception e) {
-                    e.printStackTrace();
+                        if (tblGioHang.getRowCount() > 0) {
+                            for (int i = 0; i < tblGioHang.getRowCount(); i++) {
+                                if (tblGioHang.getValueAt(i, 0) != null) {
+                                    if (tblGioHang.getValueAt(i, 0).toString().equals(maFake)) {
+                                        indexGioHang = i;
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+
+                        if (indexGioHang != -1) {
+                            for (ChiTietSanPham chiTietSanPham : list) {
+                                if (chiTietSanPham.getMaChiTietSanPham().equals(result.getText())) {
+                                    int soLuongHienTai = Integer.parseInt(tblGioHang.getValueAt(indexGioHang, 1).toString());
+                                    int soLuonngSauKhiThem = soLuongHienTai + Integer.parseInt(input);
+                                    if (soLuonngSauKhiThem > chiTietSanPham.getSoLuong()) {
+                                        JOptionPane.showMessageDialog(this, "Số lượng không đủ ạ");
+                                        return;
+                                    }
+                                    tblGioHang.setValueAt(soLuonngSauKhiThem, indexGioHang, 1);
+                                    double thanhTienSauKhiThem = Math.round((soLuonngSauKhiThem * giaFake) * 100) / 100;
+                                    tblGioHang.setValueAt(thanhTienSauKhiThem, indexGioHang, 3);
+                                    soLuongTonFake = chiTietSanPham.getSoLuong() - soLuonngSauKhiThem;
+                                }
+                            }
+                        } else {
+                            fillTableGioHang(tblGioHang, ctsps, soLuongFake);
+                            indexHoaDonCho = tblHoaDonCho.getSelectedRow();
+                            String maHD = tblHoaDonCho.getValueAt(indexHoaDonCho, 1).toString();
+                            String parentDirectory = "D:\\PRO1041_DuAn1";
+                            String newDirectoryName = "GioHang";
+                            luuGioHangVaoFile(maHD, parentDirectory, newDirectoryName);
+                        }
+                        for (int i = 0; i < tblChiTietSanPham.getRowCount(); i++) {
+                            if (tblChiTietSanPham.getValueAt(i, 0).equals(maFake)) {
+                                tblChiTietSanPham.setValueAt(soLuongTonFake, i, 1);
+                            }
+
+                        }
+                        fillDonHang2();
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
-//                fillDonHang2();
             }
         } while (true);
     }
@@ -264,7 +270,7 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
         for (HoaDon item : list) {
             molHDC.addRow(new Object[]{
                 this.tblHoaDonCho.getRowCount() + 1, item.getMaHoaDon(), item.getNhanVien().getHoTen(),
-                item.getNgayTao(), item.chiTietTrangThai()
+                item.getNgayTao(), item.getTrangThai()
             });
         }
     }
@@ -444,7 +450,7 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
             String x = cboEventBH.getSelectedItem().toString();
             ev = serviceKM.searchTen(x);
         }
-        return new HoaDon(maHD, nhanVien, khachHang, ngayTao, tongTien, true, ghiChu, ev);
+        return new HoaDon(maHD, nhanVien, khachHang, ngayTao, tongTien, "Đã thanh toán", ghiChu, ev);
     }
 
     public String phanCach(Double x) {
@@ -526,7 +532,7 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
         btnTaoHoaDonCho = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         cboEventBH = new javax.swing.JComboBox<>();
-        pnlQR = new javax.swing.JPanel();
+        pnlWebCam = new javax.swing.JPanel();
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Hóa đơn chờ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.ABOVE_TOP, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
 
@@ -834,8 +840,8 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        pnlQR.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 0)));
-        pnlQR.setForeground(new java.awt.Color(0, 51, 255));
+        pnlWebCam.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 0)));
+        pnlWebCam.setForeground(new java.awt.Color(0, 51, 255));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -847,7 +853,7 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(pnlQR, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(pnlWebCam, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -866,7 +872,7 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
                         .addGap(23, 23, 23)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(pnlQR, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(pnlWebCam, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -890,65 +896,72 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
 
         int indexs = tblChiTietSanPham.getSelectedRow();
         int indexGioHang = -1;
-        if (indexs == -1) {
-            JOptionPane.showMessageDialog(this, "Vui lòng chọn một sản phẩm");
-            return;
-        }
-        String input = JOptionPane.showInputDialog(this, "Mời nhập số lượng");
-        if (input == null || input.isEmpty()) {
-            return;
-        }
-        try {
-            int soLuongMua = Integer.parseInt(input);
-            int soLuongTon = Integer.parseInt(tblChiTietSanPham.getValueAt(indexs, 1).toString());
-            if (soLuongMua > soLuongTon) {
-                JOptionPane.showMessageDialog(this, "Số lượng không đủ");
-                return;
-            } else if (soLuongMua < 1) {
-                JOptionPane.showMessageDialog(this, "Số lượng không hợp lệ, vui lòng nhập lại");
+        indexHoaDonCho = tblHoaDonCho.getSelectedRow();
+        if (indexHoaDonCho == -1) {
+            JOptionPane.showMessageDialog(this, "Vui lòng Tạo hoá đơn");
+        } else {
+            if (indexs == -1) {
+                JOptionPane.showMessageDialog(this, "Vui lòng chọn một sản phẩm");
                 return;
             }
-            String ma = tblChiTietSanPham.getValueAt(indexs, 0).toString();
-            int soLuong = Integer.parseInt(tblChiTietSanPham.getValueAt(indexs, 1).toString());
-            double gia = Double.parseDouble(tblChiTietSanPham.getValueAt(indexs, 2).toString());
-            String ten = tblChiTietSanPham.getValueAt(indexs, 3).toString();
-            double thanhTien = Math.round((soLuong * gia) * 100) / 100;
-            ChiTietSanPham ctsps = serviceCTSP.getOne(ma);
-            if (tblGioHang.getRowCount() > 0) {
-                for (int i = 0; i < tblGioHang.getRowCount(); i++) {
-                    if (tblGioHang.getValueAt(i, 0) != null) {
-                        if (tblGioHang.getValueAt(i, 0).toString().equals(ma)) {
-                            indexGioHang = i;
-                            break;
+            String input = JOptionPane.showInputDialog(this, "Mời nhập số lượng");
+            if (input == null || input.isEmpty()) {
+                return;
+            }
+            try {
+                int soLuongMua = Integer.parseInt(input);
+                int soLuongTon = Integer.parseInt(tblChiTietSanPham.getValueAt(indexs, 1).toString());
+                if (soLuongMua > soLuongTon) {
+                    JOptionPane.showMessageDialog(this, "Số lượng không đủ");
+                    return;
+                } else if (soLuongMua < 1) {
+                    JOptionPane.showMessageDialog(this, "Số lượng không hợp lệ, vui lòng nhập lại");
+                    return;
+                }
+                String ma = tblChiTietSanPham.getValueAt(indexs, 0).toString();
+                int soLuong = Integer.parseInt(tblChiTietSanPham.getValueAt(indexs, 1).toString());
+                double gia = Double.parseDouble(tblChiTietSanPham.getValueAt(indexs, 2).toString());
+                String ten = tblChiTietSanPham.getValueAt(indexs, 3).toString();
+                double thanhTien = Math.round((soLuong * gia) * 100) / 100;
+                ChiTietSanPham ctsps = serviceCTSP.getOne(ma);
+                if (tblGioHang.getRowCount() > 0) {
+                    for (int i = 0; i < tblGioHang.getRowCount(); i++) {
+                        if (tblGioHang.getValueAt(i, 0) != null) {
+                            if (tblGioHang.getValueAt(i, 0).toString().equals(ma)) {
+                                indexGioHang = i;
+                                break;
+                            }
                         }
                     }
                 }
-            }
-            if (indexGioHang != -1) {
-                int soLuongHienTai = Integer.parseInt(tblGioHang.getValueAt(indexGioHang, 1).toString());
-                int soLuonngSauKhiThem = soLuongHienTai + Integer.parseInt(input);
-                tblGioHang.setValueAt(soLuonngSauKhiThem, indexGioHang, 1);
-                double thanhTienSauKhiThem = Math.round((soLuonngSauKhiThem * gia) * 100) / 100;
-                tblGioHang.setValueAt(thanhTienSauKhiThem, indexGioHang, 3);
+                if (indexGioHang != -1) {
+                    int soLuongHienTai = Integer.parseInt(tblGioHang.getValueAt(indexGioHang, 1).toString());
+                    int soLuonngSauKhiThem = soLuongHienTai + Integer.parseInt(input);
+                    tblGioHang.setValueAt(soLuonngSauKhiThem, indexGioHang, 1);
+                    double thanhTienSauKhiThem = Math.round((soLuonngSauKhiThem * gia) * 100) / 100;
+                    tblGioHang.setValueAt(thanhTienSauKhiThem, indexGioHang, 3);
 
-            } else {
-                fillTableGioHang(tblGioHang, ctsps, Integer.parseInt(input));
+                } else {
+                    fillTableGioHang(tblGioHang, ctsps, Integer.parseInt(input));
+
+                    //Quân
+                    //Nhớ đổi đường dẫn thư mục
+                    indexHoaDonCho = tblHoaDonCho.getSelectedRow();
+                    String maHD = tblHoaDonCho.getValueAt(indexHoaDonCho, 1).toString();
+                    String parentDirectory = "D:\\PRO1041_DuAn1";
+
+                    String newDirectoryName = "GioHang";
+                    luuGioHangVaoFile(maHD, parentDirectory, newDirectoryName);
+                }
+                soLuongTon = soLuongTon - soLuongMua;
+                tblChiTietSanPham.setValueAt(soLuongTon, indexs, 1);
+                fillDonHang2();
 
                 //Quân
                 //Nhớ đổi đường dẫn thư mục
-                indexHoaDonCho = tblHoaDonCho.getSelectedRow();
-                String maHD = tblHoaDonCho.getValueAt(indexHoaDonCho, 1).toString();
-                String parentDirectory = "F:";
-
-                String newDirectoryName = "GioHang";
-                luuGioHangVaoFile(maHD, parentDirectory, newDirectoryName);
+            } catch (Exception e) {
+                return;
             }
-            fillDonHang2();
-            soLuongTon = soLuongTon - soLuongMua;
-            tblChiTietSanPham.setValueAt(soLuongTon, indexs, 1);
-
-        } catch (Exception e) {
-            return;
         }
     }//GEN-LAST:event_btnThemGioHangActionPerformed
 
@@ -967,7 +980,6 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
     private void btnTaoHoaDonChoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTaoHoaDonChoMouseClicked
         // TODO add your handling code here:
         fillTableHDC2();
-//        tblHoaDonCho.setRowSelectionInterval(1, 1);
         molGH = (DefaultTableModel) tblGioHang.getModel();
         if (molGH.getRowCount() > 0) {
             molGH.setRowCount(0);
@@ -981,7 +993,7 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
         indexHoaDonCho = tblHoaDonCho.getSelectedRow();
         String fileName = "GioHang_" + tblHoaDonCho.getValueAt(indexHoaDonCho, 1) + ".csv";
         //Nhớ đổi đường dẫn thư mục
-        loadTableDataFromFile("F:\\GioHang", fileName);
+        loadTableDataFromFile("D:\\PRO1041_DuAn1\\GioHang", fileName);
     }//GEN-LAST:event_tblHoaDonChoMouseClicked
 
     private void btnXoaSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaSPActionPerformed
@@ -1019,16 +1031,10 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
         // TODO add your handling code here:
         if (webcam.isOpen()) {
             webcam.close();
+            System.out.println("Close");
         } else {
             initWebcam();
-            try {
-                if (webcam.isOpen()) {
-                    webcam.close();
-                } else {
-                    initWebcam();
-                }
-            } catch (Exception e) {
-            }
+
         }
     }//GEN-LAST:event_btnQRActionPerformed
 
@@ -1154,7 +1160,7 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JPanel pnlQR;
+    private javax.swing.JPanel pnlWebCam;
     private javax.swing.JTable tblChiTietSanPham;
     private javax.swing.JTable tblGioHang;
     private javax.swing.JTable tblHoaDonCho;

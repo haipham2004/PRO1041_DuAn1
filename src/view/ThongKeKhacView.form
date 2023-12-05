@@ -65,6 +65,8 @@
                           <Component id="btnTimKiem" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="jToggleButton1" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="btnGmail" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
@@ -91,6 +93,7 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="btnTimKiem" alignment="3" pref="0" max="32767" attributes="0"/>
                           <Component id="jToggleButton1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnGmail" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -302,10 +305,21 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/icon/pdf.png"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Xu&#x1ea5;t file PDF"/>
+            <Property name="text" type="java.lang.String" value="Xu&#x1ea5;t PDF"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jToggleButton1ActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnGmail">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/icon/new (1).png"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="G&#x1eed;i Email"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnGmailActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

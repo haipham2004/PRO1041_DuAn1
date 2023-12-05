@@ -90,19 +90,19 @@
                           </Group>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+                                  <Component id="txtTenKhachHang" min="-2" pref="223" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="btnCapNhat" min="-2" pref="103" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="btnLamMoi" min="-2" pref="103" max="-2" attributes="0"/>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="btnThemTuExcel" min="-2" pref="115" max="-2" attributes="0"/>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="tbnXuatFile" min="-2" pref="103" max="-2" attributes="0"/>
                               </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
-                                  <Component id="txtTenKhachHang" min="-2" pref="223" max="-2" attributes="0"/>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" attributes="0">
                                   <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -110,6 +110,7 @@
                                       <Component id="txtSoDienThoai" pref="223" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
+                              <Component id="tbnXuatFile" min="-2" pref="103" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -159,7 +160,6 @@
                               <Component id="btnThem" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
                               <Component id="btnCapNhat" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
                               <Component id="btnLamMoi" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
-                              <Component id="btnThemTuExcel" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
                               <Component id="tbnXuatFile" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -265,11 +265,6 @@
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnLamMoiMouseClicked"/>
           </Events>
-        </Component>
-        <Component class="javax.swing.JButton" name="btnThemTuExcel">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Th&#xea;m t&#x1eeb; Excel"/>
-          </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="tbnXuatFile">
           <Properties>
@@ -392,7 +387,9 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="txtTimKiem" min="-2" pref="686" max="-2" attributes="0"/>
+                      <Component id="jLabel6" min="-2" pref="123" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="txtTimKiem" min="-2" pref="558" max="-2" attributes="0"/>
                       <EmptySpace pref="37" max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -400,7 +397,10 @@
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="txtTimKiem" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="txtTimKiem" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
                       <EmptySpace min="0" pref="7" max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -411,6 +411,11 @@
               <Events>
                 <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtTimKiemKeyReleased"/>
               </Events>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel6">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="T&#xea;n Kh&#xe1;ch h&#xe0;ng, S&#x110;T:"/>
+              </Properties>
             </Component>
           </SubComponents>
         </Container>
@@ -468,10 +473,9 @@
             <Component class="javax.swing.JComboBox" name="cboGioiTinh">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="3">
+                  <StringArray count="2">
                     <StringItem index="0" value="Nam"/>
                     <StringItem index="1" value="N&#x1eef;"/>
-                    <StringItem index="2" value=" "/>
                   </StringArray>
                 </Property>
               </Properties>

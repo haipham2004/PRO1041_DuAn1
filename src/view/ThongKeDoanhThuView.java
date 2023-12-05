@@ -38,24 +38,24 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.entity.StandardEntityCollection;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
-import repository.ThongKeDTRepository;
-import repository.ThongKeSLRepository;
+import repository.ThongKeDoanhThuRepository;
+import repository.ThongKeSoLuongRepository;
 
 /**
  *
  * @author Admin
  */
-public class ThongKeDTView extends javax.swing.JPanel {
+public class ThongKeDoanhThuView extends javax.swing.JPanel {
 
-    ThongKeDTRepository repo = new ThongKeDTRepository();
+    ThongKeDoanhThuRepository repo = new ThongKeDoanhThuRepository();
 
     /**
      * Creates new form VoucherView
      */
-    public ThongKeDTView() {
+    public ThongKeDoanhThuView() {
         initComponents();
         this.setSize(1300, 755);
-//        setDataToChart(panelTKDT);
+        setDataToChart(panelTKDT);
     }
 
     public void setDataToChart(JPanel panelHoaDon) {
@@ -325,27 +325,31 @@ public class ThongKeDTView extends javax.swing.JPanel {
 
     private void btnTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemActionPerformed
         // TODO add your handling code here:
-        ThongKeDTRepository repo = new ThongKeDTRepository();
+        ThongKeDoanhThuRepository repo = new ThongKeDoanhThuRepository();
         Date ngayBd = txtNgayBD.getDate();
         Date ngayKt = txtNgayKT.getDate();
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         List<ChiTietHoaDon> listTKDT = repo.getListTKDT(ngayBd, ngayKt);
-        if (listTKDT != null) {
-            for (ChiTietHoaDon chiTietHoaDon : listTKDT) {
-                dataset.addValue(chiTietHoaDon.getHoaDon().getTongTien(), "Tổng tiền",
-                        chiTietHoaDon.getHoaDon().getNgayTao());
+        if (txtNgayKT.getCalendar().before(txtNgayBD.getCalendar())) {
+            JOptionPane.showMessageDialog(this, "Ngày kết thúc không hợp lệ");
+        } else {
+            if (listTKDT != null) {
+                for (ChiTietHoaDon chiTietHoaDon : listTKDT) {
+                    dataset.addValue(chiTietHoaDon.getHoaDon().getTongTien(), "Tổng tiền",
+                            chiTietHoaDon.getHoaDon().getNgayTao());
+                }
             }
+            JFreeChart lineChart = ChartFactory.createLineChart("Biểu đồ thống kê doanh thu".toUpperCase(),
+                    "Ngày", "Tổng tiền", dataset, PlotOrientation.VERTICAL,
+                    true, true, false);
+            ChartPanel chartPanel = new ChartPanel(lineChart);
+            chartPanel.setPreferredSize(new Dimension(859, 639));
+            panelTKDT.removeAll();
+            panelTKDT.setLayout(new CardLayout());
+            panelTKDT.add(chartPanel);
+            panelTKDT.validate();
+            panelTKDT.repaint();
         }
-        JFreeChart lineChart = ChartFactory.createLineChart("Biểu đồ thống kê doanh thu".toUpperCase(),
-                "Ngày", "Tổng tiền", dataset, PlotOrientation.VERTICAL,
-                true, true, false);
-        ChartPanel chartPanel = new ChartPanel(lineChart);
-        chartPanel.setPreferredSize(new Dimension(859, 639));
-        panelTKDT.removeAll();
-        panelTKDT.setLayout(new CardLayout());
-        panelTKDT.add(chartPanel);
-        panelTKDT.validate();
-        panelTKDT.repaint();
     }//GEN-LAST:event_btnTimKiemActionPerformed
 
     private void btnSendEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSendEmailActionPerformed
@@ -361,7 +365,7 @@ public class ThongKeDTView extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Xuất PDF thành công");
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(this, "Xuất PDF không thành công");
-            Logger.getLogger(ThongKeSLView.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ThongKeSoLuongView.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnXuatPDFActionPerformed
 

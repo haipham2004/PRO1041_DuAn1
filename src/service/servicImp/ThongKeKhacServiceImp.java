@@ -8,6 +8,6 @@ package service.servicImp;
  *
  * @author Admin
  */
-public class ThongKeDTServiceImp {
+public class ThongKeKhacServiceImp {
     
 }
