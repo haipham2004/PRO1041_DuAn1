@@ -78,8 +78,8 @@ public class DoiHangRepository {
         }
         return listDH;
     }
-    
-    public int themDonDoiHang(DoiHang dh){
+
+    public int themDonDoiHang(DoiHang dh) {
         try {
             sql = "Insert into DoiHang Values(?,?,?,GETDATE(),N'Đang đổi hàng')";
             con = DBConnect.getConnection();
@@ -93,24 +93,24 @@ public class DoiHangRepository {
             return 0;
         }
     }
-    
+
     public int countDoiHang() {
-        int tongHoaDon = 0;
+        int tongDoiHang = 0;
         try {
             sql = "Select COUNT(*) From DoiHang";
             con = DBConnect.getConnection();
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             if (rs.next()) {
-                tongHoaDon = rs.getInt(1);
+                tongDoiHang = rs.getInt(1);
             }
         } catch (Exception e) {
             e.printStackTrace();
             return 0;
         }
-        return tongHoaDon;
+        return tongDoiHang;
     }
-    
+
     public List<DoiHang> getAllDangDoiHang() {
         listDoiHang.clear();
         try {
@@ -136,5 +136,31 @@ public class DoiHangRepository {
             return null;
         }
         return listDoiHang;
+    }
+    
+    public int capNhatTrangThai(String maDH){
+        try {
+            sql = "Update DoiHang set TrangThai = N'Đổi thành công' Where MaDoiHang = ?";
+            con = DBConnect.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setObject(1, maDH);
+            return ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+    
+    public int huyDonDoiHang(String maDH){
+        try {
+            sql = "Update DoiHang set TrangThai = N'Hủy' Where MaDoiHang = ?";
+            con = DBConnect.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setObject(1, maDH);
+            return ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
     }
 }

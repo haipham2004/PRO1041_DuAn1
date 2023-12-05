@@ -54,4 +54,12 @@ public class KhachHangServiceImp implements AdamStore<KhachHang, String>{
     public int tongBanGhi(){
         return repo.tongBanGhi();
     }     
+    
+    public List<KhachHang> getListLocGioiTinhAndDiaChi(String name1, String name2) {
+        return repo.getListLocGioiTinhAndDiaChi(name1, name2);
+    }
+    
+    public List<KhachHang> getListLocGioiTinhOrDiaChi(String name1, String name2) {
+        return repo.getListLocGioiTinhOrDiaChi(name1, name2);
+    }
 }

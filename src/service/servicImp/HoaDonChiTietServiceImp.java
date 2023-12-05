@@ -30,4 +30,20 @@ public class HoaDonChiTietServiceImp {
     public int capNhatSoLuongThanhToan(List<HoaDonChiTiet> list) {
         return repo.capNhatSoLuongThanhToan(list);
     }
+    
+    public List<HoaDonChiTiet> getHDCTFromHoaDon(String maHD) {
+        return repo.getHDCTFromHoaDon(maHD);
+    }
+    
+    public int updateTrangThaiSangDoiHang(String MaHDCT){
+        return repo.updateTrangThaiSangDoiHang(MaHDCT);
+    }
+    
+    public int updateTrangThaiSangDaThanhToan(String MaHD){
+        return repo.updateTrangThaiSangDaThanhToan(MaHD);
+    }
+    
+    public int getSoLuongFromHDCT(String maHDCT){
+        return repo.getSoLuongFromHDCT(maHDCT);
+    }
 }

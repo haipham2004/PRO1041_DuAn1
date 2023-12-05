@@ -101,16 +101,11 @@
                               </Group>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="txtNgaySinh" max="32767" attributes="0"/>
-                                      <Component id="txtSoDienThoai" pref="223" max="32767" attributes="0"/>
-                                  </Group>
-                              </Group>
-                              <Component id="tbnXuatFile" min="-2" pref="103" max="-2" attributes="0"/>
+                          <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="txtNgaySinh" max="32767" attributes="0"/>
+                              <Component id="txtSoDienThoai" pref="223" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -160,7 +155,6 @@
                               <Component id="btnThem" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
                               <Component id="btnCapNhat" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
                               <Component id="btnLamMoi" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
-                              <Component id="tbnXuatFile" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="103" alignment="0" groupAlignment="3" attributes="0">
@@ -265,11 +259,6 @@
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnLamMoiMouseClicked"/>
           </Events>
-        </Component>
-        <Component class="javax.swing.JButton" name="tbnXuatFile">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Xu&#x1ea5;t file"/>
-          </Properties>
         </Component>
         <Component class="com.toedter.calendar.JDateChooser" name="txtNgaySinh">
         </Component>
@@ -481,6 +470,7 @@
               </Properties>
               <Events>
                 <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="cboGioiTinhItemStateChanged"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cboGioiTinhActionPerformed"/>
               </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
@@ -499,6 +489,9 @@
                   </StringArray>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cboDiaChiActionPerformed"/>
+              </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
               </AuxValues>

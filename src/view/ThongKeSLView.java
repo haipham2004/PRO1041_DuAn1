@@ -56,7 +56,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import model.ChiTietHoaDon;
+import model.HoaDonChiTiet;
 import model.HoaDonChiTiet;
 import org.apache.poi.examples.xssf.usermodel.LineChart;
 import org.apache.poi.ss.usermodel.CellStyle;
@@ -104,13 +104,13 @@ public class ThongKeSLView extends javax.swing.JPanel {
     }
 
     public void setDataToChart(JPanel panelHoaDon) {
-        List<ChiTietHoaDon> listCthd = repo.getListBieuDoHD();
+        List<HoaDonChiTiet> listCthd = service.getListBieuDoHD();
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         if (txtNgayBd.getCalendar() == null || txtNgayKT.getCalendar() == null) {
             if (listCthd != null) {
-                for (ChiTietHoaDon chiTietHoaDon : listCthd) {
-                    dataset.addValue(chiTietHoaDon.getHoaDon().getSoLuongHoaDon(), "Hóa đơn",
-                            chiTietHoaDon.getHoaDon().getNgayTao());
+                for (HoaDonChiTiet chiTietHoaDon : listCthd) {
+                    dataset.addValue(chiTietHoaDon.getHD().getSoLuongHoaDon(), "Hóa đơn",
+                            chiTietHoaDon.getHD().getNgayTao());
                 }
             }
             JFreeChart lineChart = ChartFactory.createLineChart("Biểu đồ thống kê tổng số hóa đơn".toUpperCase(),
@@ -133,12 +133,12 @@ public class ThongKeSLView extends javax.swing.JPanel {
     }
 
     public void setDataToChart2(JPanel panelTopSP) {
-        List<ChiTietHoaDon> listTop = repo.getListBieuDoTopSP();
+        List<HoaDonChiTiet> listTop = service.getListBieuDoTopSP();
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         if (listTop != null) {
-            for (ChiTietHoaDon chiTietHoaDon : listTop) {
-                dataset.addValue(chiTietHoaDon.getChiTietSanPham().getSanPham().getTongSP(), "Tổng sản phẩm",
-                        chiTietHoaDon.getChiTietSanPham().getSanPham().getTenSanPham());
+            for (HoaDonChiTiet chiTietHoaDon : listTop) {
+                dataset.addValue(chiTietHoaDon.getCtsp().getSanPham().getTongSP(), "Tổng sản phẩm",
+                        chiTietHoaDon.getCtsp().getSanPham().getTenSanPham());
             }
         }
         JFreeChart barChart = ChartFactory.createBarChart("Top sản phẩm bán chạy nhất".toUpperCase(),
@@ -453,11 +453,11 @@ public class ThongKeSLView extends javax.swing.JPanel {
         Date ngayBd = txtNgayBd.getDate();
         Date ngayKt = txtNgayKT.getDate();
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-        List<ChiTietHoaDon> listTKBD = repo.getListTKBieuDoHD(txtNgayBd.getDate(), txtNgayKT.getDate());
+        List<HoaDonChiTiet> listTKBD = service.getListTKBieuDoHD(txtNgayBd.getDate(), txtNgayKT.getDate());
         if (listTKBD != null) {
-            for (ChiTietHoaDon chiTietHoaDon : listTKBD) {
-                dataset.addValue(chiTietHoaDon.getHoaDon().getSoLuongHoaDon(), "Hóa đơn",
-                        chiTietHoaDon.getHoaDon().getNgayTao());
+            for (HoaDonChiTiet chiTietHoaDon : listTKBD) {
+                dataset.addValue(chiTietHoaDon.getHD().getSoLuongHoaDon(), "Hóa đơn",
+                        chiTietHoaDon.getHD().getNgayTao());
             }
         }
         JFreeChart lineChart = ChartFactory.createLineChart("Biểu đồ thống kê tổng số hóa đơn".toUpperCase(),

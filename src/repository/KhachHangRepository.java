@@ -26,7 +26,8 @@ public class KhachHangRepository {
         listKhachHang.clear();
         try {
             con = DBConnect.getConnection();
-            sql = "Select MaKH,HoTen,NgaySinh,SoDienThoai,Email,GioiTInh,DiaChi From KhachHang";
+            sql = "Select MaKH,HoTen,NgaySinh,SoDienThoai,Email,GioiTInh,DiaChi From KhachHang \n"
+                    + "where MaKH not in (Select MaKH From KhachHang where MaKH like N'KHNE')";
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
@@ -136,16 +137,17 @@ public class KhachHangRepository {
         }
         return listKhachHang2;
     }
-    
+
     public List<KhachHang> listPageKH(int index) {
         List<KhachHang> listKhachHang3 = new ArrayList<>();
         try {
             con = DBConnect.getConnection();
-            sql = "Select MaKH,HoTen,NgaySinh,SoDienThoai,Email,GioiTInh,DiaChi From KhachHang\n"
+            sql = " Select MaKH,HoTen,NgaySinh,SoDienThoai,Email,GioiTInh,DiaChi From KhachHang\n"
+                    + "where MaKH not in (Select MaKH From KhachHang where MaKH like N'KHNE')\n"
                     + "order by MaKH\n"
                     + "offset ? rows fetch next 4 rows only ";
             ps = con.prepareStatement(sql);
-            ps.setInt(1, (index-1)*4);
+            ps.setInt(1, (index - 1) * 4);
             rs = ps.executeQuery();
             while (rs.next()) {
                 KhachHang kh = new KhachHang(rs.getString(1),
@@ -163,7 +165,7 @@ public class KhachHangRepository {
         }
         return listKhachHang3;
     }
-    
+
     public int tongBanGhi() {
         int tong = 0;
         try {
@@ -179,5 +181,60 @@ public class KhachHangRepository {
             return 0;
         }
         return tong;
+    }
+
+    public List<KhachHang> getListLocGioiTinhAndDiaChi(String name1, String name2) {
+        listKhachHang.clear();
+        try {
+            con = DBConnect.getConnection();
+            sql = "Select MaKH,HoTen,NgaySinh,SoDienThoai,Email,GioiTInh,DiaChi From KhachHang \n"
+                    + "where MaKH not in (Select MaKH From KhachHang where MaKH like N'KHNE')\n"
+                    + " and GioiTinh = ? and DiaChi = ?";
+            ps = con.prepareStatement(sql);
+            ps.setObject(1, name1);
+            ps.setObject(2, name2);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                KhachHang kh = new KhachHang(rs.getString(1),
+                        rs.getString(2),
+                        rs.getDate(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getBoolean(6),
+                        rs.getString(7));
+                listKhachHang.add(kh);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+        return listKhachHang;
+    }
+
+    public List<KhachHang> getListLocGioiTinhOrDiaChi(String name1, String name2) {
+        listKhachHang.clear();
+        try {
+            con = DBConnect.getConnection();
+            sql = "Select MaKH,HoTen,NgaySinh,SoDienThoai,Email,GioiTInh,DiaChi From KhachHang \n"
+                    + "where MaKH not in (Select MaKH From KhachHang where MaKH like N'KHNE')\n"
+                    + " and " + name1 + " like ?";
+            ps = con.prepareStatement(sql);
+            ps.setObject(1, "%" + name2 + "%");
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                KhachHang kh = new KhachHang(rs.getString(1),
+                        rs.getString(2),
+                        rs.getDate(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getBoolean(6),
+                        rs.getString(7));
+                listKhachHang.add(kh);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+        return listKhachHang;
     }
 }

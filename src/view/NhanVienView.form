@@ -155,10 +155,6 @@
                               <Component id="btnSuaNV" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="btnMoiNV" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="btnImpExcel" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="btnExpExcel" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
                               <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
@@ -300,8 +296,6 @@
                           <Component id="btnThemNV" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="btnSuaNV" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="btnMoiNV" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnImpExcel" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnExpExcel" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                   </Group>
@@ -438,16 +432,6 @@
             </Component>
             <Component class="com.toedter.calendar.JDateChooser" name="txtNgayVaoLam">
             </Component>
-            <Component class="javax.swing.JButton" name="btnImpExcel">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Nh&#x1ead;p Excel"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JButton" name="btnExpExcel">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Xu&#x1ea5;t Excel"/>
-              </Properties>
-            </Component>
             <Component class="javax.swing.JLabel" name="jLabel38">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Ch&#x1ee9;c v&#x1ee5;"/>
@@ -534,7 +518,6 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="cboGioiTinhMouseClicked"/>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cboGioiTinhActionPerformed"/>
               </Events>
               <AuxValues>

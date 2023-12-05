@@ -47,6 +47,7 @@ public class HoaDonRepository {
         }
         return listHoaDon;
     }
+
     public HoaDon get1HoaDonCho(String maHD) {
         HoaDon hd = new HoaDon();
         try {
@@ -110,12 +111,13 @@ public class HoaDonRepository {
         List<HoaDon> listHD = new ArrayList<>();
         try {
             sql = "Select HD.MaHoaDon,NV.MaNV,KH.MaKH,HD.NgayTao,HD.TongTien, HD.TrangThai,HD.GhiChu\n"
-                    + "From HoaDon HD Join NhanVien NV ON HD.MaNV=NV.MaNV Join KhachHang KH ON HD.MaKH = KH.MaKH Where HD.MaHoaDon=? or NV.MaNV=? or KH.MaKH=? ";
+                    + "From HoaDon HD Join NhanVien NV ON HD.MaNV=NV.MaNV Join KhachHang KH ON HD.MaKH = KH.MaKH "
+                    + "Where HD.MaHoaDon LIKE ? or NV.MaNV LIKE ? or KH.MaKH LIKE ? ";
             con = DBConnect.getConnection();
             ps = con.prepareStatement(sql);
-            ps.setObject(1, maHD);
-            ps.setObject(2, maNV);
-            ps.setObject(3, maKH);
+            ps.setObject(1, '%' + maHD + '%');
+            ps.setObject(2, '%' + maNV + '%');
+            ps.setObject(3, '%' + maKH + '%');
             rs = ps.executeQuery();
             while (rs.next()) {
                 NhanVien nv = new NhanVien(rs.getString(2));
@@ -229,7 +231,7 @@ public class HoaDonRepository {
         try {
             sql = "Select HD.MaHoaDon,NV.MaNV,KH.MaKH,HD.NgayTao,HD.TongTien, HD.TrangThai,HD.GhiChu\n"
                     + "From HoaDon HD Join NhanVien NV ON HD.MaNV=NV.MaNV Join KhachHang KH ON HD.MaKH = KH.MaKH\n"
-                    + "where DATEDIFF(DAY,HD.NgayTao,GETDATE()) < 7 order by HD.TrangThai";
+                    + "where DATEDIFF(DAY,HD.NgayTao,GETDATE()) < 7 and HD.TrangThai like N'Đã thanh toán' order by HD.TrangThai";
             con = DBConnect.getConnection();
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
