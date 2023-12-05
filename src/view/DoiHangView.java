@@ -434,7 +434,7 @@ public class DoiHangView extends javax.swing.JPanel {
     private void btnChonHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnChonHangMouseClicked
         // TODO add your handling code here:
         pnlTong.removeAll();
-        pnlTong.add(new ChonCTSP());
+//        pnlTong.add(new ChonCTSP());
         pnlTong.repaint();
         pnlTong.revalidate();
     }//GEN-LAST:event_btnChonHangMouseClicked

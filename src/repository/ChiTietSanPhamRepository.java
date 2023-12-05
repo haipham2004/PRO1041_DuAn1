@@ -125,8 +125,8 @@ public class ChiTietSanPhamRepository {
             return 0;
         }
     }
-    
-     public List<ChiTietSanPham> getList(String name) {
+
+    public List<ChiTietSanPham> getList(String name) {
         List<ChiTietSanPham> listChiTietSanPham3 = new ArrayList<>();
         try {
             conn = DBConnect.getConnection();
@@ -155,7 +155,6 @@ public class ChiTietSanPhamRepository {
         }
         return listChiTietSanPham3;
     }
-
 
     public List<ChiTietSanPham> getListLoc(String name1, String name2, String name3, String name4) {
         List<ChiTietSanPham> listChiTietSanPham4 = new ArrayList<>();
@@ -347,7 +346,7 @@ public class ChiTietSanPhamRepository {
         }
         return listChiTietSanPham4;
     }
-    
+
     public List<ChiTietSanPham> getListLocCLKT(String name1, String name2, String name3) {
         List<ChiTietSanPham> listChiTietSanPham4 = new ArrayList<>();
         try {

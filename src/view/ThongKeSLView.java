@@ -189,7 +189,7 @@ public class ThongKeSLView extends javax.swing.JPanel {
         img3.setFixedPosition(60, 400f);
         document.add(img3);
 
-        String imgPath3 = "F:\\FPT Polytechnic\\DA1\\PRO1041_DuAn1\\ChartImage\\ChartTop.png";
+        String imgPath3 = "D:\\PRO1041_DuAn1\\ChartImage\\ChartTop.png";
         ImageData imgData3 = ImageDataFactory.create(imgPath3);
         Image img4 = new Image(imgData3);
         img4.setHeight(300);
