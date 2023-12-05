@@ -29,7 +29,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import model.ChiTietHoaDon;
+import model.HoaDonChiTiet;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.ChartRenderingInfo;
@@ -40,6 +40,7 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
 import repository.ThongKeDTRepository;
 import repository.ThongKeSLRepository;
+import service.servicImp.ThongKeDoanhThuServiceImp;
 
 /**
  *
@@ -47,7 +48,7 @@ import repository.ThongKeSLRepository;
  */
 public class ThongKeDTView extends javax.swing.JPanel {
 
-    ThongKeDTRepository repo = new ThongKeDTRepository();
+    ThongKeDoanhThuServiceImp service = new ThongKeDoanhThuServiceImp();
 
     /**
      * Creates new form VoucherView
@@ -59,13 +60,13 @@ public class ThongKeDTView extends javax.swing.JPanel {
     }
 
     public void setDataToChart(JPanel panelHoaDon) {
-        List<ChiTietHoaDon> listCthd = repo.getListThongKeDT();
+        List<HoaDonChiTiet> listCthd = service.getListThongKeDT();
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         if (txtNgayBD.getCalendar() == null || txtNgayKT.getCalendar() == null) {
             if (listCthd != null) {
-                for (ChiTietHoaDon chiTietHoaDon : listCthd) {
-                    dataset.addValue(chiTietHoaDon.getHoaDon().getTongTien(), "Tổng tiền",
-                            chiTietHoaDon.getHoaDon().getNgayTao());
+                for (HoaDonChiTiet chiTietHoaDon : listCthd) {
+                    dataset.addValue(chiTietHoaDon.getHD().getTongTien(), "Tổng tiền",
+                            chiTietHoaDon.getHD().getNgayTao());
                 }
             }
             JFreeChart lineChart = ChartFactory.createLineChart("Biểu đồ thống kê doanh thu".toUpperCase(),
@@ -329,11 +330,11 @@ public class ThongKeDTView extends javax.swing.JPanel {
         Date ngayBd = txtNgayBD.getDate();
         Date ngayKt = txtNgayKT.getDate();
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-        List<ChiTietHoaDon> listTKDT = repo.getListTKDT(ngayBd, ngayKt);
+        List<HoaDonChiTiet> listTKDT = service.getListTKDT(ngayBd, ngayKt);
         if (listTKDT != null) {
-            for (ChiTietHoaDon chiTietHoaDon : listTKDT) {
-                dataset.addValue(chiTietHoaDon.getHoaDon().getTongTien(), "Tổng tiền",
-                        chiTietHoaDon.getHoaDon().getNgayTao());
+            for (HoaDonChiTiet chiTietHoaDon : listTKDT) {
+                dataset.addValue(chiTietHoaDon.getHD().getTongTien(), "Tổng tiền",
+                        chiTietHoaDon.getHD().getNgayTao());
             }
         }
         JFreeChart lineChart = ChartFactory.createLineChart("Biểu đồ thống kê doanh thu".toUpperCase(),
