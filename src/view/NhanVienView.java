@@ -97,7 +97,7 @@ public class NhanVienView extends javax.swing.JPanel {
 
     public String maTangTuDong(String x) {
         int so = serviceNV.tongBanGhi(-1);
-        String maHD = x + String.format("%04d", so);;
+        String maHD = x + String.format("%02d", so);;
         return maHD;
     }
 
