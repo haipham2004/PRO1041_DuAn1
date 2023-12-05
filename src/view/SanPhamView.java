@@ -47,7 +47,6 @@ import static view.ChiTietSanPhamView.createStyleForHeader;
 public class SanPhamView extends javax.swing.JPanel {
 
     DefaultTableModel mol = new DefaultTableModel();
-    private AdamStoreView adamStoreView;
     LoaiSanPhamServiceImp serviceLSP = new LoaiSanPhamServiceImp();
     SanPhamServiceImp serviceSP = new SanPhamServiceImp();
     DefaultComboBoxModel<SanPham> cbxSanPham = new DefaultComboBoxModel<>();

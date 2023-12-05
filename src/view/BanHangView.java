@@ -78,7 +78,6 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
     int trangCTSP = 1, soTrangCTSP, tongBanGhiCTSP, index = -1;
     HoaDonServiceImp serviceHD = new HoaDonServiceImp();
     DefaultTableModel molHDC = new DefaultTableModel();
-    AdamStoreView adamStoreView = new AdamStoreView();
     int so = serviceHD.countHoaDon();
     int so2 = serviceHD.countHoaDon();
     HoaDonChiTietServiceImp serviceHDCT = new HoaDonChiTietServiceImp();

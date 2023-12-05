@@ -20,7 +20,7 @@ public class DoiMatKhauRepository {
     ResultSet rs = null;
     String sql = null;
 
-    public boolean checkMaTK(String maTK) {
+     public boolean checkMaTK(String maTK) {
         try {
             conn = DBConnect.getConnection();
             sql = "Select MaTK from TaiKhoan where MaTK=?";
