@@ -108,7 +108,7 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
         txtTongTienBH2.setEnabled(false);
         txtTenEV.setEnabled(false);
         txtMucGiam.setEnabled(false);
-//        initWebcam();
+        initWebcam();
     }
 
     private void initWebcam() {

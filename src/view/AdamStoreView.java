@@ -79,8 +79,9 @@ public class AdamStoreView extends javax.swing.JFrame {
         ImageIcon iconKhachHang = new ImageIcon(getClass().getResource("/icon/user (1).png"));
         ImageIcon iconHoaDon = new ImageIcon(getClass().getResource("/icon/bill.png"));
         ImageIcon iconKhuyenMai = new ImageIcon(getClass().getResource("/icon/discount.png"));
-        ImageIcon iconVoucher = new ImageIcon(getClass().getResource("/icon/voucher.png"));
         ImageIcon iconDoiMatKhau = new ImageIcon(getClass().getResource("/icon/reset-password.png"));
+        ImageIcon iconDoiHang = new ImageIcon(getClass().getResource("/icon/exchange.png"));
+        ImageIcon iconLichSuDoiHang = new ImageIcon(getClass().getResource("/icon/schedule.png"));
         ImageIcon iconDangXuat = new ImageIcon(getClass().getResource("/icon/power-off.png"));
         //Tạo thanh thống kê
         MenuItem menuThongKeDT = new MenuItem(iconDot, "Thống kê doanh thu", new ActionListener() {
@@ -157,7 +158,7 @@ public class AdamStoreView extends javax.swing.JFrame {
         });
 
         //Lịch sử đổi trả
-        MenuItem menuLsuDoiHang = new MenuItem(null, "Lịch sử đổi hàng", new ActionListener() {
+        MenuItem menuLsuDoiHang = new MenuItem(iconLichSuDoiHang, "Lịch sử đổi hàng", new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 changePanelBody(new LichSuDoiHangView());
@@ -165,7 +166,7 @@ public class AdamStoreView extends javax.swing.JFrame {
         });
 
         //Đổi trả
-        MenuItem menuDoiHang = new MenuItem(null, "Đổi hàng", new ActionListener() {
+        MenuItem menuDoiHang = new MenuItem(iconDoiHang, "Đổi hàng", new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 changePanelBody(new DoiHangView());

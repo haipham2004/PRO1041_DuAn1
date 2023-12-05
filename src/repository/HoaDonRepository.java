@@ -47,6 +47,7 @@ public class HoaDonRepository {
         }
         return listHoaDon;
     }
+
     public HoaDon get1HoaDonCho(String maHD) {
         HoaDon hd = new HoaDon();
         try {
@@ -230,7 +231,7 @@ public class HoaDonRepository {
         try {
             sql = "Select HD.MaHoaDon,NV.MaNV,KH.MaKH,HD.NgayTao,HD.TongTien, HD.TrangThai,HD.GhiChu\n"
                     + "From HoaDon HD Join NhanVien NV ON HD.MaNV=NV.MaNV Join KhachHang KH ON HD.MaKH = KH.MaKH\n"
-                    + "where DATEDIFF(DAY,HD.NgayTao,GETDATE()) < 7 order by HD.TrangThai";
+                    + "where DATEDIFF(DAY,HD.NgayTao,GETDATE()) < 7 and HD.TrangThai like N'Đã thanh toán' order by HD.TrangThai";
             con = DBConnect.getConnection();
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();

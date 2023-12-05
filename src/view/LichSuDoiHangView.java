@@ -60,8 +60,8 @@ public class LichSuDoiHangView extends javax.swing.JPanel {
         for (DoiHangChiTiet dhct : list) {
             tblmDHCT.addRow(new Object[]{
                 this.tblmDHCT.getRowCount() + 1, dhct.getMaDHCT(),
-                dhct.getChiTietHoaDon().getChiTietSanPham().getSanPham().getTenSanPham(),
-                dhct.getChiTietHoaDon().getChiTietSanPham().getMaChiTietSanPham(),
+                dhct.getHoaDonChiTiet().getCtsp().getSanPham().getTenSanPham(),
+                dhct.getHoaDonChiTiet().getCtsp().getMaChiTietSanPham(),
                 dhct.getChiTietSanPham().getMaChiTietSanPham(),
                 dhct.getSoLuong(), dhct.isTrangThai() ? "Thành công" : "Thất bại", dhct.getMoTa()
             });

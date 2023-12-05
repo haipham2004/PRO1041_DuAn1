@@ -54,7 +54,6 @@ public class HoaDonView extends javax.swing.JPanel {
                 maHoadon, ctsp.getSoLuong(), ctsp.getGia(), ctsp.isTrangThai() ? "Thành công" : "Thất bại"
             });
         }
-
     }
 
     public void showData(int index) {

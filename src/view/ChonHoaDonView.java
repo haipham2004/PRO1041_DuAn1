@@ -4,62 +4,96 @@
  */
 package view;
 
+import java.awt.Color;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.util.List;
+import java.util.Random;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
-import model.ChiTietSanPham;
-import service.servicImp.ChiTietSanPhamServiceImp;
+import model.DoiHang;
+import model.HoaDon;
+import model.NhanVien;
+import service.servicImp.DoiHangServiceImp;
+import service.servicImp.HoaDonServiceImp;
 
 /**
  *
  * @author Admin
  */
-public class ChonCTSP extends javax.swing.JPanel {
+public class ChonHoaDonView extends javax.swing.JPanel {
 
+    DoiHangServiceImp serviceDH = new DoiHangServiceImp();
+    HoaDonServiceImp serviceHD = new HoaDonServiceImp();
     DefaultTableModel tblmol = new DefaultTableModel();
-    ChiTietSanPhamServiceImp serviceCTSP = new ChiTietSanPhamServiceImp();
-    int indexCTSP = -1;
-    int trangCTSP = 1, soTrangCTSP, tongBanGhiCTSP, index = 0;
+    DangNhapView dangNhapView = new DangNhapView();
+    DoiHangView doiHangView = new DoiHangView();
+    int indexHoaDon = -1;
+    int so = serviceDH.countDoiHang();
+    Random random = new Random();
 
     /**
-     * Creates new form ChonCTSP
+     * Creates new form ChonHoaDon
      */
-    public ChonCTSP() {
+    public ChonHoaDonView() {
         initComponents();
         this.setSize(1300, 755);
+        addPlaceHolder(txtTimKiem, "Theo mã hóa đơn");
+        fillTable(serviceHD.getLSHoaDonDuocDoiHang());
     }
 
-    public void quayLaiDoiHang() {
+    public String maTangTuDong(String DH) {
+        so++;
+        String maTuDong = "";
+        String chuHoa = "QWERTYUIOPASDFGHJKLZXCVBNM";
+        char[] kyTu = new char[2];
+        for (int i = 0; i < 2; i++) {
+            kyTu[i] = chuHoa.charAt(random.nextInt(chuHoa.length()));
+            maTuDong += kyTu[i];
+        }
+        String maHD = DH + String.format("%04d", so) + maTuDong;
+        return maHD;
+    }
+
+    public void addPlaceHolder(JTextField textField, String placeHolder) {
+        textField.setText(placeHolder);
+        textField.setForeground(Color.gray);
+        textField.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                if (textField.getText().equals(placeHolder)) {
+                    textField.setText("");
+                    textField.setForeground(Color.BLACK);
+                }
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (textField.getText().isEmpty()) {
+                    textField.setText(placeHolder);
+                    textField.setForeground(Color.GRAY);
+                }
+            }
+        });
+    }
+
+    public void fillTable(List<HoaDon> list) {
+        tblmol = (DefaultTableModel) tblHoaDon.getModel();
+        tblmol.setRowCount(0);
+        for (HoaDon item : list) {
+            tblmol.addRow(new Object[]{
+                tblHoaDon.getRowCount() + 1, item.getMaHoaDon(), item.getNhanVien().getMaNhanVien(),
+                item.getKhachHang().getMaKhachHang(), item.getNgayTao(), item.getTongTien(),
+                item.getTrangThai(), item.getGhiChu()
+            });
+        }
+    }
+    
+    public void quayLaiDoiHang(){
         pnlTong.removeAll();
         pnlTong.add(new DoiHangView());
         pnlTong.repaint();
         pnlTong.revalidate();
-    }
-    
-    public void fillTableChiTietSanPham(List<ChiTietSanPham> list) {
-        tblmol = (DefaultTableModel) tblChiTietSanPham.getModel();
-        tblmol.setRowCount(0);
-        for (ChiTietSanPham chiTietSanPham : list) {
-            tblmol.addRow(new Object[]{
-                chiTietSanPham.getMaChiTietSanPham(),
-                chiTietSanPham.getSoLuong(), chiTietSanPham.getGia(),
-                chiTietSanPham.getSanPham(),
-                chiTietSanPham.getChatLieu(), chiTietSanPham.getMauSac(),
-                chiTietSanPham.getKichThuoc(), chiTietSanPham.isTrangThai() ? "Còn hàng" : "Hết hàng",});
-        }
-    }
-    
-    public void loadPageCTSP() {
-        String tenPage = new SanPhamView().getTenSPs(null, new SanPhamView().getTenSanPham());
-        tongBanGhiCTSP = serviceCTSP.tongBanGhi(tenPage);
-        if (tongBanGhiCTSP % 5 == 0) {
-            soTrangCTSP = tongBanGhiCTSP / 5;
-        } else {
-            soTrangCTSP = tongBanGhiCTSP / 5 + 1;
-        }
-        lbSoTrang2.setText(trangCTSP + " of " + soTrangCTSP);
-        System.out.println("Số trang: " + soTrangCTSP);
-        System.out.println("Số bản ghi: " + tongBanGhiCTSP);
-        fillTableChiTietSanPham(serviceCTSP.listPageCTSP(trangCTSP, tenPage));
     }
 
     /**
@@ -78,13 +112,8 @@ public class ChonCTSP extends javax.swing.JPanel {
         btnChonHoaDon = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         btnQuayLai = new javax.swing.JButton();
-        jScrollPane7 = new javax.swing.JScrollPane();
-        tblChiTietSanPham = new javax.swing.JTable();
-        btnDau2 = new javax.swing.JButton();
-        btnLui2 = new javax.swing.JButton();
-        lbSoTrang2 = new javax.swing.JLabel();
-        btnTien2 = new javax.swing.JButton();
-        btnCuoi2 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblHoaDon = new javax.swing.JTable();
         jPanel4 = new javax.swing.JPanel();
 
         pnlTong.setLayout(new java.awt.CardLayout());
@@ -107,7 +136,7 @@ public class ChonCTSP extends javax.swing.JPanel {
         });
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel2.setText("Danh sách chi tiết sản phẩm");
+        jLabel2.setText("Danh sách hóa đơn");
 
         btnQuayLai.setText("Quay lại");
         btnQuayLai.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -116,7 +145,7 @@ public class ChonCTSP extends javax.swing.JPanel {
             }
         });
 
-        tblChiTietSanPham.setModel(new javax.swing.table.DefaultTableModel(
+        tblHoaDon.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null},
@@ -124,62 +153,20 @@ public class ChonCTSP extends javax.swing.JPanel {
                 {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Mã SPCT", "Số lượng tồn", "Giá", "Tên sản phẩm", "Chất liệu", "Màu sắc ", "Kích thước", "Trạng thái"
+                "STT", "Mã hóa đơn", "Mã nhân viên", "Mã khách hàng", "Ngày tạo", "Tổng tiền", "Trạng Thái ", "Ghi chú "
             }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        tblChiTietSanPham.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblChiTietSanPhamMouseClicked(evt);
-            }
-        });
-        jScrollPane7.setViewportView(tblChiTietSanPham);
-
-        btnDau2.setText("Pre");
-        btnDau2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDau2ActionPerformed(evt);
-            }
-        });
-
-        btnLui2.setText("Lùi");
-        btnLui2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLui2ActionPerformed(evt);
-            }
-        });
-
-        lbSoTrang2.setText("Số trang");
-
-        btnTien2.setText("Tiến");
-        btnTien2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTien2ActionPerformed(evt);
-            }
-        });
-
-        btnCuoi2.setText("Next");
-        btnCuoi2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCuoi2ActionPerformed(evt);
-            }
-        });
+        ));
+        jScrollPane1.setViewportView(tblHoaDon);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnQuayLai, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel2Layout.createSequentialGroup()
@@ -190,20 +177,9 @@ public class ChonCTSP extends javax.swing.JPanel {
                                         .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 331, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 431, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(190, 190, 190)
-                                .addComponent(btnChonHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 1026, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(229, 229, 229)
-                        .addComponent(btnDau2)
-                        .addGap(33, 33, 33)
-                        .addComponent(btnLui2)
-                        .addGap(41, 41, 41)
-                        .addComponent(lbSoTrang2)
-                        .addGap(44, 44, 44)
-                        .addComponent(btnTien2)
-                        .addGap(38, 38, 38)
-                        .addComponent(btnCuoi2)))
-                .addContainerGap(145, Short.MAX_VALUE))
+                                .addComponent(btnChonHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 417, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -220,15 +196,8 @@ public class ChonCTSP extends javax.swing.JPanel {
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCuoi2)
-                    .addComponent(btnTien2)
-                    .addComponent(lbSoTrang2)
-                    .addComponent(btnLui2)
-                    .addComponent(btnDau2))
-                .addGap(70, 70, 70))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 457, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pnlTong.add(jPanel2, "card2");
@@ -253,30 +222,57 @@ public class ChonCTSP extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(pnlTong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(74, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(pnlTong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(51, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnDau2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDau2ActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_btnDau2ActionPerformed
+
+    private void btnLui2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLui2ActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_btnLui2ActionPerformed
+
+    private void btnTien2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTien2ActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_btnTien2ActionPerformed
+
+    private void btnCuoi2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCuoi2ActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_btnCuoi2ActionPerformed
+
     private void txtTimKiemKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKiemKeyReleased
         // TODO add your handling code here:
-        //        if (!txtTimKiem.getText().equals("")) {
-        //            String name = txtTimKiem.getText();
-        //            fillTable(serviceHD.getList(name));
-        //        } else {
-        //            fillTable(serviceHD.getLSHoaDon());
-        //        }
+        if (!txtTimKiem.getText().equals("")) {
+            String name = txtTimKiem.getText();
+            fillTable(serviceHD.getList2(name));
+        } else {
+            fillTable(serviceHD.getLSHoaDonDuocDoiHang());
+        }
     }//GEN-LAST:event_txtTimKiemKeyReleased
 
     private void btnChonHoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnChonHoaDonMouseClicked
         // TODO add your handling code here:
-
+        indexHoaDon = tblHoaDon.getSelectedRow();
+        String maHD = tblHoaDon.getValueAt(indexHoaDon, 1).toString();
+        serviceHD.chuyenSangDoiHang(maHD);
+        String maDH = maTangTuDong("DH");
+        HoaDon hd = new HoaDon(maHD);
+        NhanVien nv = new NhanVien(dangNhapView.getMaNV());
+        DoiHang dh = new DoiHang(maDH, hd, nv);
+        serviceDH.them(dh);
         quayLaiDoiHang();
     }//GEN-LAST:event_btnChonHoaDonMouseClicked
 
@@ -285,67 +281,17 @@ public class ChonCTSP extends javax.swing.JPanel {
         quayLaiDoiHang();
     }//GEN-LAST:event_btnQuayLaiMouseClicked
 
-    private void tblChiTietSanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblChiTietSanPhamMouseClicked
-        // TODO add your handling code here:
-
-//        index = tblChiTietSanPham.getSelectedRow();
-//        deltailChiTietSanPham(index);
-//        btnThemCTSP.setEnabled(false);
-//        indexCTSP = tblChiTietSanPham.getSelectedRow();
-    }//GEN-LAST:event_tblChiTietSanPhamMouseClicked
-
-    private void btnDau2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDau2ActionPerformed
-        // TODO add your handling code here:
-//        trangCTSP = 1;
-//        String tenPage = new SanPhamView().getTenSPs(null, new SanPhamView().getTenSanPham());
-//        fillTableChiTietSanPham(serviceCTSP.listPageCTSP(trangCTSP, tenPage));
-//        lbSoTrang2.setText(trangCTSP + " of " + soTrangCTSP);
-    }//GEN-LAST:event_btnDau2ActionPerformed
-
-    private void btnLui2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLui2ActionPerformed
-        // TODO add your handling code here:
-//        if (trangCTSP > 1) {
-//            trangCTSP--;
-//            String tenPage = new SanPhamView().getTenSPs(null, new SanPhamView().getTenSanPham());
-//            fillTableChiTietSanPham(serviceCTSP.listPageCTSP(trangCTSP, tenPage));
-//            lbSoTrang2.setText(trangCTSP + " of " + soTrangCTSP);
-//        }
-    }//GEN-LAST:event_btnLui2ActionPerformed
-
-    private void btnTien2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTien2ActionPerformed
-        // TODO add your handling code here:
-//        if (trangCTSP < soTrangCTSP) {
-//            trangCTSP++;
-//            String tenPage = new SanPhamView().getTenSPs(null, new SanPhamView().getTenSanPham());
-//            fillTableChiTietSanPham(serviceCTSP.listPageCTSP(trangCTSP, tenPage));
-//            lbSoTrang2.setText(trangCTSP + " of " + soTrangCTSP);
-//        }
-    }//GEN-LAST:event_btnTien2ActionPerformed
-
-    private void btnCuoi2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCuoi2ActionPerformed
-        // TODO add your handling code here:
-//        trangCTSP = soTrangCTSP;
-//        String tenPage = new SanPhamView().getTenSPs(null, new SanPhamView().getTenSanPham());
-//        fillTableChiTietSanPham(serviceCTSP.listPageCTSP(trangCTSP, tenPage));
-//        lbSoTrang2.setText(trangCTSP + " of " + soTrangCTSP);
-    }//GEN-LAST:event_btnCuoi2ActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnChonHoaDon;
-    private javax.swing.JButton btnCuoi2;
-    private javax.swing.JButton btnDau2;
-    private javax.swing.JButton btnLui2;
     private javax.swing.JButton btnQuayLai;
-    private javax.swing.JButton btnTien2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JScrollPane jScrollPane7;
-    private javax.swing.JLabel lbSoTrang2;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel pnlTong;
-    private javax.swing.JTable tblChiTietSanPham;
+    private javax.swing.JTable tblHoaDon;
     private javax.swing.JTextField txtTimKiem;
     // End of variables declaration//GEN-END:variables
 }

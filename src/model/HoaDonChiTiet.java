@@ -40,6 +40,11 @@ public class HoaDonChiTiet {
     public HoaDonChiTiet() {
     }
 
+    public HoaDonChiTiet(String maHDCT, ChiTietSanPham ctsp) {
+        this.maHDCT = maHDCT;
+        this.ctsp = ctsp;
+    }
+
     public HoaDonChiTiet(ChiTietSanPham ctsp, int soLuong, Boolean trangThai) {
         this.ctsp = ctsp;
         this.soLuong = soLuong;
@@ -54,6 +59,14 @@ public class HoaDonChiTiet {
 
     public HoaDonChiTiet(ChiTietSanPham ctsp, int soLuong, Double donGia) {
         this.ctsp = ctsp;
+        this.soLuong = soLuong;
+        this.donGia = donGia;
+    }
+
+    public HoaDonChiTiet(String maHDCT, ChiTietSanPham ctsp, HoaDon HD, int soLuong, Double donGia) {
+        this.maHDCT = maHDCT;
+        this.ctsp = ctsp;
+        this.HD = HD;
         this.soLuong = soLuong;
         this.donGia = donGia;
     }
