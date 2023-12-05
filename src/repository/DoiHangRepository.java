@@ -78,8 +78,8 @@ public class DoiHangRepository {
         }
         return listDH;
     }
-    
-    public int themDonDoiHang(DoiHang dh){
+
+    public int themDonDoiHang(DoiHang dh) {
         try {
             sql = "Insert into DoiHang Values(?,?,?,GETDATE(),N'Đang đổi hàng')";
             con = DBConnect.getConnection();
@@ -93,7 +93,7 @@ public class DoiHangRepository {
             return 0;
         }
     }
-    
+
     public int countDoiHang() {
         int tongHoaDon = 0;
         try {
@@ -110,7 +110,7 @@ public class DoiHangRepository {
         }
         return tongHoaDon;
     }
-    
+
     public List<DoiHang> getAllDangDoiHang() {
         listDoiHang.clear();
         try {
