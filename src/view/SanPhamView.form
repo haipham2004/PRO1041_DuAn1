@@ -101,14 +101,16 @@
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jPanel4" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="btnThemSP" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnSuaSP" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnQuayLai" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnClearSP" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnXuatFile" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnNhapFile" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnCTSP" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="btnXuatFile" alignment="1" min="-2" pref="23" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="btnThemSP" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnSuaSP" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnQuayLai" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnClearSP" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnNhapFile" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnCTSP" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="pnlSP" min="-2" pref="294" max="-2" attributes="0"/>

@@ -61,7 +61,8 @@ import org.jfree.data.gantt.TaskSeries;
 import org.jfree.data.gantt.TaskSeriesCollection;
 import org.jfree.data.xy.XYSeries;
 import repository.ThongKeKhacRepository;
-import repository.ThongKeSLRepository;
+import repository.ThongKeSoLuongRepository;
+import service.servicImp.ThongKeKhacServiceImp;
 import util.DBConnect;
 
 /**
@@ -70,7 +71,7 @@ import util.DBConnect;
  */
 public class ThongKeKhacView extends javax.swing.JPanel {
 
-    ThongKeKhacRepository repo = new ThongKeKhacRepository();
+    ThongKeKhacServiceImp service = new ThongKeKhacServiceImp();
     public static String tenSp;
     DefaultComboBoxModel<SanPham> cboSP = new DefaultComboBoxModel<>();
     private static final long serialVersionUID = 1L;
@@ -81,8 +82,7 @@ public class ThongKeKhacView extends javax.swing.JPanel {
     public ThongKeKhacView() {
         initComponents();
         setDataToChart(panel1);
-
-        loadCbo(repo.getTenSP(tenSp));
+        loadCbo(service.getTenSP(tenSp));
         setDataToChart2(panel2);
     }
 
@@ -99,7 +99,7 @@ public class ThongKeKhacView extends javax.swing.JPanel {
     }
 
     public void setDataToChart(JPanel panelTopSP) {
-        List<HoaDonChiTiet> list1 = repo.getList1();
+        List<HoaDonChiTiet> list1 = service.getList1();
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         if (list1 != null) {
             for (HoaDonChiTiet chiTietHoaDon : list1) {
@@ -124,7 +124,7 @@ public class ThongKeKhacView extends javax.swing.JPanel {
 
         try {
             final ChartRenderingInfo info2 = new ChartRenderingInfo(new StandardEntityCollection());
-            final File file2 = new File("F:\\FPT Polytechnic\\DA1\\PRO1041_DuAn1\\ChartImage\\ChartDTSPchung.png");
+            final File file2 = new File("C:\\ChartImage\\ChartDTSPchung.png");
             ChartUtilities.saveChartAsPNG(file2, barChart, 859, 236, info2);
         } catch (Exception e) {
         }
@@ -134,7 +134,7 @@ public class ThongKeKhacView extends javax.swing.JPanel {
         java.util.Date ngayBd = txtNgayBD.getDate();
         java.util.Date ngayKt = txtNgayKT.getDate();
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-        List<HoaDonChiTiet> listTK1 = repo.getListTK1(txtNgayBD.getDate(), txtNgayKT.getDate());
+        List<HoaDonChiTiet> listTK1 = service.getListTK1(txtNgayBD.getDate(), txtNgayKT.getDate());
         if (listTK1 != null) {
             for (HoaDonChiTiet chiTietHoaDon : listTK1) {
                 dataset.addValue(chiTietHoaDon.getSoLuong() + chiTietHoaDon.getCtsp().getSoLuong(), "Tổng sản phẩm",
@@ -155,12 +155,18 @@ public class ThongKeKhacView extends javax.swing.JPanel {
         panel1.add(chartPanel);
         panel1.validate();
         panel1.repaint();
+        try {
+            final ChartRenderingInfo info2 = new ChartRenderingInfo(new StandardEntityCollection());
+            final File file2 = new File("C:\\ChartImage\\ChartDTSPchung.png");
+            ChartUtilities.saveChartAsPNG(file2, barChart, 859, 236, info2);
+        } catch (Exception e) {
+        }
     }
 
     public void setDataToChart2(JPanel panel2) {
         SanPham sp = (SanPham) cboSP.getSelectedItem();
         tenSp = sp.toString();
-        List<HoaDonChiTiet> list2 = repo.getList2(tenSp);
+        List<HoaDonChiTiet> list2 = service.getList2(tenSp);
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         if (list2 != null) {
             for (HoaDonChiTiet chiTietHoaDon : list2) {
@@ -183,19 +189,13 @@ public class ThongKeKhacView extends javax.swing.JPanel {
         panel2.add(chartPanel);
         panel2.validate();
         panel2.repaint();
-        try {
-            final ChartRenderingInfo info1 = new ChartRenderingInfo(new StandardEntityCollection());
-            final File file1 = new File("F:\\FPT Polytechnic\\DA1\\PRO1041_DuAn1\\ChartImage\\ChartDTSPrieng.png");
-            ChartUtilities.saveChartAsPNG(file1, lineChart, 859, 236, info1);
-        } catch (Exception e) {
-        }
     }
 
     public void timKiem2() {
         java.util.Date ngayBd = txtNgayBD2.getDate();
         java.util.Date ngayKt = txtNgayKT2.getDate();
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-        List<HoaDonChiTiet> listTK2 = repo.getListTK2(tenSp, ngayBd, ngayKt);
+        List<HoaDonChiTiet> listTK2 = service.getListTK2(tenSp, ngayBd, ngayKt);
         if (listTK2 != null) {
             for (HoaDonChiTiet chiTietHoaDon : listTK2) {
                 dataset.addValue(chiTietHoaDon.getHD().getSoLuongHoaDon() + chiTietHoaDon.getSoLuong(), "Tổng",
@@ -228,7 +228,7 @@ public class ThongKeKhacView extends javax.swing.JPanel {
         String formattedDateTime = currentDateTime.format(formatter);
         DecimalFormat df = new DecimalFormat("#,###");
 
-        String path = "D:\\PRO1041_DuAn1\\PDF\\" + "Thongkekhac" + ".pdf";
+        String path = "C:\\PDF\\" + "Thongkekhac" + ".pdf";
         PdfWriter pdfWriter = new PdfWriter(path);
         PdfDocument pdfDocument = new PdfDocument(pdfWriter);
         pdfDocument.setDefaultPageSize(PageSize.A4);
@@ -241,7 +241,7 @@ public class ThongKeKhacView extends javax.swing.JPanel {
         img2.setOpacity(0.2f);
         document.add(img2);
 
-        String imgPath2 = "D:\\PRO1041_DuAn1\\ChartImage\\ChartDTSPchung.png";
+        String imgPath2 = "C:\\ChartImage\\ChartDTSPchung.png";
         ImageData imgData2 = ImageDataFactory.create(imgPath2);
         Image img3 = new Image(imgData2);
         img3.setHeight(300);
@@ -249,13 +249,7 @@ public class ThongKeKhacView extends javax.swing.JPanel {
         img3.setFixedPosition(60, 400f);
         document.add(img3);
 
-        String imgPath3 = "D:\\PRO1041_DuAn1\\ChartImage\\ChartDTSPrieng.png";
-        ImageData imgData3 = ImageDataFactory.create(imgPath3);
-        Image img4 = new Image(imgData3);
-        img4.setHeight(300);
-        img4.setWidth(500);
-        img4.setFixedPosition(60, 30f);
-        document.add(img4);
+       
 
         String fontPath = "C:\\Windows\\Fonts\\Arial.ttf";
         PdfFont font = PdfFontFactory.createFont(fontPath, PdfEncodings.IDENTITY_H);
@@ -299,6 +293,7 @@ public class ThongKeKhacView extends javax.swing.JPanel {
         jPanel6 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jToggleButton1 = new javax.swing.JToggleButton();
+        btnGmail = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         panel2 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
@@ -422,10 +417,18 @@ public class ThongKeKhacView extends javax.swing.JPanel {
         );
 
         jToggleButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/pdf.png"))); // NOI18N
-        jToggleButton1.setText("Xuất file PDF");
+        jToggleButton1.setText("Xuất PDF");
         jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jToggleButton1ActionPerformed(evt);
+            }
+        });
+
+        btnGmail.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/new (1).png"))); // NOI18N
+        btnGmail.setText("Gửi Email");
+        btnGmail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGmailActionPerformed(evt);
             }
         });
 
@@ -453,6 +456,8 @@ public class ThongKeKhacView extends javax.swing.JPanel {
                         .addComponent(btnTimKiem)
                         .addGap(18, 18, 18)
                         .addComponent(jToggleButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnGmail)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
@@ -472,7 +477,8 @@ public class ThongKeKhacView extends javax.swing.JPanel {
                     .addComponent(txtNgayKT, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btnTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addComponent(jToggleButton1)))
+                        .addComponent(jToggleButton1)
+                        .addComponent(btnGmail)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
@@ -579,12 +585,20 @@ public class ThongKeKhacView extends javax.swing.JPanel {
 
     private void btnTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemActionPerformed
         // TODO add your handling code here:
-        timKiem();
+        if (txtNgayKT.getCalendar().before(txtNgayBD.getCalendar())) {
+            JOptionPane.showMessageDialog(this, "Ngày kết thúc không hợp lệ");
+        } else {
+            timKiem();
+        }
     }//GEN-LAST:event_btnTimKiemActionPerformed
 
     private void btnTimKiem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiem2ActionPerformed
         // TODO add your handling code here:
-        timKiem2();
+        if (txtNgayKT2.getCalendar().before(txtNgayBD2.getCalendar())) {
+            JOptionPane.showMessageDialog(this, "Ngày kết thúc không hợp lệ");
+        } else {
+            timKiem2();
+        }       
     }//GEN-LAST:event_btnTimKiem2ActionPerformed
 
     private void cboTenSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboTenSPActionPerformed
@@ -603,8 +617,15 @@ public class ThongKeKhacView extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
+    private void btnGmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGmailActionPerformed
+        // TODO add your handling code here:
+        SendEmailView sendEmail = new SendEmailView();
+        sendEmail.setVisible(true);
+    }//GEN-LAST:event_btnGmailActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnGmail;
     private javax.swing.JToggleButton btnTimKiem;
     private javax.swing.JToggleButton btnTimKiem2;
     private javax.swing.JComboBox<String> cboTenSP;

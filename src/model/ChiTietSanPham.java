@@ -56,7 +56,6 @@ public class ChiTietSanPham {
         this.sanPham = sanPham;
     }
 
-
     public ChiTietSanPham(String maChiTietSanPham, SanPham sanPham) {
 
         this.maChiTietSanPham = maChiTietSanPham;
@@ -85,12 +84,10 @@ public class ChiTietSanPham {
 //        this.trangThai = trangThai;
 //        this.qrCode = qrCode;
 //    }
-
     public ChiTietSanPham(String maChiTietSanPham) {
         this.maChiTietSanPham = maChiTietSanPham;
     }
 
-   
     public String getMaChiTietSanPham() {
         return maChiTietSanPham;
     }

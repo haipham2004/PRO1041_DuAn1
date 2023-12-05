@@ -32,8 +32,9 @@ public class HoaDonRepository {
         List<HoaDon> listHoaDon = new ArrayList<>();
         try {
             con = DBConnect.getConnection();
-            sql = "Select HD.MaHoaDon,NV.MaNV,NV.HoTen,HD.NgayTao,HD.TrangThai\n"
-                    + "From HoaDon HD Join NhanVien NV ON HD.MaNV=NV.MaNV where HD.TrangThai like N'Chờ thanh toán'";
+            sql = "Select HD.MaHoaDon,NV.MaNV,KH.MaKH,HD.NgayTao,HD.TongTien, HD.TrangThai,HD.GhiChu\n"
+                    + "From HoaDon HD Join NhanVien NV ON HD.MaNV=NV.MaNV Join KhachHang KH ON HD.MaKH = KH.MaKH\n"
+                    + "where HD.trangThai like N'Chờ thanh toán' order by HD.TrangThai";
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {

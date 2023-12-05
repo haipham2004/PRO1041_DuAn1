@@ -240,8 +240,8 @@ public class SendEmailView extends javax.swing.JFrame {
 
             String fromEmail = txtEmailSend.getText();
             String toEmail = txtEmailTo.getText();
-            String subject = txtSubject.getText();
-            String body = txtMessage.getText();
+            String subject = txtSubject.getText();           
+            String body = txtMessage.getText() + "\n Đây là email tự động, vui lòng không reply";
             MimeMessage mail = new MimeMessage(s);
 
             mail.setFrom(new InternetAddress(fromEmail));

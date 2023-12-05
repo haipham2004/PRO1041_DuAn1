@@ -40,7 +40,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import model.HoaDon;
-import service.servicImp.ThongKeSLServiceImp;
+import service.servicImp.ThongKeSoLuongServiceImp;
 
 import java.util.Date;
 import java.util.Properties;
@@ -76,8 +76,8 @@ import org.jfree.data.gantt.Task;
 import org.jfree.data.gantt.TaskSeries;
 import org.jfree.data.gantt.TaskSeriesCollection;
 import org.jfree.data.time.SimpleTimePeriod;
-import repository.ThongKeDTRepository;
-import repository.ThongKeSLRepository;
+import repository.ThongKeDoanhThuRepository;
+import repository.ThongKeSoLuongRepository;
 import util.PDFGene;
 import static util.PDFGene.getHeaderTextCell;
 import static util.PDFGene.getHeaderTextCellValue;
@@ -90,8 +90,8 @@ import static view.ChiTietSanPhamView.createStyleForHeader;
 public class ThongKeSoLuongView extends javax.swing.JPanel {
 
     DefaultTableModel defaultTableModel = new DefaultTableModel();
-    ThongKeSLServiceImp service = new ThongKeSLServiceImp();
-    ThongKeSLRepository repo = new ThongKeSLRepository();
+    ThongKeSoLuongServiceImp service = new ThongKeSoLuongServiceImp();
+    ThongKeSoLuongRepository repo = new ThongKeSoLuongRepository();
 
     /**
      * Creates new form ThongKeView
@@ -125,7 +125,7 @@ public class ThongKeSoLuongView extends javax.swing.JPanel {
             panelHoaDon.repaint();
             try {
                 final ChartRenderingInfo info1 = new ChartRenderingInfo(new StandardEntityCollection());
-                final File file1 = new File("F:\\FPT Polytechnic\\DA1\\PRO1041_DuAn1\\ChartImage\\ChartHD.png");
+                final File file1 = new File("C:\\ChartImage\\ChartHD.png");
                 ChartUtilities.saveChartAsPNG(file1, lineChart, 859, 236, info1);
             } catch (Exception e) {
             }
@@ -153,7 +153,7 @@ public class ThongKeSoLuongView extends javax.swing.JPanel {
         panelTopSP.repaint();
         try {
             final ChartRenderingInfo info2 = new ChartRenderingInfo(new StandardEntityCollection());
-            final File file2 = new File("F:\\FPT Polytechnic\\DA1\\PRO1041_DuAn1\\ChartImage\\ChartTop.png");
+            final File file2 = new File("C:\\ChartImage\\ChartTop.png");
             ChartUtilities.saveChartAsPNG(file2, barChart, 859, 236, info2);
         } catch (Exception e) {
         }
@@ -168,7 +168,7 @@ public class ThongKeSoLuongView extends javax.swing.JPanel {
         String formattedDateTime = currentDateTime.format(formatter);
         DecimalFormat df = new DecimalFormat("#,###");
 
-        String path = "D:\\PRO1041_DuAn1\\PDF\\" + "Thongkesoluong" + ".pdf";
+        String path = "C:\\PDF\\" + "Thongkesoluong" + ".pdf";
         PdfWriter pdfWriter = new PdfWriter(path);
         PdfDocument pdfDocument = new PdfDocument(pdfWriter);
         pdfDocument.setDefaultPageSize(PageSize.A4);
@@ -181,7 +181,7 @@ public class ThongKeSoLuongView extends javax.swing.JPanel {
         img2.setOpacity(0.2f);
         document.add(img2);
 
-        String imgPath2 = "D:\\PRO1041_DuAn1\\ChartImage\\ChartHD.png";
+        String imgPath2 = "C:\\ChartImage\\ChartHD.png";
         ImageData imgData2 = ImageDataFactory.create(imgPath2);
         Image img3 = new Image(imgData2);
         img3.setHeight(300);
@@ -189,7 +189,7 @@ public class ThongKeSoLuongView extends javax.swing.JPanel {
         img3.setFixedPosition(60, 400f);
         document.add(img3);
 
-        String imgPath3 = "D:\\PRO1041_DuAn1\\ChartImage\\ChartTop.png";
+        String imgPath3 = "C:\\ChartImage\\ChartTop.png";
         ImageData imgData3 = ImageDataFactory.create(imgPath3);
         Image img4 = new Image(imgData3);
         img4.setHeight(300);
@@ -449,27 +449,34 @@ public class ThongKeSoLuongView extends javax.swing.JPanel {
 
     private void btnTimKiemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTimKiemMouseClicked
         // TODO add your handling code here:
-        ThongKeSLRepository repo = new ThongKeSLRepository();
+        ThongKeSoLuongRepository repo = new ThongKeSoLuongRepository();
         Date ngayBd = txtNgayBd.getDate();
         Date ngayKt = txtNgayKT.getDate();
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+
         List<HoaDonChiTiet> listTKBD = service.getListTKBieuDoHD(txtNgayBd.getDate(), txtNgayKT.getDate());
         if (listTKBD != null) {
             for (HoaDonChiTiet chiTietHoaDon : listTKBD) {
                 dataset.addValue(chiTietHoaDon.getHD().getSoLuongHoaDon(), "Hóa đơn",
                         chiTietHoaDon.getHD().getNgayTao());
             }
+            JFreeChart lineChart = ChartFactory.createLineChart("Biểu đồ thống kê tổng số hóa đơn".toUpperCase(),
+                    "Ngày", "Hóa đơn", dataset, PlotOrientation.VERTICAL,
+                    true, true, false);
+            ChartPanel chartPanel = new ChartPanel(lineChart);
+            chartPanel.setPreferredSize(new Dimension(650, 236));
+            panelChartHoaDon.removeAll();
+            panelChartHoaDon.setLayout(new CardLayout());
+            panelChartHoaDon.add(chartPanel);
+            panelChartHoaDon.validate();
+            panelChartHoaDon.repaint();
+            try {
+                final ChartRenderingInfo info1 = new ChartRenderingInfo(new StandardEntityCollection());
+                final File file1 = new File("F:\\FPT Polytechnic\\DA1\\PRO1041_DuAn1\\ChartImage\\ChartHD.png");
+                ChartUtilities.saveChartAsPNG(file1, lineChart, 859, 236, info1);
+            } catch (Exception e) {
+            }
         }
-        JFreeChart lineChart = ChartFactory.createLineChart("Biểu đồ thống kê tổng số hóa đơn".toUpperCase(),
-                "Ngày", "Hóa đơn", dataset, PlotOrientation.VERTICAL,
-                true, true, false);
-        ChartPanel chartPanel = new ChartPanel(lineChart);
-        chartPanel.setPreferredSize(new Dimension(650, 236));
-        panelChartHoaDon.removeAll();
-        panelChartHoaDon.setLayout(new CardLayout());
-        panelChartHoaDon.add(chartPanel);
-        panelChartHoaDon.validate();
-        panelChartHoaDon.repaint();
     }//GEN-LAST:event_btnTimKiemMouseClicked
 
     private void panelChartHoaDonKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_panelChartHoaDonKeyReleased
@@ -484,7 +491,7 @@ public class ThongKeSoLuongView extends javax.swing.JPanel {
         // TODO add your handling code here:
         SendEmailView sendEmail = new SendEmailView();
         sendEmail.setVisible(true);
-        
+
     }//GEN-LAST:event_btnGuiEmailActionPerformed
 
 

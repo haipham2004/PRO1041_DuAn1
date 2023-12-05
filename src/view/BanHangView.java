@@ -114,6 +114,9 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
     private void initWebcam() {
         Dimension size = WebcamResolution.QVGA.getSize();
         webcam = Webcam.getWebcams().get(0); // 0 is default webcam
+        if (webcam.isOpen()) {
+            webcam.close();
+        }
         webcam.setViewSize(size);
         if (webcam.isOpen()) {
             webcam.close();
@@ -453,6 +456,7 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
         Double sum = fillDonHang();
         Double tongTien;
         List<Events> list = serviceKM.getActive3(sum);
+        System.out.println(list.size());
         if (list.isEmpty()) {
             txtTongTienBH2.setText(phanCach(sum));
             txtTenEV.setText("");
@@ -463,9 +467,11 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
             if (list.get(0).isHinhThuc()) {
                 tongTien = sum - Double.valueOf(giuSo(list.get(0).getMucGiamGia()));
                 txtTongTienBH2.setText(phanCach(tongTien));
+                System.out.println(list.get(0));
             } else {
                 tongTien = sum * (1 - (Double.valueOf(giuSo(list.get(0).getMucGiamGia())) / 100));
                 txtTongTienBH2.setText(phanCach(tongTien));
+                System.out.println(list.get(0));
             }
         } else {
             Double giamPhanTram = Double.valueOf(giuSo(list.get(0).getMucGiamGia())) / 100 * sum;
@@ -1192,6 +1198,8 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
                 serviceHD.them(hd);
                 serviceHDCT.insert(serviceHDCT.getJoHang2(tblGioHang, hd));
                 pdf.genPDF(serviceHDCT.getJoHang(tblGioHang), hd, tong, tongSau, dua, tra);
+                fillTableHDC(serviceHD.getHoaDonCho());
+                molGH.setRowCount(0);
 
             } catch (IOException ex) {
                 Logger.getLogger(BanHangView.class.getName()).log(Level.SEVERE, null, ex);

@@ -573,14 +573,15 @@ public class SanPhamView extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12)
-                .addGroup(pnlSanPhamLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnThemSP)
-                    .addComponent(btnSuaSP)
-                    .addComponent(btnQuayLai)
-                    .addComponent(btnClearSP)
-                    .addComponent(btnXuatFile)
-                    .addComponent(btnNhapFile)
-                    .addComponent(btnCTSP))
+                .addGroup(pnlSanPhamLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnXuatFile, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(pnlSanPhamLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnThemSP)
+                        .addComponent(btnSuaSP)
+                        .addComponent(btnQuayLai)
+                        .addComponent(btnClearSP)
+                        .addComponent(btnNhapFile)
+                        .addComponent(btnCTSP)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlSP, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(174, Short.MAX_VALUE))
@@ -729,7 +730,7 @@ public class SanPhamView extends javax.swing.JPanel {
         FileInputStream excelFIS = null;
         BufferedInputStream excelBIS = null;
         XSSFWorkbook excelImportToJTable = null;
-        String defaultCurrentDirectoryPath = "D:\\PRO1041_DuAn1\\Excel";
+        String defaultCurrentDirectoryPath = "D:\\PRO1041_DuAn1\\Excel\\";
         JFileChooser excelFileChooser = new JFileChooser(defaultCurrentDirectoryPath);
         excelFileChooser.setDialogTitle("Select Excel File");
         FileNameExtensionFilter fnef = new FileNameExtensionFilter("EXCEL FILES", "xls", "xlsx", "xlsm");
@@ -794,7 +795,7 @@ public class SanPhamView extends javax.swing.JPanel {
         BufferedOutputStream excelBOU = null;
         XSSFWorkbook excelJtableExporter;
 
-        JFileChooser excel = new JFileChooser("D:\\PRO1041_DuAn1\\Excel");
+        JFileChooser excel = new JFileChooser("D:\\PRO1041_DuAn1\\Excel\\");
         excel.setDialogTitle("Save as");
         FileNameExtensionFilter file = new FileNameExtensionFilter("EXCEL FILE", "xls", "xlsx", "xlsm");
         excel.setFileFilter(file);

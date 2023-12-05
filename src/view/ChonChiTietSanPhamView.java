@@ -148,6 +148,11 @@ public class ChonChiTietSanPhamView extends javax.swing.JPanel {
                 btnChonHoaDonMouseClicked(evt);
             }
         });
+        btnChonHoaDon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnChonHoaDonActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel2.setText("Danh sách chi tiết sản phẩm");
@@ -528,6 +533,10 @@ public class ChonChiTietSanPhamView extends javax.swing.JPanel {
         cboLocKich.setSelectedIndex(-1);
         cboLocMau.setSelectedIndex(-1);
     }//GEN-LAST:event_btnResetMouseClicked
+
+    private void btnChonHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChonHoaDonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnChonHoaDonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
