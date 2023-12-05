@@ -154,14 +154,16 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
                 indexHoaDonCho = tblHoaDonCho.getSelectedRow();
 //                if (indexHoaDonCho == -1) {
 //                    JOptionPane.showMessageDialog(this, "Vui lòng Tạo hoá đơn");
-//                } else {
+//                    break;
+//                } 
                 List<ChiTietSanPham> list = serviceCTSP.getList(result.getText());
                 txtTest.setText(result.getText());
                 int indexs = tblChiTietSanPham.getSelectedRow();
                 int indexGioHang = -1;
 //                if (!serviceCTSP.checkMaQR(result.getText())) {
 //                    JOptionPane.showMessageDialog(this, "Mã QR không tồn tại");
-//                    return;
+//                    break;
+//                }
 //                }else{
 //                    if(serviceCTSP.checkMaQR(result.getText())){
 //                        System.out.println("hihi");
@@ -184,8 +186,8 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
                             maFake = chiTietSanPham.getMaChiTietSanPham();
                             soLuongFake = Integer.parseInt(input);
                             if (soLuongFake > chiTietSanPham.getSoLuong()) {
-                                JOptionPane.showMessageDialog(this, "Số lượng không đủ");
-                                return;
+                                JOptionPane.showMessageDialog(this, "Số lượng tồn không đủ, vui lòng nhập lại");
+                                break;
                             }
 
                             soLuongTonFake = chiTietSanPham.getSoLuong() - soLuongFake;
@@ -212,7 +214,7 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
                                 int soLuongHienTai = Integer.parseInt(tblGioHang.getValueAt(indexGioHang, 1).toString());
                                 int soLuonngSauKhiThem = soLuongHienTai + Integer.parseInt(input);
                                 if (soLuonngSauKhiThem > chiTietSanPham.getSoLuong()) {
-                                    JOptionPane.showMessageDialog(this, "Số lượng không đủ ạ");
+                                    JOptionPane.showMessageDialog(this, "Số lượng tồn không đủ, vui lòng nhập lại");
                                     return;
                                 }
                                 tblGioHang.setValueAt(soLuonngSauKhiThem, indexGioHang, 1);
@@ -320,8 +322,6 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
             soTrangCTSP = tongBanGhiCTSP / 5 + 1;
         }
         lbSoTrang2.setText(trangCTSP + " of " + soTrangCTSP);
-        System.out.println("Số trang: " + soTrangCTSP);
-        System.out.println("Số bản ghi: " + tongBanGhiCTSP);
         fillTableChiTietSanPham(serviceCTSP.listPageCTSP2(trangCTSP));
     }
 
@@ -1015,7 +1015,7 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
                 int soLuongMua = Integer.parseInt(input);
                 int soLuongTon = Integer.parseInt(tblChiTietSanPham.getValueAt(indexs, 1).toString());
                 if (soLuongMua > soLuongTon) {
-                    JOptionPane.showMessageDialog(this, "Số lượng không đủ");
+                    JOptionPane.showMessageDialog(this, "Số lượng tồn không đủ, vui lòng nhập lại");
                     return;
                 } else if (soLuongMua < 1) {
                     JOptionPane.showMessageDialog(this, "Số lượng không hợp lệ, vui lòng nhập lại");
