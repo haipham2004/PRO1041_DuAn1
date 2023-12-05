@@ -1161,10 +1161,6 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
     }//GEN-LAST:event_btnQRActionPerformed
 
     private void btnThanhToanBH2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThanhToanBH2ActionPerformed
-        if (tblGioHang.getRowCount() == 0) {
-            JOptionPane.showMessageDialog(this, "Giỏ hàng đang trống");
-            return;
-        }
         if (txtTienThuaBH2.getText().contains("-")) {
             JOptionPane.showMessageDialog(this, "Số tiền được nhập không đủ để thanh toán");
             return;
