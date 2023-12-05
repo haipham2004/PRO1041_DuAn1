@@ -251,11 +251,11 @@ public class KhuyenMaiRepository {
                 Double giam = Double.valueOf(ev.getMucGiamGia()) / 100;
                 luongGia *= (1 - giam);
             }
-            
+
             if (list.isEmpty()) {
                 return null;
             }
-            String giamGia = String.valueOf(Math.round((1 - luongGia)*100));
+            String giamGia = String.valueOf(Math.round((1 - luongGia) * 100));
             newEV = new Events(maEV, null, true, giamGia, null, null, null, true, true, null);
         } catch (Exception e) {
             e.printStackTrace();
@@ -263,12 +263,17 @@ public class KhuyenMaiRepository {
         }
         return newEV;
     }
+
     public List<Events> getActive3(Double so) {
         List<Events> list = new ArrayList<>();
         try {
             con = DBConnect.getConnection();
-            sql = "SELECT top 1 *FROM Events where HinhThuc = 0 and TrangThai = 1 and CAST(DieuKienTongTien AS INT) < ? order by MucGiamGia desc "
-                    + "SELECT top 1 *FROM Events where HinhThuc = 1 and TrangThai = 1 and CAST(DieuKienTongTien AS INT) < ? order by MucGiamGia desc";
+            sql = "SELECT * FROM ( SELECT Top 1 * FROM Events WHERE HinhThuc = 0 AND TrangThai = 1 AND CAST(DieuKienTongTien AS INT) < ? ORDER BY MucGiamGia DESC) AS A \n"
+                    + "                UNION \n"
+                    + "                SELECT * FROM ( \n"
+                    + "                SELECT TOP 1 * FROM Events WHERE HinhThuc = 1 AND TrangThai = 1 AND CAST(DieuKienTongTien AS INT) < ? \n"
+                    + "                ORDER BY MucGiamGia DESC\n"
+                    + "                ) AS B";
             ps = con.prepareStatement(sql);
             ps.setObject(1, so);
             ps.setObject(2, so);
@@ -286,6 +291,7 @@ public class KhuyenMaiRepository {
         }
         return list;
     }
+
     public Events searchTen(String ten) {
         Events ev = null;
         try {
