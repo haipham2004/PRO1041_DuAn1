@@ -32,7 +32,6 @@ public class HoaDonChiTietReposotpry {
     ResultSet rs = null;
     String sql = null;
 
-
     public List<HoaDonChiTiet> getJoHang(JTable table) {
         List<HoaDonChiTiet> list = new ArrayList<>();
         int soCot = table.getRowCount();
@@ -103,7 +102,7 @@ public class HoaDonChiTietReposotpry {
                     ChiTietSanPham ctsp = new ChiTietSanPham(rs.getString(1), sp,
                             ms, cl, kt, rs.getInt(10), rs.getDouble(11), rs.getBoolean(12));
 //                    HoaDon hd = BHView.getFormBH();
-                    HoaDonChiTiet hdct = new HoaDonChiTiet(ctsp.getMaChiTietSanPham() + hd.getMaHoaDon(), ctsp, hd, soLuong, gia, null, true);
+                    HoaDonChiTiet hdct = new HoaDonChiTiet(hd.getMaHoaDon() + ctsp.getMaChiTietSanPham(), ctsp, hd, soLuong, gia, null, true);
                     list.add(hdct);
                 }
             }
@@ -164,9 +163,9 @@ public class HoaDonChiTietReposotpry {
             ps = con.prepareStatement(sql);
             ps.setObject(1, maHD);
             rs = ps.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 HoaDon hd = new HoaDon(rs.getString(1));
-                SanPham sp = new SanPham(rs.getString(6),rs.getString(7));
+                SanPham sp = new SanPham(rs.getString(6), rs.getString(7));
                 ChiTietSanPham ctsp = new ChiTietSanPham(rs.getString(5), sp);
                 HoaDonChiTiet hdct = new HoaDonChiTiet(rs.getString(2), ctsp, hd, rs.getInt(3), rs.getDouble(4));
                 listHDCT.add(hdct);
@@ -177,8 +176,8 @@ public class HoaDonChiTietReposotpry {
         }
         return listHDCT;
     }
-    
-    public int updateTrangThaiSangDoiHang(String MaHDCT){
+
+    public int updateTrangThaiSangDoiHang(String MaHDCT) {
         try {
             sql = "Update HoaDonChiTiet set TrangThai = 1 where MaHoaDonChiTiet = ?";
             con = DBConnect.getConnection();
@@ -190,8 +189,8 @@ public class HoaDonChiTietReposotpry {
             return 0;
         }
     }
-    
-    public int updateTrangThaiSangDaThanhToan(String MaHD){
+
+    public int updateTrangThaiSangDaThanhToan(String MaHD) {
         try {
             sql = "Update HoaDonChiTiet set TrangThai = 0 where MaHoaDon = ?";
             con = DBConnect.getConnection();
@@ -203,8 +202,8 @@ public class HoaDonChiTietReposotpry {
             return 0;
         }
     }
-    
-    public int getSoLuongFromHDCT(String maHDCT){
+
+    public int getSoLuongFromHDCT(String maHDCT) {
         int soLuong = 0;
         try {
             sql = "Select SoLuong From HoaDonChiTiet where MaHoaDonChiTiet = ?";
@@ -212,7 +211,7 @@ public class HoaDonChiTietReposotpry {
             ps = con.prepareStatement(sql);
             ps.setObject(1, maHDCT);
             rs = ps.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 soLuong = rs.getInt(1);
             }
             return soLuong;
