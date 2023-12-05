@@ -45,6 +45,7 @@ public class ThuocTinhView extends javax.swing.JPanel {
         loadPageKT();
         rdConhang2.setSelected(true);
         loadCboChatLieu(serviceCl.getAll());
+       
         cboMS.setSelectedIndex(-1);
         cboKT.setSelectedIndex(-1);
     }
@@ -720,10 +721,21 @@ public class ThuocTinhView extends javax.swing.JPanel {
 
     private void btnClearThuocTinhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearThuocTinhActionPerformed
         // TODO add your handling code here:
+        int index = pnlThuocTinh.getSelectedIndex();
+        if (index == 0) {
+            loadPageCL();
+        } else if (index == 1) {
+            loadPageMS();
+        } else {
+            loadPageKT();
+        }
         txtTenMa.setEnabled(true);
         txtTenMa.setText("");
         txtTenThuocTinh.setText("");
         btnThemThuocTinh.setEnabled(true);
+        cboCL.setSelectedIndex(-1);
+        cboMS.setSelectedIndex(-1);
+        cboKT.setSelectedIndex(-1);
     }//GEN-LAST:event_btnClearThuocTinhActionPerformed
 
     private void btnDauTTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDauTTActionPerformed
@@ -850,11 +862,7 @@ public class ThuocTinhView extends javax.swing.JPanel {
         try {
             int indexs = pnlThuocTinh.getSelectedIndex();
             if (indexs == 0) {
-                //        cboCL.setSelectedIndex(-1);
-//        cboMS.setSelectedIndex(-1);
-//        cboKT.setSelectedIndex(-1);
                 ChatLieu cl = (ChatLieu) cbxChatLieu.getSelectedItem();
-                loadCboChatLieu(serviceCl.getAll());
                 String cls = cl.toString();
                 fillChatLieu(serviceCl.getList(cls));
             }
@@ -865,14 +873,13 @@ public class ThuocTinhView extends javax.swing.JPanel {
 
     private void btnQuayLaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuayLaiActionPerformed
         // TODO add your handling code here:
-        int indexs = pnlThuocTinh.getSelectedIndex();
-        if (indexs == 0) {
+        int index = pnlThuocTinh.getSelectedIndex();
+        if (index == 0) {
             loadPageCL();
-        } else if (indexs == 1) {
+        } else if (index == 1) {
             loadPageMS();
         } else {
             loadPageKT();
-
         }
     }//GEN-LAST:event_btnQuayLaiActionPerformed
 
@@ -882,7 +889,6 @@ public class ThuocTinhView extends javax.swing.JPanel {
             int indexs = pnlThuocTinh.getSelectedIndex();
             if (indexs == 1) {
                 MauSac ms = (MauSac) cbxMauSac.getSelectedItem();
-                loadCboMauSac(serviceMS.getAll());
                 String mss = ms.toString();
                 fillMauSac(serviceMS.getList(mss));
             }
@@ -896,7 +902,6 @@ public class ThuocTinhView extends javax.swing.JPanel {
             int indexs = pnlThuocTinh.getSelectedIndex();
             if (indexs == 2) {
                 KichThuoc kt = (KichThuoc) cbxKichThuoc.getSelectedItem();
-                loadCboxKichThuoc(serviceKT.getAll());
                 String kts = kt.toString();
                 fillKichThuoc(serviceKT.getList(kts));
             }
@@ -919,7 +924,7 @@ public class ThuocTinhView extends javax.swing.JPanel {
         } else {
             loadCboxKichThuoc(serviceKT.getAll());
             cboMS.setSelectedIndex(-1);
-            cboKT.setSelectedIndex(-1);
+            cboCL.setSelectedIndex(-1);
         }
     }//GEN-LAST:event_btnResetActionPerformed
 

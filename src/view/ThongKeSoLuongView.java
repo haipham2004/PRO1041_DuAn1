@@ -87,7 +87,7 @@ import static view.ChiTietSanPhamView.createStyleForHeader;
  *
  * @author Admin
  */
-public class ThongKeSLView extends javax.swing.JPanel {
+public class ThongKeSoLuongView extends javax.swing.JPanel {
 
     DefaultTableModel defaultTableModel = new DefaultTableModel();
     ThongKeSLServiceImp service = new ThongKeSLServiceImp();
@@ -96,7 +96,7 @@ public class ThongKeSLView extends javax.swing.JPanel {
     /**
      * Creates new form ThongKeView
      */
-    public ThongKeSLView() {
+    public ThongKeSoLuongView() {
         initComponents();
         this.setSize(1300, 755);
         setDataToChart(panelChartHoaDon);
@@ -442,7 +442,7 @@ public class ThongKeSLView extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Xuất PDF thành công");
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(this, "Xuất PDF không thành công");
-            Logger.getLogger(ThongKeSLView.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ThongKeSoLuongView.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }//GEN-LAST:event_btnXuatPDFActionPerformed

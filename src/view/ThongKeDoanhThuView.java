@@ -46,14 +46,14 @@ import service.servicImp.ThongKeDoanhThuServiceImp;
  *
  * @author Admin
  */
-public class ThongKeDTView extends javax.swing.JPanel {
+public class ThongKeDoanhThuView extends javax.swing.JPanel {
 
     ThongKeDoanhThuServiceImp service = new ThongKeDoanhThuServiceImp();
 
     /**
      * Creates new form VoucherView
      */
-    public ThongKeDTView() {
+    public ThongKeDoanhThuView() {
         initComponents();
         this.setSize(1300, 755);
         setDataToChart(panelTKDT);
@@ -362,7 +362,7 @@ public class ThongKeDTView extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Xuất PDF thành công");
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(this, "Xuất PDF không thành công");
-            Logger.getLogger(ThongKeSLView.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ThongKeSoLuongView.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnXuatPDFActionPerformed
 

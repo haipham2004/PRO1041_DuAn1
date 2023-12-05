@@ -639,11 +639,7 @@ public class SanPhamView extends javax.swing.JPanel {
 
     private void cboLocLSPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cboLocLSPMouseClicked
         // TODO add your handling code here:
-        LoaiSanPham lsp = (LoaiSanPham) cbxLoaiSanPhamLoc.getSelectedItem();
-        lbSoTrang.setText(trangSP + " of " + soTrangSP);
-        String name = lsp.toString();
-        loadPageSP();
-        fillTableSamPham(serviceSP.getList(name));
+     
 //
 
 
@@ -651,7 +647,11 @@ public class SanPhamView extends javax.swing.JPanel {
 
     private void cboLocLSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboLocLSPActionPerformed
         // TODO add your handling code here:
-
+   LoaiSanPham lsp = (LoaiSanPham) cbxLoaiSanPhamLoc.getSelectedItem();
+        lbSoTrang.setText(trangSP + " of " + soTrangSP);
+        String name = lsp.toString();
+        loadPageSP();
+        fillTableSamPham(serviceSP.getList(name));
 
     }//GEN-LAST:event_cboLocLSPActionPerformed
 

@@ -96,7 +96,7 @@ public class KichThuocRepository {
             conn = DBConnect.getConnection();
             sql = "SELECT*FROM KichThuoc where tenKichThuoc like ?";
             pst = conn.prepareStatement(sql);
-            pst.setObject(1, '%'+name+'%');
+            pst.setObject(1, name);
             rs = pst.executeQuery();
             while (rs.next()) {
                 KichThuoc kt = new KichThuoc(rs.getString(1),

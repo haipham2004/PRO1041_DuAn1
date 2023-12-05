@@ -44,7 +44,7 @@ public class AdamStoreView extends javax.swing.JFrame {
         setSize(1500, 820);
         this.setLocationRelativeTo(null);
         execute(isAdmin);
-        changePanelBody(new ThongKeSLView());
+        changePanelBody(new ThongKeSoLuongView());
     }
 
     public void changePanelBody(JPanel panel) {
@@ -87,14 +87,14 @@ public class AdamStoreView extends javax.swing.JFrame {
         MenuItem menuThongKeDT = new MenuItem(iconDot, "Thống kê doanh thu", new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                changePanelBody(new ThongKeDTView());
+                changePanelBody(new ThongKeDoanhThuView());
             }
         });
 
         MenuItem menuThongKeSL = new MenuItem(iconDot, "Thống kê số lượng", new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                changePanelBody(new ThongKeSLView());
+                changePanelBody(new ThongKeSoLuongView());
             }
         });
         MenuItem menuThongKe3 = new MenuItem(iconDot, "Thống kê khác", new ActionListener() {
