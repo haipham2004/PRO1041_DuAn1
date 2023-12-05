@@ -54,5 +54,13 @@ public class DoiHangServiceImp implements AdamStore<DoiHang, String> {
     public List<DoiHang> getAllDangDoiHang() {
         return repo.getAllDangDoiHang();
     }
+    
+    public int capNhatTrangThai(String maDH){
+        return repo.capNhatTrangThai(maDH);
+    }
+    
+    public int huyDonDoiHang(String maDH){
+        return repo.huyDonDoiHang(maDH);
+    }
 
 }

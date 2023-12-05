@@ -93,5 +93,25 @@ public class ChiTietSanPhamServiceImp implements AdamStore<ChiTietSanPham, Strin
     public List<ChiTietSanPham> getListLoc(String name1, String name2, String name3, String name4) {
         return repo.getListLoc(name1, name2, name3, name4);
     }
+    
+    public List<ChiTietSanPham> listPageCTSPDoiHang(int index, String name ,String tenCL) {
+        return repo.listPageCTSPDoiHang(index, name, tenCL);
+    }
+
+    public List<ChiTietSanPham> getListLocMauSacOrKichThuoc(String name1, String name2, String name3, String name4) {
+        return repo.getListLocMauSacOrKichThuoc(name1, name2, name3, name4);
+    }
+    
+    public String getTenCL(String maCTSP){
+        return repo.getTenCL(maCTSP);
+    }
+    
+    public int tangSoLuong(int soLuong, String maCTSP) {
+        return repo.tangSoLuong(soLuong, maCTSP);
+    }
+    
+    public int giamSoLuong(int soLuong, String maCTSP) {
+        return repo.giamSoLuong(soLuong, maCTSP);
+    }
  
 }

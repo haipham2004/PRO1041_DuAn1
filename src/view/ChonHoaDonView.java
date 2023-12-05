@@ -21,12 +21,13 @@ import service.servicImp.HoaDonServiceImp;
  *
  * @author Admin
  */
-public class ChonHoaDon extends javax.swing.JPanel {
+public class ChonHoaDonView extends javax.swing.JPanel {
 
     DoiHangServiceImp serviceDH = new DoiHangServiceImp();
     HoaDonServiceImp serviceHD = new HoaDonServiceImp();
     DefaultTableModel tblmol = new DefaultTableModel();
     DangNhapView dangNhapView = new DangNhapView();
+    DoiHangView doiHangView = new DoiHangView();
     int indexHoaDon = -1;
     int so = serviceDH.countDoiHang();
     Random random = new Random();
@@ -34,7 +35,7 @@ public class ChonHoaDon extends javax.swing.JPanel {
     /**
      * Creates new form ChonHoaDon
      */
-    public ChonHoaDon() {
+    public ChonHoaDonView() {
         initComponents();
         this.setSize(1300, 755);
         addPlaceHolder(txtTimKiem, "Theo mã hóa đơn");
@@ -50,7 +51,7 @@ public class ChonHoaDon extends javax.swing.JPanel {
             kyTu[i] = chuHoa.charAt(random.nextInt(chuHoa.length()));
             maTuDong += kyTu[i];
         }
-        String maHD = DH + maTuDong + String.format("%04d", so);;
+        String maHD = DH + String.format("%04d", so) + maTuDong;
         return maHD;
     }
 

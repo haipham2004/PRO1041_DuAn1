@@ -109,7 +109,7 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
         txtTongTienBH2.setEnabled(false);
         txtTenEV.setEnabled(false);
         txtMucGiam.setEnabled(false);
-//        initWebcam();
+        initWebcam();
     }
 
     private void initWebcam() {
@@ -487,7 +487,7 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
         Events ev;
         Double sum = fillDonHang();
         List<Events> list = serviceKM.getActive3(sum);
-        if (list == null) {
+        if (list.size() == 0) {
             ev = null;
         } else if (list.size() == 1) {
             ev = list.get(0);

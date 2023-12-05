@@ -23,17 +23,17 @@ public class DoiHangChiTietServiceImp implements AdamStore<DoiHangChiTiet, Strin
 
     @Override
     public int them(DoiHangChiTiet k) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return repo.them(k);
     }
 
     @Override
     public int sua(DoiHangChiTiet k, String e) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return repo.sua(k, e);
     }
 
     @Override
     public int xoa(String e) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return repo.xoa(e);
     }
 
     @Override
@@ -45,7 +45,24 @@ public class DoiHangChiTietServiceImp implements AdamStore<DoiHangChiTiet, Strin
     public List<DoiHangChiTiet> getList(String e) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-     public List<DoiHangChiTiet> getDHCT(String maDoiHang) {
+    
+    public List<DoiHangChiTiet> getDHCT(String maDoiHang) {
         return repo.getDHCT(maDoiHang);
+    }
+    
+    public List<DoiHangChiTiet> getDHCTDangDoi(String maDoiHang) {
+        return repo.getDHCTDangDoi(maDoiHang);
+    }
+    
+    public int countDoiHangChiTiet() {
+        return repo.countDoiHangChiTiet();
+    }
+    
+    public String getMaDHCT(String maHDCT){
+        return repo.getMaDHCT(maHDCT);
+    }
+    
+    public int capNhatTrangThai(String maDH){
+        return repo.capNhatTrangThai(maDH);
     }
 }

@@ -11,7 +11,7 @@ package model;
 public class DoiHangChiTiet {
     private String maDHCT;
     private DoiHang doiHang;
-    private ChiTietHoaDon chiTietHoaDon;
+    private HoaDonChiTiet hoaDonChiTiet;
     private ChiTietSanPham chiTietSanPham;
     private int soLuong;
     private boolean trangThai;
@@ -26,19 +26,32 @@ public class DoiHangChiTiet {
         this.moTa = moTa;
     }
 
-    public DoiHangChiTiet(String maDHCT, DoiHang doiHang, ChiTietHoaDon chiTietHoaDon, ChiTietSanPham chiTietSanPham, boolean trangThai, String moTa) {
+    public DoiHangChiTiet(String maDHCT, DoiHang doiHang, HoaDonChiTiet hoaDonChiTiet, ChiTietSanPham chiTietSanPham, boolean trangThai, String moTa) {
         this.maDHCT = maDHCT;
         this.doiHang = doiHang;
-        this.chiTietHoaDon = chiTietHoaDon;
+        this.hoaDonChiTiet = hoaDonChiTiet;
         this.chiTietSanPham = chiTietSanPham;
         this.trangThai = trangThai;
         this.moTa = moTa;
     }
-    
-    public DoiHangChiTiet(String maDHCT, DoiHang doiHang, ChiTietHoaDon chiTietHoaDon, ChiTietSanPham chiTietSanPham, int soLuong, boolean trangThai, String moTa) {
+
+    public DoiHangChiTiet(String maDHCT, DoiHang doiHang, HoaDonChiTiet hoaDonChiTiet) {
         this.maDHCT = maDHCT;
         this.doiHang = doiHang;
-        this.chiTietHoaDon = chiTietHoaDon;
+        this.hoaDonChiTiet = hoaDonChiTiet;
+    }
+
+    public DoiHangChiTiet(String maDHCT, ChiTietSanPham chiTietSanPham, int soLuong, String moTa) {
+        this.maDHCT = maDHCT;
+        this.chiTietSanPham = chiTietSanPham;
+        this.soLuong = soLuong;
+        this.moTa = moTa;
+    }
+    
+    public DoiHangChiTiet(String maDHCT, DoiHang doiHang, HoaDonChiTiet hoaDonChiTiet, ChiTietSanPham chiTietSanPham, int soLuong, boolean trangThai, String moTa) {
+        this.maDHCT = maDHCT;
+        this.doiHang = doiHang;
+        this.hoaDonChiTiet = hoaDonChiTiet;
         this.chiTietSanPham = chiTietSanPham;
         this.soLuong = soLuong;
         this.trangThai = trangThai;
@@ -61,12 +74,12 @@ public class DoiHangChiTiet {
         this.doiHang = doiHang;
     }
 
-    public ChiTietHoaDon getChiTietHoaDon() {
-        return chiTietHoaDon;
+    public HoaDonChiTiet getHoaDonChiTiet() {
+        return hoaDonChiTiet;
     }
 
-    public void setChiTietHoaDon(ChiTietHoaDon chiTietHoaDon) {
-        this.chiTietHoaDon = chiTietHoaDon;
+    public void setHoaDonChiTiet(HoaDonChiTiet hoaDonChiTiet) {
+        this.hoaDonChiTiet = hoaDonChiTiet;
     }
 
     public ChiTietSanPham getChiTietSanPham() {
