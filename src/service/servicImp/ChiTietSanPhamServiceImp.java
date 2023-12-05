@@ -118,10 +118,10 @@ public class ChiTietSanPhamServiceImp implements AdamStore<ChiTietSanPham, Strin
         return repo.getListLocCLMS(name1, name2, name3);
     }
     public List<ChiTietSanPham> getListLocMSKT(String name1, String name2,String name3){
-        return repo.getListLocCLMS(name1, name2, name3);
+        return repo.getListLocMSKT(name1, name2, name3);
     }
     public List<ChiTietSanPham> getListLocCLKT(String name1, String name2,String name3){
-        return repo.getListLocCLMS(name1, name2, name3);
+        return repo.getListLocCLKT(name1, name2, name3);
     }
     //
 

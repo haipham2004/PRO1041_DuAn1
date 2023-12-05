@@ -116,9 +116,9 @@ public class KichThuocRepository {
             conn = DBConnect.getConnection();
             sql = "SELECT*FROM KichThuoc\n"
                     + "order by MaKichThuoc DESC\n"
-                    + "OFFSET ? rows fetch next 4 rows only";
+                    + "OFFSET ? rows fetch next 5 rows only";
             pst = conn.prepareStatement(sql);
-            pst.setInt(1, (index - 1) * 4);
+            pst.setInt(1, (index - 1) * 5);
             rs = pst.executeQuery();
             while (rs.next()) {
                 KichThuoc kt = new KichThuoc(rs.getString(1),

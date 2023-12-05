@@ -31,7 +31,7 @@ public class HoaDonChiTietReposotpry {
     Connection con = null;
     ResultSet rs = null;
     String sql = null;
-//    BanHangView BHView = new BanHangView();
+
 
     public List<HoaDonChiTiet> getJoHang(JTable table) {
         List<HoaDonChiTiet> list = new ArrayList<>();
