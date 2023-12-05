@@ -198,7 +198,6 @@ public class PDFGene {
         document.add(new Paragraph("1. Người bán không chịu trách nhiệm với bất kỳ tổn thất trực tiếp hay gián tiếp nào do người mua gây ra.").setFont(font));
         document.add(new Paragraph("2. Thời hạn đổi sản phẩm do lỗi bên phía người bán là bảy (7) ngày kể từ ngày mua.").setFont(font));
 
-        
         document.close();
 
         try {

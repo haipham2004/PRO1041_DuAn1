@@ -1174,6 +1174,7 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
                 serviceHD.them(hd);
                 serviceHDCT.insert(serviceHDCT.getJoHang2(tblGioHang, hd));
                 pdf.genPDF(serviceHDCT.getJoHang(tblGioHang), hd, tong, tongSau, dua, tra);
+                
             } catch (IOException ex) {
                 Logger.getLogger(BanHangView.class.getName()).log(Level.SEVERE, null, ex);
             }

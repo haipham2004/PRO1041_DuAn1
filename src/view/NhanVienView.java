@@ -710,6 +710,11 @@ public class NhanVienView extends javax.swing.JPanel {
         jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder("Bộ lọc"));
 
         cboGioiTinh.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Giới tính"));
+        cboGioiTinh.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cboGioiTinhMouseClicked(evt);
+            }
+        });
         cboGioiTinh.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cboGioiTinhActionPerformed(evt);
@@ -1202,6 +1207,10 @@ public class NhanVienView extends javax.swing.JPanel {
     private void txtCCCDKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCCCDKeyReleased
         noText(evt, txtCCCD);
     }//GEN-LAST:event_txtCCCDKeyReleased
+
+    private void cboGioiTinhMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cboGioiTinhMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cboGioiTinhMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

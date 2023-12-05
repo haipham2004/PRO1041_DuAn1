@@ -125,8 +125,8 @@ public class ChiTietSanPhamRepository {
             return 0;
         }
     }
-
-    public List<ChiTietSanPham> getList(String name) {
+    
+     public List<ChiTietSanPham> getList(String name) {
         List<ChiTietSanPham> listChiTietSanPham3 = new ArrayList<>();
         try {
             conn = DBConnect.getConnection();
@@ -155,6 +155,7 @@ public class ChiTietSanPhamRepository {
         }
         return listChiTietSanPham3;
     }
+
 
     public List<ChiTietSanPham> getListLoc(String name1, String name2, String name3, String name4) {
         List<ChiTietSanPham> listChiTietSanPham4 = new ArrayList<>();
@@ -189,7 +190,198 @@ public class ChiTietSanPhamRepository {
         return listChiTietSanPham4;
     }
 
-    public List<ChiTietSanPham> getListGia(double giaMin, double giaMax,String name) {
+    //
+    public List<ChiTietSanPham> getListLocCL(String name1, String name2) {
+        List<ChiTietSanPham> listChiTietSanPham4 = new ArrayList<>();
+        try {
+            conn = DBConnect.getConnection();
+            sql = "SELECT CTSP.MaCTSP,CTSP.MaSanPham,SP.TenSanPham,MS.MaMauSac,MS.TenMauSac,CL.MaChatLieu,CL.TenChatLieu,\n"
+                    + "KT.MaKichThuoc,KT.TenKichThuoc,CTSP.SoLuong,CTSP.Gia,CTSP.TrangThai\n"
+                    + "FROM ChiTietSanPham CTSP INNER JOIN ChatLieu CL On CL.MaChatLieu=CTSP.MaChatLieu\n"
+                    + "INNER JOIn MauSac MS ON MS.MaMauSac=CTSP.MaMauSac\n"
+                    + "INNER JOIN KichThuoc KT ON KT.MaKichThuoc=CTSP.MaKichThuoc \n"
+                    + "INNER JOIN SanPham SP ON CTSP.MaSanPham=SP.MaSanPham"
+                    + " where SP.TenSanPham like ? and CL.TenChatLieu like ?";
+            pst = conn.prepareStatement(sql);
+            pst.setObject(1, '%' + name1 + '%');
+            pst.setObject(2, '%' + name2 + '%');
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                SanPham sp = new SanPham(rs.getString(2), rs.getString(3));
+                MauSac ms = new MauSac(rs.getString(4), rs.getString(5));
+                ChatLieu cl = new ChatLieu(rs.getString(6), rs.getString(7));
+                KichThuoc kt = new KichThuoc(rs.getString(8), rs.getString(9));
+                ChiTietSanPham ctsp = new ChiTietSanPham(rs.getString(1), sp,
+                        ms, cl, kt, rs.getInt(10), rs.getDouble(11), rs.getBoolean(12));
+                listChiTietSanPham4.add(ctsp);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+        return listChiTietSanPham4;
+    }
+
+    public List<ChiTietSanPham> getListLocMS(String name1, String name2) {
+        List<ChiTietSanPham> listChiTietSanPham4 = new ArrayList<>();
+        try {
+            conn = DBConnect.getConnection();
+            sql = "SELECT CTSP.MaCTSP,CTSP.MaSanPham,SP.TenSanPham,MS.MaMauSac,MS.TenMauSac,CL.MaChatLieu,CL.TenChatLieu,\n"
+                    + "KT.MaKichThuoc,KT.TenKichThuoc,CTSP.SoLuong,CTSP.Gia,CTSP.TrangThai\n"
+                    + "FROM ChiTietSanPham CTSP INNER JOIN ChatLieu CL On CL.MaChatLieu=CTSP.MaChatLieu\n"
+                    + "INNER JOIn MauSac MS ON MS.MaMauSac=CTSP.MaMauSac\n"
+                    + "INNER JOIN KichThuoc KT ON KT.MaKichThuoc=CTSP.MaKichThuoc \n"
+                    + "INNER JOIN SanPham SP ON CTSP.MaSanPham=SP.MaSanPham"
+                    + " where SP.TenSanPham like ? and MS.TenMauSac like ?";
+            pst = conn.prepareStatement(sql);
+            pst.setObject(1, '%' + name1 + '%');
+            pst.setObject(2, '%' + name2 + '%');
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                SanPham sp = new SanPham(rs.getString(2), rs.getString(3));
+                MauSac ms = new MauSac(rs.getString(4), rs.getString(5));
+                ChatLieu cl = new ChatLieu(rs.getString(6), rs.getString(7));
+                KichThuoc kt = new KichThuoc(rs.getString(8), rs.getString(9));
+                ChiTietSanPham ctsp = new ChiTietSanPham(rs.getString(1), sp,
+                        ms, cl, kt, rs.getInt(10), rs.getDouble(11), rs.getBoolean(12));
+                listChiTietSanPham4.add(ctsp);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+        return listChiTietSanPham4;
+    }
+
+    public List<ChiTietSanPham> getListLocKT(String name1, String name2) {
+        List<ChiTietSanPham> listChiTietSanPham4 = new ArrayList<>();
+        try {
+            conn = DBConnect.getConnection();
+            sql = "SELECT CTSP.MaCTSP,CTSP.MaSanPham,SP.TenSanPham,MS.MaMauSac,MS.TenMauSac,CL.MaChatLieu,CL.TenChatLieu,\n"
+                    + "KT.MaKichThuoc,KT.TenKichThuoc,CTSP.SoLuong,CTSP.Gia,CTSP.TrangThai\n"
+                    + "FROM ChiTietSanPham CTSP INNER JOIN ChatLieu CL On CL.MaChatLieu=CTSP.MaChatLieu\n"
+                    + "INNER JOIn MauSac MS ON MS.MaMauSac=CTSP.MaMauSac\n"
+                    + "INNER JOIN KichThuoc KT ON KT.MaKichThuoc=CTSP.MaKichThuoc \n"
+                    + "INNER JOIN SanPham SP ON CTSP.MaSanPham=SP.MaSanPham"
+                    + " where SP.TenSanPham like ? and KT.TenKichThuoc like ?";
+            pst = conn.prepareStatement(sql);
+            pst.setObject(1, '%' + name1 + '%');
+            pst.setObject(2, name2);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                SanPham sp = new SanPham(rs.getString(2), rs.getString(3));
+                MauSac ms = new MauSac(rs.getString(4), rs.getString(5));
+                ChatLieu cl = new ChatLieu(rs.getString(6), rs.getString(7));
+                KichThuoc kt = new KichThuoc(rs.getString(8), rs.getString(9));
+                ChiTietSanPham ctsp = new ChiTietSanPham(rs.getString(1), sp,
+                        ms, cl, kt, rs.getInt(10), rs.getDouble(11), rs.getBoolean(12));
+                listChiTietSanPham4.add(ctsp);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+        return listChiTietSanPham4;
+    }
+
+    public List<ChiTietSanPham> getListLocCLMS(String name1, String name2, String name3) {
+        List<ChiTietSanPham> listChiTietSanPham4 = new ArrayList<>();
+        try {
+            conn = DBConnect.getConnection();
+            sql = "SELECT CTSP.MaCTSP,CTSP.MaSanPham,SP.TenSanPham,MS.MaMauSac,MS.TenMauSac,CL.MaChatLieu,CL.TenChatLieu,\n"
+                    + "KT.MaKichThuoc,KT.TenKichThuoc,CTSP.SoLuong,CTSP.Gia,CTSP.TrangThai\n"
+                    + "FROM ChiTietSanPham CTSP INNER JOIN ChatLieu CL On CL.MaChatLieu=CTSP.MaChatLieu\n"
+                    + "INNER JOIn MauSac MS ON MS.MaMauSac=CTSP.MaMauSac\n"
+                    + "INNER JOIN KichThuoc KT ON KT.MaKichThuoc=CTSP.MaKichThuoc \n"
+                    + "INNER JOIN SanPham SP ON CTSP.MaSanPham=SP.MaSanPham"
+                    + " where SP.TenSanPham like ? and CL.TenChatLieu like ? and MS.TenMauSac like ?";
+            pst = conn.prepareStatement(sql);
+            pst.setObject(1, '%' + name1 + '%');
+            pst.setObject(2, '%' + name2 + '%');
+            pst.setObject(3, '%' + name3 + '%');
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                SanPham sp = new SanPham(rs.getString(2), rs.getString(3));
+                MauSac ms = new MauSac(rs.getString(4), rs.getString(5));
+                ChatLieu cl = new ChatLieu(rs.getString(6), rs.getString(7));
+                KichThuoc kt = new KichThuoc(rs.getString(8), rs.getString(9));
+                ChiTietSanPham ctsp = new ChiTietSanPham(rs.getString(1), sp,
+                        ms, cl, kt, rs.getInt(10), rs.getDouble(11), rs.getBoolean(12));
+                listChiTietSanPham4.add(ctsp);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+        return listChiTietSanPham4;
+    }
+
+    public List<ChiTietSanPham> getListLocMSKT(String name1, String name2, String name3) {
+        List<ChiTietSanPham> listChiTietSanPham4 = new ArrayList<>();
+        try {
+            conn = DBConnect.getConnection();
+            sql = "SELECT CTSP.MaCTSP,CTSP.MaSanPham,SP.TenSanPham,MS.MaMauSac,MS.TenMauSac,CL.MaChatLieu,CL.TenChatLieu,\n"
+                    + "KT.MaKichThuoc,KT.TenKichThuoc,CTSP.SoLuong,CTSP.Gia,CTSP.TrangThai\n"
+                    + "FROM ChiTietSanPham CTSP INNER JOIN ChatLieu CL On CL.MaChatLieu=CTSP.MaChatLieu\n"
+                    + "INNER JOIn MauSac MS ON MS.MaMauSac=CTSP.MaMauSac\n"
+                    + "INNER JOIN KichThuoc KT ON KT.MaKichThuoc=CTSP.MaKichThuoc \n"
+                    + "INNER JOIN SanPham SP ON CTSP.MaSanPham=SP.MaSanPham"
+                    + " where SP.TenSanPham like ?  and MS.TenMauSac like ? and KT.TenKichThuoc like ? ";
+            pst = conn.prepareStatement(sql);
+            pst.setObject(1, '%' + name1 + '%');
+            pst.setObject(2, '%' + name2 + '%');
+            pst.setObject(3, name3);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                SanPham sp = new SanPham(rs.getString(2), rs.getString(3));
+                MauSac ms = new MauSac(rs.getString(4), rs.getString(5));
+                ChatLieu cl = new ChatLieu(rs.getString(6), rs.getString(7));
+                KichThuoc kt = new KichThuoc(rs.getString(8), rs.getString(9));
+                ChiTietSanPham ctsp = new ChiTietSanPham(rs.getString(1), sp,
+                        ms, cl, kt, rs.getInt(10), rs.getDouble(11), rs.getBoolean(12));
+                listChiTietSanPham4.add(ctsp);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+        return listChiTietSanPham4;
+    }
+    
+    public List<ChiTietSanPham> getListLocCLKT(String name1, String name2, String name3) {
+        List<ChiTietSanPham> listChiTietSanPham4 = new ArrayList<>();
+        try {
+            conn = DBConnect.getConnection();
+            sql = "SELECT CTSP.MaCTSP,CTSP.MaSanPham,SP.TenSanPham,MS.MaMauSac,MS.TenMauSac,CL.MaChatLieu,CL.TenChatLieu,\n"
+                    + "KT.MaKichThuoc,KT.TenKichThuoc,CTSP.SoLuong,CTSP.Gia,CTSP.TrangThai\n"
+                    + "FROM ChiTietSanPham CTSP INNER JOIN ChatLieu CL On CL.MaChatLieu=CTSP.MaChatLieu\n"
+                    + "INNER JOIn MauSac MS ON MS.MaMauSac=CTSP.MaMauSac\n"
+                    + "INNER JOIN KichThuoc KT ON KT.MaKichThuoc=CTSP.MaKichThuoc \n"
+                    + "INNER JOIN SanPham SP ON CTSP.MaSanPham=SP.MaSanPham"
+                    + " where SP.TenSanPham like ?  and CL.TenChatLieu like ? and KT.TenKichThuoc like ? ";
+            pst = conn.prepareStatement(sql);
+            pst.setObject(1, '%' + name1 + '%');
+            pst.setObject(2, '%' + name2 + '%');
+            pst.setObject(3, name3);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                SanPham sp = new SanPham(rs.getString(2), rs.getString(3));
+                MauSac ms = new MauSac(rs.getString(4), rs.getString(5));
+                ChatLieu cl = new ChatLieu(rs.getString(6), rs.getString(7));
+                KichThuoc kt = new KichThuoc(rs.getString(8), rs.getString(9));
+                ChiTietSanPham ctsp = new ChiTietSanPham(rs.getString(1), sp,
+                        ms, cl, kt, rs.getInt(10), rs.getDouble(11), rs.getBoolean(12));
+                listChiTietSanPham4.add(ctsp);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+        return listChiTietSanPham4;
+    }
+
+    //
+    public List<ChiTietSanPham> getListGia(double giaMin, double giaMax, String name) {
         List<ChiTietSanPham> listChiTietSanPham2 = new ArrayList<>();
         try {
             conn = DBConnect.getConnection();
@@ -202,7 +394,7 @@ public class ChiTietSanPhamRepository {
             pst = conn.prepareStatement(sql);
             pst.setObject(1, giaMin);
             pst.setObject(2, giaMax);
-             pst.setObject(3, name);
+            pst.setObject(3, name);
             rs = pst.executeQuery();
             while (rs.next()) {
                 SanPham sp = new SanPham(rs.getString(2), rs.getString(3));
