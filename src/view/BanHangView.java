@@ -447,6 +447,7 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
         Double sum = fillDonHang();
         Double tongTien;
         List<Events> list = serviceKM.getActive3(sum);
+        System.out.println(list.size());
         if (list.isEmpty()) {
             txtTongTienBH2.setText(phanCach(sum));
             txtTenEV.setText("");
@@ -457,9 +458,11 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
             if (list.get(0).isHinhThuc()) {
                 tongTien = sum - Double.valueOf(giuSo(list.get(0).getMucGiamGia()));
                 txtTongTienBH2.setText(phanCach(tongTien));
+                System.out.println(list.get(0));
             } else {
                 tongTien = sum * (1 - (Double.valueOf(giuSo(list.get(0).getMucGiamGia())) / 100));
                 txtTongTienBH2.setText(phanCach(tongTien));
+                System.out.println(list.get(0));
             }
         } else {
             Double giamPhanTram = Double.valueOf(giuSo(list.get(0).getMucGiamGia())) / 100 * sum;
@@ -1158,6 +1161,10 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
     }//GEN-LAST:event_btnQRActionPerformed
 
     private void btnThanhToanBH2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThanhToanBH2ActionPerformed
+        if (tblGioHang.getRowCount() == 0) {
+            JOptionPane.showMessageDialog(this, "Giỏ hàng đang trống");
+            return;
+        }
         if (txtTienThuaBH2.getText().contains("-")) {
             JOptionPane.showMessageDialog(this, "Số tiền được nhập không đủ để thanh toán");
             return;
@@ -1173,7 +1180,8 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
                 serviceHD.them(hd);
                 serviceHDCT.insert(serviceHDCT.getJoHang2(tblGioHang, hd));
                 pdf.genPDF(serviceHDCT.getJoHang(tblGioHang), hd, tong, tongSau, dua, tra);
-                
+                fillTableHDC(serviceHD.getHoaDonCho());
+                molGH.setRowCount(0);
             } catch (IOException ex) {
                 Logger.getLogger(BanHangView.class.getName()).log(Level.SEVERE, null, ex);
             }
