@@ -86,13 +86,15 @@ public class NhanVienView extends javax.swing.JPanel {
             }
         });
     }
-    public void noText(java.awt.event.KeyEvent evt, JTextField x){
+
+    public void noText(java.awt.event.KeyEvent evt, JTextField x) {
         char c = evt.getKeyChar();
         if (!(Character.isDigit(c) || (c == KeyEvent.VK_DELETE))) {
             String txt = x.getText().replaceAll("[^\\d]", "");
             x.setText(txt);
         }
     }
+
     public String maTangTuDong(String x) {
         int so = serviceNV.tongBanGhi(-1);
         String maHD = x + String.format("%04d", so);;
@@ -173,6 +175,22 @@ public class NhanVienView extends javax.swing.JPanel {
             return false;
         } else if (!txtCCCD.getText().trim().matches(CCCDVali)) {
             JOptionPane.showMessageDialog(this, "Định dạng số căn cước nhân dân");
+            return false;
+        }
+        if (txtNgayVaoLam.getDate() == null) {
+            JOptionPane.showMessageDialog(this, "Ngày vào làm trống");
+            return false;
+        }
+        if (!rdoNam.isSelected() && !rdoNu.isSelected()) {
+            JOptionPane.showMessageDialog(this, "Chưa chọn giới tính");
+            return false;
+        }
+        if (!rdoDangLamViec.isSelected() && !rdoNghiViec.isSelected()) {
+            JOptionPane.showMessageDialog(this, "Chưa chọn trạng thái");
+            return false;
+        }
+        if (!rdoQL.isSelected() && !rdoNV.isSelected()) {
+            JOptionPane.showMessageDialog(this, "Chưa chọn chức vụ");
             return false;
         }
         return true;
@@ -292,10 +310,11 @@ public class NhanVienView extends javax.swing.JPanel {
         }
         return new NhanVien(maNV, tk, hoTen, gt, diaChi, sdt, cccd, ngayVaoLam, trangThai, anh);
     }
+
     public TaiKhoan getFormTK() {
         String maTK = txtMaTK.getText();
         String userName = util.GetUserName.gene(txtHoTen.getText());
-        while (serviceNV.timTheoUserName(userName)!=null) {
+        while (serviceNV.timTheoUserName(userName) != null) {
             userName = util.GetUserName.gene(txtHoTen.getText());
         }
         String pass = "123456";
@@ -308,6 +327,7 @@ public class NhanVienView extends javax.swing.JPanel {
         Boolean trangThai = rdoDangLamViec.isSelected() ? true : false;
         return new TaiKhoan(maTK, userName, pass, role, trangThai);
     }
+
     public TaiKhoan getFormTK2() {
         String maTK = txtMaTK.getText();
         String role;
@@ -378,7 +398,8 @@ public class NhanVienView extends javax.swing.JPanel {
             return "CCCD";
         }
     }
-    public void moi(){
+
+    public void moi() {
         txtNgayVaoLam.setDate(null);
         txtMaNV.setText(maTangTuDong("NV"));
         txtMaTK.setText(maTangTuDong("TK"));
@@ -437,8 +458,6 @@ public class NhanVienView extends javax.swing.JPanel {
         btnMoiNV = new javax.swing.JButton();
         lblAnhNV = new javax.swing.JLabel();
         txtNgayVaoLam = new com.toedter.calendar.JDateChooser();
-        btnImpExcel = new javax.swing.JButton();
-        btnExpExcel = new javax.swing.JButton();
         jLabel38 = new javax.swing.JLabel();
         rdoNV = new javax.swing.JRadioButton();
         rdoQL = new javax.swing.JRadioButton();
@@ -539,10 +558,6 @@ public class NhanVienView extends javax.swing.JPanel {
             }
         });
 
-        btnImpExcel.setText("Nhập Excel");
-
-        btnExpExcel.setText("Xuất Excel");
-
         jLabel38.setText("Chức vụ");
 
         buttonGroup1.add(rdoNV);
@@ -593,11 +608,7 @@ public class NhanVienView extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addComponent(btnSuaNV)
                         .addGap(18, 18, 18)
-                        .addComponent(btnMoiNV)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnImpExcel)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnExpExcel))
+                        .addComponent(btnMoiNV))
                     .addGroup(jPanel61Layout.createSequentialGroup()
                         .addGap(3, 3, 3)
                         .addGroup(jPanel61Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -701,20 +712,13 @@ public class NhanVienView extends javax.swing.JPanel {
                 .addGroup(jPanel61Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnThemNV)
                     .addComponent(btnSuaNV)
-                    .addComponent(btnMoiNV)
-                    .addComponent(btnImpExcel)
-                    .addComponent(btnExpExcel))
+                    .addComponent(btnMoiNV))
                 .addGap(18, 18, 18))
         );
 
         jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder("Bộ lọc"));
 
         cboGioiTinh.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Giới tính"));
-        cboGioiTinh.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                cboGioiTinhMouseClicked(evt);
-            }
-        });
         cboGioiTinh.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cboGioiTinhActionPerformed(evt);
@@ -1208,17 +1212,11 @@ public class NhanVienView extends javax.swing.JPanel {
         noText(evt, txtCCCD);
     }//GEN-LAST:event_txtCCCDKeyReleased
 
-    private void cboGioiTinhMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cboGioiTinhMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cboGioiTinhMouseClicked
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup btgGioiTinhNV;
     private javax.swing.ButtonGroup btgTrangThaiNV;
-    private javax.swing.JButton btnExpExcel;
     private javax.swing.JButton btnFirst;
-    private javax.swing.JButton btnImpExcel;
     private javax.swing.JButton btnLast;
     private javax.swing.JButton btnMoiNV;
     private javax.swing.JButton btnNext;

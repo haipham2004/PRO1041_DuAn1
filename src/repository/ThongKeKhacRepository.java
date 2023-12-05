@@ -7,7 +7,7 @@ package repository;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import model.ChiTietHoaDon;
+import model.HoaDonChiTiet;
 import model.ChiTietSanPham;
 import model.HoaDon;
 import model.SanPham;
@@ -24,8 +24,8 @@ public class ThongKeKhacRepository {
     ResultSet rs = null;
     String sql = null;
 
-    public List<ChiTietHoaDon> getList1() {
-        List<ChiTietHoaDon> list1 = new ArrayList<>();
+    public List<HoaDonChiTiet> getList1() {
+        List<HoaDonChiTiet> list1 = new ArrayList<>();
         try {
             con = DBConnect.getConnection();
             sql = "SELECT sp.MaSanPham, sp.TenSanPham, ctsp.SoLuong, SUM(hdct.SoLuong)\n"
@@ -39,7 +39,7 @@ public class ThongKeKhacRepository {
             while (rs.next()) {
                 SanPham sp = new SanPham(rs.getString(1), rs.getString(2));
                 ChiTietSanPham ctsp = new ChiTietSanPham(sp, rs.getInt(3));
-                ChiTietHoaDon cthd = new ChiTietHoaDon(ctsp, rs.getInt(4));
+                HoaDonChiTiet cthd = new HoaDonChiTiet(ctsp, rs.getInt(4));
                 list1.add(cthd);
             }
         } catch (Exception e) {
@@ -49,8 +49,8 @@ public class ThongKeKhacRepository {
         return list1;
     }
 
-    public List<ChiTietHoaDon> getListTK1(java.util.Date ngayBd, java.util.Date ngayKt) {
-        List<ChiTietHoaDon> listTK1 = new ArrayList<>();
+    public List<HoaDonChiTiet> getListTK1(java.util.Date ngayBd, java.util.Date ngayKt) {
+        List<HoaDonChiTiet> listTK1 = new ArrayList<>();
         try {
             con = DBConnect.getConnection();
             sql = "SELECT sp.MaSanPham, sp.TenSanPham, ctsp.SoLuong, SUM(hdct.SoLuong)\n"
@@ -67,7 +67,7 @@ public class ThongKeKhacRepository {
             while (rs.next()) {
                 SanPham sp = new SanPham(rs.getString(1), rs.getString(2));
                 ChiTietSanPham ctsp = new ChiTietSanPham(sp, rs.getInt(3));
-                ChiTietHoaDon cthd = new ChiTietHoaDon(ctsp, rs.getInt(4));
+                HoaDonChiTiet cthd = new HoaDonChiTiet(ctsp, rs.getInt(4));
                 listTK1.add(cthd);
             }
         } catch (Exception e) {
@@ -95,8 +95,8 @@ public class ThongKeKhacRepository {
         return listTenSP;
     }
 
-    public List<ChiTietHoaDon> getList2(String tenSP) {
-        List<ChiTietHoaDon> list2 = new ArrayList<>();
+    public List<HoaDonChiTiet> getList2(String tenSP) {
+        List<HoaDonChiTiet> list2 = new ArrayList<>();
         try {
             con = DBConnect.getConnection();
             sql = "SELECT sp.MaSanPham, sp.TenSanPham, ctsp.SoLuong,hd.NgayTao, SUM(hdct.SoLuong)\n"
@@ -113,7 +113,7 @@ public class ThongKeKhacRepository {
                 SanPham sp = new SanPham(rs.getString(1), rs.getString(2));
                 ChiTietSanPham ctsp = new ChiTietSanPham(sp, rs.getInt(3));
                 HoaDon hd = new HoaDon(rs.getDate(4));
-                ChiTietHoaDon cthd = new ChiTietHoaDon(ctsp, hd, rs.getInt(5));
+                HoaDonChiTiet cthd = new HoaDonChiTiet(ctsp, hd, rs.getInt(5));
                 list2.add(cthd);
             }
         } catch (Exception e) {
@@ -123,8 +123,8 @@ public class ThongKeKhacRepository {
         return list2;
     }
 
-    public List<ChiTietHoaDon> getListTK2(String tenSP,java.util.Date ngayBd, java.util.Date ngayKt) {
-        List<ChiTietHoaDon> listTK2 = new ArrayList<>();
+    public List<HoaDonChiTiet> getListTK2(String tenSP,java.util.Date ngayBd, java.util.Date ngayKt) {
+        List<HoaDonChiTiet> listTK2 = new ArrayList<>();
         try {
             con = DBConnect.getConnection();
             sql = "SELECT sp.MaSanPham, sp.TenSanPham, ctsp.SoLuong,hd.NgayTao, SUM(hdct.SoLuong)\n"
@@ -144,7 +144,7 @@ public class ThongKeKhacRepository {
                 SanPham sp = new SanPham(rs.getString(1), rs.getString(2));
                 ChiTietSanPham ctsp = new ChiTietSanPham(sp, rs.getInt(3));
                 HoaDon hd = new HoaDon(rs.getDate(4));
-                ChiTietHoaDon cthd = new ChiTietHoaDon(ctsp, hd, rs.getInt(5));
+                HoaDonChiTiet cthd = new HoaDonChiTiet(ctsp, hd, rs.getInt(5));
                 listTK2.add(cthd);
             }
         } catch (Exception e) {

@@ -11,7 +11,7 @@ import model.HoaDon;
 import model.NhanVien;
 import util.DBConnect;
 import java.util.Date;
-import model.ChiTietHoaDon;
+import model.HoaDonChiTiet;
 import model.ChiTietSanPham;
 import model.SanPham;
 
@@ -26,8 +26,8 @@ public class ThongKeDTRepository {
     ResultSet rs = null;
     String sql = null;
 
-    public List<ChiTietHoaDon> getListThongKeDT() {
-        List<ChiTietHoaDon> listTKDT = new ArrayList<>();
+    public List<HoaDonChiTiet> getListThongKeDT() {
+        List<HoaDonChiTiet> listTKDT = new ArrayList<>();
         try {
             con = DBConnect.getConnection();
             sql = "select NgayTao,TongTien from HoaDon";
@@ -35,7 +35,7 @@ public class ThongKeDTRepository {
             rs = ps.executeQuery();
             while (rs.next()) {
                 HoaDon hd = new HoaDon(rs.getDate(1), rs.getDouble(2));
-                ChiTietHoaDon cthd = new ChiTietHoaDon(hd);
+                HoaDonChiTiet cthd = new HoaDonChiTiet(hd);
                 listTKDT.add(cthd);
             }
         } catch (Exception e) {
@@ -45,8 +45,8 @@ public class ThongKeDTRepository {
         return listTKDT;
     }
 
-    public List<ChiTietHoaDon> getListTKDT(Date ngayBd, Date ngayKt) {
-        List<ChiTietHoaDon> listTimKiem = new ArrayList<>();
+    public List<HoaDonChiTiet> getListTKDT(Date ngayBd, Date ngayKt) {
+        List<HoaDonChiTiet> listTimKiem = new ArrayList<>();
         try {
             con = DBConnect.getConnection();
             sql = "select NgayTao,TongTien from HoaDon\n"
@@ -57,7 +57,7 @@ public class ThongKeDTRepository {
             rs = ps.executeQuery();
             while (rs.next()) {
                 HoaDon hd = new HoaDon(rs.getDate(1), rs.getDouble(2));
-                ChiTietHoaDon cthd = new ChiTietHoaDon(hd);
+                HoaDonChiTiet cthd = new HoaDonChiTiet(hd);
                 listTimKiem.add(cthd);
             }
         } catch (Exception e) {

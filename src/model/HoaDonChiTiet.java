@@ -20,6 +20,7 @@ public class HoaDonChiTiet {
     private String ghiChu;
     private Boolean trangThai;
 
+    
     public HoaDonChiTiet(int soLuong) {
         this.soLuong = soLuong;
     }
@@ -40,11 +41,6 @@ public class HoaDonChiTiet {
     public HoaDonChiTiet() {
     }
 
-    public HoaDonChiTiet(String maHDCT, ChiTietSanPham ctsp) {
-        this.maHDCT = maHDCT;
-        this.ctsp = ctsp;
-    }
-
     public HoaDonChiTiet(ChiTietSanPham ctsp, int soLuong, Boolean trangThai) {
         this.ctsp = ctsp;
         this.soLuong = soLuong;
@@ -62,7 +58,6 @@ public class HoaDonChiTiet {
         this.soLuong = soLuong;
         this.donGia = donGia;
     }
-
     public HoaDonChiTiet(String maHDCT, ChiTietSanPham ctsp, HoaDon HD, int soLuong, Double donGia) {
         this.maHDCT = maHDCT;
         this.ctsp = ctsp;
@@ -79,6 +74,30 @@ public class HoaDonChiTiet {
         this.donGia = donGia;
         this.ghiChu = ghiChu;
         this.trangThai = trangThai;
+    }
+    
+    public HoaDonChiTiet(String maHDCT, ChiTietSanPham ctsp) {
+        this.maHDCT = maHDCT;
+        this.ctsp = ctsp;
+    }
+
+
+    public HoaDonChiTiet(ChiTietSanPham ctsp, HoaDon HD, int soLuong) {
+        this.ctsp = ctsp;
+        this.HD = HD;
+        this.soLuong = soLuong;
+    }
+
+    public HoaDonChiTiet(HoaDon HD, ChiTietSanPham ctsp, int soLuong, double donGia) {
+        this.ctsp = ctsp;
+        this.HD = HD;
+        this.soLuong = soLuong;
+        this.donGia = donGia;
+    }
+
+
+    public HoaDonChiTiet(HoaDon HD) {
+        this.HD = HD;
     }
 
     public String getMaHDCT() {

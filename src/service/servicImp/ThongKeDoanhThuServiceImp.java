@@ -7,17 +7,15 @@ package service.servicImp;
 import java.util.Date;
 import java.util.List;
 import model.HoaDonChiTiet;
-import model.HoaDon;
-import repository.ThongKeSLRepository;
+import repository.ThongKeDTRepository;
 import service.AdamStore;
 
 /**
  *
  * @author Admin
  */
-public class ThongKeSLServiceImp implements AdamStore<HoaDonChiTiet, String> {
-
-    ThongKeSLRepository repo = new ThongKeSLRepository();
+public class ThongKeDoanhThuServiceImp implements AdamStore<HoaDonChiTiet, String>{
+    ThongKeDTRepository repo = new ThongKeDTRepository();
 
     @Override
     public List<HoaDonChiTiet> getAll() {
@@ -48,24 +46,12 @@ public class ThongKeSLServiceImp implements AdamStore<HoaDonChiTiet, String> {
     public List<HoaDonChiTiet> getList(String e) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    public List<HoaDonChiTiet> getListCTHD() {
-        return repo.getListCTHD();
+    
+    public List<HoaDonChiTiet> getListThongKeDT() {
+        return repo.getListThongKeDT();
     }
-
-    public List<HoaDonChiTiet> getListTk(Date ngayBd, Date ngayKt) {
-        return repo.getListTk(ngayBd, ngayKt);
+    
+    public List<HoaDonChiTiet> getListTKDT(Date ngayBd, Date ngayKt) {
+        return repo.getListTKDT(ngayBd, ngayKt);
     }
-
-    public List<HoaDonChiTiet> getListBieuDoHD() {
-        return repo.getListBieuDoHD();
-    }
-
-    public List<HoaDonChiTiet> getListTKBieuDoHD(Date ngayBd, Date ngayKt) {
-        return repo.getListTKBieuDoHD(ngayBd, ngayKt);
-    }
-
-    public List<HoaDonChiTiet> getListBieuDoTopSP() {
-        return repo.getListBieuDoTopSP();
-    }
-  
 }

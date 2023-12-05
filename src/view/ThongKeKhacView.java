@@ -40,7 +40,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import model.ChiTietHoaDon;
+import model.HoaDonChiTiet;
 import model.SanPham;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
@@ -99,16 +99,16 @@ public class ThongKeKhacView extends javax.swing.JPanel {
     }
 
     public void setDataToChart(JPanel panelTopSP) {
-        List<ChiTietHoaDon> list1 = repo.getList1();
+        List<HoaDonChiTiet> list1 = repo.getList1();
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         if (list1 != null) {
-            for (ChiTietHoaDon chiTietHoaDon : list1) {
-                dataset.addValue(chiTietHoaDon.getSoLuong() + chiTietHoaDon.getChiTietSanPham().getSoLuong(), "Tổng",
-                        chiTietHoaDon.getChiTietSanPham().getSanPham().getTenSanPham());
+            for (HoaDonChiTiet chiTietHoaDon : list1) {
+                dataset.addValue(chiTietHoaDon.getSoLuong() + chiTietHoaDon.getCtsp().getSoLuong(), "Tổng",
+                        chiTietHoaDon.getCtsp().getSanPham().getTenSanPham());
                 dataset.addValue(chiTietHoaDon.getSoLuong(), "Số bán được",
-                        chiTietHoaDon.getChiTietSanPham().getSanPham().getTenSanPham());
-                dataset.addValue(chiTietHoaDon.getChiTietSanPham().getSoLuong(), "Sản phẩm còn lại",
-                        chiTietHoaDon.getChiTietSanPham().getSanPham().getTenSanPham());
+                        chiTietHoaDon.getCtsp().getSanPham().getTenSanPham());
+                dataset.addValue(chiTietHoaDon.getCtsp().getSoLuong(), "Sản phẩm còn lại",
+                        chiTietHoaDon.getCtsp().getSanPham().getTenSanPham());
             }
         }
         JFreeChart barChart = ChartFactory.createBarChart("Doanh thu sản phẩm".toUpperCase(),
@@ -134,15 +134,15 @@ public class ThongKeKhacView extends javax.swing.JPanel {
         java.util.Date ngayBd = txtNgayBD.getDate();
         java.util.Date ngayKt = txtNgayKT.getDate();
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-        List<ChiTietHoaDon> listTK1 = repo.getListTK1(txtNgayBD.getDate(), txtNgayKT.getDate());
+        List<HoaDonChiTiet> listTK1 = repo.getListTK1(txtNgayBD.getDate(), txtNgayKT.getDate());
         if (listTK1 != null) {
-            for (ChiTietHoaDon chiTietHoaDon : listTK1) {
-                dataset.addValue(chiTietHoaDon.getSoLuong() + chiTietHoaDon.getChiTietSanPham().getSoLuong(), "Tổng sản phẩm",
-                        chiTietHoaDon.getChiTietSanPham().getSanPham().getTenSanPham());
+            for (HoaDonChiTiet chiTietHoaDon : listTK1) {
+                dataset.addValue(chiTietHoaDon.getSoLuong() + chiTietHoaDon.getCtsp().getSoLuong(), "Tổng sản phẩm",
+                        chiTietHoaDon.getCtsp().getSanPham().getTenSanPham());
                 dataset.addValue(chiTietHoaDon.getSoLuong(), "Số bán được",
-                        chiTietHoaDon.getChiTietSanPham().getSanPham().getTenSanPham());
-                dataset.addValue(chiTietHoaDon.getChiTietSanPham().getSoLuong(), "Sản phẩm còn lại",
-                        chiTietHoaDon.getChiTietSanPham().getSanPham().getTenSanPham());
+                        chiTietHoaDon.getCtsp().getSanPham().getTenSanPham());
+                dataset.addValue(chiTietHoaDon.getCtsp().getSoLuong(), "Sản phẩm còn lại",
+                        chiTietHoaDon.getCtsp().getSanPham().getTenSanPham());
             }
         }
         JFreeChart barChart = ChartFactory.createBarChart("Doanh thu sản phẩm".toUpperCase(),
@@ -160,16 +160,16 @@ public class ThongKeKhacView extends javax.swing.JPanel {
     public void setDataToChart2(JPanel panel2) {
         SanPham sp = (SanPham) cboSP.getSelectedItem();
         tenSp = sp.toString();
-        List<ChiTietHoaDon> list2 = repo.getList2(tenSp);
+        List<HoaDonChiTiet> list2 = repo.getList2(tenSp);
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         if (list2 != null) {
-            for (ChiTietHoaDon chiTietHoaDon : list2) {
-                dataset.addValue(chiTietHoaDon.getHoaDon().getSoLuongHoaDon() + chiTietHoaDon.getSoLuong(), "Tổng",
-                        chiTietHoaDon.getHoaDon().getNgayTao());
+            for (HoaDonChiTiet chiTietHoaDon : list2) {
+                dataset.addValue(chiTietHoaDon.getHD().getSoLuongHoaDon() + chiTietHoaDon.getSoLuong(), "Tổng",
+                        chiTietHoaDon.getHD().getNgayTao());
                 dataset.addValue(chiTietHoaDon.getSoLuong(), "Bán được",
-                        chiTietHoaDon.getHoaDon().getNgayTao());
-                dataset.addValue(chiTietHoaDon.getChiTietSanPham().getSoLuong(), "Còn lại",
-                        chiTietHoaDon.getHoaDon().getNgayTao());
+                        chiTietHoaDon.getHD().getNgayTao());
+                dataset.addValue(chiTietHoaDon.getCtsp().getSoLuong(), "Còn lại",
+                        chiTietHoaDon.getHD().getNgayTao());
 
             }
         }
@@ -195,15 +195,15 @@ public class ThongKeKhacView extends javax.swing.JPanel {
         java.util.Date ngayBd = txtNgayBD2.getDate();
         java.util.Date ngayKt = txtNgayKT2.getDate();
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-        List<ChiTietHoaDon> listTK2 = repo.getListTK2(tenSp, ngayBd, ngayKt);
+        List<HoaDonChiTiet> listTK2 = repo.getListTK2(tenSp, ngayBd, ngayKt);
         if (listTK2 != null) {
-            for (ChiTietHoaDon chiTietHoaDon : listTK2) {
-                dataset.addValue(chiTietHoaDon.getHoaDon().getSoLuongHoaDon() + chiTietHoaDon.getSoLuong(), "Tổng",
-                        chiTietHoaDon.getHoaDon().getNgayTao());
+            for (HoaDonChiTiet chiTietHoaDon : listTK2) {
+                dataset.addValue(chiTietHoaDon.getHD().getSoLuongHoaDon() + chiTietHoaDon.getSoLuong(), "Tổng",
+                        chiTietHoaDon.getHD().getNgayTao());
                 dataset.addValue(chiTietHoaDon.getSoLuong(), "Bán được",
-                        chiTietHoaDon.getHoaDon().getNgayTao());
-                dataset.addValue(chiTietHoaDon.getChiTietSanPham().getSoLuong(), "Còn lại",
-                        chiTietHoaDon.getHoaDon().getNgayTao());
+                        chiTietHoaDon.getHD().getNgayTao());
+                dataset.addValue(chiTietHoaDon.getCtsp().getSoLuong(), "Còn lại",
+                        chiTietHoaDon.getHD().getNgayTao());
 
             }
         }

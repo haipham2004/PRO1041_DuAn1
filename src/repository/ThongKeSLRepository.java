@@ -11,7 +11,7 @@ import model.HoaDon;
 import model.NhanVien;
 import util.DBConnect;
 import java.util.Date;
-import model.ChiTietHoaDon;
+import model.HoaDonChiTiet;
 import model.ChiTietSanPham;
 import model.SanPham;
 
@@ -27,8 +27,8 @@ public class ThongKeSLRepository {
     String sql = null;
 
 
-    public List<ChiTietHoaDon> getListCTHD() {
-        List<ChiTietHoaDon> listCTHD = new ArrayList<>();
+    public List<HoaDonChiTiet> getListCTHD() {
+        List<HoaDonChiTiet> listCTHD = new ArrayList<>();
         try {
             con = DBConnect.getConnection();
             sql = "select hdct.MaHoaDon,hd.NgayTao, ctsp.MaCTSP, hdct.SoLuong, "
@@ -41,7 +41,7 @@ public class ThongKeSLRepository {
             while (rs.next()) {
                 HoaDon hd = new HoaDon(rs.getString(1), rs.getDate(2));
                 ChiTietSanPham ctsp = new ChiTietSanPham(rs.getString(3));
-                ChiTietHoaDon cthd = new ChiTietHoaDon(hd, ctsp,
+                HoaDonChiTiet cthd = new HoaDonChiTiet(hd, ctsp,
                         rs.getInt(4), rs.getDouble(5));
                 listCTHD.add(cthd);
             }
@@ -52,8 +52,8 @@ public class ThongKeSLRepository {
         return listCTHD;
     }
 
-    public List<ChiTietHoaDon> getListTk(Date ngayBd, Date ngayKt) {
-        List<ChiTietHoaDon> listCTHD2 = new ArrayList<>();
+    public List<HoaDonChiTiet> getListTk(Date ngayBd, Date ngayKt) {
+        List<HoaDonChiTiet> listCTHD2 = new ArrayList<>();
         listCTHD2.clear();
         try {
             con = DBConnect.getConnection();
@@ -70,7 +70,7 @@ public class ThongKeSLRepository {
             while (rs.next()) {
                 HoaDon hd = new HoaDon(rs.getString(1), rs.getDate(2));
                 ChiTietSanPham ctsp = new ChiTietSanPham(rs.getString(3));
-                ChiTietHoaDon cthd = new ChiTietHoaDon(hd, ctsp,
+                HoaDonChiTiet cthd = new HoaDonChiTiet(hd, ctsp,
                         rs.getInt(4), rs.getDouble(5));
                 listCTHD2.add(cthd);
             }
@@ -81,8 +81,8 @@ public class ThongKeSLRepository {
         return listCTHD2;
     }
 
-    public List<ChiTietHoaDon> getListBieuDoHD() {
-        List<ChiTietHoaDon> listBieuDo1 = new ArrayList<>();
+    public List<HoaDonChiTiet> getListBieuDoHD() {
+        List<HoaDonChiTiet> listBieuDo1 = new ArrayList<>();
         try {
             con = DBConnect.getConnection();
             sql = "SELECT NgayTao, count(*) as TongHd\n"
@@ -93,7 +93,7 @@ public class ThongKeSLRepository {
             rs = ps.executeQuery();
             while (rs.next()) {
                 HoaDon hd = new HoaDon(rs.getDate(1), rs.getInt(2));
-                ChiTietHoaDon cthd = new ChiTietHoaDon(hd);
+                HoaDonChiTiet cthd = new HoaDonChiTiet(hd);
                 listBieuDo1.add(cthd);
             }
         } catch (Exception e) {
@@ -103,8 +103,8 @@ public class ThongKeSLRepository {
         return listBieuDo1;
     }
 
-    public List<ChiTietHoaDon> getListTKBieuDoHD(Date ngayBd, Date ngayKt) {
-        List<ChiTietHoaDon> listBieuDo2 = new ArrayList<>();
+    public List<HoaDonChiTiet> getListTKBieuDoHD(Date ngayBd, Date ngayKt) {
+        List<HoaDonChiTiet> listBieuDo2 = new ArrayList<>();
         try {
             con = DBConnect.getConnection();
             sql = "SELECT NgayTao, count(*) as TongHd\n"
@@ -118,7 +118,7 @@ public class ThongKeSLRepository {
             rs = ps.executeQuery();
             while (rs.next()) {
                 HoaDon hd = new HoaDon(rs.getDate(1), rs.getInt(2));
-                ChiTietHoaDon cthd = new ChiTietHoaDon(hd);
+                HoaDonChiTiet cthd = new HoaDonChiTiet(hd);
                 listBieuDo2.add(cthd);
             }
         } catch (Exception e) {
@@ -128,8 +128,8 @@ public class ThongKeSLRepository {
         return listBieuDo2;
     }
 
-    public List<ChiTietHoaDon> getListBieuDoTopSP() {
-        List<ChiTietHoaDon> listBieuDo1 = new ArrayList<>();
+    public List<HoaDonChiTiet> getListBieuDoTopSP() {
+        List<HoaDonChiTiet> listBieuDo1 = new ArrayList<>();
         try {
             con = DBConnect.getConnection();
             sql = "SELECT TOP (5) sp.TenSanPham, COUNT(sp.MaSanPham) AS TotalCount\n"
@@ -144,7 +144,7 @@ public class ThongKeSLRepository {
             while (rs.next()) {
                 SanPham sp = new SanPham(rs.getString(1), rs.getInt(2));
                 ChiTietSanPham ctsp = new ChiTietSanPham(sp);
-                ChiTietHoaDon cthd = new ChiTietHoaDon(ctsp);
+                HoaDonChiTiet cthd = new HoaDonChiTiet(ctsp);
                 listBieuDo1.add(cthd);
             }
         } catch (Exception e) {
