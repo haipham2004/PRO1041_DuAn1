@@ -25,17 +25,25 @@ public class AdamStoreView extends javax.swing.JFrame {
     Color selectedColor = new Color(204, 204, 204);
     Color enterColor = new Color(228, 227, 227);
     String tenNV;
+    private boolean isAdmin;
 
     /**
      * Creates new form Main
      */
     public AdamStoreView() {
+    }
+
+    public void setAdmin(boolean isAdmin) {
+        this.isAdmin = isAdmin;
+    }
+
+    public void showView() {
         initComponents();
         this.dispose();
         setUndecorated(true);
         setSize(1500, 820);
         this.setLocationRelativeTo(null);
-        execute();
+        execute(isAdmin);
         changePanelBody(new ThongKeSLView());
     }
 
@@ -61,7 +69,7 @@ public class AdamStoreView extends javax.swing.JFrame {
         return lbltenNV.getText();
     }
 
-    private void execute() {
+    private void execute(boolean isAdmin) {
         //Thêm icon vào 
         ImageIcon iconThongKe = new ImageIcon(getClass().getResource("/icon/document.png"));
         ImageIcon iconSanPham = new ImageIcon(getClass().getResource("/icon/shirt.png"));
@@ -186,7 +194,7 @@ public class AdamStoreView extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 // TODO add your handling code here:
-                int check = JOptionPane.showConfirmDialog(null, "Ban co chac chan muon dang xuat?");
+                int check = JOptionPane.showConfirmDialog(null, "Bạn có chắc chắn muốn đăng xuất?");
                 if (check == 0) {
                     DangNhapView dangNhapView = new DangNhapView();
                     dispose();
@@ -197,7 +205,11 @@ public class AdamStoreView extends javax.swing.JFrame {
         });
 
         //Câu lệnh thêm vào menu
-        addMenu(menuThongKe, menuMatHang, menuNhanVien, menuBanHang, menuKhachHang, menuHoaDon, menuDoiHang, menuLsuDoiHang, menuKm, menuDoiMatKhau, menuDangXuat);
+        if (isAdmin) {
+            addMenu(menuThongKe, menuMatHang, menuNhanVien, menuBanHang, menuKhachHang, menuHoaDon, menuDoiHang, menuLsuDoiHang, menuKm, menuDoiMatKhau, menuDangXuat);
+        } else {
+            addMenu(menuBanHang, menuKhachHang, menuHoaDon, menuDoiHang, menuLsuDoiHang, menuDoiMatKhau, menuDangXuat);
+        }
         MenuItemColor(menuThongKe);
         MenuItemColor(menuMatHang);
         MenuItemColor(menuSanPham1);
@@ -222,7 +234,6 @@ public class AdamStoreView extends javax.swing.JFrame {
             ArrayList<MenuItem> subMenu = menu[i].getSubMenu();
             for (MenuItem m : subMenu) {
                 addMenu(m);
-
             }
         }
         menus.revalidate();

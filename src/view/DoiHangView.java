@@ -685,16 +685,12 @@ public class DoiHangView extends javax.swing.JPanel {
 
     private void btnThemHoaDonDoiHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnThemHoaDonDoiHangMouseClicked
         // TODO add your handling code here:
-        indexDoiHangChiTiet = tblDanhSachDoiHang.getRowCount();
-        int soLuong = Integer.parseInt(tblDanhSachDoiHang.getValueAt(indexDoiHangChiTiet, 5).toString());
-        if (soLuong==0) {
-            pnlTong.removeAll();
-            pnlTong.add(new ChonHoaDonView());
-            pnlTong.repaint();
-            pnlTong.revalidate();
-        }else{
-            JOptionPane.showMessageDialog(this, "Sản phẩm đã đc đổi, vui lòng làm mới danh sách nếu muốn đổi lại");
-        }
+
+        pnlTong.removeAll();
+        pnlTong.add(new ChonHoaDonView());
+        pnlTong.repaint();
+        pnlTong.revalidate();
+
     }//GEN-LAST:event_btnThemHoaDonDoiHangMouseClicked
 
     private void tblHoaDonDoiHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblHoaDonDoiHangMouseClicked
@@ -707,10 +703,16 @@ public class DoiHangView extends javax.swing.JPanel {
 
     private void btnChonHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnChonHangMouseClicked
         // TODO add your handling code here:
-        pnlTong.removeAll();
-        pnlTong.add(new ChonChiTietSanPhamView());
-        pnlTong.repaint();
-        pnlTong.revalidate();
+        indexDoiHangChiTiet = tblDanhSachDoiHang.getSelectedRow();
+        int soLuong = Integer.parseInt(tblDanhSachDoiHang.getValueAt(indexDoiHangChiTiet, 5).toString());
+        if (soLuong == 0) {
+            pnlTong.removeAll();
+            pnlTong.add(new ChonChiTietSanPhamView());
+            pnlTong.repaint();
+            pnlTong.revalidate();
+        } else {
+            JOptionPane.showMessageDialog(this, "Sản phẩm đã đc đổi, vui lòng làm mới danh sách nếu muốn đổi lại");
+        }
     }//GEN-LAST:event_btnChonHangMouseClicked
 
     private void btnLamMoiDSDHMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLamMoiDSDHMouseClicked

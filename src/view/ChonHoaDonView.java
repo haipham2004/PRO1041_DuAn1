@@ -233,6 +233,36 @@ public class ChonHoaDonView extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnDau2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDau2ActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_btnDau2ActionPerformed
+
+    private void btnLui2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLui2ActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_btnLui2ActionPerformed
+
+    private void btnTien2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTien2ActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_btnTien2ActionPerformed
+
+    private void btnCuoi2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCuoi2ActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_btnCuoi2ActionPerformed
+
+    private void txtTimKiemKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKiemKeyReleased
+        // TODO add your handling code here:
+        if (!txtTimKiem.getText().equals("")) {
+            String name = txtTimKiem.getText();
+            fillTable(serviceHD.getList2(name));
+        } else {
+            fillTable(serviceHD.getLSHoaDonDuocDoiHang());
+        }
+    }//GEN-LAST:event_txtTimKiemKeyReleased
+
     private void btnChonHoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnChonHoaDonMouseClicked
         // TODO add your handling code here:
         indexHoaDon = tblHoaDon.getSelectedRow();
@@ -250,16 +280,6 @@ public class ChonHoaDonView extends javax.swing.JPanel {
         // TODO add your handling code here:
         quayLaiDoiHang();
     }//GEN-LAST:event_btnQuayLaiMouseClicked
-
-    private void txtTimKiemKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKiemKeyReleased
-        // TODO add your handling code here:
-        if (!txtTimKiem.getText().equals("")) {
-            String name = txtTimKiem.getText();
-            fillTable(serviceHD.getList2(name));
-        } else {
-            fillTable(serviceHD.getLSHoaDonDuocDoiHang());
-        }
-    }//GEN-LAST:event_txtTimKiemKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

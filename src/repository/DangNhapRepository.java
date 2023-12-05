@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.MauSac;
+import model.NhanVien;
 import model.TaiKhoan;
 import util.DBConnect;
 
@@ -60,7 +61,7 @@ public class DangNhapRepository {
             return null;
         }
     }
-    
+
     public String getMaNhanVien(String username) {
         String maNhanVien = null;
         try {
@@ -78,5 +79,27 @@ public class DangNhapRepository {
             e.printStackTrace();
             return null;
         }
+    }
+
+    public boolean isAdmin(String userID) {
+        TaiKhoan tk = null;
+        try {
+            conn = DBConnect.getConnection();
+            sql = "select MaTK,UserName,PassWord,Role,TrangThai from TaiKhoan where MaTK = ?";
+            pst = conn.prepareStatement(sql);
+            pst.setObject(1, userID);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                tk = new TaiKhoan(rs.getString(1), rs.getString(2),
+                        rs.getString(3), rs.getString(4), rs.getBoolean(5));
+                if (tk.getRole().equals("Admin")) {
+                    return true;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return false;
     }
 }

@@ -31,7 +31,7 @@ public class HoaDonChiTietReposotpry {
     Connection con = null;
     ResultSet rs = null;
     String sql = null;
-//    BanHangView BHView = new BanHangView();
+
 
     public List<HoaDonChiTiet> getJoHang(JTable table) {
         List<HoaDonChiTiet> list = new ArrayList<>();
@@ -138,7 +138,7 @@ public class HoaDonChiTietReposotpry {
         int so = 0;
         try {
             con = DBConnect.getConnection();
-            sql = "UPDATE ChiTietSanPham set SoLuong=SoLuong-?\n"
+            sql = "UPDATE ChiTietSanPham set SoLuong=SoLuong+?\n"
                     + "where MaCTSP=?";
             ps = con.prepareStatement(sql);
             for (HoaDonChiTiet ctsp : list) {

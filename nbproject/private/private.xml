@@ -4,22 +4,10 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/view/AdamStoreView.java</file>
-            <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/repository/HoaDonChiTietReposotpry.java</file>
-            <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/repository/KhachHangRepository.java</file>
-            <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/repository/DoiHangRepository.java</file>
-            <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/service/servicImp/DoiHangChiTietServiceImp.java</file>
-            <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/repository/DoiHangChiTietRepository.java</file>
-            <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/view/NhanVienView.java</file>
-            <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/service/servicImp/DoiHangServiceImp.java</file>
-            <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/view/KhachHangView.java</file>
-            <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/service/servicImp/KhachHangServiceImp.java</file>
-            <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/view/ChonChiTietSanPhamView.java</file>
-            <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/repository/NhanVienRepository.java</file>
+            <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/util/PDFGene.java</file>
             <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/view/DangNhapView.java</file>
-            <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/view/BanHangView.java</file>
             <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/view/DoiHangView.java</file>
-            <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/service/servicImp/ChiTietSanPhamServiceImp.java</file>
-            <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/repository/ChiTietSanPhamRepository.java</file>
+            <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/view/BanHangView.java</file>
         </group>
     </open-files>
 </project-private>

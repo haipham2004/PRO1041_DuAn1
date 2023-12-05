@@ -111,12 +111,13 @@ public class HoaDonRepository {
         List<HoaDon> listHD = new ArrayList<>();
         try {
             sql = "Select HD.MaHoaDon,NV.MaNV,KH.MaKH,HD.NgayTao,HD.TongTien, HD.TrangThai,HD.GhiChu\n"
-                    + "From HoaDon HD Join NhanVien NV ON HD.MaNV=NV.MaNV Join KhachHang KH ON HD.MaKH = KH.MaKH Where HD.MaHoaDon=? or NV.MaNV=? or KH.MaKH=? ";
+                    + "From HoaDon HD Join NhanVien NV ON HD.MaNV=NV.MaNV Join KhachHang KH ON HD.MaKH = KH.MaKH "
+                    + "Where HD.MaHoaDon LIKE ? or NV.MaNV LIKE ? or KH.MaKH LIKE ? ";
             con = DBConnect.getConnection();
             ps = con.prepareStatement(sql);
-            ps.setObject(1, maHD);
-            ps.setObject(2, maNV);
-            ps.setObject(3, maKH);
+            ps.setObject(1, '%' + maHD + '%');
+            ps.setObject(2, '%' + maNV + '%');
+            ps.setObject(3, '%' + maKH + '%');
             rs = ps.executeQuery();
             while (rs.next()) {
                 NhanVien nv = new NhanVien(rs.getString(2));

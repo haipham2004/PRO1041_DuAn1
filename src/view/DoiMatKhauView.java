@@ -22,22 +22,21 @@ public class DoiMatKhauView extends javax.swing.JPanel {
     public DoiMatKhauView() {
         initComponents();
         this.setSize(1300, 755);
-        thongBaoMK.setVisible(false);
     }
 
     public boolean checkEmpty() {
         if (txtMatKhauHT.getText().trim().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Mat khau hien tai khong duoc de trong !");
+            JOptionPane.showMessageDialog(this, "Mật khẩu hiện tại không được để trống");
             txtMatKhauHT.requestFocus();
             return false;
         }
         if (txtMatKhauM.getText().trim().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Mat khau moi khong duoc de trong !");
+            JOptionPane.showMessageDialog(this, "Mật khẩu mới không được để trống");
             txtMatKhauM.requestFocus();
             return false;
         }
         if (txtMatKhauM2.getText().trim().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Nhap lai mat khau moi khong duoc de trong !");
+            JOptionPane.showMessageDialog(this, "Nhập lại mật khẩu mới không được để trống");
             txtMatKhauM2.requestFocus();
             return false;
         }
@@ -46,32 +45,26 @@ public class DoiMatKhauView extends javax.swing.JPanel {
 
     public boolean checkHopLe(String maTK, String mkHienTai, String matKhauMoi, String matKhauMoi2) {
         if (matKhauMoi.length() < 8) {
-            JOptionPane.showMessageDialog(this, "Mat khau moi phai co it nhat 8 ky tu !");
+            JOptionPane.showMessageDialog(this, "Mật khẩu mới phải có ít nhất 8 ký tự");
             return false;
         }
         if (matKhauMoi.length() > 20) {
-            JOptionPane.showMessageDialog(this, "Mat khau moi khong duoc qua 20 ky tu !");
+            JOptionPane.showMessageDialog(this, "Mật khẩu mới không được quá 20 ký tự");
             return false;
         }
-//        if (matKhauMoi.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$")) {
-//            JOptionPane.showMessageDialog(this, "Mat khau moi phai co it nhat mot chu cai viet hoa, mot chu cai viet thuong, mot so va mot ki tu dac biet !");
-//            return false;
-//        }
         if (!serviceDMK.checkMaTK(maTK)) {
-            JOptionPane.showMessageDialog(this, "Khong ton tai ma tai khoan vua nhap !");
+            JOptionPane.showMessageDialog(this, "Không tồn tại mã tài khoản vừa nhập");
             return false;
         }
         if (!serviceDMK.checkPassword(maTK, mkHienTai)) {
-            JOptionPane.showMessageDialog(this, "Mat khau hien tai khong dung !");
+            JOptionPane.showMessageDialog(this, "Mật khẩu hiện tại không đúng");
             return false;
         }
 
         if (!matKhauMoi.equals(matKhauMoi2)) {
-            JOptionPane.showMessageDialog(this, "Xac nhan mat khau moi khong khop !");
+            JOptionPane.showMessageDialog(this, "Xác nhận mật khẩu mới không khớp");
             return false;
-
         }
-
         return true;
     }
 
@@ -95,7 +88,6 @@ public class DoiMatKhauView extends javax.swing.JPanel {
         jLabel5 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         txtMatKhauM2 = new javax.swing.JPasswordField();
-        thongBaoMK = new javax.swing.JLabel();
 
         jLabel1.setFont(new java.awt.Font("Segoe UI Black", 0, 36)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -159,8 +151,6 @@ public class DoiMatKhauView extends javax.swing.JPanel {
             }
         });
 
-        thongBaoMK.setText("jLabel6");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -176,10 +166,7 @@ public class DoiMatKhauView extends javax.swing.JPanel {
                     .addComponent(jLabel3)
                     .addComponent(txtMatKhauHT, javax.swing.GroupLayout.PREFERRED_SIZE, 729, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(txtMatKhauM, javax.swing.GroupLayout.PREFERRED_SIZE, 729, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(thongBaoMK, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtMatKhauM, javax.swing.GroupLayout.PREFERRED_SIZE, 729, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtMatKhauM2, javax.swing.GroupLayout.PREFERRED_SIZE, 737, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(99, 99, 99)
@@ -187,7 +174,7 @@ public class DoiMatKhauView extends javax.swing.JPanel {
                         .addGap(147, 147, 147)
                         .addComponent(btnHuyBo, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(200, Short.MAX_VALUE))
+                .addContainerGap(356, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -205,9 +192,7 @@ public class DoiMatKhauView extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtMatKhauM, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(thongBaoMK))
+                .addComponent(txtMatKhauM, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel4)
                 .addGap(18, 18, 18)
@@ -241,9 +226,9 @@ public class DoiMatKhauView extends javax.swing.JPanel {
             String matKhauMoi2 = new String(txtMatKhauM2.getPassword());
             if (checkHopLe(maTK, matKhauHT, matKhauMoi, matKhauMoi2)) {
                 if (serviceDMK.updatePass(maTK, matKhauMoi) > 0) {
-                    JOptionPane.showMessageDialog(this, "Doi mat khau thanh cong !");
+                    JOptionPane.showMessageDialog(this, "Đổi mật khẩu thành công");
                 } else {
-                    JOptionPane.showMessageDialog(this, "Doi mat khau that bai !");
+                    JOptionPane.showMessageDialog(this, "Đổi mật khẩu thất bại");
                 }
             }
         }
@@ -264,11 +249,6 @@ public class DoiMatKhauView extends javax.swing.JPanel {
 
     private void txtMatKhauMKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMatKhauMKeyReleased
         // TODO add your handling code here:
-        String MatKhauM = new String(txtMatKhauHT.getPassword());
-        if (txtMatKhauM.getPassword().length <=8 && txtMatKhauM.getPassword().length >0) {
-            thongBaoMK.setForeground(Color.red);
-            thongBaoMK.setText("Mật khẩu yếu");
-        }
     }//GEN-LAST:event_txtMatKhauMKeyReleased
 
 
@@ -280,7 +260,6 @@ public class DoiMatKhauView extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel thongBaoMK;
     private javax.swing.JTextField txtMaTK;
     private javax.swing.JPasswordField txtMatKhauHT;
     private javax.swing.JPasswordField txtMatKhauM;
