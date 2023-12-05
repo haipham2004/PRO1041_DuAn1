@@ -56,7 +56,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import model.ChiTietHoaDon;
+import model.HoaDonChiTiet;
 import model.HoaDonChiTiet;
 import org.apache.poi.examples.xssf.usermodel.LineChart;
 import org.apache.poi.ss.usermodel.CellStyle;
@@ -104,13 +104,13 @@ public class ThongKeSoLuongView extends javax.swing.JPanel {
     }
 
     public void setDataToChart(JPanel panelHoaDon) {
-        List<ChiTietHoaDon> listCthd = repo.getListBieuDoHD();
+        List<HoaDonChiTiet> listCthd = service.getListBieuDoHD();
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         if (txtNgayBd.getCalendar() == null || txtNgayKT.getCalendar() == null) {
             if (listCthd != null) {
-                for (ChiTietHoaDon chiTietHoaDon : listCthd) {
-                    dataset.addValue(chiTietHoaDon.getHoaDon().getSoLuongHoaDon(), "Hóa đơn",
-                            chiTietHoaDon.getHoaDon().getNgayTao());
+                for (HoaDonChiTiet chiTietHoaDon : listCthd) {
+                    dataset.addValue(chiTietHoaDon.getHD().getSoLuongHoaDon(), "Hóa đơn",
+                            chiTietHoaDon.getHD().getNgayTao());
                 }
             }
             JFreeChart lineChart = ChartFactory.createLineChart("Biểu đồ thống kê tổng số hóa đơn".toUpperCase(),
@@ -125,7 +125,7 @@ public class ThongKeSoLuongView extends javax.swing.JPanel {
             panelHoaDon.repaint();
             try {
                 final ChartRenderingInfo info1 = new ChartRenderingInfo(new StandardEntityCollection());
-                final File file1 = new File("F:\\FPT Polytechnic\\DA1\\PRO1041_DuAn1\\ChartImage\\ChartHD.png");
+                final File file1 = new File("C:\\ChartImage\\ChartHD.png");
                 ChartUtilities.saveChartAsPNG(file1, lineChart, 859, 236, info1);
             } catch (Exception e) {
             }
@@ -133,12 +133,12 @@ public class ThongKeSoLuongView extends javax.swing.JPanel {
     }
 
     public void setDataToChart2(JPanel panelTopSP) {
-        List<ChiTietHoaDon> listTop = repo.getListBieuDoTopSP();
+        List<HoaDonChiTiet> listTop = service.getListBieuDoTopSP();
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         if (listTop != null) {
-            for (ChiTietHoaDon chiTietHoaDon : listTop) {
-                dataset.addValue(chiTietHoaDon.getChiTietSanPham().getSanPham().getTongSP(), "Tổng sản phẩm",
-                        chiTietHoaDon.getChiTietSanPham().getSanPham().getTenSanPham());
+            for (HoaDonChiTiet chiTietHoaDon : listTop) {
+                dataset.addValue(chiTietHoaDon.getCtsp().getSanPham().getTongSP(), "Tổng sản phẩm",
+                        chiTietHoaDon.getCtsp().getSanPham().getTenSanPham());
             }
         }
         JFreeChart barChart = ChartFactory.createBarChart("Top sản phẩm bán chạy nhất".toUpperCase(),
@@ -153,7 +153,7 @@ public class ThongKeSoLuongView extends javax.swing.JPanel {
         panelTopSP.repaint();
         try {
             final ChartRenderingInfo info2 = new ChartRenderingInfo(new StandardEntityCollection());
-            final File file2 = new File("F:\\FPT Polytechnic\\DA1\\PRO1041_DuAn1\\ChartImage\\ChartTop.png");
+            final File file2 = new File("C:\\ChartImage\\ChartTop.png");
             ChartUtilities.saveChartAsPNG(file2, barChart, 859, 236, info2);
         } catch (Exception e) {
         }
@@ -168,7 +168,7 @@ public class ThongKeSoLuongView extends javax.swing.JPanel {
         String formattedDateTime = currentDateTime.format(formatter);
         DecimalFormat df = new DecimalFormat("#,###");
 
-        String path = "F:\\FPT Polytechnic\\DA1\\PRO1041_DuAn1\\PDF\\" + "Thongkesoluong" + ".pdf";
+        String path = "C:\\PDF\\" + "Thongkesoluong" + ".pdf";
         PdfWriter pdfWriter = new PdfWriter(path);
         PdfDocument pdfDocument = new PdfDocument(pdfWriter);
         pdfDocument.setDefaultPageSize(PageSize.A4);
@@ -181,7 +181,7 @@ public class ThongKeSoLuongView extends javax.swing.JPanel {
         img2.setOpacity(0.2f);
         document.add(img2);
 
-        String imgPath2 = "F:\\FPT Polytechnic\\DA1\\PRO1041_DuAn1\\ChartImage\\ChartHD.png";
+        String imgPath2 = "C:\\ChartImage\\ChartHD.png";
         ImageData imgData2 = ImageDataFactory.create(imgPath2);
         Image img3 = new Image(imgData2);
         img3.setHeight(300);
@@ -189,7 +189,7 @@ public class ThongKeSoLuongView extends javax.swing.JPanel {
         img3.setFixedPosition(60, 400f);
         document.add(img3);
 
-        String imgPath3 = "F:\\FPT Polytechnic\\DA1\\PRO1041_DuAn1\\ChartImage\\ChartTop.png";
+        String imgPath3 = "C:\\ChartImage\\ChartTop.png";
         ImageData imgData3 = ImageDataFactory.create(imgPath3);
         Image img4 = new Image(imgData3);
         img4.setHeight(300);
@@ -453,15 +453,12 @@ public class ThongKeSoLuongView extends javax.swing.JPanel {
         Date ngayBd = txtNgayBd.getDate();
         Date ngayKt = txtNgayKT.getDate();
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-        List<ChiTietHoaDon> listTKBD = repo.getListTKBieuDoHD(txtNgayBd.getDate(), txtNgayKT.getDate());
-        if (txtNgayKT.getCalendar().before(txtNgayBd.getCalendar())) {
-            JOptionPane.showMessageDialog(this, "Ngày kết thúc không hợp lệ");
-        } else {
-            if (listTKBD != null) {
-                for (ChiTietHoaDon chiTietHoaDon : listTKBD) {
-                    dataset.addValue(chiTietHoaDon.getHoaDon().getSoLuongHoaDon(), "Hóa đơn",
-                            chiTietHoaDon.getHoaDon().getNgayTao());
-                }
+
+        List<HoaDonChiTiet> listTKBD = service.getListTKBieuDoHD(txtNgayBd.getDate(), txtNgayKT.getDate());
+        if (listTKBD != null) {
+            for (HoaDonChiTiet chiTietHoaDon : listTKBD) {
+                dataset.addValue(chiTietHoaDon.getHD().getSoLuongHoaDon(), "Hóa đơn",
+                        chiTietHoaDon.getHD().getNgayTao());
             }
             JFreeChart lineChart = ChartFactory.createLineChart("Biểu đồ thống kê tổng số hóa đơn".toUpperCase(),
                     "Ngày", "Hóa đơn", dataset, PlotOrientation.VERTICAL,
@@ -473,6 +470,12 @@ public class ThongKeSoLuongView extends javax.swing.JPanel {
             panelChartHoaDon.add(chartPanel);
             panelChartHoaDon.validate();
             panelChartHoaDon.repaint();
+            try {
+                final ChartRenderingInfo info1 = new ChartRenderingInfo(new StandardEntityCollection());
+                final File file1 = new File("F:\\FPT Polytechnic\\DA1\\PRO1041_DuAn1\\ChartImage\\ChartHD.png");
+                ChartUtilities.saveChartAsPNG(file1, lineChart, 859, 236, info1);
+            } catch (Exception e) {
+            }
         }
     }//GEN-LAST:event_btnTimKiemMouseClicked
 

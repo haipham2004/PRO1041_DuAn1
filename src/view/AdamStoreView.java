@@ -12,6 +12,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -24,18 +25,27 @@ public class AdamStoreView extends javax.swing.JFrame {
     Color selectedColor = new Color(204, 204, 204);
     Color enterColor = new Color(228, 227, 227);
     String tenNV;
+    private boolean isAdmin;
 
     /**
      * Creates new form Main
      */
     public AdamStoreView() {
+    }
+
+    public void setAdmin(boolean isAdmin) {
+        this.isAdmin = isAdmin;
+    }
+
+    public void showView() {
         initComponents();
         this.dispose();
         setUndecorated(true);
         setSize(1500, 820);
         this.setLocationRelativeTo(null);
-        execute();
+        execute(isAdmin);
         changePanelBody(new ThongKeSoLuongView());
+
     }
 
     public void changePanelBody(JPanel panel) {
@@ -60,7 +70,7 @@ public class AdamStoreView extends javax.swing.JFrame {
         return lbltenNV.getText();
     }
 
-    private void execute() {
+    private void execute(boolean isAdmin) {
         //Thêm icon vào 
         ImageIcon iconThongKe = new ImageIcon(getClass().getResource("/icon/document.png"));
         ImageIcon iconSanPham = new ImageIcon(getClass().getResource("/icon/shirt.png"));
@@ -70,8 +80,9 @@ public class AdamStoreView extends javax.swing.JFrame {
         ImageIcon iconKhachHang = new ImageIcon(getClass().getResource("/icon/user (1).png"));
         ImageIcon iconHoaDon = new ImageIcon(getClass().getResource("/icon/bill.png"));
         ImageIcon iconKhuyenMai = new ImageIcon(getClass().getResource("/icon/discount.png"));
-        ImageIcon iconVoucher = new ImageIcon(getClass().getResource("/icon/voucher.png"));
         ImageIcon iconDoiMatKhau = new ImageIcon(getClass().getResource("/icon/reset-password.png"));
+        ImageIcon iconDoiHang = new ImageIcon(getClass().getResource("/icon/exchange.png"));
+        ImageIcon iconLichSuDoiHang = new ImageIcon(getClass().getResource("/icon/schedule.png"));
         ImageIcon iconDangXuat = new ImageIcon(getClass().getResource("/icon/power-off.png"));
         //Tạo thanh thống kê
         MenuItem menuThongKeDT = new MenuItem(iconDot, "Thống kê doanh thu", new ActionListener() {
@@ -148,7 +159,7 @@ public class AdamStoreView extends javax.swing.JFrame {
         });
 
         //Lịch sử đổi trả
-        MenuItem menuLsuDoiHang = new MenuItem(null, "Lịch sử đổi hàng", new ActionListener() {
+        MenuItem menuLsuDoiHang = new MenuItem(iconLichSuDoiHang, "Lịch sử đổi hàng", new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 changePanelBody(new LichSuDoiHangView());
@@ -156,7 +167,7 @@ public class AdamStoreView extends javax.swing.JFrame {
         });
 
         //Đổi trả
-        MenuItem menuDoiHang = new MenuItem(null, "Đổi hàng", new ActionListener() {
+        MenuItem menuDoiHang = new MenuItem(iconDoiHang, "Đổi hàng", new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 changePanelBody(new DoiHangView());
@@ -183,14 +194,23 @@ public class AdamStoreView extends javax.swing.JFrame {
         MenuItem menuDangXuat = new MenuItem(iconDangXuat, "Đăng xuất", new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                DangNhapView dangNhapView = new DangNhapView();
-                dispose();
-                dangNhapView.setVisible(true);
+                // TODO add your handling code here:
+                int check = JOptionPane.showConfirmDialog(null, "Bạn có chắc chắn muốn đăng xuất?");
+                if (check == 0) {
+                    DangNhapView dangNhapView = new DangNhapView();
+                    dispose();
+                    dangNhapView.setVisible(true);
+                }
+
             }
         });
 
         //Câu lệnh thêm vào menu
-        addMenu(menuThongKe, menuMatHang, menuNhanVien, menuBanHang, menuKhachHang, menuHoaDon, menuDoiHang, menuLsuDoiHang, menuKm, menuDoiMatKhau, menuDangXuat);
+        if (isAdmin) {
+            addMenu(menuThongKe, menuMatHang, menuNhanVien, menuBanHang, menuKhachHang, menuHoaDon, menuDoiHang, menuLsuDoiHang, menuKm, menuDoiMatKhau, menuDangXuat);
+        } else {
+            addMenu(menuBanHang, menuKhachHang, menuHoaDon, menuDoiHang, menuLsuDoiHang, menuDoiMatKhau, menuDangXuat);
+        }
         MenuItemColor(menuThongKe);
         MenuItemColor(menuMatHang);
         MenuItemColor(menuSanPham1);
@@ -215,7 +235,6 @@ public class AdamStoreView extends javax.swing.JFrame {
             ArrayList<MenuItem> subMenu = menu[i].getSubMenu();
             for (MenuItem m : subMenu) {
                 addMenu(m);
-
             }
         }
         menus.revalidate();

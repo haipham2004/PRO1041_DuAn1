@@ -29,7 +29,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import model.ChiTietHoaDon;
+import model.HoaDonChiTiet;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.ChartRenderingInfo;
@@ -40,6 +40,7 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
 import repository.ThongKeDoanhThuRepository;
 import repository.ThongKeSoLuongRepository;
+import service.servicImp.ThongKeDoanhThuServiceImp;
 
 /**
  *
@@ -48,6 +49,8 @@ import repository.ThongKeSoLuongRepository;
 public class ThongKeDoanhThuView extends javax.swing.JPanel {
 
     ThongKeDoanhThuRepository repo = new ThongKeDoanhThuRepository();
+
+    ThongKeDoanhThuServiceImp service = new ThongKeDoanhThuServiceImp();
 
     /**
      * Creates new form VoucherView
@@ -59,13 +62,13 @@ public class ThongKeDoanhThuView extends javax.swing.JPanel {
     }
 
     public void setDataToChart(JPanel panelHoaDon) {
-        List<ChiTietHoaDon> listCthd = repo.getListThongKeDT();
+        List<HoaDonChiTiet> listCthd = service.getListThongKeDT();
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         if (txtNgayBD.getCalendar() == null || txtNgayKT.getCalendar() == null) {
             if (listCthd != null) {
-                for (ChiTietHoaDon chiTietHoaDon : listCthd) {
-                    dataset.addValue(chiTietHoaDon.getHoaDon().getTongTien(), "Tổng tiền",
-                            chiTietHoaDon.getHoaDon().getNgayTao());
+                for (HoaDonChiTiet chiTietHoaDon : listCthd) {
+                    dataset.addValue(chiTietHoaDon.getHD().getTongTien(), "Tổng tiền",
+                            chiTietHoaDon.getHD().getNgayTao());
                 }
             }
             JFreeChart lineChart = ChartFactory.createLineChart("Biểu đồ thống kê doanh thu".toUpperCase(),
@@ -80,7 +83,7 @@ public class ThongKeDoanhThuView extends javax.swing.JPanel {
             panelHoaDon.repaint();
             try {
                 final ChartRenderingInfo info1 = new ChartRenderingInfo(new StandardEntityCollection());
-                final File file1 = new File("F:\\FPT Polytechnic\\DA1\\PRO1041_DuAn1\\ChartImage\\ChartDT.png");
+                final File file1 = new File("C:\\ChartImage\\ChartDT.png");
                 ChartUtilities.saveChartAsPNG(file1, lineChart, 859, 639, info1);
             } catch (Exception e) {
             }
@@ -95,7 +98,7 @@ public class ThongKeDoanhThuView extends javax.swing.JPanel {
         String formattedDateTime = currentDateTime.format(formatter);
         DecimalFormat df = new DecimalFormat("#,###");
 
-        String path = "F:\\FPT Polytechnic\\DA1\\PRO1041_DuAn1\\PDF\\" + "ThongkeDT" + ".pdf";
+        String path = "C:\\PDF\\" + "ThongkeDT" + ".pdf";
         PdfWriter pdfWriter = new PdfWriter(path);
         PdfDocument pdfDocument = new PdfDocument(pdfWriter);
         pdfDocument.setDefaultPageSize(PageSize.A4);
@@ -108,7 +111,7 @@ public class ThongKeDoanhThuView extends javax.swing.JPanel {
         img2.setOpacity(0.2f);
         document.add(img2);
 
-        String imgPath2 = "F:\\FPT Polytechnic\\DA1\\PRO1041_DuAn1\\ChartImage\\ChartDT.png";
+        String imgPath2 = "C:\\ChartImage\\ChartDT.png";
         ImageData imgData2 = ImageDataFactory.create(imgPath2);
         Image img3 = new Image(imgData2);
         img3.setHeight(300);
@@ -329,26 +332,32 @@ public class ThongKeDoanhThuView extends javax.swing.JPanel {
         Date ngayBd = txtNgayBD.getDate();
         Date ngayKt = txtNgayKT.getDate();
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-        List<ChiTietHoaDon> listTKDT = repo.getListTKDT(ngayBd, ngayKt);
+        List<HoaDonChiTiet> listTKDT = repo.getListTKDT(ngayBd, ngayKt);
         if (txtNgayKT.getCalendar().before(txtNgayBD.getCalendar())) {
             JOptionPane.showMessageDialog(this, "Ngày kết thúc không hợp lệ");
         } else {
             if (listTKDT != null) {
-                for (ChiTietHoaDon chiTietHoaDon : listTKDT) {
-                    dataset.addValue(chiTietHoaDon.getHoaDon().getTongTien(), "Tổng tiền",
-                            chiTietHoaDon.getHoaDon().getNgayTao());
+                for (HoaDonChiTiet chiTietHoaDon : listTKDT) {
+                    dataset.addValue(chiTietHoaDon.getHD().getTongTien(), "Tổng tiền",
+                            chiTietHoaDon.getHD().getNgayTao());
+                }
+                JFreeChart lineChart = ChartFactory.createLineChart("Biểu đồ thống kê doanh thu".toUpperCase(),
+                        "Ngày", "Tổng tiền", dataset, PlotOrientation.VERTICAL,
+                        true, true, false);
+                ChartPanel chartPanel = new ChartPanel(lineChart);
+                chartPanel.setPreferredSize(new Dimension(859, 639));
+                panelTKDT.removeAll();
+                panelTKDT.setLayout(new CardLayout());
+                panelTKDT.add(chartPanel);
+                panelTKDT.validate();
+                panelTKDT.repaint();
+                try {
+                    final ChartRenderingInfo info1 = new ChartRenderingInfo(new StandardEntityCollection());
+                    final File file1 = new File("C:\\ChartImage\\ChartDT.png");
+                    ChartUtilities.saveChartAsPNG(file1, lineChart, 859, 639, info1);
+                } catch (Exception e) {
                 }
             }
-            JFreeChart lineChart = ChartFactory.createLineChart("Biểu đồ thống kê doanh thu".toUpperCase(),
-                    "Ngày", "Tổng tiền", dataset, PlotOrientation.VERTICAL,
-                    true, true, false);
-            ChartPanel chartPanel = new ChartPanel(lineChart);
-            chartPanel.setPreferredSize(new Dimension(859, 639));
-            panelTKDT.removeAll();
-            panelTKDT.setLayout(new CardLayout());
-            panelTKDT.add(chartPanel);
-            panelTKDT.validate();
-            panelTKDT.repaint();
         }
     }//GEN-LAST:event_btnTimKiemActionPerformed
 

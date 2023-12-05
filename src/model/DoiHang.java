@@ -15,7 +15,7 @@ public class DoiHang {
     private HoaDon hoaDon;
     private NhanVien nhanVien;
     private Date ngayDoiTra;
-    private boolean trangThai;
+    private String trangThai;
 
     public DoiHang() {
     }
@@ -29,7 +29,13 @@ public class DoiHang {
         this.hoaDon = hoaDon;
     }
 
-    public DoiHang(String maDoiHang, HoaDon hoaDon, NhanVien nhanVien, Date ngayDoiTra, boolean trangThai) {
+    public DoiHang(String maDoiHang, HoaDon hoaDon, NhanVien nhanVien) {
+        this.maDoiHang = maDoiHang;
+        this.hoaDon = hoaDon;
+        this.nhanVien = nhanVien;
+    }
+
+    public DoiHang(String maDoiHang, HoaDon hoaDon, NhanVien nhanVien, Date ngayDoiTra, String trangThai) {
         this.maDoiHang = maDoiHang;
         this.hoaDon = hoaDon;
         this.nhanVien = nhanVien;
@@ -69,19 +75,12 @@ public class DoiHang {
         this.ngayDoiTra = ngayDoiTra;
     }
 
-    public boolean isTrangThai() {
+    public String getTrangThai() {
         return trangThai;
     }
 
-    public void setTrangThai(boolean trangThai) {
+    public void setTrangThai(String trangThai) {
         this.trangThai = trangThai;
     }
     
-    public String chiTietTrangThai(){
-        if (trangThai) {
-            return "Đã đổi trả";
-        }else{
-            return "Hủy";
-        }
-    }
 }

@@ -50,23 +50,31 @@ public class ChiTietSanPhamServiceImp implements AdamStore<ChiTietSanPham, Strin
         return repo.getList(e);
     }
 
-    public List<ChiTietSanPham> getListGia(double giaMin, double giaMax) {
-        return repo.getListGia(giaMin, giaMax);
+    public List<ChiTietSanPham> getListGia(double giaMin, double giaMax, String name) {
+        return repo.getListGia(giaMin, giaMax, name);
     }
 
-    public List<ChiTietSanPham> listPageCTSP(int index) {
-        return repo.listPageCTSP(index);
+    public List<ChiTietSanPham> listPageCTSP(int index, String name) {
+        return repo.listPageCTSP(index, name);
     }
 
-    public int tongBanGhi() {
-        return repo.tongBanGhi();
+    public List<ChiTietSanPham> listPageCTSP2(int index) {
+        return repo.listPageCTSP2(index);
+    }
+
+    public int tongBanGhi(String name) {
+        return repo.tongBanGhi(name);
+    }
+
+    public int tongBanGhi2() {
+        return repo.tongBanGhi2();
     }
 
     public int updateTrangThaiSoLuong() {
         return repo.updateTrangThaiSoLuong();
     }
 
-    public boolean checkMaQR(String qrCode) throws SQLException {
+    public boolean checkMaQR(String qrCode) {
         return repo.checkMaQR(qrCode);
     }
 
@@ -74,24 +82,67 @@ public class ChiTietSanPhamServiceImp implements AdamStore<ChiTietSanPham, Strin
         return repo.taoQR(qrCode);
     }
 
-    public boolean checkExitCTSP(String maCTSP) throws SQLException {
-        return repo.checkExitCTSP(maCTSP);
-    }
-
     public List<ChiTietSanPham> getDanhSachSPCT(String maHoadon) {
         return repo.getDanhSachSPCT(maHoadon);
     }
 
-    public boolean checkTrungCTSP(String name) throws SQLException {
-        return repo.checkTrungCTSP(name);
+    public boolean checkTrungCTSP(String name1, String name2, String name3, String name4) {
+        return repo.checkTrungCTSP(name1, name2, name3, name4);
     }
 
     public List<ChiTietSanPham> getListLoc(String name1, String name2, String name3, String name4) {
         return repo.getListLoc(name1, name2, name3, name4);
     }
-
-
-    public int sua2(List<HoaDonChiTiet> list) {
-        return repo.sua2(list);
+    
+    public List<ChiTietSanPham> listPageCTSPDoiHang(int index, String name ,String tenCL) {
+        return repo.listPageCTSPDoiHang(index, name, tenCL);
     }
+
+    public List<ChiTietSanPham> getListLocMauSacOrKichThuoc(String name1, String name2, String name3, String name4) {
+        return repo.getListLocMauSacOrKichThuoc(name1, name2, name3, name4);
+    }
+    
+    public String getTenCL(String maCTSP){
+        return repo.getTenCL(maCTSP);
+    }
+    
+    public int tangSoLuong(int soLuong, String maCTSP) {
+        return repo.tangSoLuong(soLuong, maCTSP);
+    }
+    
+    public int giamSoLuong(int soLuong, String maCTSP) {
+        return repo.giamSoLuong(soLuong, maCTSP);
+    }
+
+    public int capNhatSoLuongThanhToanCong(int soLuong, String ma) {
+        return repo.capNhatSoLuongThanhToanCong(soLuong, ma);
+    }
+
+    public int capNhatSoLuongThanhToanTru(int soLuong, String ma) {
+        return repo.capNhatSoLuongThanhToanTru(soLuong, ma);
+    }
+
+    //
+    public List<ChiTietSanPham> getListLocCL(String name1, String name2) {
+        return repo.getListLocCL(name1, name2);
+    }
+    
+    public List<ChiTietSanPham> getListLocMS(String name1, String name2) {
+        return repo.getListLocMS(name1, name2);
+    }
+    
+    public List<ChiTietSanPham> getListLocKT(String name1, String name2) {
+        return repo.getListLocKT(name1, name2);
+    }
+    public List<ChiTietSanPham> getListLocCLMS(String name1, String name2,String name3){
+        return repo.getListLocCLMS(name1, name2, name3);
+    }
+    public List<ChiTietSanPham> getListLocMSKT(String name1, String name2,String name3){
+        return repo.getListLocMSKT(name1, name2, name3);
+    }
+    public List<ChiTietSanPham> getListLocCLKT(String name1, String name2,String name3){
+        return repo.getListLocCLKT(name1, name2, name3);
+    }
+    //
+
 }

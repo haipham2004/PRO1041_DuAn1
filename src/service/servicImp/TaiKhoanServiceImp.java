@@ -54,7 +54,7 @@ public class TaiKhoanServiceImp implements AdamStore<TaiKhoan, String>{
         return repo.checkMaTK(MaTK);
     }
     
-    public boolean isCurrentPasswordValid(String maTK, String enterPassWord) {
-        return repo.isCurrentPasswordValid(maTK, enterPassWord);
+    public boolean checkPassword(String maTK, String enterPassWord) {
+        return repo.checkPassword(maTK, enterPassWord);
     }
 }

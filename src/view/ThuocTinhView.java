@@ -43,20 +43,10 @@ public class ThuocTinhView extends javax.swing.JPanel {
         loadPageCL();
         loadPageMS();
         loadPageKT();
-//        loadCboChatLieu(serviceCl.getAll());
         rdConhang2.setSelected(true);
-    }
-
-    public void loadData() {
-        int indexs = pnlThuocTinh.getSelectedIndex();
-        if (indexs == 0) {
-            loadCboChatLieu(serviceCl.getAll());
-        } else if (indexs == 1) {
-            loadCboMauSac(serviceMS.getAll());
-        } else {
-            loadCboxKichThuoc(serviceKT.getAll());
-
-        }
+        loadCboChatLieu(serviceCl.getAll());
+        cboMS.setSelectedIndex(-1);
+        cboKT.setSelectedIndex(-1);
     }
 
     public ChatLieu savesCL() {
@@ -77,7 +67,7 @@ public class ThuocTinhView extends javax.swing.JPanel {
         for (ChatLieu chatLieu : list) {
             cbxChatLieu.addElement(chatLieu);
         }
-        cboThuọcTinh.setModel((ComboBoxModel) cbxChatLieu);
+        cboCL.setModel((ComboBoxModel) cbxChatLieu);
     }
 
     public void loadCboMauSac(List<MauSac> list) {
@@ -85,7 +75,7 @@ public class ThuocTinhView extends javax.swing.JPanel {
         for (MauSac mauSac : list) {
             cbxMauSac.addElement(mauSac);
         }
-        cboThuọcTinh.setModel((ComboBoxModel) cbxMauSac);
+        cboMS.setModel((ComboBoxModel) cbxMauSac);
     }
 
     public void loadCboxKichThuoc(List<KichThuoc> list) {
@@ -93,7 +83,7 @@ public class ThuocTinhView extends javax.swing.JPanel {
         for (KichThuoc kichThuoc : list) {
             cbxKichThuoc.addElement(kichThuoc);
         }
-        cboThuọcTinh.setModel((ComboBoxModel) cbxKichThuoc);
+        cboKT.setModel((ComboBoxModel) cbxKichThuoc);
     }
 
     public MauSac savesMS() {
@@ -184,10 +174,10 @@ public class ThuocTinhView extends javax.swing.JPanel {
 
     public void loadPageMS() {
         tongBanGhiMS = serviceMS.tongBanGhi();
-        if (tongBanGhiMS % 4 == 0) {
-            soTrangMS = tongBanGhiMS / 4;
+        if (tongBanGhiMS % 5 == 0) {
+            soTrangMS = tongBanGhiMS / 5;
         } else {
-            soTrangMS = tongBanGhiMS / 4 + 1;
+            soTrangMS = tongBanGhiMS / 5 + 1;
         }
         lbSoTrang.setText(trangMS + " of " + soTrangMS);
         fillMauSac(serviceMS.listPageMS(trangMS));
@@ -195,22 +185,21 @@ public class ThuocTinhView extends javax.swing.JPanel {
 
     public void loadPageCL() {
         tongBanGhiCL = serviceCl.tongBanGhi();
-        if (tongBanGhiCL % 4 == 0) {
-            soTrangCL = tongBanGhiCL / 4;
+        if (tongBanGhiCL % 5 == 0) {
+            soTrangCL = tongBanGhiCL / 5;
         } else {
-            soTrangCL = tongBanGhiCL / 4 + 1;
+            soTrangCL = tongBanGhiCL / 5 + 1;
         }
         lbSoTrang.setText(trangCL + " of " + soTrangCL);
         fillChatLieu(serviceCl.listPageCL(trangCL));
-
     }
 
     public void loadPageKT() {
         tongBanGhiKT = serviceKT.tongBanGhi();
-        if (tongBanGhiKT % 4 == 0) {
-            soTrangKT = tongBanGhiKT / 4;
+        if (tongBanGhiKT % 5 == 0) {
+            soTrangKT = tongBanGhiKT / 5;
         } else {
-            soTrangKT = tongBanGhiKT / 4 + 1;
+            soTrangKT = tongBanGhiKT / 5 + 1;
         }
         lbSoTrang.setText(trangKT + " of " + soTrangKT);
         fillKichThuoc(serviceKT.listPageKT(trangKT));
@@ -252,7 +241,6 @@ public class ThuocTinhView extends javax.swing.JPanel {
         btnThemThuocTinh = new javax.swing.JButton();
         btnSuaThuocTinh = new javax.swing.JButton();
         btnClearThuocTinh = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
         btnDauTT = new javax.swing.JButton();
         btnCuoiTT = new javax.swing.JButton();
         btnLuiTT = new javax.swing.JButton();
@@ -268,7 +256,11 @@ public class ThuocTinhView extends javax.swing.JPanel {
         jPanel4 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         tblKichThuoc = new javax.swing.JTable();
-        cboThuọcTinh = new javax.swing.JComboBox<>();
+        cboCL = new javax.swing.JComboBox<>();
+        btnQuayLai = new javax.swing.JButton();
+        cboMS = new javax.swing.JComboBox<>();
+        cboKT = new javax.swing.JComboBox<>();
+        btnReset = new javax.swing.JButton();
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Quản lý thuộc tính"));
 
@@ -346,8 +338,6 @@ public class ThuocTinhView extends javax.swing.JPanel {
                 btnClearThuocTinhActionPerformed(evt);
             }
         });
-
-        jButton1.setText("Xuất file");
 
         btnDauTT.setText("Đầu ");
         btnDauTT.addActionListener(new java.awt.event.ActionListener() {
@@ -496,10 +486,43 @@ public class ThuocTinhView extends javax.swing.JPanel {
 
         pnlThuocTinh.addTab("Kích Thước", jPanel4);
 
-        cboThuọcTinh.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        cboThuọcTinh.addMouseListener(new java.awt.event.MouseAdapter() {
+        cboCL.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cboCL.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                cboThuọcTinhMouseClicked(evt);
+                cboCLMouseClicked(evt);
+            }
+        });
+        cboCL.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboCLActionPerformed(evt);
+            }
+        });
+
+        btnQuayLai.setText("Quay lại");
+        btnQuayLai.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnQuayLaiActionPerformed(evt);
+            }
+        });
+
+        cboMS.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cboMS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboMSActionPerformed(evt);
+            }
+        });
+
+        cboKT.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cboKT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboKTActionPerformed(evt);
+            }
+        });
+
+        btnReset.setText("Reset");
+        btnReset.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnResetActionPerformed(evt);
             }
         });
 
@@ -511,22 +534,25 @@ public class ThuocTinhView extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(14, 14, 14)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                .addGap(43, 43, 43)
-                                .addComponent(btnThemThuocTinh)
-                                .addGap(56, 56, 56)
-                                .addComponent(btnSuaThuocTinh)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnClearThuocTinh))
-                            .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(14, 14, 14)
-                                .addComponent(jButton1))
+                                .addGap(43, 43, 43)
+                                .addComponent(btnThemThuocTinh)
+                                .addGap(33, 33, 33)
+                                .addComponent(btnSuaThuocTinh)
+                                .addGap(28, 28, 28)
+                                .addComponent(btnClearThuocTinh)
+                                .addGap(28, 28, 28)
+                                .addComponent(btnQuayLai))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(55, 55, 55)
-                                .addComponent(cboThuọcTinh, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(101, 101, 101)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(cboCL, javax.swing.GroupLayout.Alignment.LEADING, 0, 179, Short.MAX_VALUE)
+                                    .addComponent(cboMS, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(cboKT, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnReset))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(157, 157, 157)
                         .addComponent(btnDauTT)
@@ -538,7 +564,7 @@ public class ThuocTinhView extends javax.swing.JPanel {
                         .addComponent(btnTienTT)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnCuoiTT)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(26, 26, 26))
             .addComponent(pnlThuocTinh)
         );
         jPanel1Layout.setVerticalGroup(
@@ -549,14 +575,20 @@ public class ThuocTinhView extends javax.swing.JPanel {
                         .addContainerGap()
                         .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cboCL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnReset))
                         .addGap(18, 18, 18)
-                        .addComponent(cboThuọcTinh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(cboMS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(cboKT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(55, 55, 55)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnThemThuocTinh)
                     .addComponent(btnSuaThuocTinh)
                     .addComponent(btnClearThuocTinh)
-                    .addComponent(jButton1))
+                    .addComponent(btnQuayLai))
                 .addGap(39, 39, 39)
                 .addComponent(pnlThuocTinh, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(45, 45, 45)
@@ -688,10 +720,21 @@ public class ThuocTinhView extends javax.swing.JPanel {
 
     private void btnClearThuocTinhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearThuocTinhActionPerformed
         // TODO add your handling code here:
+        int index = pnlThuocTinh.getSelectedIndex();
+        if (index == 0) {
+            loadPageCL();
+        } else if (index == 1) {
+            loadPageMS();
+        } else {
+            loadPageKT();
+        }
         txtTenMa.setEnabled(true);
         txtTenMa.setText("");
         txtTenThuocTinh.setText("");
         btnThemThuocTinh.setEnabled(true);
+        cboCL.setSelectedIndex(-1);
+        cboMS.setSelectedIndex(-1);
+        cboKT.setSelectedIndex(-1);
     }//GEN-LAST:event_btnClearThuocTinhActionPerformed
 
     private void btnDauTTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDauTTActionPerformed
@@ -808,35 +851,82 @@ public class ThuocTinhView extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_pnlThuocTinhMouseClicked
 
-    private void cboThuọcTinhMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cboThuọcTinhMouseClicked
+    private void cboCLMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cboCLMouseClicked
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_cboCLMouseClicked
+
+    private void cboCLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboCLActionPerformed
         // TODO add your handling code here:
         try {
-             int indexs = pnlThuocTinh.getSelectedIndex();
-        if (indexs == 0) {
-            ChatLieu cl = (ChatLieu) cbxChatLieu.getSelectedItem();
-            loadCboChatLieu(serviceCl.getAll());
-               String cls = cl.toString();
-            fillChatLieu(serviceCl.getList(cls));
-        } else if (indexs == 1) {
-
-            MauSac ms = (MauSac) cbxMauSac.getSelectedItem();
-            loadCboMauSac(serviceMS.getAll());
-            String mss = ms.toString();
-            fillMauSac(serviceMS.getList(mss));
-        } else {
-
-            KichThuoc kt = (KichThuoc) cbxKichThuoc.getSelectedItem();
-            loadCboxKichThuoc(serviceKT.getAll());
-            String kts = kt.toString();
-            fillKichThuoc(serviceKT.getList(kts));
-        }
+            int indexs = pnlThuocTinh.getSelectedIndex();
+            if (indexs == 0) {
+                ChatLieu cl = (ChatLieu) cbxChatLieu.getSelectedItem();
+                String cls = cl.toString();
+                fillChatLieu(serviceCl.getList(cls));
+            }
         } catch (Exception e) {
-          
+
         }
-//            ChatLieu cl = (ChatLieu) cbxChatLieu.getSelectedItem();
-//            String cls = cl.toString();
-//            fillChatLieu(serviceCl.getList(cls));
-    }//GEN-LAST:event_cboThuọcTinhMouseClicked
+    }//GEN-LAST:event_cboCLActionPerformed
+
+    private void btnQuayLaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuayLaiActionPerformed
+        // TODO add your handling code here:
+        int indexs = pnlThuocTinh.getSelectedIndex();
+        if (indexs == 0) {
+            loadPageCL();
+        } else if (indexs == 1) {
+            loadPageMS();
+        } else {
+            loadPageKT();
+
+        }
+    }//GEN-LAST:event_btnQuayLaiActionPerformed
+
+    private void cboMSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboMSActionPerformed
+        // TODO add your handling code here:
+        try {
+            int indexs = pnlThuocTinh.getSelectedIndex();
+            if (indexs == 1) {
+                MauSac ms = (MauSac) cbxMauSac.getSelectedItem();
+                String mss = ms.toString();
+                fillMauSac(serviceMS.getList(mss));
+            }
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_cboMSActionPerformed
+
+    private void cboKTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboKTActionPerformed
+        // TODO add your handling code here:
+        try {
+            int indexs = pnlThuocTinh.getSelectedIndex();
+            if (indexs == 2) {
+                KichThuoc kt = (KichThuoc) cbxKichThuoc.getSelectedItem();
+                String kts = kt.toString();
+                fillKichThuoc(serviceKT.getList(kts));
+            }
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_cboKTActionPerformed
+
+    private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
+        // TODO add your handling code here:
+        int index = pnlThuocTinh.getSelectedIndex();
+        if (index == 0) {
+            cboMS.setSelectedIndex(-1);
+            cboKT.setSelectedIndex(-1);
+            loadCboChatLieu(serviceCl.getAll());
+
+        } else if (index == 1) {
+            loadCboMauSac(serviceMS.getAll());
+            cboCL.setSelectedIndex(-1);
+            cboKT.setSelectedIndex(-1);
+        } else {
+            loadCboxKichThuoc(serviceKT.getAll());
+            cboMS.setSelectedIndex(-1);
+            cboCL.setSelectedIndex(-1);
+        }
+    }//GEN-LAST:event_btnResetActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -844,13 +934,16 @@ public class ThuocTinhView extends javax.swing.JPanel {
     private javax.swing.JButton btnCuoiTT;
     private javax.swing.JButton btnDauTT;
     private javax.swing.JButton btnLuiTT;
+    private javax.swing.JButton btnQuayLai;
+    private javax.swing.JButton btnReset;
     private javax.swing.JButton btnSuaThuocTinh;
     private javax.swing.JButton btnThemThuocTinh;
     private javax.swing.JButton btnTienTT;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
-    private javax.swing.JComboBox<String> cboThuọcTinh;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JComboBox<String> cboCL;
+    private javax.swing.JComboBox<String> cboKT;
+    private javax.swing.JComboBox<String> cboMS;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

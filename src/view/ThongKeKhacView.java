@@ -40,7 +40,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import model.ChiTietHoaDon;
+import model.HoaDonChiTiet;
 import model.SanPham;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
@@ -62,6 +62,7 @@ import org.jfree.data.gantt.TaskSeriesCollection;
 import org.jfree.data.xy.XYSeries;
 import repository.ThongKeKhacRepository;
 import repository.ThongKeSoLuongRepository;
+import service.servicImp.ThongKeKhacServiceImp;
 import util.DBConnect;
 
 /**
@@ -70,7 +71,7 @@ import util.DBConnect;
  */
 public class ThongKeKhacView extends javax.swing.JPanel {
 
-    ThongKeKhacRepository repo = new ThongKeKhacRepository();
+    ThongKeKhacServiceImp service = new ThongKeKhacServiceImp();
     public static String tenSp;
     DefaultComboBoxModel<SanPham> cboSP = new DefaultComboBoxModel<>();
     private static final long serialVersionUID = 1L;
@@ -81,8 +82,7 @@ public class ThongKeKhacView extends javax.swing.JPanel {
     public ThongKeKhacView() {
         initComponents();
         setDataToChart(panel1);
-
-        loadCbo(repo.getTenSP(tenSp));
+        loadCbo(service.getTenSP(tenSp));
         setDataToChart2(panel2);
     }
 
@@ -99,16 +99,16 @@ public class ThongKeKhacView extends javax.swing.JPanel {
     }
 
     public void setDataToChart(JPanel panelTopSP) {
-        List<ChiTietHoaDon> list1 = repo.getList1();
+        List<HoaDonChiTiet> list1 = service.getList1();
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         if (list1 != null) {
-            for (ChiTietHoaDon chiTietHoaDon : list1) {
-                dataset.addValue(chiTietHoaDon.getSoLuong() + chiTietHoaDon.getChiTietSanPham().getSoLuong(), "Tổng",
-                        chiTietHoaDon.getChiTietSanPham().getSanPham().getTenSanPham());
+            for (HoaDonChiTiet chiTietHoaDon : list1) {
+                dataset.addValue(chiTietHoaDon.getSoLuong() + chiTietHoaDon.getCtsp().getSoLuong(), "Tổng",
+                        chiTietHoaDon.getCtsp().getSanPham().getTenSanPham());
                 dataset.addValue(chiTietHoaDon.getSoLuong(), "Số bán được",
-                        chiTietHoaDon.getChiTietSanPham().getSanPham().getTenSanPham());
-                dataset.addValue(chiTietHoaDon.getChiTietSanPham().getSoLuong(), "Sản phẩm còn lại",
-                        chiTietHoaDon.getChiTietSanPham().getSanPham().getTenSanPham());
+                        chiTietHoaDon.getCtsp().getSanPham().getTenSanPham());
+                dataset.addValue(chiTietHoaDon.getCtsp().getSoLuong(), "Sản phẩm còn lại",
+                        chiTietHoaDon.getCtsp().getSanPham().getTenSanPham());
             }
         }
         JFreeChart barChart = ChartFactory.createBarChart("Doanh thu sản phẩm".toUpperCase(),
@@ -124,7 +124,7 @@ public class ThongKeKhacView extends javax.swing.JPanel {
 
         try {
             final ChartRenderingInfo info2 = new ChartRenderingInfo(new StandardEntityCollection());
-            final File file2 = new File("F:\\FPT Polytechnic\\DA1\\PRO1041_DuAn1\\ChartImage\\ChartDTSPchung.png");
+            final File file2 = new File("C:\\ChartImage\\ChartDTSPchung.png");
             ChartUtilities.saveChartAsPNG(file2, barChart, 859, 236, info2);
         } catch (Exception e) {
         }
@@ -134,15 +134,15 @@ public class ThongKeKhacView extends javax.swing.JPanel {
         java.util.Date ngayBd = txtNgayBD.getDate();
         java.util.Date ngayKt = txtNgayKT.getDate();
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-        List<ChiTietHoaDon> listTK1 = repo.getListTK1(txtNgayBD.getDate(), txtNgayKT.getDate());
+        List<HoaDonChiTiet> listTK1 = service.getListTK1(txtNgayBD.getDate(), txtNgayKT.getDate());
         if (listTK1 != null) {
-            for (ChiTietHoaDon chiTietHoaDon : listTK1) {
-                dataset.addValue(chiTietHoaDon.getSoLuong() + chiTietHoaDon.getChiTietSanPham().getSoLuong(), "Tổng sản phẩm",
-                        chiTietHoaDon.getChiTietSanPham().getSanPham().getTenSanPham());
+            for (HoaDonChiTiet chiTietHoaDon : listTK1) {
+                dataset.addValue(chiTietHoaDon.getSoLuong() + chiTietHoaDon.getCtsp().getSoLuong(), "Tổng sản phẩm",
+                        chiTietHoaDon.getCtsp().getSanPham().getTenSanPham());
                 dataset.addValue(chiTietHoaDon.getSoLuong(), "Số bán được",
-                        chiTietHoaDon.getChiTietSanPham().getSanPham().getTenSanPham());
-                dataset.addValue(chiTietHoaDon.getChiTietSanPham().getSoLuong(), "Sản phẩm còn lại",
-                        chiTietHoaDon.getChiTietSanPham().getSanPham().getTenSanPham());
+                        chiTietHoaDon.getCtsp().getSanPham().getTenSanPham());
+                dataset.addValue(chiTietHoaDon.getCtsp().getSoLuong(), "Sản phẩm còn lại",
+                        chiTietHoaDon.getCtsp().getSanPham().getTenSanPham());
             }
         }
         JFreeChart barChart = ChartFactory.createBarChart("Doanh thu sản phẩm".toUpperCase(),
@@ -157,7 +157,7 @@ public class ThongKeKhacView extends javax.swing.JPanel {
         panel1.repaint();
         try {
             final ChartRenderingInfo info2 = new ChartRenderingInfo(new StandardEntityCollection());
-            final File file2 = new File("F:\\FPT Polytechnic\\DA1\\PRO1041_DuAn1\\ChartImage\\ChartDTSPchung.png");
+            final File file2 = new File("C:\\ChartImage\\ChartDTSPchung.png");
             ChartUtilities.saveChartAsPNG(file2, barChart, 859, 236, info2);
         } catch (Exception e) {
         }
@@ -166,16 +166,16 @@ public class ThongKeKhacView extends javax.swing.JPanel {
     public void setDataToChart2(JPanel panel2) {
         SanPham sp = (SanPham) cboSP.getSelectedItem();
         tenSp = sp.toString();
-        List<ChiTietHoaDon> list2 = repo.getList2(tenSp);
+        List<HoaDonChiTiet> list2 = service.getList2(tenSp);
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         if (list2 != null) {
-            for (ChiTietHoaDon chiTietHoaDon : list2) {
-                dataset.addValue(chiTietHoaDon.getHoaDon().getSoLuongHoaDon() + chiTietHoaDon.getSoLuong(), "Tổng",
-                        chiTietHoaDon.getHoaDon().getNgayTao());
+            for (HoaDonChiTiet chiTietHoaDon : list2) {
+                dataset.addValue(chiTietHoaDon.getHD().getSoLuongHoaDon() + chiTietHoaDon.getSoLuong(), "Tổng",
+                        chiTietHoaDon.getHD().getNgayTao());
                 dataset.addValue(chiTietHoaDon.getSoLuong(), "Bán được",
-                        chiTietHoaDon.getHoaDon().getNgayTao());
-                dataset.addValue(chiTietHoaDon.getChiTietSanPham().getSoLuong(), "Còn lại",
-                        chiTietHoaDon.getHoaDon().getNgayTao());
+                        chiTietHoaDon.getHD().getNgayTao());
+                dataset.addValue(chiTietHoaDon.getCtsp().getSoLuong(), "Còn lại",
+                        chiTietHoaDon.getHD().getNgayTao());
 
             }
         }
@@ -195,15 +195,15 @@ public class ThongKeKhacView extends javax.swing.JPanel {
         java.util.Date ngayBd = txtNgayBD2.getDate();
         java.util.Date ngayKt = txtNgayKT2.getDate();
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-        List<ChiTietHoaDon> listTK2 = repo.getListTK2(tenSp, ngayBd, ngayKt);
+        List<HoaDonChiTiet> listTK2 = service.getListTK2(tenSp, ngayBd, ngayKt);
         if (listTK2 != null) {
-            for (ChiTietHoaDon chiTietHoaDon : listTK2) {
-                dataset.addValue(chiTietHoaDon.getHoaDon().getSoLuongHoaDon() + chiTietHoaDon.getSoLuong(), "Tổng",
-                        chiTietHoaDon.getHoaDon().getNgayTao());
+            for (HoaDonChiTiet chiTietHoaDon : listTK2) {
+                dataset.addValue(chiTietHoaDon.getHD().getSoLuongHoaDon() + chiTietHoaDon.getSoLuong(), "Tổng",
+                        chiTietHoaDon.getHD().getNgayTao());
                 dataset.addValue(chiTietHoaDon.getSoLuong(), "Bán được",
-                        chiTietHoaDon.getHoaDon().getNgayTao());
-                dataset.addValue(chiTietHoaDon.getChiTietSanPham().getSoLuong(), "Còn lại",
-                        chiTietHoaDon.getHoaDon().getNgayTao());
+                        chiTietHoaDon.getHD().getNgayTao());
+                dataset.addValue(chiTietHoaDon.getCtsp().getSoLuong(), "Còn lại",
+                        chiTietHoaDon.getHD().getNgayTao());
 
             }
         }
@@ -228,7 +228,7 @@ public class ThongKeKhacView extends javax.swing.JPanel {
         String formattedDateTime = currentDateTime.format(formatter);
         DecimalFormat df = new DecimalFormat("#,###");
 
-        String path = "F:\\FPT Polytechnic\\DA1\\PRO1041_DuAn1\\PDF\\" + "Thongkekhac" + ".pdf";
+        String path = "C:\\PDF\\" + "Thongkekhac" + ".pdf";
         PdfWriter pdfWriter = new PdfWriter(path);
         PdfDocument pdfDocument = new PdfDocument(pdfWriter);
         pdfDocument.setDefaultPageSize(PageSize.A4);
@@ -241,7 +241,7 @@ public class ThongKeKhacView extends javax.swing.JPanel {
         img2.setOpacity(0.2f);
         document.add(img2);
 
-        String imgPath2 = "F:\\FPT Polytechnic\\DA1\\PRO1041_DuAn1\\ChartImage\\ChartDTSPchung.png";
+        String imgPath2 = "C:\\ChartImage\\ChartDTSPchung.png";
         ImageData imgData2 = ImageDataFactory.create(imgPath2);
         Image img3 = new Image(imgData2);
         img3.setHeight(300);
@@ -249,13 +249,7 @@ public class ThongKeKhacView extends javax.swing.JPanel {
         img3.setFixedPosition(60, 400f);
         document.add(img3);
 
-        String imgPath3 = "F:\\FPT Polytechnic\\DA1\\PRO1041_DuAn1\\ChartImage\\ChartDTSPrieng.png";
-        ImageData imgData3 = ImageDataFactory.create(imgPath3);
-        Image img4 = new Image(imgData3);
-        img4.setHeight(300);
-        img4.setWidth(500);
-        img4.setFixedPosition(60, 30f);
-        document.add(img4);
+       
 
         String fontPath = "C:\\Windows\\Fonts\\Arial.ttf";
         PdfFont font = PdfFontFactory.createFont(fontPath, PdfEncodings.IDENTITY_H);

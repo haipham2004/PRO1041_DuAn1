@@ -1,8 +1,4 @@
 
---bản full
-﻿----Update:2023-11-27--lúc 14g32p--okela
-
-
 CREATE DATABASE AdamStores
 GO
 USE AdamStores
@@ -60,7 +56,7 @@ CREATE TABLE [HoaDon] (
   [MaHoaDon] varchar(10),
   [MaNV] varchar(10) not null,
   CONSTRAINT FK_HD_NV foreign key(MaNV) references NhanVien(MaNV),
-  [MaKH] varchar(10) not null,
+  [MaKH] varchar(10),
   CONSTRAINT FK_HD_KH foreign key(MaKH) references KhachHang(MaKH),
   [NgayTao] datetime,
   [TongTien] Money,
@@ -113,7 +109,8 @@ PRIMARY KEY ([MaKichThuoc])
 );
 
 CREATE TABLE [ChiTietSanPham] (
-  [MaCTSP] VARCHAR(10) NOT NULL DEFAULT SUBSTRING(CONVERT(varchar(255), NEWID()), 25, 5),
+ --[MaCTSP] VARCHAR(10) NOT NULL DEFAULT SUBSTRING(CONVERT(varchar(255), NEWID()), 25, 5),
+ [MaCTSP] VARCHAR(10) NOT NULL DEFAULT CONCAT('CTSP', SUBSTRING(CONVERT(varchar(255), NEWID()), 25, 3)),
   [MaSanPham] varchar(10) not null,
   CONSTRAINT FK_CTSP_SP foreign key(MaSanPham) references SanPham(MaSanPham),
   [MaMauSac] varchar(10) not null,
@@ -150,13 +147,13 @@ CREATE TABLE [DoiHang] (
    [MaHoaDon] varchar(10) not null,
    CONSTRAINT FK_DH_HD foreign key(MaHoaDon) references HoaDon(MaHoaDon),
   [NgayDoiTra] date,
-  [TrangThai] bit,
+  [TrangThai] nvarchar(30),
   PRIMARY KEY ([MaDoiHang])
 );
 
 CREATE TABLE [DoiHangChiTiet] (
   [MaDHCT] varchar(10),
-  [MaCTSP] varchar(10) not null,
+  [MaCTSP] varchar(10) ,
    CONSTRAINT FK_DHCT_SPCT foreign key(MaCTSP) references ChiTietSanPham(MaCTSP),
   [MaDoiHang] varchar(10) not null,
    CONSTRAINT FK_DHCT_DH foreign key(MaDoiHang) references DoiHang(MaDoiHang),
@@ -167,4 +164,3 @@ CREATE TABLE [DoiHangChiTiet] (
   [TrangThai] bit,
   PRIMARY KEY ([MaDHCT])
 );
-

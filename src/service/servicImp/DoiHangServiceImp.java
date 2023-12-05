@@ -24,7 +24,7 @@ public class DoiHangServiceImp implements AdamStore<DoiHang, String> {
 
     @Override
     public int them(DoiHang k) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return repo.themDonDoiHang(k);
     }
 
     @Override
@@ -45,6 +45,22 @@ public class DoiHangServiceImp implements AdamStore<DoiHang, String> {
     @Override
     public List<DoiHang> getList(String e) {
         return repo.getList(e);
+    }
+    
+    public int countDoiHang() {
+        return repo.countDoiHang();
+    }
+    
+    public List<DoiHang> getAllDangDoiHang() {
+        return repo.getAllDangDoiHang();
+    }
+    
+    public int capNhatTrangThai(String maDH){
+        return repo.capNhatTrangThai(maDH);
+    }
+    
+    public int huyDonDoiHang(String maDH){
+        return repo.huyDonDoiHang(maDH);
     }
 
 }

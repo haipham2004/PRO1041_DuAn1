@@ -1,4 +1,3 @@
---update ﻿----Update:2023-11-27--lúc 14g32p--okela
 
 INSERT INTO TaiKhoan VALUES
 ('TK01','hoilamgi1','khongnoidau1','Admin',1),
@@ -10,45 +9,53 @@ INSERT INTO NhanVien VALUES
 ('NV01','TK01',N'Phạm Ngọc Hải',1,N'Ninh Bình','0334294889','037643953721','2023-09-15',1,'anh1.png'),
 ('NV02','TK02',N'Trần Anh Quân',1,N'Hà Nội','0958655432','037637459321','2023-09-15',1,'anh2.png'),
 ('NV03','TK03',N'Nguyễn Khánh Li',0,N'Bắc Ninh','0394747324','0378475845','2023-08-13',1,'anh3.png'),
-('NV04','TK04',N'Nguyễn Đình Minh Hiếu',1,N'Ninh Bình','0334294653','037643953435','2023-07-15',0,'anh4.png'),
+('NV04','TK04',N'Nguyễn Đình Minh Hiếu',1,N'Hà Nội','0334294653','037643953435','2023-07-15',0,'anh4.png'),
 ('NV05','TK05',N'Mai Thuỳ Linh',0,N'Hà Nội','0334294878','037643953267','2023-07-19',0,'anh5.png')
 INSERT INTO KhachHang Values
 ('KH01',N'Đoàn Xuân Bằng','2004-11-03','0934832745','bangdx@gmail.com',1,N'Nam Định'),
 ('KH02',N'Vũ Mạnh Trường','2004-07-09','0934832324','truongvmx@gmail.com',1,N'Nam Định'),
-('KH03',N'Hoàng Minh Tâm','2004-01-15','0934832234','tamhm@gmail.com',0,N'Nghệ An')
-
-
+('KH03',N'Hoàng Minh Tâm','2004-01-15','0934832234','tamhm@gmail.com',0,N'Nghệ An'),
+('KH04',N'Nguyễn Tuấn Khanh','2004-08-22','0934832789','khanhnt@gmail.com',1,N'Ninh Bình'),
+('KH05',N'Lê Tiến Dũng','2004-07-23','0934832987','dunglt@gmail.com',1,N'Ninh Bình'),
+('KHNE',null,null,null,null,null,null)
 INSERT INTO LoaiSanPham VALUES
-('LSP01',N'Áo thun nam',1,N'Hàng đẹp'),
+('LSP01',N'Áo hoodie nam',1,N'Hàng đẹp'),
 ('LSP02',N'Áo sơ mi nam',1,N'Hàng đẹp'),
 ('LSP03',N'Áo khoác nam',1,N'Hàng đẹp'),
-('LSP04',N'Áo polo Nam',0,N'Hàng đẹp'),
-('LSP05',N'Áo jeans Nam',1,N'Hàng đẹp')
+('LSP04',N'Áo len nam',1,N'Hàng đẹp'),
+('LSP05',N'Áo jeans nam',1,N'Hàng đẹp')
 INSERT INTO SanPham VALUES
-('SP01',N'OLD NAVY',1,'LSP05',N'Việt Nam'),
-('SP02',N'GAP',1,'LSP05',N'Lào'),
+('SP01',N'Nuker',1,'LSP05',N'Việt Nam'),
+('SP02',N'GAP',1,'LSP05',N'Hàn Quốc'),
 ('SP03',N'LEVI',1,'LSP05',N'Thái Lan'),
-('SP04',N'Basic Tee',0,'LSP01',N'Hàn Quốc'),
-('SP05',N'Graphic Tee',0,'LSP01',N'Việt Nam'),
+('SP04',N'Basic Tee',1,'LSP01',N'Hàn Quốc'),
+('SP05',N'Graphic Tee',1,'LSP01',N'Việt Nam'),
 ('SP06',N'Longline Tee',1,'LSP01',N'Campuchia'),
 ('SP07',N'Flannel Shirt',1,'LSP03',N'Việt Nam'),
-('SP08',N'inen Shirt',1,'LSP03',N'Việt Nam'),
+('SP08',N'Inen Shirt',1,'LSP03',N'Việt Nam'),
 ('SP09',N'Western Shirt',1,'LSP03',N'Nhật Bản'),
 ('SP10',N'Denim Jacket',1,'LSP02',N'Việt Nam'),
 ('SP11',N'Down Jacket',1,'LSP02',N'Việt Nam'),
-('SP12',N'Pea Coat ',0,'LSP02',N'Đài Loan')
+('SP12',N'Pea Coat ',1,'LSP02',N'Đài Loan')
 INSERT INTO MauSac VALUES
 ('MS01',N'Đỏ',1),
 ('MS02',N'Đen',1),
 ('MS03',N'Trắng',1),
 ('MS04',N'Xanh',1),
-('MS05',N'Vàng',1)
+('MS05',N'Vàng',1),
+('MS06',N'Xám',1),
+('MS07',N'Be',1),
+('MS08',N'Hồng',1),
+('MS09',N'Bạc',1),
+('MS10',N'Tím',1)
 INSERT INTO ChatLieu VALUES
-('CL01',N'Vải cotton',1),
-('CL02',N'Vải kaki',1),
+('CL01',N'Vải Canvas',1),
+('CL02',N'Vải Cotton',1),
 ('CL03',N'Vải Kate',1),
-('CL04',N'Vải nỉ',1),
-('CL05',N'Vải Jean',1)
+('CL04',N'Vải lụa',1),
+('CL05',N'Vải Jean',1),
+('CL06',N' Vải Modal',1)
+
 INSERT INTO KichThuoc VALUES
 ('KT01','S',1),
 ('KT02','M',1),
@@ -61,18 +68,20 @@ INSERT INTO Events VALUES
 ('EV03',N'Giáng sinh',0,'40%','2023-11-03','2023-11-12',N'Siêu giảm giá',1,1,'2500000'),
 ('EV04',N'Ngày nhà giáo Việt Nam 20/11',0,'40%','2023-11-12','2023-11-13',N'Siêu giảm giá',1,1,'7500000')
 
-SELECT*FROM ChiTietSanPham
 INSERT INTO ChiTietSanPham(MaSanPham,MaMauSac,MaChatLieu,MaKichThuoc,SoLuong,Gia,TrangThai,qrCode) VALUES
-('SP02','MS05','CL03','KT04',50,400000,1,null),
-('SP05','MS02','CL01','KT01',50,356000,0,null),
-('SP04','MS03','CL02','KT03',50,200000,1,null),
-('SP03','MS04','CL04','KT02',50,200000,1,null),
-('SP01','MS01','CL05','KT05',50,200000,0,null),
-('SP02','MS05','CL04','KT01',70,320000,1,null),
-('SP03','MS05','CL05','KT02',80,650000,1,null),
-('SP05','MS03','CL03','KT05',90,780000,1,null),
-('SP01','MS04','CL04','KT04',100,210000,1,null)
-SELECT*FROM HoaDon
+('SP02','MS05','CL03','KT04',200,400000,1,null),
+('SP05','MS02','CL01','KT01',210,750000,0,null),
+('SP04','MS03','CL02','KT03',230,200000,1,null),
+('SP03','MS04','CL04','KT02',250,600000,1,null),
+('SP01','MS01','CL05','KT05',210,200000,0,null),
+('SP02','MS05','CL04','KT01',150,380000,1,null),
+('SP03','MS05','CL05','KT02',110,650000,1,null),
+('SP05','MS03','CL03','KT05',120,780000,1,null),
+('SP01','MS04','CL04','KT04',123,220000,1,null),
+('SP06','MS06','CL02','KT03',178,390000,1,null),
+('SP07','MS07','CL01','KT05',189,470000,1,null),
+('SP09','MS09','CL05','KT04',100,980000,1,null),
+('SP10','MS10','CL02','KT03',100,980000,1,null)
 
 INSERT INTO HoaDon VALUES
 ('HD01','NV05','KH03',getDate(),450000,50000,400000,N'Đã thanh toán',N'Thành công','EV03'),
@@ -96,70 +105,69 @@ INSERT INTO HoaDon VALUES
 ('HD19','NV02','KH01','2023-11-15',750000,50000,700000,N'Đã thanh toán',N'Thành công','EV01'),
 ('HD20','NV03','KH01','2023-11-23',750000,50000,700000,N'Đã thanh toán',N'Thành công','EV01'),
 ('HD21','NV05','KH01','2023-11-23',750000,50000,700000,N'Đã thanh toán',N'Thành công','EV01')
+ 
 
+ select * from ChiTietSanPham
 INSERT INTO HoaDonChiTiet VALUES
-('HDCT01','05B8F','HD03',3,170000,N'Ok',1),
-('HDCT02','5A609','HD02',4,170000,N'Ok',1),
-('HDCT03','05B8F','HD01',3,210000,N'Not Ok',0),
-('HDCT04','5C82E','HD02',4,170000,N'Ok',1),
-('HDCT06','5A609','HD04',3,210000,N'Not Ok',0),
-('HDCT07','05B8F','HD05',4,170000,N'Ok',1),
-('HDCT08','93AF8','HD06',3,210000,N'Not Ok',0),
-('HDCT09','5C82E','HD08',3,210000,N'Not Ok',0),
-('HDCT10','05B8F','HD09',3,210000,N'Not Ok',0),
-('HDCT11','9EE5C','HD09',3,210000,N'Not Ok',0),
-('HDCT12','A5B27','HD06',3,210000,N'Not Ok',0),
-('HDCT13','9EE5C','HD08',3,210000,N'Not Ok',0),
-('HDCT14','A5B27','HD07',4,170000,N'Ok',1),
-('HDCT15','5C82E','HD10',1,400000,N'Ok',1),
-('HDCT16','93AF8','HD10',2,356000,N'Ok',1),
-('HDCT17','05B8F','HD10',3,200000,N'Ok',1),
-('HDCT18','93AF8','HD11',4,200000,N'Ok',1),
-('HDCT19','A9371','HD11',5,200000,N'Ok',1),
-('HDCT20','AB1DE','HD11',5,200000,N'Ok',1),
-('HDCT21','5C82E','HD12',4,400000,N'Ok',1),
-('HDCT22','9EE5C','HD12',3,356000,N'Ok',1),
-('HDCT23','A5B27','HD12',2,200000,N'Ok',1),
-('HDCT24','5A609','HD13',1,200000,N'Ok',1),
-('HDCT25','BC079','HD13',1,200000,N'Ok',1),
-('HDCT26','93AF8','HD13',2,200000,N'Ok',1),
-('HDCT27','05B8F','HD14',4,200000,N'Ok',1),
-('HDCT28','5C82E','HD14',3,320000,N'Ok',1),
-('HDCT29','5A609','HD14',2,650000,N'Ok',1),
-('HDCT30','AB1DE','HD15',1,780000,N'Ok',1),
-('HDCT31','BC079','HD15',1,210000,N'Ok',1),
-('HDCT32','93AF8','HD15',2,200000,N'Ok',1),
-('HDCT33','5A609','HD16',1,400000,N'Ok',1),
-('HDCT34','BC079','HD16',2,356000,N'Ok',1),
-('HDCT35','A5B27','HD16',3,200000,N'Ok',1),
-('HDCT36','5A609','HD17',4,200000,N'Ok',1),
-('HDCT37','93AF8','HD17',5,200000,N'Ok',1),
-('HDCT38','BC079','HD17',5,200000,N'Ok',1),
-('HDCT39','93AF8','HD18',4,400000,N'Ok',1),
-('HDCT40','5A609','HD18',3,356000,N'Ok',1),
-('HDCT41','93AF8','HD18',2,200000,N'Ok',1),
-('HDCT42','BC079','HD19',1,200000,N'Ok',1),
-('HDCT43','A5B27','HD19',1,200000,N'Ok',1),
-('HDCT44','9EE5C','HD19',2,200000,N'Ok',1),
-('HDCT45','A5B27','HD20',4,200000,N'Ok',1),
-('HDCT46','9EE5C','HD20',3,320000,N'Ok',1),
-('HDCT47','5C82E','HD20',2,650000,N'Ok',1),
-('HDCT48','5C82E','HD21',1,780000,N'Ok',1),
-('HDCT49','AB1DE','HD21',1,210000,N'Ok',1),
-('HDCT50','A9371','HD21',2,200000,N'Ok',1)
-
-
+('HDCT01','CTSP0E4','HD03',3,170000,N'Ok',1),
+('HDCT02','CTSP0FA','HD02',4,170000,N'Ok',1),
+('HDCT03','CTSP0E4','HD01',3,210000,N'Not Ok',0),
+('HDCT04','CTSP301','HD02',4,170000,N'Ok',1),
+('HDCT06','CTSP0FA','HD04',3,210000,N'Not Ok',0),
+('HDCT07','CTSP0E4','HD05',4,170000,N'Ok',1),
+('HDCT08','CTSP4FC','HD06',3,210000,N'Not Ok',0),
+('HDCT09','CTSP301','HD08',3,210000,N'Not Ok',0),
+('HDCT10','CTSP0E4','HD09',3,210000,N'Not Ok',0),
+('HDCT11','CTSP505','HD09',3,210000,N'Not Ok',0),
+('HDCT12','CTSP684','HD06',3,210000,N'Not Ok',0),
+('HDCT13','CTSP505','HD08',3,210000,N'Not Ok',0),
+('HDCT14','CTSP684','HD07',4,170000,N'Ok',1),
+('HDCT15','CTSP301','HD10',1,400000,N'Ok',1),
+('HDCT16','CTSP4FC','HD10',2,356000,N'Ok',1),
+('HDCT17','CTSP0E4','HD10',3,200000,N'Ok',1),
+('HDCT18','CTSP4FC','HD11',4,200000,N'Ok',1),
+('HDCT19','CTSP6AB','HD11',5,200000,N'Ok',1),
+('HDCT20','CTSP7E0','HD11',5,200000,N'Ok',1),
+('HDCT21','CTSP301','HD12',4,400000,N'Ok',1),
+('HDCT22','CTSP505','HD12',3,356000,N'Ok',1),
+('HDCT23','CTSP684','HD12',2,200000,N'Ok',1),
+('HDCT24','CTSP0FA','HD13',1,200000,N'Ok',1),
+('HDCT25','CTSP97F','HD13',1,200000,N'Ok',1),
+('HDCT26','CTSP4FC','HD13',2,200000,N'Ok',1),
+('HDCT27','CTSP0E4','HD14',4,200000,N'Ok',1),
+('HDCT28','CTSP301','HD14',3,320000,N'Ok',1),
+('HDCT29','CTSP0FA','HD14',2,650000,N'Ok',1),
+('HDCT30','CTSP7E0','HD15',1,780000,N'Ok',1),
+('HDCT31','CTSP97F','HD15',1,210000,N'Ok',1),
+('HDCT32','CTSP4FC','HD15',2,200000,N'Ok',1),
+('HDCT33','CTSP0FA','HD16',1,400000,N'Ok',1),
+('HDCT34','CTSP97F','HD16',2,356000,N'Ok',1),
+('HDCT35','CTSP684','HD16',3,200000,N'Ok',1),
+('HDCT36','CTSP0FA','HD17',4,200000,N'Ok',1),
+('HDCT37','CTSP4FC','HD17',5,200000,N'Ok',1),
+('HDCT38','CTSP97F','HD17',5,200000,N'Ok',1),
+('HDCT39','CTSP4FC','HD18',4,400000,N'Ok',1),
+('HDCT40','CTSP0FA','HD18',3,356000,N'Ok',1),
+('HDCT41','CTSP4FC','HD18',2,200000,N'Ok',1),
+('HDCT42','CTSP97F','HD19',1,200000,N'Ok',1),
+('HDCT43','CTSP684','HD19',1,200000,N'Ok',1),
+('HDCT44','CTSP505','HD19',2,200000,N'Ok',1),
+('HDCT45','CTSP684','HD20',4,200000,N'Ok',1),
+('HDCT46','CTSP505','HD20',3,320000,N'Ok',1),
+('HDCT47','CTSP301','HD20',2,650000,N'Ok',1),
+('HDCT48','CTSP301','HD21',1,780000,N'Ok',1),
+('HDCT49','CTSP7E0','HD21',1,210000,N'Ok',1),
+('HDCT50','CTSP6AB','HD21',2,200000,N'Ok',1)
 
 INSERT INTO DoiHang VALUES
-('DH01','NV02','HD03','2023-11-07',1),
-('DH02','NV04','HD06','2023-11-14',1),
-('DH03','NV05','HD08','2023-11-19',1)
+('DH01','NV02','HD03','2023-11-07',N'Đổi thành công'),
+('DH02','NV04','HD06','2023-11-14',N'Đổi thành công'),
+('DH03','NV05','HD08','2023-11-19',N'Đổi thành công'),
+('DH04','NV03','HD10','2023-11-29',N'Đổi thành công')
 
 INSERT INTO DoiHangChiTiet VALUES
-('DHCT01','5C82E','DH03','HDCT01',1,N'Áo bị chật',1),
-('DHCT02','A9371','DH01','HDCT34',1,N'Áo bị rộng',1),
-('DHCT03','93AF8','DH02','HDCT43',1,N'Áo bị chật',1),
-('DHCT04','AB1DE','DH02','HDCT49',1,N'Áo bị rộng',1),
-('DHCT05','05B8F','DH03','HDCT15',1,N'Áo bị chật',1)
-
-
+('DHCT01','CTSP684','DH03','HDCT09',2,N'Áo bị chật',1),
+('DHCT02','CTSP505','DH01','HDCT01',1,N'Áo bị rộng',1),
+('DHCT03','CTSP7E0','DH02','HDCT08',1,N'Áo bị chật',1),
+('DHCT04','CTSP0E4','DH03','HDCT13',1,N'Áo bị chật',1),
+('DHCT05','CTSP7E0','DH04','HDCT16',1,N'Áo bị rộng',1)

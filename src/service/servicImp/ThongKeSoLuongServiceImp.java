@@ -6,7 +6,7 @@ package service.servicImp;
 
 import java.util.Date;
 import java.util.List;
-import model.ChiTietHoaDon;
+import model.HoaDonChiTiet;
 import model.HoaDon;
 import repository.ThongKeSoLuongRepository;
 import service.AdamStore;
@@ -15,22 +15,22 @@ import service.AdamStore;
  *
  * @author Admin
  */
-public class ThongKeSoLuongServiceImp implements AdamStore<ChiTietHoaDon, String> {
+public class ThongKeSoLuongServiceImp implements AdamStore<HoaDonChiTiet, String> {
 
     ThongKeSoLuongRepository repo = new ThongKeSoLuongRepository();
 
     @Override
-    public List<ChiTietHoaDon> getAll() {
+    public List<HoaDonChiTiet> getAll() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public int them(ChiTietHoaDon k) {
+    public int them(HoaDonChiTiet k) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public int sua(ChiTietHoaDon k, String e) {
+    public int sua(HoaDonChiTiet k, String e) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
@@ -40,14 +40,32 @@ public class ThongKeSoLuongServiceImp implements AdamStore<ChiTietHoaDon, String
     }
 
     @Override
-    public ChiTietHoaDon getOne(String e) {
+    public HoaDonChiTiet getOne(String e) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public List<ChiTietHoaDon> getList(String e) {
+    public List<HoaDonChiTiet> getList(String e) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
+    public List<HoaDonChiTiet> getListCTHD() {
+        return repo.getListCTHD();
+    }
+
+    public List<HoaDonChiTiet> getListTk(Date ngayBd, Date ngayKt) {
+        return repo.getListTk(ngayBd, ngayKt);
+    }
+
+    public List<HoaDonChiTiet> getListBieuDoHD() {
+        return repo.getListBieuDoHD();
+    }
+
+    public List<HoaDonChiTiet> getListTKBieuDoHD(Date ngayBd, Date ngayKt) {
+        return repo.getListTKBieuDoHD(ngayBd, ngayKt);
+    }
+
+    public List<HoaDonChiTiet> getListBieuDoTopSP() {
+        return repo.getListBieuDoTopSP();
+    }
   
 }

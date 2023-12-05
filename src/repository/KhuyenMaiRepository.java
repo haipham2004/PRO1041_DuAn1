@@ -237,7 +237,7 @@ public class KhuyenMaiRepository {
         Events newEV = null;
         try {
             con = DBConnect.getConnection();
-            sql = "SELECT*FROM Events where TrangThai = 1 and CAST(DieuKienTongTien AS INT) < ? order by ThoiGianBatDau";
+            sql = "SELECT*FROM Events where TrangThai = 1 and CAST(DieuKienTongTien AS INT) < ? order by MucGiamGia desc";
             ps = con.prepareStatement(sql);
             ps.setObject(1, so);
             rs = ps.executeQuery();
@@ -267,9 +267,11 @@ public class KhuyenMaiRepository {
         List<Events> list = new ArrayList<>();
         try {
             con = DBConnect.getConnection();
-            sql = "SELECT*FROM Events where TrangThai = 1 and CAST(DieuKienTongTien AS INT) < ?";
+            sql = "SELECT top 1 *FROM Events where HinhThuc = 0 and TrangThai = 1 and CAST(DieuKienTongTien AS INT) < ? order by MucGiamGia desc "
+                    + "SELECT top 1 *FROM Events where HinhThuc = 1 and TrangThai = 1 and CAST(DieuKienTongTien AS INT) < ? order by MucGiamGia desc";
             ps = con.prepareStatement(sql);
             ps.setObject(1, so);
+            ps.setObject(2, so);
             rs = ps.executeQuery();
             while (rs.next()) {
                 Events ev = new Events(rs.getString(1), rs.getString(2), rs.getBoolean(3),
