@@ -114,6 +114,9 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
     private void initWebcam() {
         Dimension size = WebcamResolution.QVGA.getSize();
         webcam = Webcam.getWebcams().get(0); // 0 is default webcam
+        if (webcam.isOpen()) {
+            webcam.close();
+        }
         webcam.setViewSize(size);
         panel = new WebcamPanel(webcam);
         panel.setPreferredSize(size);
@@ -1154,6 +1157,9 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
                 webcam.close();
                 System.out.println("Close");
             } else {
+                pnlWebCam.removeAll();
+                pnlWebCam.revalidate();
+                pnlWebCam.repaint();
                 initWebcam();
             }
         } catch (Exception e) {
