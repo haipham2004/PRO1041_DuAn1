@@ -316,4 +316,22 @@ public class HoaDonRepository {
         }
         return tong;
     }
+    public HoaDon getOne(String maHD){
+        HoaDon hd = null;
+        try {
+            con = DBConnect.getConnection();
+            sql = "SELECT hd.MaKH, kh.HoTen, kh.SoDienThoai FROM HoaDon hd join KhachHang kh on hd.MaKH = kh.MaKH where MaHoaDon = ?";
+            ps = con.prepareStatement(sql);
+            ps.setObject(1, maHD);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                KhachHang kh = new KhachHang(rs.getString(1), rs.getString(2), rs.getString(3));
+                hd = new HoaDon(maHD, kh);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return hd;
+        }
+        return hd;
+    }
 }

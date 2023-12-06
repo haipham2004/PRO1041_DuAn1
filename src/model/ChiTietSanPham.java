@@ -171,8 +171,11 @@ public class ChiTietSanPham {
 
     @Override
     public String toString() {
-        return  sanPham.getTenSanPham();
+        return sanPham.getTenSanPham();
     }
 
+    public String toString2() {
+        return sanPham.getTenSanPham() + "(" + "/" + kichThuoc + "/" + chatLieu + "/" + mauSac + ")";
+    }
 
 }
