@@ -90,7 +90,7 @@ public class HoaDonRepository {
         try {
             sql = "Select HD.MaHoaDon,NV.MaNV,KH.MaKH,HD.NgayTao,HD.TongTien, HD.TrangThai,HD.GhiChu\n"
                     + "From HoaDon HD Join NhanVien NV ON HD.MaNV=NV.MaNV Join KhachHang KH ON HD.MaKH = KH.MaKH\n"
-                    + "where HD.trangThai like N'Đã thanh toán' order by HD.TrangThai";
+                    + "where HD.trangThai like N'Đã thanh toán' or HD.trangThai like N'Đang đổi hàng' order by HD.TrangThai";
             con = DBConnect.getConnection();
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
@@ -227,23 +227,22 @@ public class HoaDonRepository {
         }
     }
 
-    public List<HoaDon> getLSHoaDonDuocDoiHang() {
-        List<HoaDon> listHD = new ArrayList<>();
+    public String maHoaDonDuocDoiHang(String maHd) {
+        String maDuDK = null;
         try {
-            sql = "Select HD.MaHoaDon,NV.MaNV,KH.MaKH,HD.NgayTao,HD.TongTien, HD.TrangThai,HD.GhiChu\n"
+            sql = "Select HD.MaHoaDon\n"
                     + "From HoaDon HD Join NhanVien NV ON HD.MaNV=NV.MaNV Join KhachHang KH ON HD.MaKH = KH.MaKH\n"
-                    + "where DATEDIFF(DAY,HD.NgayTao,GETDATE()) < 7 and HD.TrangThai like N'Đã thanh toán' order by HD.TrangThai";
+                    + "where DATEDIFF(DAY,HD.NgayTao,GETDATE()) <= 7 \n"
+                    + "and (HD.TrangThai like N'Đã thanh toán' )\n"
+                    + "and HD.MaHoaDon = ?\n";
             con = DBConnect.getConnection();
             ps = con.prepareStatement(sql);
+            ps.setObject(1, maHd);
             rs = ps.executeQuery();
             while (rs.next()) {
-                NhanVien nv = new NhanVien(rs.getString(2));
-                KhachHang kh = new KhachHang(rs.getString(3));
-                HoaDon hd = new HoaDon(rs.getString(1), nv, kh, rs.getDate(4), rs.getDouble(5),
-                        rs.getString(6), rs.getString(7));
-                listHD.add(hd);
+                maDuDK = rs.getString(1);
             }
-            return listHD;
+            return maDuDK;
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -274,5 +273,47 @@ public class HoaDonRepository {
             e.printStackTrace();
             return null;
         }
+    }
+
+    public List<HoaDon> listPageHD(int index) {
+        List<HoaDon> listHoaDon3 = new ArrayList<>();
+        try {
+            con = DBConnect.getConnection();
+            sql = "Select HD.MaHoaDon,NV.MaNV,KH.MaKH,HD.NgayTao,HD.TongTien, HD.TrangThai,HD.GhiChu\n"
+                    + "From HoaDon HD Join NhanVien NV ON HD.MaNV=NV.MaNV Join KhachHang KH ON HD.MaKH = KH.MaKH\n"
+                    + "order by MaHoaDon DESC\n"
+                    + "OFFSET ? rows fetch next 15 rows only";
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, (index - 1) * 5);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                NhanVien nv = new NhanVien(rs.getString(2));
+                KhachHang kh = new KhachHang(rs.getString(3));
+                HoaDon hd = new HoaDon(rs.getString(1), nv, kh, rs.getDate(4), rs.getDouble(5),
+                        rs.getString(6), rs.getString(7));
+                listHoaDon3.add(hd);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+        return listHoaDon3;
+    }
+
+    public int tongBanGhi() {
+        int tong = 0;
+        try {
+            con = DBConnect.getConnection();
+            sql = "SELECT COUNT(*) FROM HoaDon";
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                tong = rs.getInt(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
+        return tong;
     }
 }

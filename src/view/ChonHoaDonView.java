@@ -39,7 +39,7 @@ public class ChonHoaDonView extends javax.swing.JPanel {
         initComponents();
         this.setSize(1300, 755);
         addPlaceHolder(txtTimKiem, "Theo mã hóa đơn");
-        fillTable(serviceHD.getLSHoaDonDuocDoiHang());
+//        fillTable(serviceHD.getLSHoaDonDuocDoiHang());
     }
 
     public String maTangTuDong(String DH) {
@@ -255,12 +255,12 @@ public class ChonHoaDonView extends javax.swing.JPanel {
 
     private void txtTimKiemKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKiemKeyReleased
         // TODO add your handling code here:
-        if (!txtTimKiem.getText().equals("")) {
-            String name = txtTimKiem.getText();
-            fillTable(serviceHD.getList2(name));
-        } else {
-            fillTable(serviceHD.getLSHoaDonDuocDoiHang());
-        }
+//        if (!txtTimKiem.getText().equals("")) {
+//            String name = txtTimKiem.getText();
+//            fillTable(serviceHD.getList2(name));
+//        } else {
+//            fillTable(serviceHD.getLSHoaDonDuocDoiHang());
+//        }
     }//GEN-LAST:event_txtTimKiemKeyReleased
 
     private void btnChonHoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnChonHoaDonMouseClicked

@@ -64,9 +64,8 @@ public class HoaDonServiceImp implements AdamStore<HoaDon, String> {
         return repo.chuyenSangDoiHang(maHD);
     }
 
-    
-    public List<HoaDon> getLSHoaDonDuocDoiHang() {
-        return repo.getLSHoaDonDuocDoiHang();
+    public String maHoaDonDuocDoiHang(String maHd) {
+        return repo.maHoaDonDuocDoiHang(maHd);
     }
 
     public int themHoaDonCho(HoaDon hd) {
@@ -79,5 +78,11 @@ public class HoaDonServiceImp implements AdamStore<HoaDon, String> {
 
     public List<HoaDon> getList2(String MaHDorMaKH) {
         return repo.getList2(MaHDorMaKH);
+    }
+    public List<HoaDon> listPageHD(int index){
+        return repo.listPageHD(index);
+    }
+    public int tongBanGhi(){
+        return repo.tongBanGhi();
     }
 }
