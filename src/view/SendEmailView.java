@@ -287,7 +287,7 @@ public class SendEmailView extends javax.swing.JFrame {
 
     private void btnDinhKemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDinhKemActionPerformed
         // TODO add your handling code here:
-        JFileChooser f = new JFileChooser("F:\\FPT Polytechnic\\DA1\\PRO1041_DuAn1\\PDF\\");
+        JFileChooser f = new JFileChooser("C:\\PDF\\");
         f.setDialogTitle("Mở file");
         f.showOpenDialog(null);
         File ften = f.getSelectedFile();
