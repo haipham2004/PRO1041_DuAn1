@@ -5,10 +5,12 @@
 package repository;
 
 import java.sql.*;
-import java.sql.Connection;
-import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+
 import model.ChatLieu;
 import model.HoaDonChiTiet;
 import model.ChiTietSanPham;
@@ -200,7 +202,7 @@ public class DoiHangChiTietRepository {
                     + "CTSPCu.Gia, SPMoi.TenSanPham, SPMoi.MaSanPham, CLMoi.TenChatLieu,CLMoi.MaChatLieu,\n"
                     + "KTMoi.TenKichThuoc,KTMoi.MaKichThuoc, MSMoi.TenMauSac,MSMoi.MaMauSac,\n"
                     + "CTSPMoi.Gia, DH.MaDoiHang,CTSPCu.MaCTSP, CTSPMoi.MaCTSP, \n"
-                    + "HDCT.MaHoaDonChiTiet From DoiHangChiTiet DHCT\n"
+                    + "HDCT.MaHoaDonChiTiet, DHCT.MoTa From DoiHangChiTiet DHCT\n"
                     + "Join ChiTietSanPham CTSPMoi ON DHCT.MaCTSP = CTSPMoi.MaCTSP\n"
                     + "Join SanPham SPMoi ON SPMoi.MaSanPham = CTSPMoi.MaSanPham\n"
                     + "Join ChatLieu CLMoi ON CLMoi.MaChatLieu = CTSPMoi.MaChatLieu\n"
@@ -231,7 +233,7 @@ public class DoiHangChiTietRepository {
                 MauSac msMoi = new MauSac(rs.getString(19), rs.getString(18));
                 ChiTietSanPham ctspMoi = new ChiTietSanPham(rs.getString(23), spMoi, msMoi, clMoi, ktMoi, rs.getDouble(20));
                 DoiHang dh = new DoiHang(rs.getString(21));
-                DoiHangChiTiet dhct = new DoiHangChiTiet(rs.getString(1), dh, hdct, ctspMoi, rs.getInt(2));
+                DoiHangChiTiet dhct = new DoiHangChiTiet(rs.getString(1), dh, hdct, ctspMoi, rs.getInt(2),true,rs.getString(25));
                 listDHCT2.add(dhct);
             }
             return listDHCT2;
@@ -239,5 +241,42 @@ public class DoiHangChiTietRepository {
             e.printStackTrace();
             return null;
         }
+    }
+    public List<HoaDonChiTiet> getJoHang(JTable table) {
+        List<HoaDonChiTiet> list = new ArrayList<>();
+        int soCot = table.getRowCount();
+        if (soCot == 0) {
+            return null;
+        }
+        try {
+            con = DBConnect.getConnection();
+            sql = "SELECT CTSP.MaCTSP,CTSP.MaSanPham,SP.TenSanPham,MS.MaMauSac,MS.TenMauSac,CL.MaChatLieu,CL.TenChatLieu,\n"
+                    + " KT.MaKichThuoc,KT.TenKichThuoc,CTSP.SoLuong,CTSP.Gia,CTSP.TrangThai\n"
+                    + " FROM ChiTietSanPham CTSP INNER JOIN ChatLieu CL On CL.MaChatLieu=CTSP.MaChatLieu\n"
+                    + " INNER JOIn MauSac MS ON MS.MaMauSac=CTSP.MaMauSac\n"
+                    + " INNER JOIN KichThuoc KT ON KT.MaKichThuoc=CTSP.MaKichThuoc \n"
+                    + " INNER JOIN SanPham SP ON CTSP.MaSanPham=SP.MaSanPham"
+                    + " where maCTSP = ?";
+            ps = con.prepareStatement(sql);
+            for (int i = 0; i < soCot; i++) {
+                String maCTSP = table.getValueAt(i, 3).toString();
+                int soLuong = Integer.parseInt(table.getValueAt(i, 4).toString());
+                Double gia = Double.parseDouble(table.getValueAt(i, 5).toString());
+                ps.setObject(1, maCTSP);
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    SanPham sp = new SanPham(rs.getString(2), rs.getString(3));
+                    MauSac ms = new MauSac(rs.getString(4), rs.getString(5));
+                    ChatLieu cl = new ChatLieu(rs.getString(6), rs.getString(7));
+                    KichThuoc kt = new KichThuoc(rs.getString(8), rs.getString(9));
+                    ChiTietSanPham ctsp = new ChiTietSanPham(rs.getString(1), sp,
+                            ms, cl, kt, rs.getInt(10), rs.getDouble(11), rs.getBoolean(12));
+                    HoaDonChiTiet hdct = new HoaDonChiTiet(ctsp, soLuong, gia);
+                    list.add(hdct);
+                }
+            }
+        } catch (Exception e) {
+        }
+        return list;
     }
 }
