@@ -11,6 +11,7 @@ import java.util.Date;
  * @author Admin BVCN88 02
  */
 public class KhachHang {
+
     private String maKhachHang;
     private String hoTen;
     private Date ngaySinh;
@@ -35,8 +36,14 @@ public class KhachHang {
         this.gioiTinh = gioiTinh;
         this.diaChi = diaChi;
     }
-    
-        public KhachHang(String maKhachHang, String hoTen) {
+
+    public KhachHang(String maKhachHang, String hoTen, String soDienThoai) {
+        this.maKhachHang = maKhachHang;
+        this.hoTen = hoTen;
+        this.soDienThoai = soDienThoai;
+    }
+
+    public KhachHang(String maKhachHang, String hoTen) {
         this.maKhachHang = maKhachHang;
         this.hoTen = hoTen;
     }
@@ -96,8 +103,8 @@ public class KhachHang {
     public void setDiaChi(String diaChi) {
         this.diaChi = diaChi;
     }
-    
-    public String chiTietGioiTinh(){
+
+    public String chiTietGioiTinh() {
         if (gioiTinh) {
             return "Nam";
         } else {
