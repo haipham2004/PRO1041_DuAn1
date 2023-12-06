@@ -20,6 +20,7 @@ import model.MauSac;
 import service.servicImp.ChatLieuServiceImp;
 import service.servicImp.ChiTietSanPhamServiceImp;
 import service.servicImp.DoiHangChiTietServiceImp;
+import service.servicImp.HoaDonChiTietServiceImp;
 import service.servicImp.KichThuocServiceImp;
 import service.servicImp.MauSacServiceImp;
 
@@ -34,6 +35,7 @@ public class ChonChiTietSanPhamView extends javax.swing.JPanel {
     DefaultComboBoxModel<MauSac> cbxMauSacLoc = new DefaultComboBoxModel<>();
     DefaultComboBoxModel<ChatLieu> cbxChatLieuLoc = new DefaultComboBoxModel<>();
     KichThuocServiceImp serviceKT = new KichThuocServiceImp();
+    HoaDonChiTietServiceImp serviceHDCT = new HoaDonChiTietServiceImp();
     ChatLieuServiceImp serviceCl = new ChatLieuServiceImp();
     DoiHangChiTietServiceImp serviceDHCT = new DoiHangChiTietServiceImp();
     DoiHangView doiHangView = new DoiHangView();
@@ -529,6 +531,7 @@ public class ChonChiTietSanPhamView extends javax.swing.JPanel {
                 serviceDHCT.them(dhct);
                 serviceCTSP.tangSoLuong(soLuongDoiHang, maCTSPCu);
                 serviceCTSP.giamSoLuong(soLuongDoiHang, maCTSP);
+                serviceHDCT.capNhatSoLuongDoiHang(soLuongDoiHang, maHDCT);
                 quayLaiDoiHang();
             }
         } else {
