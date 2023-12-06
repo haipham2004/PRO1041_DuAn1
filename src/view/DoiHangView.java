@@ -15,6 +15,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import model.ChatLieu;
+import model.ChiTietSanPham;
 import model.DoiHang;
 import model.DoiHangChiTiet;
 import model.HoaDonChiTiet;
@@ -37,19 +38,21 @@ public class DoiHangView extends javax.swing.JPanel {
     DoiHangChiTietServiceImp serviceDHCT = new DoiHangChiTietServiceImp();
     ChiTietSanPhamServiceImp serviceCTSP = new ChiTietSanPhamServiceImp();
     HoaDonView hoaDonView = new HoaDonView();
-    DefaultTableModel tblmolHDDH = new DefaultTableModel();
+    DefaultTableModel tblmolDSSPCu = new DefaultTableModel();
     DefaultTableModel tblmolHDCT = new DefaultTableModel();
-    DefaultTableModel tblmolDSDH = new DefaultTableModel();
+    DefaultTableModel tblmolDSSPMoi = new DefaultTableModel();
     public static int indexHoaDonDoiHang = -1;
     public static int indexHoaDonChiTiet = -1;
     public static int indexDoiHangChiTiet = -1;
     public static String tenSP;
     public static String tenCL;
     public static int soLuongSP;
+    public static int soLuongDoiHang;
     public static String maDHCT;
+    public static String maHDCT;
     public static String maCTSPCu;
-    static String kichThuoc, mauSac, chatLieu;
-
+    static String maHD = null;
+    static String maDH = null;
     int so = serviceDHCT.countDoiHangChiTiet();
     Random random = new Random();
 
@@ -61,41 +64,11 @@ public class DoiHangView extends javax.swing.JPanel {
         this.setSize(1300, 755);
 //        loadTableHDDH(serviceDH.getAllDangDoiHang());
 //        saveIndex();
-        addPlaceHolder(txtSoLuongDoiHang, "Nhập số lượng đổi");
-        kichThuoc = hoaDonView.getKichThuoc();
-        chatLieu = hoaDonView.getChatLieu();
-        mauSac = hoaDonView.getMauSac();
-        setThongTinSP();
-    }
-
-   
-
-    public void setThongTinSP() {
-        txtChatLieu.setText(chatLieu);
-        txtKichThuoc.setText(kichThuoc);
-        txtMauSac.setText(mauSac);
-    }
-
-    public void addPlaceHolder(JTextField textField, String placeHolder) {
-        textField.setText(placeHolder);
-        textField.setForeground(Color.gray);
-        textField.addFocusListener(new FocusListener() {
-            @Override
-            public void focusGained(FocusEvent e) {
-                if (textField.getText().equals(placeHolder)) {
-                    textField.setText("");
-                    textField.setForeground(Color.BLACK);
-                }
-            }
-
-            @Override
-            public void focusLost(FocusEvent e) {
-                if (textField.getText().isEmpty()) {
-                    textField.setText(placeHolder);
-                    textField.setForeground(Color.GRAY);
-                }
-            }
-        });
+        maHD = hoaDonView.getMaHD();
+        maDH = hoaDonView.getMaDH();
+        fillTableHoaDonChiTiet(serviceHDCT.getHDCTFromHoaDon(maHD));
+        loadDSSPCu(serviceDHCT.getDHCTFromDH(maDH));
+        loadDSSPMoi(serviceDHCT.getDHCTFromDH(maDH));
     }
 
 //    public void loadTableHDDH(List<DoiHang> list) {
@@ -140,6 +113,14 @@ public class DoiHangView extends javax.swing.JPanel {
     public void setMaDHCT(String maDHCT) {
         DoiHangView.maDHCT = maDHCT;
     }
+    
+    public String getMaHDCT() {
+        return maHDCT;
+    }
+
+    public void setMaHDCT(String maHDCT) {
+        DoiHangView.maHDCT = maHDCT;
+    }
 
     public String getMaCL() {
         return tenCL;
@@ -151,6 +132,10 @@ public class DoiHangView extends javax.swing.JPanel {
 
     public int getSoLuongSP() {
         return soLuongSP;
+    }
+    
+    public int getSoLuongDoiHang() {
+        return soLuongDoiHang;
     }
 
     public void setMaCL(int soLuongSP) {
@@ -170,22 +155,18 @@ public class DoiHangView extends javax.swing.JPanel {
 //        return maDHCT;
 //    }
 //
-//    public void fillTableHoaDonChiTiet(List<HoaDonChiTiet> list) {
-//        tblmolHDCT = (DefaultTableModel) tblChiTietHoaDon.getModel();
-//        tblmolHDCT.setRowCount(0);
-//        for (HoaDonChiTiet item : list) {
-//            tblmolHDCT.addRow(new Object[]{tblChiTietHoaDon.getRowCount() + 1,
-//                item.getMaHDCT(), item.getCtsp().getSanPham().getTenSanPham(),
-//                item.getCtsp().getMaChiTietSanPham(), item.getSoLuong(),
-//                item.getDonGia()
-//            });
-//        }
-//    }
-//
-//    public void showHoaDonChiTiet(int index) {
-//        String maHoadon = (String) tblHoaDonDoiHang.getValueAt(index, 2);
-//        fillTableHoaDonChiTiet(serviceHDCT.getHDCTFromHoaDon(maHoadon));
-//    }
+    public void fillTableHoaDonChiTiet(List<HoaDonChiTiet> list) {
+        tblmolHDCT = (DefaultTableModel) tblChiTietHoaDon.getModel();
+        tblmolHDCT.setRowCount(0);
+        for (HoaDonChiTiet item : list) {
+            tblmolHDCT.addRow(new Object[]{tblChiTietHoaDon.getRowCount() + 1,
+                item.getMaHDCT(), item.getCtsp().getSanPham().getTenSanPham(),
+                item.getCtsp().getMaChiTietSanPham(), item.getSoLuong(),
+                item.getDonGia()
+            });
+        }
+    }
+
 //
 //    public void fillTableDanhSachDoiHang(List<DoiHangChiTiet> list) {
 //        tblmolDSDH = (DefaultTableModel) tblDanhSachDoiHang.getModel();
@@ -289,6 +270,66 @@ public class DoiHangView extends javax.swing.JPanel {
 //        txtTongSoLuongMua.setText("");
 //        txtTongSoLuongDoi.setText("");
 //    }
+    public void deltailChiTietSanPham(int index) {
+        String maCTSP = tblChiTietHoaDon.getValueAt(index, 3).toString();
+        ChiTietSanPham ctsp = serviceCTSP.getThuocTinh(maCTSP).get(0);
+        txtChatLieu.setText(ctsp.getChatLieu().getTenChatLieu());
+        txtKichThuoc.setText(ctsp.getKichThuoc().getTenKichThuoc());
+        txtMauSac.setText(ctsp.getMauSac().getTenMauSac());
+    }
+
+    public boolean validSoLuong(int index) {
+        try {
+            if (txtSoLuongDoiHang.getText().trim().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Số lượng không được để trống");
+                return false;
+            }
+            soLuongDoiHang = Integer.parseInt(txtSoLuongDoiHang.getText());
+            int soLuongConLai = Integer.parseInt(tblChiTietHoaDon.getValueAt(index, 4).toString());
+            if ((soLuongDoiHang > soLuongConLai)) {
+                JOptionPane.showMessageDialog(this, "Số lượng sản phẩm không đủ");
+                return false;
+            } else if (soLuongDoiHang < 1) {
+                JOptionPane.showMessageDialog(this, "Số lượng tối thiểu đổi là 1");
+                return false;
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Số lượng sai định dạng");
+            return false;
+        }
+        return true;
+    }
+    
+    public void loadDSSPCu(List<DoiHangChiTiet> list){
+        tblmolDSSPCu = (DefaultTableModel) tblDanhSachSPCu.getModel();
+        tblmolDSSPCu.setRowCount(0);
+        for (DoiHangChiTiet item : list) {
+            tblmolDSSPCu.addRow(new Object[]{
+                item.getHoaDonChiTiet().getCtsp().getMaChiTietSanPham(),
+                item.getHoaDonChiTiet().getCtsp().getSanPham().getTenSanPham(),
+                item.getHoaDonChiTiet().getCtsp().getChatLieu().getTenChatLieu(),
+                item.getHoaDonChiTiet().getCtsp().getKichThuoc().getTenKichThuoc(),
+                item.getHoaDonChiTiet().getCtsp().getMauSac().getTenMauSac(),
+                item.getSoLuong(), item.getHoaDonChiTiet().getCtsp().getGia()
+            });
+        }
+    }
+    
+    public void loadDSSPMoi(List<DoiHangChiTiet> list){
+        tblmolDSSPMoi = (DefaultTableModel) tblDanhSachSPMoi.getModel();
+        tblmolDSSPMoi.setRowCount(0);
+        for (DoiHangChiTiet item : list) {
+            tblmolDSSPMoi.addRow(new Object[]{
+                item.getChiTietSanPham().getMaChiTietSanPham(),
+                item.getChiTietSanPham().getSanPham().getTenSanPham(),
+                item.getChiTietSanPham().getChatLieu().getTenChatLieu(),
+                item.getChiTietSanPham().getKichThuoc().getTenKichThuoc(),
+                item.getChiTietSanPham().getMauSac().getTenMauSac(),
+                item.getSoLuong(), item.getChiTietSanPham().getGia()
+            });
+        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -316,7 +357,7 @@ public class DoiHangView extends javax.swing.JPanel {
         tblChiTietHoaDon = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        tblDanhSachDoiHang = new javax.swing.JTable();
+        tblDanhSachSPCu = new javax.swing.JTable();
         btnChonHang = new javax.swing.JButton();
         btnLamMoiDSDH = new javax.swing.JButton();
         btnQuayLai = new javax.swing.JButton();
@@ -330,7 +371,8 @@ public class DoiHangView extends javax.swing.JPanel {
         txtSoLuongDoiHang = new javax.swing.JTextField();
         jPanel8 = new javax.swing.JPanel();
         jScrollPane5 = new javax.swing.JScrollPane();
-        tblDanhSachDoiHang2 = new javax.swing.JTable();
+        tblDanhSachSPMoi = new javax.swing.JTable();
+        jLabel4 = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
 
         pnlTong.setLayout(new java.awt.CardLayout());
@@ -464,7 +506,7 @@ public class DoiHangView extends javax.swing.JPanel {
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Danh sách sản phẩm cũ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
 
-        tblDanhSachDoiHang.setModel(new javax.swing.table.DefaultTableModel(
+        tblDanhSachSPCu.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
@@ -475,12 +517,12 @@ public class DoiHangView extends javax.swing.JPanel {
                 "Mã CTSP", "Tên SP", "Chất liệu", "Kích thước", "Màu sắc", "Số lượng", "Đơn giá"
             }
         ));
-        tblDanhSachDoiHang.addMouseListener(new java.awt.event.MouseAdapter() {
+        tblDanhSachSPCu.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblDanhSachDoiHangMouseClicked(evt);
+                tblDanhSachSPCuMouseClicked(evt);
             }
         });
-        jScrollPane3.setViewportView(tblDanhSachDoiHang);
+        jScrollPane3.setViewportView(tblDanhSachSPCu);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -545,17 +587,17 @@ public class DoiHangView extends javax.swing.JPanel {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(28, 28, 28)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtChatLieu, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(40, 40, 40)
                 .addComponent(jLabel2)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtKichThuoc, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(30, 30, 30)
                 .addComponent(jLabel3)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtMauSac, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(63, Short.MAX_VALUE))
+                .addContainerGap(75, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -575,26 +617,23 @@ public class DoiHangView extends javax.swing.JPanel {
 
         jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Danh sách sản phẩm mới", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
 
-        tblDanhSachDoiHang2.setModel(new javax.swing.table.DefaultTableModel(
+        tblDanhSachSPMoi.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "STT", "Mã CTSP", "Tên SP", "Chất liệu", "Kích thước", "Màu sắc", "Số lượng", "Đơn giá"
+                "Mã CTSP", "Tên SP", "Chất liệu", "Kích thước", "Màu sắc", "Số lượng", "Đơn giá"
             }
         ));
-        tblDanhSachDoiHang2.addMouseListener(new java.awt.event.MouseAdapter() {
+        tblDanhSachSPMoi.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblDanhSachDoiHang2MouseClicked(evt);
+                tblDanhSachSPMoiMouseClicked(evt);
             }
         });
-        jScrollPane5.setViewportView(tblDanhSachDoiHang2);
-        if (tblDanhSachDoiHang2.getColumnModel().getColumnCount() > 0) {
-            tblDanhSachDoiHang2.getColumnModel().getColumn(0).setHeaderValue("STT");
-        }
+        jScrollPane5.setViewportView(tblDanhSachSPMoi);
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
@@ -602,8 +641,8 @@ public class DoiHangView extends javax.swing.JPanel {
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 539, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32))
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 565, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -612,6 +651,8 @@ public class DoiHangView extends javax.swing.JPanel {
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        jLabel4.setText("Số lượng đổi hàng:");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -635,8 +676,10 @@ public class DoiHangView extends javax.swing.JPanel {
                                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(jPanel4Layout.createSequentialGroup()
+                                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(txtSoLuongDoiHang, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
+                                        .addGap(44, 44, 44)
                                         .addComponent(btnChonHang)))))
                         .addGap(18, 18, 18)
                         .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -653,9 +696,10 @@ public class DoiHangView extends javax.swing.JPanel {
                             .addComponent(btnQuayLai, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnChonHang, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnLamMoiDSDH, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4)
                             .addComponent(txtSoLuongDoiHang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnLamMoiDSDH, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnChonHang, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -703,20 +747,22 @@ public class DoiHangView extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnLamMoiDSDHActionPerformed
 
-    private void tblDanhSachDoiHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDanhSachDoiHangMouseClicked
+    private void tblDanhSachSPCuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDanhSachSPCuMouseClicked
         // TODO add your handling code here:
 //        indexDoiHangChiTiet = tblDanhSachDoiHang.getSelectedRow();
 //        String maHDCT = tblDanhSachDoiHang.getValueAt(indexDoiHangChiTiet, 1).toString();
 //        tenSP = tblDanhSachDoiHang.getValueAt(indexDoiHangChiTiet, 2).toString();
-//        maCTSPCu = tblDanhSachDoiHang.getValueAt(indexDoiHangChiTiet, 3).toString();
 //        tenCL = serviceCTSP.getTenCL(maCTSPCu);
 //        maDHCT = serviceDHCT.getMaDHCT(maHDCT);
 //        soLuongSP = serviceHDCT.getSoLuongFromHDCT(maHDCT);
-    }//GEN-LAST:event_tblDanhSachDoiHangMouseClicked
+    }//GEN-LAST:event_tblDanhSachSPCuMouseClicked
 
     private void tblChiTietHoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblChiTietHoaDonMouseClicked
         // TODO add your handling code here:
-//        indexHoaDonChiTiet = tblChiTietHoaDon.getSelectedRow();
+        indexHoaDonChiTiet = tblChiTietHoaDon.getSelectedRow();
+        maCTSPCu = tblChiTietHoaDon.getValueAt(indexHoaDonChiTiet, 3).toString();
+        maHDCT = tblChiTietHoaDon.getValueAt(indexHoaDonChiTiet, 1).toString();
+        deltailChiTietSanPham(indexHoaDonChiTiet);
     }//GEN-LAST:event_tblChiTietHoaDonMouseClicked
 
     private void btnXacNhanDoiHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXacNhanDoiHangActionPerformed
@@ -737,16 +783,16 @@ public class DoiHangView extends javax.swing.JPanel {
 
     private void btnChonHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnChonHangMouseClicked
         // TODO add your handling code here:
-//        indexDoiHangChiTiet = tblDanhSachDoiHang.getSelectedRow();
-//        int soLuong = Integer.parseInt(tblDanhSachDoiHang.getValueAt(indexDoiHangChiTiet, 5).toString());
-//        if (soLuong == 0) {
-//            pnlTong.removeAll();
-//            pnlTong.add(new ChonChiTietSanPhamView());
-//            pnlTong.repaint();
-//            pnlTong.revalidate();
-//        } else {
-//            JOptionPane.showMessageDialog(this, "Sản phẩm đã đc đổi, vui lòng làm mới danh sách nếu muốn đổi lại");
-//        }
+        if (indexHoaDonChiTiet == -1) {
+            JOptionPane.showMessageDialog(this, "Bạn chưa chọn sản phẩm");
+        } else {
+            if (validSoLuong(indexHoaDonChiTiet)) {
+                pnlTong.removeAll();
+                pnlTong.add(new ChonChiTietSanPhamView());
+                pnlTong.repaint();
+                pnlTong.revalidate();
+            }
+        }
     }//GEN-LAST:event_btnChonHangMouseClicked
 
     private void btnLamMoiDSDHMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLamMoiDSDHMouseClicked
@@ -794,9 +840,9 @@ public class DoiHangView extends javax.swing.JPanel {
         pnlTong.revalidate();
     }//GEN-LAST:event_btnQuayLaiMouseClicked
 
-    private void tblDanhSachDoiHang2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDanhSachDoiHang2MouseClicked
+    private void tblDanhSachSPMoiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDanhSachSPMoiMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_tblDanhSachDoiHang2MouseClicked
+    }//GEN-LAST:event_tblDanhSachSPMoiMouseClicked
 
     private void btnQuayLaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuayLaiActionPerformed
         // TODO add your handling code here:
@@ -816,6 +862,7 @@ public class DoiHangView extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -828,8 +875,8 @@ public class DoiHangView extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JPanel pnlTong;
     private javax.swing.JTable tblChiTietHoaDon;
-    private javax.swing.JTable tblDanhSachDoiHang;
-    private javax.swing.JTable tblDanhSachDoiHang2;
+    private javax.swing.JTable tblDanhSachSPCu;
+    private javax.swing.JTable tblDanhSachSPMoi;
     private javax.swing.JTextField txtChatLieu;
     private javax.swing.JTextField txtKichThuoc;
     private javax.swing.JTextField txtMaHD;

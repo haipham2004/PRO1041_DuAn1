@@ -159,7 +159,7 @@ public class DangNhapView extends javax.swing.JFrame {
 
         txtMatKhau.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createMatteBorder(2, 1, 2, 1, new java.awt.Color(0, 0, 0)), javax.swing.BorderFactory.createEmptyBorder(0, 10, 0, 10)));
 
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/Logo_Adam.jpg"))); // NOI18N
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Logo_Adam.jpg"))); // NOI18N
 
         javax.swing.GroupLayout PanelMainLayout = new javax.swing.GroupLayout(PanelMain);
         PanelMain.setLayout(PanelMainLayout);
