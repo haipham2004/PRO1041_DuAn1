@@ -1148,7 +1148,7 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
         FileInputStream excelFIS = null;
         BufferedInputStream excelBIS = null;
         XSSFWorkbook excelImportToJTable = null;
-        String defaultCurrentDirectoryPath = "F:\\FPT Polytechnic\\DA1\\PRO1041_DuAn1\\Excel\\";
+        String defaultCurrentDirectoryPath = "D:\\PRO1041_DuAn1\\Excel\\";
         JFileChooser excelFileChooser = new JFileChooser(defaultCurrentDirectoryPath);
         excelFileChooser.setDialogTitle("Select Excel File");
         FileNameExtensionFilter fnef = new FileNameExtensionFilter("EXCEL FILES", "xls", "xlsx", "xlsm");
@@ -1242,7 +1242,7 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
         BufferedOutputStream excelBOU = null;
         XSSFWorkbook excelJtableExporter;
 
-        JFileChooser excel = new JFileChooser("F:\\FPT Polytechnic\\DA1\\PRO1041_DuAn1\\Excel\\");
+        JFileChooser excel = new JFileChooser("D:\\PRO1041_DuAn1\\Excel\\");
         excel.setDialogTitle("Save as");
         FileNameExtensionFilter file = new FileNameExtensionFilter("EXCEL FILE", "xls", "xlsx", "xlsm");
         excel.setFileFilter(file);

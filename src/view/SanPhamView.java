@@ -640,11 +640,7 @@ public class SanPhamView extends javax.swing.JPanel {
 
     private void cboLocLSPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cboLocLSPMouseClicked
         // TODO add your handling code here:
-        LoaiSanPham lsp = (LoaiSanPham) cbxLoaiSanPhamLoc.getSelectedItem();
-        lbSoTrang.setText(trangSP + " of " + soTrangSP);
-        String name = lsp.toString();
-        loadPageSP();
-        fillTableSamPham(serviceSP.getList(name));
+     
 //
 
 
@@ -652,7 +648,11 @@ public class SanPhamView extends javax.swing.JPanel {
 
     private void cboLocLSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboLocLSPActionPerformed
         // TODO add your handling code here:
-
+   LoaiSanPham lsp = (LoaiSanPham) cbxLoaiSanPhamLoc.getSelectedItem();
+        lbSoTrang.setText(trangSP + " of " + soTrangSP);
+        String name = lsp.toString();
+        loadPageSP();
+        fillTableSamPham(serviceSP.getList(name));
 
     }//GEN-LAST:event_cboLocLSPActionPerformed
 
@@ -730,7 +730,7 @@ public class SanPhamView extends javax.swing.JPanel {
         FileInputStream excelFIS = null;
         BufferedInputStream excelBIS = null;
         XSSFWorkbook excelImportToJTable = null;
-        String defaultCurrentDirectoryPath = "F:\\FPT Polytechnic\\DA1\\PRO1041_DuAn1\\Excel\\";
+        String defaultCurrentDirectoryPath = "D:\\PRO1041_DuAn1\\Excel\\";
         JFileChooser excelFileChooser = new JFileChooser(defaultCurrentDirectoryPath);
         excelFileChooser.setDialogTitle("Select Excel File");
         FileNameExtensionFilter fnef = new FileNameExtensionFilter("EXCEL FILES", "xls", "xlsx", "xlsm");
@@ -795,7 +795,7 @@ public class SanPhamView extends javax.swing.JPanel {
         BufferedOutputStream excelBOU = null;
         XSSFWorkbook excelJtableExporter;
 
-        JFileChooser excel = new JFileChooser("F:\\FPT Polytechnic\\DA1\\PRO1041_DuAn1\\Excel\\");
+        JFileChooser excel = new JFileChooser("D:\\PRO1041_DuAn1\\Excel\\");
         excel.setDialogTitle("Save as");
         FileNameExtensionFilter file = new FileNameExtensionFilter("EXCEL FILE", "xls", "xlsx", "xlsm");
         excel.setFileFilter(file);

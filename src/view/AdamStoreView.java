@@ -45,7 +45,6 @@ public class AdamStoreView extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         execute(isAdmin);
         changePanelBody(new ThongKeSoLuongView());
-
     }
 
     public void changePanelBody(JPanel panel) {
@@ -88,7 +87,7 @@ public class AdamStoreView extends javax.swing.JFrame {
         MenuItem menuThongKeDT = new MenuItem(iconDot, "Thống kê doanh thu", new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                changePanelBody(new ThongKeDoanhThuView());
+                changePanelBody(new ThongKeSoLuongView());
             }
         });
 

@@ -47,9 +47,7 @@ import service.servicImp.ThongKeDoanhThuServiceImp;
  * @author Admin
  */
 public class ThongKeDoanhThuView extends javax.swing.JPanel {
-
     ThongKeDoanhThuRepository repo = new ThongKeDoanhThuRepository();
-
     ThongKeDoanhThuServiceImp service = new ThongKeDoanhThuServiceImp();
 
     /**
