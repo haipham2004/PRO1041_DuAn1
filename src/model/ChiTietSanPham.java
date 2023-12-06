@@ -164,6 +164,4 @@ public class ChiTietSanPham {
     public String toString() {
         return  sanPham.getTenSanPham();
     }
-
-
 }
