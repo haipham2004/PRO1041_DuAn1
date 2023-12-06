@@ -206,9 +206,9 @@ public class AdamStoreView extends javax.swing.JFrame {
 
         //Câu lệnh thêm vào menu
         if (isAdmin) {
-            addMenu(menuThongKe, menuMatHang, menuNhanVien, menuBanHang, menuKhachHang, menuHoaDon, menuDoiHang, menuLsuDoiHang, menuKm, menuDoiMatKhau, menuDangXuat);
+            addMenu(menuThongKe, menuMatHang, menuNhanVien, menuBanHang, menuKhachHang, menuHoaDon, menuLsuDoiHang, menuKm, menuDoiMatKhau, menuDangXuat);
         } else {
-            addMenu(menuBanHang, menuKhachHang, menuHoaDon, menuDoiHang, menuLsuDoiHang, menuDoiMatKhau, menuDangXuat);
+            addMenu(menuBanHang, menuKhachHang, menuHoaDon, menuLsuDoiHang, menuDoiMatKhau, menuDangXuat);
         }
         MenuItemColor(menuThongKe);
         MenuItemColor(menuMatHang);

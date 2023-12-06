@@ -31,6 +31,15 @@ public class ChiTietSanPham {
         this.trangThai = trangThai;
     }
 
+    public ChiTietSanPham(String maChiTietSanPham, SanPham sanPham, MauSac mauSac, ChatLieu chatLieu, KichThuoc kichThuoc, double gia) {
+        this.maChiTietSanPham = maChiTietSanPham;
+        this.sanPham = sanPham;
+        this.mauSac = mauSac;
+        this.chatLieu = chatLieu;
+        this.kichThuoc = kichThuoc;
+        this.gia = gia;
+    }
+
     public ChiTietSanPham(SanPham sanPham, int soLuong) {
         this.sanPham = sanPham;
         this.soLuong = soLuong;
@@ -162,6 +171,10 @@ public class ChiTietSanPham {
 
     @Override
     public String toString() {
-        return  sanPham.getTenSanPham();
+        return sanPham.getTenSanPham();
+    }
+    
+    public String toString2() {
+        return sanPham.getTenSanPham() + "(" + "/" + kichThuoc + "/" + chatLieu + "/" + mauSac + ")";
     }
 }

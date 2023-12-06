@@ -5,7 +5,9 @@
 package service.servicImp;
 
 import java.util.List;
+import javax.swing.JTable;
 import model.DoiHangChiTiet;
+import model.HoaDonChiTiet;
 import repository.DoiHangChiTietRepository;
 import service.AdamStore;
 
@@ -64,5 +66,12 @@ public class DoiHangChiTietServiceImp implements AdamStore<DoiHangChiTiet, Strin
     
     public int capNhatTrangThai(String maDH){
         return repo.capNhatTrangThai(maDH);
+    }
+    
+    public List<DoiHangChiTiet> getDHCTFromDH(String maDH) {
+        return repo.getDHCTFromDH(maDH);
+    }
+    public List<HoaDonChiTiet> getJoHang(JTable table) {
+        return repo.getJoHang(table);
     }
 }

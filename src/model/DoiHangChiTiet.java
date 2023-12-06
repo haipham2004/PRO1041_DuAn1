@@ -9,6 +9,7 @@ package model;
  * @author Admin
  */
 public class DoiHangChiTiet {
+
     private String maDHCT;
     private DoiHang doiHang;
     private HoaDonChiTiet hoaDonChiTiet;
@@ -19,7 +20,15 @@ public class DoiHangChiTiet {
 
     public DoiHangChiTiet() {
     }
-    
+
+    public DoiHangChiTiet(String maDHCT, DoiHang doiHang, HoaDonChiTiet hoaDonChiTiet, ChiTietSanPham chiTietSanPham, int soLuong) {
+        this.maDHCT = maDHCT;
+        this.doiHang = doiHang;
+        this.hoaDonChiTiet = hoaDonChiTiet;
+        this.chiTietSanPham = chiTietSanPham;
+        this.soLuong = soLuong;
+    }
+
     public DoiHangChiTiet(ChiTietSanPham chiTietSanPham, boolean trangThai, String moTa) {
         this.chiTietSanPham = chiTietSanPham;
         this.trangThai = trangThai;
@@ -41,13 +50,22 @@ public class DoiHangChiTiet {
         this.hoaDonChiTiet = hoaDonChiTiet;
     }
 
+    public DoiHangChiTiet(String maDHCT, DoiHang doiHang, HoaDonChiTiet hoaDonChiTiet, ChiTietSanPham chiTietSanPham, int soLuong, String moTa) {
+        this.maDHCT = maDHCT;
+        this.doiHang = doiHang;
+        this.hoaDonChiTiet = hoaDonChiTiet;
+        this.chiTietSanPham = chiTietSanPham;
+        this.soLuong = soLuong;
+        this.moTa = moTa;
+    }
+
     public DoiHangChiTiet(String maDHCT, ChiTietSanPham chiTietSanPham, int soLuong, String moTa) {
         this.maDHCT = maDHCT;
         this.chiTietSanPham = chiTietSanPham;
         this.soLuong = soLuong;
         this.moTa = moTa;
     }
-    
+
     public DoiHangChiTiet(String maDHCT, DoiHang doiHang, HoaDonChiTiet hoaDonChiTiet, ChiTietSanPham chiTietSanPham, int soLuong, boolean trangThai, String moTa) {
         this.maDHCT = maDHCT;
         this.doiHang = doiHang;
@@ -55,6 +73,13 @@ public class DoiHangChiTiet {
         this.chiTietSanPham = chiTietSanPham;
         this.soLuong = soLuong;
         this.trangThai = trangThai;
+        this.moTa = moTa;
+    }
+
+    public DoiHangChiTiet(HoaDonChiTiet hoaDonChiTiet, ChiTietSanPham chiTietSanPham, int soLuong, String moTa) {
+        this.hoaDonChiTiet = hoaDonChiTiet;
+        this.chiTietSanPham = chiTietSanPham;
+        this.soLuong = soLuong;
         this.moTa = moTa;
     }
 
@@ -113,5 +138,5 @@ public class DoiHangChiTiet {
     public void setMoTa(String moTa) {
         this.moTa = moTa;
     }
-    
+
 }

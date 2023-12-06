@@ -46,4 +46,8 @@ public class HoaDonChiTietServiceImp {
     public int getSoLuongFromHDCT(String maHDCT){
         return repo.getSoLuongFromHDCT(maHDCT);
     }
+    
+    public int capNhatSoLuongDoiHang(int soLuongGiam, String maHDCT) {
+        return repo.capNhatSoLuongDoiHang(soLuongGiam, maHDCT);
+    }
 }
