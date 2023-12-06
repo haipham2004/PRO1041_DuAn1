@@ -39,7 +39,7 @@ public class HoaDonServiceImp implements AdamStore<HoaDon, String> {
 
     @Override
     public HoaDon getOne(String e) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return repo.getOne(e);
     }
 
     @Override
