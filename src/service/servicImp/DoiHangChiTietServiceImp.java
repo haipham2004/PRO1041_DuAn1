@@ -65,4 +65,8 @@ public class DoiHangChiTietServiceImp implements AdamStore<DoiHangChiTiet, Strin
     public int capNhatTrangThai(String maDH){
         return repo.capNhatTrangThai(maDH);
     }
+    
+    public List<DoiHangChiTiet> getDHCTFromDH(String maDH) {
+        return repo.getDHCTFromDH(maDH);
+    }
 }

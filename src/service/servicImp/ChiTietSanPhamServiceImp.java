@@ -147,6 +147,10 @@ public class ChiTietSanPhamServiceImp implements AdamStore<ChiTietSanPham, Strin
     public List<ChiTietSanPham> getListLocCLKT(String name1, String name2,String name3){
         return repo.getListLocCLKT(name1, name2, name3);
     }
+    
+    public List<ChiTietSanPham> getThuocTinh(String maCTSP) {
+        return repo.getThuocTinh(maCTSP);
+    }
     //
 
 }

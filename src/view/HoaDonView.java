@@ -5,11 +5,15 @@
 package view;
 
 import java.util.List;
+import java.util.Random;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.ChiTietSanPham;
+import model.DoiHang;
 import model.HoaDon;
+import model.NhanVien;
 import service.servicImp.ChiTietSanPhamServiceImp;
+import service.servicImp.DoiHangServiceImp;
 import service.servicImp.HoaDonServiceImp;
 import static view.SanPhamView.maSanPham;
 import static view.SanPhamView.tenSanPham;
@@ -21,12 +25,17 @@ import static view.SanPhamView.tenSanPham;
 public class HoaDonView extends javax.swing.JPanel {
 
     private HoaDonServiceImp serviceHD = new HoaDonServiceImp();
+    DoiHangServiceImp serviceDH = new DoiHangServiceImp();
+    DangNhapView dangNhapView = new DangNhapView();
     private ChiTietSanPhamServiceImp serviceCTSP = new ChiTietSanPhamServiceImp();
     private DefaultTableModel tblmHoaDon = new DefaultTableModel();
     private DefaultTableModel tblmSanPhamHDChiTiet = new DefaultTableModel();
-    public static String kichThuoc, mauSac, chatLieu;
     int trangHD = 1, soTrangHD, tongBanGhiHD;
     private int index = -1;
+    private int indexHoaDon = -1;
+    public static String maHD = null;
+    public static String maDH = null;
+    Random random = new Random();
 
     /**
      * Creates new form HoaDonView
@@ -109,28 +118,34 @@ public class HoaDonView extends javax.swing.JPanel {
         }
     }
 
-    public static String getKichThuoc() {
-        return kichThuoc;
+    public String getMaHD() {
+        return maHD;
     }
 
-    public static void setKichThuoc(String kichThuoc) {
-        HoaDonView.kichThuoc = kichThuoc;
+    public void setMaHD(String maHD) {
+        HoaDonView.maHD = maHD;
+    }
+    
+    public String getMaDH() {
+        return maDH;
     }
 
-    public static String getMauSac() {
-        return mauSac;
+    public void setMaDH(String maDH) {
+        HoaDonView.maDH = maDH;
     }
 
-    public static void setMauSac(String mauSac) {
-        HoaDonView.mauSac = mauSac;
-    }
-
-    public static String getChatLieu() {
-        return chatLieu;
-    }
-
-    public static void setChatLieu(String chatLieu) {
-        HoaDonView.chatLieu = chatLieu;
+    public String maTangTuDong(String tenMa) {
+        int so = serviceDH.countDoiHang();
+        so++;
+        String maTuDong = "";
+        String chuHoa = "QWERTYUIOPASDFGHJKLZXCVBNM";
+        char[] kyTu = new char[2];
+        for (int i = 0; i < 2; i++) {
+            kyTu[i] = chuHoa.charAt(random.nextInt(chuHoa.length()));
+            maTuDong += kyTu[i];
+        }
+        String maHD = tenMa + String.format("%04d", so) + maTuDong;
+        return maHD;
     }
 
     /**
@@ -255,13 +270,13 @@ public class HoaDonView extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbSoTrang)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btnDau1)
                         .addComponent(btnLui1)
                         .addComponent(btnTien1)
-                        .addComponent(btnCuoi1)))
+                        .addComponent(btnCuoi1))
+                    .addComponent(lbSoTrang))
                 .addContainerGap())
         );
 
@@ -485,6 +500,7 @@ public class HoaDonView extends javax.swing.JPanel {
     private void tblHoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblHoaDonMouseClicked
         // TODO add your handling code here:
         index = tblHoaDon.getSelectedRow();
+        maHD = tblHoaDon.getValueAt(index, 1).toString();
         this.showData(index);
         this.showSanPhamHDChiTiet(index);
     }//GEN-LAST:event_tblHoaDonMouseClicked
@@ -508,17 +524,22 @@ public class HoaDonView extends javax.swing.JPanel {
 
     private void btnDoiHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDoiHangActionPerformed
         // TODO add your handling code here:
-        int index = tblHoaDon.getSelectedRow();
-        int index2 = tblLoaiSanPham.getSelectedRow();
-        if (index == -1) {
+        indexHoaDon = tblHoaDon.getSelectedRow();
+        if (indexHoaDon == -1) {
             JOptionPane.showMessageDialog(this, "Bạn chưa chọn hóa đơn cần đổi hàng");
-        } else {            
-                if (doiHang(index)) {
-                    panelTong.removeAll();
-                    panelTong.add(new DoiHangView());
-                    panelTong.repaint();
-                    panelTong.revalidate();
-                }           
+        } else {
+            if (doiHang(indexHoaDon)) {
+                serviceHD.chuyenSangDoiHang(maHD);
+                maDH = maTangTuDong("DH");
+                HoaDon hd = new HoaDon(maHD);
+                NhanVien nv = new NhanVien(dangNhapView.getMaNV());
+                DoiHang dh = new DoiHang(maDH, hd, nv);
+                serviceDH.them(dh);
+                panelTong.removeAll();
+                panelTong.add(new DoiHangView());
+                panelTong.repaint();
+                panelTong.revalidate();
+            }
         }
     }//GEN-LAST:event_btnDoiHangActionPerformed
 
