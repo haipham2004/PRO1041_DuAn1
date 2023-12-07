@@ -21,7 +21,8 @@ public class LichSuDoiHangView extends javax.swing.JPanel {
     private DoiHangServiceImp serviceDH = new DoiHangServiceImp();
     private DoiHangChiTietServiceImp serviceDHCT = new DoiHangChiTietServiceImp();
     private DefaultTableModel tblmLSDH = new DefaultTableModel();
-    private DefaultTableModel tblmDHCT = new DefaultTableModel();
+    private DefaultTableModel tblmolDSSPMoi = new DefaultTableModel();
+    private DefaultTableModel tblmolDSSPCu = new DefaultTableModel();
     private int index = -1;
 
     /**
@@ -44,6 +45,16 @@ public class LichSuDoiHangView extends javax.swing.JPanel {
             });
         }
     }
+    
+    public void fillTableDSSPCu(List<DoiHangChiTiet> list) {
+        tblmLSDH = (DefaultTableModel) tblDoiHang.getModel();
+        tblmLSDH.setRowCount(0);
+        for (DoiHangChiTiet item : list) {
+            tblmLSDH.addRow(new Object[]{
+                
+            });
+        }
+    }
 
     public void showLSDH(int index) {
         txtMaDoiTra.setText(tblDoiHang.getValueAt(index, 1).toString());
@@ -54,23 +65,37 @@ public class LichSuDoiHangView extends javax.swing.JPanel {
         txtTrangThai.setText(tblDoiHang.getValueAt(index, 6).toString());
     }
 
-    public void fillTableDHCT(List<DoiHangChiTiet> list, String maDoiHang) {
-        tblmDHCT = (DefaultTableModel) tblCTDH.getModel();
-        tblmDHCT.setRowCount(0);
-        for (DoiHangChiTiet dhct : list) {
-            tblmDHCT.addRow(new Object[]{
-                this.tblmDHCT.getRowCount() + 1, dhct.getMaDHCT(),
-                dhct.getHoaDonChiTiet().getCtsp().getSanPham().getTenSanPham(),
-                dhct.getHoaDonChiTiet().getCtsp().getMaChiTietSanPham(),
-                dhct.getChiTietSanPham().getMaChiTietSanPham(),
-                dhct.getSoLuong(), dhct.isTrangThai() ? "Thành công" : "Thất bại", dhct.getMoTa()
+    
+
+    public void loadDSSPCu(List<DoiHangChiTiet> list) {
+        tblmolDSSPCu = (DefaultTableModel) tblDanhSachSPCu.getModel();
+        tblmolDSSPCu.setRowCount(0);
+        for (DoiHangChiTiet item : list) {
+            tblmolDSSPCu.addRow(new Object[]{
+                item.getHoaDonChiTiet().getCtsp().getMaChiTietSanPham(),
+                item.getHoaDonChiTiet().getCtsp().getSanPham().getTenSanPham(),
+                item.getHoaDonChiTiet().getCtsp().getChatLieu().getTenChatLieu(),
+                item.getHoaDonChiTiet().getCtsp().getKichThuoc().getTenKichThuoc(),
+                item.getHoaDonChiTiet().getCtsp().getMauSac().getTenMauSac(),
+                item.getSoLuong(), item.getHoaDonChiTiet().getCtsp().getGia()
             });
         }
     }
 
-    public void showDHCT(int index) {
-        String maDoiHang = (String) tblmLSDH.getValueAt(index, 1);
-        fillTableDHCT(serviceDHCT.getDHCT(maDoiHang), maDoiHang);
+    public void loadDSSPMoi(List<DoiHangChiTiet> list) {
+        tblmolDSSPMoi = (DefaultTableModel) tblDanhSachSPMoi.getModel();
+        tblmolDSSPMoi.setRowCount(0);
+        for (DoiHangChiTiet item : list) {
+            tblmolDSSPMoi.addRow(new Object[]{
+                item.getChiTietSanPham().getMaChiTietSanPham(),
+                item.getChiTietSanPham().getSanPham().getTenSanPham(),
+                item.getChiTietSanPham().getChatLieu().getTenChatLieu(),
+                item.getChiTietSanPham().getKichThuoc().getTenKichThuoc(),
+                item.getChiTietSanPham().getMauSac().getTenMauSac(),
+                item.getSoLuong(), item.getChiTietSanPham().getGia(),
+                item.getMoTa()
+            });
+        }
     }
 
     /**
@@ -87,9 +112,6 @@ public class LichSuDoiHangView extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblDoiHang = new javax.swing.JTable();
-        jPanel3 = new javax.swing.JPanel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        tblCTDH = new javax.swing.JTable();
         jPanel6 = new javax.swing.JPanel();
         jLabel19 = new javax.swing.JLabel();
         jLabel26 = new javax.swing.JLabel();
@@ -108,6 +130,12 @@ public class LichSuDoiHangView extends javax.swing.JPanel {
         jPanel7 = new javax.swing.JPanel();
         jScrollPane5 = new javax.swing.JScrollPane();
         tblDoiTra3 = new javax.swing.JTable();
+        jPanel3 = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tblDanhSachSPCu = new javax.swing.JTable();
+        jPanel8 = new javax.swing.JPanel();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        tblDanhSachSPMoi = new javax.swing.JTable();
 
         jLabel1.setText("Tìm kiếm:");
 
@@ -151,37 +179,6 @@ public class LichSuDoiHangView extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 12, Short.MAX_VALUE))
-        );
-
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Chi tiết đổi hàng", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
-
-        tblCTDH.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
-            },
-            new String [] {
-                "STT", "Mã ĐHCT", "Tên SP", "Mã CTSP cũ", "Mã CTSP mới", "Số lượng", "Trạng thái", "Mô tả"
-            }
-        ));
-        jScrollPane3.setViewportView(tblCTDH);
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 1148, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(8, Short.MAX_VALUE))
         );
 
         jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Phiếu đổi hàng", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.ABOVE_TOP, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
@@ -296,6 +293,88 @@ public class LichSuDoiHangView extends javax.swing.JPanel {
                 .addGap(33, 33, 33))
         );
 
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Danh sách sản phẩm cũ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
+
+        tblDanhSachSPCu.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Mã CTSP", "Tên SP", "Chất liệu", "Kích thước", "Màu sắc", "Số lượng", "Đơn giá"
+            }
+        ));
+        tblDanhSachSPCu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblDanhSachSPCuMouseClicked(evt);
+            }
+        });
+        jScrollPane3.setViewportView(tblDanhSachSPCu);
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 553, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Danh sách sản phẩm mới", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
+
+        tblDanhSachSPMoi.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Mã CTSP", "Tên SP", "Chất liệu", "Kích thước", "Màu sắc", "Số lượng", "Đơn giá", "Mô tả"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tblDanhSachSPMoi.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblDanhSachSPMoiMouseClicked(evt);
+            }
+        });
+        jScrollPane6.setViewportView(tblDanhSachSPMoi);
+
+        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
+        jPanel8.setLayout(jPanel8Layout);
+        jPanel8Layout.setHorizontalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 565, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jPanel8Layout.setVerticalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -303,7 +382,10 @@ public class LichSuDoiHangView extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(36, 36, 36)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -324,12 +406,13 @@ public class LichSuDoiHangView extends javax.swing.JPanel {
                     .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(31, 31, 31)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(51, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(55, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -345,7 +428,9 @@ public class LichSuDoiHangView extends javax.swing.JPanel {
         // TODO add your handling code here:
         int index = tblDoiHang.getSelectedRow();
         this.showLSDH(index);
-        this.showDHCT(index);
+        String maDH = tblDoiHang.getValueAt(index, 1).toString();
+        loadDSSPCu(serviceDHCT.getDHCTFromDH(maDH));
+        loadDSSPMoi(serviceDHCT.getDHCTFromDH(maDH));
     }//GEN-LAST:event_tblDoiHangMouseClicked
 
     private void txtTimKiemKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKiemKeyReleased
@@ -357,6 +442,14 @@ public class LichSuDoiHangView extends javax.swing.JPanel {
             fillTableLSDH(serviceDH.getAll());
         }
     }//GEN-LAST:event_txtTimKiemKeyReleased
+
+    private void tblDanhSachSPCuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDanhSachSPCuMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tblDanhSachSPCuMouseClicked
+
+    private void tblDanhSachSPMoiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDanhSachSPMoiMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tblDanhSachSPMoiMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -372,11 +465,14 @@ public class LichSuDoiHangView extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JTextField jTextField3;
-    private javax.swing.JTable tblCTDH;
+    private javax.swing.JTable tblDanhSachSPCu;
+    private javax.swing.JTable tblDanhSachSPMoi;
     private javax.swing.JTable tblDoiHang;
     private javax.swing.JTable tblDoiTra3;
     private javax.swing.JTextField txtMaDoiTra;

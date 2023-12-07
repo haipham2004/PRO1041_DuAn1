@@ -335,4 +335,17 @@ public class HoaDonRepository {
         }
         return hd;
     }
+    
+    public int capNhatTrangThai(String maHD){
+        try {
+            sql = "Update HoaDon set TrangThai = N'Đã thanh toán' Where MaHoaDon = ?";
+            con = DBConnect.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setObject(1, maHD);
+            return ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
 }

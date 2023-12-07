@@ -230,7 +230,7 @@ public class PDFGene2 {
 
 //        Double sumSauKM = sum * (1 - mucGiam);
             threeColTable4.addCell(new Cell().add("").setBorder(Border.NO_BORDER));
-            threeColTable4.addCell(new Cell().add("Tiền phải trả").setTextAlignment(TextAlignment.CENTER).setBorder(Border.NO_BORDER));
+            threeColTable4.addCell(new Cell().add("Khách trả thêm").setTextAlignment(TextAlignment.CENTER).setBorder(Border.NO_BORDER));
             threeColTable4.addCell(new Cell().add(tra + " VNĐ").setTextAlignment(TextAlignment.RIGHT).setBorder(Border.NO_BORDER));
             document.add(threeColTable4.setMargin(10f));
 
