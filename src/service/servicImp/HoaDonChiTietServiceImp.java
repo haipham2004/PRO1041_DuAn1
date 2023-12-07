@@ -50,4 +50,8 @@ public class HoaDonChiTietServiceImp {
     public int capNhatSoLuongDoiHang(int soLuongGiam, String maHDCT) {
         return repo.capNhatSoLuongDoiHang(soLuongGiam, maHDCT);
     }
+    
+    public int capNhatSoLuongDoiHang2(int soLuongTang, String maHDCT) {
+        return repo.capNhatSoLuongDoiHang2(soLuongTang, maHDCT);
+    }
 }

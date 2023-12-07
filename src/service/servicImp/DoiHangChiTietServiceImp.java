@@ -74,4 +74,16 @@ public class DoiHangChiTietServiceImp implements AdamStore<DoiHangChiTiet, Strin
     public List<HoaDonChiTiet> getJoHang(JTable table) {
         return repo.getJoHang(table);
     }
+    
+    public int congSoLuong(String maHDCT, int soLuong){
+        return repo.congSoLuong(maHDCT, soLuong);
+    }
+    
+    public DoiHangChiTiet checkTrung(String maDH, String maCTSPCu, String maCTSPMoi) {
+        return repo.checkTrung(maDH, maCTSPCu, maCTSPMoi);
+    }
+    
+    public int xoaDHCT(String maDoiHang){
+        return repo.xoaDHCT(maDoiHang);
+    }
 }
