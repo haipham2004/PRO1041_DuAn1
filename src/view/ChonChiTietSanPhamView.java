@@ -134,6 +134,7 @@ public class ChonChiTietSanPhamView extends javax.swing.JPanel {
 
     public String maTangTuDong(String DHCT) {
         int so = serviceDHCT.countDoiHangChiTiet();
+        so++;
         String maTuDong = "";
         String chuHoa = "QWERTYUIOPASDFGHJKLZXCVBNM";
         char[] kyTu = new char[2];
@@ -450,7 +451,7 @@ public class ChonChiTietSanPhamView extends javax.swing.JPanel {
                         .addComponent(btnTien)
                         .addGap(38, 38, 38)
                         .addComponent(btnCuoi)))
-                .addContainerGap(68, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -464,7 +465,7 @@ public class ChonChiTietSanPhamView extends javax.swing.JPanel {
                     .addComponent(btnChonHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
                 .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(78, 78, 78)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -482,11 +483,11 @@ public class ChonChiTietSanPhamView extends javax.swing.JPanel {
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1181, Short.MAX_VALUE)
+            .addGap(0, 1131, Short.MAX_VALUE)
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 774, Short.MAX_VALUE)
+            .addGap(0, 748, Short.MAX_VALUE)
         );
 
         pnlTong.add(jPanel4, "card3");
@@ -497,15 +498,15 @@ public class ChonChiTietSanPhamView extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(pnlTong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(pnlTong, javax.swing.GroupLayout.PREFERRED_SIZE, 1131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(56, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(pnlTong, javax.swing.GroupLayout.PREFERRED_SIZE, 774, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(72, Short.MAX_VALUE))
+                .addComponent(pnlTong, javax.swing.GroupLayout.PREFERRED_SIZE, 748, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(98, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -522,17 +523,26 @@ public class ChonChiTietSanPhamView extends javax.swing.JPanel {
                 return;
             } else {
                 String maCTSP = tblChiTietSanPham.getValueAt(indexCTSP, 0).toString();
-                ChiTietSanPham ctsp = new ChiTietSanPham(maCTSP);
-                String moTa = txtMoTa.getText();
-                DoiHang dh = new DoiHang(maDH);
-                HoaDonChiTiet hdct = new HoaDonChiTiet(maHDCT);
-                String maDHCT = maTangTuDong("DHCT");
-                DoiHangChiTiet dhct = new DoiHangChiTiet(maDHCT, dh, hdct, ctsp, soLuongDoiHang, moTa);
-                serviceDHCT.them(dhct);
-                serviceCTSP.tangSoLuong(soLuongDoiHang, maCTSPCu);
-                serviceCTSP.giamSoLuong(soLuongDoiHang, maCTSP);
-                serviceHDCT.capNhatSoLuongDoiHang(soLuongDoiHang, maHDCT);
-                quayLaiDoiHang();
+                if (serviceDHCT.checkTrung(maDH,maCTSPCu,maCTSP) != null) {
+                    serviceDHCT.congSoLuong(maHDCT, soLuongDoiHang);
+                    serviceCTSP.tangSoLuong(soLuongDoiHang, maCTSPCu);
+                    serviceCTSP.giamSoLuong(soLuongDoiHang, maCTSP);
+                    serviceHDCT.capNhatSoLuongDoiHang(soLuongDoiHang, maHDCT);
+                    quayLaiDoiHang();
+                    return;
+                } else {
+                    ChiTietSanPham ctsp = new ChiTietSanPham(maCTSP);
+                    String moTa = txtMoTa.getText();
+                    DoiHang dh = new DoiHang(maDH);
+                    HoaDonChiTiet hdct = new HoaDonChiTiet(maHDCT);
+                    String maDHCT = maTangTuDong("DHCT");
+                    DoiHangChiTiet dhct = new DoiHangChiTiet(maDHCT, dh, hdct, ctsp, soLuongDoiHang, moTa);
+                    serviceDHCT.them(dhct);
+                    serviceCTSP.tangSoLuong(soLuongDoiHang, maCTSPCu);
+                    serviceCTSP.giamSoLuong(soLuongDoiHang, maCTSP);
+                    serviceHDCT.capNhatSoLuongDoiHang(soLuongDoiHang, maHDCT);
+                    quayLaiDoiHang();
+                }
             }
         } else {
             JOptionPane.showMessageDialog(this, "Bạn chưa chọn sản phẩm để đổi");

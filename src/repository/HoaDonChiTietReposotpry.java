@@ -234,4 +234,18 @@ public class HoaDonChiTietReposotpry {
             return 0;
         }
     }
+    
+    public int capNhatSoLuongDoiHang2(int soLuongTang, String maHDCT) {
+        try {
+            con = DBConnect.getConnection();
+            sql = "UPDATE HoaDonChiTiet set SoLuong = SoLuong + ? where MaHoaDonChiTiet = ?";
+            ps = con.prepareStatement(sql);
+            ps.setObject(1, soLuongTang);
+            ps.setObject(2, maHDCT);
+            return ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
 }

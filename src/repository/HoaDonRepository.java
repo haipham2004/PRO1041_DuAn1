@@ -32,9 +32,8 @@ public class HoaDonRepository {
         List<HoaDon> listHoaDon = new ArrayList<>();
         try {
             con = DBConnect.getConnection();
-            sql = "Select HD.MaHoaDon,NV.MaNV,KH.MaKH,HD.NgayTao,HD.TongTien, HD.TrangThai,HD.GhiChu\n"
-                    + "From HoaDon HD Join NhanVien NV ON HD.MaNV=NV.MaNV Join KhachHang KH ON HD.MaKH = KH.MaKH\n"
-                    + "where HD.trangThai like N'Chờ thanh toán' order by HD.TrangThai";
+            sql = "Select HD.MaHoaDon,NV.MaNV,NV.HoTen,HD.NgayTao,HD.TrangThai\n"
+                    + "From HoaDon HD Join NhanVien NV ON HD.MaNV=NV.MaNV where HD.TrangThai = N'Chờ thanh toán'";
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
@@ -176,7 +175,7 @@ public class HoaDonRepository {
 
     public int chuyenSangDoiHang(String maHD) {
         try {
-            sql = "Update HoaDon set TrangThai = N'Đang đổi hàng' where MaHoaDon = ?";
+            sql = "Update HoaDon set TrangThai = N'Đã đổi hàng' where MaHoaDon = ?";
             con = DBConnect.getConnection();
             ps = con.prepareStatement(sql);
             ps.setObject(1, maHD);
@@ -233,7 +232,7 @@ public class HoaDonRepository {
             sql = "Select HD.MaHoaDon\n"
                     + "From HoaDon HD Join NhanVien NV ON HD.MaNV=NV.MaNV Join KhachHang KH ON HD.MaKH = KH.MaKH\n"
                     + "where DATEDIFF(DAY,HD.NgayTao,GETDATE()) <= 7 \n"
-                    + "and (HD.TrangThai like N'Đã thanh toán' )\n"
+                    + "and (HD.TrangThai like N'Đã thanh toán')\n"
                     + "and HD.MaHoaDon = ?\n";
             con = DBConnect.getConnection();
             ps = con.prepareStatement(sql);
@@ -284,7 +283,7 @@ public class HoaDonRepository {
                     + "order by MaHoaDon DESC\n"
                     + "OFFSET ? rows fetch next 15 rows only";
             ps = con.prepareStatement(sql);
-            ps.setInt(1, (index - 1) * 5);
+            ps.setInt(1, (index - 1) * 15);
             rs = ps.executeQuery();
             while (rs.next()) {
                 NhanVien nv = new NhanVien(rs.getString(2));

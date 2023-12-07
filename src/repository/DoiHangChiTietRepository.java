@@ -279,4 +279,81 @@ public class DoiHangChiTietRepository {
         }
         return list;
     }
+    
+    public int congSoLuong(String maHDCT, int soLuong){
+        try {
+            sql = "UPDATE DoiHangChiTiet set SoLuong = SoLuong + ? where MaHoaDonChiTiet = ?";
+            con = DBConnect.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setObject(1, soLuong);
+            ps.setObject(2, maHDCT);
+            return ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+    
+    public DoiHangChiTiet checkTrung(String maDH, String maCTSPCu, String maCTSPMoi) {
+        DoiHangChiTiet dhct = null;
+        try {
+            sql = "Select DHCT.MaDHCT,DHCT.SoLuong,SPCu.TenSanPham,SPCu.MaSanPham,CLCu.TenChatLieu,\n"
+                    + "CLCu.MaChatLieu,KTCu.TenKichThuoc,KTCu.MaKichThuoc, MSCu.TenMauSac,MSCu.MaMauSac,\n"
+                    + "CTSPCu.Gia, SPMoi.TenSanPham, SPMoi.MaSanPham, CLMoi.TenChatLieu,CLMoi.MaChatLieu,\n"
+                    + "KTMoi.TenKichThuoc,KTMoi.MaKichThuoc, MSMoi.TenMauSac,MSMoi.MaMauSac,\n"
+                    + "CTSPMoi.Gia, DH.MaDoiHang,CTSPCu.MaCTSP, CTSPMoi.MaCTSP, \n"
+                    + "HDCT.MaHoaDonChiTiet, DHCT.MoTa From DoiHangChiTiet DHCT\n"
+                    + "Join ChiTietSanPham CTSPMoi ON DHCT.MaCTSP = CTSPMoi.MaCTSP\n"
+                    + "Join SanPham SPMoi ON SPMoi.MaSanPham = CTSPMoi.MaSanPham\n"
+                    + "Join ChatLieu CLMoi ON CLMoi.MaChatLieu = CTSPMoi.MaChatLieu\n"
+                    + "Join MauSac MSMoi ON MSMoi.MaMauSac = CTSPMoi.MaMauSac\n"
+                    + "Join KichThuoc KTMoi ON KTMoi.MaKichThuoc = CTSPMoi.MaKichThuoc\n"
+                    + "Join HoaDonChiTiet HDCT ON HDCT.MaHoaDonChiTiet = DHCT.MaHoaDonChiTiet\n"
+                    + "Join ChiTietSanPham CTSPCu ON HDCT.MaCTSP = CTSPCu.MaCTSP\n"
+                    + "Join SanPham SPCu ON SPCu.MaSanPham = CTSPCu.MaSanPham\n"
+                    + "Join ChatLieu CLCu ON CLCu.MaChatLieu = CTSPCu.MaChatLieu\n"
+                    + "Join MauSac MSCu ON MSCu.MaMauSac = CTSPCu.MaMauSac\n"
+                    + "Join KichThuoc KTCu ON KTCu.MaKichThuoc = CTSPCu.MaKichThuoc\n"
+                    + "Join DoiHang DH ON DH.MaDoiHang = DHCT.MaDoiHang\n"
+                    + "where DH.MaDoiHang = ? and CTSPCu.MaCTSP = ? and CTSPMoi.MaCTSP = ?";
+            con = DBConnect.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setObject(1, maDH);
+            ps.setObject(2, maCTSPCu);
+            ps.setObject(3, maCTSPMoi);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                SanPham spCu = new SanPham(rs.getString(4), rs.getString(3));
+                ChatLieu clCu = new ChatLieu(rs.getString(6), rs.getString(5));
+                KichThuoc ktCu = new KichThuoc(rs.getString(8), rs.getString(7));
+                MauSac msCu = new MauSac(rs.getString(10), rs.getString(9));
+                ChiTietSanPham ctspCu = new ChiTietSanPham(rs.getString(22), spCu, msCu, clCu, ktCu, rs.getDouble(11));
+                HoaDonChiTiet hdct = new HoaDonChiTiet(rs.getString(24), ctspCu);
+                SanPham spMoi = new SanPham(rs.getString(13), rs.getString(12));
+                ChatLieu clMoi = new ChatLieu(rs.getString(15), rs.getString(14));
+                KichThuoc ktMoi = new KichThuoc(rs.getString(17), rs.getString(16));
+                MauSac msMoi = new MauSac(rs.getString(19), rs.getString(18));
+                ChiTietSanPham ctspMoi = new ChiTietSanPham(rs.getString(23), spMoi, msMoi, clMoi, ktMoi, rs.getDouble(20));
+                DoiHang dh = new DoiHang(rs.getString(21));
+                dhct = new DoiHangChiTiet(rs.getString(1), dh, hdct, ctspMoi, rs.getInt(2),true,rs.getString(25));
+            }
+            return dhct;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+    
+    public int xoaDHCT(String maDoiHang){
+        try {
+            sql = "Delete DoiHangChiTiet where MaDoiHang = ?";
+            con = DBConnect.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setObject(1, maDoiHang);
+            return ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
 }
