@@ -280,6 +280,7 @@ public class HoaDonRepository {
             con = DBConnect.getConnection();
             sql = "Select HD.MaHoaDon,NV.MaNV,KH.MaKH,HD.NgayTao,HD.TongTien, HD.TrangThai,HD.GhiChu\n"
                     + "From HoaDon HD Join NhanVien NV ON HD.MaNV=NV.MaNV Join KhachHang KH ON HD.MaKH = KH.MaKH\n"
+                    + "where HD.MaHoaDon not in (Select MaHoaDon From HoaDon where TrangThai = N'Chờ thanh toán')\n"
                     + "order by MaHoaDon DESC\n"
                     + "OFFSET ? rows fetch next 15 rows only";
             ps = con.prepareStatement(sql);
@@ -315,7 +316,8 @@ public class HoaDonRepository {
         }
         return tong;
     }
-    public HoaDon getOne(String maHD){
+
+    public HoaDon getOne(String maHD) {
         HoaDon hd = null;
         try {
             con = DBConnect.getConnection();
