@@ -137,7 +137,7 @@ public class PDFGene2 {
             threeColTable.setBackgroundColor(Color.BLACK, 0.7f);
             threeColTable.addCell(new Cell().add("Tên").setBold().setFontColor(Color.WHITE).setBorder(Border.NO_BORDER));
             threeColTable.addCell(new Cell().add("Số lượng").setBold().setTextAlignment(TextAlignment.CENTER).setFontColor(Color.WHITE).setBorder(Border.NO_BORDER));
-            threeColTable.addCell(new Cell().add("Mô tả").setBold().setTextAlignment(TextAlignment.RIGHT).setFontColor(Color.WHITE).setBorder(Border.NO_BORDER));
+            threeColTable.addCell(new Cell().add("Lý do").setBold().setTextAlignment(TextAlignment.RIGHT).setFontColor(Color.WHITE).setBorder(Border.NO_BORDER));
             threeColTable.addCell(new Cell().add("Giá").setBold().setTextAlignment(TextAlignment.RIGHT).setFontColor(Color.WHITE).setBorder(Border.NO_BORDER)).setMarginRight(10f);
             document.add(threeColTable);
 
