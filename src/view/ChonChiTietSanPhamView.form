@@ -60,7 +60,7 @@
                                           <EmptySpace type="separate" max="-2" attributes="0"/>
                                           <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                                          <Component id="btnChonHoaDon" min="-2" pref="127" max="-2" attributes="0"/>
+                                          <Component id="btnChonCTSP" min="-2" pref="127" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
@@ -95,7 +95,7 @@
                       <Component id="jLabel2" min="-2" pref="30" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="btnChonHoaDon" alignment="0" min="-2" pref="62" max="-2" attributes="0"/>
+                          <Component id="btnChonCTSP" alignment="0" min="-2" pref="62" max="-2" attributes="0"/>
                           <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
                           <Component id="jPanel3" alignment="0" max="32767" attributes="0"/>
                       </Group>
@@ -115,13 +115,13 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JButton" name="btnChonHoaDon">
+            <Component class="javax.swing.JButton" name="btnChonCTSP">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Ch&#x1ecd;n"/>
               </Properties>
               <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnChonHoaDonMouseClicked"/>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnChonHoaDonActionPerformed"/>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnChonCTSPMouseClicked"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnChonCTSPActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel2">
