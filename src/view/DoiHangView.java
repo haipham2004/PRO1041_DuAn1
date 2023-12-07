@@ -892,7 +892,7 @@ public class DoiHangView extends javax.swing.JPanel {
 
     private void btnLamMoiDSDHMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLamMoiDSDHMouseClicked
         // TODO add your handling code here:
-
+        lamMoi();
     }//GEN-LAST:event_btnLamMoiDSDHMouseClicked
 
     private void btnQuayLaiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnQuayLaiMouseClicked
