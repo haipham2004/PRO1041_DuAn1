@@ -44,7 +44,7 @@ public class DoiHangChiTietRepository {
                     + "JOIN DoiHang DH ON DH.MaDoiHang = DHCT.MaDoiHang  JOIN HoaDon HD ON DH.MaHoaDon = HD.MaHoaDon \n"
                     + "JOIN HoaDonChiTiet HDCT ON HDCT.MaHoaDonChiTiet = DHCT.MaHoaDonChiTiet JOIN ChiTietSanPham CTSPCu\n"
                     + "ON HDCT.MaCTSP = CTSPCu.MaCTSP JOIN ChiTietSanPham CTSPMoi ON DHCT.MaCTSP = CTSPMoi.MaCTSP JOIN SanPham SP ON SP.MaSanPham = CTSPCu.MaSanPham"
-                    + "					WHERE DH.MaDoiHang = ? and DHCT.TrangThai = 1";
+                    + "WHERE DH.MaDoiHang = ? and DHCT.TrangThai = 1";
             con = DBConnect.getConnection();
             ps = con.prepareStatement(sql);
             ps.setObject(1, maDoiHang);
