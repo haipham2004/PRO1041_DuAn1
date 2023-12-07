@@ -803,11 +803,11 @@ public class DoiHangView extends javax.swing.JPanel {
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1323, Short.MAX_VALUE)
+            .addGap(0, 1335, Short.MAX_VALUE)
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 708, Short.MAX_VALUE)
+            .addGap(0, 720, Short.MAX_VALUE)
         );
 
         pnlTong.add(jPanel7, "card3");
@@ -816,17 +816,11 @@ public class DoiHangView extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(pnlTong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(pnlTong, javax.swing.GroupLayout.DEFAULT_SIZE, 1335, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(pnlTong, javax.swing.GroupLayout.PREFERRED_SIZE, 708, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(pnlTong, javax.swing.GroupLayout.PREFERRED_SIZE, 720, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -871,6 +865,12 @@ public class DoiHangView extends javax.swing.JPanel {
             String dua = txtTienDua.getText();
             String thua = txtTienThua.getText();
             pdf.genPDF(listDHCT, listHDCT, listHDCT3, dh, 0.0, tra, dua, thua);
+            serviceDH.capNhatTrangThai(maDH);
+            serviceDHCT.capNhatTrangThai(maDH);
+            pnlTong.removeAll();
+            pnlTong.add(new LichSuDoiHangView());
+            pnlTong.repaint();
+            pnlTong.revalidate();
         } catch (IOException ex) {
             Logger.getLogger(DoiHangView.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -901,6 +901,7 @@ public class DoiHangView extends javax.swing.JPanel {
         int check = JOptionPane.showConfirmDialog(this, "Xác nhận hủy đơn hàng?");
         if (check == 0) {
             lamMoi();
+            serviceDH.huyDonDoiHang(maDH);
             pnlTong.removeAll();
             pnlTong.add(new HoaDonView());
             pnlTong.repaint();
