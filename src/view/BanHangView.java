@@ -351,7 +351,7 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
         // Tạo đường dẫn đến tệp tin trong thư mục con
         String filePath = childDir.getPath() + File.separator + fileName;
 
-        try ( FileWriter fileWriter = new FileWriter(filePath)) {
+        try (FileWriter fileWriter = new FileWriter(filePath)) {
             // Ghi tiêu đề cột vào tệp tin
             for (int i = 0; i < molGH.getColumnCount(); i++) {
                 fileWriter.append(molGH.getColumnName(i));
@@ -388,7 +388,7 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
             return;
         }
 
-        try ( BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line;
             boolean skipFirstLine = true;
             while ((line = br.readLine()) != null) {
@@ -1092,6 +1092,7 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
         int indexDongCuoi = tblHoaDonCho.getRowCount() - 1;
         tblHoaDonCho.setRowSelectionInterval(indexDongCuoi, indexDongCuoi);
         detailHD(hd2);
+        fillDonHang2();
         txtTienKhachBH2.setText("0");
         tinhThua();
     }//GEN-LAST:event_btnTaoHoaDonChoMouseClicked
@@ -1176,7 +1177,13 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
                 pdf.genPDF(serviceHDCT.getJoHang(tblGioHang), hd, tong, tongSau, dua, tra);
                 fillTableHDC(serviceHD.getHoaDonCho());
                 molGH.setRowCount(0);
-
+                fillDonHang2();
+                txtMaHDBH2.setText("");
+                txtMaKHBH2.setText("");
+                txtTienKhachBH2.setText("0");
+                txtTienThuaBH2.setText("0");
+                txtTenEV.setText("");
+                txtMucGiam.setText("");
             } catch (IOException ex) {
                 Logger.getLogger(BanHangView.class.getName()).log(Level.SEVERE, null, ex);
             }
