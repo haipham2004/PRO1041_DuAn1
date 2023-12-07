@@ -39,6 +39,8 @@ import service.servicImp.HoaDonChiTietServiceImp;
 import service.servicImp.HoaDonServiceImp;
 import service.servicImp.NhanVienServiceImp;
 import util.PDFGene2;
+import static view.ChonChiTietSanPhamView.maCTSPCu;
+import static view.ChonChiTietSanPhamView.soLuongDoiHang;
 
 /**
  *
@@ -80,8 +82,6 @@ public class DoiHangView extends javax.swing.JPanel {
     public DoiHangView() {
         initComponents();
         this.setSize(1300, 755);
-//        loadTableHDDH(serviceDH.getAllDangDoiHang());
-//        saveIndex();
         maHD = hoaDonView.getMaHD();
         maDH = hoaDonView.getMaDH();
         fillTableHoaDonChiTiet(serviceHDCT.getHDCTFromHoaDon(maHD));
@@ -90,17 +90,6 @@ public class DoiHangView extends javax.swing.JPanel {
         setForm();
     }
 
-//    public void loadTableHDDH(List<DoiHang> list) {
-//        tblmolHDDH = (DefaultTableModel) tblHoaDonDoiHang.getModel();
-//        tblmolHDDH.setRowCount(0);
-//        for (DoiHang item : list) {
-//            tblmolHDDH.addRow(new Object[]{
-//                tblHoaDonDoiHang.getRowCount() + 1, item.getMaDoiHang(), item.getHoaDon().getMaHoaDon(),
-//                item.getHoaDon().getKhachHang().getHoTen(), item.getNhanVien().getHoTen(), item.getNgayDoiTra(),
-//                item.getTrangThai()
-//            });
-//        }
-//    }
     public String getTenSP() {
         return tenSP;
     }
@@ -161,19 +150,6 @@ public class DoiHangView extends javax.swing.JPanel {
         DoiHangView.soLuongSP = soLuongSP;
     }
 
-//    public String maTangTuDong(String DHCT) {
-//        so++;
-//        String maTuDong = "";
-//        String chuHoa = "QWERTYUIOPASDFGHJKLZXCVBNM";
-//        char[] kyTu = new char[2];
-//        for (int i = 0; i < 2; i++) {
-//            kyTu[i] = chuHoa.charAt(random.nextInt(chuHoa.length()));
-//            maTuDong += kyTu[i];
-//        }
-//        String maDHCT = DHCT + String.format("%04d", so) + maTuDong;
-//        return maDHCT;
-//    }
-//
     public void fillTableHoaDonChiTiet(List<HoaDonChiTiet> list) {
         tblmolHDCT = (DefaultTableModel) tblChiTietHoaDon.getModel();
         tblmolHDCT.setRowCount(0);
@@ -186,109 +162,6 @@ public class DoiHangView extends javax.swing.JPanel {
         }
     }
 
-//
-//    public void fillTableDanhSachDoiHang(List<DoiHangChiTiet> list) {
-//        tblmolDSDH = (DefaultTableModel) tblDanhSachDoiHang.getModel();
-//        tblmolDSDH.setRowCount(0);
-//        for (DoiHangChiTiet item : list) {
-//            tblmolDSDH.addRow(new Object[]{tblDanhSachDoiHang.getRowCount() + 1,
-//                item.getHoaDonChiTiet().getMaHDCT(),
-//                item.getHoaDonChiTiet().getCtsp().getSanPham().getTenSanPham(),
-//                item.getHoaDonChiTiet().getCtsp().getMaChiTietSanPham(),
-//                item.getChiTietSanPham().getMaChiTietSanPham(),
-//                item.getSoLuong(), item.getChiTietSanPham().getGia(), item.getMoTa()
-//            });
-//        }
-//    }
-//
-//    public void showDoiHangChiTiet(int index) {
-//        String maDoiHang = (String) tblHoaDonDoiHang.getValueAt(index, 1);
-//        fillTableDanhSachDoiHang(serviceDHCT.getDHCTDangDoi(maDoiHang));
-//    }
-//
-//    public void saveIndex() {
-//        if (indexHoaDonDoiHang != -1) {
-//            this.showHoaDonChiTiet(indexHoaDonDoiHang);
-//            this.showDoiHangChiTiet(indexHoaDonDoiHang);
-//            tblHoaDonDoiHang.setRowSelectionInterval(indexHoaDonDoiHang, indexHoaDonDoiHang);
-//            detailDH();
-//        }
-//    }
-//
-//    public Double tongTienHoaDon() {
-//        int x = tblChiTietHoaDon.getRowCount();
-//        if (x == 0) {
-//            return 0.0;
-//        }
-//        Double sum = 0.0;
-//        for (int i = 0; i < x; i++) {
-//            int soLuong = Integer.parseInt(tblChiTietHoaDon.getValueAt(i, 4).toString());
-//            Double donGia = Double.parseDouble(tblChiTietHoaDon.getValueAt(i, 5).toString());
-//            sum += (soLuong * donGia);
-//        }
-//        return sum;
-//    }
-//
-//    public Double tongTienDoiHang() {
-//        int x = tblDanhSachDoiHang.getRowCount();
-//        if (x == 0) {
-//            return 0.0;
-//        }
-//        Double sum = 0.0;
-//        for (int i = 0; i < x; i++) {
-//            int soLuong = Integer.parseInt(tblDanhSachDoiHang.getValueAt(i, 5).toString());
-//            Double donGia = Double.parseDouble(tblDanhSachDoiHang.getValueAt(i, 6).toString());
-//            sum += (soLuong * donGia);
-//        }
-//        return sum;
-//    }
-//
-//    public int soLuongDoiHang() {
-//        int x = tblDanhSachDoiHang.getRowCount();
-//        if (x == 0) {
-//            return 0;
-//        }
-//        int sum = 0;
-//        for (int i = 0; i < x; i++) {
-//            sum += Integer.parseInt(tblDanhSachDoiHang.getValueAt(i, 5).toString());
-//        }
-//        return sum;
-//    }
-//
-//    public int soLuongHoaDon() {
-//        int x = tblChiTietHoaDon.getRowCount();
-//        if (x == 0) {
-//            return 0;
-//        }
-//        int sum = 0;
-//        for (int i = 0; i < x; i++) {
-//            sum += Integer.parseInt(tblChiTietHoaDon.getValueAt(i, 4).toString());
-//        }
-//        return sum;
-//    }
-//
-//    public String phanCach(Double x) {
-//        NumberFormat fm = NumberFormat.getNumberInstance(Locale.US);
-//        return fm.format(x);
-//    }
-//
-//    public void detailDH() {
-//        txtMaHD.setText(tblHoaDonDoiHang.getValueAt(indexHoaDonDoiHang, 2).toString());
-//        txtMaKH.setText(tblHoaDonDoiHang.getValueAt(indexHoaDonDoiHang, 3).toString());
-//        txtTongTienHoaDon.setText(phanCach(tongTienHoaDon()));
-//        txtTongTienHangDoi.setText(phanCach(tongTienDoiHang()));
-//        txtTongSoLuongMua.setText(soLuongHoaDon() + "");
-//        txtTongSoLuongDoi.setText(soLuongDoiHang() + "");
-//    }
-//
-//    public void clearDonDoiHang() {
-//        txtMaHD.setText("");
-//        txtMaKH.setText("");
-//        txtTongTienHoaDon.setText("");
-//        txtTongTienHangDoi.setText("");
-//        txtTongSoLuongMua.setText("");
-//        txtTongSoLuongDoi.setText("");
-//    }
     public void deltailChiTietSanPham(int index) {
         String maCTSP = tblChiTietHoaDon.getValueAt(index, 3).toString();
         ChiTietSanPham ctsp = serviceCTSP.getThuocTinh(maCTSP).get(0);
@@ -329,7 +202,8 @@ public class DoiHangView extends javax.swing.JPanel {
                 item.getHoaDonChiTiet().getCtsp().getChatLieu().getTenChatLieu(),
                 item.getHoaDonChiTiet().getCtsp().getKichThuoc().getTenKichThuoc(),
                 item.getHoaDonChiTiet().getCtsp().getMauSac().getTenMauSac(),
-                item.getSoLuong(), item.getHoaDonChiTiet().getCtsp().getGia()
+                item.getSoLuong(), item.getHoaDonChiTiet().getCtsp().getGia(),
+                item.getHoaDonChiTiet().getMaHDCT()
             });
         }
     }
@@ -367,6 +241,7 @@ public class DoiHangView extends javax.swing.JPanel {
             return "0";
         }
     }
+
     public void tinhThua() {
         Double tongTien = Double.valueOf(boPhanCach(txtTienTra.getText()));
         txtTienDua.setText(phanCach(Double.valueOf(boPhanCach(txtTienDua.getText()))));
@@ -466,6 +341,39 @@ public class DoiHangView extends javax.swing.JPanel {
         return list;
     }
 
+    public void lamMoi() {
+        int checkXoaGH = JOptionPane.showConfirmDialog(this, "Bạn có chắc mắc muốn xoá tất cả sản phẩm chưa được đặt hàng");
+        if (checkXoaGH == JOptionPane.YES_NO_OPTION) {
+            for (int i = 0; i < tblDanhSachSPCu.getRowCount(); i++) {
+                String productID = tblDanhSachSPCu.getValueAt(i, 0).toString();
+                String MaHDCT = tblDanhSachSPCu.getValueAt(i, 7).toString();
+                int quantity = Integer.parseInt(tblDanhSachSPCu.getValueAt(i, 5).toString());
+                int indexHDCT = -1;
+                for (int j = 0; j < tblChiTietHoaDon.getRowCount(); j++) {
+                    if (tblChiTietHoaDon.getValueAt(j, 3).toString().equals(productID)) {
+                        indexHDCT = j;
+                        break;
+                    }
+                }
+                if (indexHDCT != -1) {
+                    serviceCTSP.capNhatSoLuongThanhToanCong(quantity, productID);
+                    serviceHDCT.capNhatSoLuongDoiHang2(quantity, MaHDCT);
+                }
+            }
+            for (int i = 0; i < tblDanhSachSPMoi.getRowCount(); i++) {
+                String productID = tblDanhSachSPMoi.getValueAt(i, 0).toString();
+                int quantity = Integer.parseInt(tblDanhSachSPMoi.getValueAt(i, 5).toString());
+                serviceCTSP.tangSoLuong(quantity, productID);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Xoá sản phẩm không thành công");
+        }
+        fillTableHoaDonChiTiet(serviceHDCT.getHDCTFromHoaDon(maHD));
+        serviceDHCT.xoaDHCT(maDH);
+        loadDSSPCu(serviceDHCT.getDHCTFromDH(maDH));
+        loadDSSPMoi(serviceDHCT.getDHCTFromDH(maDH));
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -487,7 +395,6 @@ public class DoiHangView extends javax.swing.JPanel {
         txtTongTienHoaDon = new javax.swing.JTextField();
         jLabel25 = new javax.swing.JLabel();
         txtTongTienHangDoi = new javax.swing.JTextField();
-        btnHuy = new javax.swing.JButton();
         jLabel26 = new javax.swing.JLabel();
         txtTienDua = new javax.swing.JTextField();
         jLabel27 = new javax.swing.JLabel();
@@ -544,18 +451,6 @@ public class DoiHangView extends javax.swing.JPanel {
 
         txtTongTienHangDoi.setEnabled(false);
 
-        btnHuy.setText("Hủy");
-        btnHuy.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnHuyMouseClicked(evt);
-            }
-        });
-        btnHuy.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnHuyActionPerformed(evt);
-            }
-        });
-
         jLabel26.setText("Tiền khách đưa");
 
         txtTienDua.setEnabled(false);
@@ -595,7 +490,6 @@ public class DoiHangView extends javax.swing.JPanel {
                             .addComponent(jLabel20))
                         .addGap(83, 83, 83)
                         .addComponent(txtMaKH, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btnHuy, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnXacNhanDoiHang, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                         .addComponent(jLabel26)
@@ -647,11 +541,9 @@ public class DoiHangView extends javax.swing.JPanel {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtTienThua, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel27))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnXacNhanDoiHang, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnHuy, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(44, 44, 44))
         );
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Chi tiết hóa đơn", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
@@ -695,13 +587,13 @@ public class DoiHangView extends javax.swing.JPanel {
 
         tblDanhSachSPCu.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Mã CTSP", "Tên SP", "Chất liệu", "Kích thước", "Màu sắc", "Số lượng", "Đơn giá"
+                "Mã CTSP", "Tên SP", "Chất liệu", "Kích thước", "Màu sắc", "Số lượng", "Đơn giá", "Mã HĐCT"
             }
         ));
         tblDanhSachSPCu.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -747,7 +639,7 @@ public class DoiHangView extends javax.swing.JPanel {
             }
         });
 
-        btnQuayLai.setText("Quay lại");
+        btnQuayLai.setText("Hủy");
         btnQuayLai.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnQuayLaiMouseClicked(evt);
@@ -878,7 +770,7 @@ public class DoiHangView extends javax.swing.JPanel {
                                         .addComponent(btnChonHang)))))
                         .addGap(18, 18, 18)
                         .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -911,11 +803,11 @@ public class DoiHangView extends javax.swing.JPanel {
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1217, Short.MAX_VALUE)
+            .addGap(0, 1323, Short.MAX_VALUE)
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 742, Short.MAX_VALUE)
+            .addGap(0, 708, Short.MAX_VALUE)
         );
 
         pnlTong.add(jPanel7, "card3");
@@ -926,14 +818,14 @@ public class DoiHangView extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(pnlTong, javax.swing.GroupLayout.PREFERRED_SIZE, 1217, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(47, Short.MAX_VALUE))
+                .addComponent(pnlTong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(pnlTong, javax.swing.GroupLayout.PREFERRED_SIZE, 742, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pnlTong, javax.swing.GroupLayout.PREFERRED_SIZE, 708, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -944,12 +836,6 @@ public class DoiHangView extends javax.swing.JPanel {
 
     private void tblDanhSachSPCuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDanhSachSPCuMouseClicked
         // TODO add your handling code here:
-//        indexDoiHangChiTiet = tblDanhSachDoiHang.getSelectedRow();
-//        String maHDCT = tblDanhSachDoiHang.getValueAt(indexDoiHangChiTiet, 1).toString();
-//        tenSP = tblDanhSachDoiHang.getValueAt(indexDoiHangChiTiet, 2).toString();
-//        tenCL = serviceCTSP.getTenCL(maCTSPCu);
-//        maDHCT = serviceDHCT.getMaDHCT(maHDCT);
-//        soLuongSP = serviceHDCT.getSoLuongFromHDCT(maHDCT);
     }//GEN-LAST:event_tblDanhSachSPCuMouseClicked
 
     private void tblChiTietHoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblChiTietHoaDonMouseClicked
@@ -988,19 +874,6 @@ public class DoiHangView extends javax.swing.JPanel {
         } catch (IOException ex) {
             Logger.getLogger(DoiHangView.class.getName()).log(Level.SEVERE, null, ex);
         }
-//        if (indexHoaDonDoiHang == -1) {
-//            JOptionPane.showMessageDialog(this, "Bạn chưa chọn hóa đơn để đổi hàng");
-//        } else {
-//            tblmolHDCT = (DefaultTableModel) tblChiTietHoaDon.getModel();
-//            tblmolDSDH = (DefaultTableModel) tblDanhSachDoiHang.getModel();
-//            String maDH = tblHoaDonDoiHang.getValueAt(indexHoaDonDoiHang, 1).toString();
-//            serviceDH.capNhatTrangThai(maDH);
-//            serviceDHCT.capNhatTrangThai(maDH);
-//            loadTableHDDH(serviceDH.getAllDangDoiHang());
-//            tblmolHDCT.setRowCount(0);
-//            tblmolDSDH.setRowCount(0);
-//            JOptionPane.showMessageDialog(this, "Đổi hàng thành công");
-//        }
     }//GEN-LAST:event_btnXacNhanDoiHangActionPerformed
 
     private void btnChonHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnChonHangMouseClicked
@@ -1019,47 +892,20 @@ public class DoiHangView extends javax.swing.JPanel {
 
     private void btnLamMoiDSDHMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLamMoiDSDHMouseClicked
         // TODO add your handling code here:
-//        for (int i = 0; i < tblDanhSachDoiHang.getRowCount(); i++) {
-//            int soLuong = Integer.parseInt(tblDanhSachDoiHang.getValueAt(i, 5).toString());
-//            if (soLuong != 0) {
-//                String maCTSPCu = tblDanhSachDoiHang.getValueAt(i, 3).toString();
-//                String maCTSPMoi = tblDanhSachDoiHang.getValueAt(i, 4).toString();
-//                serviceCTSP.tangSoLuong(soLuong, maCTSPMoi);
-//                serviceCTSP.giamSoLuong(soLuong, maCTSPCu);
-//            }
-//        }
-//        String maDH = tblHoaDonDoiHang.getValueAt(indexHoaDonDoiHang, 1).toString();
-//        serviceDHCT.xoa(maDH);
-//        showDoiHangChiTiet(indexHoaDonDoiHang);
+
     }//GEN-LAST:event_btnLamMoiDSDHMouseClicked
-
-    private void btnHuyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHuyMouseClicked
-        // TODO add your handling code here:
-//        if (indexHoaDonDoiHang == -1) {
-//            JOptionPane.showMessageDialog(this, "Bạn chưa chọn hóa đơn để hủy");
-//        } else {
-//            tblmolHDCT = (DefaultTableModel) tblChiTietHoaDon.getModel();
-//            tblmolDSDH = (DefaultTableModel) tblDanhSachDoiHang.getModel();
-//            String maDH = tblHoaDonDoiHang.getValueAt(indexHoaDonDoiHang, 1).toString();
-//            serviceDH.huyDonDoiHang(maDH);
-//            loadTableHDDH(serviceDH.getAllDangDoiHang());
-//            tblmolHDCT.setRowCount(0);
-//            tblmolDSDH.setRowCount(0);
-//            clearDonDoiHang();
-//        }
-    }//GEN-LAST:event_btnHuyMouseClicked
-
-    private void btnHuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHuyActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnHuyActionPerformed
 
     private void btnQuayLaiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnQuayLaiMouseClicked
         // TODO add your handling code here:
         //        quayLaiDoiHang();
-        pnlTong.removeAll();
-        pnlTong.add(new HoaDonView());
-        pnlTong.repaint();
-        pnlTong.revalidate();
+        int check = JOptionPane.showConfirmDialog(this, "Xác nhận hủy đơn hàng?");
+        if (check == 0) {
+            lamMoi();
+            pnlTong.removeAll();
+            pnlTong.add(new HoaDonView());
+            pnlTong.repaint();
+            pnlTong.revalidate();
+        }
     }//GEN-LAST:event_btnQuayLaiMouseClicked
 
     private void tblDanhSachSPMoiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDanhSachSPMoiMouseClicked
@@ -1086,7 +932,6 @@ public class DoiHangView extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnChonHang;
-    private javax.swing.JButton btnHuy;
     private javax.swing.JButton btnLamMoiDSDH;
     private javax.swing.JButton btnQuayLai;
     private javax.swing.JButton btnXacNhanDoiHang;

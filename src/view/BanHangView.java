@@ -156,85 +156,84 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
                 if (indexHoaDonCho == -1) {
                     JOptionPane.showMessageDialog(this, "Vui lòng Tạo hoá đơn");
                     continue;
-                }
-                else{
-                List<ChiTietSanPham> list = serviceCTSP.getList(result.getText());
-                txtTest.setText(result.getText());
-                int indexs = tblChiTietSanPham.getSelectedRow();
-                int indexGioHang = -1;
-                if (!serviceCTSP.checkMaQR(result.getText())) {
-                    JOptionPane.showMessageDialog(this, "Mã QR không tồn tại");
-                    continue;
-                }
+                } else {
+                    List<ChiTietSanPham> list = serviceCTSP.getList(result.getText());
+                    txtTest.setText(result.getText());
+                    int indexs = tblChiTietSanPham.getSelectedRow();
+                    int indexGioHang = -1;
+                    if (!serviceCTSP.checkMaQR(result.getText())) {
+                        JOptionPane.showMessageDialog(this, "Mã QR không tồn tại");
+                        continue;
+                    }
 
-                try {
-                    String input = JOptionPane.showInputDialog(this, "Mời nhập số lượng");
-                    if (input == null || input.isEmpty()) {
-                        return;
-                    }
-                    String maFake = null;
-                    int soLuongFake = 0;
-                    double giaFake = 0;
-                    String tenFake = null;
-                    int soLuongTonFake = 0;
-                    for (ChiTietSanPham chiTietSanPham : list) {
-                        if (chiTietSanPham.getMaChiTietSanPham().equals(result.getText())) {
-                            maFake = chiTietSanPham.getMaChiTietSanPham();
-                            soLuongFake = Integer.parseInt(input);
-                            if (soLuongFake > chiTietSanPham.getSoLuong()) {
-                                JOptionPane.showMessageDialog(this, "Số lượng tồn không đủ, vui lòng nhập lại");
-                                return;
-                            }
-                            soLuongTonFake = chiTietSanPham.getSoLuong() - soLuongFake;
-                            giaFake = chiTietSanPham.getGia();
-                            tenFake = chiTietSanPham.getSanPham().getTenSanPham();
+                    try {
+                        String input = JOptionPane.showInputDialog(this, "Mời nhập số lượng");
+                        if (input == null || input.isEmpty()) {
+                            return;
                         }
-                    }
-                    ChiTietSanPham ctsps = serviceCTSP.getOne(maFake);
-
-                    if (tblGioHang.getRowCount() > 0) {
-                        for (int i = 0; i < tblGioHang.getRowCount(); i++) {
-                            if (tblGioHang.getValueAt(i, 0) != null) {
-                                if (tblGioHang.getValueAt(i, 0).toString().equals(maFake)) {
-                                    indexGioHang = i;
-                                    break;
-                                }
-                            }
-                        }
-                    }
-                    if (indexGioHang != -1) {
+                        String maFake = null;
+                        int soLuongFake = 0;
+                        double giaFake = 0;
+                        String tenFake = null;
+                        int soLuongTonFake = 0;
                         for (ChiTietSanPham chiTietSanPham : list) {
                             if (chiTietSanPham.getMaChiTietSanPham().equals(result.getText())) {
-                                int soLuongHienTai = Integer.parseInt(tblGioHang.getValueAt(indexGioHang, 1).toString());
-                                int soLuonngSauKhiThem = soLuongHienTai + Integer.parseInt(input);
-                                if (soLuonngSauKhiThem > chiTietSanPham.getSoLuong()) {
+                                maFake = chiTietSanPham.getMaChiTietSanPham();
+                                soLuongFake = Integer.parseInt(input);
+                                if (soLuongFake > chiTietSanPham.getSoLuong()) {
                                     JOptionPane.showMessageDialog(this, "Số lượng tồn không đủ, vui lòng nhập lại");
                                     return;
                                 }
-                                tblGioHang.setValueAt(soLuonngSauKhiThem, indexGioHang, 1);
-                                double thanhTienSauKhiThem = Math.round((soLuonngSauKhiThem * giaFake) * 100) / 100;
-                                tblGioHang.setValueAt(thanhTienSauKhiThem, indexGioHang, 3);
-                                soLuongTonFake = chiTietSanPham.getSoLuong() - soLuonngSauKhiThem;
-                                serviceCTSP.capNhatSoLuongThanhToanCong(Integer.parseInt(input), maFake);
-                                loadPageCTSP();
+                                soLuongTonFake = chiTietSanPham.getSoLuong() - soLuongFake;
+                                giaFake = chiTietSanPham.getGia();
+                                tenFake = chiTietSanPham.getSanPham().getTenSanPham();
                             }
                         }
-                    } else {
-                        fillTableGioHang(tblGioHang, ctsps, soLuongFake);
-                        serviceCTSP.capNhatSoLuongThanhToanCong(Integer.parseInt(input), maFake);
-                        loadPageCTSP();
-                        indexHoaDonCho = tblHoaDonCho.getSelectedRow();
-                        String maHD = tblHoaDonCho.getValueAt(indexHoaDonCho, 1).toString();
-                        String parentDirectory = "D:\\PRO1041_DuAn1";
-                        String newDirectoryName = "GioHang";
-                        luuGioHangVaoFile(maHD, parentDirectory, newDirectoryName);
+                        ChiTietSanPham ctsps = serviceCTSP.getOne(maFake);
+
+                        if (tblGioHang.getRowCount() > 0) {
+                            for (int i = 0; i < tblGioHang.getRowCount(); i++) {
+                                if (tblGioHang.getValueAt(i, 0) != null) {
+                                    if (tblGioHang.getValueAt(i, 0).toString().equals(maFake)) {
+                                        indexGioHang = i;
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                        if (indexGioHang != -1) {
+                            for (ChiTietSanPham chiTietSanPham : list) {
+                                if (chiTietSanPham.getMaChiTietSanPham().equals(result.getText())) {
+                                    int soLuongHienTai = Integer.parseInt(tblGioHang.getValueAt(indexGioHang, 1).toString());
+                                    int soLuonngSauKhiThem = soLuongHienTai + Integer.parseInt(input);
+                                    if (soLuonngSauKhiThem > chiTietSanPham.getSoLuong()) {
+                                        JOptionPane.showMessageDialog(this, "Số lượng tồn không đủ, vui lòng nhập lại");
+                                        return;
+                                    }
+                                    tblGioHang.setValueAt(soLuonngSauKhiThem, indexGioHang, 1);
+                                    double thanhTienSauKhiThem = Math.round((soLuonngSauKhiThem * giaFake) * 100) / 100;
+                                    tblGioHang.setValueAt(thanhTienSauKhiThem, indexGioHang, 3);
+                                    soLuongTonFake = chiTietSanPham.getSoLuong() - soLuonngSauKhiThem;
+                                    serviceCTSP.capNhatSoLuongThanhToanCong(Integer.parseInt(input), maFake);
+                                    loadPageCTSP();
+                                }
+                            }
+                        } else {
+                            fillTableGioHang(tblGioHang, ctsps, soLuongFake);
+                            serviceCTSP.capNhatSoLuongThanhToanCong(Integer.parseInt(input), maFake);
+                            loadPageCTSP();
+                            indexHoaDonCho = tblHoaDonCho.getSelectedRow();
+                            String maHD = tblHoaDonCho.getValueAt(indexHoaDonCho, 1).toString();
+                            String parentDirectory = "D:\\PRO1041_DuAn1";
+                            String newDirectoryName = "GioHang";
+                            luuGioHangVaoFile(maHD, parentDirectory, newDirectoryName);
+                        }
+                        fillDonHang2();
+                        tinhThua();
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
-                    fillDonHang2();
-                    tinhThua();
-                } catch (Exception e) {
-                    e.printStackTrace();
                 }
-            }
             }
         } while (true);
     }
@@ -245,7 +244,6 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
         t.setDaemon(true);
         return t;
     }
-
 
     public String maTangTuDong(String HD) {
         so++;
@@ -318,7 +316,6 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
         fillTableChiTietSanPham(serviceCTSP.listPageCTSP2(trangCTSP));
     }
 
- 
     public void fillTableHDC2() {
         DangNhapView dangNhapView = new DangNhapView();
         String maHD = maTangTuDong("HD");
@@ -354,7 +351,7 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
         // Tạo đường dẫn đến tệp tin trong thư mục con
         String filePath = childDir.getPath() + File.separator + fileName;
 
-        try (FileWriter fileWriter = new FileWriter(filePath)) {
+        try ( FileWriter fileWriter = new FileWriter(filePath)) {
             // Ghi tiêu đề cột vào tệp tin
             for (int i = 0; i < molGH.getColumnCount(); i++) {
                 fileWriter.append(molGH.getColumnName(i));
@@ -391,7 +388,7 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
             return;
         }
 
-        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+        try ( BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line;
             boolean skipFirstLine = true;
             while ((line = br.readLine()) != null) {
@@ -1296,6 +1293,11 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
                         tblChiTietSanPham.setValueAt(soLuongSauKhiSua, indexSanPham, 1);
                         molGH.removeRow(indexXoaGH);
                         fillTableGioHang(tblGioHang, ctsps, Integer.parseInt(input));
+                        indexHoaDonCho = tblHoaDonCho.getSelectedRow();
+                        String maHD = tblHoaDonCho.getValueAt(indexHoaDonCho, 1).toString();
+                        String parentDirectory = "D:\\PRO1041_DuAn1";
+                        String newDirectoryName = "GioHang";
+                        luuGioHangVaoFile(maHD, parentDirectory, newDirectoryName);
                     } else if (Integer.parseInt(input) <= 0) {
                         JOptionPane.showMessageDialog(this, "Số lượng sản phẩm phải lớn hơn 0, vui lòng sửa lại");
                         return;
@@ -1315,7 +1317,11 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
                     tblChiTietSanPham.setValueAt(soLuongSauKhiSua, indexSanPham, 1);
                     molGH.removeRow(indexXoaGH);
                     fillTableGioHang(tblGioHang, ctsps, Integer.parseInt(input));
-
+                    indexHoaDonCho = tblHoaDonCho.getSelectedRow();
+                    String maHD = tblHoaDonCho.getValueAt(indexHoaDonCho, 1).toString();
+                    String parentDirectory = "D:\\PRO1041_DuAn1";
+                    String newDirectoryName = "GioHang";
+                    luuGioHangVaoFile(maHD, parentDirectory, newDirectoryName);
                 }
             }
         } else {
