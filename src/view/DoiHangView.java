@@ -901,7 +901,7 @@ public class DoiHangView extends javax.swing.JPanel {
         int check = JOptionPane.showConfirmDialog(this, "Xác nhận hủy đơn hàng?");
         if (check == 0) {
             lamMoi();
-            serviceDH.huyDonDoiHang(maDH);
+            serviceHD.capNhatTrangThai(maHD);
             pnlTong.removeAll();
             pnlTong.add(new HoaDonView());
             pnlTong.repaint();
