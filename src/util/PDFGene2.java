@@ -137,7 +137,7 @@ public class PDFGene2 {
             threeColTable.setBackgroundColor(Color.BLACK, 0.7f);
             threeColTable.addCell(new Cell().add("Tên").setBold().setFontColor(Color.WHITE).setBorder(Border.NO_BORDER));
             threeColTable.addCell(new Cell().add("Số lượng").setBold().setTextAlignment(TextAlignment.CENTER).setFontColor(Color.WHITE).setBorder(Border.NO_BORDER));
-            threeColTable.addCell(new Cell().add("Mô tả").setBold().setTextAlignment(TextAlignment.RIGHT).setFontColor(Color.WHITE).setBorder(Border.NO_BORDER));
+            threeColTable.addCell(new Cell().add("Lý do").setBold().setTextAlignment(TextAlignment.RIGHT).setFontColor(Color.WHITE).setBorder(Border.NO_BORDER));
             threeColTable.addCell(new Cell().add("Giá").setBold().setTextAlignment(TextAlignment.RIGHT).setFontColor(Color.WHITE).setBorder(Border.NO_BORDER)).setMarginRight(10f);
             document.add(threeColTable);
 
@@ -230,7 +230,7 @@ public class PDFGene2 {
 
 //        Double sumSauKM = sum * (1 - mucGiam);
             threeColTable4.addCell(new Cell().add("").setBorder(Border.NO_BORDER));
-            threeColTable4.addCell(new Cell().add("Tiền phải trả").setTextAlignment(TextAlignment.CENTER).setBorder(Border.NO_BORDER));
+            threeColTable4.addCell(new Cell().add("Khách trả thêm").setTextAlignment(TextAlignment.CENTER).setBorder(Border.NO_BORDER));
             threeColTable4.addCell(new Cell().add(tra + " VNĐ").setTextAlignment(TextAlignment.RIGHT).setBorder(Border.NO_BORDER));
             document.add(threeColTable4.setMargin(10f));
 
