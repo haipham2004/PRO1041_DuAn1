@@ -102,13 +102,6 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
     }
 
     public void mtam2() {
-//        ChatLieu cl = (ChatLieu) cbxChatLieuLoc.getSelectedItem();
-//        String tenTimCL = cl.toString();
-//        MauSac ms = (MauSac) cbxMauSacLoc.getSelectedItem();
-//        String tenTimMS = ms.toString();
-//        KichThuoc kt = (KichThuoc) cbxKichThuocLoc.getSelectedItem();
-//        String tenTimKT = kt.toString();
-//String tenList = new SanPhamView().getTenSPs(null, new SanPhamView().getTenSanPham());
         if (cboLocChat.getSelectedIndex() != -1 && cboLocMau.getSelectedIndex() == -1 && cboLocKich.getSelectedIndex() == -1) {
             ChatLieu cl = (ChatLieu) cbxChatLieuLoc.getSelectedItem();
             String tenTimCL = cl.toString();
@@ -136,7 +129,6 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
             String tenTimMS = ms.toString();
             KichThuoc kt = (KichThuoc) cbxKichThuocLoc.getSelectedItem();
             String tenTimKT = kt.toString();
-            System.out.println(tenTimMS + " " + tenTimKT);
             String tenList = new SanPhamView().getTenSPs(null, new SanPhamView().getTenSanPham());
             fillTableChiTietSanPham(serviceCTSP.getListLocMSKT(tenList, tenTimMS, tenTimKT));
         } else if (cboLocChat.getSelectedIndex() != -1 && cboLocMau.getSelectedIndex() == -1 && cboLocKich.getSelectedIndex() != -1) {
@@ -415,8 +407,6 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
         btnTien2 = new javax.swing.JButton();
         btnCuoi2 = new javax.swing.JButton();
         lbSoTrang2 = new javax.swing.JLabel();
-        btnQR = new javax.swing.JButton();
-        btnNhapFileExcel = new javax.swing.JButton();
         btnXuatfile = new javax.swing.JButton();
         btnBackSP = new javax.swing.JButton();
         btnTaoAllQR = new javax.swing.JButton();
@@ -736,22 +726,6 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
 
         lbSoTrang2.setText("Số trang");
 
-        btnQR.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/z4883882330886_8f9a20df51f3b6cffdecf910e8a70379.jpg"))); // NOI18N
-        btnQR.setText("Tạo QR");
-        btnQR.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnQRActionPerformed(evt);
-            }
-        });
-
-        btnNhapFileExcel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/z4883861072449_7ae13d74ca98dc15bf13cc3275ca5686.jpg"))); // NOI18N
-        btnNhapFileExcel.setText("Nhập file");
-        btnNhapFileExcel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNhapFileExcelActionPerformed(evt);
-            }
-        });
-
         btnXuatfile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/z4883861072449_7ae13d74ca98dc15bf13cc3275ca5686.jpg"))); // NOI18N
         btnXuatfile.setText("Xuất file");
         btnXuatfile.addActionListener(new java.awt.event.ActionListener() {
@@ -785,10 +759,8 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
                     .addGroup(jPanel16Layout.createSequentialGroup()
                         .addComponent(btnTaoAllQR)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnQR)
-                        .addGap(29, 29, 29)
                         .addComponent(btnQuayLai)
-                        .addGap(18, 18, 18)
+                        .addGap(39, 39, 39)
                         .addComponent(btnThemCTSP))
                     .addGroup(jPanel16Layout.createSequentialGroup()
                         .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -807,35 +779,24 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(jPanel16Layout.createSequentialGroup()
-                            .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel48, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel47))
-                            .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel16Layout.createSequentialGroup()
-                                    .addGap(18, 18, 18)
-                                    .addComponent(cboChatLieu, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(2, 2, 2))
-                                .addGroup(jPanel16Layout.createSequentialGroup()
-                                    .addGap(20, 20, 20)
-                                    .addComponent(cboMauSac, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel16Layout.createSequentialGroup()
-                            .addComponent(jLabel49)
-                            .addGap(18, 18, 18)
-                            .addComponent(cboKichThuoc, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel16Layout.createSequentialGroup()
-                        .addComponent(btnSuaCTSP)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnClearCTSP)))
-                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel16Layout.createSequentialGroup()
-                        .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel16Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnXuatfile)
+                                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel48, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel47))
+                                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel16Layout.createSequentialGroup()
+                                        .addGap(18, 18, 18)
+                                        .addComponent(cboChatLieu, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel16Layout.createSequentialGroup()
+                                        .addGap(20, 20, 20)
+                                        .addComponent(cboMauSac, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel16Layout.createSequentialGroup()
+                                .addComponent(jLabel49)
                                 .addGap(18, 18, 18)
-                                .addComponent(btnNhapFileExcel))
+                                .addComponent(cboKichThuoc, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel16Layout.createSequentialGroup()
                                 .addGap(66, 66, 66)
                                 .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -843,12 +804,18 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
                                     .addGroup(jPanel16Layout.createSequentialGroup()
                                         .addComponent(jLabel52, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
-                                        .addComponent(rdConhang1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addGap(303, 303, 303))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel16Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnBackSP)
-                        .addGap(186, 186, 186))))
+                                        .addComponent(rdConhang1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(303, 303, 303))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel16Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnBackSP)
+                                .addGap(186, 186, 186))))
+                    .addGroup(jPanel16Layout.createSequentialGroup()
+                        .addComponent(btnSuaCTSP)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnClearCTSP)
+                        .addGap(38, 38, 38)
+                        .addComponent(btnXuatfile))))
             .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                 .addGroup(jPanel16Layout.createSequentialGroup()
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -919,9 +886,7 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
                     .addComponent(btnThemCTSP)
                     .addComponent(btnSuaCTSP)
                     .addComponent(btnClearCTSP)
-                    .addComponent(btnQR)
                     .addComponent(btnXuatfile)
-                    .addComponent(btnNhapFileExcel, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnTaoAllQR))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1103,133 +1068,9 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
 
     }//GEN-LAST:event_txtTienMaxKeyReleased
 
-    private void btnQRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQRActionPerformed
-        // TODO add your handling code here:
-        index = tblChiTietSanPham.getSelectedRow();
-        if (index == -1) {
-            JOptionPane.showMessageDialog(this, "Bạn chưa chọn sản phẩm để tạo mã QR");
-            return;
-        }
-        if (index != -1) {
-            String ma = (String) tblChiTietSanPham.getValueAt(index, 0);
-            if (serviceCTSP.checkMaQR(ma)) {
-                JOptionPane.showMessageDialog(this, "Mã QR của chi tiết này sản phẩm đã tồn tại");
-            } else {
-                deltailChiTietSanPham(index);
-                btnThemCTSP.setEnabled(false);
-                serviceCTSP.taoQR(ma);
-                JOptionPane.showMessageDialog(this, "Tạo QR thành công cho sản phẩm có mã: " + ma);
-            }
-
-        } else {
-            JOptionPane.showMessageDialog(this, "Tạo QR thất bại");
-        }
-    }//GEN-LAST:event_btnQRActionPerformed
-
-    private void btnNhapFileExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNhapFileExcelActionPerformed
-        // TODO add your handling code here:
-        mol = (DefaultTableModel) tblChiTietSanPham.getModel();
-//        for (int i = 0; i < 10; i++) {
-//            mol.addRow(new Object[]{
-//                i, i, i, i, i, i, i, i
-//            });
-//        }
-
-        System.out.println("Nhập excel1");
-        File excelFile;
-        FileInputStream excelFIS = null;
-        BufferedInputStream excelBIS = null;
-        XSSFWorkbook excelImportToJTable = null;
-        String defaultCurrentDirectoryPath = "D:\\PRO1041_DuAn1\\Excel\\";
-        JFileChooser excelFileChooser = new JFileChooser(defaultCurrentDirectoryPath);
-        excelFileChooser.setDialogTitle("Select Excel File");
-        FileNameExtensionFilter fnef = new FileNameExtensionFilter("EXCEL FILES", "xls", "xlsx", "xlsm");
-        excelFileChooser.setFileFilter(fnef);
-        int excelChooser = excelFileChooser.showOpenDialog(null);
-        System.out.println("Nhập excel2");
-        if (excelChooser == JFileChooser.APPROVE_OPTION) {
-            try {
-                mol = (DefaultTableModel) tblChiTietSanPham.getModel();
-                System.out.println("Nhập excel3");
-                excelFile = excelFileChooser.getSelectedFile();
-                excelFIS = new FileInputStream(excelFile);
-                excelBIS = new BufferedInputStream(excelFIS);
-                excelImportToJTable = new XSSFWorkbook(excelBIS);
-                XSSFSheet excelSheet = excelImportToJTable.getSheetAt(0);
-
-                for (int i = 1; i < tblChiTietSanPham.getRowCount(); i++) {
-                    System.out.println("Nhập excel6");
-                    XSSFRow excelRow = excelSheet.getRow(i);
-                    System.out.println("Nhập excel5");
-                    if (excelRow != null) {
-                        System.out.println("Test3");
-                        XSSFCell excelSoLuong = excelRow.getCell(0);
-                        XSSFCell excelGia = excelRow.getCell(1);
-                        XSSFCell excelSP = excelRow.getCell(2);
-                        XSSFCell excelCL = excelRow.getCell(3);
-                        XSSFCell excelMS = excelRow.getCell(4);
-                        XSSFCell excelKT = excelRow.getCell(5);
-                        XSSFCell excelTT = excelRow.getCell(6);
-                        mol.addRow(new Object[]{excelSoLuong, excelGia, excelSP, excelCL, excelKT, excelMS, excelTT});
-                        ChiTietSanPham ctsp = new ChiTietSanPham();
-                        int soLuong;
-
-                        if (excelSoLuong.getCellType() == CellType.NUMERIC) {
-                            soLuong = (int) excelSoLuong.getNumericCellValue();
-                        } else {
-                            soLuong = (int) Double.parseDouble(excelSoLuong.toString());
-                        }
-
-                        ctsp.setSoLuong(soLuong);
-
-                        double gia;
-
-                        if (excelGia.getCellType() == CellType.NUMERIC) {
-                            gia = excelGia.getNumericCellValue();
-                        } else {
-                            gia = Double.parseDouble(excelGia.toString());
-                        }
-
-                        ctsp.setGia(gia);
-                        SanPham sp = new SanPham();
-                        String sps = excelSP.toString();
-                        sp.setMaSanPham(sps);
-                        ChatLieu cl = new ChatLieu();
-                        String cls = excelCL.toString();
-                        cl.setMaChatLieu(cls);
-                        MauSac ms = new MauSac();
-                        String mss = excelMS.toString();
-                        ms.setMaMauSac(mss);
-                        KichThuoc kt = new KichThuoc();
-                        String kts = excelKT.toString();
-                        kt.setMaKichThuoc(kts);
-                        boolean trangThai;
-                        if (soLuong > 0) {
-                            trangThai = true;
-                        } else {
-                            trangThai = false;
-                        }
-                        ChiTietSanPham ctsp2 = new ChiTietSanPham(sp, ms, cl, kt, soLuong, gia, trangThai);
-                        System.out.println("Test1");
-                        serviceCTSP.them(ctsp2);
-                        System.out.println("Test2");
-                        loadPageCTSP();
-
-                    } else {
-                        System.out.println("Dòng " + i + " là null. Bỏ qua dòng này.");
-                    }
-                }
-                JOptionPane.showMessageDialog(null, "Imported Successfully !!.....");
-            } catch (IOException iOException) {
-                JOptionPane.showMessageDialog(null, iOException.getMessage());
-            }
-
-        }
-    }//GEN-LAST:event_btnNhapFileExcelActionPerformed
-
     private void btnXuatfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXuatfileActionPerformed
         // TODO add your handling code here:
-        fillTableChiTietSanPham(serviceCTSP.getList(new SanPhamView().getTenSPs(null, new SanPhamView().getTenSanPham())));
+        fillTableChiTietSanPham(serviceCTSP.getAll());
         FileOutputStream excelFOU = null;
         BufferedOutputStream excelBOU = null;
         XSSFWorkbook excelJtableExporter;
@@ -1311,6 +1152,7 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
                 }
             }
             JOptionPane.showMessageDialog(this, "Xuất file  thành công: ");
+            loadPageCTSP();
         }
     }//GEN-LAST:event_btnXuatfileActionPerformed
 
@@ -1340,7 +1182,11 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
 
     private void btnTaoAllQRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaoAllQRActionPerformed
         // TODO add your handling code here:
-        for (ChiTietSanPham chiTietSanPham : serviceCTSP.getList(new SanPhamView().getTenSPs(null, new SanPhamView().getTenSanPham()))) {
+
+        for (ChiTietSanPham chiTietSanPham : serviceCTSP.getAll()) {
+            if (serviceCTSP.checkMaQR(chiTietSanPham.getMaChiTietSanPham())) {
+                continue;
+            }
             qrCode(chiTietSanPham.getMaChiTietSanPham());
             serviceCTSP.taoQR(chiTietSanPham.getMaChiTietSanPham());
         }
@@ -1424,6 +1270,9 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
         cboLocChat.setSelectedIndex(-1);
         cboLocMau.setSelectedIndex(-1);
         cboLocKich.setSelectedIndex(-1);
+        cboLocChat.setSelectedItem("Tất cả");
+        cboLocMau.setSelectedItem("Tất cả");
+        cboLocKich.setSelectedItem("Tất cả");
         loadPageCTSP();
 
     }//GEN-LAST:event_btnResetActionPerformed
@@ -1435,8 +1284,6 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
     private javax.swing.JButton btnCuoi2;
     private javax.swing.JButton btnDau2;
     private javax.swing.JButton btnLui2;
-    private javax.swing.JButton btnNhapFileExcel;
-    private javax.swing.JButton btnQR;
     private javax.swing.JButton btnQuayLai;
     private javax.swing.JButton btnReset;
     private javax.swing.JButton btnSearchGia;

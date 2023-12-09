@@ -90,14 +90,14 @@ public class MauSacRepository {
             return 0;
         }
     }
-    
+
     public List<MauSac> getList(String name) {
         List<MauSac> listMauSac4 = new ArrayList<>();
         try {
             conn = DBConnect.getConnection();
             sql = "SELECT * FROM MauSac where tenMauSac like ?";
             pst = conn.prepareStatement(sql);
-            pst.setObject(1,'%'+name+'%');
+            pst.setObject(1, '%' + name + '%');
             rs = pst.executeQuery();
             while (rs.next()) {
                 MauSac ms = new MauSac(rs.getString(1),
@@ -116,7 +116,7 @@ public class MauSacRepository {
         try {
             conn = DBConnect.getConnection();
             sql = "SELECT * FROM MauSac\n"
-                    + "order by MaMauSac DESC\n"
+                    + "order by MaMauSac\n"
                     + "OFFSET ? rows fetch next 5 rows only";
             pst = conn.prepareStatement(sql);
             pst.setInt(1, (index - 1) * 5);
@@ -148,6 +148,25 @@ public class MauSacRepository {
             return 0;
         }
         return tong;
+    }
+
+    public boolean checkTrungMS(String name1) {
+        try {
+            Connection conn = DBConnect.getConnection();
+            String sql = "SELECT MS.MaMauSac FROM MauSac MS\n"
+                    + "where MS.TenMauSac like ?\n"
+                    + "GROUP BY  MS.MaMauSac\n"
+                    + "HAVING COUNT(*) >= 1";
+            pst = conn.prepareStatement(sql);
+            pst.setObject(1, name1);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
 }
