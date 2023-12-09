@@ -53,4 +53,7 @@ public class KichThuocServiceImp implements AdamStore<KichThuoc, String>{
     public int tongBanGhi() {
         return repo.tongBanGhi();
     }
+    public boolean checkTrungKT(String name1) {
+        return repo.checkTrungKT(name1);
+    }
 }

@@ -44,8 +44,7 @@ public class ThuocTinhView extends javax.swing.JPanel {
         loadPageMS();
         loadPageKT();
         rdConhang2.setSelected(true);
-        loadCboChatLieu(serviceCl.getAll());
-       
+        cboCL.setSelectedIndex(-1);
         cboMS.setSelectedIndex(-1);
         cboKT.setSelectedIndex(-1);
     }
@@ -269,7 +268,7 @@ public class ThuocTinhView extends javax.swing.JPanel {
 
         jLabel1.setText("Mã");
 
-        jLabel2.setText("tên");
+        jLabel2.setText("Tên");
 
         jLabel3.setText("Trạng thái");
 
@@ -618,48 +617,65 @@ public class ThuocTinhView extends javax.swing.JPanel {
     private void btnThemThuocTinhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemThuocTinhActionPerformed
         // TODO add your handling code here:
         int indexs = pnlThuocTinh.getSelectedIndex();
+        String tenTT = txtTenThuocTinh.getText().trim();
         if (indexs == 0) {
             ChatLieu cl = savesCL();
             if (validateTT()) {
-                if (serviceCl.getOne(cl.getMaChatLieu()) != null) {
-                    JOptionPane.showMessageDialog(this, "Mã chất liệu trùng");
+                System.out.println("Tên: "+tenTT);
+                if (serviceCl.checkTrungCL(tenTT)) {
+                    JOptionPane.showMessageDialog(this, "Chất liệu đã tồn tại, vui lòng kiểm tra lại", "Message", 2);
                     return;
                 } else {
-                    if (serviceCl.them(cl) > 0) {
-                        loadPageKT();
-                        JOptionPane.showMessageDialog(this, "Thêm sản chất liệu thành công");
+                    if (serviceCl.getOne(cl.getMaChatLieu()) != null) {
+                        JOptionPane.showMessageDialog(this, "Mã chất liệu trùng");
+                        return;
                     } else {
-                        JOptionPane.showMessageDialog(this, "Thêm chất liệu thất bại");
+                        if (serviceCl.them(cl) > 0) {
+                            loadPageCL();
+                            JOptionPane.showMessageDialog(this, "Thêm sản chất liệu thành công");
+                        } else {
+                            JOptionPane.showMessageDialog(this, "Thêm chất liệu thất bại");
+                        }
                     }
                 }
             }
         } else if (indexs == 1) {
             MauSac ms = savesMS();
             if (validateTT()) {
-                if (serviceMS.getOne(ms.getMaMauSac()) != null) {
-                    JOptionPane.showMessageDialog(this, "Mã màu sắc trùng");
+                if (serviceMS.checkTrungMS(tenTT)) {
+                    JOptionPane.showMessageDialog(this, "Màu sắc đã tồn tại, vui lòng kiểm tra lại", "Message", 2);
                     return;
                 } else {
-                    if (serviceMS.them(ms) > 0) {
-                        loadPageMS();
-                        JOptionPane.showMessageDialog(this, "Thêm màu sắc thành công");
+                    if (serviceMS.getOne(ms.getMaMauSac()) != null) {
+                        JOptionPane.showMessageDialog(this, "Mã màu sắc trùng");
+                        return;
                     } else {
-                        JOptionPane.showMessageDialog(this, "Thêm màu sắc thất bại");
+                        if (serviceMS.them(ms) > 0) {
+                            loadPageMS();
+                            JOptionPane.showMessageDialog(this, "Thêm màu sắc thành công");
+                        } else {
+                            JOptionPane.showMessageDialog(this, "Thêm màu sắc thất bại");
+                        }
                     }
                 }
             }
         } else {
             KichThuoc kt = savesKT();
             if (validateTT()) {
-                if (serviceKT.getOne(kt.getMaKichThuoc()) != null) {
-                    JOptionPane.showMessageDialog(this, "Mã kích thước trùng");
+                if (serviceKT.checkTrungKT(tenTT)) {
+                    JOptionPane.showMessageDialog(this, "Kích thước đã tồn tại, vui lòng kiểm tra lại", "Message", 2);
                     return;
                 } else {
-                    if (serviceKT.them(kt) > 0) {
-                        loadPageKT();
-                        JOptionPane.showMessageDialog(this, "Thêm kích thước thành công");
+                    if (serviceKT.getOne(kt.getMaKichThuoc()) != null) {
+                        JOptionPane.showMessageDialog(this, "Mã kích thước trùng");
+                        return;
                     } else {
-                        JOptionPane.showMessageDialog(this, "Thêm kích thước thất bại");
+                        if (serviceKT.them(kt) > 0) {
+                            loadPageKT();
+                            JOptionPane.showMessageDialog(this, "Thêm kích thước thành công");
+                        } else {
+                            JOptionPane.showMessageDialog(this, "Thêm kích thước thất bại");
+                        }
                     }
                 }
             }
@@ -669,9 +685,14 @@ public class ThuocTinhView extends javax.swing.JPanel {
     private void btnSuaThuocTinhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaThuocTinhActionPerformed
         // TODO add your handling code here:
         int indexs = pnlThuocTinh.getSelectedIndex();
+        String tenTT = txtTenThuocTinh.getText().trim();
         if (indexs == 0) {
             if (index < 0) {
                 JOptionPane.showMessageDialog(this, "Bạn chưa chọn dòng dữ liệu nào");
+                return;
+            }
+            if (serviceCl.checkTrungCL(tenTT)) {
+                JOptionPane.showMessageDialog(this, "Chất liệu đã tồn tại, vui lòng kiểm tra lại", "Message", 2);
                 return;
             } else {
                 ChatLieu cl = savesCL();
@@ -687,7 +708,11 @@ public class ThuocTinhView extends javax.swing.JPanel {
             if (index < 0) {
                 JOptionPane.showMessageDialog(this, "Bạn chưa chọn dòng dữ liệu nào");
                 return;
-            } else {
+            }
+             if (serviceMS.checkTrungMS(tenTT)) {
+                JOptionPane.showMessageDialog(this, "Màu sắc đã tồn tại, vui lòng kiểm tra lại", "Message", 2);
+                return;
+            }else {
                 MauSac ms = savesMS();
                 String ma = tblMauSac.getValueAt(index, 0).toString();
                 if (serviceMS.sua(ms, ma) > 0) {
@@ -701,7 +726,11 @@ public class ThuocTinhView extends javax.swing.JPanel {
             if (index < 0) {
                 JOptionPane.showMessageDialog(this, "Bạn chưa chọn dòng dữ liệu nào");
                 return;
-            } else {
+            }
+             if (serviceKT.checkTrungKT(tenTT)) {
+                JOptionPane.showMessageDialog(this, "Kích thước đã tồn tại, vui lòng kiểm tra lại", "Message", 2);
+                return;
+            }else {
                 KichThuoc kt = savesKT();
                 String ma = tblKichThuoc.getValueAt(index, 0).toString();
                 if (serviceKT.sua(kt, ma) > 0) {

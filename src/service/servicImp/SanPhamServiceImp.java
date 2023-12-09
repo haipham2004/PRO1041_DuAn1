@@ -47,6 +47,7 @@ public class SanPhamServiceImp implements AdamStore<SanPham, String> {
     public List<SanPham> getList(String e) {
         return repo.getList(e);
     }
+    
 
     public List<SanPham> listPageSP(int index) {
         return repo.listPageSP(index);

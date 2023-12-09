@@ -51,4 +51,8 @@ public class ChatLieuServiceImp implements AdamStore<ChatLieu, String>{
     public int tongBanGhi(){
         return repo.tongBanGhi();
     }
+    
+    public boolean checkTrungCL(String name1) {
+        return repo.checkTrungCL(name1);
+    }
 }

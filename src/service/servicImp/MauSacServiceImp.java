@@ -54,4 +54,7 @@ public class MauSacServiceImp implements AdamStore<MauSac, String> {
     public int tongBanGhi() {
         return repo.tongBanGhi();
     }
+     public boolean checkTrungMS(String name1){
+         return repo.checkTrungMS(name1);
+     }
 }

@@ -204,7 +204,6 @@ public class SanPhamView extends javax.swing.JPanel {
         btnQuayLai = new javax.swing.JButton();
         btnClearSP = new javax.swing.JButton();
         btnXuatFile = new javax.swing.JButton();
-        btnNhapFile = new javax.swing.JButton();
         pnlSP = new javax.swing.JTabbedPane();
         jPanel8 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -421,13 +420,6 @@ public class SanPhamView extends javax.swing.JPanel {
             }
         });
 
-        btnNhapFile.setText("Nhập file");
-        btnNhapFile.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNhapFileActionPerformed(evt);
-            }
-        });
-
         tblSanPham.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
@@ -552,9 +544,7 @@ public class SanPhamView extends javax.swing.JPanel {
                 .addComponent(btnQuayLai)
                 .addGap(46, 46, 46)
                 .addComponent(btnXuatFile)
-                .addGap(34, 34, 34)
-                .addComponent(btnNhapFile)
-                .addGap(55, 55, 55)
+                .addGap(43, 43, 43)
                 .addComponent(btnCTSP)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(pnlSanPhamLayout.createSequentialGroup()
@@ -578,16 +568,13 @@ public class SanPhamView extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(41, 41, 41)
-                .addGroup(pnlSanPhamLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlSanPhamLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnThemSP)
-                        .addComponent(btnSuaSP)
-                        .addComponent(btnClearSP)
-                        .addComponent(btnQuayLai)
-                        .addComponent(btnXuatFile, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(pnlSanPhamLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnNhapFile)
-                        .addComponent(btnCTSP)))
+                .addGroup(pnlSanPhamLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnThemSP)
+                    .addComponent(btnSuaSP)
+                    .addComponent(btnClearSP)
+                    .addComponent(btnQuayLai)
+                    .addComponent(btnXuatFile, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCTSP))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                 .addComponent(pnlSP, javax.swing.GroupLayout.PREFERRED_SIZE, 408, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -619,7 +606,7 @@ public class SanPhamView extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(pnlTong, javax.swing.GroupLayout.DEFAULT_SIZE, 795, Short.MAX_VALUE)
+                .addComponent(pnlTong, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -644,15 +631,14 @@ public class SanPhamView extends javax.swing.JPanel {
 
     private void cboLocLSPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cboLocLSPMouseClicked
         // TODO add your handling code here:
-     
-//
 
+//
 
     }//GEN-LAST:event_cboLocLSPMouseClicked
 
     private void cboLocLSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboLocLSPActionPerformed
         // TODO add your handling code here:
-   LoaiSanPham lsp = (LoaiSanPham) cbxLoaiSanPhamLoc.getSelectedItem();
+        LoaiSanPham lsp = (LoaiSanPham) cbxLoaiSanPhamLoc.getSelectedItem();
         lbSoTrang.setText(trangSP + " of " + soTrangSP);
         String name = lsp.toString();
         loadPageSP();
@@ -728,70 +714,6 @@ public class SanPhamView extends javax.swing.JPanel {
 
     }//GEN-LAST:event_btnCTSPActionPerformed
 
-    private void btnNhapFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNhapFileActionPerformed
-        // TODO add your handling code here:
-        File excelFile;
-        FileInputStream excelFIS = null;
-        BufferedInputStream excelBIS = null;
-        XSSFWorkbook excelImportToJTable = null;
-        String defaultCurrentDirectoryPath = "D:\\PRO1041_DuAn1\\Excel\\";
-        JFileChooser excelFileChooser = new JFileChooser(defaultCurrentDirectoryPath);
-        excelFileChooser.setDialogTitle("Select Excel File");
-        FileNameExtensionFilter fnef = new FileNameExtensionFilter("EXCEL FILES", "xls", "xlsx", "xlsm");
-        excelFileChooser.setFileFilter(fnef);
-        int excelChooser = excelFileChooser.showOpenDialog(null);
-        if (excelChooser == JFileChooser.APPROVE_OPTION) {
-            try {
-                excelFile = excelFileChooser.getSelectedFile();
-                excelFIS = new FileInputStream(excelFile);
-                excelBIS = new BufferedInputStream(excelFIS);
-                excelImportToJTable = new XSSFWorkbook(excelBIS);
-                XSSFSheet excelSheet = excelImportToJTable.getSheetAt(0);
-                for (int i = 1; i < tblSanPham.getRowCount(); i++) {
-                    XSSFRow excelRow = excelSheet.getRow(i);
-                    if (excelRow != null) {
-                        XSSFCell exceMaSP = excelRow.getCell(0);
-                        String maCheck = exceMaSP.toString();
-                        if (!serviceSP.checkExitSP(maCheck)) {
-                            XSSFCell excelTenSP = excelRow.getCell(1);
-                            XSSFCell excelTT = excelRow.getCell(2);
-                            XSSFCell excelXX = excelRow.getCell(3);
-                            XSSFCell excelLSP = excelRow.getCell(4);
-                            mol.addRow(new Object[]{exceMaSP, excelTenSP, excelTT, excelXX, excelLSP});
-                            String name = exceMaSP.toString();
-                            String exceMaSPs = exceMaSP.toString();
-                            String excelTenSPs = excelTenSP.toString();
-
-                            boolean trangThai;
-                            if (excelTT.toString().equals("Còn hàng")) {
-                                trangThai = true;
-                            } else {
-                                trangThai = false;
-                            }
-                            LoaiSanPham lsp = new LoaiSanPham();
-                            String lsps = excelLSP.toString();
-                            lsp.setMaLoaiSanPham(lsps);
-                            String excelXXs = excelXX.toString();
-                            SanPham sp = new SanPham(exceMaSPs, excelTenSPs, trangThai, lsp, excelXXs);
-                            serviceSP.them(sp);
-                            loadPageSP();
-                        } else {
-                            System.out.println("Sản phẩm có mã: " + maCheck + "Đã tồn tại. Bỏ qua bản ghi" + i);
-                        }
-
-                    } else {
-                        System.out.println("Dòng " + i + " là null. Bỏ qua dòng này");
-                    }
-                }
-                JOptionPane.showMessageDialog(null, "Imported Successfully !!.....");
-            } catch (IOException iOException) {
-                JOptionPane.showMessageDialog(null, iOException.getMessage());
-            } catch (SQLException ex) {
-                Logger.getLogger(SanPhamView.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-    }//GEN-LAST:event_btnNhapFileActionPerformed
-
     private void btnXuatFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXuatFileActionPerformed
         // TODO add your handling code here:
         fillTableSamPham(serviceSP.getAll());
@@ -864,6 +786,7 @@ public class SanPhamView extends javax.swing.JPanel {
                 }
             }
             JOptionPane.showMessageDialog(this, "Xuất file  thành công: ");
+            loadPageSP();
         }
     }//GEN-LAST:event_btnXuatFileActionPerformed
 
@@ -914,7 +837,6 @@ public class SanPhamView extends javax.swing.JPanel {
     private javax.swing.JButton btnCuoi1;
     private javax.swing.JButton btnDau1;
     private javax.swing.JButton btnLui1;
-    private javax.swing.JButton btnNhapFile;
     private javax.swing.JButton btnQuayLai;
     private javax.swing.JButton btnSuaSP;
     private javax.swing.JButton btnThemSP;

@@ -29,7 +29,7 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
-              <Component id="pnlTong" pref="795" max="32767" attributes="0"/>
+              <Component id="pnlTong" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -70,9 +70,7 @@
                       <Component id="btnQuayLai" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
                       <Component id="btnXuatFile" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
-                      <Component id="btnNhapFile" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
                       <Component id="btnCTSP" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
@@ -103,18 +101,13 @@
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jPanel4" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="btnThemSP" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="btnSuaSP" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="btnClearSP" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="btnQuayLai" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="btnXuatFile" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                              <Component id="btnNhapFile" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="btnCTSP" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="btnThemSP" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnSuaSP" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnClearSP" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnQuayLai" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnXuatFile" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
+                          <Component id="btnCTSP" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="37" max="32767" attributes="0"/>
                       <Component id="pnlSP" min="-2" pref="408" max="-2" attributes="0"/>
@@ -433,14 +426,6 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnXuatFileActionPerformed"/>
-              </Events>
-            </Component>
-            <Component class="javax.swing.JButton" name="btnNhapFile">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Nh&#x1ead;p file"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNhapFileActionPerformed"/>
               </Events>
             </Component>
             <Container class="javax.swing.JTabbedPane" name="pnlSP">
