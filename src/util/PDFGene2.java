@@ -265,23 +265,18 @@ public class PDFGene2 {
 
             if (file.exists()) {
                 Desktop desktop = Desktop.getDesktop();
-                desktop.open(file); // Mở file PDF bằng ứng dụng mặc định
+                desktop.open(file); 
                 try {
                     Robot robot = new Robot();
 
-                    // Đợi 1 giây trước khi bắt đầu nhấn phím
                     robot.delay(1000);
 
-                    // Nhấn phím Ctrl
                     robot.keyPress(KeyEvent.VK_CONTROL);
 
-                    // Nhấn phím P
                     robot.keyPress(KeyEvent.VK_P);
 
-                    // Nhả phím Ctrl
                     robot.keyRelease(KeyEvent.VK_CONTROL);
 
-                    // Nhả phím P
                     robot.keyRelease(KeyEvent.VK_P);
                 } catch (AWTException e) {
                 }
