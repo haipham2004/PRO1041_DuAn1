@@ -124,7 +124,7 @@ public class HoaDonView extends javax.swing.JPanel {
     public void setMaHD(String maHD) {
         HoaDonView.maHD = maHD;
     }
-    
+
     public String getMaDH() {
         return maDH;
     }
@@ -145,6 +145,13 @@ public class HoaDonView extends javax.swing.JPanel {
         }
         String maHD = tenMa + String.format("%04d", so) + maTuDong;
         return maHD;
+    }
+
+    public void chuyenSangDoiHang() {
+        panelTong.removeAll();
+        panelTong.add(new DoiHangView());
+        panelTong.repaint();
+        panelTong.revalidate();
     }
 
     /**

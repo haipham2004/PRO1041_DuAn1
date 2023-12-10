@@ -592,6 +592,9 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtChatLieu">
+                  <Properties>
+                    <Property name="enabled" type="boolean" value="false"/>
+                  </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel2">
                   <Properties>
@@ -599,6 +602,9 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtKichThuoc">
+                  <Properties>
+                    <Property name="enabled" type="boolean" value="false"/>
+                  </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel3">
                   <Properties>
@@ -606,6 +612,9 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtMauSac">
+                  <Properties>
+                    <Property name="enabled" type="boolean" value="false"/>
+                  </Properties>
                 </Component>
               </SubComponents>
             </Container>

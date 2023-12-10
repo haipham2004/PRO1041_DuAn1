@@ -166,7 +166,6 @@ public class PDFGene2 {
                         System.out.println(x.getSoLuong());
                         System.out.println(y.getSoLuong());
                         if (list.getHoaDonChiTiet().getCtsp().getMaChiTietSanPham().equals(x.getCtsp().getMaChiTietSanPham())) {
-                            System.out.println("Hehehehe");
                             Paragraph p = new Paragraph();
                             Text txt1 = new Text(x.getCtsp().toString2()).setUnderline(1.5f, 3.5f);
                             Text txt2 = new Text(list.getChiTietSanPham().toString2());

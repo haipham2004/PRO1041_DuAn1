@@ -45,6 +45,8 @@ public class ChonChiTietSanPhamView extends javax.swing.JPanel {
     static int indexCTSP = -1;
     static String tenSP = null;
     static String chatLieu = null;
+    static String kichThuoc = null;
+    static String mauSac = null;
     static int soLuongSP = 0;
     static String maHDCT = null;
     static int soLuongDoiHang = 0;
@@ -64,7 +66,6 @@ public class ChonChiTietSanPhamView extends javax.swing.JPanel {
         loadLocMauSac(serviceMS.getAll());
         loadLocChatLieu(serviceCl.getAll());
         tenSP = doiHangView.getTenSP();
-        chatLieu = doiHangView.getMaCL();
         soLuongSP = doiHangView.getSoLuongSP();
         maHDCT = doiHangView.getMaHDCT();
         maCTSPCu = doiHangView.getMaCTSPCu();
@@ -121,7 +122,6 @@ public class ChonChiTietSanPhamView extends javax.swing.JPanel {
     }
 
     public void loadPageCTSP() {
-        chatLieu = new DoiHangView().getMaCL();
         tongBanGhiCTSP = serviceCTSP.tongBanGhi2();
         if (tongBanGhiCTSP % 20 == 0) {
             soTrangCTSP = tongBanGhiCTSP / 20;
@@ -226,6 +226,15 @@ public class ChonChiTietSanPhamView extends javax.swing.JPanel {
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtMoTa = new javax.swing.JTextArea();
+        jPanel5 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        txtChatLieu = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        txtKichThuoc = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        txtMauSac = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        txtSoLuongDoiHang = new javax.swing.JTextField();
         jPanel4 = new javax.swing.JPanel();
 
         pnlTong.setLayout(new java.awt.CardLayout());
@@ -412,6 +421,66 @@ public class ChonChiTietSanPhamView extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
+        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Thông tin sản phẩm", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
+
+        jLabel1.setText("Chất liệu: ");
+
+        txtChatLieu.setEnabled(false);
+
+        jLabel3.setText("Kích thước: ");
+
+        txtKichThuoc.setEnabled(false);
+
+        jLabel4.setText("Màu sắc: ");
+
+        txtMauSac.setEnabled(false);
+
+        jLabel5.setText("Số lượng đổi hàng:");
+
+        txtSoLuongDoiHang.setEnabled(false);
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtChatLieu, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtKichThuoc, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtMauSac, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtSoLuongDoiHang, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel4)
+                        .addComponent(txtMauSac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(txtSoLuongDoiHang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel1)
+                        .addComponent(txtChatLieu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel3)
+                        .addComponent(txtKichThuoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(21, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -421,7 +490,6 @@ public class ChonChiTietSanPhamView extends javax.swing.JPanel {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(6, 6, 6)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnQuayLai, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(jScrollPane7, javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(jPanel2Layout.createSequentialGroup()
@@ -429,10 +497,13 @@ public class ChonChiTietSanPhamView extends javax.swing.JPanel {
                                     .addGap(18, 18, 18)
                                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGap(18, 18, 18)
-                                    .addComponent(btnChonCTSP, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 431, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(btnChonCTSP, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btnQuayLai, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(280, 280, 280)
                         .addComponent(btnDau)
@@ -444,15 +515,18 @@ public class ChonChiTietSanPhamView extends javax.swing.JPanel {
                         .addComponent(btnTien)
                         .addGap(38, 38, 38)
                         .addComponent(btnCuoi)))
-                .addContainerGap(130, Short.MAX_VALUE))
+                .addContainerGap(129, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnQuayLai, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(btnQuayLai, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnChonCTSP, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -540,11 +614,6 @@ public class ChonChiTietSanPhamView extends javax.swing.JPanel {
             return;
         }
     }//GEN-LAST:event_btnChonCTSPMouseClicked
-
-    private void btnQuayLaiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnQuayLaiMouseClicked
-        // TODO add your handling code here:
-        quayLaiDoiHang();
-    }//GEN-LAST:event_btnQuayLaiMouseClicked
 
     private void tblChiTietSanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblChiTietSanPhamMouseClicked
         // TODO add your handling code here:
@@ -693,6 +762,11 @@ public class ChonChiTietSanPhamView extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_cboLocChatActionPerformed
 
+    private void btnQuayLaiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnQuayLaiMouseClicked
+        // TODO add your handling code here:
+        quayLaiDoiHang();
+    }//GEN-LAST:event_btnQuayLaiMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnChonCTSP;
@@ -705,16 +779,25 @@ public class ChonChiTietSanPhamView extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> cboLocChat;
     private javax.swing.JComboBox<String> cboLocKich;
     private javax.swing.JComboBox<String> cboLocMau;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JLabel lbSoTrang;
     private javax.swing.JPanel pnlTong;
     private javax.swing.JTable tblChiTietSanPham;
+    private javax.swing.JTextField txtChatLieu;
+    private javax.swing.JTextField txtKichThuoc;
+    private javax.swing.JTextField txtMauSac;
     private javax.swing.JTextArea txtMoTa;
+    private javax.swing.JTextField txtSoLuongDoiHang;
     // End of variables declaration//GEN-END:variables
 }
