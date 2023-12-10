@@ -163,3 +163,4 @@ CREATE TABLE [DoiHangChiTiet] (
   [TrangThai] bit,
   PRIMARY KEY ([MaDHCT])
 );
+--Update hai 16g03p 10/12/2023

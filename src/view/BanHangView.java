@@ -1102,7 +1102,7 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
     private void btnTaoHoaDonChoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTaoHoaDonChoMouseClicked
         // TODO add your handling code here:
         if (tblHoaDonCho.getRowCount() == 10) {
-            JOptionPane.showMessageDialog(this, "Số lượng hóa đơn chờ không được lớn hơn 5");
+            JOptionPane.showMessageDialog(this, "Số lượng hóa đơn chờ không được lớn hơn 10");
         } else {
             String maHD = maTangTuDong("HD");
             NhanVien nhanVien = new NhanVien(dangNhapView.getMaNV());
