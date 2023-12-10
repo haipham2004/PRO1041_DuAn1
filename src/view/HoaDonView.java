@@ -4,7 +4,9 @@
  */
 package view;
 
+import java.text.NumberFormat;
 import java.util.List;
+import java.util.Locale;
 import java.util.Random;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -69,13 +71,18 @@ public class HoaDonView extends javax.swing.JPanel {
             });
         }
     }
+    
+    public String phanCach(Double x) {
+        NumberFormat fm = NumberFormat.getNumberInstance(Locale.US);
+        return fm.format(x);
+    }
 
     public void showData(int index) {
         txtMaHoaDon.setText(tblHoaDon.getValueAt(index, 1).toString());
         txtMaNhanVien.setText(tblHoaDon.getValueAt(index, 2).toString());
         txtMaKhachHang.setText(tblHoaDon.getValueAt(index, 3).toString());
         txtNgayTao.setText(tblHoaDon.getValueAt(index, 4).toString());
-        txtTongTien.setText(tblHoaDon.getValueAt(index, 5).toString());
+        txtTongTien.setText(phanCach(Double.valueOf(tblHoaDon.getValueAt(index, 5).toString())));
         txtTrangThai.setText(tblHoaDon.getValueAt(index, 6).toString());
         txtGhiChu.setText(tblHoaDon.getValueAt(index, 7).toString());
     }
