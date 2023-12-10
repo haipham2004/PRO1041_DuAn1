@@ -87,7 +87,7 @@ public class AdamStoreView extends javax.swing.JFrame {
         MenuItem menuThongKeDT = new MenuItem(iconDot, "Thống kê doanh thu", new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                changePanelBody(new ThongKeSoLuongView());
+                changePanelBody(new ThongKeDoanhThuView());
             }
         });
 

@@ -116,7 +116,7 @@ public class ChatLieuRepository {
         try {
             conn = DBConnect.getConnection();
             sql = "SELECT*FROM ChatLieu\n"
-                    + "order by MaChatLieu DESC\n"
+                    + "order by MaChatLieu\n"
                     + "OFFSET ? rows fetch next 5 rows only";
             pst = conn.prepareStatement(sql);
             pst.setInt(1, (index - 1) * 5);
@@ -148,6 +148,25 @@ public class ChatLieuRepository {
             return 0;
         }
         return tong;
+    }
+
+    public boolean checkTrungCL(String name1) {
+        try {
+            Connection conn = DBConnect.getConnection();
+            String sql = "SELECT CL.MaChatLieu FROM ChatLieu CL\n"
+                    + "where CL.TenChatLieu like ?\n"
+                    + "GROUP BY CL.MaChatLieu\n"
+                    + "HAVING COUNT(*) >= 1";
+            pst = conn.prepareStatement(sql);
+            pst.setObject(1,name1);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
 }

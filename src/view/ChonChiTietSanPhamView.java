@@ -147,13 +147,6 @@ public class ChonChiTietSanPhamView extends javax.swing.JPanel {
     }
 
     public void mtam2() {
-//        ChatLieu cl = (ChatLieu) cbxChatLieuLoc.getSelectedItem();
-//        String tenTimCL = cl.toString();
-//        MauSac ms = (MauSac) cbxMauSacLoc.getSelectedItem();
-//        String tenTimMS = ms.toString();
-//        KichThuoc kt = (KichThuoc) cbxKichThuocLoc.getSelectedItem();
-//        String tenTimKT = kt.toString();
-//String tenList = new SanPhamView().getTenSPs(null, new SanPhamView().getTenSanPham());
         if (cboLocChat.getSelectedIndex() != -1 && cboLocMau.getSelectedIndex() == -1 && cboLocKich.getSelectedIndex() == -1) {
             ChatLieu cl = (ChatLieu) cbxChatLieuLoc.getSelectedItem();
             String tenTimCL = cl.toString();

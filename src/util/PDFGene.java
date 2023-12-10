@@ -165,10 +165,11 @@ public class PDFGene {
         threeColTable4.addCell(new Cell().add("Tiền hàng").setTextAlignment(TextAlignment.CENTER).setBorder(Border.NO_BORDER));
         threeColTable4.addCell(new Cell().add(df.format(tong) + " VNĐ").setTextAlignment(TextAlignment.RIGHT).setBorder(Border.NO_BORDER));
 
-        threeColTable4.addCell(new Cell().add("").setBorder(Border.NO_BORDER));
-        threeColTable4.addCell(new Cell().add("Giảm giá").setTextAlignment(TextAlignment.CENTER).setBorder(Border.NO_BORDER));
-        threeColTable4.addCell(new Cell().add(df.format(tong - tongCuoi) + " VNĐ").setTextAlignment(TextAlignment.RIGHT).setBorder(Border.NO_BORDER));
-
+        if (tong != tongCuoi) {
+            threeColTable4.addCell(new Cell().add("").setBorder(Border.NO_BORDER));
+            threeColTable4.addCell(new Cell().add("Giảm giá").setTextAlignment(TextAlignment.CENTER).setBorder(Border.NO_BORDER));
+            threeColTable4.addCell(new Cell().add(df.format(tong - tongCuoi) + " VNĐ").setTextAlignment(TextAlignment.RIGHT).setBorder(Border.NO_BORDER));
+        }
 //        Double sumSauKM = sum * (1 - mucGiam);
         threeColTable4.addCell(new Cell().add("").setBorder(Border.NO_BORDER));
         threeColTable4.addCell(new Cell().add("Tổng tiền").setTextAlignment(TextAlignment.CENTER).setBorder(Border.NO_BORDER));

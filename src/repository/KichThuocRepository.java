@@ -89,7 +89,7 @@ public class KichThuocRepository {
             return 0;
         }
     }
-    
+
     public List<KichThuoc> getList(String name) {
         List<KichThuoc> listKichThuoc4 = new ArrayList<>();
         try {
@@ -115,7 +115,7 @@ public class KichThuocRepository {
         try {
             conn = DBConnect.getConnection();
             sql = "SELECT*FROM KichThuoc\n"
-                    + "order by MaKichThuoc DESC\n"
+                    + "order by MaKichThuoc\n"
                     + "OFFSET ? rows fetch next 5 rows only";
             pst = conn.prepareStatement(sql);
             pst.setInt(1, (index - 1) * 5);
@@ -147,5 +147,24 @@ public class KichThuocRepository {
             return 0;
         }
         return tong;
+    }
+
+    public boolean checkTrungKT(String name1) {
+        try {
+            Connection conn = DBConnect.getConnection();
+            String sql = "SELECT KT.MaKichThuoc FROM KichThuoc KT\n"
+                    + "where KT.TenKichThuoc like ?\n"
+                    + "GROUP BY KT.MaKichThuoc\n"
+                    + "HAVING COUNT(*) >= 1";
+            pst = conn.prepareStatement(sql);
+            pst.setObject(1, name1);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 }

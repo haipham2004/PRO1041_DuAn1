@@ -3,17 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/view/HoaDonView.java</file>
-            <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/repository/DoiHangChiTietRepository.java</file>
-            <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/util/PDFGene2.java</file>
-            <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/service/servicImp/DoiHangServiceImp.java</file>
-            <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/util/DBConnect.java</file>
-            <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/view/ChonChiTietSanPhamView.java</file>
-            <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/view/LichSuDoiHangView.java</file>
-            <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/view/DangNhapView.java</file>
-            <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/view/DoiHangView.java</file>
-            <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/repository/DoiHangRepository.java</file>
-            <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/service/servicImp/DoiHangChiTietServiceImp.java</file>
+            <file>file:/D:/PRO1041_DuAn1/PRO1041_DuAn1/src/application/Main.java</file>
+            <file>file:/D:/PRO1041_DuAn1/PRO1041_DuAn1/src/service/servicImp/DoiHangChiTietServiceImp.java</file>
+            <file>file:/D:/PRO1041_DuAn1/PRO1041_DuAn1/src/view/LichSuDoiHangView.java</file>
         </group>
     </open-files>
 </project-private>
