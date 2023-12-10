@@ -62,7 +62,9 @@ public class DoiHangView extends javax.swing.JPanel {
     public static int indexHoaDonChiTiet = -1;
     public static int indexDoiHangChiTiet = -1;
     public static String tenSP;
-    public static String tenCL;
+    public static String chatLieu;
+    public static String kichThuoc;
+    public static String mauSac;
     public static int soLuongSP;
     public static int soLuongDoiHang;
     public static String maDHCT;
@@ -121,6 +123,30 @@ public class DoiHangView extends javax.swing.JPanel {
     public void setMaDHCT(String maDHCT) {
         DoiHangView.maDHCT = maDHCT;
     }
+    
+    public String getChatLieu() {
+        return chatLieu;
+    }
+
+    public void setChatLieu(String chatLieu) {
+        DoiHangView.chatLieu = chatLieu;
+    }
+    
+    public String getKichThuoc() {
+        return kichThuoc;
+    }
+
+    public void setKichThuoc(String kichThuoc) {
+        DoiHangView.kichThuoc = kichThuoc;
+    }
+    
+    public String getMauSac() {
+        return mauSac;
+    }
+
+    public void setMauSac(String mauSac) {
+        DoiHangView.mauSac = mauSac;
+    }
 
     public String getMaHDCT() {
         return maHDCT;
@@ -128,14 +154,6 @@ public class DoiHangView extends javax.swing.JPanel {
 
     public void setMaHDCT(String maHDCT) {
         DoiHangView.maHDCT = maHDCT;
-    }
-
-    public String getMaCL() {
-        return tenCL;
-    }
-
-    public void setMaCL(String tenCL) {
-        DoiHangView.tenCL = tenCL;
     }
 
     public int getSoLuongSP() {
@@ -168,6 +186,9 @@ public class DoiHangView extends javax.swing.JPanel {
         txtChatLieu.setText(ctsp.getChatLieu().getTenChatLieu());
         txtKichThuoc.setText(ctsp.getKichThuoc().getTenKichThuoc());
         txtMauSac.setText(ctsp.getMauSac().getTenMauSac());
+        chatLieu = txtChatLieu.getText();
+        kichThuoc = txtKichThuoc.getText();
+        mauSac = txtMauSac.getText();
     }
 
     public boolean validSoLuong(int index) {
@@ -655,9 +676,15 @@ public class DoiHangView extends javax.swing.JPanel {
 
         jLabel1.setText("Chất liệu: ");
 
+        txtChatLieu.setEnabled(false);
+
         jLabel2.setText("Kích thước: ");
 
+        txtKichThuoc.setEnabled(false);
+
         jLabel3.setText("Màu sắc: ");
+
+        txtMauSac.setEnabled(false);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -816,7 +843,7 @@ public class DoiHangView extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlTong, javax.swing.GroupLayout.DEFAULT_SIZE, 1335, Short.MAX_VALUE)
+            .addComponent(pnlTong, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

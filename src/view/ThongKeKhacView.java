@@ -14,8 +14,12 @@ import com.itextpdf.kernel.pdf.PdfDocument;
 import static com.itextpdf.kernel.pdf.PdfName.N;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
+import com.itextpdf.layout.border.Border;
+import com.itextpdf.layout.border.SolidBorder;
+import com.itextpdf.layout.element.Cell;
 import com.itextpdf.layout.element.Image;
 import com.itextpdf.layout.element.Paragraph;
+import com.itextpdf.layout.element.Table;
 import static java.awt.AWTEventMulticaster.add;
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -28,6 +32,7 @@ import java.io.IOException;
 import java.sql.Date;
 import java.sql.*;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -64,6 +69,9 @@ import repository.ThongKeKhacRepository;
 import repository.ThongKeSoLuongRepository;
 import service.servicImp.ThongKeKhacServiceImp;
 import util.DBConnect;
+import static util.PDFGene2.getBillingandCustomCell;
+import static util.PDFGene2.getHeaderTextCell;
+import static util.PDFGene2.getHeaderTextCellValue;
 
 /**
  *
@@ -228,6 +236,16 @@ public class ThongKeKhacView extends javax.swing.JPanel {
         String formattedDateTime = currentDateTime.format(formatter);
         DecimalFormat df = new DecimalFormat("#,###");
 
+        float twocol = 285f;
+        Double sum = 0.0;
+        float threecol = 190f;
+        float twocol150 = twocol + 150f;
+        float twocolumnWidth[] = {twocol150, twocol};
+        float onecolumnWidth[] = {twocol150};
+        float fullwidth[] = {threecol * 3};
+        float threecolWidth[] = {threecol, threecol, threecol};
+        Paragraph onesp = new Paragraph("\n");
+
         String path = "C:\\PDF\\" + "Thongkekhac" + ".pdf";
         PdfWriter pdfWriter = new PdfWriter(path);
         PdfDocument pdfDocument = new PdfDocument(pdfWriter);
@@ -240,30 +258,53 @@ public class ThongKeKhacView extends javax.swing.JPanel {
         img2.setFixedPosition(10, 710);
         img2.setOpacity(0.2f);
         document.add(img2);
+        String fontPath = "C:\\Windows\\Fonts\\Arial.ttf";
+        PdfFont font = PdfFontFactory.createFont(fontPath, PdfEncodings.IDENTITY_H);
+
+        Table table = new Table(twocolumnWidth);
+        table.addCell(new Cell().add("").setFontSize(20f).setBold().setBorder(Border.NO_BORDER));
+
+        Table nestedtable = new Table(new float[]{twocol / 2, twocol / 2});
+        nestedtable.addCell(getHeaderTextCell("Ngày: "));
+        nestedtable.addCell(getHeaderTextCellValue(formattedDateTime));
+
+        table.addCell(new Cell().add(nestedtable).setBorder(Border.NO_BORDER));
+
+        Border gb = new SolidBorder(com.itextpdf.kernel.color.Color.GRAY, 1f);
+        Table divider = new Table(fullwidth);
+        divider.setBorder(gb);
+
+        document.add(table);
+        document.add(onesp);
+        document.add(onesp);
+        document.add(onesp);
+        document.add(divider);
+        document.add(onesp);
+
+        java.util.Date ngayBD = txtNgayBD.getDate();
+        java.util.Date ngayKT = txtNgayKT.getDate();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+        if (ngayBD != null && ngayKT != null) {
+            String ngayBDDinhDang = dateFormat.format(ngayBD);
+            String ngayKTDinhDang = dateFormat.format(ngayKT);
+
+            Table twoColTable = new Table(twocolumnWidth);
+            twoColTable.addCell(getBillingandCustomCell("Ngày bắt đầu: " + ngayBDDinhDang).setHeight(20f));
+            twoColTable.addCell(getBillingandCustomCell("Ngày kết thúc: " + ngayKTDinhDang).setHeight(20f));
+            twoColTable.setFont(font);
+            document.add(twoColTable);
+        }
 
         String imgPath2 = "C:\\ChartImage\\ChartDTSPchung.png";
         ImageData imgData2 = ImageDataFactory.create(imgPath2);
         Image img3 = new Image(imgData2);
-        img3.setHeight(300);
+        img3.setHeight(250);
         img3.setWidth(500);
-        img3.setFixedPosition(60, 400f);
+        img3.setFixedPosition(60, 300f);
         document.add(img3);
 
-       
-
-        String fontPath = "C:\\Windows\\Fonts\\Arial.ttf";
-        PdfFont font = PdfFontFactory.createFont(fontPath, PdfEncodings.IDENTITY_H);
         document.setFont(font);
 
-        Double sum = 0.0;
-        float threecol = 190f;
-        float twocol = 285f;
-        float twocol150 = twocol + 150f;
-        float twocolumnWidth[] = {twocol150, twocol};
-        float onecolumnWidth[] = {twocol150};
-        float fullwidth[] = {threecol * 3};
-        float threecolWidth[] = {threecol, threecol, threecol};
-        Paragraph onesp = new Paragraph("\n");
         document.close();
 
     }
@@ -598,7 +639,7 @@ public class ThongKeKhacView extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Ngày kết thúc không hợp lệ");
         } else {
             timKiem2();
-        }       
+        }
     }//GEN-LAST:event_btnTimKiem2ActionPerformed
 
     private void cboTenSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboTenSPActionPerformed

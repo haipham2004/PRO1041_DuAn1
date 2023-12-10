@@ -348,4 +348,17 @@ public class HoaDonRepository {
             return 0;
         }
     }
+    
+    public int huyHoaDonCho(String maHD){
+        try {
+            sql = "DELETE HoaDon where MaHoaDon = ?";
+            con = DBConnect.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setObject(1, maHD);
+            return ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
 }
