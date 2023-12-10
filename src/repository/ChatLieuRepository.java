@@ -153,10 +153,8 @@ public class ChatLieuRepository {
     public boolean checkTrungCL(String name1) {
         try {
             Connection conn = DBConnect.getConnection();
-            String sql = "SELECT CL.MaChatLieu FROM ChatLieu CL\n"
-                    + "where CL.TenChatLieu like ?\n"
-                    + "GROUP BY CL.MaChatLieu\n"
-                    + "HAVING COUNT(*) >= 1";
+            sql = "SELECT CL.MaChatLieu FROM ChatLieu CL\n"
+                    + "where CL.TenChatLieu =?";
             pst = conn.prepareStatement(sql);
             pst.setObject(1, name1);
             rs = pst.executeQuery();

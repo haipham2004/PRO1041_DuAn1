@@ -154,9 +154,8 @@ public class MauSacRepository {
         try {
             Connection conn = DBConnect.getConnection();
             String sql = "SELECT MS.MaMauSac FROM MauSac MS\n"
-                    + "where MS.TenMauSac like ?\n"
-                    + "GROUP BY  MS.MaMauSac\n"
-                    + "HAVING COUNT(*) >= 1";
+                    + "where MS.TenMauSac=?\n";
+
             pst = conn.prepareStatement(sql);
             pst.setObject(1, name1);
             rs = pst.executeQuery();

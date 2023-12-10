@@ -55,12 +55,12 @@ INSERT INTO MauSac VALUES
 ('MS09',N'Bạc',1),
 ('MS10',N'Tím',1)
 INSERT INTO ChatLieu VALUES
-('CL01',N'Vải Canvas',1),
-('CL02',N'Vải Cotton',1),
-('CL03',N'Vải Kate',1),
-('CL04',N'Vải lụa',1),
-('CL05',N'Vải Jean',1),
-('CL06',N' Vải Modal',1)
+('CL01',N'Canvas',1),
+('CL02',N'Bò',1),
+('CL03',N'Kaki',1),
+('CL04',N'Lụa',1),
+('CL05',N'Nỉ',1),
+('CL06',N'Len',1)
 
 INSERT INTO KichThuoc VALUES
 ('KT01','S',1),
