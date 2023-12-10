@@ -217,14 +217,16 @@ public class ThongKeSoLuongView extends javax.swing.JPanel {
         Date ngayBD = txtNgayBd.getDate();
         Date ngayKT = txtNgayKT.getDate();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-        String ngayBDDinhDang = dateFormat.format(ngayBD);
-        String ngayKTDinhDang = dateFormat.format(ngayKT);
+        if (ngayBD != null && ngayKT != null) {
+            String ngayBDDinhDang = dateFormat.format(ngayBD);
+            String ngayKTDinhDang = dateFormat.format(ngayKT);
 
-        Table twoColTable = new Table(twocolumnWidth);
-        twoColTable.addCell(getBillingandCustomCell("Ngày bắt đầu: " + ngayBDDinhDang).setHeight(20f));
-        twoColTable.addCell(getBillingandCustomCell("Ngày kết thúc: " + ngayKTDinhDang).setHeight(20f));
-        twoColTable.setFont(font);
-        document.add(twoColTable);
+            Table twoColTable = new Table(twocolumnWidth);
+            twoColTable.addCell(getBillingandCustomCell("Ngày bắt đầu: " + ngayBDDinhDang).setHeight(20f));
+            twoColTable.addCell(getBillingandCustomCell("Ngày kết thúc: " + ngayKTDinhDang).setHeight(20f));
+            twoColTable.setFont(font);
+            document.add(twoColTable);
+        }
 
         String imgPath2 = "C:\\ChartImage\\ChartHD.png";
         ImageData imgData2 = ImageDataFactory.create(imgPath2);
