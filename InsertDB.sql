@@ -260,7 +260,7 @@ INSERT INTO HoaDonChiTiet VALUES
 ('HDCT80','CTSP19B02E','HD14',2,650000,N'Ok',1)
 --đoạn code dưới để check HDCT nhé nào cảm thấy thiếu thì check có thể not in or in
 
-delete from HoaDonChiTiet
+--delete from HoaDonChiTiet
 
 DECLARE @Counter INT = 1;
 
@@ -283,10 +283,18 @@ BEGIN
     SET @Counter = @Counter + 1;
 END
 
+UPDATE HoaDon
+SET TongTien = (
+    SELECT SUM(HDCT.SoLuong * HDCT.DonGia) AS TongTien
+    FROM HoaDonChiTiet HDCT
+    WHERE HoaDon.MaHoaDon = HDCT.MaHoaDon
+    GROUP BY HDCT.MaHoaDon
+)
+UPDATE HoaDon SET TongTienSauKM = TongTien - TongTienKM
 
-delete from HoaDonChiTiet
+--delete from HoaDonChiTiet
 select * from ChiTietSanPham where MaCTSP = 'CTSP9F828D'
-
+SELECT*FROM HoaDon
 select * from HoaDonChiTiet
 where MaCTSP = 'CTSP9F828D'
 
