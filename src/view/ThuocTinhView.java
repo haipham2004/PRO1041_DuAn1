@@ -621,7 +621,6 @@ public class ThuocTinhView extends javax.swing.JPanel {
         if (indexs == 0) {
             ChatLieu cl = savesCL();
             if (validateTT()) {
-                System.out.println("Tên: "+tenTT);
                 if (serviceCl.checkTrungCL(tenTT)) {
                     JOptionPane.showMessageDialog(this, "Chất liệu đã tồn tại, vui lòng kiểm tra lại", "Message", 2);
                     return;
@@ -709,10 +708,10 @@ public class ThuocTinhView extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(this, "Bạn chưa chọn dòng dữ liệu nào");
                 return;
             }
-             if (serviceMS.checkTrungMS(tenTT)) {
+            if (serviceMS.checkTrungMS(tenTT)) {
                 JOptionPane.showMessageDialog(this, "Màu sắc đã tồn tại, vui lòng kiểm tra lại", "Message", 2);
                 return;
-            }else {
+            } else {
                 MauSac ms = savesMS();
                 String ma = tblMauSac.getValueAt(index, 0).toString();
                 if (serviceMS.sua(ms, ma) > 0) {
@@ -727,10 +726,10 @@ public class ThuocTinhView extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(this, "Bạn chưa chọn dòng dữ liệu nào");
                 return;
             }
-             if (serviceKT.checkTrungKT(tenTT)) {
+            if (serviceKT.checkTrungKT(tenTT)) {
                 JOptionPane.showMessageDialog(this, "Kích thước đã tồn tại, vui lòng kiểm tra lại", "Message", 2);
                 return;
-            }else {
+            } else {
                 KichThuoc kt = savesKT();
                 String ma = tblKichThuoc.getValueAt(index, 0).toString();
                 if (serviceKT.sua(kt, ma) > 0) {

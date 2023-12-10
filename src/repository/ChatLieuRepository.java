@@ -158,7 +158,7 @@ public class ChatLieuRepository {
                     + "GROUP BY CL.MaChatLieu\n"
                     + "HAVING COUNT(*) >= 1";
             pst = conn.prepareStatement(sql);
-            pst.setObject(1,name1);
+            pst.setObject(1, name1);
             rs = pst.executeQuery();
             while (rs.next()) {
                 return true;
@@ -168,5 +168,4 @@ public class ChatLieuRepository {
         }
         return false;
     }
-
 }
