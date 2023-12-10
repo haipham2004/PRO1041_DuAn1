@@ -320,7 +320,6 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
         DangNhapView dangNhapView = new DangNhapView();
         String maHD = maTangTuDong("HD");
         txtMaHDBH2.setText(maTangTuDong2("HD"));
-
         LocalDate ngayTao = LocalDate.now();
         molHDC.addRow(new Object[]{
             this.tblHoaDonCho.getRowCount() + 1, maHD, dangNhapView.getTenNV(), ngayTao, "Chờ thanh toán"
@@ -329,29 +328,19 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
 
     public void luuGioHangVaoFile(String maHD, String parentDirectory, String newDirectoryName) {
         molGH = (DefaultTableModel) tblGioHang.getModel();
-        // Tạo đường dẫn đến thư mục cha
         String parentPath = parentDirectory + File.separator;
-
-        // Tạo đối tượng File để đại diện cho thư mục cha
         File parentDir = new File(parentPath);
         if (!parentDir.exists()) {
-            // Nếu thư mục cha không tồn tại, tạo mới
             parentDir.mkdirs();
         }
-
-        // Tạo đối tượng File để đại diện cho thư mục con với tên mới
         File childDir = new File(parentPath + newDirectoryName);
         if (!childDir.exists()) {
-            // Nếu thư mục con không tồn tại, tạo mới
             childDir.mkdirs();
         }
 
         String fileName = "GioHang_" + maHD + ".csv";
-
-        // Tạo đường dẫn đến tệp tin trong thư mục con
         String filePath = childDir.getPath() + File.separator + fileName;
-
-        try ( FileWriter fileWriter = new FileWriter(filePath)) {
+        try (FileWriter fileWriter = new FileWriter(filePath)) {
             // Ghi tiêu đề cột vào tệp tin
             for (int i = 0; i < molGH.getColumnCount(); i++) {
                 fileWriter.append(molGH.getColumnName(i));
@@ -360,8 +349,6 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
                 }
             }
             fileWriter.append("\n");
-
-            // Ghi dữ liệu từ mô hình vào tệp tin
             for (int row = 0; row < molGH.getRowCount(); row++) {
                 for (int col = 0; col < molGH.getColumnCount(); col++) {
                     fileWriter.append(molGH.getValueAt(row, col).toString());
@@ -378,9 +365,7 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
 
     public void loadTableDataFromFile(String directory, String fileName) {
         molGH = (DefaultTableModel) tblGioHang.getModel();
-        molGH.setRowCount(0); // Xóa dữ liệu hiện tại trong bảng
-
-        // Tạo đường dẫn đến tệp tin
+        molGH.setRowCount(0); 
         String filePath = directory + File.separator + fileName;
         File file = new File(filePath);
 
@@ -388,7 +373,7 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
             return;
         }
 
-        try ( BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line;
             boolean skipFirstLine = true;
             while ((line = br.readLine()) != null) {
@@ -1367,7 +1352,7 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
 
     private void btnHuyDonHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHuyDonHangMouseClicked
         // TODO add your handling code here:
-        if (indexHoaDonCho==-1) {
+        if (indexHoaDonCho == -1) {
             JOptionPane.showMessageDialog(this, "Bạn chưa chọn hóa đơn cần xóa");
         } else {
             String maHD = tblHoaDonCho.getValueAt(indexHoaDonCho, 1).toString();

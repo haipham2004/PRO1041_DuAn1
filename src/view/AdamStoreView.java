@@ -44,7 +44,7 @@ public class AdamStoreView extends javax.swing.JFrame {
         setSize(1500, 820);
         this.setLocationRelativeTo(null);
         execute(isAdmin);
-        changePanelBody(new ThongKeSoLuongView());
+        changePanelBody(new BanHangView());
     }
 
     public void changePanelBody(JPanel panel) {

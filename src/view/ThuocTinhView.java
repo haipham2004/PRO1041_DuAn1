@@ -621,60 +621,59 @@ public class ThuocTinhView extends javax.swing.JPanel {
         if (indexs == 0) {
             ChatLieu cl = savesCL();
             if (validateTT()) {
+                if (serviceCl.getOne(cl.getMaChatLieu()) != null) {
+                    JOptionPane.showMessageDialog(this, "Mã chất liệu trùng");
+                    return;
+                }
                 if (serviceCl.checkTrungCL(tenTT)) {
                     JOptionPane.showMessageDialog(this, "Chất liệu đã tồn tại, vui lòng kiểm tra lại", "Message", 2);
                     return;
                 } else {
-                    if (serviceCl.getOne(cl.getMaChatLieu()) != null) {
-                        JOptionPane.showMessageDialog(this, "Mã chất liệu trùng");
-                        return;
+                    if (serviceCl.them(cl) > 0) {
+                        JOptionPane.showMessageDialog(this, "Thêm chất liệu thành công");
+                        loadPageCL();
                     } else {
-                        if (serviceCl.them(cl) > 0) {
-                            loadPageCL();
-                            JOptionPane.showMessageDialog(this, "Thêm sản chất liệu thành công");
-                        } else {
-                            JOptionPane.showMessageDialog(this, "Thêm chất liệu thất bại");
-                        }
+                        JOptionPane.showMessageDialog(this, "Thêm chất liệu thất bại");
                     }
                 }
+
             }
         } else if (indexs == 1) {
             MauSac ms = savesMS();
             if (validateTT()) {
+                if (serviceMS.getOne(ms.getMaMauSac()) != null) {
+                    JOptionPane.showMessageDialog(this, "Mã màu sắc trùng");
+                    return;
+                }
                 if (serviceMS.checkTrungMS(tenTT)) {
                     JOptionPane.showMessageDialog(this, "Màu sắc đã tồn tại, vui lòng kiểm tra lại", "Message", 2);
                     return;
                 } else {
-                    if (serviceMS.getOne(ms.getMaMauSac()) != null) {
-                        JOptionPane.showMessageDialog(this, "Mã màu sắc trùng");
-                        return;
+                    if (serviceMS.them(ms) > 0) {
+                        loadPageMS();
+                        JOptionPane.showMessageDialog(this, "Thêm màu sắc thành công");
                     } else {
-                        if (serviceMS.them(ms) > 0) {
-                            loadPageMS();
-                            JOptionPane.showMessageDialog(this, "Thêm màu sắc thành công");
-                        } else {
-                            JOptionPane.showMessageDialog(this, "Thêm màu sắc thất bại");
-                        }
+                        JOptionPane.showMessageDialog(this, "Thêm màu sắc thất bại");
                     }
                 }
+
             }
         } else {
             KichThuoc kt = savesKT();
             if (validateTT()) {
+                if (serviceKT.getOne(kt.getMaKichThuoc()) != null) {
+                    JOptionPane.showMessageDialog(this, "Mã kích thước trùng");
+                    return;
+                }
                 if (serviceKT.checkTrungKT(tenTT)) {
                     JOptionPane.showMessageDialog(this, "Kích thước đã tồn tại, vui lòng kiểm tra lại", "Message", 2);
                     return;
                 } else {
-                    if (serviceKT.getOne(kt.getMaKichThuoc()) != null) {
-                        JOptionPane.showMessageDialog(this, "Mã kích thước trùng");
-                        return;
+                    if (serviceKT.them(kt) > 0) {
+                        loadPageKT();
+                        JOptionPane.showMessageDialog(this, "Thêm kích thước thành công");
                     } else {
-                        if (serviceKT.them(kt) > 0) {
-                            loadPageKT();
-                            JOptionPane.showMessageDialog(this, "Thêm kích thước thành công");
-                        } else {
-                            JOptionPane.showMessageDialog(this, "Thêm kích thước thất bại");
-                        }
+                        JOptionPane.showMessageDialog(this, "Thêm kích thước thất bại");
                     }
                 }
             }

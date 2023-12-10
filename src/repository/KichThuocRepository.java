@@ -153,9 +153,7 @@ public class KichThuocRepository {
         try {
             Connection conn = DBConnect.getConnection();
             String sql = "SELECT KT.MaKichThuoc FROM KichThuoc KT\n"
-                    + "where KT.TenKichThuoc like ?\n"
-                    + "GROUP BY KT.MaKichThuoc\n"
-                    + "HAVING COUNT(*) >= 1";
+                    + "where KT.TenKichThuoc=?\n";
             pst = conn.prepareStatement(sql);
             pst.setObject(1, name1);
             rs = pst.executeQuery();

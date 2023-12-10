@@ -56,11 +56,11 @@ INSERT INTO MauSac VALUES
 ('MS10',N'Tím',1)
 INSERT INTO ChatLieu VALUES
 ('CL01',N'Vải Canvas',1),
-('CL02',N'Vải Cotton',1),
-('CL03',N'Vải Kate',1),
-('CL04',N'Vải lụa',1),
-('CL05',N'Vải Jean',1),
-('CL06',N' Vải Modal',1)
+('CL02',N'Vải Bò',1),
+('CL03',N'Vải Kaki',1),
+('CL04',N'Vải Lụa',1),
+('CL05',N'Vải Nỉ',1),
+('CL06',N'Vải Len',1)
 
 INSERT INTO KichThuoc VALUES
 ('KT01','S',1),
@@ -307,4 +307,4 @@ INSERT INTO DoiHangChiTiet VALUES
 ('DHCT03','CTSP0CD10E','DH02','HDCT08',1,N'Áo bị chật',1),
 ('DHCT04','CTSP1A41AF','DH03','HDCT13',1,N'Áo bị chật',1),
 ('DHCT05','CTSP27CC07','DH04','HDCT16',1,N'Áo bị rộng',1)
---Update hai 16g03p 10/12/2023
+--Update hai 23g03p 10/12/2023
