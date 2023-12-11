@@ -3,7 +3,35 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/D:/PRO1041_DuAn1/PRO1041_DuAn1/src/application/Main.java</file>
+=======
+<<<<<<< HEAD
+            <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/view/HoaDonView.java</file>
+            <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/view/AdamStoreView.java</file>
+            <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/repository/KhachHangRepository.java</file>
+            <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/view/NhanVienView.java</file>
+            <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/view/KhachHangView.java</file>
+            <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/service/servicImp/KhachHangServiceImp.java</file>
+            <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/util/DBConnect.java</file>
+            <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/view/ChonChiTietSanPhamView.java</file>
+            <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/view/KhuyenMaiView.java</file>
+            <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/repository/HoaDonRepository.java</file>
+            <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/view/DangNhapView.java</file>
+            <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/view/BanHangView.java</file>
+            <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/view/DoiHangView.java</file>
+            <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/service/servicImp/ChiTietSanPhamServiceImp.java</file>
+            <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/service/servicImp/HoaDonServiceImp.java</file>
+            <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/view/ChiTietSanPhamView.java</file>
+            <file>file:/D:/FPT%20Polytechnic/DuAn1/PRO1041_DuAn1/src/repository/ChiTietSanPhamRepository.java</file>
+=======
+            <file>file:/F:/FPT%20Polytechnic/DA1/PRO1041_DuAn1/src/repository/ThongKeDoanhThuRepository.java</file>
+            <file>file:/F:/FPT%20Polytechnic/DA1/PRO1041_DuAn1/src/view/ThongKeSoLuongView.java</file>
+            <file>file:/F:/FPT%20Polytechnic/DA1/PRO1041_DuAn1/src/util/DBConnect.java</file>
+            <file>file:/F:/FPT%20Polytechnic/DA1/PRO1041_DuAn1/src/view/ThongKeKhacView.java</file>
+            <file>file:/F:/FPT%20Polytechnic/DA1/PRO1041_DuAn1/src/view/ThongKeDoanhThuView.java</file>
+>>>>>>> 52c0e2242b096548ee6514611c989fbc9ff2354e
+>>>>>>> 5f737bfec341c481b4e2ffe5d3e2b4a535fcc2fd
         </group>
     </open-files>
 </project-private>

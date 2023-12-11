@@ -227,7 +227,7 @@ public class HoaDonView extends javax.swing.JPanel {
 
         lbSoTrang.setText("Số trang");
 
-        btnDau1.setText("Pre");
+        btnDau1.setText("Đầu");
         btnDau1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDau1ActionPerformed(evt);
@@ -248,7 +248,7 @@ public class HoaDonView extends javax.swing.JPanel {
             }
         });
 
-        btnCuoi1.setText("Last");
+        btnCuoi1.setText("Cuối");
         btnCuoi1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCuoi1ActionPerformed(evt);

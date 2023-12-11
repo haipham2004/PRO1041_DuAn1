@@ -145,9 +145,9 @@ public class KhachHangRepository {
             sql = " Select MaKH,HoTen,NgaySinh,SoDienThoai,Email,GioiTInh,DiaChi From KhachHang\n"
                     + "where MaKH not in (Select MaKH From KhachHang where MaKH like N'KHNE')\n"
                     + "order by MaKH\n"
-                    + "offset ? rows fetch next 4 rows only ";
+                    + "offset ? rows fetch next 5 rows only ";
             ps = con.prepareStatement(sql);
-            ps.setInt(1, (index - 1) * 4);
+            ps.setInt(1, (index - 1) * 5);
             rs = ps.executeQuery();
             while (rs.next()) {
                 KhachHang kh = new KhachHang(rs.getString(1),

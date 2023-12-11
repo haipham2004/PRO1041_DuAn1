@@ -120,7 +120,7 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
               loadLocChatLieu(serviceCl.getAll());
         loadLocMauSac(serviceMS.getAll());
         loadLocKichThuoc(serviceKT.getAll());
-//        initWebcam();
+        initWebcam();
     }
 
     private void initWebcam() {

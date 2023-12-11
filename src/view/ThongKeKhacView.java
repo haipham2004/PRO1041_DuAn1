@@ -138,39 +138,6 @@ public class ThongKeKhacView extends javax.swing.JPanel {
         }
     }
 
-    public void timKiem() {
-        java.util.Date ngayBd = txtNgayBD.getDate();
-        java.util.Date ngayKt = txtNgayKT.getDate();
-        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-        List<HoaDonChiTiet> listTK1 = service.getListTK1(txtNgayBD.getDate(), txtNgayKT.getDate());
-        if (listTK1 != null) {
-            for (HoaDonChiTiet chiTietHoaDon : listTK1) {
-                dataset.addValue(chiTietHoaDon.getSoLuong() + chiTietHoaDon.getCtsp().getSoLuong(), "Tổng sản phẩm",
-                        chiTietHoaDon.getCtsp().getSanPham().getTenSanPham());
-                dataset.addValue(chiTietHoaDon.getSoLuong(), "Số bán được",
-                        chiTietHoaDon.getCtsp().getSanPham().getTenSanPham());
-                dataset.addValue(chiTietHoaDon.getCtsp().getSoLuong(), "Sản phẩm còn lại",
-                        chiTietHoaDon.getCtsp().getSanPham().getTenSanPham());
-            }
-        }
-        JFreeChart barChart = ChartFactory.createBarChart("Doanh thu sản phẩm".toUpperCase(),
-                "Sản phẩm", "Số lượng", dataset, PlotOrientation.VERTICAL,
-                false, true, false);
-        ChartPanel chartPanel = new ChartPanel(barChart);
-        chartPanel.setPreferredSize(new Dimension(650, 236));
-        panel1.removeAll();
-        panel1.setLayout(new CardLayout());
-        panel1.add(chartPanel);
-        panel1.validate();
-        panel1.repaint();
-        try {
-            final ChartRenderingInfo info2 = new ChartRenderingInfo(new StandardEntityCollection());
-            final File file2 = new File("C:\\ChartImage\\ChartDTSPchung.png");
-            ChartUtilities.saveChartAsPNG(file2, barChart, 859, 236, info2);
-        } catch (Exception e) {
-        }
-    }
-
     public void setDataToChart2(JPanel panel2) {
         SanPham sp = (SanPham) cboSP.getSelectedItem();
         tenSp = sp.toString();
@@ -178,34 +145,6 @@ public class ThongKeKhacView extends javax.swing.JPanel {
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         if (list2 != null) {
             for (HoaDonChiTiet chiTietHoaDon : list2) {
-                dataset.addValue(chiTietHoaDon.getHD().getSoLuongHoaDon() + chiTietHoaDon.getSoLuong(), "Tổng",
-                        chiTietHoaDon.getHD().getNgayTao());
-                dataset.addValue(chiTietHoaDon.getSoLuong(), "Bán được",
-                        chiTietHoaDon.getHD().getNgayTao());
-                dataset.addValue(chiTietHoaDon.getCtsp().getSoLuong(), "Còn lại",
-                        chiTietHoaDon.getHD().getNgayTao());
-
-            }
-        }
-        JFreeChart lineChart = ChartFactory.createLineChart("Thống kê doanh thu từng sản phẩm".toUpperCase(),
-                "Ngày", "Số lượng", dataset, PlotOrientation.VERTICAL,
-                true, true, false);
-        ChartPanel chartPanel = new ChartPanel(lineChart);
-        chartPanel.setPreferredSize(new Dimension(859, 236));
-        panel2.removeAll();
-        panel2.setLayout(new CardLayout());
-        panel2.add(chartPanel);
-        panel2.validate();
-        panel2.repaint();
-    }
-
-    public void timKiem2() {
-        java.util.Date ngayBd = txtNgayBD2.getDate();
-        java.util.Date ngayKt = txtNgayKT2.getDate();
-        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-        List<HoaDonChiTiet> listTK2 = service.getListTK2(tenSp, ngayBd, ngayKt);
-        if (listTK2 != null) {
-            for (HoaDonChiTiet chiTietHoaDon : listTK2) {
                 dataset.addValue(chiTietHoaDon.getHD().getSoLuongHoaDon() + chiTietHoaDon.getSoLuong(), "Tổng",
                         chiTietHoaDon.getHD().getNgayTao());
                 dataset.addValue(chiTietHoaDon.getSoLuong(), "Bán được",
@@ -626,19 +565,84 @@ public class ThongKeKhacView extends javax.swing.JPanel {
 
     private void btnTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemActionPerformed
         // TODO add your handling code here:
-        if (txtNgayKT.getCalendar().before(txtNgayBD.getCalendar())) {
-            JOptionPane.showMessageDialog(this, "Ngày kết thúc không hợp lệ");
+        if (txtNgayBD.getCalendar() == null || txtNgayKT.getCalendar() == null) {
+            JOptionPane.showMessageDialog(this, "Bạn chưa chọn ngày cần tìm kiếm");
+            return;
         } else {
-            timKiem();
+            if (txtNgayKT.getCalendar().before(txtNgayBD.getCalendar())) {
+                JOptionPane.showMessageDialog(this, "Ngày kết thúc không hợp lệ");
+                return;
+            } else {
+                java.util.Date ngayBd = txtNgayBD.getDate();
+                java.util.Date ngayKt = txtNgayKT.getDate();
+                DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+                List<HoaDonChiTiet> listTK1 = service.getListTK1(txtNgayBD.getDate(), txtNgayKT.getDate());
+                if (listTK1 != null) {
+                    for (HoaDonChiTiet chiTietHoaDon : listTK1) {
+                        dataset.addValue(chiTietHoaDon.getSoLuong() + chiTietHoaDon.getCtsp().getSoLuong(), "Tổng sản phẩm",
+                                chiTietHoaDon.getCtsp().getSanPham().getTenSanPham());
+                        dataset.addValue(chiTietHoaDon.getSoLuong(), "Số bán được",
+                                chiTietHoaDon.getCtsp().getSanPham().getTenSanPham());
+                        dataset.addValue(chiTietHoaDon.getCtsp().getSoLuong(), "Sản phẩm còn lại",
+                                chiTietHoaDon.getCtsp().getSanPham().getTenSanPham());
+                    }
+                }
+                JFreeChart barChart = ChartFactory.createBarChart("Doanh thu sản phẩm".toUpperCase(),
+                        "Sản phẩm", "Số lượng", dataset, PlotOrientation.VERTICAL,
+                        false, true, false);
+                ChartPanel chartPanel = new ChartPanel(barChart);
+                chartPanel.setPreferredSize(new Dimension(650, 236));
+                panel1.removeAll();
+                panel1.setLayout(new CardLayout());
+                panel1.add(chartPanel);
+                panel1.validate();
+                panel1.repaint();
+                try {
+                    final ChartRenderingInfo info2 = new ChartRenderingInfo(new StandardEntityCollection());
+                    final File file2 = new File("C:\\ChartImage\\ChartDTSPchung.png");
+                    ChartUtilities.saveChartAsPNG(file2, barChart, 859, 236, info2);
+                } catch (Exception e) {
+                }
+            }
         }
     }//GEN-LAST:event_btnTimKiemActionPerformed
 
     private void btnTimKiem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiem2ActionPerformed
         // TODO add your handling code here:
-        if (txtNgayKT2.getCalendar().before(txtNgayBD2.getCalendar())) {
-            JOptionPane.showMessageDialog(this, "Ngày kết thúc không hợp lệ");
+        if (txtNgayBD.getCalendar() == null || txtNgayKT.getCalendar() == null) {
+            JOptionPane.showMessageDialog(this, "Bạn chưa chọn ngày cần tìm kiếm");
+            return;
         } else {
-            timKiem2();
+            if (txtNgayKT2.getCalendar().before(txtNgayBD2.getCalendar())) {
+                JOptionPane.showMessageDialog(this, "Ngày kết thúc không hợp lệ");
+                return;
+            } else {
+                java.util.Date ngayBd = txtNgayBD2.getDate();
+                java.util.Date ngayKt = txtNgayKT2.getDate();
+                DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+                List<HoaDonChiTiet> listTK2 = service.getListTK2(tenSp, ngayBd, ngayKt);
+                if (listTK2 != null) {
+                    for (HoaDonChiTiet chiTietHoaDon : listTK2) {
+                        dataset.addValue(chiTietHoaDon.getHD().getSoLuongHoaDon() + chiTietHoaDon.getSoLuong(), "Tổng",
+                                chiTietHoaDon.getHD().getNgayTao());
+                        dataset.addValue(chiTietHoaDon.getSoLuong(), "Bán được",
+                                chiTietHoaDon.getHD().getNgayTao());
+                        dataset.addValue(chiTietHoaDon.getCtsp().getSoLuong(), "Còn lại",
+                                chiTietHoaDon.getHD().getNgayTao());
+
+                    }
+                }
+                JFreeChart lineChart = ChartFactory.createLineChart("Thống kê doanh thu từng sản phẩm".toUpperCase(),
+                        "Ngày", "Số lượng", dataset, PlotOrientation.VERTICAL,
+                        true, true, false);
+                ChartPanel chartPanel = new ChartPanel(lineChart);
+                chartPanel.setPreferredSize(new Dimension(859, 236));
+                panel2.removeAll();
+                panel2.setLayout(new CardLayout());
+                panel2.add(chartPanel);
+                panel2.validate();
+                panel2.repaint();
+            }
         }
     }//GEN-LAST:event_btnTimKiem2ActionPerformed
 
