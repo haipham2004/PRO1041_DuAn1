@@ -74,10 +74,10 @@ public class KhachHangView extends javax.swing.JPanel {
 
     public void loadPageKH() {
         tongBanGhiKH = serviceKH.tongBanGhi();
-        if (tongBanGhiKH % 4 == 0) {
-            soTrangKH = tongBanGhiKH / 4;
+        if (tongBanGhiKH % 5 == 0) {
+            soTrangKH = tongBanGhiKH / 5;
         } else {
-            soTrangKH = tongBanGhiKH / 4 + 1;
+            soTrangKH = tongBanGhiKH / 5 + 1;
         }
         lblSoTrangKH.setText(trangKH + " of " + soTrangKH);
         fillTableKH(serviceKH.listPageKH(trangKH));
@@ -626,11 +626,13 @@ public class KhachHangView extends javax.swing.JPanel {
 
     private void txtTimKiemKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKiemKeyReleased
         // TODO add your handling code here:
-        if (!txtTimKiem.getText().equals("")) {
-            String name = txtTimKiem.getText();
-            fillTableKH(serviceKH.getList(name));
+        if (txtTimKiem.getText().isEmpty()) {
+            loadPageKH();
         } else {
-            fillTableKH(serviceKH.getAll());
+            String name = txtTimKiem.getText();
+            cboDiaChi.setSelectedIndex(-1);
+            cboGioiTinh.setSelectedIndex(-1);
+            fillTableKH(serviceKH.getList(name));
         }
     }//GEN-LAST:event_txtTimKiemKeyReleased
 
