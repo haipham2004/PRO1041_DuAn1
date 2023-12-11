@@ -99,9 +99,9 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
         loadLocChatLieu(serviceCl.getAll());
         loadLocMauSac(serviceMS.getAll());
         loadLocKichThuoc(serviceKT.getAll());
-       
+
     }
-    
+
     public void mtam2() {
         if (cboLocChat.getSelectedIndex() != -1 && cboLocMau.getSelectedIndex() == -1 && cboLocKich.getSelectedIndex() == -1) {
             ChatLieu cl = (ChatLieu) cbxChatLieuLoc.getSelectedItem();
@@ -946,6 +946,9 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
         // TODO add your handling code here:
         index = tblChiTietSanPham.getSelectedRow();
         deltailChiTietSanPham(index);
+        cboChatLieu.setEnabled(false);
+        cboMauSac.setEnabled(false);
+        cboKichThuoc.setEnabled(false);
         btnThemCTSP.setEnabled(false);
     }//GEN-LAST:event_tblChiTietSanPhamMouseClicked
 
@@ -985,17 +988,6 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
         if (index < 0) {
             JOptionPane.showMessageDialog(this, "Bạn chưa chọn dòng dữ liệu nào");
             return;
-        }
-        String ten = new SanPhamView().getTenSanPham();
-        ChatLieu cl = (ChatLieu) cbxChatLieu.getSelectedItem();
-        String tenTimCL = cl.toString();
-        MauSac ms = (MauSac) cbxMauSac.getSelectedItem();
-        String tenTimMS = ms.toString();
-        KichThuoc kt = (KichThuoc) cbxKichThuoc.getSelectedItem();
-        String tenTimKT = kt.toString();
-        if (serviceCTSP.checkTrungCTSP(tenTimCL, tenTimMS, tenTimKT, ten)) {
-            JOptionPane.showMessageDialog(this, "Chi tiết sản phẩm đã tồn tại, vui lòng sửa lại", "Message", 2);
-            return;
         } else {
             ChiTietSanPham ctsp = savesCTSP();
             String ma = tblChiTietSanPham.getValueAt(index, 0).toString();
@@ -1008,6 +1000,18 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(this, "Sửa chi tiết sản phẩm thất bại");
             }
         }
+//        String ten = new SanPhamView().getTenSanPham();
+//        ChatLieu cl = (ChatLieu) cbxChatLieu.getSelectedItem();
+//        String tenTimCL = cl.toString();
+//        MauSac ms = (MauSac) cbxMauSac.getSelectedItem();
+//        String tenTimMS = ms.toString();
+//        KichThuoc kt = (KichThuoc) cbxKichThuoc.getSelectedItem();
+//        String tenTimKT = kt.toString();
+//        if (serviceCTSP.checkTrungCTSP(tenTimCL, tenTimMS, tenTimKT, ten)) {
+//            JOptionPane.showMessageDialog(this, "Chi tiết sản phẩm đã tồn tại, vui lòng sửa lại", "Message", 2);
+//            return;
+//        } 
+
 
     }//GEN-LAST:event_btnSuaCTSPActionPerformed
 
@@ -1016,6 +1020,9 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
         String tenPage = new SanPhamView().getTenSPs(null, new SanPhamView().getTenSanPham());
         fillTableChiTietSanPham(serviceCTSP.listPageCTSP(trangCTSP, tenPage));
         btnThemCTSP.setEnabled(true);
+        cboChatLieu.setEnabled(true);
+        cboMauSac.setEnabled(true);
+        cboKichThuoc.setEnabled(true);
         txtSoLuong.setText("");
         txtGia.setText("");
         cboChatLieu.setSelectedIndex(0);

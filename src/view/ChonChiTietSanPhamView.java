@@ -67,11 +67,18 @@ public class ChonChiTietSanPhamView extends javax.swing.JPanel {
         loadLocChatLieu(serviceCl.getAll());
         tenSP = doiHangView.getTenSP();
         soLuongSP = doiHangView.getSoLuongSP();
+        chatLieu = doiHangView.getChatLieu();
+        mauSac = doiHangView.getMauSac();
+        kichThuoc = doiHangView.getKichThuoc();
         maHDCT = doiHangView.getMaHDCT();
         maCTSPCu = doiHangView.getMaCTSPCu();
         soLuongDoiHang = doiHangView.getSoLuongDoiHang();
         maDH = hoaDonView.getMaDH();
         doiHangView.setIndexHDDH(doiHangView.getIndexHDDH());
+        txtChatLieu.setText(chatLieu);
+        txtKichThuoc.setText(kichThuoc);
+        txtMauSac.setText(mauSac);
+        txtSoLuongDoiHang.setText(soLuongDoiHang+"");
     }
 
     public void quayLaiDoiHang() {
@@ -194,7 +201,6 @@ public class ChonChiTietSanPhamView extends javax.swing.JPanel {
             String tenList = "";
             fillTableChiTietSanPham(serviceCTSP.getListLoc(tenList, tenTimCL, tenTimMS, tenTimKT));
         }
-
     }
 
     /**
@@ -289,7 +295,7 @@ public class ChonChiTietSanPhamView extends javax.swing.JPanel {
         });
         jScrollPane7.setViewportView(tblChiTietSanPham);
 
-        btnDau.setText("Pre");
+        btnDau.setText("Đầu");
         btnDau.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDauActionPerformed(evt);
@@ -312,7 +318,7 @@ public class ChonChiTietSanPhamView extends javax.swing.JPanel {
             }
         });
 
-        btnCuoi.setText("Next");
+        btnCuoi.setText("Cuối");
         btnCuoi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCuoiActionPerformed(evt);
@@ -468,11 +474,11 @@ public class ChonChiTietSanPhamView extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel5)
+                        .addComponent(txtSoLuongDoiHang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel4)
-                        .addComponent(txtMauSac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
-                            .addComponent(txtSoLuongDoiHang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtMauSac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel1)
                         .addComponent(txtChatLieu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)

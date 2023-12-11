@@ -560,7 +560,7 @@ public class ThuocTinhView extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnDauTT)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(btnLuiTT)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lbSoTrang)
@@ -767,7 +767,6 @@ public class ThuocTinhView extends javax.swing.JPanel {
             trangCL = 1;
             fillChatLieu(serviceCl.listPageCL(trangCL));
             lbSoTrang.setText(trangCL + " of " + soTrangCL);
-
         } else if (index == 1) {
             trangMS = 1;
             fillMauSac(serviceMS.listPageMS(trangMS));
