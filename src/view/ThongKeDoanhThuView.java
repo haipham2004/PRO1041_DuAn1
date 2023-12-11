@@ -370,34 +370,42 @@ public class ThongKeDoanhThuView extends javax.swing.JPanel {
 
     private void btnTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemActionPerformed
         // TODO add your handling code here:
-        ThongKeDoanhThuRepository repo = new ThongKeDoanhThuRepository();
         Date ngayBd = txtNgayBD.getDate();
         Date ngayKt = txtNgayKT.getDate();
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-        List<HoaDonChiTiet> listTKDT = repo.getListTKDT(ngayBd, ngayKt);
-        if (txtNgayKT.getCalendar().before(txtNgayBD.getCalendar())) {
-            JOptionPane.showMessageDialog(this, "Ngày kết thúc không hợp lệ");
+        if (ngayBd == null || ngayKt == null) {
+            JOptionPane.showMessageDialog(this, "Bạn chưa chọn ngày cần tìm kiếm");
+            setDataToChart(panelTKDT);
+            return;
         } else {
-            if (listTKDT != null) {
-                for (HoaDonChiTiet chiTietHoaDon : listTKDT) {
-                    dataset.addValue(chiTietHoaDon.getHD().getTongTien(), "Tổng tiền",
-                            chiTietHoaDon.getHD().getNgayTao());
-                }
-                JFreeChart lineChart = ChartFactory.createLineChart("Biểu đồ thống kê doanh thu".toUpperCase(),
-                        "Ngày", "Tổng tiền", dataset, PlotOrientation.VERTICAL,
-                        true, true, false);
-                ChartPanel chartPanel = new ChartPanel(lineChart);
-                chartPanel.setPreferredSize(new Dimension(859, 639));
-                panelTKDT.removeAll();
-                panelTKDT.setLayout(new CardLayout());
-                panelTKDT.add(chartPanel);
-                panelTKDT.validate();
-                panelTKDT.repaint();
-                try {
-                    final ChartRenderingInfo info1 = new ChartRenderingInfo(new StandardEntityCollection());
-                    final File file1 = new File("C:\\ChartImage\\ChartDT.png");
-                    ChartUtilities.saveChartAsPNG(file1, lineChart, 859, 639, info1);
-                } catch (Exception e) {
+            if (txtNgayKT.getCalendar().before(txtNgayBD.getCalendar())) {
+                JOptionPane.showMessageDialog(this, "Ngày kết thúc không hợp lệ");
+                return;
+            } else {
+                List<HoaDonChiTiet> listTKDT = repo.getListTKDT(ngayBd, ngayKt);
+                if (listTKDT == null) {
+                    setDataToChart(panelTKDT);
+                } else {
+                    for (HoaDonChiTiet chiTietHoaDon : listTKDT) {
+                        dataset.addValue(chiTietHoaDon.getHD().getTongTien(), "Tổng tiền",
+                                chiTietHoaDon.getHD().getNgayTao());
+                    }
+                    JFreeChart lineChart = ChartFactory.createLineChart("Biểu đồ thống kê doanh thu".toUpperCase(),
+                            "Ngày", "Tổng tiền", dataset, PlotOrientation.VERTICAL,
+                            true, true, false);
+                    ChartPanel chartPanel = new ChartPanel(lineChart);
+                    chartPanel.setPreferredSize(new Dimension(859, 639));
+                    panelTKDT.removeAll();
+                    panelTKDT.setLayout(new CardLayout());
+                    panelTKDT.add(chartPanel);
+                    panelTKDT.validate();
+                    panelTKDT.repaint();
+                    try {
+                        final ChartRenderingInfo info1 = new ChartRenderingInfo(new StandardEntityCollection());
+                        final File file1 = new File("C:\\ChartImage\\ChartDT.png");
+                        ChartUtilities.saveChartAsPNG(file1, lineChart, 859, 639, info1);
+                    } catch (Exception e) {
+                    }
                 }
             }
         }
