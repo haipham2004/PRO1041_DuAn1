@@ -363,7 +363,7 @@ public class DoiHangView extends javax.swing.JPanel {
     }
 
     public void lamMoi() {
-        int checkXoaGH = JOptionPane.showConfirmDialog(this, "Bạn có chắc mắc muốn xoá tất cả sản phẩm chưa được đặt hàng");
+        int checkXoaGH = JOptionPane.showConfirmDialog(this, "Bạn có chắc mắc muốn xoá tất cả Các sản phẩm đang được đổi hàng");
         if (checkXoaGH == JOptionPane.YES_NO_OPTION) {
             for (int i = 0; i < tblDanhSachSPCu.getRowCount(); i++) {
                 String productID = tblDanhSachSPCu.getValueAt(i, 0).toString();

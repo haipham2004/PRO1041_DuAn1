@@ -99,6 +99,7 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
         loadLocChatLieu(serviceCl.getAll());
         loadLocMauSac(serviceMS.getAll());
         loadLocKichThuoc(serviceKT.getAll());
+
     }
 
     public void mtam2() {
@@ -696,7 +697,7 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
             }
         });
 
-        btnDau2.setText("Pre");
+        btnDau2.setText("Đầu");
         btnDau2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDau2ActionPerformed(evt);
@@ -717,7 +718,7 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
             }
         });
 
-        btnCuoi2.setText("Next");
+        btnCuoi2.setText("Cuối");
         btnCuoi2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCuoi2ActionPerformed(evt);
@@ -945,6 +946,9 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
         // TODO add your handling code here:
         index = tblChiTietSanPham.getSelectedRow();
         deltailChiTietSanPham(index);
+        cboChatLieu.setEnabled(false);
+        cboMauSac.setEnabled(false);
+        cboKichThuoc.setEnabled(false);
         btnThemCTSP.setEnabled(false);
     }//GEN-LAST:event_tblChiTietSanPhamMouseClicked
 
@@ -984,17 +988,6 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
         if (index < 0) {
             JOptionPane.showMessageDialog(this, "Bạn chưa chọn dòng dữ liệu nào");
             return;
-        }
-        String ten = new SanPhamView().getTenSanPham();
-        ChatLieu cl = (ChatLieu) cbxChatLieu.getSelectedItem();
-        String tenTimCL = cl.toString();
-        MauSac ms = (MauSac) cbxMauSac.getSelectedItem();
-        String tenTimMS = ms.toString();
-        KichThuoc kt = (KichThuoc) cbxKichThuoc.getSelectedItem();
-        String tenTimKT = kt.toString();
-        if (serviceCTSP.checkTrungCTSP(tenTimCL, tenTimMS, tenTimKT, ten)) {
-            JOptionPane.showMessageDialog(this, "Chi tiết sản phẩm đã tồn tại, vui lòng sửa lại", "Message", 2);
-            return;
         } else {
             ChiTietSanPham ctsp = savesCTSP();
             String ma = tblChiTietSanPham.getValueAt(index, 0).toString();
@@ -1007,6 +1000,18 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(this, "Sửa chi tiết sản phẩm thất bại");
             }
         }
+//        String ten = new SanPhamView().getTenSanPham();
+//        ChatLieu cl = (ChatLieu) cbxChatLieu.getSelectedItem();
+//        String tenTimCL = cl.toString();
+//        MauSac ms = (MauSac) cbxMauSac.getSelectedItem();
+//        String tenTimMS = ms.toString();
+//        KichThuoc kt = (KichThuoc) cbxKichThuoc.getSelectedItem();
+//        String tenTimKT = kt.toString();
+//        if (serviceCTSP.checkTrungCTSP(tenTimCL, tenTimMS, tenTimKT, ten)) {
+//            JOptionPane.showMessageDialog(this, "Chi tiết sản phẩm đã tồn tại, vui lòng sửa lại", "Message", 2);
+//            return;
+//        } 
+
 
     }//GEN-LAST:event_btnSuaCTSPActionPerformed
 
@@ -1015,6 +1020,9 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
         String tenPage = new SanPhamView().getTenSPs(null, new SanPhamView().getTenSanPham());
         fillTableChiTietSanPham(serviceCTSP.listPageCTSP(trangCTSP, tenPage));
         btnThemCTSP.setEnabled(true);
+        cboChatLieu.setEnabled(true);
+        cboMauSac.setEnabled(true);
+        cboKichThuoc.setEnabled(true);
         txtSoLuong.setText("");
         txtGia.setText("");
         cboChatLieu.setSelectedIndex(0);
@@ -1121,12 +1129,10 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
             for (int i = 0; i < tblChiTietSanPham.getRowCount(); i++) {
                 try {
                     XSSFRow excelRow = excelsheet.createRow(i + 1);
-
                     for (int j = 0; j < tblChiTietSanPham.getColumnCount(); j++) {
                         XSSFCell excelCell = excelRow.createCell(j);
                         excelCell.setCellValue(tblChiTietSanPham.getValueAt(i, j).toString());
                     }
-
                     excelFOU = new FileOutputStream(excel.getSelectedFile() + ".xlsx");
                     excelBOU = new BufferedOutputStream(excelFOU);
                     try {
@@ -1185,6 +1191,7 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
 
         for (ChiTietSanPham chiTietSanPham : serviceCTSP.getAll()) {
             if (serviceCTSP.checkMaQR(chiTietSanPham.getMaChiTietSanPham())) {
+                System.out.println("Bỏ qua mã: "+chiTietSanPham.getMaChiTietSanPham());
                 continue;
             }
             qrCode(chiTietSanPham.getMaChiTietSanPham());

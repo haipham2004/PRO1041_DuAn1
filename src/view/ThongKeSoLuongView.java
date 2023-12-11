@@ -490,27 +490,37 @@ public class ThongKeSoLuongView extends javax.swing.JPanel {
         Date ngayKt = txtNgayKT.getDate();
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 
-        List<HoaDonChiTiet> listTKBD = service.getListTKBieuDoHD(txtNgayBd.getDate(), txtNgayKT.getDate());
-        if (listTKBD != null) {
-            for (HoaDonChiTiet chiTietHoaDon : listTKBD) {
-                dataset.addValue(chiTietHoaDon.getHD().getSoLuongHoaDon(), "Hóa đơn",
-                        chiTietHoaDon.getHD().getNgayTao());
-            }
-            JFreeChart lineChart = ChartFactory.createLineChart("Biểu đồ thống kê tổng số hóa đơn".toUpperCase(),
-                    "Ngày", "Hóa đơn", dataset, PlotOrientation.VERTICAL,
-                    true, true, false);
-            ChartPanel chartPanel = new ChartPanel(lineChart);
-            chartPanel.setPreferredSize(new Dimension(650, 236));
-            panelChartHoaDon.removeAll();
-            panelChartHoaDon.setLayout(new CardLayout());
-            panelChartHoaDon.add(chartPanel);
-            panelChartHoaDon.validate();
-            panelChartHoaDon.repaint();
-            try {
-                final ChartRenderingInfo info1 = new ChartRenderingInfo(new StandardEntityCollection());
-                final File file1 = new File("F:\\FPT Polytechnic\\DA1\\PRO1041_DuAn1\\ChartImage\\ChartHD.png");
-                ChartUtilities.saveChartAsPNG(file1, lineChart, 859, 236, info1);
-            } catch (Exception e) {
+        if (ngayBd == null || ngayKt == null) {
+            JOptionPane.showMessageDialog(this, "Bạn chưa chọn ngày cần tìm kiếm");
+            return;
+        } else {
+            if (txtNgayKT.getCalendar().before(txtNgayBd.getCalendar())) {
+                JOptionPane.showMessageDialog(this, "Ngày kết thúc không hợp lệ");
+                return;
+            } else {
+                List<HoaDonChiTiet> listTKBD = service.getListTKBieuDoHD(txtNgayBd.getDate(), txtNgayKT.getDate());
+                if (listTKBD != null) {
+                    for (HoaDonChiTiet chiTietHoaDon : listTKBD) {
+                        dataset.addValue(chiTietHoaDon.getHD().getSoLuongHoaDon(), "Hóa đơn",
+                                chiTietHoaDon.getHD().getNgayTao());
+                    }
+                    JFreeChart lineChart = ChartFactory.createLineChart("Biểu đồ thống kê tổng số hóa đơn".toUpperCase(),
+                            "Ngày", "Hóa đơn", dataset, PlotOrientation.VERTICAL,
+                            true, true, false);
+                    ChartPanel chartPanel = new ChartPanel(lineChart);
+                    chartPanel.setPreferredSize(new Dimension(650, 236));
+                    panelChartHoaDon.removeAll();
+                    panelChartHoaDon.setLayout(new CardLayout());
+                    panelChartHoaDon.add(chartPanel);
+                    panelChartHoaDon.validate();
+                    panelChartHoaDon.repaint();
+                    try {
+                        final ChartRenderingInfo info1 = new ChartRenderingInfo(new StandardEntityCollection());
+                        final File file1 = new File("F:\\FPT Polytechnic\\DA1\\PRO1041_DuAn1\\ChartImage\\ChartHD.png");
+                        ChartUtilities.saveChartAsPNG(file1, lineChart, 859, 236, info1);
+                    } catch (Exception e) {
+                    }
+                }
             }
         }
     }//GEN-LAST:event_btnTimKiemMouseClicked

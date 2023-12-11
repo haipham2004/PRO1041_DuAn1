@@ -199,7 +199,6 @@ public class ChonChiTietSanPhamView extends javax.swing.JPanel {
             String tenList = "";
             fillTableChiTietSanPham(serviceCTSP.getListLoc(tenList, tenTimCL, tenTimMS, tenTimKT));
         }
-
     }
 
     /**
@@ -294,7 +293,7 @@ public class ChonChiTietSanPhamView extends javax.swing.JPanel {
         });
         jScrollPane7.setViewportView(tblChiTietSanPham);
 
-        btnDau.setText("Pre");
+        btnDau.setText("Đầu");
         btnDau.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDauActionPerformed(evt);
@@ -317,7 +316,7 @@ public class ChonChiTietSanPhamView extends javax.swing.JPanel {
             }
         });
 
-        btnCuoi.setText("Next");
+        btnCuoi.setText("Cuối");
         btnCuoi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCuoiActionPerformed(evt);

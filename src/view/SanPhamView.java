@@ -453,7 +453,7 @@ public class SanPhamView extends javax.swing.JPanel {
             tblSanPham.getColumnModel().getColumn(4).setResizable(false);
         }
 
-        btnDau1.setText("Pre");
+        btnDau1.setText("Đầu");
         btnDau1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDau1ActionPerformed(evt);
