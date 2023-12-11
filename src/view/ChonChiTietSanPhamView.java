@@ -67,11 +67,18 @@ public class ChonChiTietSanPhamView extends javax.swing.JPanel {
         loadLocChatLieu(serviceCl.getAll());
         tenSP = doiHangView.getTenSP();
         soLuongSP = doiHangView.getSoLuongSP();
+        chatLieu = doiHangView.getChatLieu();
+        mauSac = doiHangView.getMauSac();
+        kichThuoc = doiHangView.getKichThuoc();
         maHDCT = doiHangView.getMaHDCT();
         maCTSPCu = doiHangView.getMaCTSPCu();
         soLuongDoiHang = doiHangView.getSoLuongDoiHang();
         maDH = hoaDonView.getMaDH();
         doiHangView.setIndexHDDH(doiHangView.getIndexHDDH());
+        txtChatLieu.setText(chatLieu);
+        txtKichThuoc.setText(kichThuoc);
+        txtMauSac.setText(mauSac);
+        txtSoLuongDoiHang.setText(soLuongDoiHang+"");
     }
 
     public void quayLaiDoiHang() {
