@@ -168,7 +168,7 @@ public class ChiTietSanPhamRepository {
                     + "INNER JOIN SanPham SP ON CTSP.MaSanPham=SP.MaSanPham"
                     + " where SP.TenSanPham like ? and CL.TenChatLieu like ? and MS.TenMauSac like ? and KT.TenKichThuoc like ?";
             pst = conn.prepareStatement(sql);
-            pst.setObject(1, name1);
+            pst.setObject(1, '%' + name1 + '%');
             pst.setObject(2, name2);
             pst.setObject(3, name3);
             pst.setObject(4, name4);
@@ -202,7 +202,7 @@ public class ChiTietSanPhamRepository {
                     + "INNER JOIN SanPham SP ON CTSP.MaSanPham=SP.MaSanPham"
                     + " where SP.TenSanPham like ? and CL.TenChatLieu like ?";
             pst = conn.prepareStatement(sql);
-            pst.setObject(1, name1);
+            pst.setObject(1, '%' + name1 + '%');
             pst.setObject(2, name2);
             rs = pst.executeQuery();
             while (rs.next()) {
@@ -233,7 +233,7 @@ public class ChiTietSanPhamRepository {
                     + "INNER JOIN SanPham SP ON CTSP.MaSanPham=SP.MaSanPham"
                     + " where SP.TenSanPham like ? and MS.TenMauSac like ?";
             pst = conn.prepareStatement(sql);
-            pst.setObject(1, name1);
+            pst.setObject(1, '%' + name1 + '%');
             pst.setObject(2, name2);
             rs = pst.executeQuery();
             while (rs.next()) {
@@ -264,7 +264,7 @@ public class ChiTietSanPhamRepository {
                     + "INNER JOIN SanPham SP ON CTSP.MaSanPham=SP.MaSanPham"
                     + " where SP.TenSanPham like ? and KT.TenKichThuoc like ?";
             pst = conn.prepareStatement(sql);
-            pst.setObject(1, name1);
+            pst.setObject(1, '%' + name1 + '%');
             pst.setObject(2, name2);
             rs = pst.executeQuery();
             while (rs.next()) {
@@ -295,7 +295,7 @@ public class ChiTietSanPhamRepository {
                     + "INNER JOIN SanPham SP ON CTSP.MaSanPham=SP.MaSanPham"
                     + " where SP.TenSanPham like ? and CL.TenChatLieu like ? and MS.TenMauSac like ?";
             pst = conn.prepareStatement(sql);
-            pst.setObject(1, name1);
+            pst.setObject(1, '%' + name1 + '%');
             pst.setObject(2, name2);
             pst.setObject(3, name3);
             rs = pst.executeQuery();
@@ -327,7 +327,7 @@ public class ChiTietSanPhamRepository {
                     + "INNER JOIN SanPham SP ON CTSP.MaSanPham=SP.MaSanPham"
                     + " where SP.TenSanPham like ?  and MS.TenMauSac like ? and KT.TenKichThuoc like ? ";
             pst = conn.prepareStatement(sql);
-            pst.setObject(1, name1);
+            pst.setObject(1, '%' + name1 + '%');
             pst.setObject(2, name2);
             pst.setObject(3, name3);
             rs = pst.executeQuery();
@@ -359,7 +359,7 @@ public class ChiTietSanPhamRepository {
                     + "INNER JOIN SanPham SP ON CTSP.MaSanPham=SP.MaSanPham"
                     + " where SP.TenSanPham like ?  and CL.TenChatLieu like ? and KT.TenKichThuoc like ? ";
             pst = conn.prepareStatement(sql);
-            pst.setObject(1,name1);
+            pst.setObject(1,'%' + name1 + '%');
             pst.setObject(2,name2);
             pst.setObject(3, name3);
             rs = pst.executeQuery();

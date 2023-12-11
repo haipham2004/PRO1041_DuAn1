@@ -44,9 +44,7 @@ public class ChonChiTietSanPhamView extends javax.swing.JPanel {
     ChiTietSanPhamServiceImp serviceCTSP = new ChiTietSanPhamServiceImp();
     static int indexCTSP = -1;
     static String tenSP = null;
-    static String chatLieu = null;
-    static String kichThuoc = null;
-    static String mauSac = null;
+    String chatLieu,kichThuoc,mauSac;
     static int soLuongSP = 0;
     static String maHDCT = null;
     static int soLuongDoiHang = 0;
@@ -475,11 +473,11 @@ public class ChonChiTietSanPhamView extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel5)
+                        .addComponent(txtSoLuongDoiHang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel4)
-                        .addComponent(txtMauSac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
-                            .addComponent(txtSoLuongDoiHang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtMauSac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel1)
                         .addComponent(txtChatLieu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -671,25 +669,18 @@ public class ChonChiTietSanPhamView extends javax.swing.JPanel {
         // TODO add your handling code here:
         if (cboLocKich.getSelectedIndex() != -1) {
             if (cboLocChat.getSelectedIndex() != -1 && cboLocMau.getSelectedIndex() == -1 && cboLocKich.getSelectedIndex() == -1) {
-                // Người dùng chỉ chọn chất liệu
                 mtam2();
             } else if (cboLocChat.getSelectedIndex() == -1 && cboLocMau.getSelectedIndex() != -1 && cboLocKich.getSelectedIndex() == -1) {
-                // Người dùng chỉ chọn màu sắc
                 mtam2();
             } else if (cboLocChat.getSelectedIndex() == -1 && cboLocMau.getSelectedIndex() == -1 && cboLocKich.getSelectedIndex() != -1) {
-                // Người dùng chỉ chọn kích thước
                 mtam2();
             } else if (cboLocChat.getSelectedIndex() != -1 && cboLocMau.getSelectedIndex() != -1 && cboLocKich.getSelectedIndex() == -1) {
-                // Người dùng chọn chất liệu và màu sắc
                 mtam2();
             } else if (cboLocChat.getSelectedIndex() == -1 && cboLocMau.getSelectedIndex() != -1 && cboLocKich.getSelectedIndex() != -1) {
-                // Người dùng chọn màu sắc và kích thước
                 mtam2();
             } else if (cboLocChat.getSelectedIndex() != -1 && cboLocMau.getSelectedIndex() == -1 && cboLocKich.getSelectedIndex() != -1) {
-                // Người dùng chọn chất liệu và kích thước
                 mtam2();
             } else if (cboLocChat.getSelectedIndex() != -1 && cboLocMau.getSelectedIndex() != -1 && cboLocKich.getSelectedIndex() != -1) {
-                // Người dùng chọn cả ba
                 mtam2();
             }
         }
@@ -700,25 +691,18 @@ public class ChonChiTietSanPhamView extends javax.swing.JPanel {
 
         if (cboLocMau.getSelectedIndex() != -1) {
             if (cboLocChat.getSelectedIndex() != -1 && cboLocMau.getSelectedIndex() == -1 && cboLocKich.getSelectedIndex() == -1) {
-                // Người dùng chỉ chọn chất liệu
                 mtam2();
             } else if (cboLocChat.getSelectedIndex() == -1 && cboLocMau.getSelectedIndex() != -1 && cboLocKich.getSelectedIndex() == -1) {
-                // Người dùng chỉ chọn màu sắc
                 mtam2();
             } else if (cboLocChat.getSelectedIndex() == -1 && cboLocMau.getSelectedIndex() == -1 && cboLocKich.getSelectedIndex() != -1) {
-                // Người dùng chỉ chọn kích thước
                 mtam2();
             } else if (cboLocChat.getSelectedIndex() != -1 && cboLocMau.getSelectedIndex() != -1 && cboLocKich.getSelectedIndex() == -1) {
-                // Người dùng chọn chất liệu và màu sắc
                 mtam2();
             } else if (cboLocChat.getSelectedIndex() == -1 && cboLocMau.getSelectedIndex() != -1 && cboLocKich.getSelectedIndex() != -1) {
-                // Người dùng chọn màu sắc và kích thước
                 mtam2();
             } else if (cboLocChat.getSelectedIndex() != -1 && cboLocMau.getSelectedIndex() == -1 && cboLocKich.getSelectedIndex() != -1) {
-                // Người dùng chọn chất liệu và kích thước
                 mtam2();
             } else if (cboLocChat.getSelectedIndex() != -1 && cboLocMau.getSelectedIndex() != -1 && cboLocKich.getSelectedIndex() != -1) {
-                // Người dùng chọn cả ba
                 mtam2();
             }
 
@@ -745,25 +729,18 @@ public class ChonChiTietSanPhamView extends javax.swing.JPanel {
         // TODO add your handling code here:
         if (cboLocChat.getSelectedIndex() != -1) {
             if (cboLocChat.getSelectedIndex() != -1 && cboLocMau.getSelectedIndex() == -1 && cboLocKich.getSelectedIndex() == -1) {
-                // Người dùng chỉ chọn chất liệu
                 mtam2();
             } else if (cboLocChat.getSelectedIndex() == -1 && cboLocMau.getSelectedIndex() != -1 && cboLocKich.getSelectedIndex() == -1) {
-                // Người dùng chỉ chọn màu sắc
                 mtam2();
             } else if (cboLocChat.getSelectedIndex() == -1 && cboLocMau.getSelectedIndex() == -1 && cboLocKich.getSelectedIndex() != -1) {
-                // Người dùng chỉ chọn kích thước
                 mtam2();
             } else if (cboLocChat.getSelectedIndex() != -1 && cboLocMau.getSelectedIndex() != -1 && cboLocKich.getSelectedIndex() == -1) {
-                // Người dùng chọn chất liệu và màu sắc
                 mtam2();
             } else if (cboLocChat.getSelectedIndex() == -1 && cboLocMau.getSelectedIndex() != -1 && cboLocKich.getSelectedIndex() != -1) {
-                // Người dùng chọn màu sắc và kích thước
                 mtam2();
             } else if (cboLocChat.getSelectedIndex() != -1 && cboLocMau.getSelectedIndex() == -1 && cboLocKich.getSelectedIndex() != -1) {
-                // Người dùng chọn chất liệu và kích thước
                 mtam2();
             } else if (cboLocChat.getSelectedIndex() != -1 && cboLocMau.getSelectedIndex() != -1 && cboLocKich.getSelectedIndex() != -1) {
-                // Người dùng chọn cả ba
                 mtam2();
             }
         }

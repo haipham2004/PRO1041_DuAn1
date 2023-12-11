@@ -341,7 +341,6 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
         String fileName = "GioHang_" + maHD + ".csv";
         String filePath = childDir.getPath() + File.separator + fileName;
         try (FileWriter fileWriter = new FileWriter(filePath)) {
-            // Ghi tiêu đề cột vào tệp tin
             for (int i = 0; i < molGH.getColumnCount(); i++) {
                 fileWriter.append(molGH.getColumnName(i));
                 if (i < molGH.getColumnCount() - 1) {
