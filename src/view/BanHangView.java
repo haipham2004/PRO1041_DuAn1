@@ -120,7 +120,7 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
               loadLocChatLieu(serviceCl.getAll());
         loadLocMauSac(serviceMS.getAll());
         loadLocKichThuoc(serviceKT.getAll());
-        initWebcam();
+//        initWebcam();
     }
 
     private void initWebcam() {
@@ -196,12 +196,10 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
                                 maFake = chiTietSanPham.getMaChiTietSanPham();
                                 soLuongFake = Integer.parseInt(input);
                                 if (soLuongFake > chiTietSanPham.getSoLuong()) {
-                                    JOptionPane.showMessageDialog(this, "Số lượng tồn không đủ, vui lòng nhập lại");
-                                    checkInput = false;
+                                    JOptionPane.showMessageDialog(this, "Số lượng tồn không đủ, vui lòng nhập lại");   
                                     return;
                                 } else if (soLuongFake < 1) {
                                     JOptionPane.showMessageDialog(this, "Số lượng không hợp lệ, vui lòng nhập lại");
-                                    checkInput = false;
                                     return;
                                 }
                                 soLuongTonFake = chiTietSanPham.getSoLuong() - soLuongFake;
@@ -272,38 +270,38 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
         if (cboLocChat.getSelectedIndex() != -1 && cboLocMau.getSelectedIndex() == -1 && cboLocKich.getSelectedIndex() == -1) {
             ChatLieu cl = (ChatLieu) cbxChatLieuLoc.getSelectedItem();
             String tenTimCL = cl.toString();
-            String tenList = new SanPhamView().getTenSPs(null, new SanPhamView().getTenSanPham());
+            String tenList ="";
             fillTableChiTietSanPham(serviceCTSP.getListLocCL(tenList, tenTimCL));
         } else if (cboLocChat.getSelectedIndex() == -1 && cboLocMau.getSelectedIndex() != -1 && cboLocKich.getSelectedIndex() == -1) {
             MauSac ms = (MauSac) cbxMauSacLoc.getSelectedItem();
             String tenTimMS = ms.toString();
-            String tenList = new SanPhamView().getTenSPs(null, new SanPhamView().getTenSanPham());
+            String tenList ="";
             fillTableChiTietSanPham(serviceCTSP.getListLocMS(tenList, tenTimMS));
         } else if (cboLocChat.getSelectedIndex() == -1 && cboLocMau.getSelectedIndex() == -1 && cboLocKich.getSelectedIndex() != -1) {
             KichThuoc kt = (KichThuoc) cbxKichThuocLoc.getSelectedItem();
             String tenTimKT = kt.toString();
-            String tenList = new SanPhamView().getTenSPs(null, new SanPhamView().getTenSanPham());
+            String tenList ="";
             fillTableChiTietSanPham(serviceCTSP.getListLocKT(tenList, tenTimKT));
         } else if (cboLocChat.getSelectedIndex() != -1 && cboLocMau.getSelectedIndex() != -1 && cboLocKich.getSelectedIndex() == -1) {
             ChatLieu cl = (ChatLieu) cbxChatLieuLoc.getSelectedItem();
             String tenTimCL = cl.toString();
             MauSac ms = (MauSac) cbxMauSacLoc.getSelectedItem();
             String tenTimMS = ms.toString();
-            String tenList = new SanPhamView().getTenSPs(null, new SanPhamView().getTenSanPham());
+            String tenList ="";
             fillTableChiTietSanPham(serviceCTSP.getListLocCLMS(tenList, tenTimCL, tenTimMS));
         } else if (cboLocChat.getSelectedIndex() == -1 && cboLocMau.getSelectedIndex() != -1 && cboLocKich.getSelectedIndex() != -1) {
             MauSac ms = (MauSac) cbxMauSacLoc.getSelectedItem();
             String tenTimMS = ms.toString();
             KichThuoc kt = (KichThuoc) cbxKichThuocLoc.getSelectedItem();
             String tenTimKT = kt.toString();
-            String tenList = new SanPhamView().getTenSPs(null, new SanPhamView().getTenSanPham());
+            String tenList ="";
             fillTableChiTietSanPham(serviceCTSP.getListLocMSKT(tenList, tenTimMS, tenTimKT));
         } else if (cboLocChat.getSelectedIndex() != -1 && cboLocMau.getSelectedIndex() == -1 && cboLocKich.getSelectedIndex() != -1) {
             ChatLieu cl = (ChatLieu) cbxChatLieuLoc.getSelectedItem();
             String tenTimCL = cl.toString();
             KichThuoc kt = (KichThuoc) cbxKichThuocLoc.getSelectedItem();
             String tenTimKT = kt.toString();
-            String tenList = new SanPhamView().getTenSPs(null, new SanPhamView().getTenSanPham());
+            String tenList ="";
             fillTableChiTietSanPham(serviceCTSP.getListLocCLKT(tenList, tenTimCL, tenTimKT));
         } else if (cboLocChat.getSelectedIndex() != -1 && cboLocMau.getSelectedIndex() != -1 && cboLocKich.getSelectedIndex() != -1) {
             ChatLieu cl = (ChatLieu) cbxChatLieuLoc.getSelectedItem();
@@ -312,7 +310,7 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
             String tenTimMS = ms.toString();
             KichThuoc kt = (KichThuoc) cbxKichThuocLoc.getSelectedItem();
             String tenTimKT = kt.toString();
-            String tenList = new SanPhamView().getTenSPs(null, new SanPhamView().getTenSanPham());
+            String tenList ="";
             fillTableChiTietSanPham(serviceCTSP.getListLoc(tenList, tenTimCL, tenTimMS, tenTimKT));
         }
 
@@ -443,7 +441,6 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
         String fileName = "GioHang_" + maHD + ".csv";
         String filePath = childDir.getPath() + File.separator + fileName;
         try (FileWriter fileWriter = new FileWriter(filePath)) {
-            // Ghi tiêu đề cột vào tệp tin
             for (int i = 0; i < molGH.getColumnCount(); i++) {
                 fileWriter.append(molGH.getColumnName(i));
                 if (i < molGH.getColumnCount() - 1) {
@@ -917,14 +914,14 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
                         .addGap(107, 107, 107)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addComponent(cboLocChat, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(cboLocMau, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(132, 132, 132)
-                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(18, 18, 18)
+                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(cboLocChat, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(cboLocMau, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(24, 24, 24)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addComponent(cboLocKich, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -951,24 +948,21 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel7))
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel7))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnThemGioHang, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(cboLocMau, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(cboLocKich, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(btnReset)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(cboLocChat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                                .addComponent(btnReset))
+                            .addComponent(cboLocMau, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cboLocChat, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(btnThemGioHang, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)

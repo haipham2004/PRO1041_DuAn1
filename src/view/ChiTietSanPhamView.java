@@ -1191,6 +1191,7 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
 
         for (ChiTietSanPham chiTietSanPham : serviceCTSP.getAll()) {
             if (serviceCTSP.checkMaQR(chiTietSanPham.getMaChiTietSanPham())) {
+                System.out.println("Bỏ qua mã: "+chiTietSanPham.getMaChiTietSanPham());
                 continue;
             }
             qrCode(chiTietSanPham.getMaChiTietSanPham());
