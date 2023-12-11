@@ -109,7 +109,7 @@ PRIMARY KEY ([MaKichThuoc])
 
 CREATE TABLE [ChiTietSanPham] (
  --[MaCTSP] VARCHAR(10) NOT NULL DEFAULT SUBSTRING(CONVERT(varchar(255), NEWID()), 25, 5),
- [MaCTSP] VARCHAR(10) NOT NULL DEFAULT CONCAT('CTSP', SUBSTRING(CONVERT(varchar(255), NEWID()), 25, 3)),
+ [MaCTSP] VARCHAR(10) NOT NULL DEFAULT CONCAT('CTSP', SUBSTRING(CONVERT(varchar(255), NEWID()), 25, 6)),
   [MaSanPham] varchar(10) not null,
   CONSTRAINT FK_CTSP_SP foreign key(MaSanPham) references SanPham(MaSanPham),
   [MaMauSac] varchar(10) not null,
@@ -163,3 +163,4 @@ CREATE TABLE [DoiHangChiTiet] (
   [TrangThai] bit,
   PRIMARY KEY ([MaDHCT])
 );
+--Update hai 23g03p 10/12/2023

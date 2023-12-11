@@ -51,7 +51,7 @@ public class PDFGene {
         String formattedDateTime = currentDateTime.format(formatter);
         DecimalFormat df = new DecimalFormat("#,###");
 
-        String path = "D:\\PRO1041_DuAn1\\PDF\\" + hd.getMaHoaDon() + ".pdf";
+        String path = "D:\\" + hd.getMaHoaDon() + ".pdf";
         PdfWriter pdfWriter = new PdfWriter(path);
         PdfDocument pdfDocument = new PdfDocument(pdfWriter);
         pdfDocument.setDefaultPageSize(PageSize.A4);
@@ -142,7 +142,7 @@ public class PDFGene {
         for (HoaDonChiTiet hdct : list) {
             Double total = hdct.getSoLuong() * hdct.getDonGia();
             sum += total;
-            threeColTable2.addCell(new Cell().add(hdct.getCtsp().toString()).setBorder(Border.NO_BORDER)).setMarginLeft(10f);
+            threeColTable2.addCell(new Cell().add(hdct.getCtsp().toString2()).setBorder(Border.NO_BORDER)).setMarginLeft(10f);
             threeColTable2.addCell(new Cell().add(String.valueOf(hdct.getSoLuong())).setTextAlignment(TextAlignment.CENTER).setBorder(Border.NO_BORDER));
             threeColTable2.addCell(new Cell().add(df.format(total) + " VNĐ").setTextAlignment(TextAlignment.RIGHT).setBorder(Border.NO_BORDER)).setMarginRight(10f);
         }
@@ -206,23 +206,18 @@ public class PDFGene {
 
             if (file.exists()) {
                 Desktop desktop = Desktop.getDesktop();
-                desktop.open(file); // Mở file PDF bằng ứng dụng mặc định
+                desktop.open(file); 
                 try {
                     Robot robot = new Robot();
 
-                    // Đợi 1 giây trước khi bắt đầu nhấn phím
                     robot.delay(1000);
 
-                    // Nhấn phím Ctrl
                     robot.keyPress(KeyEvent.VK_CONTROL);
 
-                    // Nhấn phím P
                     robot.keyPress(KeyEvent.VK_P);
 
-                    // Nhả phím Ctrl
                     robot.keyRelease(KeyEvent.VK_CONTROL);
 
-                    // Nhả phím P
                     robot.keyRelease(KeyEvent.VK_P);
                 } catch (AWTException e) {
                     e.printStackTrace();
