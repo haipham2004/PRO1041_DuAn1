@@ -758,7 +758,7 @@
             </Component>
             <Component class="javax.swing.JButton" name="btnDau2">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Pre"/>
+                <Property name="text" type="java.lang.String" value="&#x110;&#x1ea7;u"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDau2ActionPerformed"/>
@@ -782,7 +782,7 @@
             </Component>
             <Component class="javax.swing.JButton" name="btnCuoi2">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Next"/>
+                <Property name="text" type="java.lang.String" value="Cu&#x1ed1;i"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCuoi2ActionPerformed"/>

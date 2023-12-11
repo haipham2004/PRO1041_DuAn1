@@ -106,7 +106,7 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
         txtTongTienBH2.setEnabled(false);
         txtTenEV.setEnabled(false);
         txtMucGiam.setEnabled(false);
-        initWebcam();
+//        initWebcam();
     }
 
     private void initWebcam() {
@@ -365,7 +365,7 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
 
     public void loadTableDataFromFile(String directory, String fileName) {
         molGH = (DefaultTableModel) tblGioHang.getModel();
-        molGH.setRowCount(0); 
+        molGH.setRowCount(0);
         String filePath = directory + File.separator + fileName;
         File file = new File(filePath);
 
@@ -718,6 +718,11 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
             }
         });
 
+        txtTimKiemCTSP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTimKiemCTSPActionPerformed(evt);
+            }
+        });
         txtTimKiemCTSP.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtTimKiemCTSPKeyReleased(evt);
@@ -1004,10 +1009,9 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnThemGioHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemGioHangActionPerformed
-
         int indexs = tblChiTietSanPham.getSelectedRow();
-        int indexGioHang = -1;
         indexHoaDonCho = tblHoaDonCho.getSelectedRow();
+        int indexGioHang = -1;
         if (indexHoaDonCho == -1) {
             JOptionPane.showMessageDialog(this, "Vui lòng Tạo hoá đơn");
         } else {
@@ -1053,7 +1057,6 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
                     tblGioHang.setValueAt(thanhTienSauKhiThem, indexGioHang, 3);
                     serviceCTSP.capNhatSoLuongThanhToanCong(Integer.parseInt(input), ma);
                 } else {
-
                     fillTableGioHang(tblGioHang, ctsps, Integer.parseInt(input));
                     serviceCTSP.capNhatSoLuongThanhToanCong(Integer.parseInt(input), ma);
                     indexHoaDonCho = tblHoaDonCho.getSelectedRow();
@@ -1078,6 +1081,8 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
 
     private void txtTimKiemCTSPKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKiemCTSPKeyReleased
         // TODO add your handling code here:
+        String tenTim = txtTimKiemCTSP.getText();
+        fillTableChiTietSanPham(serviceCTSP.getList(tenTim));
     }//GEN-LAST:event_txtTimKiemCTSPKeyReleased
 
     private void tblGioHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblGioHangMouseClicked
@@ -1364,6 +1369,10 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
     private void btnHuyDonHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHuyDonHangActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnHuyDonHangActionPerformed
+
+    private void txtTimKiemCTSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTimKiemCTSPActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTimKiemCTSPActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

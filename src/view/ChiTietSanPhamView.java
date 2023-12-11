@@ -99,8 +99,9 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
         loadLocChatLieu(serviceCl.getAll());
         loadLocMauSac(serviceMS.getAll());
         loadLocKichThuoc(serviceKT.getAll());
+       
     }
-
+    
     public void mtam2() {
         if (cboLocChat.getSelectedIndex() != -1 && cboLocMau.getSelectedIndex() == -1 && cboLocKich.getSelectedIndex() == -1) {
             ChatLieu cl = (ChatLieu) cbxChatLieuLoc.getSelectedItem();
@@ -696,7 +697,7 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
             }
         });
 
-        btnDau2.setText("Pre");
+        btnDau2.setText("Đầu");
         btnDau2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDau2ActionPerformed(evt);
@@ -717,7 +718,7 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
             }
         });
 
-        btnCuoi2.setText("Next");
+        btnCuoi2.setText("Cuối");
         btnCuoi2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCuoi2ActionPerformed(evt);
@@ -1121,12 +1122,10 @@ public class ChiTietSanPhamView extends javax.swing.JPanel {
             for (int i = 0; i < tblChiTietSanPham.getRowCount(); i++) {
                 try {
                     XSSFRow excelRow = excelsheet.createRow(i + 1);
-
                     for (int j = 0; j < tblChiTietSanPham.getColumnCount(); j++) {
                         XSSFCell excelCell = excelRow.createCell(j);
                         excelCell.setCellValue(tblChiTietSanPham.getValueAt(i, j).toString());
                     }
-
                     excelFOU = new FileOutputStream(excel.getSelectedFile() + ".xlsx");
                     excelBOU = new BufferedOutputStream(excelFOU);
                     try {
