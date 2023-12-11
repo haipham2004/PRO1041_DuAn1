@@ -257,7 +257,6 @@ public class ThuocTinhView extends javax.swing.JPanel {
         jScrollPane4 = new javax.swing.JScrollPane();
         tblKichThuoc = new javax.swing.JTable();
         cboCL = new javax.swing.JComboBox<>();
-        btnQuayLai = new javax.swing.JButton();
         cboMS = new javax.swing.JComboBox<>();
         cboKT = new javax.swing.JComboBox<>();
         btnReset = new javax.swing.JButton();
@@ -497,13 +496,6 @@ public class ThuocTinhView extends javax.swing.JPanel {
             }
         });
 
-        btnQuayLai.setText("Quay lại");
-        btnQuayLai.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnQuayLaiActionPerformed(evt);
-            }
-        });
-
         cboMS.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cboMS.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -539,11 +531,9 @@ public class ThuocTinhView extends javax.swing.JPanel {
                                 .addComponent(btnThemThuocTinh)
                                 .addGap(33, 33, 33)
                                 .addComponent(btnSuaThuocTinh)
-                                .addGap(28, 28, 28)
+                                .addGap(53, 53, 53)
                                 .addComponent(btnClearThuocTinh)
-                                .addGap(28, 28, 28)
-                                .addComponent(btnQuayLai)
-                                .addGap(111, 111, 111))
+                                .addGap(187, 187, 187))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
@@ -585,11 +575,11 @@ public class ThuocTinhView extends javax.swing.JPanel {
                         .addComponent(cboKT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnThemThuocTinh)
-                    .addComponent(btnSuaThuocTinh)
-                    .addComponent(btnClearThuocTinh)
-                    .addComponent(btnQuayLai))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnThemThuocTinh)
+                        .addComponent(btnSuaThuocTinh))
+                    .addComponent(btnClearThuocTinh))
                 .addGap(38, 38, 38)
                 .addComponent(pnlThuocTinh, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -892,18 +882,6 @@ public class ThuocTinhView extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_cboCLActionPerformed
 
-    private void btnQuayLaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuayLaiActionPerformed
-        // TODO add your handling code here:
-        int index = pnlThuocTinh.getSelectedIndex();
-        if (index == 0) {
-            loadPageCL();
-        } else if (index == 1) {
-            loadPageMS();
-        } else {
-            loadPageKT();
-        }
-    }//GEN-LAST:event_btnQuayLaiActionPerformed
-
     private void cboMSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboMSActionPerformed
         // TODO add your handling code here:
         try {
@@ -955,7 +933,6 @@ public class ThuocTinhView extends javax.swing.JPanel {
     private javax.swing.JButton btnCuoiTT;
     private javax.swing.JButton btnDauTT;
     private javax.swing.JButton btnLuiTT;
-    private javax.swing.JButton btnQuayLai;
     private javax.swing.JButton btnReset;
     private javax.swing.JButton btnSuaThuocTinh;
     private javax.swing.JButton btnThemThuocTinh;

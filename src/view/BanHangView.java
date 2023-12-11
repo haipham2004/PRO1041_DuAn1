@@ -120,7 +120,7 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
               loadLocChatLieu(serviceCl.getAll());
         loadLocMauSac(serviceMS.getAll());
         loadLocKichThuoc(serviceKT.getAll());
-//        initWebcam();
+        initWebcam();
     }
 
     private void initWebcam() {
@@ -1469,7 +1469,6 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
                 int soLuongTon = Integer.parseInt(tblChiTietSanPham.getValueAt(indexSanPham, 1).toString());
                 int soLuongGioHangHienTai = Integer.parseInt(tblGioHang.getValueAt(tblGioHang.getSelectedRow(), 1).toString());
                 if (Integer.parseInt(input) > soLuongGioHangHienTai) {
-                    System.out.println("Cộng");
                     int soLuongSauKhiSua = soLuongTon - (Integer.parseInt(input) - soLuongGioHangHienTai);
                     if (Integer.parseInt(input) <= soLuongTon) {
                         serviceCTSP.capNhatSoLuongThanhToan(soLuongSauKhiSua, productID);
@@ -1490,7 +1489,6 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
                     }
 
                 } else {
-                    System.out.println("Trừ");
                     int soLuongSauKhiSua = soLuongTon + (soLuongGioHangHienTai - Integer.parseInt(input));
                     if (Integer.parseInt(input) <= 0) {
                         JOptionPane.showMessageDialog(this, "Số lượng sản phẩm phải lớn hơn 0, vui lòng sửa lại");
