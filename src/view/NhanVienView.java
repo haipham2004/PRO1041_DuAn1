@@ -61,8 +61,6 @@ public class NhanVienView extends javax.swing.JPanel {
         loadPage();
         setForm(false);
         btnMoiNV.setEnabled(true);
-        System.out.println(serviceNV.tongBanGhi(-1));
-        System.out.println(util.GetUserName.gene("Nguyễn Văn Haha"));;
     }
 
     public void sort(JTable table) {
