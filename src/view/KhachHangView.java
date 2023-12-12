@@ -233,8 +233,10 @@ public class KhachHangView extends javax.swing.JPanel {
 
         jLabel4.setText("Số điện thoại: ");
 
+        btngGioiTinh.add(rdNam);
         rdNam.setText("Nam");
 
+        btngGioiTinh.add(rdNu);
         rdNu.setText("Nữ");
 
         jLabel5.setText("Ngày sinh: ");
@@ -368,13 +370,30 @@ public class KhachHangView extends javax.swing.JPanel {
             new String [] {
                 "Mã khách hàng", "Tên khách hàng", "Giới tính", "SĐT", "Ngày sinh", "Email", "Địa chỉ"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tblKhachHang.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblKhachHangMouseClicked(evt);
             }
         });
         jScrollPane2.setViewportView(tblKhachHang);
+        if (tblKhachHang.getColumnModel().getColumnCount() > 0) {
+            tblKhachHang.getColumnModel().getColumn(0).setResizable(false);
+            tblKhachHang.getColumnModel().getColumn(1).setResizable(false);
+            tblKhachHang.getColumnModel().getColumn(2).setResizable(false);
+            tblKhachHang.getColumnModel().getColumn(3).setResizable(false);
+            tblKhachHang.getColumnModel().getColumn(4).setResizable(false);
+            tblKhachHang.getColumnModel().getColumn(5).setResizable(false);
+            tblKhachHang.getColumnModel().getColumn(6).setResizable(false);
+        }
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Tìm kiếm"));
 
@@ -473,28 +492,28 @@ public class KhachHangView extends javax.swing.JPanel {
 
         lblSoTrangKH.setText("Số trang");
 
-        btnDau.setText("<<");
+        btnDau.setText("Đầu");
         btnDau.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnDauMouseClicked(evt);
             }
         });
 
-        btnLui.setText("<");
+        btnLui.setText("Lùi");
         btnLui.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnLuiMouseClicked(evt);
             }
         });
 
-        btnTien.setText(">");
+        btnTien.setText("Tiến");
         btnTien.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnTienMouseClicked(evt);
             }
         });
 
-        btnCuoi.setText(">>");
+        btnCuoi.setText("Cuối");
         btnCuoi.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnCuoiMouseClicked(evt);

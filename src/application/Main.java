@@ -3,10 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package application;
-
 import view.AdamStoreView;
 import view.DangNhapView;
-
 /**
  *
  * @author Admin BVCN88 02

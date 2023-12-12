@@ -915,15 +915,17 @@ public class ThuocTinhView extends javax.swing.JPanel {
             cboMS.setSelectedIndex(-1);
             cboKT.setSelectedIndex(-1);
             loadCboChatLieu(serviceCl.getAll());
-
+             loadPageCL();
         } else if (index == 1) {
             loadCboMauSac(serviceMS.getAll());
             cboCL.setSelectedIndex(-1);
             cboKT.setSelectedIndex(-1);
+            loadPageMS();
         } else {
             loadCboxKichThuoc(serviceKT.getAll());
             cboMS.setSelectedIndex(-1);
             cboCL.setSelectedIndex(-1);
+            loadPageKT();
         }
     }//GEN-LAST:event_btnResetActionPerformed
 
