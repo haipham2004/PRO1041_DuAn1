@@ -796,6 +796,17 @@ public class NhanVienView extends javax.swing.JPanel {
             }
         });
         jScrollPane4.setViewportView(tblNV1);
+        if (tblNV1.getColumnModel().getColumnCount() > 0) {
+            tblNV1.getColumnModel().getColumn(0).setResizable(false);
+            tblNV1.getColumnModel().getColumn(1).setResizable(false);
+            tblNV1.getColumnModel().getColumn(2).setResizable(false);
+            tblNV1.getColumnModel().getColumn(3).setResizable(false);
+            tblNV1.getColumnModel().getColumn(4).setResizable(false);
+            tblNV1.getColumnModel().getColumn(5).setResizable(false);
+            tblNV1.getColumnModel().getColumn(6).setResizable(false);
+            tblNV1.getColumnModel().getColumn(7).setResizable(false);
+            tblNV1.getColumnModel().getColumn(8).setResizable(false);
+        }
 
         javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
         jPanel11.setLayout(jPanel11Layout);

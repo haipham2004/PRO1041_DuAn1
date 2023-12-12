@@ -169,7 +169,6 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
             if (result != null) {
                 indexHoaDonCho = tblHoaDonCho.getSelectedRow();
                 if (indexHoaDonCho == -1) {
-                    JOptionPane.showMessageDialog(this, "Vui lòng Tạo hoá đơn");
                     continue;
                 } else {
                     List<ChiTietSanPham> list = serviceCTSP.getList(result.getText());
@@ -685,13 +684,28 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
             new String [] {
                 "STT", "Mã hóa đơn", "Tên nhân viên", "Ngày tạo", "Trạng thái"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tblHoaDonCho.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblHoaDonChoMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(tblHoaDonCho);
+        if (tblHoaDonCho.getColumnModel().getColumnCount() > 0) {
+            tblHoaDonCho.getColumnModel().getColumn(0).setResizable(false);
+            tblHoaDonCho.getColumnModel().getColumn(1).setResizable(false);
+            tblHoaDonCho.getColumnModel().getColumn(2).setResizable(false);
+            tblHoaDonCho.getColumnModel().getColumn(3).setResizable(false);
+            tblHoaDonCho.getColumnModel().getColumn(4).setResizable(false);
+        }
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -722,13 +736,31 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
             new String [] {
                 "Mã", "Số lượng", "Giá", "Thành tiền", "Tên sản phẩm", "Chất liệu", "Màu sắc", "Kích thước"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                true, false, false, false, false, true, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tblGioHang.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblGioHangMouseClicked(evt);
             }
         });
         jScrollPane2.setViewportView(tblGioHang);
+        if (tblGioHang.getColumnModel().getColumnCount() > 0) {
+            tblGioHang.getColumnModel().getColumn(0).setResizable(false);
+            tblGioHang.getColumnModel().getColumn(1).setResizable(false);
+            tblGioHang.getColumnModel().getColumn(2).setResizable(false);
+            tblGioHang.getColumnModel().getColumn(3).setResizable(false);
+            tblGioHang.getColumnModel().getColumn(4).setResizable(false);
+            tblGioHang.getColumnModel().getColumn(5).setResizable(false);
+            tblGioHang.getColumnModel().getColumn(6).setResizable(false);
+            tblGioHang.getColumnModel().getColumn(7).setResizable(false);
+        }
 
         btnXoaSP.setText("Xóa sản phẩm");
         btnXoaSP.addActionListener(new java.awt.event.ActionListener() {
@@ -808,13 +840,31 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
             new String [] {
                 "Mã CTSP", "Số lượng tồn", "Giá", "Tên sản phẩm", "Chất liệu", "Màu sắc", "Kích thước", "Trạng thái"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tblChiTietSanPham.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblChiTietSanPhamMouseClicked(evt);
             }
         });
         jScrollPane3.setViewportView(tblChiTietSanPham);
+        if (tblChiTietSanPham.getColumnModel().getColumnCount() > 0) {
+            tblChiTietSanPham.getColumnModel().getColumn(0).setResizable(false);
+            tblChiTietSanPham.getColumnModel().getColumn(1).setResizable(false);
+            tblChiTietSanPham.getColumnModel().getColumn(2).setResizable(false);
+            tblChiTietSanPham.getColumnModel().getColumn(3).setResizable(false);
+            tblChiTietSanPham.getColumnModel().getColumn(4).setResizable(false);
+            tblChiTietSanPham.getColumnModel().getColumn(5).setResizable(false);
+            tblChiTietSanPham.getColumnModel().getColumn(6).setResizable(false);
+            tblChiTietSanPham.getColumnModel().getColumn(7).setResizable(false);
+        }
 
         btnThemGioHang.setText("Thêm vào giỏ hàng");
         btnThemGioHang.addActionListener(new java.awt.event.ActionListener() {
