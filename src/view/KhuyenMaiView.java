@@ -135,6 +135,34 @@ public class KhuyenMaiView extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Chưa điền mức giảm khuyến mãi");
             return false;
         }
+        try {
+            Double mucGiam = Double.parseDouble(txtMucGiam.getText());
+            if (mucGiam <= 0) {
+                JOptionPane.showMessageDialog(this, "Mức giảm phải là số dương");
+                return false;
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Mức giảm phải là số");
+            return false;
+        }
+        if (rdDieuKien.isSelected()) {
+            if (txtDieuKienTT.getText().isBlank()) {
+                JOptionPane.showMessageDialog(this, "Chưa điền điều kiện giảm giá");
+                return false;
+            } else {
+                try {
+                    Double dieuKienTT = Double.parseDouble(txtDieuKienTT.getText());
+                    if (dieuKienTT <= 0) {
+                        JOptionPane.showMessageDialog(this, "Điều kiện tổng tiền phải là số dương");
+                        return false;
+                    }
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(this, "Điều kiện tổng tiền phải là số");
+                    return false;
+                }
+            }
+        }
+
         if (txtNgayBatDau.getCalendar() == null) {
             JOptionPane.showMessageDialog(this, "Chưa chọn ngày bắt đầu");
             return false;
@@ -622,7 +650,7 @@ public class KhuyenMaiView extends javax.swing.JPanel {
 
     private void txtSearchEventKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchEventKeyReleased
         if (txtSearchEvent.getText().isEmpty()) {
-            fillTable(service.getAll());
+            loadPageKm();
         } else {
             List<Events> searchEvent = service.getList("%" + txtSearchEvent.getText() + "%");
             fillTable(searchEvent);
