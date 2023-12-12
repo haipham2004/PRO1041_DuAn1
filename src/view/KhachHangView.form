@@ -519,7 +519,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnDau">
           <Properties>
-            <Property name="text" type="java.lang.String" value="&lt;&lt;"/>
+            <Property name="text" type="java.lang.String" value="&#x110;&#x1ea7;u"/>
           </Properties>
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnDauMouseClicked"/>
@@ -527,7 +527,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnLui">
           <Properties>
-            <Property name="text" type="java.lang.String" value="&lt;"/>
+            <Property name="text" type="java.lang.String" value="L&#xf9;i"/>
           </Properties>
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnLuiMouseClicked"/>
@@ -535,7 +535,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnTien">
           <Properties>
-            <Property name="text" type="java.lang.String" value="&gt;"/>
+            <Property name="text" type="java.lang.String" value="Ti&#x1ebf;n"/>
           </Properties>
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnTienMouseClicked"/>
@@ -543,7 +543,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnCuoi">
           <Properties>
-            <Property name="text" type="java.lang.String" value="&gt;&gt;"/>
+            <Property name="text" type="java.lang.String" value="Cu&#x1ed1;i"/>
           </Properties>
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnCuoiMouseClicked"/>

@@ -473,28 +473,28 @@ public class KhachHangView extends javax.swing.JPanel {
 
         lblSoTrangKH.setText("Số trang");
 
-        btnDau.setText("<<");
+        btnDau.setText("Đầu");
         btnDau.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnDauMouseClicked(evt);
             }
         });
 
-        btnLui.setText("<");
+        btnLui.setText("Lùi");
         btnLui.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnLuiMouseClicked(evt);
             }
         });
 
-        btnTien.setText(">");
+        btnTien.setText("Tiến");
         btnTien.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnTienMouseClicked(evt);
             }
         });
 
-        btnCuoi.setText(">>");
+        btnCuoi.setText("Cuối");
         btnCuoi.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnCuoiMouseClicked(evt);

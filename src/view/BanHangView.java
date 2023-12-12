@@ -117,7 +117,8 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
         txtTongTienBH2.setEnabled(false);
         txtTenEV.setEnabled(false);
         txtMucGiam.setEnabled(false);
-              loadLocChatLieu(serviceCl.getAll());
+        txtTienThuaBH2.setEnabled(false);
+        loadLocChatLieu(serviceCl.getAll());
         loadLocMauSac(serviceMS.getAll());
         loadLocKichThuoc(serviceKT.getAll());
         initWebcam();
@@ -822,7 +823,7 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
             }
         });
 
-        btnDau2.setText("Pre");
+        btnDau2.setText("Đầu");
         btnDau2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDau2ActionPerformed(evt);
@@ -845,7 +846,7 @@ public class BanHangView extends javax.swing.JPanel implements Runnable, ThreadF
             }
         });
 
-        btnCuoi2.setText("Next");
+        btnCuoi2.setText("Cuối");
         btnCuoi2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCuoi2ActionPerformed(evt);
