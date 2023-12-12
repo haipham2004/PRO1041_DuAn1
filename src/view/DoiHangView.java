@@ -47,7 +47,7 @@ import static view.ChonChiTietSanPhamView.soLuongDoiHang;
  * @author Admin
  */
 public class DoiHangView extends javax.swing.JPanel {
-
+    
     DoiHangServiceImp serviceDH = new DoiHangServiceImp();
     HoaDonChiTietServiceImp serviceHDCT = new HoaDonChiTietServiceImp();
     HoaDonServiceImp serviceHD = new HoaDonServiceImp();
@@ -91,35 +91,35 @@ public class DoiHangView extends javax.swing.JPanel {
         loadDSSPMoi(serviceDHCT.getDHCTFromDH(maDH));
         setForm();
     }
-
+    
     public String getTenSP() {
         return tenSP;
     }
-
+    
     public void setTenSP(String tenSP) {
         DoiHangView.tenSP = tenSP;
     }
-
+    
     public int getIndexHDDH() {
         return indexHoaDonDoiHang;
     }
-
+    
     public void setIndexHDDH(int indexHoaDonDoiHang) {
         DoiHangView.indexHoaDonDoiHang = indexHoaDonDoiHang;
     }
-
+    
     public String getMaCTSPCu() {
         return maCTSPCu;
     }
-
+    
     public void setMaCTSPCu(String maCTSPCu) {
         DoiHangView.maCTSPCu = maCTSPCu;
     }
-
+    
     public String getMaDHCT() {
         return maDHCT;
     }
-
+    
     public void setMaDHCT(String maDHCT) {
         DoiHangView.maDHCT = maDHCT;
     }
@@ -127,7 +127,7 @@ public class DoiHangView extends javax.swing.JPanel {
     public String getChatLieu() {
         return chatLieu;
     }
-
+    
     public void setChatLieu(String chatLieu) {
         DoiHangView.chatLieu = chatLieu;
     }
@@ -135,7 +135,7 @@ public class DoiHangView extends javax.swing.JPanel {
     public String getKichThuoc() {
         return kichThuoc;
     }
-
+    
     public void setKichThuoc(String kichThuoc) {
         DoiHangView.kichThuoc = kichThuoc;
     }
@@ -143,31 +143,31 @@ public class DoiHangView extends javax.swing.JPanel {
     public String getMauSac() {
         return mauSac;
     }
-
+    
     public void setMauSac(String mauSac) {
         DoiHangView.mauSac = mauSac;
     }
-
+    
     public String getMaHDCT() {
         return maHDCT;
     }
-
+    
     public void setMaHDCT(String maHDCT) {
         DoiHangView.maHDCT = maHDCT;
     }
-
+    
     public int getSoLuongSP() {
         return soLuongSP;
     }
-
+    
     public int getSoLuongDoiHang() {
         return soLuongDoiHang;
     }
-
+    
     public void setMaCL(int soLuongSP) {
         DoiHangView.soLuongSP = soLuongSP;
     }
-
+    
     public void fillTableHoaDonChiTiet(List<HoaDonChiTiet> list) {
         tblmolHDCT = (DefaultTableModel) tblChiTietHoaDon.getModel();
         tblmolHDCT.setRowCount(0);
@@ -179,7 +179,7 @@ public class DoiHangView extends javax.swing.JPanel {
             });
         }
     }
-
+    
     public void deltailChiTietSanPham(int index) {
         String maCTSP = tblChiTietHoaDon.getValueAt(index, 3).toString();
         ChiTietSanPham ctsp = serviceCTSP.getThuocTinh(maCTSP).get(0);
@@ -190,7 +190,7 @@ public class DoiHangView extends javax.swing.JPanel {
         kichThuoc = txtKichThuoc.getText();
         mauSac = txtMauSac.getText();
     }
-
+    
     public boolean validSoLuong(int index) {
         try {
             if (txtSoLuongDoiHang.getText().trim().isEmpty()) {
@@ -212,7 +212,7 @@ public class DoiHangView extends javax.swing.JPanel {
         }
         return true;
     }
-
+    
     public void loadDSSPCu(List<DoiHangChiTiet> list) {
         tblmolDSSPCu = (DefaultTableModel) tblDanhSachSPCu.getModel();
         tblmolDSSPCu.setRowCount(0);
@@ -228,7 +228,7 @@ public class DoiHangView extends javax.swing.JPanel {
             });
         }
     }
-
+    
     public void loadDSSPMoi(List<DoiHangChiTiet> list) {
         tblmolDSSPMoi = (DefaultTableModel) tblDanhSachSPMoi.getModel();
         tblmolDSSPMoi.setRowCount(0);
@@ -244,12 +244,12 @@ public class DoiHangView extends javax.swing.JPanel {
             });
         }
     }
-
+    
     public String phanCach(Double x) {
         NumberFormat fm = NumberFormat.getNumberInstance(Locale.US);
         return fm.format(x);
     }
-
+    
     public String boPhanCach(String x) {
         String so = x.replace(",", "");
         if (so.isBlank()) {
@@ -262,7 +262,7 @@ public class DoiHangView extends javax.swing.JPanel {
             return "0";
         }
     }
-
+    
     public void tinhThua() {
         Double tongTien = Double.valueOf(boPhanCach(txtTienTra.getText()));
         txtTienDua.setText(phanCach(Double.valueOf(boPhanCach(txtTienDua.getText()))));
@@ -270,7 +270,7 @@ public class DoiHangView extends javax.swing.JPanel {
         Double tienThua = tienKhach - tongTien;
         txtTienThua.setText(phanCach(tienThua));
     }
-
+    
     public void setForm() {
         txtMaHD.setText(maHD);
         txtMaKH.setText(serviceHD.getOne(maHD).getKhachHang().getMaKhachHang());
@@ -299,14 +299,10 @@ public class DoiHangView extends javax.swing.JPanel {
         txtTienDua.setEnabled(true);
         tinhThua();
     }
-
+    
     public List<DoiHangChiTiet> getJoHang(JTable table, JTable table2) {
         List<DoiHangChiTiet> list = new ArrayList<>();
         int soCot = table.getRowCount();
-        if (soCot == 0) {
-            JOptionPane.showMessageDialog(null, "Giỏ hàng rỗng");
-            return null;
-        }
         try {
             for (int i = 0; i < soCot; i++) {
                 String maCTSP = table.getValueAt(i, 0).toString();
@@ -320,9 +316,9 @@ public class DoiHangView extends javax.swing.JPanel {
                 System.out.println(kt);
                 String mota = table2.getValueAt(i, 7).toString();
                 System.out.println(mota);
-
+                
                 ChiTietSanPham ctspCu = new ChiTietSanPham(maCTSP);
-
+                
                 SanPham sp = new SanPham(null, ten);
                 ChatLieu cl2 = new ChatLieu(null, cl);
                 MauSac cl3 = new MauSac(null, ms);
@@ -338,20 +334,16 @@ public class DoiHangView extends javax.swing.JPanel {
         }
         return list;
     }
-
+    
     public List<HoaDonChiTiet> getJoHang2(JTable table) {
         List<HoaDonChiTiet> list = new ArrayList<>();
         int soCot = table.getRowCount();
-        if (soCot == 0) {
-            JOptionPane.showMessageDialog(null, "Giỏ hàng rỗng");
-            return null;
-        }
         try {
             for (int i = 0; i < soCot; i++) {
                 String maCTSP = table.getValueAt(i, 0).toString();
                 int soLuong = Integer.parseInt(table.getValueAt(i, 5).toString());
                 Double gia = Double.parseDouble(table.getValueAt(i, 6).toString());
-
+                
                 ChiTietSanPham ctsp = new ChiTietSanPham(maCTSP);
 //                ChiTietSanPham ctspMoi = new ChiTietSanPham(maCTSP2, gia);
                 HoaDonChiTiet hdct = new HoaDonChiTiet(ctsp, soLuong, gia);
@@ -361,7 +353,7 @@ public class DoiHangView extends javax.swing.JPanel {
         }
         return list;
     }
-
+    
     public void lamMoi() {
         int checkXoaGH = JOptionPane.showConfirmDialog(this, "Bạn có chắc mắc muốn xoá tất cả Các sản phẩm đang được đổi hàng");
         if (checkXoaGH == JOptionPane.YES_NO_OPTION) {
@@ -872,10 +864,17 @@ public class DoiHangView extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Số tiền được nhập không đủ để thực hiện giao dịch");
             return;
         }
+        if (tblDanhSachSPCu.getRowCount() == 0) {
+            JOptionPane.showMessageDialog(this, "Chưa có sản phẩm đổi");
+            return;
+        }
         List<HoaDonChiTiet> listHDCT = serviceDHCT.getJoHang(tblChiTietHoaDon);
         List<HoaDonChiTiet> listHDCT3 = serviceDHCT.getJoHang(tblChiTietHoaDon);
         List<HoaDonChiTiet> listHDCT2 = getJoHang2(tblDanhSachSPCu);
         List<DoiHangChiTiet> listDHCT = getJoHang(tblDanhSachSPCu, tblDanhSachSPMoi);
+        if (listHDCT == null || listHDCT2 == null) {
+            return;
+        }
         for (HoaDonChiTiet hdct3 : listHDCT) {
             for (HoaDonChiTiet hdct2 : listHDCT2) {
                 if (hdct3.getCtsp().getMaChiTietSanPham().equals(hdct2.getCtsp().getMaChiTietSanPham())) {
@@ -883,7 +882,7 @@ public class DoiHangView extends javax.swing.JPanel {
                 }
             }
         }
-
+        
         HoaDon hd = serviceHD.getOne(maHD);
         NhanVien nv = serviceNV.timTheoUserName(userName);
         DoiHang dh = new DoiHang(hoaDonView.getMaDH(), hd, nv);
