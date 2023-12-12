@@ -59,11 +59,9 @@
                                   <Component id="btnThemThuocTinh" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
                                   <Component id="btnSuaThuocTinh" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
                                   <Component id="btnClearThuocTinh" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                                  <Component id="btnQuayLai" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="111" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="187" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="jPanel5" min="-2" max="-2" attributes="0"/>
@@ -118,11 +116,12 @@
                       <Component id="jPanel5" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="btnThemThuocTinh" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="btnSuaThuocTinh" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="btnClearThuocTinh" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="btnQuayLai" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="btnThemThuocTinh" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnSuaThuocTinh" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Component id="btnClearThuocTinh" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
                   <Component id="pnlThuocTinh" min="-2" pref="281" max="-2" attributes="0"/>
@@ -493,14 +492,6 @@
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
-        </Component>
-        <Component class="javax.swing.JButton" name="btnQuayLai">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Quay l&#x1ea1;i"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnQuayLaiActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JComboBox" name="cboMS">
           <Properties>
