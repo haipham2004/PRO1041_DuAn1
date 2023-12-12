@@ -145,13 +145,10 @@ public class ThongKeKhacView extends javax.swing.JPanel {
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         if (list2 != null) {
             for (HoaDonChiTiet chiTietHoaDon : list2) {
-                dataset.addValue(chiTietHoaDon.getHD().getSoLuongHoaDon() + chiTietHoaDon.getSoLuong(), "Tổng",
-                        chiTietHoaDon.getHD().getNgayTao());
                 dataset.addValue(chiTietHoaDon.getSoLuong(), "Bán được",
                         chiTietHoaDon.getHD().getNgayTao());
                 dataset.addValue(chiTietHoaDon.getCtsp().getSoLuong(), "Còn lại",
                         chiTietHoaDon.getHD().getNgayTao());
-
             }
         }
         JFreeChart lineChart = ChartFactory.createLineChart("Thống kê doanh thu từng sản phẩm".toUpperCase(),
@@ -623,8 +620,6 @@ public class ThongKeKhacView extends javax.swing.JPanel {
                 List<HoaDonChiTiet> listTK2 = service.getListTK2(tenSp, ngayBd, ngayKt);
                 if (listTK2 != null) {
                     for (HoaDonChiTiet chiTietHoaDon : listTK2) {
-                        dataset.addValue(chiTietHoaDon.getHD().getSoLuongHoaDon() + chiTietHoaDon.getSoLuong(), "Tổng",
-                                chiTietHoaDon.getHD().getNgayTao());
                         dataset.addValue(chiTietHoaDon.getSoLuong(), "Bán được",
                                 chiTietHoaDon.getHD().getNgayTao());
                         dataset.addValue(chiTietHoaDon.getCtsp().getSoLuong(), "Còn lại",
