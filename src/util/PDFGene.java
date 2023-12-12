@@ -51,7 +51,7 @@ public class PDFGene {
         String formattedDateTime = currentDateTime.format(formatter);
         DecimalFormat df = new DecimalFormat("#,###");
 
-        String path = "D:\\PRO1041_DuAn1\\PDF\\" + hd.getMaHoaDon() + ".pdf";
+        String path = "D:\\PDF\\" + hd.getMaHoaDon() + ".pdf";
         PdfWriter pdfWriter = new PdfWriter(path);
         PdfDocument pdfDocument = new PdfDocument(pdfWriter);
         pdfDocument.setDefaultPageSize(PageSize.A4);
@@ -165,15 +165,15 @@ public class PDFGene {
         threeColTable4.addCell(new Cell().add("Tiền hàng").setTextAlignment(TextAlignment.CENTER).setBorder(Border.NO_BORDER));
         threeColTable4.addCell(new Cell().add(df.format(tong) + " VNĐ").setTextAlignment(TextAlignment.RIGHT).setBorder(Border.NO_BORDER));
 
-        if (tong != tongCuoi) {
+        if (tong - tongCuoi != 0.0) {
             threeColTable4.addCell(new Cell().add("").setBorder(Border.NO_BORDER));
             threeColTable4.addCell(new Cell().add("Giảm giá").setTextAlignment(TextAlignment.CENTER).setBorder(Border.NO_BORDER));
             threeColTable4.addCell(new Cell().add(df.format(tong - tongCuoi) + " VNĐ").setTextAlignment(TextAlignment.RIGHT).setBorder(Border.NO_BORDER));
+            threeColTable4.addCell(new Cell().add("").setBorder(Border.NO_BORDER));
+            threeColTable4.addCell(new Cell().add("Tổng tiền").setTextAlignment(TextAlignment.CENTER).setBorder(Border.NO_BORDER));
+            threeColTable4.addCell(new Cell().add(df.format(tongCuoi) + " VNĐ").setTextAlignment(TextAlignment.RIGHT).setBorder(Border.NO_BORDER));
         }
 //        Double sumSauKM = sum * (1 - mucGiam);
-        threeColTable4.addCell(new Cell().add("").setBorder(Border.NO_BORDER));
-        threeColTable4.addCell(new Cell().add("Tổng tiền").setTextAlignment(TextAlignment.CENTER).setBorder(Border.NO_BORDER));
-        threeColTable4.addCell(new Cell().add(df.format(tongCuoi) + " VNĐ").setTextAlignment(TextAlignment.RIGHT).setBorder(Border.NO_BORDER));
         document.add(threeColTable4.setMargin(10f));
 
         Table threeColTable5 = new Table(onetwo);
@@ -206,11 +206,11 @@ public class PDFGene {
 
             if (file.exists()) {
                 Desktop desktop = Desktop.getDesktop();
-                desktop.open(file); 
+                desktop.open(file);
                 try {
                     Robot robot = new Robot();
 
-                    robot.delay(1000);
+                    robot.delay(3000);
 
                     robot.keyPress(KeyEvent.VK_CONTROL);
 
